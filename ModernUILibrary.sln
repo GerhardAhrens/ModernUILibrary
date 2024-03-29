@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernUILibrary", "ModernUILibrary\ModernUILibrary.csproj", "{653A5FAD-E8DE-45AA-9178-D2C9B84D09D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernUIDemo", "ModernUIDemo\ModernUIDemo.csproj", "{1C94DC78-3605-476B-B9E4-A942FAD1DD97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Doc", "_Doc", "{24D6D8AD-B927-4075-B043-FBD9829A569C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{653A5FAD-E8DE-45AA-9178-D2C9B84D09D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653A5FAD-E8DE-45AA-9178-D2C9B84D09D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653A5FAD-E8DE-45AA-9178-D2C9B84D09D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653A5FAD-E8DE-45AA-9178-D2C9B84D09D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C94DC78-3605-476B-B9E4-A942FAD1DD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C94DC78-3605-476B-B9E4-A942FAD1DD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C94DC78-3605-476B-B9E4-A942FAD1DD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C94DC78-3605-476B-B9E4-A942FAD1DD97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBF3218C-51DD-45E4-94F2-5DAE0722B287}
+	EndGlobalSection
+EndGlobal

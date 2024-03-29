@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <FileVersion>1.0.2024.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ModernUIBase\" />
+    <Folder Include="ModernUI\RadionButton\Themes\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
+</Project>

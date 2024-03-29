@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyVersion>1.0.2024.1</AssemblyVersion>
+    <FileVersion>1.0.2024.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="BaseClass\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
+</Project>
