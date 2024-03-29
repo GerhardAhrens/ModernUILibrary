@@ -16,7 +16,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -65,5 +66,73 @@
             <Run Text="{Binding Path=IsChecked, ElementName=rbDrei}" />
         </TextBlock>
 
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center">
+            <StackPanel
+                Margin="0,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Text="A" />
+                <ModernUI:FlatToggleButton
+                    x:Name="tgA"
+                    Width="43"
+                    Height="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel
+                Margin="0,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Text="B" />
+                <ModernUI:FlatToggleButton
+                    x:Name="tgB"
+                    Width="43"
+                    Height="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsChecked="True" />
+            </StackPanel>
+            <StackPanel
+                Margin="0,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="20,0"
+                    VerticalAlignment="Center"
+                    Text="C" />
+                <ModernUI:FlatToggleButton
+                    x:Name="tgC"
+                    Width="43"
+                    Height="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsChecked="False" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" Grid.Column="1">
+            <Run FontWeight="Bold" Text="Ergebnis:" />
+            <LineBreak />
+            <Run FontWeight="Bold" Text="FlatToggleButton A:" />
+            <Run Text="{Binding Path=IsChecked, ElementName=tgA}" />
+            <LineBreak />
+            <Run FontWeight="Bold" Text="FlatToggleButton B:" />
+            <Run Text="{Binding Path=IsChecked, ElementName=tgB}" />
+            <LineBreak />
+            <Run FontWeight="Bold" Text="FlatToggleButton C:" />
+            <Run Text="{Binding Path=IsChecked, ElementName=tgC}" />
+        </TextBlock>
     </Grid>
 </UserControl>

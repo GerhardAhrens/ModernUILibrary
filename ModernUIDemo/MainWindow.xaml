@@ -10,10 +10,107 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border
+                            x:Name="Border"
+                            Margin="0,0,0,0"
+                            Padding="25,5,25,5"
+                            BorderBrush="Gainsboro"
+                            BorderThickness="1,1,1,0"
+                            CornerRadius="5,5,0,0">
+                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="White" />
+                                <Setter TargetName="Border" Property="Background" Value="Black" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Black" />
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <TabControl>
-            <TabItem Header="TextBox Controls" />
-            <TabItem Header="Check Controls">
+        <TabControl TabStripPlacement="Left">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Background" Value="WhiteSmoke" />
+                </Style>
+
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <RotateTransform Angle="-360" />
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Border
+                                    x:Name="Border"
+                                    Margin="0,0,0,0"
+                                    Padding="25,5,25,5"
+                                    BorderBrush="Gainsboro"
+                                    BorderThickness="1,1,1,0"
+                                    CornerRadius="5,5,0,0">
+                                    <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="White" />
+                                        <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                        <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,3" />
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="Blue  " />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="LightGray" />
+                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="TextBox Controls" />
+                </TabItem.Header>
+                <myControls:TextBoxControlsUC />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="ListBox Controls" />
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Button Controls" />
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Check Controls" />
+                </TabItem.Header>
                 <myControls:CheckControlsUC />
             </TabItem>
         </TabControl>
