@@ -113,6 +113,13 @@
                 </TabItem.Header>
                 <myControls:CheckControlsUC />
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Badges Controls" />
+                </TabItem.Header>
+                <myControls:BadgesControlsUC />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
