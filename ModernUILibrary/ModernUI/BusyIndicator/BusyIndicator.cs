@@ -38,7 +38,7 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BusyIndicator), new FrameworkPropertyMetadata(typeof(BusyIndicator)));
             BusyIndicator.IsBusyProperty = DependencyProperty.Register("IsBusy", typeof(bool), typeof(BusyIndicator), new PropertyMetadata(false, OnIsBusyChangedCallback));
-            BusyIndicator.TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(BusyIndicator), new PropertyMetadata("加载中..."));
+            BusyIndicator.TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(BusyIndicator), new PropertyMetadata("Erstellen.."));
             BusyIndicator.LoadingColorProperty = DependencyProperty.Register("LoadingColor", typeof(Brush), typeof(BusyIndicator), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0, 122, 204))));
         }
 

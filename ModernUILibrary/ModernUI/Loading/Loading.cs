@@ -9,12 +9,6 @@
     {
         private FrameworkElement PART_Root;
 
-        public bool IsActived
-        {
-            get { return (bool)GetValue(IsActivedProperty); }
-            set { SetValue(IsActivedProperty, value); }
-        }
-        
         public static readonly DependencyProperty IsActivedProperty =
             DependencyProperty.Register("IsActived", typeof(bool), typeof(Loading), new PropertyMetadata(true, OnIsActivedChangedCallback));
 
@@ -28,31 +22,9 @@
             VisualStateManager.GoToElementState(loading.PART_Root, (bool)e.NewValue ? "Active" : "Inactive", true);
         }
 
-        public double SpeedRatio
-        {
-            get { return (double)GetValue(SpeedRatioProperty); }
-            set { SetValue(SpeedRatioProperty, value); }
-        }
-
         // Using a DependencyProperty as the backing store for SpeedRatio.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SpeedRatioProperty =
             DependencyProperty.Register("SpeedRatio", typeof(double), typeof(Loading), new PropertyMetadata(1d, OnSpeedRatioChangedCallback));
-
-        private static void OnSpeedRatioChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            Loading loading = d as Loading;
-            if(loading.PART_Root == null || !loading.IsActived)
-            {
-                return;
-            }
-            loading.SetSpeedRatio(loading.PART_Root, loading.SpeedRatio);
-        }
-
-        public EnumLoadingType Type
-        {
-            get { return (EnumLoadingType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
 
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
@@ -61,6 +33,24 @@
         static Loading()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Loading), new FrameworkPropertyMetadata(typeof(Loading)));
+        }
+
+        public EnumLoadingType Type
+        {
+            get { return (EnumLoadingType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+
+        public bool IsActived
+        {
+            get { return (bool)GetValue(IsActivedProperty); }
+            set { SetValue(IsActivedProperty, value); }
+        }
+
+        public double SpeedRatio
+        {
+            get { return (double)GetValue(SpeedRatioProperty); }
+            set { SetValue(SpeedRatioProperty, value); }
         }
 
         public override void OnApplyTemplate()
@@ -89,6 +79,16 @@
                     }
                 }
             }
+        }
+
+        private static void OnSpeedRatioChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Loading loading = d as Loading;
+            if (loading.PART_Root == null || !loading.IsActived)
+            {
+                return;
+            }
+            loading.SetSpeedRatio(loading.PART_Root, loading.SpeedRatio);
         }
     }
 }

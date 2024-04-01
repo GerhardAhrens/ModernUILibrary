@@ -18,4 +18,10 @@
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MyControls\BusyIndicatorControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
