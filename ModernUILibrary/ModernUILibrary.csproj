@@ -11,10 +11,17 @@
   <ItemGroup>
     <Folder Include="ModernUIBase\" />
     <Folder Include="ModernUI\Badge\Themes\" />
+    <Folder Include="ModernUI\BusyIndicator\Themes\" />
+    <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
     <Folder Include="Themes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetCore5.0.Microsoft.Expression.Drawing" Version="1.0.0" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

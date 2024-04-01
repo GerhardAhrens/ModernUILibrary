@@ -120,6 +120,13 @@
                 </TabItem.Header>
                 <myControls:BadgesControlsUC />
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="BusyIndicator Controls" />
+                </TabItem.Header>
+                <myControls:BadgesControlsUC />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
