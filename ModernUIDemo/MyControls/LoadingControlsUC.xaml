@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ModernUIDemo.MyControls.TextBoxControlsUC"
+    x:Class="ModernUIDemo.MyControls.LoadingControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
@@ -19,14 +19,23 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock
+        <TextBlock Grid.Row="0"
             Grid.ColumnSpan="2"
             FontSize="14"
-            Text="Beispiel für verschiedene TextBox Varianten (Text, Numeric, Currency, ..." />
-        <Separator
+            Text="Beispiel für verschiedene Animationen des Loading Controls" />
+        <Separator Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="3"
             Background="Green" />
 
+        <StackPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ModernUI:FlatToggleButton x:Name="ToggleButton1" Margin="10,0" IsChecked="True" />
+            </StackPanel>
+            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#141418" Margin="0,10">
+                <ModernUI:Loading Width="50" Height="50" Margin="20" SpeedRatio="1"
+                                IsActived="{Binding Path=IsChecked, ElementName=ToggleButton1}"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

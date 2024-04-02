@@ -127,6 +127,16 @@
                 </TabItem.Header>
                 <myControls:BusyIndicatorControlsUC />
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
+                        Text="Loading Animation Controls"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:LoadingControlsUC />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
