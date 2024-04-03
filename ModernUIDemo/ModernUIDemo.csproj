@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="BaseClass\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\LoadingControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\NoticeMessageControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

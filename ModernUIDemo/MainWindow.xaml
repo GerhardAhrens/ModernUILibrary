@@ -137,6 +137,16 @@
                 </TabItem.Header>
                 <myControls:LoadingControlsUC />
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
+                        Text="NoticeMessage Controls"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:NoticeMessageControlsUC />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -9,10 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModernUIBase\" />
+    <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUI\Badge\Themes\" />
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
+    <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
