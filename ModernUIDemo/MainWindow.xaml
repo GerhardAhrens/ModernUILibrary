@@ -106,12 +106,21 @@
                 <TabItem.Header>
                     <TextBlock Text="Button Controls" />
                 </TabItem.Header>
+                <myControls:ButtonControlsUC />
             </TabItem>
+
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock Text="Check Controls" />
+                    <TextBlock Text="RadioButton Controls" />
                 </TabItem.Header>
-                <myControls:CheckControlsUC />
+                <myControls:RadioButtonControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="NumericUpDown Controls" />
+                </TabItem.Header>
+                <myControls:NumericUpDownControlsUC />
             </TabItem>
 
             <TabItem>

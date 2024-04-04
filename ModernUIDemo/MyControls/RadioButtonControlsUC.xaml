@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ModernUIDemo.MyControls.CheckControlsUC"
+    x:Class="ModernUIDemo.MyControls.RadioButtonControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"

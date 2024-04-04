@@ -29,6 +29,12 @@
     <Compile Update="MyControls\NoticeMessageControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ButtonControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\NumericUpDownControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

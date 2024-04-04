@@ -19,22 +19,42 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
+        <TextBlock
+            Grid.Row="0"
             Grid.ColumnSpan="2"
             FontSize="14"
             Text="Beispiel für verschiedene Animationen des Loading Controls" />
-        <Separator Grid.Row="1"
+        <Separator
+            Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="3"
             Background="Green" />
 
         <StackPanel Grid.Row="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <ModernUI:FlatToggleButton x:Name="ToggleButton1" Margin="10,0" IsChecked="True" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton1"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown1"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
             </StackPanel>
-            <Border HorizontalAlignment="Center" VerticalAlignment="Center" Background="#141418" Margin="0,10">
-                <ModernUI:Loading Width="50" Height="50" Margin="20" SpeedRatio="1"
-                                IsActived="{Binding Path=IsChecked, ElementName=ToggleButton1}"/>
+
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#141418">
+                <ModernUI:Loading
+                    Width="50"
+                    Height="50"
+                    Margin="20"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton1}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown1}" />
             </Border>
         </StackPanel>
     </Grid>

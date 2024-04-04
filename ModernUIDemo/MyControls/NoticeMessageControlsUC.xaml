@@ -28,5 +28,11 @@
             Height="3"
             Background="Green" />
 
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <Button
+                x:Name="BtnInfo"
+                Click="BtnInfo_Click"
+                Content="Info" />
+        </StackPanel>
     </Grid>
 </UserControl>
