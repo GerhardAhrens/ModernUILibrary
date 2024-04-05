@@ -12,11 +12,13 @@
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUI\Badge\Themes\" />
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
+    <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
+    <Folder Include="ModernUI\SegmentControl\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
     <Folder Include="Themes\" />

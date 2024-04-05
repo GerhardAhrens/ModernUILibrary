@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernIU.Controls;
+
     /// <summary>
     /// Interaktionslogik für ButtonControlsUC.xaml
     /// </summary>
@@ -16,11 +18,11 @@
             this.InitializeComponent();
 
             List<string> list = new List<string>();
-            list.Add("全部");
-            list.Add("主任医师");
-            list.Add("副主任医师");
-            list.Add("住院医生");
-            list.Add("其他");
+            list.Add("Alles");
+            list.Add("Nix");
+            list.Add("Vielichet");
+            list.Add("Oder nicht");
+            list.Add("Nee");
 
             dt.Columns.Add("ID");
             dt.Columns.Add("NAME");
@@ -44,5 +46,15 @@
 
         }
 
+        private void SegmentItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SegmentItem si = (SegmentItem)sender;
+            MessageBox.Show(si.Name);
+        }
+
+        private void BtnGroupButtonClick_ItemClick(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
     }
 }

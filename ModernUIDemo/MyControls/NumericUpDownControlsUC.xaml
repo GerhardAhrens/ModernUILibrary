@@ -175,6 +175,7 @@
                     Foreground="White"
                     Style="{StaticResource AddButtonStyle}" />
             </Grid>
+
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter TargetName="border" Property="Opacity" Value="0.56" />
@@ -208,6 +209,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -215,6 +217,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -231,7 +234,11 @@
         <StackPanel
             Grid.Row="2"
             Grid.ColumnSpan="2"
+            Margin="0,0,0,15"
             Orientation="Horizontal">
+
+            <Label Width="20" />
+
             <ModernUI:IntegerUpDown
                 Width="100"
                 Height="30"
@@ -239,6 +246,7 @@
                 Increment="2"
                 Maximum="50"
                 Minimum="10"
+                UpDownOrientation="Vertical"
                 Value="11" />
 
             <Label Width="20" />
@@ -251,6 +259,19 @@
                 Minimum="0"
                 UpDownOrientation="Horizontal"
                 Value="30" />
+        </StackPanel>
+
+        <Separator
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Height="3"
+            Margin="0,0,0,30"
+            Background="Green" />
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal">
 
             <Label Width="20" />
 

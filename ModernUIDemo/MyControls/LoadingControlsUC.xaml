@@ -11,10 +11,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -30,7 +32,7 @@
             Height="3"
             Background="Green" />
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="2" Grid.Column="0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <ModernUI:FlatToggleButton
                     x:Name="ToggleButton1"
@@ -55,6 +57,150 @@
                     Margin="20"
                     IsActived="{Binding Path=IsChecked, ElementName=ToggleButton1}"
                     SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown1}" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton2"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown2"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
+            </StackPanel>
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#141418">
+                <ModernUI:Loading
+                    Width="50"
+                    Height="50"
+                    Margin="20"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton2}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown2}"
+                    Type="DoubleRound" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton3"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown3"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
+            </StackPanel>
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#141418">
+                <ModernUI:Loading
+                    Width="50"
+                    Height="50"
+                    Margin="20"
+                    Foreground="#C1C1C1"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton3}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown3}"
+                    Type="SingleRound" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton4"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown4"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
+            </StackPanel>
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#141418">
+                <ModernUI:Loading
+                    Width="50"
+                    Height="50"
+                    Margin="20"
+                    Foreground="#C1C1C1"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton4}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown4}"
+                    Type="Cogs" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton5"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown5"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
+            </StackPanel>
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Gray">
+                <ModernUI:Loading
+                    Width="50"
+                    Height="50"
+                    Margin="10"
+                    Foreground="Red"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton5}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown5}"
+                    Type="Apple" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FlatToggleButton
+                    x:Name="ToggleButton6"
+                    Margin="10,0"
+                    IsChecked="True" />
+                <ModernUI:DoubleUpDown
+                    x:Name="DoubleUpDown6"
+                    Width="60"
+                    Increment="1"
+                    Maximum="5"
+                    Minimum="1" />
+            </StackPanel>
+            <Border
+                Margin="0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#141418">
+                <ModernUI:Loading
+                    Width="40"
+                    Height="40"
+                    Margin="20"
+                    Foreground="#C1C1C1"
+                    IsActived="{Binding Path=IsChecked, ElementName=ToggleButton6}"
+                    SpeedRatio="{Binding Path=Value, ElementName=DoubleUpDown6}"
+                    Type="Normal" />
             </Border>
         </StackPanel>
     </Grid>
