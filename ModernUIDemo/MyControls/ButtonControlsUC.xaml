@@ -365,6 +365,38 @@
                 </ModernUI:ButtonGroup>
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:ButtonGroup
+                    x:Name="BtnGroupButtonSource"
+                    Width="Auto"
+                    Height="30"
+                    MinWidth="100"
+                    Margin="0,10"
+                    Background="#F0F4F7"
+                    BorderBrush="#A4A7AC"
+                    CornerRadius="3"
+                    ItemClick="BtnGroupButtonClick_ItemClick" />
+
+                <Label Width="20" />
+
+                <ModernUI:ButtonGroup
+                    x:Name="BtnGroupButtonDataTable"
+                    Width="Auto"
+                    Height="30"
+                    MinWidth="100"
+                    Margin="0,10"
+                    Background="#F0F4F7"
+                    BorderBrush="#A4A7AC"
+                    CornerRadius="3"
+                    ItemClick="BtnGroupButtonClick_ItemClick">
+                    <ModernUI:ButtonGroup.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=NAME}" />
+                        </DataTemplate>
+                    </ModernUI:ButtonGroup.ItemTemplate>
+                </ModernUI:ButtonGroup>
+            </StackPanel>
+
             <StackPanel Height="60" Orientation="Horizontal">
                 <ModernUI:IconToggleButton
                     VerticalAlignment="Center"

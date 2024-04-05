@@ -67,7 +67,7 @@
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new SegmentItem();
+            return new ButtonGroupItem();
         }
 
         public override void OnApplyTemplate()

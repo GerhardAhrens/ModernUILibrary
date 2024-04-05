@@ -1,6 +1,7 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.Data;
+    using System.Net.WebSockets;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -20,7 +21,7 @@
             List<string> list = new List<string>();
             list.Add("Alles");
             list.Add("Nix");
-            list.Add("Vielichet");
+            list.Add("Vieleicht");
             list.Add("Oder nicht");
             list.Add("Nee");
 
@@ -34,6 +35,9 @@
             dr["ID"] = "2";
             dr["NAME"] = "Charlie";
             dt.Rows.Add(dr);
+
+            this.BtnGroupButtonSource.ItemsSource = list;
+            this.BtnGroupButtonDataTable.ItemsSource = dt.AsDataView();
         }
 
         private void FlatButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +58,11 @@
 
         private void BtnGroupButtonClick_ItemClick(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            ButtonGroup si = (ButtonGroup)sender;
 
+            var content = ((ContentControl)e.NewValue).Content;
+            var column = ((System.Data.DataRowView)content).Row["NAME"];
+            MessageBox.Show($"{si.Name}; {column}");
         }
     }
 }
