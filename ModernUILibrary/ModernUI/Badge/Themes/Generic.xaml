@@ -9,7 +9,7 @@
     <Converters:InverseBooleanVisibilityConverter x:Key="InverseBooleanVisibilityConverter" />
 
     <Style TargetType="{x:Type MUI:Badge}">
-        <Setter Property="Background" Value="#FF5500" />
+        <Setter Property="Background" Value="Red" />
         <Setter Property="BorderBrush" Value="#FFFFFF" />
         <Setter Property="Foreground" Value="#FFFFFF" />
         <Setter Property="BorderThickness" Value="1" />
@@ -41,6 +41,7 @@
                                 FontFamily="{TemplateBinding FontFamily}"
                                 FontSize="{TemplateBinding FontSize}"
                                 FontWeight="{TemplateBinding FontWeight}"
+                                Background="{TemplateBinding Background}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Text="{Binding Number, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Border>

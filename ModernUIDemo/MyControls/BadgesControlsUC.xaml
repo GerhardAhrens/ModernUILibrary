@@ -29,7 +29,10 @@
                 Height="3"
                 Background="Green" />
 
-            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <StackPanel
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:Badge
                         Margin="10,10"
@@ -53,6 +56,56 @@
                         VerticalAlignment="Center"
                         Number="3" />
 
+                    <ModernUI:FlatButton
+                        x:Name="button"
+                        Width="100"
+                        Height="30"
+                        ModernUI:BadgeAdorner.Background="#5CB85C"
+                        ModernUI:BadgeAdorner.BadgeType="Normal"
+                        ModernUI:BadgeAdorner.HasAdorner="True"
+                        ModernUI:BadgeAdorner.IsShowAdorner="True"
+                        ModernUI:BadgeAdorner.Number="50"
+                        Click="FlatButton_Click"
+                        Content="Klick für +1"
+                        CornerRadius="3" />
+
+                    <ModernUI:FlatButton
+                        x:Name="button1"
+                        Width="100"
+                        Height="30"
+                        Margin="20,0,0,0"
+                        ModernUI:BadgeAdorner.Background="#49C0F6"
+                        ModernUI:BadgeAdorner.HasAdorner="True"
+                        ModernUI:BadgeAdorner.IsShowAdorner="True"
+                        ModernUI:BadgeAdorner.Number="50"
+                        Click="FlatButton_Click"
+                        Content="Klick für +1"
+                        CornerRadius="3"
+                        Type="Default" />
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0">
+                    <TextBox
+                        x:Name="text"
+                        Width="200"
+                        Height="50"
+                        ModernUI:BadgeAdorner.Background="WhiteSmoke"
+                        ModernUI:BadgeAdorner.BadgeType="Dot"
+                        ModernUI:BadgeAdorner.HasAdorner="True"
+                        ModernUI:BadgeAdorner.IsShowAdorner="True"
+                        ModernUI:BadgeAdorner.Number="{Binding Path=Text.Length, ElementName=text, UpdateSourceTrigger=PropertyChanged}"
+                        AcceptsReturn="True"
+                        MaxLines="5" />
+
+                    <ToggleButton
+                        x:Name="btnChangeAdornerType"
+                        Width="100"
+                        Height="30"
+                        Margin="20"
+                        ModernUI:BadgeAdorner.HasAdorner="True"
+                        ModernUI:BadgeAdorner.IsShowAdorner="True"
+                        ModernUI:BadgeAdorner.Number="3"
+                        Click="btnChangeAdornerType_Click" />
                 </StackPanel>
             </StackPanel>
         </Grid>

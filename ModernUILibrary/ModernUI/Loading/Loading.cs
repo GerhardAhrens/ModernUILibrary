@@ -88,6 +88,7 @@
             {
                 return;
             }
+
             loading.SetSpeedRatio(loading.PART_Root, loading.SpeedRatio);
         }
     }
