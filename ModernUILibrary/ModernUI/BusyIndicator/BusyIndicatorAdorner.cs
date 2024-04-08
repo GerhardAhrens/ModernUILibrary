@@ -8,8 +8,13 @@
 
     public class BusyIndicatorAdorner : Adorner
     {
-        private VisualCollection _visuals;
-        private BusyIndicator busyIndicator;
+        public static readonly DependencyProperty IsOpenProperty =
+    DependencyProperty.RegisterAttached("IsOpen", typeof(bool), typeof(BusyIndicatorAdorner)
+        , new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal, BusyIndicatorAdorner.IsOpenCallback, CoerceIsOpen, true, System.Windows.Data.UpdateSourceTrigger.PropertyChanged));
+
+        public BusyIndicatorAdorner(UIElement adornedElement) : base(adornedElement)
+        {
+        }
 
         public static bool GetIsOpen(DependencyObject obj)
         {
@@ -20,10 +25,6 @@
         {
             obj.SetValue(IsOpenProperty, value);
         }
-
-        public static readonly DependencyProperty IsOpenProperty =
-            DependencyProperty.RegisterAttached("IsOpen", typeof(bool), typeof(BusyIndicatorAdorner)
-                , new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal, BusyIndicatorAdorner.IsOpenCallback, CoerceIsOpen, true, System.Windows.Data.UpdateSourceTrigger.PropertyChanged));
 
         private static void IsOpenCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -39,10 +40,6 @@
             if (baseValue == null)
                 return false;
             return baseValue;
-        }
-
-        public BusyIndicatorAdorner(UIElement adornedElement) : base(adornedElement)
-        {
         }
     }
 }

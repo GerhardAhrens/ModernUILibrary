@@ -72,8 +72,9 @@ namespace ModernIU.Base
                 }
                 return TList;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                string errorText = ex.Message;
                 return null;
             }
         }
