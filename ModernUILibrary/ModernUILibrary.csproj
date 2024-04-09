@@ -19,8 +19,10 @@
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
     <Folder Include="ModernUI\SegmentControl\Themes\" />
+    <Folder Include="ModernUI\TextBox\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
+    <Folder Include="Resources\" />
     <Folder Include="Themes\" />
   </ItemGroup>
 
