@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/NumericUpDown/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/RadionButton/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/SegmentControl/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Separator/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToggleButton/Themes/Generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

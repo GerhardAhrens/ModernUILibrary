@@ -264,6 +264,11 @@
                     IsChecked="True" />
             </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="1"
+                Margin="0,0,0,10"
+                Background="Green" />
+
             <StackPanel Orientation="Horizontal">
                 <ModernUI:SegmentControl SelectedIndex="1">
                     <ModernUI:SegmentItem
@@ -396,6 +401,8 @@
                     </ModernUI:ButtonGroup.ItemTemplate>
                 </ModernUI:ButtonGroup>
             </StackPanel>
+
+            <ModernUI:HeaderSeparator Height="1" Background="Green" />
 
             <StackPanel Height="60" Orientation="Horizontal">
                 <ModernUI:IconToggleButton
