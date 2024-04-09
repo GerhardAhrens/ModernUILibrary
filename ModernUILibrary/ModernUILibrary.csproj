@@ -17,6 +17,7 @@
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
+    <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
     <Folder Include="ModernUI\SegmentControl\Themes\" />
     <Folder Include="ModernUI\TextBox\Themes\" />

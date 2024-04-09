@@ -1,5 +1,4 @@
-﻿
-namespace ModernIU.Controls
+﻿namespace ModernIU.Controls
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -93,7 +92,17 @@ namespace ModernIU.Controls
             this.PART_ClearText = VisualHelper.FindVisualElement<Path>(this, "PART_ClearText");
             if(this.PART_ClearText != null)
             {
-                this.PART_ClearText.MouseLeftButtonDown += PART_ClearText_MouseLeftButtonDown;
+                if (this.IsReadOnly == false)
+                {
+                    this.PART_ClearText.MouseLeftButtonDown += PART_ClearText_MouseLeftButtonDown;
+                    this.PART_ClearText.IsEnabled = true;
+                    this.PART_ClearText.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.PART_ClearText.Visibility = Visibility.Collapsed;
+                    this.PART_ClearText.IsEnabled = false;
+                }
             }
 
             this.PART_ScrollViewer = VisualHelper.FindVisualElement<ScrollViewer>(this, "PART_ContentHost");
@@ -114,6 +123,9 @@ namespace ModernIU.Controls
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.ContextMenu = this.BuildContextMenu();
         }
 
         private void TitleTextBox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
@@ -155,6 +167,64 @@ namespace ModernIU.Controls
             inputControlStyle.Triggers.Add(triggerIsReadOnly);
 
             return inputControlStyle;
+        }
+
+        /// <summary>
+        /// Spezifisches Kontextmenü erstellen
+        /// </summary>
+        /// <returns></returns>
+        private ContextMenu BuildContextMenu()
+        {
+            ContextMenu textBoxContextMenu = new ContextMenu();
+            MenuItem copyMenu = new MenuItem();
+            copyMenu.Header = "Kopiere";
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
+            WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
+            textBoxContextMenu.Items.Add(copyMenu);
+
+            if (this.IsReadOnly == false)
+            {
+                MenuItem pasteMenu = new MenuItem();
+                pasteMenu.Header = "Einfügen";
+                pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
+                textBoxContextMenu.Items.Add(pasteMenu);
+
+                MenuItem deleteMenu = new MenuItem();
+                deleteMenu.Header = "Ausschneiden";
+                deleteMenu.Icon = Icons.GetPathGeometry(Icons.IconDelete);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
+                textBoxContextMenu.Items.Add(deleteMenu);
+
+                MenuItem setDateMenu = new MenuItem();
+                setDateMenu.Header = "Setze Datum";
+                setDateMenu.Icon = Icons.GetPathGeometry(Icons.IconClock);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(setDateMenu, "Click", this.OnSetDateMenu);
+                textBoxContextMenu.Items.Add(setDateMenu);
+            }
+
+            return textBoxContextMenu;
+        }
+
+        private void OnCopyMenu(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.Text);
+        }
+
+        private void OnPasteMenu(object sender, RoutedEventArgs e)
+        {
+            this.Text = Clipboard.GetText();
+        }
+
+        private void OnDeleteMenu(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.Text);
+            this.Text = string.Empty;
+        }
+
+        private void OnSetDateMenu(object sender, RoutedEventArgs e)
+        {
+            this.Text = DateTime.Now.ToShortDateString();
         }
 
         private static void OnSetBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

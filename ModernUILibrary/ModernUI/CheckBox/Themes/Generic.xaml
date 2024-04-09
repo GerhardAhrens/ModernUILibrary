@@ -4,9 +4,8 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="TitleTextBoxStyle.xaml" />
-        <ResourceDictionary Source="IconTextBoxStyle.xaml" />
-        <ResourceDictionary Source="IpTextBox.xaml" />
+        <ResourceDictionary Source="DefaultCheckBoxStyle.xaml" />
+        <ResourceDictionary Source="MCheckBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

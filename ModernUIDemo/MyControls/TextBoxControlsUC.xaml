@@ -80,6 +80,89 @@
                     TextWrapping="Wrap"
                     TitleOrientation="Vertical" />
             </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Icon TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:IconTextBox
+                    x:Name="IconTextBox_A"
+                    Width="150"
+                    Height="23"
+                    Margin="0,5"
+                    BorderThickness="1,1,1,1"
+                    CornerRadius="3"
+                    EnterKeyClick="IconTextBox_EnterKeyClick"
+                    IconBackground="AliceBlue"
+                    IconForeground="Gray"
+                    IconPlacement="Left"
+                    IconWidth="11"
+                    Watermark="Vorname" />
+
+                <ModernUI:IconTextBox
+                    x:Name="IconTextBox_B"
+                    Width="150"
+                    Height="23"
+                    Margin="10,5"
+                    BorderThickness="0,0,0,1"
+                    EnterKeyClick="IconTextBox_EnterKeyClick"
+                    IconBackground="Transparent"
+                    IconBorderBrush="Transparent"
+                    IconBorderThickness="0"
+                    IconForeground="Gray"
+                    IconPathData="{StaticResource ResourceKey=Icon_Checked}"
+                    IconPlacement="Left"
+                    IconWidth="11"
+                    Watermark="Vorname" />
+
+                <ModernUI:IconTextBox
+                    x:Name="IconTextBox_C"
+                    Width="150"
+                    Height="23"
+                    Margin="10,5"
+                    Padding="0,0,10,0"
+                    CornerRadius="14"
+                    EnterKeyClick="IconTextBox_EnterKeyClick"
+                    IconBorderThickness="0"
+                    IconPadding="15,0,10,0"
+                    IconPlacement="Left"
+                    Watermark="Vorname" />
+
+                <ModernUI:IconTextBox
+                    x:Name="IconTextBox_D"
+                    Width="150"
+                    Height="23"
+                    Margin="10,5"
+                    Padding="10,0,0,0"
+                    CornerRadius="14"
+                    EnterKeyClick="IconTextBox_EnterKeyClick"
+                    IconForeground="Blue"
+                    IconPlacement="Right"
+                    Watermark="Vorname" />
+
+                <ModernUI:IconTextBox
+                    x:Name="IconTextBox_E"
+                    Width="100"
+                    Height="23"
+                    Margin="10,5"
+                    Padding="10,0,0,0"
+                    IconForeground="Blue"
+                    IconPlacement="Left"
+                    IsReadOnly="True"
+                    Text="Hallo" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="IP-Adresse TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:IpTextBox Width="160" Height="25" />
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>
