@@ -8,7 +8,7 @@
     xmlns:myControls="clr-namespace:ModernUIDemo.MyControls"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="600"
     mc:Ignorable="d">
 
     <Window.Resources>

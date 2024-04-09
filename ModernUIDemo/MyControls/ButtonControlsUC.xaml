@@ -5,7 +5,7 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="600"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -265,9 +265,10 @@
             </StackPanel>
 
             <ModernUI:HeaderSeparator
-                Height="1"
+                Height="15"
                 Margin="0,0,0,10"
-                Background="Green" />
+                Background="Green"
+                Header="ButtonGroup" />
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:SegmentControl SelectedIndex="1">
@@ -402,7 +403,10 @@
                 </ModernUI:ButtonGroup>
             </StackPanel>
 
-            <ModernUI:HeaderSeparator Height="1" Background="Green" />
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Spezieller Button Style" />
 
             <StackPanel Height="60" Orientation="Horizontal">
                 <ModernUI:IconToggleButton
