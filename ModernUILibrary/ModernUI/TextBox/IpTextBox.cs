@@ -119,6 +119,8 @@
             this.FontFamily = ControlBase.FontFamily;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.BorderBrush = ControlBase.BorderBrush;
+            this.BorderThickness = ControlBase.BorderThickness;
             this.Margin = new Thickness(2);
             this.IsEnabled = true;
             this.Focusable = true;
@@ -135,7 +137,7 @@
             this.PART_BOX3 = this.GetTemplateChild("PART_BOX3") as TextBox;
             this.PART_BOX4 = this.GetTemplateChild("PART_BOX4") as TextBox;
 
-            if(this.PART_BOX1 != null)
+            if (this.PART_BOX1 != null)
             {
                 this.PART_BOX1.PreviewTextInput += PART_BOX1_PreviewTextInput;
                 this.PART_BOX1.TextChanged += PART_BOX1_TextChanged;
@@ -169,8 +171,11 @@
                 this.PART_BOX4.LostFocus += (o, e) => { this.IsKeyboardFocused = false; };
                 this.PART_BOX4.PreviewKeyDown += PART_BOX1_PreviewKeyDown;
             }
+
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
         }
-        
+
         void PART_BOX1_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Control) && e.Key == Key.V)
@@ -415,24 +420,31 @@
 
             /* Trigger für IsMouseOver = True */
             Trigger triggerIsMouseOver = new Trigger();
-            triggerIsMouseOver.Property = TextBox.IsMouseOverProperty;
+            triggerIsMouseOver.Property = IpTextBox.IsMouseOverProperty;
             triggerIsMouseOver.Value = true;
-            triggerIsMouseOver.Setters.Add(new Setter() { Property = TextBox.BackgroundProperty, Value = Brushes.LightGray });
+            triggerIsMouseOver.Setters.Add(new Setter() { Property = IpTextBox.BackgroundProperty, Value = Brushes.LightGray });
             inputControlStyle.Triggers.Add(triggerIsMouseOver);
 
             /* Trigger für IsFocused = True */
             Trigger triggerIsFocused = new Trigger();
-            triggerIsFocused.Property = TextBox.IsFocusedProperty;
+            triggerIsFocused.Property = IpTextBox.IsFocusedProperty;
             triggerIsFocused.Value = true;
-            triggerIsFocused.Setters.Add(new Setter() { Property = TextBox.BackgroundProperty, Value = Brushes.LightGray });
+            triggerIsFocused.Setters.Add(new Setter() { Property = IpTextBox.BackgroundProperty, Value = Brushes.LightGray });
             inputControlStyle.Triggers.Add(triggerIsFocused);
 
-            /* Trigger für IsFocused = True */
+            /* Trigger für IsReadOnly = True */
             Trigger triggerIsReadOnly = new Trigger();
             triggerIsReadOnly.Property = TextBox.IsReadOnlyProperty;
             triggerIsReadOnly.Value = true;
-            triggerIsReadOnly.Setters.Add(new Setter() { Property = TextBox.BackgroundProperty, Value = Brushes.LightYellow });
+            triggerIsReadOnly.Setters.Add(new Setter() { Property = IpTextBox.BackgroundProperty, Value = Brushes.LightYellow });
             inputControlStyle.Triggers.Add(triggerIsReadOnly);
+
+            /* Trigger für IsHasError = True */
+            Trigger triggerIsHasError = new Trigger();
+            triggerIsHasError.Property = IpTextBox.IsHasErrorProperty;
+            triggerIsHasError.Value = true;
+            triggerIsHasError.Setters.Add(new Setter() { Property = IpTextBox.BackgroundProperty, Value = Brushes.Red });
+            inputControlStyle.Triggers.Add(triggerIsHasError);
 
             return inputControlStyle;
         }
@@ -441,7 +453,7 @@
         {
             if (e.NewValue != null)
             {
-                var control = (TitleTextBox)d;
+                var control = (IpTextBox)d;
 
                 if (e.NewValue.GetType() == typeof(bool))
                 {
