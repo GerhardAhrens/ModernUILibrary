@@ -36,9 +36,14 @@
             this.Margin = new Thickness(2);
             this.IsReadOnly = false;
             this.Focusable = true;
+
             this.KeyUp += IconTextBox_KeyUp;
         }
 
+        ~IconTextBox()
+        {
+            this.KeyUp -= IconTextBox_KeyUp;
+        }
 
         public event RoutedPropertyChangedEventHandler<object> EnterKeyClick
         {
@@ -168,6 +173,17 @@
             if(e.Key == Key.Enter)
             {
                 this.OnEnterKeyClick(null, null);
+            }
+
+            IconTextBox txt = sender as IconTextBox;
+            if (txt != null)
+            {
+                if (string.IsNullOrEmpty(txt.Text) == true)
+                {
+                }
+                else
+                {
+                }
             }
         }
 

@@ -235,7 +235,7 @@
         #endregion
 
         #region Event Implement Function
-        void PART_BOX1_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void PART_BOX1_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             string input = this.PART_BOX1.Text + e.Text;
             if (!string.IsNullOrWhiteSpace(input) && ".".Equals(e.Text))
@@ -289,7 +289,7 @@
             }
         }
 
-        void PART_BOX2_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void PART_BOX2_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             string input = this.PART_BOX2.Text + e.Text;
 
@@ -320,7 +320,7 @@
             }
         }
 
-        void PART_BOX3_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void PART_BOX3_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             string input = this.PART_BOX3.Text + e.Text;
 
@@ -351,7 +351,7 @@
             }
         }
 
-        void PART_BOX4_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void PART_BOX4_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             string input = this.PART_BOX4.Text + e.Text;
 
@@ -374,7 +374,7 @@
             }
         }
 
-        void PART_BOX1_TextChanged(object sender, TextChangedEventArgs e)
+        private void PART_BOX1_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.PART_BOX1.Text.Length == 3)
             {
@@ -397,7 +397,7 @@
             }
         }
 
-        void PART_BOX2_TextChanged(object sender, TextChangedEventArgs e)
+        private void PART_BOX2_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.PART_BOX2.Text.Length == 3)
             {
@@ -405,7 +405,7 @@
             }
         }
 
-        void PART_BOX3_TextChanged(object sender, TextChangedEventArgs e)
+        private void PART_BOX3_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.PART_BOX3.Text.Length == 3)
             {
