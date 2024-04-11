@@ -19,93 +19,19 @@
         private const string ipRegex = @"^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$";
         private const string ZeroTo255Tip = "{0} ist kein gültiger Eintrag. Geben Sie einen Wert zwischen 0 und 255 an.";
 
-        private TextBox PART_BOX1;
-        private TextBox PART_BOX2;
-        private TextBox PART_BOX3;
-        private TextBox PART_BOX4;
+        private TextBox PART_BOX1 = null;
+        private TextBox PART_BOX2 = null;
+        private TextBox PART_BOX3 = null;
+        private TextBox PART_BOX4 = null;
 
-        #region DependencyProperty
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(IpTextBox), new PropertyMetadata(Brushes.Transparent));
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(IpTextBox), new PropertyMetadata(false, OnIsReadOnlyChanged));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(IpTextBox), new PropertyMetadata(true, OnSetBorderChanged));
-
-        public bool SetBorder
-        {
-            get { return (bool)GetValue(SetBorderProperty); }
-            set { SetValue(SetBorderProperty, value); }
-        }
-
-        public Brush ReadOnlyColor
-        {
-            get { return (Brush)GetValue(ReadOnlyColorProperty); }
-            set { SetValue(ReadOnlyColorProperty, value); }
-        }
-
-        #region Type
-
-        public EnumIpBoxType Type
-        {
-            get { return (EnumIpBoxType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
-        }
-
-        public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.Register("Type", typeof(EnumIpBoxType), typeof(IpTextBox), new PropertyMetadata(EnumIpBoxType.IpAddress));
-
-        #endregion
-
-        #region IsHasError
-
-        public bool IsHasError
-        {
-            get { return (bool)GetValue(IsHasErrorProperty); }
-            private set { SetValue(IsHasErrorProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsHasErrorProperty =
-            DependencyProperty.Register("IsHasError", typeof(bool), typeof(IpTextBox), new PropertyMetadata(false));
-
-        #endregion
-
-        #region ErrorContent
-
-        public string ErrorContent
-        {
-            get { return (string)GetValue(ErrorContentProperty); }
-            private set { SetValue(ErrorContentProperty, value); }
-        }
-
-        public static readonly DependencyProperty ErrorContentProperty =
-            DependencyProperty.Register("ErrorContent", typeof(string), typeof(IpTextBox), new PropertyMetadata(string.Empty));
-
-        #endregion
-
-        #region IsKeyboardFocused
-
-        public new bool IsKeyboardFocused
-        {
-            get { return (bool)GetValue(IsKeyboardFocusedProperty); }
-            private set { SetValue(IsKeyboardFocusedProperty, value); }
-        }
-
-        public new static readonly DependencyProperty IsKeyboardFocusedProperty =
-            DependencyProperty.Register("IsKeyboardFocused", typeof(bool), typeof(IpTextBox), new PropertyMetadata(false));
-
-        #endregion
-
-        #region Text
-
-        public string Text
-        {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
-
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(IpTextBox), new PropertyMetadata(string.Empty));
-
-        #endregion
-
-        #endregion
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(IpTextBox), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(EnumIpBoxType), typeof(IpTextBox), new PropertyMetadata(EnumIpBoxType.IpAddress));
+        public static readonly DependencyProperty ErrorContentProperty = DependencyProperty.Register("ErrorContent", typeof(string), typeof(IpTextBox), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty IsHasErrorProperty =  DependencyProperty.Register("IsHasError", typeof(bool), typeof(IpTextBox), new PropertyMetadata(false));
+        public new static readonly DependencyProperty IsKeyboardFocusedProperty = DependencyProperty.Register("IsKeyboardFocused", typeof(bool), typeof(IpTextBox), new PropertyMetadata(false));
 
         static IpTextBox()
         {
@@ -126,7 +52,53 @@
             this.Focusable = true;
         }
 
-        #region Override
+        public bool SetBorder
+        {
+            get { return (bool)GetValue(SetBorderProperty); }
+            set { SetValue(SetBorderProperty, value); }
+        }
+
+        public Brush ReadOnlyColor
+        {
+            get { return (Brush)GetValue(ReadOnlyColorProperty); }
+            set { SetValue(ReadOnlyColorProperty, value); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return (bool)GetValue(IsReadOnlyProperty); }
+            set { SetValue(IsReadOnlyProperty, value); }
+        }
+
+        public EnumIpBoxType Type
+        {
+            get { return (EnumIpBoxType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
+        }
+
+        public bool IsHasError
+        {
+            get { return (bool)GetValue(IsHasErrorProperty); }
+            private set { SetValue(IsHasErrorProperty, value); }
+        }
+
+        public string ErrorContent
+        {
+            get { return (string)GetValue(ErrorContentProperty); }
+            private set { SetValue(ErrorContentProperty, value); }
+        }
+
+        public new bool IsKeyboardFocused
+        {
+            get { return (bool)GetValue(IsKeyboardFocusedProperty); }
+            private set { SetValue(IsKeyboardFocusedProperty, value); }
+        }
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
 
         public override void OnApplyTemplate()
         {
@@ -174,9 +146,12 @@
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            //this.ContextMenu = this.BuildContextMenu();
         }
 
-        void PART_BOX1_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void PART_BOX1_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Control) && e.Key == Key.V)
             {
@@ -210,9 +185,6 @@
             }
         }
 
-        #endregion
-
-        #region private function
         private bool IsNumber(string input)
         {
             Regex regex = new Regex("^[0-9]*$");
@@ -232,7 +204,6 @@
 
             return !this.IsNumberRange(text, 0, 255);
         }
-        #endregion
 
         #region Event Implement Function
         private void PART_BOX1_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -434,7 +405,7 @@
 
             /* Trigger für IsReadOnly = True */
             Trigger triggerIsReadOnly = new Trigger();
-            triggerIsReadOnly.Property = TextBox.IsReadOnlyProperty;
+            triggerIsReadOnly.Property = IpTextBox.IsReadOnlyProperty;
             triggerIsReadOnly.Value = true;
             triggerIsReadOnly.Setters.Add(new Setter() { Property = IpTextBox.BackgroundProperty, Value = Brushes.LightYellow });
             inputControlStyle.Triggers.Add(triggerIsReadOnly);
@@ -466,6 +437,37 @@
                     {
                         control.BorderBrush = Brushes.Transparent;
                         control.BorderThickness = new Thickness(0);
+                    }
+                }
+            }
+        }
+
+        private static void OnIsReadOnlyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                IpTextBox control = (IpTextBox)d;
+                if (e.NewValue.GetType() == typeof(bool))
+                {
+                    if ((bool)e.NewValue == true)
+                    {
+                        if (control.PART_BOX1 != null)
+                        {
+                            control.PART_BOX1.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX2.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX3.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX4.IsReadOnly = (bool)e.NewValue;
+                        }
+                    }
+                    else
+                    {
+                        if (control.PART_BOX1 != null)
+                        {
+                            control.PART_BOX1.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX2.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX3.IsReadOnly = (bool)e.NewValue;
+                            control.PART_BOX4.IsReadOnly = (bool)e.NewValue;
+                        }
                     }
                 }
             }

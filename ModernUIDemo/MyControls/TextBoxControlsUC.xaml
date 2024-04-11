@@ -39,14 +39,15 @@
                 Header="Title TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TitleTextBox x:Name="txtA"
+                <ModernUI:TitleTextBox
+                    x:Name="txtA"
                     Title="Vorname:"
                     Width="240"
                     Height="27"
                     Margin="5,0"
                     CanClearText="True" />
 
-                <ModernUI:TitleTextBox 
+                <ModernUI:TitleTextBox
                     Title="Nachname:"
                     Width="240"
                     Height="27"
@@ -160,7 +161,10 @@
                 Header="IP-Adresse TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:IpTextBox Width="160" Height="25" />
+                <ModernUI:IpTextBox
+                    Width="160"
+                    Height="25"
+                    IsReadOnly="True" />
             </StackPanel>
 
         </StackPanel>
