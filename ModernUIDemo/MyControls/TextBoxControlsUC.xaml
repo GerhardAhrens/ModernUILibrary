@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignWidth="900"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -165,6 +165,74 @@
                     Width="160"
                     Height="25"
                     IsReadOnly="True" />
+
+                <ModernUI:IpTextBox
+                    Width="160"
+                    Height="25"
+                    IsReadOnly="False" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Password TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:MPasswordBox
+                    x:Name="passwordBox"
+                    Width="150"
+                    Height="28"
+                    Margin="2"
+                    IconBackground="AliceBlue"
+                    IconForeground="Gray"
+                    IsShowIcon="True" />
+
+                <ModernUI:MPasswordBox
+                    x:Name="passwordBox1"
+                    Width="150"
+                    Height="28"
+                    Margin="2"
+                    IconBackground="AliceBlue"
+                    IconForeground="Gray"
+                    IsCanSeePassword="False"
+                    Password="{Binding .}"
+                    Watermark="Bitte geben Sie Ihr Passwort ein" />
+
+                <ModernUI:MPasswordBox
+                    x:Name="passwordBox2"
+                    Width="150"
+                    Height="28"
+                    Margin="2"
+                    IconBackground="Transparent"
+                    IconBorderThickness="0"
+                    IconForeground="Gray"
+                    Watermark="Bitte geben Sie Ihr Passwort ein" />
+
+                <ModernUI:MPasswordBox
+                    x:Name="passwordBox3"
+                    Width="150"
+                    Height="28"
+                    Margin="2"
+                    IconBackground="Transparent"
+                    IconBorderThickness="0"
+                    IconForeground="Gray"
+                    IsShowIcon="False"
+                    Watermark="Bitte geben Sie Ihr Passwort ein" />
+
+                <TextBlock
+                    Width="100"
+                    Background="White"
+                    Text="{Binding Path=Password, ElementName=passwordBox, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Numeric TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:NumericTextBox Width="200" Height="25" Margin="0,0,10,0" PatternType="NotEmpty" />
+
             </StackPanel>
 
         </StackPanel>

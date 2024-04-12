@@ -7,6 +7,8 @@
         <ResourceDictionary Source="TitleTextBoxStyle.xaml" />
         <ResourceDictionary Source="IconTextBoxStyle.xaml" />
         <ResourceDictionary Source="IpTextBox.xaml" />
+        <ResourceDictionary Source="MPasswordBox.xaml" />
+        <ResourceDictionary Source="NumericTextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
