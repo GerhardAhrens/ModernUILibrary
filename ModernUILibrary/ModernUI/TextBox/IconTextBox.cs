@@ -28,12 +28,12 @@
 
         public IconTextBox() : base()
         {
-            this.Height = ControlBase.DefaultHeight;
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
+            this.Margin = ControlBase.DefaultMargin;
+            this.Height = ControlBase.DefaultHeight;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Center;
-            this.Margin = new Thickness(2);
             this.IsReadOnly = false;
             this.Focusable = true;
 

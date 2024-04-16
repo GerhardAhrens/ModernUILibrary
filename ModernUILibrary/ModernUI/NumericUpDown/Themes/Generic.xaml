@@ -217,7 +217,7 @@
                         AllowsTransparency="True"
                         IsOpen="{Binding IsShowTip, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                         Placement="Top"
-                        PlacementTarget="{Binding ElementName=border}"
+                        PlacementTarget="{Binding ElementName=Border}"
                         StaysOpen="False">
                         <Grid>
                             <Grid.RowDefinitions>

@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.ListBoxControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <AdornerDecorator>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.ColumnSpan="2"
+                FontSize="14"
+                Text="Beispiel für verschiedene Varianten beim Einsatz von ListBox / ComboBox" />
+            <Separator
+                Grid.ColumnSpan="2"
+                Height="3"
+                Background="Green" />
+
+            <StackPanel
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ModernUI:MComboBox
+                        x:Name="mComboBox"
+                        Width="100"
+                        HorizontalAlignment="Left"
+                        IsReadOnly="False"
+                        ItemsSource="{Binding Path=MComboBoxSource.Value}"
+                        SelectedItem="{Binding Path=MComboBoxSourceSelectedItem.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Width="150"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        Background="White">
+                        <Run Text="Ergebnis:" />
+                        <Run Text="{Binding Path=SelectedValue, ElementName=mComboBox}" />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </AdornerDecorator>
+</UserControl>

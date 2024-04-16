@@ -14,12 +14,16 @@
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
     <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
+    <Folder Include="ModernUI\DropDownButton\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
+    <Folder Include="ModernUI\ComboBox\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
+    <Folder Include="ModernUI\ScrollViewer\Themes\" />
     <Folder Include="ModernUI\SegmentControl\Themes\" />
+    <Folder Include="ModernUI\SplitButton\Themes\" />
     <Folder Include="ModernUI\TextBox\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />

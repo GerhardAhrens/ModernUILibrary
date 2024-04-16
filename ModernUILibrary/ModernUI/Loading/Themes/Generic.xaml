@@ -1,8 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:MUI="clr-namespace:ModernIU.Controls"
-                    xmlns:ec="http://schemas.microsoft.com/expression/2010/controls" 
-                    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DoubleArc.xaml" />

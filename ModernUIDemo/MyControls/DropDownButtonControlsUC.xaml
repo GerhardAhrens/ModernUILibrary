@@ -1,0 +1,214 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.DropDownButtonControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <AdornerDecorator>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.ColumnSpan="2"
+                FontSize="14"
+                Text="Beispiel für die Verwendung von DropDownButton" />
+            <Separator
+                Grid.ColumnSpan="2"
+                Height="3"
+                Background="Green" />
+
+            <StackPanel
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ModernUI:DropDownButton
+                        Width="180"
+                        Height="30"
+                        Margin="0,5"
+                        Content="DropDown Button Liste">
+                        <ModernUI:DropDownButton.DropDownContent>
+                            <StackPanel HorizontalAlignment="Center">
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button1" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button2" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button3" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Content="Button4" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button5" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button6" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button7" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button9" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button10" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button11" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button12" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button13" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button14" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button15" />
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="25"
+                                    Margin="0,2"
+                                    Click="FlatButton_Click"
+                                    Content="Button16" />
+                            </StackPanel>
+                        </ModernUI:DropDownButton.DropDownContent>
+                    </ModernUI:DropDownButton>
+
+                </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="Splitbutton mit Liste" />
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton"
+                        Width="180"
+                        Height="28"
+                        Margin="5,0"
+                        Content="SplitButton mit Liste"
+                        ItemClick="SplitButton_ItemClick" />
+
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton2"
+                        Width="80"
+                        Height="28"
+                        Margin="5,0"
+                        Background="#3278B3"
+                        BorderBrush="#2C6B9F"
+                        BorderThickness="0"
+                        Content="升级"
+                        Foreground="White"
+                        ItemClick="SplitButton_ItemClick" />
+                    
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton3"
+                        Width="80"
+                        Height="28"
+                        Margin="5,0"
+                        Background="#23B7E5"
+                        BorderBrush="#19A9D5"
+                        BorderThickness="0"
+                        Content="升级"
+                        Foreground="White"
+                        ItemClick="SplitButton_ItemClick" />
+                    
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton4"
+                        Width="80"
+                        Height="28"
+                        Margin="5,0"
+                        Background="#2BAAB1"
+                        BorderBrush="#26969C"
+                        BorderThickness="0"
+                        Content="升级"
+                        Foreground="White"
+                        ItemClick="SplitButton_ItemClick" />
+                    
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton5"
+                        Width="80"
+                        Height="28"
+                        Margin="5,0"
+                        Background="#EDBC6C"
+                        BorderBrush="#EAB255"
+                        BorderThickness="0"
+                        Content="升级"
+                        Foreground="White"
+                        ItemClick="SplitButton_ItemClick" />
+                    
+                    <ModernUI:SplitButton
+                        x:Name="SplitButton6"
+                        Width="80"
+                        Height="28"
+                        Margin="5,0"
+                        Background="#E36159"
+                        BorderBrush="#DF4C43"
+                        BorderThickness="0"
+                        Content="升级"
+                        Foreground="White"
+                        ItemClick="SplitButton_ItemClick" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </AdornerDecorator>
+</UserControl>

@@ -43,8 +43,6 @@
                     x:Name="txtA"
                     Title="Vorname:"
                     Width="240"
-                    Height="27"
-                    Margin="5,0"
                     CanClearText="True" />
 
                 <ModernUI:TitleTextBox
@@ -181,8 +179,6 @@
                 <ModernUI:MPasswordBox
                     x:Name="passwordBox"
                     Width="150"
-                    Height="28"
-                    Margin="2"
                     IconBackground="AliceBlue"
                     IconForeground="Gray"
                     IsShowIcon="True" />
@@ -190,8 +186,6 @@
                 <ModernUI:MPasswordBox
                     x:Name="passwordBox1"
                     Width="150"
-                    Height="28"
-                    Margin="2"
                     IconBackground="AliceBlue"
                     IconForeground="Gray"
                     IsCanSeePassword="False"
@@ -201,8 +195,6 @@
                 <ModernUI:MPasswordBox
                     x:Name="passwordBox2"
                     Width="150"
-                    Height="28"
-                    Margin="2"
                     IconBackground="Transparent"
                     IconBorderThickness="0"
                     IconForeground="Gray"
@@ -231,8 +223,46 @@
                 Header="Numeric TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:NumericTextBox Width="200" Height="25" Margin="0,0,10,0" PatternType="NotEmpty" />
+                <ModernUI:TextBoxCurrency x:Name="txtCurrencyTextBox" Width="100" />
 
+                <TextBlock
+                    Width="100"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=Text, ElementName=txtCurrencyTextBox}" />
+                </TextBlock>
+
+                <ModernUI:TextBoxInt
+                    x:Name="txtIntTextBox"
+                    Width="100"
+                    Margin="10,0"
+                    MaxLength="5" />
+
+                <TextBlock
+                    Width="100"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=Text, ElementName=txtIntTextBox}" />
+                </TextBlock>
+
+                <ModernUI:TextBoxDecimal
+                    x:Name="txtDecTextBox"
+                    Width="100"
+                    Margin="10,0"
+                    MaxLength="5" />
+
+                <TextBlock
+                    Width="100"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=Text, ElementName=txtDecTextBox}" />
+                </TextBlock>
             </StackPanel>
 
         </StackPanel>

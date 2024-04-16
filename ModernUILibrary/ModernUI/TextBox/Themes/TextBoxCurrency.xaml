@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
+
+    <!--#region Style TextBoxCurrency-->
+    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="MUI:TextBoxCurrency">
+        <Setter Property="TextAlignment" Value="Right" />
+        <Style.Triggers>
+            <Trigger Property="IsNegative" Value="True">
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--#endregion Style TextBoxCurrency-->
+</ResourceDictionary>

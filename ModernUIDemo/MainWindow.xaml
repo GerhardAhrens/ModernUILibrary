@@ -101,6 +101,7 @@
                 <TabItem.Header>
                     <TextBlock Text="ListBox Controls" />
                 </TabItem.Header>
+                <myControls:ListBoxControlsUC />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -155,6 +156,16 @@
                         TextWrapping="Wrap" />
                 </TabItem.Header>
                 <myControls:NoticeMessageControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
+                        Text="DropDownButton Controls"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:DropDownButtonControlsUC />
             </TabItem>
         </TabControl>
     </Grid>
