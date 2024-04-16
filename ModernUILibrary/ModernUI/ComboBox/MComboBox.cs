@@ -268,7 +268,7 @@ namespace ModernIU.Controls
             ContextMenu textBoxContextMenu = new ContextMenu();
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Kopiere";
-            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
+            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
             textBoxContextMenu.Items.Add(copyMenu);
 
@@ -276,13 +276,13 @@ namespace ModernIU.Controls
             {
                 MenuItem pasteMenu = new MenuItem();
                 pasteMenu.Header = "Einfügen";
-                pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste);
+                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
                 textBoxContextMenu.Items.Add(pasteMenu);
 
                 MenuItem deleteMenu = new MenuItem();
                 deleteMenu.Header = "Ausschneiden";
-                deleteMenu.Icon = Icons.GetPathGeometry(Icons.IconDelete);
+                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
                 textBoxContextMenu.Items.Add(deleteMenu);
             }

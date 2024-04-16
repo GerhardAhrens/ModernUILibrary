@@ -15,6 +15,7 @@
     <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
+    <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\ComboBox\" />

@@ -371,6 +371,11 @@
                 </ModernUI:ButtonGroup>
             </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Button per ListOfT erstellen" />
+
             <StackPanel Orientation="Horizontal">
                 <ModernUI:ButtonGroup
                     x:Name="BtnGroupButtonSource"
@@ -383,8 +388,14 @@
                     CornerRadius="3"
                     ItemClick="BtnGroupButtonClick_ItemClick" />
 
-                <Label Width="20" />
+            </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Button per DataTable erstellen" />
+
+            <StackPanel Orientation="Horizontal">
                 <ModernUI:ButtonGroup
                     x:Name="BtnGroupButtonDataTable"
                     Width="Auto"

@@ -35,5 +35,10 @@
         {
             MessageBox.Show(e.NewValue.ToString());
         }
+
+        private void OnFlatButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.DropDownButton3.IsDropDownOpen = false;
+        }
     }
 }

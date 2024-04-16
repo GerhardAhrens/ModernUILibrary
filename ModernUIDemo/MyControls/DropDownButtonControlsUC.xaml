@@ -139,6 +139,7 @@
                     Height="15"
                     Background="Green"
                     Header="Splitbutton mit Liste" />
+
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:SplitButton
                         x:Name="SplitButton"
@@ -150,63 +151,94 @@
 
                     <ModernUI:SplitButton
                         x:Name="SplitButton2"
-                        Width="80"
+                        Width="100"
                         Height="28"
                         Margin="5,0"
                         Background="#3278B3"
                         BorderBrush="#2C6B9F"
                         BorderThickness="0"
-                        Content="升级"
+                        Content="SplitButton"
                         Foreground="White"
                         ItemClick="SplitButton_ItemClick" />
-                    
+
                     <ModernUI:SplitButton
                         x:Name="SplitButton3"
-                        Width="80"
+                        Width="100"
                         Height="28"
                         Margin="5,0"
                         Background="#23B7E5"
                         BorderBrush="#19A9D5"
                         BorderThickness="0"
-                        Content="升级"
+                        Content="SplitButton"
                         Foreground="White"
                         ItemClick="SplitButton_ItemClick" />
-                    
+
                     <ModernUI:SplitButton
                         x:Name="SplitButton4"
-                        Width="80"
+                        Width="100"
                         Height="28"
                         Margin="5,0"
                         Background="#2BAAB1"
                         BorderBrush="#26969C"
                         BorderThickness="0"
-                        Content="升级"
+                        Content="SplitButton"
                         Foreground="White"
                         ItemClick="SplitButton_ItemClick" />
-                    
+
                     <ModernUI:SplitButton
                         x:Name="SplitButton5"
-                        Width="80"
+                        Width="100"
                         Height="28"
                         Margin="5,0"
                         Background="#EDBC6C"
                         BorderBrush="#EAB255"
                         BorderThickness="0"
-                        Content="升级"
+                        Content="SplitButton"
                         Foreground="White"
                         ItemClick="SplitButton_ItemClick" />
-                    
+
                     <ModernUI:SplitButton
                         x:Name="SplitButton6"
-                        Width="80"
+                        Width="100"
                         Height="28"
                         Margin="5,0"
                         Background="#E36159"
                         BorderBrush="#DF4C43"
                         BorderThickness="0"
-                        Content="升级"
+                        Content="SplitButton"
                         Foreground="White"
                         ItemClick="SplitButton_ItemClick" />
+                </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="Splitbutton mit Steuerung" />
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ModernUI:DropDownButton
+                        x:Name="DropDownButton3"
+                        Width="140"
+                        Height="30"
+                        Margin="0,5"
+                        Content="Dropdown-Steuerung"
+                        Trigger="Custom">
+                        <ModernUI:DropDownButton.DropDownContent>
+                            <StackPanel Margin="10" HorizontalAlignment="Center">
+                                <TextBlock
+                                    Margin="0,0,0,10"
+                                    Foreground="Black"
+                                    Text="benutzerdefinierten Dropdown-Inhalten" />
+
+                                <ModernUI:FlatButton
+                                    Width="70"
+                                    Height="28"
+                                    HorizontalAlignment="Right"
+                                    Click="OnFlatButtonClick"
+                                    Content="DropDown Steuerung" />
+                            </StackPanel>
+                        </ModernUI:DropDownButton.DropDownContent>
+                    </ModernUI:DropDownButton>
                 </StackPanel>
             </StackPanel>
         </Grid>

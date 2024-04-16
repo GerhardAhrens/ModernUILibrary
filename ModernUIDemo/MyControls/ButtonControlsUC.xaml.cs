@@ -35,6 +35,10 @@
             dr["ID"] = "2";
             dr["NAME"] = "Charlie";
             dt.Rows.Add(dr);
+            dr = dt.NewRow();
+            dr["ID"] = "3";
+            dr["NAME"] = "Buddy";
+            dt.Rows.Add(dr);
 
             this.BtnGroupButtonSource.ItemsSource = list;
             this.BtnGroupButtonDataTable.ItemsSource = dt.AsDataView();
@@ -61,8 +65,15 @@
             ButtonGroup si = (ButtonGroup)sender;
 
             var content = ((ContentControl)e.NewValue).Content;
-            var column = ((System.Data.DataRowView)content).Row["NAME"];
-            MessageBox.Show($"{si.Name}; {column}");
+            if ((((ContentControl)e.NewValue).Content).GetType() == typeof(string))
+            {
+                MessageBox.Show($"{si.Name}; {content}");
+            }
+            else
+            {
+                var column = ((System.Data.DataRowView)content).Row["NAME"];
+                MessageBox.Show($"{si.Name}; {column}");
+            }
         }
     }
 }

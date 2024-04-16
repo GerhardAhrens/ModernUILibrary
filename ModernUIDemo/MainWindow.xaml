@@ -93,10 +93,25 @@
 
             <TabItem>
                 <TabItem.Header>
+                    <TextBlock Text="Icon (PathGeometry)" />
+                </TabItem.Header>
+                <myControls:IconsControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Farben" />
+                </TabItem.Header>
+                <myControls:ColorControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
                     <TextBlock Text="TextBox Controls" />
                 </TabItem.Header>
                 <myControls:TextBoxControlsUC />
             </TabItem>
+
             <TabItem>
                 <TabItem.Header>
                     <TextBlock Text="ListBox Controls" />

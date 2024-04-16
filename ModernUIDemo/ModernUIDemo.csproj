@@ -23,6 +23,12 @@
     <Compile Update="MyControls\DropDownButtonControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ColorControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\IconsControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\ListBoxControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
