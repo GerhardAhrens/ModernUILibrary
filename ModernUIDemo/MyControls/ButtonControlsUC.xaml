@@ -43,7 +43,11 @@
                     Height="30"
                     Margin="10,10"
                     Content="Refresh"
-                    PathWidth="12" />
+                    PathWidth="12">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Test" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                </ModernUI:PathButton>
 
                 <ModernUI:PathButton
                     Width="95"

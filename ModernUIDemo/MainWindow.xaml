@@ -107,9 +107,16 @@
 
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock Text="TextBox Controls" />
+                    <TextBlock Text="TextBox (String) Controls" />
                 </TabItem.Header>
-                <myControls:TextBoxControlsUC />
+                <myControls:TextBoxStringControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="TextBox (Numeric) Controls" />
+                </TabItem.Header>
+                <myControls:TextBoxNumericControlsUC />
             </TabItem>
 
             <TabItem>
@@ -181,6 +188,16 @@
                         TextWrapping="Wrap" />
                 </TabItem.Header>
                 <myControls:DropDownButtonControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
+                        Text="Tooltip Controls"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:TooltipControlsUC />
             </TabItem>
         </TabControl>
     </Grid>

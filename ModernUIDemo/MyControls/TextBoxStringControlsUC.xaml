@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ModernUIDemo.MyControls.TextBoxControlsUC"
+    x:Class="ModernUIDemo.MyControls.TextBoxStringControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
@@ -188,7 +188,7 @@
                     Width="150"
                     IconBackground="AliceBlue"
                     IconForeground="Gray"
-                    IsCanSeePassword="False"
+                    IsCanSeePassword="True"
                     Password="{Binding .}"
                     Watermark="Bitte geben Sie Ihr Passwort ein" />
 
@@ -216,56 +216,6 @@
                     Background="White"
                     Text="{Binding Path=Password, ElementName=passwordBox, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-
-            <ModernUI:HeaderSeparator
-                Height="15"
-                Background="Green"
-                Header="Numeric TextBox" />
-
-            <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxCurrency x:Name="txtCurrencyTextBox" Width="100" />
-
-                <TextBlock
-                    Width="100"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Background="White">
-                    <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=Text, ElementName=txtCurrencyTextBox}" />
-                </TextBlock>
-
-                <ModernUI:TextBoxInt
-                    x:Name="txtIntTextBox"
-                    Width="100"
-                    Margin="10,0"
-                    MaxLength="5" />
-
-                <TextBlock
-                    Width="100"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Background="White">
-                    <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=Text, ElementName=txtIntTextBox}" />
-                </TextBlock>
-
-                <ModernUI:TextBoxDecimal
-                    x:Name="txtDecTextBox"
-                    Width="100"
-                    Margin="10,0"
-                    MaxLength="5" />
-
-                <TextBlock
-                    Width="100"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Background="White">
-                    <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=Text, ElementName=txtDecTextBox}" />
-                </TextBlock>
-            </StackPanel>
-
         </StackPanel>
-
     </Grid>
 </UserControl>

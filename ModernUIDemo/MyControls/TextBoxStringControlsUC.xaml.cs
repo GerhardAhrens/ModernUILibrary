@@ -6,11 +6,11 @@
     using ModernIU.Controls;
 
     /// <summary>
-    /// Interaktionslogik für TextBoxControlsUC.xaml
+    /// Interaktionslogik für TextBoxStringControlsUC.xaml
     /// </summary>
-    public partial class TextBoxControlsUC : UserControl
+    public partial class TextBoxStringControlsUC : UserControl
     {
-        public TextBoxControlsUC()
+        public TextBoxStringControlsUC()
         {
             this.InitializeComponent();
         }

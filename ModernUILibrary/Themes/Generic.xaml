@@ -18,6 +18,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ScrollViewer/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/TextBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToggleButton/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToolTip/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Resources/MenuItemStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

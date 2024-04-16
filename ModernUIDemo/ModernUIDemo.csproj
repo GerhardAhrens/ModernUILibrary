@@ -47,6 +47,12 @@
     <Compile Update="MyControls\NumericUpDownControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\TooltipControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\TextBoxStringControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
