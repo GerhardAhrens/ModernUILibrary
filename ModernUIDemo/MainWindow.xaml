@@ -199,6 +199,16 @@
                 </TabItem.Header>
                 <myControls:TooltipControlsUC />
             </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
+                        Text="Poptip Controls"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:PoptipControlsUC />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

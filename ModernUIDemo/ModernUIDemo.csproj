@@ -47,6 +47,9 @@
     <Compile Update="MyControls\NumericUpDownControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\PoptipControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TooltipControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
