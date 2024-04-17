@@ -7,7 +7,6 @@
 
     public class DropDownButton : ContentControl
     {
-        private UIElement Root;
         public static readonly DependencyProperty DropDownContentProperty;
 
         #region Constructors
