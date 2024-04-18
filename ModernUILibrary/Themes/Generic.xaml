@@ -11,6 +11,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Icons/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Loading/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Message/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/MessageBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/NumericUpDown/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/RadionButton/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/SegmentControl/Themes/Generic.xaml" />

@@ -184,6 +184,16 @@
                 <TabItem.Header>
                     <TextBlock
                         Width="140"
+                        Text="MessageBox Window"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:MessageBoxControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
                         Text="DropDownButton Controls"
                         TextWrapping="Wrap" />
                 </TabItem.Header>
