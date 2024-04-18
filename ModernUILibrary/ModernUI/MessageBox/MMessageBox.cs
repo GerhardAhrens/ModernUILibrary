@@ -167,17 +167,16 @@ namespace ModernIU.Controls
                 default:
                     break;
             }
+
             return MessageBoxModule.Show(owner, messageBoxText, caption, button, defaultResult);
         }
 
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption
-            , MessageBoxButton button, MessageBoxResult defaultResult)
+        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption , MessageBoxButton button, MessageBoxResult defaultResult)
         {
             return MessageBoxModule.Show(owner, messageBoxText, caption, button, defaultResult, EnumPromptType.Info);
         }
 
-        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption
-            , MessageBoxButton button, MessageBoxResult defaultResult, EnumPromptType type)
+        public static MessageBoxResult Show(Window owner, string messageBoxText, string caption , MessageBoxButton button, MessageBoxResult defaultResult, EnumPromptType type)
         {
             MessageBoxModule messageBox = new MessageBoxModule();
 
@@ -194,7 +193,7 @@ namespace ModernIU.Controls
             }
             else
             {
-                messageBox.ShowInTaskbar = true;
+                messageBox.ShowInTaskbar = false;
             }
 
             messageBox.Owner = owner;
@@ -227,27 +226,18 @@ namespace ModernIU.Controls
             bool? result = messageBox.ShowDialog();
             switch (button)
             {
-
-                //break;
                 case MessageBoxButton.OKCancel:
                     {
-                        return result == true ? MessageBoxResult.OK
-                            : result == false ? MessageBoxResult.Cancel :
-                            MessageBoxResult.None;
+                        return result == true ? MessageBoxResult.OK : result == false ? MessageBoxResult.Cancel : MessageBoxResult.None;
                     }
-                //break;
                 case MessageBoxButton.YesNo:
                     {
                         return result == true ? MessageBoxResult.Yes : MessageBoxResult.No;
                     }
-                //break;
                 case MessageBoxButton.YesNoCancel:
                     {
-                        return result == true ? MessageBoxResult.Yes
-                            : result == false ? MessageBoxResult.No :
-                            MessageBoxResult.Cancel;
+                        return result == true ? MessageBoxResult.Yes : result == false ? MessageBoxResult.No :  MessageBoxResult.Cancel;
                     }
-
                 case MessageBoxButton.OK:
                 default:
                     {
@@ -258,7 +248,7 @@ namespace ModernIU.Controls
 
         public static MessageBoxResult Show(string messageBoxText, EnumPromptType type)
         {
-            return Show(messageBoxText, "", type);
+            return Show(messageBoxText, string.Empty, type);
         }
 
         public static MessageBoxResult Show(string messageBoxText, string caption, EnumPromptType type)

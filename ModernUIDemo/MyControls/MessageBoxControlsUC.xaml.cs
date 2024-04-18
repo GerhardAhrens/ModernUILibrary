@@ -24,11 +24,12 @@
                 case "Info":
                     if (MMessageBox.Show("Element", "Bildunterschrift", EnumPromptType.Error) == MessageBoxResult.OK)
                     {
-                        MessageBox.Show("Klicken Sie auf OK.");
+                        MessageBox.Show("Result: OK.");
                     }
                     break;
                 case "Error":
-                    MMessageBox.Show(Window.GetWindow(this), "Sie verwenden derzeit eine zu niedrige Browserversion, die dazu führen kann, dass ein Teil der Funktion des Produkts nicht normal genutzt werden kann", "", MessageBoxButton.YesNoCancel, EnumPromptType.Warn);
+                    MessageBoxResult result = MMessageBox.Show(Window.GetWindow(this), "Sie verwenden derzeit eine zu niedrige Browserversion, die dazu führen kann, dass ein Teil der Funktion des Produkts nicht normal genutzt werden kann", "", MessageBoxButton.YesNoCancel, EnumPromptType.Warn);
+                    MessageBox.Show($"{result}");
                     break;
                 case "Warn":
                     MMessageBox.Show("Element", EnumPromptType.Warn);
