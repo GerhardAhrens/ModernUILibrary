@@ -53,7 +53,7 @@
                 double controlHeight = control.ActualHeight;
 
                 Point p = this.PlacementTarget.PointFromScreen(new Point(0, 0));
-                if(p != null)
+                if(p != default)
                 {
                     double pointX = Math.Abs(p.X); 
                     double pointY = Math.Abs(p.Y);

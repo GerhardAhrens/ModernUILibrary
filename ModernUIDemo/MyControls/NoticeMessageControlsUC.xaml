@@ -2,7 +2,8 @@
     x:Class="ModernUIDemo.MyControls.NoticeMessageControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:MUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:MUIbase="clr-namespace:ModernIU.Base;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
@@ -17,22 +18,107 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.ColumnSpan="2"
             FontSize="14"
-            Text="Beispiel für verschiedene TextBox Varianten (Text, Numeric, Currency, ..." />
+            Text="Beispiel für verschiedene Benachrichtigungen" />
+
         <Separator
             Grid.ColumnSpan="2"
             Height="3"
             Background="Green" />
 
         <StackPanel Grid.Row="2" Orientation="Vertical">
-            <Button
-                x:Name="BtnInfo"
+            <MUI:FlatButton
+                x:Name="btnInfo"
+                Width="200"
+                Height="25"
+                Margin="5"
                 Click="BtnInfo_Click"
-                Content="Info" />
+                Content="Info"
+                CornerRadius="3" />
+
+            <MUI:FlatButton
+                x:Name="btnSuccess"
+                Width="200"
+                Height="25"
+                Margin="5"
+                Click="btnSuccess_Click"
+                Content="Success"
+                CornerRadius="3"
+                ToolTipService.ShowDuration="5000"
+                Type="success">
+
+                <MUI:FlatButton.ToolTip>
+                    <MUI:MToolTip Placement="Top">
+                        <TextBlock
+                            Width="150"
+                            Text="ToolTip für die Anzeige der Schaltfläche Erfolg"
+                            TextWrapping="Wrap" />
+                    </MUI:MToolTip>
+                </MUI:FlatButton.ToolTip>
+            </MUI:FlatButton>
+
+            <MUI:FlatButton
+                x:Name="btnError"
+                Width="200"
+                Height="25"
+                Margin="5"
+                Click="btnError_Click"
+                Content="Error"
+                CornerRadius="3"
+                Type="error" />
+
+            <MUI:FlatButton
+                x:Name="btnWarn"
+                Width="200"
+                Height="25"
+                Margin="5"
+                Click="btnWarn_Click"
+                Content="Warn"
+                CornerRadius="3"
+                Type="warning" />
+        </StackPanel>
+
+        <MUI:HeaderSeparator
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Height="15"
+            Margin="0,0,0,65"
+            Background="Green"
+            Header="NoticeMessageAdorner" />
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Margin="0,20"
+            Orientation="Vertical">
+            <Grid
+                MUIbase:NoticeMessageAdorner.Content="Blub, Blub"
+                MUIbase:NoticeMessageAdorner.CornerRadius="3"
+                MUIbase:NoticeMessageAdorner.IsOpen="{Binding IsChecked, ElementName=btnShowNoticeMessage}"
+                MUIbase:NoticeMessageAdorner.MessageType="Error"
+                Background="AliceBlue">
+                <CheckBox
+                    x:Name="btnShowNoticeMessage"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Zeigen" />
+            </Grid>
+
+            <ToggleButton
+                x:Name="aa"
+                Width="100"
+                Height="30"
+                VerticalAlignment="Top"
+                MUIbase:NoticeMessageAdorner.Content="Blub, Blub"
+                MUIbase:NoticeMessageAdorner.CornerRadius="3"
+                MUIbase:NoticeMessageAdorner.IsOpen="{Binding IsChecked, ElementName=aa, Mode=TwoWay}"
+                MUIbase:NoticeMessageAdorner.MessageType="Error"
+                Background="AliceBlue" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -33,6 +33,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Orientation="Vertical">
+            
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
