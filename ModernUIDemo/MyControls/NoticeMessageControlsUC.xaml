@@ -31,72 +31,70 @@
             Height="3"
             Background="Green" />
 
-        <StackPanel Grid.Row="2" Orientation="Vertical">
-            <MUI:FlatButton
-                x:Name="btnInfo"
-                Width="200"
-                Height="25"
-                Margin="5"
-                Click="BtnInfo_Click"
-                Content="Info"
-                CornerRadius="3" />
-
-            <MUI:FlatButton
-                x:Name="btnSuccess"
-                Width="200"
-                Height="25"
-                Margin="5"
-                Click="btnSuccess_Click"
-                Content="Success"
-                CornerRadius="3"
-                ToolTipService.ShowDuration="5000"
-                Type="success">
-
-                <MUI:FlatButton.ToolTip>
-                    <MUI:MToolTip Placement="Top">
-                        <TextBlock
-                            Width="150"
-                            Text="ToolTip für die Anzeige der Schaltfläche Erfolg"
-                            TextWrapping="Wrap" />
-                    </MUI:MToolTip>
-                </MUI:FlatButton.ToolTip>
-            </MUI:FlatButton>
-
-            <MUI:FlatButton
-                x:Name="btnError"
-                Width="200"
-                Height="25"
-                Margin="5"
-                Click="btnError_Click"
-                Content="Error"
-                CornerRadius="3"
-                Type="error" />
-
-            <MUI:FlatButton
-                x:Name="btnWarn"
-                Width="200"
-                Height="25"
-                Margin="5"
-                Click="btnWarn_Click"
-                Content="Warn"
-                CornerRadius="3"
-                Type="warning" />
-        </StackPanel>
-
-        <MUI:HeaderSeparator
-            Grid.Row="3"
+        <UniformGrid
+            Grid.Row="2"
             Grid.ColumnSpan="2"
-            Height="15"
-            Margin="0,0,0,65"
-            Background="Green"
-            Header="NoticeMessageAdorner" />
+            Columns="2">
+            <StackPanel Orientation="Vertical">
+                <MUI:FlatButton
+                    x:Name="btnInfo"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    Click="BtnInfo_Click"
+                    Content="Info"
+                    CornerRadius="3" />
 
-        <StackPanel
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
-            Margin="0,20"
-            Orientation="Vertical">
+                <MUI:FlatButton
+                    x:Name="btnSuccess"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    Click="btnSuccess_Click"
+                    Content="Success"
+                    CornerRadius="3"
+                    ToolTipService.ShowDuration="5000"
+                    Type="success">
+
+                    <MUI:FlatButton.ToolTip>
+                        <MUI:MToolTip Placement="Top">
+                            <TextBlock
+                                Width="150"
+                                Text="ToolTip für die Anzeige der Schaltfläche Erfolg"
+                                TextWrapping="Wrap" />
+                        </MUI:MToolTip>
+                    </MUI:FlatButton.ToolTip>
+                </MUI:FlatButton>
+
+                <MUI:FlatButton
+                    x:Name="btnError"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    Click="btnError_Click"
+                    Content="Error"
+                    CornerRadius="3"
+                    Type="error" />
+
+                <MUI:FlatButton
+                    x:Name="btnWarn"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    Click="btnWarn_Click"
+                    Content="Warn"
+                    CornerRadius="3"
+                    Type="warning" />
+            </StackPanel>
+
+            <MUI:Alert
+                Grid.Column="1"
+                Width="150"
+                VerticalAlignment="Center"
+                Content="Error" />
+
             <Grid
+                Margin="0,20,0,0"
                 MUIbase:NoticeMessageAdorner.Content="Blub, Blub"
                 MUIbase:NoticeMessageAdorner.CornerRadius="3"
                 MUIbase:NoticeMessageAdorner.IsOpen="{Binding IsChecked, ElementName=btnShowNoticeMessage}"
@@ -111,14 +109,14 @@
 
             <ToggleButton
                 x:Name="aa"
-                Width="100"
-                Height="30"
+                Width="200"
+                Height="50"
                 VerticalAlignment="Top"
                 MUIbase:NoticeMessageAdorner.Content="Blub, Blub"
                 MUIbase:NoticeMessageAdorner.CornerRadius="3"
                 MUIbase:NoticeMessageAdorner.IsOpen="{Binding IsChecked, ElementName=aa, Mode=TwoWay}"
                 MUIbase:NoticeMessageAdorner.MessageType="Error"
                 Background="AliceBlue" />
-        </StackPanel>
+        </UniformGrid>
     </Grid>
 </UserControl>
