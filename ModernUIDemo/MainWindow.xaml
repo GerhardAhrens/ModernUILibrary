@@ -194,6 +194,16 @@
                 <TabItem.Header>
                     <TextBlock
                         Width="140"
+                        Text="PopUp Window"
+                        TextWrapping="Wrap" />
+                </TabItem.Header>
+                <myControls:PopUpControlsUC />
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock
+                        Width="140"
                         Text="DropDownButton Controls"
                         TextWrapping="Wrap" />
                 </TabItem.Header>

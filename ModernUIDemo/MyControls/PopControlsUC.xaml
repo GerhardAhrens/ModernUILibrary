@@ -1,0 +1,87 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.PopUpControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:MUIBehaviors="clr-namespace:ModernIU.Behaviors;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <PathGeometry x:Key="Icon_Close" Figures="M754.782 212.596 512 455.368 269.218 212.596c-13.081-13.081-34.29-13.081-47.369 0-13.081 13.081-13.081 34.288 0 47.367l242.782 242.771L221.849 745.507c-13.081 13.081-13.081 34.288 0 47.367 13.081 13.081 34.29 13.081 47.369 0L512 550.103l242.782 242.771c13.081 13.081 34.289 13.081 47.37 0 13.081-13.081 13.081-34.288 0-47.367L559.37 502.735l242.782-242.771c13.081-13.081 13.081-34.288 0-47.367C789.07 199.517 767.862 199.517 754.782 212.596z" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.ColumnSpan="2"
+            FontSize="14"
+            Text="Beispiel zum Aufrufen eines PopUp Window" />
+        <Separator
+            Grid.ColumnSpan="2"
+            Height="3"
+            Background="Green" />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Button
+                x:Name="btnOpenMaskLayer"
+                Width="100"
+                Height="30"
+                Click="btnOpenMaskLayer_Click"
+                Content="Klick" />
+            <MUI:PopupEx
+                x:Name="maskLayer"
+                MUIBehaviors:MaskLayerBehavior.Owner="{Binding Path=., RelativeSource={RelativeSource AncestorType=Window}}"
+                PopupAnimation="Fade"
+                Topmost="False">
+                <Grid
+                    Width="800"
+                    Height="500"
+                    Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#FAFAFB" CornerRadius="5">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Foreground="Red"
+                            Text="Popup Windows" />
+                    </Border>
+
+                    <MUI:PathIconButton
+                        x:Name="btnClose"
+                        Grid.Column="1"
+                        Width="30"
+                        Margin="20,4,0,0"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        Click="btnClose_Click"
+                        MouseOverBackground="Transparent"
+                        NormalPathColor="White"
+                        PathData="{StaticResource Icon_Close}"
+                        PathWidth="18"
+                        PressedBackground="Transparent" />
+                </Grid>
+            </MUI:PopupEx>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

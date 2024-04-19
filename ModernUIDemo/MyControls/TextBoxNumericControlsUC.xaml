@@ -33,14 +33,17 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Orientation="Vertical">
-            
+
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="Numeric TextBox" />
+                Header="Currency TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxCurrency x:Name="txtCurrencyTextBox" Width="100" />
+                <ModernUI:TextBoxCurrency
+                    x:Name="txtCurrencyTextBox"
+                    Width="100"
+                    Margin="10,0" />
 
                 <TextBlock
                     Width="100"
@@ -50,7 +53,14 @@
                     <Run Text="Ergebnis:" />
                     <Run Text="{Binding Path=Text, ElementName=txtCurrencyTextBox}" />
                 </TextBlock>
+            </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Integer TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
                 <ModernUI:TextBoxInt
                     x:Name="txtIntTextBox"
                     Width="100"
@@ -66,6 +76,14 @@
                     <Run Text="{Binding Path=Text, ElementName=txtIntTextBox}" />
                 </TextBlock>
 
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Decimal TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
                 <ModernUI:TextBoxDecimal
                     x:Name="txtDecTextBox"
                     Width="100"
@@ -81,7 +99,6 @@
                     <Run Text="{Binding Path=Text, ElementName=txtDecTextBox}" />
                 </TextBlock>
             </StackPanel>
-
         </StackPanel>
 
     </Grid>
