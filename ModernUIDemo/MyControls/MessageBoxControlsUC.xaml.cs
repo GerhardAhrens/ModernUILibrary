@@ -18,24 +18,28 @@
 
         private void FlatButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.None;
             Button btn = sender as Button;
             switch (btn.Content.ToString())
             {
                 case "Info":
-                    if (MMessageBox.Show("Element", "Bildunterschrift", EnumPromptType.Error) == MessageBoxResult.OK)
+                    if (MMessageBox.Show("Element", "Bildunterschrift", EnumPromptType.Info) == MessageBoxResult.OK)
                     {
                         MessageBox.Show("Result: OK.");
                     }
                     break;
                 case "Error":
-                    MessageBoxResult result = MMessageBox.Show(Window.GetWindow(this), "Sie verwenden derzeit eine zu niedrige Browserversion, die dazu führen kann, dass ein Teil der Funktion des Produkts nicht normal genutzt werden kann", "", MessageBoxButton.YesNoCancel, EnumPromptType.Warn);
-                    MessageBox.Show($"{result}");
+                    result = MMessageBox.Show(Window.GetWindow(this), "Sie verwenden derzeit eine zu niedrige Browserversion, die dazu führen kann, dass ein Teil der Funktion des Produkts nicht normal genutzt werden kann", "", MessageBoxButton.YesNoCancel, EnumPromptType.Error);
+                    MessageBox.Show($"Result: {result}");
+
                     break;
                 case "Warn":
-                    MMessageBox.Show("Element", EnumPromptType.Warn);
+                    result = MMessageBox.Show("Element", EnumPromptType.Warn);
+                    MessageBox.Show($"Result: {result}");
                     break;
                 case "Success":
-                    MMessageBox.Show("Element", EnumPromptType.Success);
+                    result = MMessageBox.Show("Element", EnumPromptType.Success);
+                    MessageBox.Show($"Result: {result}");
                     break;
                 default:
                     break;

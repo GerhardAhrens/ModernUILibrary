@@ -13,8 +13,10 @@ namespace ModernIU.Controls
     internal sealed class MessageBoxModule : Window
     {
         private Button PART_CloseButton;
+        /*
         private Storyboard openStoryboard;
         private Storyboard closedStoryboard;
+        */
 
         public static readonly DependencyProperty TypeProperty;
         public static readonly DependencyProperty MessageTextProperty;
@@ -82,10 +84,10 @@ namespace ModernIU.Controls
             MessageBoxModule.TypeProperty = DependencyProperty.Register("Type", typeof(EnumPromptType), typeof(MessageBoxModule), new PropertyMetadata(EnumPromptType.Info));
             MessageBoxModule.MessageTextProperty = DependencyProperty.Register("MessageText", typeof(string), typeof(MessageBoxModule));
             MessageBoxModule.ButtonCollectionProperty = DependencyProperty.Register("ButtonCollection", typeof(ObservableCollection<Button>), typeof(MessageBoxModule));
-            MessageBoxModule.YesButtonTextProperty = DependencyProperty.Register("YesButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("是"));
-            MessageBoxModule.NoButtonTextProperty = DependencyProperty.Register("NoButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("否"));
-            MessageBoxModule.OkButtonTextProperty = DependencyProperty.Register("OkButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("确定"));
-            MessageBoxModule.CancelButtonTextProperty = DependencyProperty.Register("CancelButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("取消"));
+            MessageBoxModule.YesButtonTextProperty = DependencyProperty.Register("YesButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("Ja"));
+            MessageBoxModule.NoButtonTextProperty = DependencyProperty.Register("NoButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("Nein"));
+            MessageBoxModule.OkButtonTextProperty = DependencyProperty.Register("OkButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("Ok"));
+            MessageBoxModule.CancelButtonTextProperty = DependencyProperty.Register("CancelButtonText", typeof(string), typeof(MessageBoxModule), new PropertyMetadata("Abbruch"));
         }
 
         public MessageBoxModule()
@@ -114,7 +116,6 @@ namespace ModernIU.Controls
             this.PART_CloseButton = this.GetTemplateChild("PART_CloseButton") as Button;
             Grid s = this.GetTemplateChild("grid") as Grid;
 
-
             if (this.PART_CloseButton != null)
             {
                 this.PART_CloseButton.Click += CloseWindow;
@@ -129,7 +130,7 @@ namespace ModernIU.Controls
 
         public static MessageBoxResult Show(string messageBoxText)
         {
-            return MessageBoxModule.Show(messageBoxText, "");
+            return MessageBoxModule.Show(messageBoxText, string.Empty);
         }
 
         public static MessageBoxResult Show(string messageBoxText, string caption)
@@ -206,15 +207,18 @@ namespace ModernIU.Controls
                 case MessageBoxButton.OK:
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Ok", FlatButtonSkinEnum.primary, MessageBoxResult.OK));
                     break;
+
                 case MessageBoxButton.OKCancel:
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Abbruch", FlatButtonSkinEnum.ghost, MessageBoxResult.Cancel));
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Ok", FlatButtonSkinEnum.primary, MessageBoxResult.OK));
                     break;
+
                 case MessageBoxButton.YesNoCancel:
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Abbruch", FlatButtonSkinEnum.Default, MessageBoxResult.Cancel));
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Nein", FlatButtonSkinEnum.ghost, MessageBoxResult.No));
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Ja", FlatButtonSkinEnum.primary, MessageBoxResult.Yes));
                     break;
+
                 case MessageBoxButton.YesNo:
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Nein", FlatButtonSkinEnum.ghost, MessageBoxResult.No));
                     messageBox.ButtonCollection.Add(CreateButton(messageBox, "Ja", FlatButtonSkinEnum.primary, MessageBoxResult.Yes));
@@ -224,25 +228,13 @@ namespace ModernIU.Controls
             }
 
             bool? result = messageBox.ShowDialog();
-            switch (button)
+            if (result.HasValue == true)
             {
-                case MessageBoxButton.OKCancel:
-                    {
-                        return result == true ? MessageBoxResult.OK : result == false ? MessageBoxResult.Cancel : MessageBoxResult.None;
-                    }
-                case MessageBoxButton.YesNo:
-                    {
-                        return result == true ? MessageBoxResult.Yes : MessageBoxResult.No;
-                    }
-                case MessageBoxButton.YesNoCancel:
-                    {
-                        return result == true ? MessageBoxResult.Yes : result == false ? MessageBoxResult.No :  MessageBoxResult.Cancel;
-                    }
-                case MessageBoxButton.OK:
-                default:
-                    {
-                        return result == true ? MessageBoxResult.OK : MessageBoxResult.None;
-                    }
+                return messageBox.Tag != null ? (MessageBoxResult)messageBox.Tag : MessageBoxResult.None;
+            }
+            else
+            {
+                return MessageBoxResult.None;
             }
         }
 
@@ -263,26 +255,26 @@ namespace ModernIU.Controls
             switch (type)
             {
                 case EnumPromptType.Info:
-                    caption = "Auf etwas aufmerksam machen";
+                    caption = "Information";
                     break;
                 case EnumPromptType.Warn:
-                    caption = "Eine Warnung";
+                    caption = "Warnung";
                     break;
                 case EnumPromptType.Error:
-                    caption = "Ein Fehler";
+                    caption = "Fehler";
                     break;
                 case EnumPromptType.Success:
                     caption = "Erledigt";
                     break;
                 default:
+                    caption = "Unbekannt";
                     break;
             }
 
             return caption;
         }
 
-        private static Button CreateButton(MessageBoxModule messageBox, string content, FlatButtonSkinEnum buttonType
-            , MessageBoxResult dialogResult)
+        private static Button CreateButton(MessageBoxModule messageBox, string content, FlatButtonSkinEnum buttonType , MessageBoxResult dialogResult)
         {
             FlatButton button = new FlatButton();
             button.Content = content;
@@ -293,28 +285,33 @@ namespace ModernIU.Controls
             button.Margin = new Thickness(10, 0, 10, 10);
             button.Click += (o, e) =>
             {
-                bool? flag = null;
                 switch (dialogResult)
                 {
                     case MessageBoxResult.None:
-                        flag = null;
+                        messageBox.DialogResult = false;
+                        messageBox.Tag = MessageBoxResult.None;
                         break;
                     case MessageBoxResult.OK:
-                        flag = true;
+                        messageBox.DialogResult = true;
+                        messageBox.Tag = MessageBoxResult.OK;
                         break;
                     case MessageBoxResult.Cancel:
-                        flag = false;
+                        messageBox.DialogResult = true;
+                        messageBox.Tag = MessageBoxResult.Cancel;
                         break;
                     case MessageBoxResult.Yes:
-                        flag = true;
+                        messageBox.DialogResult = true;
+                        messageBox.Tag = MessageBoxResult.Yes;
                         break;
                     case MessageBoxResult.No:
-                        flag = false;
+                        messageBox.DialogResult = true;
+                        messageBox.Tag = MessageBoxResult.No;
                         break;
                     default:
+                        messageBox.DialogResult = false;
+                        messageBox.Tag = MessageBoxResult.None;
                         break;
                 }
-                messageBox.DialogResult = flag;
             };
 
             return button;
