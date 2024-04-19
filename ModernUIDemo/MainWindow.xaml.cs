@@ -1,10 +1,13 @@
 ﻿namespace ModernUIDemo
 {
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
 
     using ModernUIDemo.Core;
+    using ModernUIDemo.Model;
+    using ModernUIDemo.MyControls;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -17,9 +20,18 @@
 
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
 
+            this.TabControlSource.Value = new ObservableCollection<TabControlItem>();
+            this.TabControlSource.Value.Add(new TabControlItem("Darstellung", true));
+            this.TabControlSource.Value.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
+            this.TabControlSource.Value.Add(new TabControlItem("Farben", new ColorControlsUC()));
+            this.TabControlSource.Value.Add(new TabControlItem("Farben", new ColorControlsUC()));
+            this.TabControlSource.Value.Add(new TabControlItem("Eingabe", true));
+            this.TabControlSource.Value.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
+
             this.DataContext = this;
         }
 
+        public XamlProperty<ObservableCollection<TabControlItem>> TabControlSource { get; set; } = XamlProperty.Set<ObservableCollection<TabControlItem>>();
         public XamlProperty<List<string>> MComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
         public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
 
@@ -46,5 +58,10 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+
+        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

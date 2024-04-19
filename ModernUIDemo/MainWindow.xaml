@@ -42,25 +42,18 @@
     </Window.Resources>
 
     <Grid>
-        <TabControl TabStripPlacement="Left">
+        <TabControl
+            DisplayMemberPath="ItemHeader"
+            ItemsSource="{Binding Path=TabControlSource.Value, UpdateSourceTrigger=PropertyChanged}"
+            SelectionChanged="TabControl_SelectionChanged"
+            TabStripPlacement="Left">
+
             <TabControl.Resources>
                 <Style TargetType="{x:Type Grid}">
                     <Setter Property="Background" Value="WhiteSmoke" />
                 </Style>
 
                 <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentPresenter Content="{TemplateBinding Content}">
-                                    <ContentPresenter.LayoutTransform>
-                                        <RotateTransform Angle="-360" />
-                                    </ContentPresenter.LayoutTransform>
-                                </ContentPresenter>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TabItem}">
@@ -73,17 +66,23 @@
                                     CornerRadius="5,5,0,0">
                                     <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
                                 </Border>
+
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="White" />
+                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Black" />
                                         <Setter TargetName="Border" Property="Background" Value="LightGray" />
                                         <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,3" />
                                         <Setter TargetName="Border" Property="BorderBrush" Value="Blue  " />
                                     </Trigger>
+
                                     <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="LightGray" />
+                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Gray" />
                                         <Setter TargetName="Border" Property="Background" Value="White" />
                                     </Trigger>
+
+                                    <DataTrigger Binding="{Binding Path=IsGroupItem, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Green" />
+                                    </DataTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
@@ -91,6 +90,12 @@
                 </Style>
             </TabControl.Resources>
 
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Path=ItemContent, UpdateSourceTrigger=PropertyChanged}" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+            <!--
             <TabItem>
                 <TabItem.Header>
                     <TextBlock Text="Icon (PathGeometry)" />
@@ -229,6 +234,7 @@
                 </TabItem.Header>
                 <myControls:PoptipControlsUC />
             </TabItem>
+            -->
         </TabControl>
     </Grid>
 </Window>
