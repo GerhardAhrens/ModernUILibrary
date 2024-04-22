@@ -52,6 +52,12 @@
     <Compile Update="MyControls\PoptipControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\TemplateControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\TextBoxMultilineControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TooltipControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

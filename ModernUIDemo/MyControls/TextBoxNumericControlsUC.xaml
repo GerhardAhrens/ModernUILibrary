@@ -64,7 +64,6 @@
                 <ModernUI:TextBoxInt
                     x:Name="txtIntTextBox"
                     Width="100"
-                    Margin="10,0"
                     MaxLength="5" />
 
                 <TextBlock
@@ -87,7 +86,6 @@
                 <ModernUI:TextBoxDecimal
                     x:Name="txtDecTextBox"
                     Width="100"
-                    Margin="10,0"
                     MaxLength="5" />
 
                 <TextBlock
@@ -99,7 +97,26 @@
                     <Run Text="{Binding Path=Text, ElementName=txtDecTextBox}" />
                 </TextBlock>
             </StackPanel>
-        </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Math TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TextBoxMath x:Name="TxtMathTextBox" Width="100" />
+
+                <TextBlock
+                    Width="100"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=Text, ElementName=TxtMathTextBox}" />
+                </TextBlock>
+
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </UserControl>

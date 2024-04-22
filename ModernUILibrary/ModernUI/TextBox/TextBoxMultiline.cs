@@ -1,77 +1,74 @@
-﻿namespace ModernIU.Controls
+﻿//-----------------------------------------------------------------------
+// <copyright file="TextBoxMultiline.cs" company="Lifeprojects.de">
+//     Class: TextBoxMultiline
+//     Copyright © Gerhard Ahrens, 2018
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>development@lifeprojects.de</email>
+// <date>27.07.2018</date>
+//
+// <summary>Class for UI Control TextBox</summary>
+//-----------------------------------------------------------------------
+
+namespace ModernIU.Controls
 {
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media;
-    using System.Windows.Shapes;
 
     using ModernIU.Base;
 
-    public enum TitleOrientationEnum
+    public sealed class TextBoxMultiline : TextBox
     {
-        Horizontal,
-        Vertical,
-    }
+        public static readonly DependencyProperty LinesProperty = 
+            DependencyProperty.Register("Lines",
+                typeof(int),
+                typeof(TextBoxMultiline),
+                new FrameworkPropertyMetadata(2, OnLinesPropertyChanged));
 
-    [TemplatePart(Name = "PART_ClearText", Type = typeof(Path))]
-    [TemplatePart(Name = "PART_ContentHost", Type = typeof(ScrollViewer))]
-    public class TitleTextBox : TextBox
-    {
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title" , typeof(string), typeof(TitleTextBox));
+        public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxMultiline), new PropertyMetadata(Brushes.Transparent));
+        public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxMultiline), new PropertyMetadata(true, OnSetBorderChanged));
 
-        public static readonly DependencyProperty IsShowTitleProperty = DependencyProperty.Register("IsShowTitle", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
-
-        public static readonly DependencyProperty CanClearTextProperty = DependencyProperty.Register("CanClearText", typeof(bool), typeof(TitleTextBox));
-
-        public static readonly DependencyProperty TitleOrientationProperty = DependencyProperty.Register("TitleOrientation", typeof(TitleOrientationEnum), typeof(TitleTextBox));
-
-        public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TitleTextBox), new PropertyMetadata(Brushes.Transparent));
-
-        public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true, OnSetBorderChanged));
-
-        private Path PART_ClearText;
-        private ScrollViewer PART_ScrollViewer;
-
-        static TitleTextBox()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TitleTextBox), new FrameworkPropertyMetadata(typeof(TitleTextBox)));
-        }
-
-        public TitleTextBox()
+        public TextBoxMultiline()
         {
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
-            this.Margin = ControlBase.DefaultMargin;
-            this.Height = ControlBase.DefaultHeight;
-            this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Top;
+            this.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            this.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+            this.AcceptsReturn = true;
+            this.TextWrapping = TextWrapping.Wrap;
+            this.Padding = new Thickness(0);
+            this.Margin = new Thickness(2);
+            this.MinHeight = 18;
+            this.Height = 23;
+            this.MaxLines = 5;
+            this.ClipToBounds = false;
             this.IsReadOnly = false;
             this.Focusable = true;
+
+            this.AddHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(SelectivelyIgnoreMouseButton), true);
+            this.AddHandler(MouseDoubleClickEvent, new RoutedEventHandler(SelectAllText), true);
         }
 
-        public string Title
+        ~TextBoxMultiline()
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            this.RemoveHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(SelectivelyIgnoreMouseButton));
+            this.RemoveHandler(MouseDoubleClickEvent, new RoutedEventHandler(SelectAllText));
         }
 
-        public bool IsShowTitle
+        public int Lines
         {
-            get { return (bool)GetValue(IsShowTitleProperty); }
-            set { SetValue(IsShowTitleProperty, value); }
-        }
-
-
-        public bool CanClearText
-        {
-            get { return (bool)GetValue(CanClearTextProperty); }
-            set { SetValue(CanClearTextProperty, value); }
-        }
-
-        public TitleOrientationEnum TitleOrientation
-        {
-            get { return (TitleOrientationEnum)GetValue(TitleOrientationProperty); }
-            set { SetValue(TitleOrientationProperty, value); }
+            get
+            {
+                return (int)GetValue(LinesProperty);
+            }
+            set
+            {
+                SetValue(LinesProperty, value);
+            }
         }
 
         public bool SetBorder
@@ -86,35 +83,33 @@
             set { SetValue(ReadOnlyColorProperty, value); }
         }
 
+        private void MoveFocus(FocusNavigationDirection direction)
+        {
+            UIElement focusedElement = Keyboard.FocusedElement as UIElement;
+
+            if (focusedElement != null)
+            {
+                if (focusedElement is TextBox)
+                {
+                    focusedElement.MoveFocus(new TraversalRequest(direction));
+                }
+            }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            this.CaretIndex = this.Text.Length;
+            this.SelectAll();
 
-            this.PART_ClearText = VisualHelper.FindVisualElement<Path>(this, "PART_ClearText");
-            if(this.PART_ClearText != null)
-            {
-                if (this.IsReadOnly == false)
-                {
-                    this.PART_ClearText.MouseLeftButtonDown += PART_ClearText_MouseLeftButtonDown;
-                    this.PART_ClearText.IsEnabled = true;
-                    this.PART_ClearText.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.PART_ClearText.Visibility = Visibility.Collapsed;
-                    this.PART_ClearText.IsEnabled = false;
-                }
-            }
-
-            this.PART_ScrollViewer = VisualHelper.FindVisualElement<ScrollViewer>(this, "PART_ContentHost");
-
-            this.PreviewMouseWheel += TitleTextBox_PreviewMouseWheel;
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.ContextMenu = this.BuildContextMenu();
 
             /* Rahmen für Control festlegen */
             if (SetBorder == true)
             {
-                this.BorderBrush = ControlBase.BorderBrush;
-                this.BorderThickness = ControlBase.BorderThickness;
+                this.BorderBrush = Brushes.Green;
+                this.BorderThickness = new Thickness(1);
             }
             else
             {
@@ -124,22 +119,42 @@
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
-
-            /* Spezifisches Kontextmenü für Control übergeben */
-            this.ContextMenu = this.BuildContextMenu();
         }
 
-        private void TitleTextBox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            if(this.TitleOrientation == TitleOrientationEnum.Vertical && this.PART_ScrollViewer != null)
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
-                this.PART_ScrollViewer.ScrollToVerticalOffset(this.PART_ScrollViewer.VerticalOffset - e.Delta);
+                if (e.Key == Key.Tab)
+                {
+                    return;
+                }
             }
-        }
-
-        private void PART_ClearText_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.Text = string.Empty;
+            else
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        this.MoveFocus(FocusNavigationDirection.Previous);
+                        break;
+                    case Key.Down:
+                        this.MoveFocus(FocusNavigationDirection.Next);
+                        break;
+                    case Key.Left:
+                        return;
+                    case Key.Right:
+                        return;
+                    case Key.Pa1:
+                        return;
+                    case Key.End:
+                        return;
+                    case Key.Delete:
+                        return;
+                    case Key.Tab:
+                        this.MoveFocus(FocusNavigationDirection.Next);
+                        break;
+                }
+            }
         }
 
         private Style SetTriggerFunction()
@@ -232,14 +247,14 @@
         {
             if (e.NewValue != null)
             {
-                var control = (TitleTextBox)d;
+                var control = (TextBoxAll)d;
 
                 if (e.NewValue.GetType() == typeof(bool))
                 {
                     if ((bool)e.NewValue == true)
                     {
-                        control.BorderBrush = ControlBase.BorderBrush;
-                        control.BorderThickness = ControlBase.BorderThickness;
+                        control.BorderBrush = Brushes.Green;
+                        control.BorderThickness = new Thickness(1);
                     }
                     else
                     {
@@ -248,6 +263,40 @@
                     }
                 }
             }
+        }
+
+        private static void SelectivelyIgnoreMouseButton(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject parent = e.OriginalSource as UIElement;
+            while (parent != null && !(parent is TextBox))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            if (parent != null)
+            {
+                var textBox = (TextBox)parent;
+                if (textBox.IsKeyboardFocusWithin == false)
+                {
+                    textBox.Focus();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private static void SelectAllText(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            if (textBox != null)
+            {
+                textBox.SelectAll();
+            }
+        }
+
+        private static void OnLinesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TextBoxMultiline multilineTextBox = (TextBoxMultiline)d;
+            multilineTextBox.MaxLines = (int)e.NewValue;
         }
     }
 }

@@ -30,6 +30,7 @@
             tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
             tabItemSource.Add(new TabControlItem("Eingabe", true));
             tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBox (Multiline) Controls", new TextBoxMultilineControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
             tabItemSource.Add(new TabControlItem("ListBox Controls", new ListBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
@@ -53,12 +54,48 @@
         }
 
         public XamlProperty<ICollectionView> TabControlSource { get; set; } = XamlProperty.Set<ICollectionView>();
-        public XamlProperty<List<string>> MComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
-        public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
+
+        private Dictionary<string, object> _MulitiSelectSourceCB;
+        public Dictionary<string, object> MulitiSelectSourceCB
+        {
+            get { return _MulitiSelectSourceCB; }
+            set
+            {
+                SetField(ref _MulitiSelectSourceCB, value);
+            }
+        }
+
+        private Dictionary<string, object> _MultiSelectedsItems;
+        public Dictionary<string, object> MultiSelectedsItems
+        {
+            get
+            {
+                return _MultiSelectedsItems;
+            }
+            set
+            {
+                SetField(ref _MultiSelectedsItems, value);
+            }
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
+            this.MulitiSelectSourceCB = new Dictionary<string, object>();
+            this.MulitiSelectSourceCB.Add("Hund", "MAS");
+            this.MulitiSelectSourceCB.Add("Katze", "TPJ");
+            this.MulitiSelectSourceCB.Add("Maus", "SBC");
+            this.MulitiSelectSourceCB.Add("Zebra", "CBE");
+            this.MulitiSelectSourceCB.Add("Wolf", "CBE");
+            this.MulitiSelectSourceCB.Add("Mücke", "CBE");
+            this.MulitiSelectSourceCB.Add("Huhn", "CBE");
+            this.MulitiSelectSourceCB.Add("Amsel", "CBE");
+            this.MulitiSelectSourceCB.Add("Ente", "CBE");
+
+            /*
+            this.MultiSelectedsItems. = new Dictionary<string, object>();
+            this.MultiSelectedsItems.Add("Hund", "MAS");
+            this.MultiSelectedsItems.Add("Katze", "TPJ");
+            */
         }
 
         #region PropertyChanged Implementierung

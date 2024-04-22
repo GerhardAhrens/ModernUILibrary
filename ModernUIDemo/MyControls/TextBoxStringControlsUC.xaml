@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
-    d:DesignWidth="900"
+    d:DesignWidth="850"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -64,21 +64,6 @@
                     IsShowTitle="False" />
             </StackPanel>
 
-            <ModernUI:HeaderSeparator
-                Height="15"
-                Background="Green"
-                Header="Mehrzeilige TextBox" />
-
-            <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TitleTextBox
-                    Title="Multiline:"
-                    Width="490"
-                    Height="150"
-                    Margin="5,0"
-                    IsShowTitle="True"
-                    TextWrapping="Wrap"
-                    TitleOrientation="Vertical" />
-            </StackPanel>
 
             <ModernUI:HeaderSeparator
                 Height="15"
@@ -213,8 +198,21 @@
 
                 <TextBlock
                     Width="100"
+                    Height="{Binding Path=ActualHeight, ElementName=passwordBox}"
+                    Margin="10,0"
                     Background="White"
                     Text="{Binding Path=Password, ElementName=passwordBox, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="ReadOnly TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TextBoxReadOnly
+                            Width="150"
+                            Text="Test" />
             </StackPanel>
         </StackPanel>
     </Grid>

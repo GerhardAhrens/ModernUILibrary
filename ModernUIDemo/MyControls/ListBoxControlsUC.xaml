@@ -50,6 +50,14 @@
                         <Run Text="{Binding Path=SelectedValue, ElementName=mComboBox}" />
                     </TextBlock>
                 </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="Multiselect ComboBox" />
+
+                <StackPanel Margin="0,2" Orientation="Horizontal" />
+
             </StackPanel>
         </Grid>
     </AdornerDecorator>

@@ -14,6 +14,7 @@
 namespace ModernIU.Controls
 {
     using System;
+    using System.ComponentModel;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
@@ -31,6 +32,7 @@ namespace ModernIU.Controls
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register("ReadOnlyBackgroundColor", typeof(Brush), typeof(MComboBox), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(222, 222, 222))));
         public static readonly DependencyProperty IsNumericProperty = DependencyProperty.Register("IsNumeric", typeof(bool), typeof(MComboBox), new PropertyMetadata(false));
         public static new readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(MComboBox), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsReadOnlyChangedCallback));
+        public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(MComboBox), new PropertyMetadata(true, OnSetBorderChanged));
 
         private static int selectedIndex = -1;
 
@@ -86,6 +88,12 @@ namespace ModernIU.Controls
             set { this.SetValue(IsReadOnlyProperty, value); }
         }
 
+        public bool SetBorder
+        {
+            get { return (bool)GetValue(SetBorderProperty); }
+            set { SetValue(SetBorderProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -102,7 +110,18 @@ namespace ModernIU.Controls
             Border border = GetTemplateFrameworkElement(this, "Border") as Border;
             if (border != null)
             {
-                this._defaultBackgroundBorder = border.Background;
+                //this._defaultBackgroundBorder = border.Background;
+                /* Rahmen für Control festlegen */
+                if (SetBorder == true)
+                {
+                    this._defaultBackgroundBorder = Brushes.Green;
+                    this.BorderThickness = new Thickness(1);
+                }
+                else
+                {
+                    this._defaultBackgroundBorder = Brushes.Transparent;
+                    this.BorderThickness = new Thickness(0);
+                }
             }
 
             /* Trigger an Style übergeben */
@@ -110,6 +129,18 @@ namespace ModernIU.Controls
 
             /* Spezifisches Kontextmenü für Control übergeben */
             this._comboBoxTextBox.ContextMenu = this.BuildContextMenu();
+
+            /* Rahmen für Control festlegen */
+            if (SetBorder == true)
+            {
+                this.BorderBrush = Brushes.Green;
+                this.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                this.BorderBrush = Brushes.Transparent;
+                this.BorderThickness = new Thickness(0);
+            }
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -215,22 +246,6 @@ namespace ModernIU.Controls
             return foundElement;
         }
 
-
-        private void ApplyReadOnlyBackgroundColor()
-        {
-            this.ReadOnlyBackgroundColor = Brushes.LightYellow;
-        }
-
-        private void ApplyBorderBrush()
-        {
-            this.BorderBrush = Brushes.Green;
-        }
-
-        private void ApplyFontSize()
-        {
-            this.FontSize = 12.0;
-        }
-
         private Style SetTriggerFunction()
         {
             Style inputControlStyle = new Style();
@@ -304,6 +319,28 @@ namespace ModernIU.Controls
         {
             Clipboard.SetText(this.Text);
             this.Text = string.Empty;
+        }
+
+        private static void OnSetBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                var control = (MComboBox)d;
+                var backgroundBorder = GetTemplateFrameworkElement(control, "Border") as Border;
+                if (e.NewValue.GetType() == typeof(bool))
+                {
+                    if ((bool)e.NewValue == true)
+                    {
+                        backgroundBorder.BorderBrush = Brushes.Green;
+                        backgroundBorder.BorderThickness = new Thickness(1);
+                    }
+                    else
+                    {
+                        backgroundBorder.BorderBrush = Brushes.Transparent;
+                        backgroundBorder.BorderThickness = new Thickness(0);
+                    }
+                }
+            }
         }
     }
 }
