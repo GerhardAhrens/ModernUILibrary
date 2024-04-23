@@ -45,13 +45,13 @@
                 Click="btnOpenMaskLayer_Click"
                 Content="Klick" />
             <MUI:PopupEx
-                x:Name="maskLayer"
-                MUIBehaviors:MaskLayerBehavior.Owner="{Binding Path=., RelativeSource={RelativeSource AncestorType=Window}}"
+                x:Name="popupMaskLayer"
+                MUIBehaviors:MaskLayerBehavior.Owner="{Binding Path=., RelativeSource={RelativeSource AncestorType=UserControl}}"
                 PopupAnimation="Fade"
                 Topmost="False">
                 <Grid
-                    Width="800"
-                    Height="500"
+                    Width="700"
+                    Height="400"
                     Background="Transparent">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -70,13 +70,13 @@
                         x:Name="btnClose"
                         Grid.Column="1"
                         Width="30"
-                        Margin="20,4,0,0"
+                        Margin="10,4,0,0"
                         VerticalAlignment="Top"
                         Background="Transparent"
                         Click="btnClose_Click"
                         MouseOverBackground="Transparent"
                         NormalPathColor="White"
-                        PathData="{StaticResource Icon_Close}"
+                        PathData="{StaticResource ResourceKey=Icon_Close}"
                         PathWidth="18"
                         PressedBackground="Transparent" />
                 </Grid>

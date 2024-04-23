@@ -28,6 +28,12 @@
                 Height="3"
                 Background="Green" />
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Margin="0,0,0,-20"
+                Background="Green"
+                Header="Splitbutton mit Liste" />
+
             <StackPanel
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
@@ -50,6 +56,11 @@
                         <Run Text="{Binding Path=SelectedValue, ElementName=mComboBox}" />
                     </TextBlock>
                 </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="CheckComboBox" />
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:FlatButton
@@ -89,6 +100,44 @@
                         IsEnabled="True"
                         IsShowFilterBox="True"
                         MaxShowNumber="3" />
+                </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="ComboBoxColor" />
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <ModernUI:ComboBoxColor
+                        x:Name="superCombo"
+                        Grid.Row="0"
+                        Width="150"
+                        Height="30"
+                        SelectedColor="{Binding Path=SelectedColorItem.Value, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Height="20"
+                        Margin="0,10,0,0"
+                        VerticalAlignment="Center"
+                        Background="{Binding ElementName=superCombo, Path=SelectedColor, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Text="{Binding ElementName=superCombo, Path=SelectedColorCode, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="ListBox" />
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <ModernUI:MultiSelectListbox
+                    Width="200"
+                    Height="100"
+                    VerticalAlignment="Top"
+                    IsReadOnly="False"
+                    ItemsSource="{Binding Path=ListBoxSource.Value}"
+                    SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

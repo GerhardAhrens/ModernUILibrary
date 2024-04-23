@@ -2,6 +2,8 @@
 {
     using System.Windows.Controls;
 
+    using ModernUIDemo.Core;
+
     /// <summary>
     /// Interaktionslogik für TextBoxNumericControlsUC.xaml
     /// </summary>
@@ -10,6 +12,10 @@
         public TextBoxNumericControlsUC()
         {
             this.InitializeComponent();
+            this.DataContext = this;
         }
+
+        public XamlProperty<DateTime?> ValueDate { get; set; } = XamlProperty.Set<DateTime?>();
+
     }
 }

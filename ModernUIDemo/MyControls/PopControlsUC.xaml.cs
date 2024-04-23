@@ -17,12 +17,12 @@
 
         private void btnOpenMaskLayer_Click(object sender, RoutedEventArgs e)
         {
-            this.maskLayer.SetValue(MaskLayerBehavior.IsOpenProperty, true);
+            this.popupMaskLayer.SetValue(MaskLayerBehavior.IsOpenProperty, true);
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.maskLayer.SetValue(MaskLayerBehavior.IsOpenProperty, false);
+            this.popupMaskLayer.SetValue(MaskLayerBehavior.IsOpenProperty, false);
         }
     }
 }

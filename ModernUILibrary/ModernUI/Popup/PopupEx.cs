@@ -8,7 +8,7 @@
     public class PopupEx : Popup
     {
         public static DependencyProperty TopmostProperty = Window.TopmostProperty.AddOwner(typeof(PopupEx), new FrameworkPropertyMetadata(false, OnTopmostChanged));
-        public static readonly DependencyProperty IsUpdatePositionProperty = DependencyProperty.Register("IsUpdatePosition", typeof(bool), typeof(PopupEx), new PropertyMetadata(true));
+        public static readonly DependencyProperty IsUpdatePositionProperty = DependencyProperty.Register(nameof(IsUpdatePosition), typeof(bool), typeof(PopupEx), new PropertyMetadata(true));
 
 
         public bool Topmost
