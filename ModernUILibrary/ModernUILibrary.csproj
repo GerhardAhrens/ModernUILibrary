@@ -15,12 +15,12 @@
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
     <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
+    <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\MessageBox\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
-    <Folder Include="ModernUI\ComboBox\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />

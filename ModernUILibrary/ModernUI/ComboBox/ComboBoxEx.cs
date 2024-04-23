@@ -25,12 +25,12 @@ namespace ModernIU.Controls
     using ModernIU.Base;
 
     [SupportedOSPlatform("windows")]
-    public class MComboBox : ComboBox
+    public class ComboBoxEx : ComboBox
     {
-        public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(MComboBox), new PropertyMetadata(1000));
-        public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register("ReadOnlyBackgroundColor", typeof(Brush), typeof(MComboBox), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(222, 222, 222))));
-        public static readonly DependencyProperty IsNumericProperty = DependencyProperty.Register("IsNumeric", typeof(bool), typeof(MComboBox), new PropertyMetadata(false));
-        public static new readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(MComboBox), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsReadOnlyChangedCallback));
+        public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(ComboBoxEx), new PropertyMetadata(1000));
+        public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register("ReadOnlyBackgroundColor", typeof(Brush), typeof(ComboBoxEx), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(222, 222, 222))));
+        public static readonly DependencyProperty IsNumericProperty = DependencyProperty.Register("IsNumeric", typeof(bool), typeof(ComboBoxEx), new PropertyMetadata(false));
+        public static new readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(ComboBoxEx), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsReadOnlyChangedCallback));
 
         private static int selectedIndex = -1;
 
@@ -40,7 +40,7 @@ namespace ModernIU.Controls
         /// <summary>
         /// Initializes a new instance of the <see cref="ComboBoxEx"/> class.
         /// </summary>
-        public MComboBox() : base()
+        public ComboBoxEx() : base()
         {
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
@@ -159,10 +159,10 @@ namespace ModernIU.Controls
                 comboBox.IsReadOnly = (bool)e.NewValue;
             }
 
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action<MComboBox>(ApplyIsReadOnly), comboBox);
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action<ComboBoxEx>(ApplyIsReadOnly), comboBox);
         }
 
-        private static void ApplyIsReadOnly(MComboBox pComboBox)
+        private static void ApplyIsReadOnly(ComboBoxEx pComboBox)
         {
             ToggleButton toggleButton = null;
             Border buttonBorder = null;
@@ -177,11 +177,11 @@ namespace ModernIU.Controls
             {
                 if (pComboBox.IsReadOnly)
                 {
-                    backgroundBorder.Background = ((MComboBox)pComboBox).ReadOnlyBackgroundColor;
+                    backgroundBorder.Background = ((ComboBoxEx)pComboBox).ReadOnlyBackgroundColor;
 
                     if (buttonBorder != null)
                     {
-                        buttonBorder.Background = ((MComboBox)pComboBox).ReadOnlyBackgroundColor;
+                        buttonBorder.Background = ((ComboBoxEx)pComboBox).ReadOnlyBackgroundColor;
                     }
 
                     toggleButton.IsEnabled = false;
@@ -189,11 +189,11 @@ namespace ModernIU.Controls
                 }
                 else
                 {
-                    backgroundBorder.Background = ((MComboBox)pComboBox)._defaultBackgroundBorder;
+                    backgroundBorder.Background = ((ComboBoxEx)pComboBox)._defaultBackgroundBorder;
 
                     if (buttonBorder != null)
                     {
-                        buttonBorder.Background = ((MComboBox)pComboBox)._defaultBackgroundBorder;
+                        buttonBorder.Background = ((ComboBoxEx)pComboBox)._defaultBackgroundBorder;
                     }
 
                     toggleButton.IsEnabled = true;

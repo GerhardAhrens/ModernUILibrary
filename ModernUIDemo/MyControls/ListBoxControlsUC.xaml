@@ -33,7 +33,7 @@
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <ModernUI:MComboBox
+                    <ModernUI:ComboBoxEx
                         x:Name="mComboBox"
                         Width="100"
                         HorizontalAlignment="Left"
@@ -49,6 +49,46 @@
                         <Run Text="Ergebnis:" />
                         <Run Text="{Binding Path=SelectedValue, ElementName=mComboBox}" />
                     </TextBlock>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ModernUI:FlatButton
+                        x:Name="btnGetContent"
+                        Width="90"
+                        Height="30"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Click="btnGetContent_Click"
+                        Content="Gewählte Werte"
+                        Visibility="Visible" />
+
+                    <StackPanel
+                        Margin="0,10"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal">
+                        <TextBlock Text="SelectedObjList：" />
+                        <TextBlock Text="{Binding SelectedObjList.Count, ElementName=CheckComboBox, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Margin="20,0,0,0" Text="SelectedStrList：" />
+                        <TextBlock Text="{Binding SelectedStrList.Count, ElementName=CheckComboBox, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Margin="20,0,0,0" Text="Value：" />
+                        <TextBlock Text="{Binding Value, ElementName=CheckComboBox, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Margin="20,0,0,0" Text="Content：" />
+                        <TextBlock Text="{Binding Content, ElementName=CheckComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+
+                    <ModernUI:CheckComboBox
+                        x:Name="CheckComboBox"
+                        Width="200"
+                        Height="28"
+                        Margin="10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsEnabled="True"
+                        IsShowFilterBox="True"
+                        MaxShowNumber="3" />
                 </StackPanel>
             </StackPanel>
         </Grid>
