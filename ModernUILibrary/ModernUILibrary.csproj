@@ -21,6 +21,9 @@
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\MessageBox\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
+    <Folder Include="ModernUI\ComboBoxColor\" />
+    <Folder Include="ModernUI\DatePicker\" />
+    <Folder Include="ModernUI\ListBox\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />

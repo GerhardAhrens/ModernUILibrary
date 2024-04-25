@@ -1,7 +1,10 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
 
     using ModernIU.Controls;
 
@@ -10,12 +13,34 @@
     /// <summary>
     /// Interaktionslogik für ListBoxControlsUC.xaml
     /// </summary>
-    public partial class ListBoxControlsUC : UserControl
+    public partial class ListBoxControlsUC : UserControl, INotifyPropertyChanged
     {
         public ListBoxControlsUC()
         {
             this.InitializeComponent();
 
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+
+            this.DataContext = this;
+        }
+
+        public XamlProperty<List<string>> MComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+        public XamlProperty<List<string>> ListBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+        public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
+        public XamlProperty<Brush> SelectedColorItem { get; set; } = XamlProperty.Set<Brush>();
+
+        private Dictionary<string, object> _ListBoxSourceSelectedItem;
+        public Dictionary<string, object> ListBoxSourceSelectedItem
+        {
+            get { return _ListBoxSourceSelectedItem; }
+            set
+            {
+                SetField(ref _ListBoxSourceSelectedItem, value);
+            }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
             List<CheckComboBoxTest> data = new List<CheckComboBoxTest>();
             data.Add(new CheckComboBoxTest(1, "C#"));
             data.Add(new CheckComboBoxTest(2, "C++"));
@@ -28,13 +53,10 @@
             this.CheckComboBox.DisplayMemberPath = "Content";
 
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
+            this.ListBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
 
-            this.DataContext = this;
+            this.SelectedColorItem.Value = Brushes.Transparent;
         }
-
-        public XamlProperty<List<string>> MComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
-        public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
-
 
         internal class CheckComboBoxTest
         {
@@ -50,7 +72,26 @@
 
         private void btnGetContent_Click(object sender, RoutedEventArgs e)
         {
-            MMessageBox.Show(this.CheckComboBox.Content.ToString(), "", MessageBoxButton.YesNoCancel);
+            MMessageBox.Show(this.CheckComboBox.Content.ToString(), "Auswahl", MessageBoxButton.OK);
         }
+
+        #region PropertyChanged Implementierung
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion PropertyChanged Implementierung
     }
 }
