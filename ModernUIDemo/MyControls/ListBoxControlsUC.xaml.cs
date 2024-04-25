@@ -49,7 +49,10 @@
             data.Add(new CheckComboBoxTest(5, "Object C"));
             data.Add(new CheckComboBoxTest(6, "Java"));
 
-            this.CheckComboBox.ItemsSource = data;
+            //this.CheckComboBox.ItemsSource = data;
+            this.CheckComboBox.Items.Add(data[0]);
+            this.CheckComboBox.Items.Add(data[1]);
+            this.CheckComboBox.Items.Add(data[2]);
             this.CheckComboBox.DisplayMemberPath = "Content";
 
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };

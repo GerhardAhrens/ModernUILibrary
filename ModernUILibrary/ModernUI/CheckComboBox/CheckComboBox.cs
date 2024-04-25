@@ -35,7 +35,7 @@
 
         public static readonly DependencyProperty MaxDropDownHeightProperty = DependencyProperty.Register("MaxDropDownHeight", typeof(double), typeof(CheckComboBox), new PropertyMetadata(200d));
 
-        public static readonly DependencyProperty FilterBoxWatermarkProperty = DependencyProperty.Register("FilterBoxWatermark", typeof(string), typeof(CheckComboBox), new PropertyMetadata("Enter keyword filtering"));
+        public static readonly DependencyProperty FilterBoxWatermarkProperty = DependencyProperty.Register("FilterBoxWatermark", typeof(string), typeof(CheckComboBox), new PropertyMetadata("Inhaltsfilter"));
         #endregion
 
         #region Constructors
@@ -148,9 +148,16 @@
                 this.PART_FilterTextBox.TextChanged += PART_FilterTextBox_TextChanged;
             }
 
-            view = CollectionViewSource.GetDefaultView(this.ItemsSource);
+            if (this.ItemsSource != null)
+            {
+                this.view = CollectionViewSource.GetDefaultView(this.ItemsSource);
+            }
+            else
+            {
+                this.view = CollectionViewSource.GetDefaultView(this.Items);
+            }
 
-            if(PART_Popup != null)
+            if (PART_Popup != null)
             {
                 this.PART_Popup.Opened += PART_Popup_Opened;
             }
