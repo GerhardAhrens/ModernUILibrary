@@ -27,7 +27,6 @@
             tabItemSource.Add(new TabControlItem("Darstellung", true));
             tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
             tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
-            tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
             tabItemSource.Add(new TabControlItem("Eingabe", true));
             tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
