@@ -8,8 +8,8 @@
     xmlns:myControls="clr-namespace:ModernUIDemo.MyControls"
     Title="MainWindow"
     Width="970"
-    MaxWidth="1200"
     Height="600"
+    MaxWidth="1200"
     MaxHeight="650"
     mc:Ignorable="d">
 
@@ -64,25 +64,42 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
+            <!--
+            https://stackoverflow.com/questions/2138200/change-background-color-for-selected-listbox-item
+            -->
+            
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="FontStyle" Value="Italic" />
+                            <Setter Property="FontWeight" Value="ExtraBold" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="Blue" />
+                        </Trigger>
+
                         <DataTrigger Binding="{Binding Path=IsGroupItem}" Value="true">
                             <Setter Property="ListBoxItem.Foreground" Value="Black" />
                             <Setter Property="ListBoxItem.Background" Value="LightGray" />
                             <Setter Property="ListBoxItem.IsHitTestVisible" Value="False" />
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="Black" />
                         </DataTrigger>
-                        
+
                         <DataTrigger Binding="{Binding Path=IsGroupItem}" Value="false">
+                            <Setter Property="Margin" Value="10,0" />
                             <Setter Property="ListBoxItem.Foreground" Value="Black" />
                             <Setter Property="ListBoxItem.Background" Value="Transparent" />
                             <Setter Property="ListBoxItem.IsHitTestVisible" Value="True" />
-                            <Setter Property="FontWeight" Value="Normal"/>
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Normal" />
+                            <Setter Property="Foreground" Value="Black" />
                         </DataTrigger>
                     </Style.Triggers>
+
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                    </Style.Resources>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
