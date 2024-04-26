@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Data;
 
     using Microsoft.VisualBasic;
@@ -43,7 +44,7 @@
             tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
-            tabItemSource.Add(new TabControlItem("Tooltip Controls", new PopUpControlsUC()));
+            tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
 
@@ -52,6 +53,8 @@
         }
 
         public XamlProperty<ICollectionView> TabControlSource { get; set; } = XamlProperty.Set<ICollectionView>();
+
+        public XamlProperty<UserControl> ContentItem { get; set; } = XamlProperty.Set<UserControl>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -76,9 +79,15 @@
         }
         #endregion PropertyChanged Implementierung
 
-        private void TabControl_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ListBox lb = sender as ListBox;
+            if (lb != null)
+            {
+                TabControlItem currrentItem = lb.SelectedItem as TabControlItem;
+                UserControl uc = currrentItem.ItemContent as UserControl;
+                this.ContentItem.Value = uc;
+            }
         }
     }
 }

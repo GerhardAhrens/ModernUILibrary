@@ -8,7 +8,9 @@
     xmlns:myControls="clr-namespace:ModernUIDemo.MyControls"
     Title="MainWindow"
     Width="970"
+    MaxWidth="1200"
     Height="600"
+    MaxHeight="650"
     mc:Ignorable="d">
 
     <Window.Resources>
@@ -42,199 +44,55 @@
     </Window.Resources>
 
     <Grid>
-        <TabControl
-            DisplayMemberPath="ItemHeader"
-            ItemsSource="{Binding Path=TabControlSource.Value, UpdateSourceTrigger=PropertyChanged}"
-            SelectionChanged="TabControl_SelectionChanged"
-            TabStripPlacement="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <TabControl.Resources>
-                <Style TargetType="{x:Type Grid}">
-                    <Setter Property="Background" Value="WhiteSmoke" />
-                </Style>
-
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type TabItem}">
-                                <Border
-                                    x:Name="Border"
-                                    Margin="0,0,0,0"
-                                    Padding="25,5,25,5"
-                                    BorderBrush="Gainsboro"
-                                    BorderThickness="1,1,1,0"
-                                    CornerRadius="5,5,0,0">
-                                    <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
-                                </Border>
-
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Black" />
-                                        <Setter TargetName="Border" Property="Background" Value="LightGray" />
-                                        <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,3" />
-                                        <Setter TargetName="Border" Property="BorderBrush" Value="Blue  " />
-                                    </Trigger>
-
-                                    <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Gray" />
-                                        <Setter TargetName="Border" Property="Background" Value="White" />
-                                    </Trigger>
-
-                                    <DataTrigger Binding="{Binding Path=IsGroupItem, UpdateSourceTrigger=PropertyChanged}" Value="True">
-                                        <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Green" />
-                                    </DataTrigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
-
-            <TabControl.ContentTemplate>
+        <ListBox
+            Width="200"
+            ItemsSource="{Binding Path=TabControlSource.Value}"
+            SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl Content="{Binding Path=ItemContent, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=ItemHeader}" />
+                    </StackPanel>
                 </DataTemplate>
-            </TabControl.ContentTemplate>
-            <!--
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="Icon (PathGeometry)" />
-                </TabItem.Header>
-                <myControls:IconsControlsUC />
-            </TabItem>
+            </ListBox.ItemTemplate>
 
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="Farben" />
-                </TabItem.Header>
-                <myControls:ColorControlsUC />
-            </TabItem>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsGroupItem}" Value="true">
+                            <Setter Property="ListBoxItem.Foreground" Value="Black" />
+                            <Setter Property="ListBoxItem.Background" Value="LightGray" />
+                            <Setter Property="ListBoxItem.IsHitTestVisible" Value="False" />
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding Path=IsGroupItem}" Value="false">
+                            <Setter Property="ListBoxItem.Foreground" Value="Black" />
+                            <Setter Property="ListBoxItem.Background" Value="Transparent" />
+                            <Setter Property="ListBoxItem.IsHitTestVisible" Value="True" />
+                            <Setter Property="FontWeight" Value="Normal"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="TextBox (String) Controls" />
-                </TabItem.Header>
-                <myControls:TextBoxStringControlsUC />
-            </TabItem>
+        <ContentControl
+            x:Name="ccContent"
+            Grid.Row="0"
+            Grid.Column="1"
+            Background="Silver"
+            Content="{Binding Path=ContentItem.Value, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="TextBox (Numeric) Controls" />
-                </TabItem.Header>
-                <myControls:TextBoxNumericControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="ListBox Controls" />
-                </TabItem.Header>
-                <myControls:ListBoxControlsUC />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="Button Controls" />
-                </TabItem.Header>
-                <myControls:ButtonControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="RadioButton Controls" />
-                </TabItem.Header>
-                <myControls:RadioButtonControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="NumericUpDown Controls" />
-                </TabItem.Header>
-                <myControls:NumericUpDownControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="Badges Controls" />
-                </TabItem.Header>
-                <myControls:BadgesControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock Text="BusyIndicator Controls" />
-                </TabItem.Header>
-                <myControls:BusyIndicatorControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="Loading Animation Controls"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:LoadingControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="NoticeMessage Controls"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:NoticeMessageControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="MessageBox Window"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:MessageBoxControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="PopUp Window"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:PopUpControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="DropDownButton Controls"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:DropDownButtonControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="Tooltip Controls"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:TooltipControlsUC />
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock
-                        Width="140"
-                        Text="Poptip Controls"
-                        TextWrapping="Wrap" />
-                </TabItem.Header>
-                <myControls:PoptipControlsUC />
-            </TabItem>
-            -->
-        </TabControl>
     </Grid>
 </Window>
