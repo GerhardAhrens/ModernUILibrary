@@ -132,12 +132,12 @@
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
                     <ModernUI:MultiSelectListbox
-                    Width="200"
-                    Height="100"
-                    VerticalAlignment="Top"
-                    IsReadOnly="False"
-                    ItemsSource="{Binding Path=ListBoxSource.Value}"
-                    SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Width="200"
+                        Height="100"
+                        VerticalAlignment="Top"
+                        IsReadOnly="False"
+                        ItemsSource="{Binding Path=ListBoxSource.Value}"
+                        SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

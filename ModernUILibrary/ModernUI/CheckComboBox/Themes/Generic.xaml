@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:MUIBase="clr-namespace:ModernIU.Base"
-    xmlns:MUI="clr-namespace:ModernIU.Controls">
+    xmlns:MUI="clr-namespace:ModernIU.Controls"
+    xmlns:MUIBase="clr-namespace:ModernIU.Base">
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
@@ -101,7 +101,7 @@
                                 Duration="0:0:0.2" />
                         </Storyboard>
                     </VisualState>
-                    
+
                     <VisualState x:Name="Unchecked">
                         <Storyboard>
                             <DoubleAnimation
@@ -119,12 +119,12 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </Grid>
-        
+
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Light.Border.MouseOver}" />
             </Trigger>
-            
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="ToggleButton.IsChecked" Value="True" />
@@ -132,7 +132,7 @@
                 </MultiTrigger.Conditions>
                 <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Light.Border.MouseOver}" />
             </MultiTrigger>
-            
+
             <Trigger Property="UIElement.IsEnabled" Value="False">
                 <Setter TargetName="Border" Property="Panel.Background" Value="{StaticResource ComboBox.Disabled.Background}" />
                 <Setter TargetName="Border" Property="Border.BorderBrush" Value="{StaticResource ComboBox.Disabled.BorderBrush}" />
@@ -161,9 +161,9 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            
-                            <MUI:FlatCheckBox IsEnabled="False" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=MUI:CheckComboBoxItem}}" />
-                            
+
+                            <MUI:FlatCheckBox IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=MUI:CheckComboBoxItem}}" IsEnabled="False" />
+
                             <ContentPresenter
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
@@ -181,7 +181,7 @@
                             <Setter Property="Background" Value="{StaticResource Brush.Item.MouseOver.Background}" />
                             <Setter Property="Foreground" Value="{StaticResource Brush.Item.MouseOver.Foreground}" />
                         </Trigger>
-                        
+
                         <!--<Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{StaticResource Brush.Item.Selected.Background}" />
                             <Setter Property="Foreground" Value="{StaticResource Brush.Item.Selected.Foreground}" />
@@ -264,9 +264,10 @@
                                     SnapsToDevicePixels="True"
                                     UseLayoutRounding="True" />
 
-                                <MUI:MTextBox
+                                <TextBox
                                     x:Name="PART_FilterTextBox"
                                     Height="26"
+                                    VerticalContentAlignment="Center"
                                     Margin="5,5,5,3"
                                     MUIBase:WatermarkAdorner.Watermark="{TemplateBinding FilterBoxWatermark}"
                                     Visibility="{Binding IsShowFilterBox, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
