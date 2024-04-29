@@ -212,7 +212,6 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -226,66 +225,78 @@
             Grid.ColumnSpan="2"
             FontSize="14"
             Text="Beispiel für verschiedene NumericUpDown Varianten (Styles)" />
+
         <Separator
             Grid.ColumnSpan="2"
             Height="3"
             Background="Green" />
 
-        <StackPanel
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Margin="0,0,0,15"
-            Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,15"
+                Orientation="Horizontal">
 
-            <Label Width="20" />
+                <Label Width="20" />
 
-            <ModernUI:IntegerUpDown
-                Width="100"
-                Height="30"
-                Margin="0,0"
-                Increment="2"
-                Maximum="50"
-                Minimum="10"
-                UpDownOrientation="Vertical"
-                Value="11" />
+                <ModernUI:IntegerUpDown
+                    Width="100"
+                    Height="30"
+                    Margin="0,0"
+                    Increment="2"
+                    Maximum="50"
+                    Minimum="10"
+                    UpDownOrientation="Vertical"
+                    Value="11" />
 
-            <Label Width="20" />
+                <Label Width="20" />
 
-            <ModernUI:IntegerUpDown
-                Width="100"
-                Height="30"
-                Margin="10,0"
-                Maximum="20"
-                Minimum="0"
-                UpDownOrientation="Horizontal"
-                Value="30" />
-        </StackPanel>
+                <ModernUI:IntegerUpDown
+                    Width="100"
+                    Height="30"
+                    Margin="10,0"
+                    Maximum="20"
+                    Minimum="0"
+                    UpDownOrientation="Horizontal"
+                    Value="30" />
+            </StackPanel>
 
-        <Separator
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
-            Height="3"
-            Margin="0,0,0,30"
-            Background="Green" />
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="IntegerUpDown mit eigenem Style" />
 
-        <StackPanel
-            Grid.Row="3"
-            Grid.ColumnSpan="2"
-            Orientation="Horizontal">
+            <StackPanel Margin="0,5" Orientation="Horizontal">
 
-            <Label Width="20" />
+                <Label Width="20" />
 
-            <ModernUI:IntegerUpDown
-                Width="100"
-                Height="25"
-                Margin="0,0"
-                Increment="3"
-                IsReadOnly="False"
-                Maximum="20"
-                Minimum="0"
-                Style="{DynamicResource IntegerUpDownStyle1}"
-                UpDownOrientation="Horizontal"
-                Value="20" />
+                <ModernUI:IntegerUpDown
+                    Width="100"
+                    Height="25"
+                    Margin="0,0"
+                    Increment="3"
+                    IsReadOnly="False"
+                    Maximum="20"
+                    Minimum="0"
+                    Style="{DynamicResource IntegerUpDownStyle1}"
+                    UpDownOrientation="Horizontal"
+                    Value="20" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="IntegerUpDown mit einer Liste als Source" />
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <ModernUI:ListIntegerUpDown
+                    Width="140"
+                    Maximum="100"
+                    SetBorder="True"
+                    WidthContent="100"
+                    ItemsSource="{Binding Path=ListUpDownIntSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -41,9 +41,11 @@ namespace ModernIU.Controls
         /// </summary>
         public MultiSelectListbox()
         {
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.BorderBrush = ControlBase.BorderBrush;
+            this.BorderThickness = ControlBase.BorderThickness;
             this.SelectionMode = SelectionMode.Extended;
-            this.BorderBrush = Brushes.Green;
-            this.BorderThickness = new Thickness(1);
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
