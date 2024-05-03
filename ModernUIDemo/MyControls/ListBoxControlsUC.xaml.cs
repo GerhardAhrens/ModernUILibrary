@@ -39,6 +39,8 @@
             }
         }
 
+        public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             List<CheckComboBoxTest> data = new List<CheckComboBoxTest>();
@@ -57,6 +59,7 @@
 
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
             this.ListBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
+            this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
 
             this.SelectedColorItem.Value = Brushes.Transparent;
         }

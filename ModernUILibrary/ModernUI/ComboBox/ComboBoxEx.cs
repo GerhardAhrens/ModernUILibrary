@@ -226,11 +226,6 @@ namespace ModernIU.Controls
             this.BorderBrush = Brushes.Green;
         }
 
-        private void ApplyFontSize()
-        {
-            this.FontSize = 12.0;
-        }
-
         private Style SetTriggerFunction()
         {
             Style inputControlStyle = new Style();

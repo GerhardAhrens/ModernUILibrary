@@ -139,6 +139,27 @@
                         ItemsSource="{Binding Path=ListBoxSource.Value}"
                         SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
+
+                <ModernUI:HeaderSeparator
+                    Height="15"
+                    Background="Green"
+                    Header="FilteredComboBox" />
+
+                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                    <ModernUI:FilteredComboBox
+                        Width="200"
+                        Height="25"
+                        Margin="5"
+                        DisplayMemberPath="Value"
+                        ItemsSource="{Binding Path=FilterdComboBoxSource.Value}">
+                        <ModernUI:FilteredComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                            </ItemsPanelTemplate>
+                        </ModernUI:FilteredComboBox.ItemsPanel>
+                    </ModernUI:FilteredComboBox>
+                </StackPanel>
+
             </StackPanel>
         </Grid>
     </AdornerDecorator>
