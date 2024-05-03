@@ -291,9 +291,9 @@
             <StackPanel Margin="0,5" Orientation="Horizontal">
                 <ModernUI:ListIntegerUpDown
                     Width="140"
-                    Maximum="100"
                     SetBorder="True"
-                    WidthContent="100"
+                    Value="2024"
+                    WidthContent="120"
                     ItemsSource="{Binding Path=ListUpDownIntSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
             </StackPanel>

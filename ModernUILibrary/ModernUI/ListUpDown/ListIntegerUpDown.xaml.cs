@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Controls;
@@ -18,17 +19,14 @@
     public partial class ListIntegerUpDown : UserControl
     {
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListIntegerUpDown), new PropertyMetadata(null, OnItemsSourceChanged));
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(int), typeof(ListIntegerUpDown), new PropertyMetadata(0, new PropertyChangedCallback(OnValuePropertyChanged)));
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(ListIntegerUpDown), new UIPropertyMetadata(100));
-        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(ListIntegerUpDown), new UIPropertyMetadata(0));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(ListIntegerUpDown), new PropertyMetadata(string.Empty, new PropertyChangedCallback(OnValuePropertyChanged)));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(ListIntegerUpDown), new PropertyMetadata(true, OnSetBorderChanged));
         public static readonly DependencyProperty WidthContentProperty = DependencyProperty.Register("WidthContent", typeof(double), typeof(ListIntegerUpDown), new PropertyMetadata(100.0, OnWidthContentPropertyChanged));
-        private static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ListIntegerUpDown));
-        private static readonly RoutedEvent IncreaseClickedEvent = EventManager.RegisterRoutedEvent("IncreaseClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ListIntegerUpDown));
-        private static readonly RoutedEvent DecreaseClickedEvent = EventManager.RegisterRoutedEvent("DecreaseClicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ListIntegerUpDown));
 
         private ICollectionView ItemSource { get; set; }
         private readonly Regex _numMatch;
+        private int minimum = -1;
+        private int maximum = -1;
 
         public ListIntegerUpDown()
         {
@@ -36,9 +34,6 @@
 
             _numMatch = new Regex(@"^-?\d+$");
             this.Focusable = true;
-
-            this.Maximum = int.MaxValue;
-            this.Minimum = 0;
 
             this.TxtIntegerUpDown.Text = "0";
             this.TxtIntegerUpDown.HorizontalContentAlignment = HorizontalAlignment.Right;
@@ -63,7 +58,9 @@
             WeakEventManager<TextBox, TextCompositionEventArgs>.AddHandler(this.TxtIntegerUpDown, "PreviewTextInput", this.OnPreviewTextInput);
             WeakEventManager<TextBox, TextChangedEventArgs>.AddHandler(this.TxtIntegerUpDown, "TextChanged", this.OnTextChanged);
             WeakEventManager<TextBox, KeyEventArgs>.AddHandler(this.TxtIntegerUpDown, "PreviewKeyDown", this.OnPreviewKeyDown);
+            WeakEventManager<TextBox, RoutedEventArgs>.AddHandler(this.TxtIntegerUpDown, "LostFocus", this.OnLostFocus);
         }
+
 
         public IEnumerable ItemsSource
         {
@@ -71,29 +68,16 @@
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public int Value
+        public string Value
         {
             get
             {
-                return (int)this.GetValue(ValueProperty);
+                return (string)this.GetValue(ValueProperty);
             }
             set
             {
-                this.TxtIntegerUpDown.Text = value.ToString();
                 this.SetValue(ValueProperty, value);
             }
-        }
-
-        public int Maximum
-        {
-            get { return (int)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
-        }
-
-        public int Minimum
-        {
-            get { return (int)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
         }
 
         public bool SetBorder
@@ -108,24 +92,6 @@
             set { SetValue(WidthContentProperty, value); }
         }
 
-        public event RoutedEventHandler ValueChanged
-        {
-            add { AddHandler(ValueChangedEvent, value); }
-            remove { RemoveHandler(ValueChangedEvent, value); }
-        }
-
-        public event RoutedEventHandler IncreaseClicked
-        {
-            add { AddHandler(IncreaseClickedEvent, value); }
-            remove { RemoveHandler(IncreaseClickedEvent, value); }
-        }
-
-        public event RoutedEventHandler DecreaseClicked
-        {
-            add { AddHandler(DecreaseClickedEvent, value); }
-            remove { RemoveHandler(DecreaseClickedEvent, value); }
-        }
-
         private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != null)
@@ -135,6 +101,8 @@
                 {
                     control.ItemSource = CollectionViewSource.GetDefaultView(e.NewValue);
                     control.ItemSource.MoveCurrentToFirst();
+                    control.minimum = Convert.ToInt32(control.ItemSource.MoveCurrentToFirst());
+                    control.maximum = Convert.ToInt32(control.ItemSource.MoveCurrentToLast());
                 }
             }
         }
@@ -186,19 +154,31 @@
 
         private void OnClickDown(object sender, RoutedEventArgs e)
         {
-            if (this.Value < this.Maximum)
+            if (string.IsNullOrEmpty(this.Value) == false)
             {
-                this.Value++;
-                RaiseEvent(new RoutedEventArgs(IncreaseClickedEvent));
+                this.ItemSource.MoveCurrentTo(Convert.ToInt32(this.Value));
+            }
+
+            this.ItemSource.MoveCurrentToNext();
+            if (this.ItemSource.IsCurrentAfterLast == false)
+            {
+                this.TxtIntegerUpDown.Text = this.ItemSource.CurrentItem.ToString();
+                this.Value = this.ItemSource.CurrentItem.ToString();
             }
         }
 
         private void OnClickUp(object sender, RoutedEventArgs e)
         {
-            if (this.Value > this.Minimum)
+            if (string.IsNullOrEmpty(this.Value) == false)
             {
-                this.Value--;
-                RaiseEvent(new RoutedEventArgs(DecreaseClickedEvent));
+                this.ItemSource.MoveCurrentTo(Convert.ToInt32(this.Value));
+            }
+
+            this.ItemSource.MoveCurrentToPrevious();
+            if (this.ItemSource.IsCurrentBeforeFirst == false)
+            {
+                this.TxtIntegerUpDown.Text = this.ItemSource.CurrentItem.ToString();
+                this.Value = this.ItemSource.CurrentItem.ToString();
             }
         }
 
@@ -207,9 +187,9 @@
             var tb = (TextBox)sender;
             var text = tb.Text.Insert(tb.CaretIndex, e.Text);
 
-            e.Handled = !_numMatch.IsMatch(text);
+            e.Handled = !this._numMatch.IsMatch(text);
 
-            if (this.Value > this.Maximum || this.Value < this.Minimum)
+            if (this.ItemSource.IsCurrentAfterLast == true || this.ItemSource.IsCurrentBeforeFirst == true)
             {
                 e.Handled = false;
             }
@@ -219,39 +199,38 @@
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var tb = (TextBox)sender;
-            if (!_numMatch.IsMatch(tb.Text))
+            if (tb != null)
             {
-                ResetText(tb);
-            }
+                if (!this._numMatch.IsMatch(tb.Text))
+                {
+                    this.ResetText(tb);
+                }
 
-            this.Value = Convert.ToInt32(tb.Text);
-            if (this.Value < this.Minimum)
+                if (this.ItemSource != null)
+                {
+                    var found = this.ItemSource.Cast<int>().ToList().FindAll(f => f.Equals(Convert.ToInt32(tb.Text)));
+                    if (found != null && found.Count > 0)
+                    {
+                        tb.Text = found[0].ToString();
+                        this.Value = found[0].ToString();
+                    }
+                }
+            }
+        }
+
+        private void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var tb = (TextBox)sender;
+            if (tb != null)
             {
-                this.Value = this.Minimum;
+                this.ItemSource.MoveCurrentToFirst();
+                tb.Text = this.ItemSource.CurrentItem.ToString();
+                this.Value = this.ItemSource.CurrentItem.ToString();
             }
-
-            if (this.Value > this.Maximum)
-            {
-                this.Value = this.Maximum;
-            }
-
-            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
         }
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.IsDown && e.Key == Key.Up && Value < Maximum)
-            {
-                this.Value++;
-                RaiseEvent(new RoutedEventArgs(IncreaseClickedEvent));
-            }
-            else if (e.IsDown && e.Key == Key.Down && Value > Minimum)
-            {
-                this.Value--;
-                RaiseEvent(new RoutedEventArgs(DecreaseClickedEvent));
-
-            }
-
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
                 if (e.Key == Key.Tab)
@@ -291,7 +270,7 @@
 
         private void ResetText(TextBox tb)
         {
-            tb.Text = 0 < Minimum ? Minimum.ToString() : "0";
+            tb.Text = 0 < this.minimum ? this.minimum.ToString() : "0";
             tb.SelectAll();
         }
 
