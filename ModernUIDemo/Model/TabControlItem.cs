@@ -53,5 +53,6 @@ namespace ModernUIDemo.Model
         public bool IsGroupItem { get; private set; }
         public string ItemHeader { get; private set; }
         public UserControl ItemContent { get; private set; }
+        public string Stichworte { get; set; }
     }
 }

@@ -3,45 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ModernUIDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:myControls="clr-namespace:ModernUIDemo.MyControls"
     Title="MainWindow"
-    Width="970"
+    Width="1100"
     Height="600"
     MaxWidth="1200"
     MaxHeight="650"
     mc:Ignorable="d">
-
-    <Window.Resources>
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Border
-                            x:Name="Border"
-                            Margin="0,3,0,0"
-                            Padding="25,5,25,5"
-                            BorderBrush="Gainsboro"
-                            BorderThickness="1,1,1,0"
-                            CornerRadius="5,5,0,0">
-                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="White" />
-                                <Setter TargetName="Border" Property="Background" Value="Black" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="Black" />
-                                <Setter TargetName="Border" Property="Background" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -65,9 +33,9 @@
             </ListBox.ItemTemplate>
 
             <!--
-            https://stackoverflow.com/questions/2138200/change-background-color-for-selected-listbox-item
+                https://stackoverflow.com/questions/2138200/change-background-color-for-selected-listbox-item
             -->
-            
+
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
@@ -108,6 +76,7 @@
             x:Name="ccContent"
             Grid.Row="0"
             Grid.Column="1"
+            Margin="5,0"
             Background="Silver"
             Content="{Binding Path=ContentItem.Value, UpdateSourceTrigger=PropertyChanged}" />
 

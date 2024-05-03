@@ -290,11 +290,20 @@
 
             <StackPanel Margin="0,5" Orientation="Horizontal">
                 <ModernUI:ListIntegerUpDown
+                    x:Name="listIntUpDown"
                     Width="140"
-                    SetBorder="True"
-                    Value="2024"
+                    ItemsSource="{Binding Path=ListUpDownIntSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     WidthContent="120"
-                    ItemsSource="{Binding Path=ListUpDownIntSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    Value="2024" />
+
+                <TextBlock
+                    Width="200"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run FontWeight="Medium" Text="Auswahl:" />
+                    <Run Text="{Binding Path=Value, ElementName=listIntUpDown}" />
+                </TextBlock>
 
             </StackPanel>
         </StackPanel>

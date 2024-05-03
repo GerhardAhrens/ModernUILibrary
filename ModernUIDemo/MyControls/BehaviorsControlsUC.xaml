@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="ModernUIDemo.MyControls.TemplateControlsUC"
+    x:Class="ModernUIDemo.MyControls.BehaviorsControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
@@ -21,7 +21,7 @@
         <TextBlock
             Grid.ColumnSpan="2"
             FontSize="14"
-            Text="Beispiel für verschiedene TextBox Varianten (Text, Numeric, Currency, ..." />
+            Text="Beispiel für verschiedene Behaviors Varianten" />
         <Separator
             Grid.ColumnSpan="2"
             Height="3"

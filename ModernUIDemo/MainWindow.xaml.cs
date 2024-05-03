@@ -40,6 +40,7 @@
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Loading Animation Controls", new LoadingControlsUC()));
+            tabItemSource.Add(new TabControlItem("Behaviors Controls", new BehaviorsControlsUC()));
             tabItemSource.Add(new TabControlItem($"MessageBox, NoticeMessage\nWindow", true));
             tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
