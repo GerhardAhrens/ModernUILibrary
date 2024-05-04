@@ -315,7 +315,6 @@
                 <ModernUI:ListStringUpDown
                     x:Name="listStringUpDown"
                     Width="140"
-                    Value="Hund"
                     ItemsSource="{Binding Path=ListUpDownStringSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     WidthContent="120" />
 

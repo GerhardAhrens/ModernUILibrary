@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Text.RegularExpressions;
     using System.Windows;
     using System.Windows.Controls;
@@ -70,14 +69,8 @@
 
         public string Value
         {
-            get
-            {
-                return (string)this.GetValue(ValueProperty);
-            }
-            set
-            {
-                this.SetValue(ValueProperty, value);
-            }
+            get { return (string)this.GetValue(ValueProperty); }
+            set { this.SetValue(ValueProperty, value); }
         }
 
         public bool SetBorder

@@ -47,6 +47,7 @@
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnDown, "Click", this.OnClickDown);
             WeakEventManager<TextBox, KeyEventArgs>.AddHandler(this.TxTBoxStringUpDown, "PreviewKeyDown", this.OnPreviewKeyDown);
             WeakEventManager<TextBox, TextChangedEventArgs>.AddHandler(this.TxTBoxStringUpDown, "TextChanged", this.OnTextChanged);
+            WeakEventManager<TextBox, RoutedEventArgs>.AddHandler(this.TxTBoxStringUpDown, "GotFocus", this.OnGotFocus);
         }
 
         public IEnumerable ItemsSource
@@ -135,13 +136,21 @@
             }
         }
 
+        private void OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var tb = (TextBox)sender;
+            if (tb != null)
+            {
+                tb.Focus();
+                tb.SelectAll();
+            }
+        }
+
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             if (tb != null && this.ItemSource != null)
             {
-                tb.SelectAll();
-
                 var found = this.ItemSource.Cast<string>().ToList().FindAll(f => f.Equals(tb.Text));
                 if (found != null && found.Count > 0)
                 {
