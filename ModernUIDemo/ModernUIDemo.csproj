@@ -61,6 +61,9 @@
     <Compile Update="MyControls\ProgressBarControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\GroupBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TemplateControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

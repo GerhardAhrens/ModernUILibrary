@@ -48,6 +48,7 @@
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
+            tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
 

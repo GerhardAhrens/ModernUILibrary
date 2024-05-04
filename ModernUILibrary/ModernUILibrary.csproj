@@ -17,6 +17,7 @@
     <Folder Include="ModernUI\Button\Themes\" />
     <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
+    <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\MessageBox\Themes\" />
@@ -33,6 +34,7 @@
     <Folder Include="ModernUI\Slider\Themes\" />
     <Folder Include="ModernUI\SplitButton\Themes\" />
     <Folder Include="ModernUI\TextBox\Themes\" />
+    <Folder Include="ModernUI\TitleBar\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
     <Folder Include="ModernUI\ToolTip\Themes\" />
