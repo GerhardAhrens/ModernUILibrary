@@ -55,6 +55,12 @@
     <Compile Update="MyControls\BehaviorsControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\SliderControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\ProgressBarControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TemplateControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

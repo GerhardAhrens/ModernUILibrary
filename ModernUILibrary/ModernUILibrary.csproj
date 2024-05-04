@@ -26,9 +26,11 @@
     <Folder Include="ModernUI\ListBox\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
+    <Folder Include="ModernUI\ProgressBar\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
     <Folder Include="ModernUI\ScrollViewer\Themes\" />
     <Folder Include="ModernUI\SegmentControl\Themes\" />
+    <Folder Include="ModernUI\Slider\Themes\" />
     <Folder Include="ModernUI\SplitButton\Themes\" />
     <Folder Include="ModernUI\TextBox\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
