@@ -49,6 +49,10 @@
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
             tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
+            tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
+            tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
+            tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
 

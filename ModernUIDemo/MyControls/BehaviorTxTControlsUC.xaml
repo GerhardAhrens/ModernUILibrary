@@ -1,0 +1,95 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.BehaviorTxTControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:Behavior="clr-namespace:ModernIU.Behaviors;assembly=ModernUILibrary"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <System:String x:Key="InputMaskIban">
+            >LL00 0000 0000 0000 0000 0000 0000 0000 0000
+        </System:String>
+
+        <Style x:Key="StyleWatermarkLabel">
+            <Setter Property="TextBlock.Foreground" Value="{x:Static SystemColors.ControlDarkBrush}" />
+            <Setter Property="FrameworkElement.Opacity" Value="0.8" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.Margin" Value="6,4,4,4" />
+        </Style>
+
+        <Style x:Key="StyleWatermarkLabel2">
+            <Setter Property="TextBlock.Foreground" Value="Red" />
+            <Setter Property="FrameworkElement.Opacity" Value="0.5" />
+            <Setter Property="TextBlock.FontSize" Value="14" />
+            <Setter Property="TextBlock.FontStyle" Value="Italic" />
+        </Style>
+
+        <Style x:Key="StyleWatermarkLabel3">
+            <Setter Property="TextBlock.Foreground" Value="Green" />
+            <Setter Property="FrameworkElement.Opacity" Value="0.5" />
+            <Setter Property="TextBlock.FontSize" Value="14" />
+            <Setter Property="TextBlock.FontStyle" Value="Italic" />
+            <Setter Property="TextBlock.Margin" Value="6,3,4,4" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.ColumnSpan="2"
+            FontSize="14"
+            Text="Beispiel für verschiedene Behavior TextBox Erweiterungen" />
+        <Separator
+            Grid.ColumnSpan="2"
+            Height="3"
+            Background="Green" />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Orientation="Vertical">
+            <ModernUI:MGroupBox Margin="5" Header="TextBoxInputMaskBehavior">
+                <UniformGrid Columns="2">
+                    <TextBlock
+                    Name="tbDateTime"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Datetime" />
+
+                    <TextBox
+                    Name="txtDateTime"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="120"
+                    Height="23"
+                    HorizontalAlignment="Left">
+                        <i:Interaction.Behaviors>
+                            <Behavior:TextBoxInputMaskBehavior InputMask="00/00/0000" />
+                            <Behavior:TextBoxSelectAllOnFocusBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </UniformGrid>
+
+            </ModernUI:MGroupBox>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

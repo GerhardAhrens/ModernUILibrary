@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Behaviors\TextBox\" />
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUI\Alert\Themes\" />
     <Folder Include="ModernUI\Badge\Themes\" />
@@ -38,7 +39,6 @@
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
     <Folder Include="ModernUI\ToolTip\Themes\" />
-    <Folder Include="Behaviors\" />
     <Folder Include="Resources\" />
     <Folder Include="Themes\" />
   </ItemGroup>
