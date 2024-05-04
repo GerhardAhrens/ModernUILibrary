@@ -20,9 +20,12 @@
 
         public XamlProperty<IEnumerable<int>> ListUpDownIntSource { get; set; } = XamlProperty.Set<IEnumerable<int>>();
 
+        public XamlProperty<List<string>> ListUpDownStringSource { get; set; } = XamlProperty.Set<List<string>>();
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.ListUpDownIntSource.Value = Enumerable.Range(DateTime.Today.Year - 5, 30).Select(x => (x - 1) + 1);
+            this.ListUpDownStringSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
 
         }
     }

@@ -109,8 +109,11 @@
 
         private static void OnValuePropertyChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
-            ListIntegerUpDown control = target as ListIntegerUpDown;
-            control.TxtIntegerUpDown.Text = e.NewValue.ToString();
+            if (e.NewValue != null)
+            {
+                ListIntegerUpDown control = target as ListIntegerUpDown;
+                control.TxtIntegerUpDown.Text = e.NewValue.ToString();
+            }
         }
 
         private static void OnSetBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -152,21 +155,6 @@
             }
         }
 
-        private void OnClickDown(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(this.Value) == false)
-            {
-                this.ItemSource.MoveCurrentTo(Convert.ToInt32(this.Value));
-            }
-
-            this.ItemSource.MoveCurrentToNext();
-            if (this.ItemSource.IsCurrentAfterLast == false)
-            {
-                this.TxtIntegerUpDown.Text = this.ItemSource.CurrentItem.ToString();
-                this.Value = this.ItemSource.CurrentItem.ToString();
-            }
-        }
-
         private void OnClickUp(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(this.Value) == false)
@@ -176,6 +164,21 @@
 
             this.ItemSource.MoveCurrentToPrevious();
             if (this.ItemSource.IsCurrentBeforeFirst == false)
+            {
+                this.TxtIntegerUpDown.Text = this.ItemSource.CurrentItem.ToString();
+                this.Value = this.ItemSource.CurrentItem.ToString();
+            }
+        }
+
+        private void OnClickDown(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.Value) == false)
+            {
+                this.ItemSource.MoveCurrentTo(Convert.ToInt32(this.Value));
+            }
+
+            this.ItemSource.MoveCurrentToNext();
+            if (this.ItemSource.IsCurrentAfterLast == false)
             {
                 this.TxtIntegerUpDown.Text = this.ItemSource.CurrentItem.ToString();
                 this.Value = this.ItemSource.CurrentItem.ToString();
@@ -201,7 +204,7 @@
             var tb = (TextBox)sender;
             if (tb != null)
             {
-                if (!this._numMatch.IsMatch(tb.Text))
+                if (this._numMatch.IsMatch(tb.Text) == false)
                 {
                     this.ResetText(tb);
                 }

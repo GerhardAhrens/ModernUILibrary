@@ -304,7 +304,29 @@
                     <Run FontWeight="Medium" Text="Auswahl:" />
                     <Run Text="{Binding Path=Value, ElementName=listIntUpDown}" />
                 </TextBlock>
+            </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="IntegerUpDown mit einer Liste als Source" />
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <ModernUI:ListStringUpDown
+                    x:Name="listStringUpDown"
+                    Width="140"
+                    Value="Hund"
+                    ItemsSource="{Binding Path=ListUpDownStringSource.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    WidthContent="120" />
+
+                <TextBlock
+                    Width="200"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run FontWeight="Medium" Text="Auswahl:" />
+                    <Run Text="{Binding Path=Value, ElementName=listStringUpDown}" />
+                </TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>
