@@ -59,7 +59,7 @@
 
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
             this.ListBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
-            this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
+            this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise","Igel", "Elefant", "Hund","Pferd","Pinguin", "Zebra" , "2001", "2010", "2024","2030"};
 
             this.SelectedColorItem.Value = Brushes.Transparent;
         }

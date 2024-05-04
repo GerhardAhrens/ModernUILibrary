@@ -138,15 +138,13 @@ namespace ModernIU.Controls
                     break;
                 case Key.Tab:
                 case Key.Enter:
-
                     this.ClearFilter();
                     break;
                 default:
-                    if (Text != this.oldFilter)
+                    if (this.Text != this.oldFilter)
                     {
                         this.RefreshFilter();
                         this.IsDropDownOpen = true;
-
                         this.EditableTextBox.SelectionStart = int.MaxValue;
                     }
 
@@ -159,8 +157,8 @@ namespace ModernIU.Controls
         protected override void OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
             this.ClearFilter();
-            var temp = SelectedIndex;
-            SelectedIndex = -1;
+            var temp = this.SelectedIndex;
+            this.SelectedIndex = -1;
             this.Text = string.Empty;
             this.SelectedIndex = temp;
             base.OnPreviewLostKeyboardFocus(e);

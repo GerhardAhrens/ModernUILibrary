@@ -145,12 +145,12 @@
                     Background="Green"
                     Header="FilteredComboBox" />
 
-                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:FilteredComboBox
                         Width="200"
                         Height="25"
                         Margin="5"
-                        DisplayMemberPath="Value"
+                        x:Name="cbFilteredComboBox"
                         ItemsSource="{Binding Path=FilterdComboBoxSource.Value}">
                         <ModernUI:FilteredComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -158,6 +158,15 @@
                             </ItemsPanelTemplate>
                         </ModernUI:FilteredComboBox.ItemsPanel>
                     </ModernUI:FilteredComboBox>
+
+                    <TextBlock
+                        Width="150"
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        Background="White">
+                        <Run Text="Auswah:" />
+                        <Run Text="{Binding Path=SelectedValue, ElementName=cbFilteredComboBox}" />
+                    </TextBlock>
                 </StackPanel>
 
             </StackPanel>
