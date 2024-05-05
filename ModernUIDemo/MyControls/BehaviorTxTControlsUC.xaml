@@ -63,10 +63,20 @@
             Grid.Row="1"
             Grid.Column="0"
             Orientation="Vertical">
-            <UniformGrid
-                Width="300"
+            <ModernUI:AutoGrid
+                Width="458"
                 HorizontalAlignment="Left"
-                Columns="2">
+                VerticalAlignment="Top"
+                ChildHorizontalAlignment="Stretch"
+                ChildMargin="5"
+                ChildVerticalAlignment="Center"
+                IsAutoIndexing="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="110" />
+                </Grid.ColumnDefinitions>
+
                 <TextBlock
                     Name="tbDateTime"
                     Grid.Row="0"
@@ -87,7 +97,65 @@
                         <Behavior:TextBoxSelectAllOnFocusBehavior />
                     </i:Interaction.Behaviors>
                 </TextBox>
-            </UniformGrid>
+
+                <Button
+                    x:Name="BtnDateTime"
+                    Width="100"
+                    Content="Anzeigen" />
+
+                <TextBlock
+                    Name="tbPhone"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Telefonnummer" />
+
+                <TextBox
+                    Name="txtPhone"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="167"
+                    Height="25"
+                    HorizontalAlignment="Left">
+                    <i:Interaction.Behaviors>
+                        <Behavior:TextBoxInputMaskBehavior InputMask="( 99999 ) 0000000" PromptChar="_" />
+                        <Behavior:TextBoxSelectAllOnFocusBehavior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
+
+                <Button
+                    x:Name="BtnPhone"
+                    Width="100"
+                    Content="Anzeigen" />
+
+                <TextBlock
+                    Name="tbIBAN"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Sepa - IBAN" />
+
+                <TextBox
+                    Name="txtIBAN"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="200"
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <i:Interaction.Behaviors>
+                        <Behavior:TextBoxInputMaskBehavior InputMask="{StaticResource InputMaskIban}" PromptChar="_" />
+                        <Behavior:TextBoxSelectAllOnFocusBehavior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
+
+                <Button
+                    x:Name="BtnIBAN"
+                    Width="100"
+                    Content="Anzeigen" />
+            </ModernUI:AutoGrid>
         </StackPanel>
 
     </Grid>

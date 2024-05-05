@@ -18,7 +18,6 @@
 
 namespace ModernIU.Behaviors
 {
-    using System;
     using System.ComponentModel;
     using System.Globalization;
     using System.Runtime.Versioning;

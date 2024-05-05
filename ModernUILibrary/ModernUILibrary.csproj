@@ -4,6 +4,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <FileVersion>1.0.2024.1</FileVersion>
   </PropertyGroup>
@@ -26,6 +27,7 @@
     <Folder Include="ModernUI\ComboBoxColor\" />
     <Folder Include="ModernUI\DatePicker\" />
     <Folder Include="ModernUI\ListBox\" />
+    <Folder Include="ModernUI\Grid\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\ProgressBar\Themes\" />
@@ -40,6 +42,8 @@
     <Folder Include="ModernUI\ToggleButton\Themes\" />
     <Folder Include="Converters\" />
     <Folder Include="ModernUI\ToolTip\Themes\" />
+    <Folder Include="BehaviorsBase\" />
+    <Folder Include="Extensions\" />
     <Folder Include="Resources\" />
     <Folder Include="Themes\" />
   </ItemGroup>
