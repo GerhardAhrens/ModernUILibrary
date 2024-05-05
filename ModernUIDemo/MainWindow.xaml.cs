@@ -42,16 +42,17 @@
             tabItemSource.Add(new TabControlItem("Loading Animation Controls", new LoadingControlsUC()));
             tabItemSource.Add(new TabControlItem("Slider Controls", new SliderControlsUC()));
             tabItemSource.Add(new TabControlItem("ProgressBar Controls", new ProgressBarControlsUC()));
-            tabItemSource.Add(new TabControlItem("Behaviors Controls", new BehaviorsControlsUC()));
             tabItemSource.Add(new TabControlItem($"MessageBox, NoticeMessage\nWindow", true));
             tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
             tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()));
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
+            tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);

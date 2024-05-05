@@ -30,6 +30,7 @@
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\ProgressBar\Themes\" />
     <Folder Include="ModernUI\RadionButton\Themes\" />
+    <Folder Include="ModernUI\RatingBar\Themes\" />
     <Folder Include="ModernUI\ScrollViewer\Themes\" />
     <Folder Include="ModernUI\SegmentControl\Themes\" />
     <Folder Include="ModernUI\Slider\Themes\" />
