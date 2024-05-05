@@ -20,6 +20,8 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.You should have received a copy of the GNU General Public License along with this program. 
  * If not, see <http://www.gnu.org/licenses/>.
+ * Inspiration von
+ * https://github.com/nirdobovizki/MvvmControls
 */
 
 namespace ModernIU.Controls
@@ -32,68 +34,71 @@ namespace ModernIU.Controls
     public class FormPanel : Panel
     {
         public static readonly DependencyProperty ColumnsProperty =
-                    DependencyProperty.Register("Columns", typeof(int), typeof(FormPanel),
-                    new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsMeasure));
+                    DependencyProperty.Register("Columns", typeof(int), typeof(FormPanel), new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public static readonly DependencyProperty ColumnSpacingProperty =
+            DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(15.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public static readonly DependencyProperty RowSpacingProperty =
+            DependencyProperty.Register("RowSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public static readonly DependencyProperty LabelControlSpacingProperty =
+            DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public static readonly DependencyProperty LabelSizeProperty = DependencyProperty.Register("LabelSize", typeof(Size), typeof(FormPanel));
+
+        public static readonly DependencyProperty LabelControlPairSizeProperty = DependencyProperty.Register("LabelControlPairSize", typeof(Size), typeof(FormPanel));
+
+        public static readonly DependencyProperty IsStandaloneProperty = 
+            DependencyProperty.RegisterAttached("IsStandalone", typeof(bool), typeof(FormPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public static readonly DependencyProperty ControlSizeProperty = DependencyProperty.Register("ControlSize", typeof(Size), typeof(FormPanel));
+
+        public static readonly DependencyProperty IsGroupHeaderProperty =
+            DependencyProperty.RegisterAttached("IsGroupHeader", typeof(bool), typeof(FormPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+
         public int Columns
         {
             get { return (int)GetValue(ColumnsProperty); }
             set { SetValue(ColumnsProperty, value); }
         }
 
-        public static readonly DependencyProperty ColumnSpacingProperty =
-            DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(FormPanel),
-            new FrameworkPropertyMetadata(15.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double ColumnSpacing
         {
             get { return (double)GetValue(ColumnSpacingProperty); }
             set { SetValue(ColumnSpacingProperty, value); }
         }
 
-        public static readonly DependencyProperty RowSpacingProperty =
-            DependencyProperty.Register("RowSpacing", typeof(double), typeof(FormPanel),
-            new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double RowSpacing
         {
             get { return (double)GetValue(RowSpacingProperty); }
             set { SetValue(RowSpacingProperty, value); }
         }
 
-        public static readonly DependencyProperty LabelControlSpacingProperty =
-            DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(FormPanel),
-            new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public double LabelControlSpacing
         {
             get { return (double)GetValue(LabelControlSpacingProperty); }
             set { SetValue(LabelControlSpacingProperty, value); }
         }
 
-        public static readonly DependencyProperty LabelSizeProperty =
-            DependencyProperty.Register("LabelSize", typeof(Size), typeof(FormPanel));
         public Size LabelSize
         {
             get { return (Size)GetValue(LabelSizeProperty); }
             set { SetValue(LabelSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty ControlSizeProperty =
-            DependencyProperty.Register("ControlSize", typeof(Size), typeof(FormPanel));
         public Size ControlSize
         {
             get { return (Size)GetValue(ControlSizeProperty); }
             set { SetValue(ControlSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty LabelControlPairSizeProperty =
-            DependencyProperty.Register("LabelControlPairSize", typeof(Size), typeof(FormPanel));
         public Size LabelControlPairSize
         {
             get { return (Size)GetValue(LabelControlPairSizeProperty); }
             set { SetValue(LabelControlPairSizeProperty, value); }
         }
 
-        public static readonly DependencyProperty IsStandaloneProperty =
-            DependencyProperty.RegisterAttached("IsStandalone", typeof(bool), typeof(FormPanel),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static bool GetIsStandalone(UIElement elem)
         {
             return (bool)elem.GetValue(IsStandaloneProperty);
@@ -103,9 +108,6 @@ namespace ModernIU.Controls
             elem.SetValue(IsStandaloneProperty, value);
         }
 
-        public static readonly DependencyProperty IsGroupHeaderProperty =
-            DependencyProperty.RegisterAttached("IsGroupHeader", typeof(bool), typeof(FormPanel),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static bool GetIsGroupHeader(UIElement elem)
         {
             return (bool)elem.GetValue(IsGroupHeaderProperty);

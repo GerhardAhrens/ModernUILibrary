@@ -36,6 +36,8 @@
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
+            tabItemSource.Add(new TabControlItem("Loyout Grid, Panel", true));
+            tabItemSource.Add(new TabControlItem("FormPanel Controls", new FormPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));
