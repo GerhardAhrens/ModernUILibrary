@@ -18,19 +18,12 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.ColumnSpan="2"
-            FontSize="14"
-            Text="Beispiel für verschiedene TextBox Varianten (Text, Numeric, Currency, ..." />
-        <Separator
-            Grid.ColumnSpan="2"
-            Height="3"
-            Background="Green" />
+        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <Separator Height="3" Background="Green" />
 
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
             Orientation="Vertical" />
 
     </Grid>

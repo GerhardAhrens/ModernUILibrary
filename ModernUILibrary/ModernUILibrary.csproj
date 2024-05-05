@@ -27,7 +27,6 @@
     <Folder Include="ModernUI\ComboBoxColor\" />
     <Folder Include="ModernUI\DatePicker\" />
     <Folder Include="ModernUI\ListBox\" />
-    <Folder Include="ModernUI\Grid\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\ProgressBar\Themes\" />
