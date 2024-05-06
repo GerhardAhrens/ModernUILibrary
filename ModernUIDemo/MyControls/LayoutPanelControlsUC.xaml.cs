@@ -4,11 +4,11 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaktionslogik für FormPanelControlsUC.xaml
+    /// Interaktionslogik für LayoutPanelControlsUC.xaml
     /// </summary>
-    public partial class FormPanelControlsUC : UserControl
+    public partial class LayoutPanelControlsUC : UserControl
     {
-        public FormPanelControlsUC()
+        public LayoutPanelControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);

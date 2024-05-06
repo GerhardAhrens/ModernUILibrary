@@ -75,7 +75,7 @@
     <Compile Update="MyControls\RatingControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MyControls\FormPanelControlsUC.xaml.cs">
+    <Compile Update="MyControls\LayoutPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\UploadControlsUC.xaml.cs">

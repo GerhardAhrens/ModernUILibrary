@@ -31,31 +31,31 @@ namespace ModernIU.Controls
     using System.Windows;
     using System.Windows.Controls;
 
-    public class FormPanel : Panel
+    public class LayoutPanel : Panel
     {
         public static readonly DependencyProperty ColumnsProperty =
-                    DependencyProperty.Register("Columns", typeof(int), typeof(FormPanel), new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsMeasure));
+                    DependencyProperty.Register("Columns", typeof(int), typeof(LayoutPanel), new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ColumnSpacingProperty =
-            DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(15.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            DependencyProperty.Register("ColumnSpacing", typeof(double), typeof(LayoutPanel), new FrameworkPropertyMetadata(15.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty RowSpacingProperty =
-            DependencyProperty.Register("RowSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            DependencyProperty.Register("RowSpacing", typeof(double), typeof(LayoutPanel), new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty LabelControlSpacingProperty =
-            DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(FormPanel), new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            DependencyProperty.Register("LabelControlSpacing", typeof(double), typeof(LayoutPanel), new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
-        public static readonly DependencyProperty LabelSizeProperty = DependencyProperty.Register("LabelSize", typeof(Size), typeof(FormPanel));
+        public static readonly DependencyProperty LabelSizeProperty = DependencyProperty.Register("LabelSize", typeof(Size), typeof(LayoutPanel));
 
-        public static readonly DependencyProperty LabelControlPairSizeProperty = DependencyProperty.Register("LabelControlPairSize", typeof(Size), typeof(FormPanel));
+        public static readonly DependencyProperty LabelControlPairSizeProperty = DependencyProperty.Register("LabelControlPairSize", typeof(Size), typeof(LayoutPanel));
 
         public static readonly DependencyProperty IsStandaloneProperty = 
-            DependencyProperty.RegisterAttached("IsStandalone", typeof(bool), typeof(FormPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            DependencyProperty.RegisterAttached("IsStandalone", typeof(bool), typeof(LayoutPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
-        public static readonly DependencyProperty ControlSizeProperty = DependencyProperty.Register("ControlSize", typeof(Size), typeof(FormPanel));
+        public static readonly DependencyProperty ControlSizeProperty = DependencyProperty.Register("ControlSize", typeof(Size), typeof(LayoutPanel));
 
         public static readonly DependencyProperty IsGroupHeaderProperty =
-            DependencyProperty.RegisterAttached("IsGroupHeader", typeof(bool), typeof(FormPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
+            DependencyProperty.RegisterAttached("IsGroupHeader", typeof(bool), typeof(LayoutPanel), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public int Columns
         {
