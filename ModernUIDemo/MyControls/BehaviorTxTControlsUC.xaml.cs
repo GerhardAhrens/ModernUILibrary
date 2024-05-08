@@ -1,7 +1,10 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
+
+    using ModernUIDemo.Core;
 
     /// <summary>
     /// Interaktionslogik für BehaviorTxTControlsUC.xaml
@@ -18,10 +21,15 @@
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnDateTime, "Click", this.OnButtonClick);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnPhone, "Click", this.OnButtonClick);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnIBAN, "Click", this.OnButtonClick);
+
+            this.DataContext = this;
         }
+
+        public XamlProperty<DateTime?> ValueDate { get; set; } = XamlProperty.Set<DateTime?>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.ValueDate.Value = DateTime.Now;
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)

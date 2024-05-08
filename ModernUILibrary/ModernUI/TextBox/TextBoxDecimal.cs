@@ -84,12 +84,22 @@
                 this.BorderBrush = Brushes.Transparent;
                 this.BorderThickness = new Thickness(0);
             }
+
+            if (this.Number > 0)
+            {
+                this.Text = this.Number.ToString();
+            }
+            else
+            {
+                this.Text = string.Empty;
+            }
         }
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
 
+            /*
             if (string.IsNullOrEmpty( this.Text)  == true )
             {
                 this.Text = string.Empty;
@@ -100,6 +110,7 @@
                 if (decimal.TryParse(this.Text, out decimal result))
                 {
                     this.Number = Convert.ToDecimal(string.IsNullOrEmpty(this.Text) == true ? "0" : this.Text);
+                    this.Text = this.Number.ToString(CultureInfo.CurrentCulture);
                 }
                 else
                 {
@@ -107,6 +118,7 @@
                     this.Number = 0;
                 }
             }
+            */
         }
 
         protected override void OnGotFocus(RoutedEventArgs e)
@@ -131,7 +143,7 @@
                 if (this.DecimalPlaces != c)
                 {
                     this.Text = $"{this.Text}{this.decimalSeparator}{new string('0', this.DecimalPlaces - c)}";
-                    this.Number = Convert.ToDecimal(this.Text);
+                    this.Number = Convert.ToDecimal(this.Text,CultureInfo.CurrentCulture);
                 }
             }
         }
@@ -150,6 +162,11 @@
                 this.SelectAll();
             }
 
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -181,22 +198,20 @@
                 }
             }
 
+            e.Handled = false;
+
             if (e.Key == Key.OemComma)
             {
                 if (this.Text.Count(c => c == decimalSeparator) >= 1)
                 {
                     e.Handled = true;
                 }
-                else
-                {
-                    e.Handled = false;
-                }
 
                 return;
             }
 
             int key = (int)e.Key;
-            e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 9);
+            e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 9 || key == 142);
 
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
@@ -381,6 +396,7 @@
         {
             Clipboard.SetText(this.Text);
             this.Text = string.Empty;
+            this.Number = 0.0M;
         }
     }
 }

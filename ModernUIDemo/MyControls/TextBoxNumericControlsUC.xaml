@@ -72,7 +72,7 @@
                     VerticalAlignment="Center"
                     Background="White">
                     <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=Text, ElementName=txtIntTextBox}" />
+                    <Run Text="{Binding Path=Number, ElementName=txtIntTextBox}" />
                 </TextBlock>
 
             </StackPanel>
@@ -94,7 +94,7 @@
                     VerticalAlignment="Center"
                     Background="White">
                     <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=Text, ElementName=txtDecTextBox}" />
+                    <Run Text="{Binding Path=Number, ElementName=txtDecTextBox}" />
                 </TextBlock>
             </StackPanel>
 

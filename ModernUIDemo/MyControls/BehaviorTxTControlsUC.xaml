@@ -38,9 +38,28 @@
             <Setter Property="TextBlock.FontStyle" Value="Italic" />
             <Setter Property="TextBlock.Margin" Value="6,3,4,4" />
         </Style>
+
+        <Style x:Key="GroupHeaderLeft" TargetType="ContentControl">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border
+                            Margin="0,0,0,5"
+                            BorderBrush="DarkBlue"
+                            BorderThickness="0,0,0,1">
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                TextBlock.Foreground="DarkBlue"
+                                TextBlock.TextAlignment="Left" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -59,104 +78,261 @@
             Height="3"
             Background="Green" />
 
-        <StackPanel
+        <ModernUI:LayoutPanel
+            Name="panel"
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical">
-            <ModernUI:AutoGrid
-                Width="458"
+            Width="680"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ColumnSpacing="0"
+            Columns="2">
+            <ContentControl
+                ModernUI:LayoutPanel.IsGroupHeader="True"
+                ModernUI:LayoutPanel.IsStandalone="False"
+                Content="TextBoxInputMaskBehavior"
+                Style="{StaticResource ResourceKey=GroupHeaderLeft}" />
+
+            <TextBlock
+                Name="tbDateTime"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                ChildHorizontalAlignment="Stretch"
-                ChildMargin="5"
-                ChildVerticalAlignment="Center"
-                IsAutoIndexing="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="110" />
-                </Grid.ColumnDefinitions>
+                VerticalAlignment="Center"
+                Text="Datetime" />
 
-                <TextBlock
-                    Name="tbDateTime"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="Datetime" />
+            <TextBox
+                Name="txtDateTime"
+                Width="120"
+                Height="23"
+                HorizontalAlignment="Left">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputMaskBehavior InputMask="00/00/0000" />
+                    <Behavior:TextBoxSelectAllOnFocusBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
 
-                <TextBox
-                    Name="txtDateTime"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Width="120"
-                    Height="23"
-                    HorizontalAlignment="Left">
-                    <i:Interaction.Behaviors>
-                        <Behavior:TextBoxInputMaskBehavior InputMask="00/00/0000" />
-                        <Behavior:TextBoxSelectAllOnFocusBehavior />
-                    </i:Interaction.Behaviors>
-                </TextBox>
+            <Button
+                x:Name="BtnDateTime"
+                Width="100"
+                Content="Anzeigen" />
 
-                <Button
-                    x:Name="BtnDateTime"
-                    Width="100"
-                    Content="Anzeigen" />
+            <Label />
 
-                <TextBlock
-                    Name="tbPhone"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="Telefonnummer" />
+            <TextBlock
+                Name="tbPhone"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Telefonnummer" />
 
-                <TextBox
-                    Name="txtPhone"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Width="167"
-                    Height="25"
-                    HorizontalAlignment="Left">
-                    <i:Interaction.Behaviors>
-                        <Behavior:TextBoxInputMaskBehavior InputMask="( 99999 ) 0000000" PromptChar="_" />
-                        <Behavior:TextBoxSelectAllOnFocusBehavior />
-                    </i:Interaction.Behaviors>
-                </TextBox>
+            <TextBox
+                Name="txtPhone"
+                Width="167"
+                Height="25"
+                HorizontalAlignment="Left">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputMaskBehavior InputMask="( 99999 ) 0000000" PromptChar="_" />
+                    <Behavior:TextBoxSelectAllOnFocusBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
 
-                <Button
-                    x:Name="BtnPhone"
-                    Width="100"
-                    Content="Anzeigen" />
+            <Button
+                x:Name="BtnPhone"
+                Width="100"
+                Content="Anzeigen" />
 
-                <TextBlock
-                    Name="tbIBAN"
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="Sepa - IBAN" />
+            <Label />
 
-                <TextBox
-                    Name="txtIBAN"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Width="200"
-                    Height="25"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center">
-                    <i:Interaction.Behaviors>
-                        <Behavior:TextBoxInputMaskBehavior InputMask="{StaticResource InputMaskIban}" PromptChar="_" />
-                        <Behavior:TextBoxSelectAllOnFocusBehavior />
-                    </i:Interaction.Behaviors>
-                </TextBox>
+            <TextBlock
+                Name="tbIBAN"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Sepa - IBAN" />
 
-                <Button
-                    x:Name="BtnIBAN"
-                    Width="100"
-                    Content="Anzeigen" />
-            </ModernUI:AutoGrid>
-        </StackPanel>
+            <TextBox
+                Name="txtIBAN"
+                Width="200"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputMaskBehavior InputMask="{StaticResource InputMaskIban}" PromptChar="_" />
+                    <Behavior:TextBoxSelectAllOnFocusBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
 
+            <Button
+                x:Name="BtnIBAN"
+                Width="100"
+                Content="Anzeigen" />
+
+            <Label />
+
+            <ContentControl
+                ModernUI:LayoutPanel.IsGroupHeader="True"
+                ModernUI:LayoutPanel.IsStandalone="False"
+                Content="TextBox Input mit Behavior"
+                Style="{StaticResource ResourceKey=GroupHeaderLeft}" />
+            <TextBlock
+                Name="tbInteger"
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Interger" />
+
+            <TextBox
+                Name="txtInteger"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputBehavior InputMode="DigitInput" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <TextBlock
+                Width="150"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Ergebnis:" />
+                <Run Text="{Binding Path=Text, ElementName=txtInteger}" />
+            </TextBlock>
+
+            <Label />
+
+            <TextBlock
+                Name="tbDecimal"
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Decimal" />
+
+            <TextBox
+                Name="txtDecimal"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputBehavior DecimalPlace="4" InputMode="DecimalInput" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <TextBlock
+                Width="150"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Ergebnis:" />
+                <Run Text="{Binding Path=Text, ElementName=txtDecimal}" />
+            </TextBlock>
+
+            <Label />
+
+            <TextBlock
+                Name="tbMoney"
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Währung" />
+
+            <TextBox
+                Name="txtMoney"
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputBehavior InputMode="Money" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <TextBlock
+                Width="150"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Ergebnis:" />
+                <Run Text="{Binding Path=Text, ElementName=txtMoney}" />
+            </TextBlock>
+
+            <Label />
+
+            <TextBlock
+                Name="tbLetter"
+                Grid.Row="3"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Letter Only" />
+
+            <TextBox
+                Name="txtLetterOrDigit"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="100"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputBehavior InputMode="LetterOrDigit" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <TextBlock
+                Width="150"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Ergebnis:" />
+                <Run Text="{Binding Path=Text, ElementName=txtLetterOrDigit}" />
+            </TextBlock>
+
+            <Label />
+
+            <TextBlock
+                Name="tbDatum"
+                Grid.Row="4"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Datum" />
+
+            <TextBox
+                Name="txtDatum"
+                Grid.Row="4"
+                Grid.Column="1"
+                Width="100"
+                Language="de-de"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Path=ValueDate.Value, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Behaviors>
+                    <Behavior:TextBoxInputBehavior InputMode="Date" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <TextBlock
+                Width="150"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Ergebnis:" />
+                <Run Text="{Binding Path=Text, ElementName=txtDatum}" />
+            </TextBlock>
+
+            <Label />
+
+        </ModernUI:LayoutPanel>
     </Grid>
 </UserControl>

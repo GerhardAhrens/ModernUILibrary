@@ -12,6 +12,7 @@
         public TextBoxNumericControlsUC()
         {
             this.InitializeComponent();
+            this.ValueDate.Value = DateTime.Now;
             this.DataContext = this;
         }
 

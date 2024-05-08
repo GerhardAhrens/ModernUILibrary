@@ -1,5 +1,6 @@
 ﻿namespace ModernIU.Controls
 {
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -70,6 +71,16 @@
                 this.BorderBrush = Brushes.Transparent;
                 this.BorderThickness = new Thickness(0);
             }
+
+            if (this.Number > 0)
+            {
+                this.Text = this.Number.ToString(CultureInfo.CurrentCulture);
+            }
+            else
+            {
+                this.Text = string.Empty;
+                this.Number = 0;
+            }
         }
 
         protected override void OnTextChanged(TextChangedEventArgs e)
@@ -85,6 +96,7 @@
                 if (int.TryParse(this.Text, out int result))
                 {
                     this.Number = Convert.ToInt32(string.IsNullOrEmpty(this.Text) == true ? "0" : this.Text);
+                    this.Text = this.Number.ToString(CultureInfo.CurrentCulture);
                 }
                 else
                 {
@@ -299,6 +311,7 @@
         {
             Clipboard.SetText(this.Text);
             this.Text = string.Empty;
+            this.Number = 0;
         }
     }
 }
