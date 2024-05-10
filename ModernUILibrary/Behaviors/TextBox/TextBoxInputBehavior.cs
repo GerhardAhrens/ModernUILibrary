@@ -43,9 +43,9 @@ namespace ModernIU.Behaviors
     public enum TextBoxInputMode
     {
         None,
-        DecimalInput,
-        DigitInput,
-        PercentInput,
+        Decimal,
+        Integer,
+        Percent,
         Letter,
         LetterOrDigit,
         Money,
@@ -55,7 +55,7 @@ namespace ModernIU.Behaviors
     [SupportedOSPlatform("windows")]
     public class TextBoxInputBehavior : Behavior<TextBox>
     {
-        const NumberStyles validNumberStyles = NumberStyles.AllowDecimalPoint |
+        private const NumberStyles validNumberStyles = NumberStyles.AllowDecimalPoint |
                                               NumberStyles.AllowThousands |
                                               NumberStyles.AllowLeadingSign;
 
@@ -73,14 +73,15 @@ namespace ModernIU.Behaviors
 
         private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "d.M.yy" };
 
+        private bool changeIntern = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBoxInputBehavior"/> class.
         /// </summary>
         public TextBoxInputBehavior()
         {
-            InputMode = TextBoxInputMode.None;
-            JustPositivDecimalInput = false;
-            MaxVorkommastellen = null;
+            this.InputMode = TextBoxInputMode.None;
+            this.JustPositivDecimalInput = false;
+            this.MaxVorkommastellen = null;
         }
 
         public TextBoxInputMode InputMode { get; set; }
@@ -116,7 +117,7 @@ namespace ModernIU.Behaviors
         {
             base.OnAttached();
 
-            if (InputMode == TextBoxInputMode.DigitInput || InputMode == TextBoxInputMode.DecimalInput || InputMode == TextBoxInputMode.Money)
+            if (InputMode == TextBoxInputMode.Integer || InputMode == TextBoxInputMode.Decimal || InputMode == TextBoxInputMode.Money || InputMode == TextBoxInputMode.Percent)
             {
                 AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Right;
             }
@@ -129,6 +130,7 @@ namespace ModernIU.Behaviors
 
             AssociatedObject.PreviewTextInput += AssociatedObjectPreviewTextInput;
             AssociatedObject.PreviewKeyDown += AssociatedObjectPreviewKeyDown;
+            AssociatedObject.TextChanged += this.AssociatedObjectTextChanged;
 
             DataObject.AddPastingHandler(AssociatedObject, Pasting);
         }
@@ -138,6 +140,7 @@ namespace ModernIU.Behaviors
             base.OnDetaching();
             AssociatedObject.PreviewTextInput -= AssociatedObjectPreviewTextInput;
             AssociatedObject.PreviewKeyDown -= AssociatedObjectPreviewKeyDown;
+            AssociatedObject.TextChanged -= this.AssociatedObjectTextChanged;
 
             DataObject.RemovePastingHandler(AssociatedObject, Pasting);
         }
@@ -148,7 +151,7 @@ namespace ModernIU.Behaviors
             {
                 var pastedText = (string)e.DataObject.GetData(typeof(string));
 
-                if (IsValidInput(GetText(pastedText)) == false)
+                if (this.IsValidInput(GetText(pastedText)) == false)
                 {
                     if (this.Beep == true)
                     {
@@ -169,6 +172,51 @@ namespace ModernIU.Behaviors
             }
         }
 
+        private void AssociatedObjectTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            if (txt != null)
+            {
+                if (this.changeIntern == true)
+                {
+                    this.changeIntern = false;
+                    return;
+                }
+
+                if (InputMode == TextBoxInputMode.Date)
+                {
+                    if (string.IsNullOrEmpty(txt.Text) == true)
+                    {
+                        return;
+                    }
+
+                    if (txt.Text.Length > 10)
+                    {
+                        if (this.CheckIsDate(txt.Text.Split(' ')[0]).Item1 == true)
+                        {
+                            this.changeIntern = true;
+                            if (this.CheckIsDate(txt.Text.Split(' ')[0]).Item2 != null)
+                            {
+                                txt.Text = Convert.ToDateTime(txt.Text.Split(' ')[0]).ToShortDateString();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (this.CheckIsDate(txt.Text).Item1 == true)
+                        {
+                            this.changeIntern = true;
+                            if (this.CheckIsDate(txt.Text).Item2 != null)
+                            {
+                                txt.Text = Convert.ToDateTime(txt.Text).ToShortDateString();
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
         private void AssociatedObjectPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape && this.EscapeClearsText == true)
@@ -178,7 +226,7 @@ namespace ModernIU.Behaviors
 
             if (e.Key == Key.Space)
             {
-                if (!IsValidInput(GetText(" ")))
+                if (this.IsValidInput(GetText(" ")) == false)
                 {
                     if (this.Beep == true)
                     {
@@ -194,7 +242,7 @@ namespace ModernIU.Behaviors
                 //wenn was selektiert wird dann wird nur das gelöscht mit BACK
                 if (AssociatedObject.SelectionLength > 0)
                 {
-                    if (IsValidInput(GetText("")) == false)
+                    if (this.IsValidInput(GetText(string.Empty)) == false)
                     {
                         if (this.Beep == true)
                         {
@@ -210,7 +258,7 @@ namespace ModernIU.Behaviors
                     var txt = AssociatedObject.Text;
                     var backspace = txt.Remove(AssociatedObject.CaretIndex - 1, 1);
 
-                    if (IsValidInput(backspace) == false)
+                    if (this.IsValidInput(backspace) == false)
                     {
                         SystemSounds.Beep.Play();
                         e.Handled = true;
@@ -223,7 +271,7 @@ namespace ModernIU.Behaviors
                 //wenn was selektiert wird dann wird nur das gelöscht mit ENTF
                 if (AssociatedObject.SelectionLength > 0)
                 {
-                    if (IsValidInput(GetText(string.Empty)) == false)
+                    if (this.IsValidInput(GetText(string.Empty)) == false)
                     {
                         if (this.Beep == true)
                         {
@@ -239,7 +287,7 @@ namespace ModernIU.Behaviors
                     var txt = AssociatedObject.Text;
                     var entf = txt.Remove(AssociatedObject.CaretIndex, 1);
 
-                    if (!IsValidInput(entf))
+                    if (this.IsValidInput(entf) == false)
                     {
                         if (this.Beep == true)
                         {
@@ -254,7 +302,7 @@ namespace ModernIU.Behaviors
 
         private void AssociatedObjectPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (IsValidInput(GetText(e.Text)) == false)
+            if (this.IsValidInput(GetText(e.Text)) == false)
             {
                 if (this.Beep == true)
                 {
@@ -310,10 +358,10 @@ namespace ModernIU.Behaviors
                 case TextBoxInputMode.None:
                     return true;
 
-                case TextBoxInputMode.DigitInput:
+                case TextBoxInputMode.Integer:
                     return CheckIsDigit(input);
 
-                case TextBoxInputMode.DecimalInput:
+                case TextBoxInputMode.Decimal:
                     if (CheckIsDecimal(input) == false)
                     {
                         return false;
@@ -329,7 +377,7 @@ namespace ModernIU.Behaviors
 
                     return true;
 
-                case TextBoxInputMode.PercentInput: //99,999 is zulässig und  nur positiv ohne 1000er Trennzeichen
+                case TextBoxInputMode.Percent: //99,999 is zulässig und  nur positiv ohne 1000er Trennzeichen
                     float percent;
 
                     if (input.Contains(negativeSign))
@@ -400,7 +448,7 @@ namespace ModernIU.Behaviors
                             }
                         }
 
-                        return this.CheckIsDate(input, dateSeparator);
+                        return this.CheckIsDate(input, dateSeparator).Item1;
                     }
 
                 default:
@@ -464,7 +512,7 @@ namespace ModernIU.Behaviors
             return BitConverter.GetBytes(decimal.GetBits(d)[3])[2];
         }
 
-        private bool CheckIsDate(string input, char dateSeparator = '.')
+        private (bool,DateTime?) CheckIsDate(string input, char dateSeparator = '.')
         {
             bool result = false;
 
@@ -472,12 +520,12 @@ namespace ModernIU.Behaviors
 
             if (input.ToCharArray().Where(x => x == dateSeparator).Count() > 2)
             {
-                return false;
+                return (false,null);
             }
 
             if (input.ToCharArray().Where(x => x == negativeSign).Count() > 0)
             {
-                return false;
+                return (false, null);
             }
 
             bool isLengthOk = false;
@@ -492,7 +540,7 @@ namespace ModernIU.Behaviors
 
             if (isLengthOk ==  false)
             {
-                return true;
+                return (true,null);
             }
 
             DateTime date;
@@ -501,7 +549,7 @@ namespace ModernIU.Behaviors
                 result = true;
             }
 
-            return result;
+            return (result, date);
         }
     }
 }

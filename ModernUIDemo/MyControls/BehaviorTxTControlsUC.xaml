@@ -97,7 +97,7 @@
                 Name="tbDateTime"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="Datetime" />
+                Text="DateTime" />
 
             <TextBox
                 Name="txtDateTime"
@@ -188,7 +188,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <i:Interaction.Behaviors>
-                    <Behavior:TextBoxInputBehavior InputMode="DigitInput" />
+                    <Behavior:TextBoxInputBehavior InputMode="Integer" />
                 </i:Interaction.Behaviors>
             </TextBox>
 
@@ -220,7 +220,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <i:Interaction.Behaviors>
-                    <Behavior:TextBoxInputBehavior DecimalPlace="4" InputMode="DecimalInput" />
+                    <Behavior:TextBoxInputBehavior DecimalPlace="4" InputMode="Decimal" />
                 </i:Interaction.Behaviors>
             </TextBox>
 
