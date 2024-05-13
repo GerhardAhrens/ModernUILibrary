@@ -25,11 +25,11 @@
             this.DataContext = this;
         }
 
-        public XamlProperty<DateTime?> ValueDate { get; set; } = XamlProperty.Set<DateTime?>();
+        public XamlProperty<string> ValueDate { get; set; } = XamlProperty.Set<string>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.ValueDate.Value = DateTime.Now;
+            this.ValueDate.Value = DateOnly.FromDateTime(DateTime.Now).ToShortDateString();
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)

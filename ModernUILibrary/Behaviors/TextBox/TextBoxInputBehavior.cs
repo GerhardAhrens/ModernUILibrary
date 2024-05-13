@@ -71,7 +71,7 @@ namespace ModernIU.Behaviors
         public static readonly DependencyProperty BeepProperty =
             DependencyProperty.RegisterAttached("Beep", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(true));
 
-        private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "d.M.yy" };
+        private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy" };
 
         private bool changeIntern = false;
         /// <summary>
@@ -177,6 +177,7 @@ namespace ModernIU.Behaviors
             TextBox txt = sender as TextBox;
             if (txt != null)
             {
+                string originalSource = ((TextBox)e.Source).Text;
                 if (this.changeIntern == true)
                 {
                     this.changeIntern = false;
@@ -192,27 +193,26 @@ namespace ModernIU.Behaviors
 
                     if (txt.Text.Length > 10)
                     {
-                        if (this.CheckIsDate(txt.Text.Split(' ')[0]).Item1 == true)
+                        if (this.CheckIsDate(originalSource.Split(' ')[0]).Item1 == true)
                         {
                             this.changeIntern = true;
-                            if (this.CheckIsDate(txt.Text.Split(' ')[0]).Item2 != null)
+                            if (this.CheckIsDate(originalSource.Split(' ')[0]).Item2 != null)
                             {
-                                txt.Text = Convert.ToDateTime(txt.Text.Split(' ')[0]).ToShortDateString();
+                                txt.Text = Convert.ToDateTime(originalSource.Split(' ')[0]).ToShortDateString();
                             }
                         }
                     }
                     else
                     {
-                        if (this.CheckIsDate(txt.Text).Item1 == true)
+                        if (this.CheckIsDate(originalSource).Item1 == true)
                         {
                             this.changeIntern = true;
-                            if (this.CheckIsDate(txt.Text).Item2 != null)
+                            if (this.CheckIsDate(originalSource).Item2 != null)
                             {
-                                txt.Text = Convert.ToDateTime(txt.Text).ToShortDateString();
+                                txt.Text = Convert.ToDateTime(originalSource).ToShortDateString();
                             }
                         }
                     }
-
                 }
             }
         }
@@ -309,7 +309,7 @@ namespace ModernIU.Behaviors
                     SystemSounds.Beep.Play();
                 }
 
-                e.Handled = true;
+                e.Handled = false;
             }
         }
 
@@ -373,7 +373,6 @@ namespace ModernIU.Behaviors
                     {
                         return false;
                     }
-
 
                     return true;
 
@@ -512,7 +511,7 @@ namespace ModernIU.Behaviors
             return BitConverter.GetBytes(decimal.GetBits(d)[3])[2];
         }
 
-        private (bool,DateTime?) CheckIsDate(string input, char dateSeparator = '.')
+        private (bool,DateOnly?) CheckIsDate(string input, char dateSeparator = '.')
         {
             bool result = false;
 
@@ -528,6 +527,7 @@ namespace ModernIU.Behaviors
                 return (false, null);
             }
 
+            /*
             bool isLengthOk = false;
             foreach (string dateFormat in DateFormats)
             {
@@ -542,9 +542,10 @@ namespace ModernIU.Behaviors
             {
                 return (true,null);
             }
+            */
 
-            DateTime date;
-            if (DateTime.TryParseExact(input, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
+            DateOnly date;
+            if (DateOnly.TryParseExact(input, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
             {
                 result = true;
             }
