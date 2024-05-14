@@ -603,7 +603,7 @@ namespace ModernIU.Controls
 
             if (dp != null)
             {
-                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action<DatePickerEx>(ApplyIsReadOnly), dp);
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Send, new Action<DatePickerEx>(ApplyIsReadOnly), dp);
             }
         }
 
