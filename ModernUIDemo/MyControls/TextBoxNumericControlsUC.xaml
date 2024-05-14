@@ -136,6 +136,11 @@
                     <Run Text="Ergebnis:" />
                     <Run Text="{Binding Path=SelectedDate, ElementName=dtPicker}" />
                 </TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TextBoxDate />
             </StackPanel>
 
         </StackPanel>
