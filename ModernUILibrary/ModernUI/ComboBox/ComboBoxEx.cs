@@ -29,6 +29,7 @@ namespace ModernIU.Controls
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(ComboBoxEx), new PropertyMetadata(1000));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register("ReadOnlyBackgroundColor", typeof(Brush), typeof(ComboBoxEx), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(222, 222, 222))));
         public static readonly DependencyProperty IsNumericProperty = DependencyProperty.Register("IsNumeric", typeof(bool), typeof(ComboBoxEx), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsEnabledContextMenuProperty = DependencyProperty.Register("IsEnabledContextMenu", typeof(bool), typeof(ComboBoxEx), new FrameworkPropertyMetadata(true, OnEnabledContextMenu));
         public static new readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(ComboBoxEx), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsReadOnlyChangedCallback));
 
         private static int selectedIndex = -1;
@@ -96,6 +97,12 @@ namespace ModernIU.Controls
             set { this.SetValue(IsReadOnlyProperty, value); }
         }
 
+        public bool IsEnabledContextMenu
+        {
+            get { return (bool)GetValue(IsEnabledContextMenuProperty); }
+            set { this.SetValue(IsEnabledContextMenuProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -119,7 +126,14 @@ namespace ModernIU.Controls
             this.Style = this.SetTriggerFunction();
 
             /* Spezifisches Kontextmenü für Control übergeben */
-            this._comboBoxTextBox.ContextMenu = this.BuildContextMenu();
+            if (this.IsEnabledContextMenu == true)
+            {
+                this._comboBoxTextBox.ContextMenu = this.BuildContextMenu();
+            }
+            else
+            {
+                this._comboBoxTextBox.ContextMenu = null;
+            }
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -153,6 +167,24 @@ namespace ModernIU.Controls
             else
             {
                 e.Handled = false;
+            }
+        }
+
+        private static void OnEnabledContextMenu(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ComboBoxEx comboBox = d as ComboBoxEx;
+
+            if (e.NewValue != e.OldValue)
+            {
+                /* Spezifisches Kontextmenü für Control übergeben */
+                if (comboBox.IsEnabledContextMenu == true)
+                {
+                    comboBox._comboBoxTextBox.ContextMenu = comboBox.BuildContextMenu();
+                }
+                else
+                {
+                    comboBox._comboBoxTextBox.ContextMenu = null;
+                }
             }
         }
 

@@ -98,20 +98,19 @@
 
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <ComboBox
+            <MUI:ComboBoxEx
                 x:Name="cbDay"
                 Width="40"
                 Height="23"
                 VerticalAlignment="Center"
-                IsEditable="True"
-                Style="{StaticResource ComboBoxTest2}" />
+                IsEditable="True" />
 
             <TextBlock
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
                 Text="." />
 
-            <ComboBox
+            <MUI:ComboBoxEx
                 x:Name="cbMonth"
                 Width="40"
                 Height="23"
@@ -123,7 +122,7 @@
                 FontWeight="Bold"
                 Text="." />
 
-            <ComboBox
+            <MUI:ComboBoxEx
                 x:Name="cbYear"
                 Width="60"
                 Height="23"

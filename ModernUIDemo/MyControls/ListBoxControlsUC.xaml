@@ -40,6 +40,14 @@
                 VerticalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:ComboBoxEx
+                        x:Name="rComboBox"
+                        Width="100"
+                        HorizontalAlignment="Left"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Path=MComboBoxSource.Value}"
+                        SelectedItem="{Binding Path=MComboBoxSourceSelectedItem.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <ModernUI:ComboBoxEx
                         x:Name="mComboBox"
                         Width="100"
                         HorizontalAlignment="Left"
