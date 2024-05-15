@@ -21,7 +21,6 @@ namespace ModernIU.Controls
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-
     using ModernIU.Base;
 
     [SupportedOSPlatform("windows")]
@@ -47,19 +46,30 @@ namespace ModernIU.Controls
             this.BorderBrush = ControlBase.BorderBrush;
             this.BorderThickness = ControlBase.BorderThickness;
             this.Height = ControlBase.DefaultHeight;
-            this.Margin = ControlBase.DefaultMargin;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Center;
             this.VerticalContentAlignment = VerticalAlignment.Center;
             this.Padding = new Thickness(0);
+            this.Margin = new Thickness(2);
             this.MinHeight = 18;
             this.ClipToBounds = false;
             this.Focusable = true;
+
+            WeakEventManager<ComboBox, SelectionChangedEventArgs>.AddHandler(this, "SelectionChanged", this.OnSelectionChanged);
 
             this.ReadOnlyBackgroundColor = Brushes.LightYellow;
             this.IsNumeric = false;
             this.IsReadOnly = false;
             this.IsEditable = true;
+        }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.Text) == true)
+            {
+                //this.SelectedIndex = -1;
+                //this.SelectedValue = null;
+            }
         }
 
         public int MaxLength
@@ -122,10 +132,6 @@ namespace ModernIU.Controls
                 {
                     this.SelectedIndex = selectedIndex;
                 }
-            }
-            else
-            {
-                selectedIndex = this.SelectedIndex;
             }
         }
 
@@ -205,25 +211,13 @@ namespace ModernIU.Controls
         {
             FrameworkElement foundElement = null;
 
-            if (pBasisControl != null &&
-                !string.IsNullOrEmpty(pTemplateName))
+            if (pBasisControl != null && !string.IsNullOrEmpty(pTemplateName))
             {
                 pBasisControl.ApplyTemplate();
                 foundElement = pBasisControl.Template.FindName(pTemplateName, pBasisControl) as FrameworkElement;
             }
 
             return foundElement;
-        }
-
-
-        private void ApplyReadOnlyBackgroundColor()
-        {
-            this.ReadOnlyBackgroundColor = Brushes.LightYellow;
-        }
-
-        private void ApplyBorderBrush()
-        {
-            this.BorderBrush = Brushes.Green;
         }
 
         private Style SetTriggerFunction()
