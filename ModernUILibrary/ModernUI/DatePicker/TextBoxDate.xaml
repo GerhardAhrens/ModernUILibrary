@@ -124,7 +124,7 @@
 
             <MUI:ComboBoxEx
                 x:Name="cbYear"
-                Width="60"
+                Width="50"
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True" />

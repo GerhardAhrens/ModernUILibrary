@@ -140,7 +140,7 @@
             </StackPanel>
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxDate IsReadOnly="True" />
+                <ModernUI:TextBoxDate IsReadOnly="False" />
             </StackPanel>
 
         </StackPanel>

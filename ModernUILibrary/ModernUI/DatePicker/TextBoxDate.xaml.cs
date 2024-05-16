@@ -3,9 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
     using System.Windows.Media;
-    using System.Windows.Threading;
 
     using ModernIU.Base;
 
@@ -14,8 +12,10 @@
     /// </summary>
     public partial class TextBoxDate : UserControl
     {
-        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
-        public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register("ReadOnlyBackgroundColor", typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
+        public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
+        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new FrameworkPropertyMetadata(false, ShowTodayButtonChanged));
+        public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(nameof(SelectedValue), typeof(string), typeof(TextBoxDate), new PropertyMetadata(string.Empty));
 
         public TextBoxDate()
         {
@@ -45,11 +45,23 @@
             set { this.SetValue(ReadOnlyBackgroundColorProperty, value); }
         }
 
+        public string SelectedValue
+        {
+            get { return GetValue(SelectedValueProperty) as string; }
+            set { this.SetValue(SelectedValueProperty, value); }
+        }
+
+        public bool ShowTodayButton
+        {
+            get { return (bool)GetValue(ShowTodayButtonProperty); }
+            set { SetValue(ShowTodayButtonProperty, value); }
+        }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.cbDay.ItemsSource = Enumerable.Range(1, 31).Select(x => (x - 1) + 1);
             this.cbDay.SelectedValue = DateTime.Now.Day;
-            this.cbDay.IsEnabledContextMenu = true;
+            this.cbDay.IsEnabledContextMenu = false;
             this.cbMonth.ItemsSource = Enumerable.Range(1, 12).Select(x => (x - 1) + 1);
             this.cbMonth.SelectedValue = DateTime.Now.Month;
             this.cbMonth.IsEnabledContextMenu = false;
@@ -77,6 +89,19 @@
                     datePicker.cbDay.IsReadOnly = datePicker.IsReadOnly;
                     datePicker.cbMonth.IsReadOnly = datePicker.IsReadOnly;
                     datePicker.cbYear.IsReadOnly = datePicker.IsReadOnly;
+                }
+            }
+        }
+
+        private static void ShowTodayButtonChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (sender is TextBoxDate)
+            {
+                var d = (TextBoxDate)sender;
+                bool showButton = (bool)(e.NewValue);
+
+                if (showButton == true)
+                {
                 }
             }
         }
