@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media;
 
     using ModernIU.Base;
@@ -29,7 +30,9 @@
             this.Focusable = true;
 
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-
+            WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
+            WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
+            WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
             this.DataContext = this;
         }
 
@@ -70,6 +73,36 @@
             this.cbYear.IsEnabledContextMenu = false;
         }
 
+        private void MoveFocus(FocusNavigationDirection direction)
+        {
+            UIElement focusedElement = Keyboard.FocusedElement as UIElement;
+
+            if (focusedElement != null)
+            {
+                if (focusedElement is TextBox)
+                {
+                    focusedElement.MoveFocus(new TraversalRequest(direction));
+                }
+            }
+        }
+
+        private void OnDateSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxEx cb = sender as ComboBoxEx;
+            if (sender != null)
+            {
+                if (cb.Name == "cbDay")
+                {
+                }
+                else if (cb.Name == "cbMonth")
+                {
+                }
+                else if (cb.Name == "cbYear")
+                {
+                }
+            }
+        }
+
         private static void OnIsReadOnly(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TextBoxDate datePicker = (TextBoxDate)d;
@@ -104,6 +137,43 @@
                 {
                 }
             }
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
+            {
+                if (e.Key == Key.Tab)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        break;
+                    case Key.Down:
+                        break;
+                    case Key.Left:
+                        return;
+                    case Key.Right:
+                        return;
+                    case Key.Pa1:
+                        return;
+                    case Key.End:
+                        return;
+                    case Key.Delete:
+                        return;
+                    case Key.Return:
+                        this.MoveFocus(FocusNavigationDirection.Next);
+                        break;
+                    case Key.Tab:
+                        break;
+                }
+            }
+
         }
 
         public override void OnApplyTemplate()

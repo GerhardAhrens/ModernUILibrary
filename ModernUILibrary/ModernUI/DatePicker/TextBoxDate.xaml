@@ -5,96 +5,10 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    KeyboardNavigation.ControlTabNavigation="Cycle"
+    KeyboardNavigation.DirectionalNavigation="None"
+    KeyboardNavigation.TabNavigation="Cycle"
     mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <Style x:Key="ComboBoxTest2" TargetType="{x:Type ComboBox}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton
-                                Grid.Column="2"
-                                Focusable="false"
-                                IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                <ToggleButton.Template>
-                                    <ControlTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="3*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Border
-                                                x:Name="XBorder"
-                                                Grid.ColumnSpan="2"
-                                                Background="Beige"
-                                                BorderBrush="Black"
-                                                BorderThickness="1"
-                                                CornerRadius="2" />
-                                            <Border
-                                                Grid.Column="0"
-                                                Margin="1"
-                                                Background="AliceBlue"
-                                                BorderBrush="Black"
-                                                BorderThickness="0,0,1,0"
-                                                CornerRadius="2,0,0,2" />
-                                            <Path
-                                                x:Name="Arrow"
-                                                Grid.Column="1"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Data="M 0 0 L 4 4 L 8 0 Z"
-                                                Fill="DarkGray" />
-                                        </Grid>
-
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                                <Setter TargetName="XBorder" Property="Background" Value="LightGray" />
-                                            </Trigger>
-                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
-                                                <Setter TargetName="XBorder" Property="Background" Value="LightGray" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
-                            <ContentPresenter
-                                Name="ContentSite"
-                                Margin="3"
-                                Content="{TemplateBinding SelectionBoxItem}"
-                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                IsHitTestVisible="False" />
-                            <TextBox
-                                x:Name="PART_EditableTextBox"
-                                Background="Transparent"
-                                Foreground="Black"
-                                IsReadOnly="{TemplateBinding IsReadOnly}"
-                                Visibility="Hidden" />
-                            <Popup
-                                Name="Popup"
-                                AllowsTransparency="True"
-                                Focusable="False"
-                                IsOpen="{TemplateBinding IsDropDownOpen}"
-                                Placement="Bottom"
-                                PopupAnimation="Slide">
-                                <Grid
-                                    Name="DropDown"
-                                    MinWidth="{TemplateBinding ActualWidth}"
-                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                    SnapsToDevicePixels="True">
-                                    <Border x:Name="DropDownBorder" Background="White" />
-                                    <ScrollViewer SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True" />
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
 
     <Grid>
         <StackPanel Orientation="Horizontal">
@@ -103,7 +17,8 @@
                 Width="40"
                 Height="23"
                 VerticalAlignment="Center"
-                IsEditable="True" />
+                IsEditable="True"
+                KeyboardNavigation.TabIndex="10" />
 
             <TextBlock
                 VerticalAlignment="Bottom"
@@ -115,7 +30,8 @@
                 Width="40"
                 Height="23"
                 VerticalAlignment="Center"
-                IsEditable="True" />
+                IsEditable="True"
+                KeyboardNavigation.TabIndex="11" />
 
             <TextBlock
                 VerticalAlignment="Bottom"
@@ -127,7 +43,8 @@
                 Width="50"
                 Height="23"
                 VerticalAlignment="Center"
-                IsEditable="True" />
+                IsEditable="True"
+                KeyboardNavigation.TabIndex="12" />
         </StackPanel>
     </Grid>
 </UserControl>
