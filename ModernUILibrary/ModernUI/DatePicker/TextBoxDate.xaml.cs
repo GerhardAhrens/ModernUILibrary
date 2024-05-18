@@ -15,8 +15,8 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new FrameworkPropertyMetadata(false, ShowTodayButtonChanged));
-        public static readonly DependencyProperty SelectedValueProperty = DependencyProperty.Register(nameof(SelectedValue), typeof(string), typeof(TextBoxDate), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new FrameworkPropertyMetadata(false, OnShowTodayButtonChanged));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(object), typeof(TextBoxDate), new PropertyMetadata(null, OnSelectedDateChanged));
 
         public TextBoxDate()
         {
@@ -48,10 +48,10 @@
             set { this.SetValue(ReadOnlyBackgroundColorProperty, value); }
         }
 
-        public string SelectedValue
+        public DateTime? SelectedDate
         {
-            get { return GetValue(SelectedValueProperty) as string; }
-            set { this.SetValue(SelectedValueProperty, value); }
+            get { return GetValue(SelectedDateProperty) as DateTime?; }
+            set { this.SetValue(SelectedDateProperty, value); }
         }
 
         public bool ShowTodayButton
@@ -126,7 +126,7 @@
             }
         }
 
-        private static void ShowTodayButtonChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private static void OnShowTodayButtonChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (sender is TextBoxDate)
             {
@@ -136,6 +136,15 @@
                 if (showButton == true)
                 {
                 }
+            }
+        }
+
+        private static void OnSelectedDateChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (sender is TextBoxDate)
+            {
+                var d = (TextBoxDate)sender;
+                object selected = (object)(e.NewValue);
             }
         }
 

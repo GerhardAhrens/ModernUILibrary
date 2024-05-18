@@ -140,7 +140,7 @@
             </StackPanel>
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxDate IsReadOnly="False" />
+                <ModernUI:TextBoxDate IsReadOnly="False" SelectedDate="{Binding Path=ValueDate, UpdateSourceTrigger=PropertyChanged}" ShowTodayButton="False" />
             </StackPanel>
 
         </StackPanel>
