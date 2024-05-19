@@ -15,8 +15,8 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new FrameworkPropertyMetadata(false, OnShowTodayButtonChanged));
-        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(object), typeof(TextBoxDate), new PropertyMetadata(null, OnSelectedDateChanged));
+        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnShowTodayButtonChanged));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(object), typeof(TextBoxDate), new PropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
 
         public TextBoxDate()
         {
@@ -63,13 +63,13 @@
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.cbDay.ItemsSource = Enumerable.Range(1, 31).Select(x => (x - 1) + 1);
-            this.cbDay.SelectedValue = DateTime.Now.Day;
+            //this.cbDay.SelectedValue = DateTime.Now.Day;
             this.cbDay.IsEnabledContextMenu = false;
             this.cbMonth.ItemsSource = Enumerable.Range(1, 12).Select(x => (x - 1) + 1);
-            this.cbMonth.SelectedValue = DateTime.Now.Month;
+            //this.cbMonth.SelectedValue = DateTime.Now.Month;
             this.cbMonth.IsEnabledContextMenu = false;
             this.cbYear.ItemsSource = Enumerable.Range(1900, 200).Select(x => (x - 1) + 1);
-            this.cbYear.SelectedValue = DateTime.Now.Year;
+            //this.cbYear.SelectedValue = DateTime.Now.Year;
             this.cbYear.IsEnabledContextMenu = false;
         }
 

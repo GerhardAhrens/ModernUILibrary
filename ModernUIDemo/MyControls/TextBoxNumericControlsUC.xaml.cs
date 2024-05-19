@@ -21,23 +21,24 @@
             this.DataContext = this;
         }
 
-        private DateTime? _ValueDate;
+        private DateTime? _TextBoxDateValue;
 
-        public DateTime? ValueDate
+        public DateTime? TextBoxDateValue
         {
-            get { return this._ValueDate; }
+            get { return this._TextBoxDateValue; }
             set 
             { 
-                this._ValueDate = value;
-                this.SetField(ref _ValueDate, value);
+                this._TextBoxDateValue = value;
+                this.SetField(ref _TextBoxDateValue, value);
             }
         }
 
-        //public XamlProperty<DateTime?> ValueDate { get; set; } = XamlProperty.Set<DateTime?>();
+        public XamlProperty<DateTime?> DateTimePickerValue { get; set; } = XamlProperty.Set<DateTime?>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.ValueDate = DateTime.Now;
+            this.TextBoxDateValue = DateTime.Now;
+            this.DateTimePickerValue.Value = DateTime.Now;
         }
 
         #region PropertyChanged Implementierung

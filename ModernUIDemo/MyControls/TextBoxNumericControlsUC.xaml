@@ -125,7 +125,7 @@
                 <ModernUI:DatePickerEx
                     x:Name="dtPicker"
                     IsReadOnly="False"
-                    SelectedDate="{Binding Path=ValueDate.Value, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedDate="{Binding Path=DateTimePickerValue.Value, UpdateSourceTrigger=PropertyChanged}"
                     ShowTodayButton="True" />
 
                 <TextBlock
@@ -140,7 +140,10 @@
             </StackPanel>
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxDate IsReadOnly="False" SelectedDate="{Binding Path=ValueDate, UpdateSourceTrigger=PropertyChanged}" ShowTodayButton="False" />
+                <ModernUI:TextBoxDate
+                    IsReadOnly="False"
+                    SelectedDate="{Binding Path=TextBoxDateValue, UpdateSourceTrigger=PropertyChanged}"
+                    ShowTodayButton="False" />
             </StackPanel>
 
         </StackPanel>
