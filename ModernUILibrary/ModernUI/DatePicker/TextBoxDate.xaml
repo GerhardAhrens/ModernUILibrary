@@ -18,7 +18,8 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
-                KeyboardNavigation.TabIndex="10" />
+                KeyboardNavigation.TabIndex="10"
+                MaxLength="2" />
 
             <TextBlock
                 VerticalAlignment="Bottom"
@@ -31,7 +32,8 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
-                KeyboardNavigation.TabIndex="11" />
+                KeyboardNavigation.TabIndex="11"
+                MaxLength="2" />
 
             <TextBlock
                 VerticalAlignment="Bottom"
@@ -44,7 +46,8 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
-                KeyboardNavigation.TabIndex="12" />
+                KeyboardNavigation.TabIndex="12"
+                MaxLength="4" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -163,7 +163,7 @@
                 }
             }
 
-            int key = (int)e.Key;            
+            int key = (int)e.Key;
             e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 9);
 
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)

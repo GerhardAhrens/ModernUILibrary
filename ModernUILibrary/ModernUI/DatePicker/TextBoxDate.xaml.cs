@@ -16,7 +16,7 @@
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
         public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnShowTodayButtonChanged));
-        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new PropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
 
         public TextBoxDate()
         {
@@ -33,7 +33,6 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
-            this.DataContext = this;
         }
 
         public bool IsReadOnly
@@ -63,13 +62,10 @@
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.cbDay.ItemsSource = Enumerable.Range(1, 31).Select(x => (x - 1) + 1);
-            //this.cbDay.SelectedValue = DateTime.Now.Day;
             this.cbDay.IsEnabledContextMenu = false;
             this.cbMonth.ItemsSource = Enumerable.Range(1, 12).Select(x => (x - 1) + 1);
-            //this.cbMonth.SelectedValue = DateTime.Now.Month;
             this.cbMonth.IsEnabledContextMenu = false;
             this.cbYear.ItemsSource = Enumerable.Range(1900, 200).Select(x => (x - 1) + 1);
-            //this.cbYear.SelectedValue = DateTime.Now.Year;
             this.cbYear.IsEnabledContextMenu = false;
         }
 
@@ -128,11 +124,9 @@
 
         private static void OnShowTodayButtonChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is TextBoxDate)
+            if (sender is TextBoxDate control)
             {
-                var d = (TextBoxDate)sender;
                 bool showButton = (bool)(e.NewValue);
-
                 if (showButton == true)
                 {
                 }
@@ -141,15 +135,23 @@
 
         private static void OnSelectedDateChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (sender is TextBoxDate)
+            if (sender is TextBoxDate control)
             {
-                var d = (TextBoxDate)sender;
                 DateTime? selected = (DateTime?)(e.NewValue);
+                if (selected != null)
+                {
+                    control.cbDay.SelectedValue = selected.HasValue ? selected.Value.Day : -1;
+                    control.cbMonth.SelectedValue = selected.HasValue ? selected.Value.Month : -1;
+                    control.cbYear.SelectedValue = selected.HasValue ? selected.Value.Year : -1;
+                }
             }
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            int key = (int)e.Key;
+            e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
+
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
                 if (e.Key == Key.Tab)
