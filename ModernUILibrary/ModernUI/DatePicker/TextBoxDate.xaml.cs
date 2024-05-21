@@ -33,6 +33,7 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
+            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbDay, "PreviewKeyDown", this.OnDayPreviewKeyDown);
         }
 
         public bool IsReadOnly
@@ -140,17 +141,17 @@
                 DateTime? selected = (DateTime?)(e.NewValue);
                 if (selected != null)
                 {
-                    control.cbDay.SelectedValue = selected.HasValue ? selected.Value.Day : -1;
-                    control.cbMonth.SelectedValue = selected.HasValue ? selected.Value.Month : -1;
-                    control.cbYear.SelectedValue = selected.HasValue ? selected.Value.Year : -1;
+                    control.cbDay.SelectedValue = selected.HasValue == true ? selected.Value.Day : -1;
+                    control.cbMonth.SelectedValue = selected.HasValue == true? selected.Value.Month : -1;
+                    control.cbYear.SelectedValue = selected.HasValue == true? selected.Value.Year : -1;
                 }
             }
         }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        private void OnDayPreviewKeyDown(object sender, KeyEventArgs e)
         {
             int key = (int)e.Key;
-            e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
+            e.Handled = !(key >= 35 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
 
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
@@ -184,7 +185,10 @@
                         break;
                 }
             }
+        }
 
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
         }
 
         public override void OnApplyTemplate()
