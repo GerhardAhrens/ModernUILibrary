@@ -1,6 +1,7 @@
 ﻿namespace ModernIU.Controls
 {
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -17,6 +18,10 @@
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
         public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnShowTodayButtonChanged));
         public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
+        private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "yyyy.MM", "yyyy.M", "MM.yyyy", "M.yyyy", "yyyy.MM" };
+        private string day = string.Empty;
+        private string month = string.Empty;
+        private string year = string.Empty;
 
         public TextBoxDate()
         {
@@ -90,12 +95,26 @@
             {
                 if (cb.Name == "cbDay")
                 {
+                    day = ((object[])e.AddedItems)[0].ToString();
                 }
                 else if (cb.Name == "cbMonth")
                 {
+                    month = ((object[])e.AddedItems)[0].ToString();
                 }
                 else if (cb.Name == "cbYear")
                 {
+                    year = ((object[])e.AddedItems)[0].ToString();
+                }
+
+                if (string.IsNullOrEmpty(day) == false && string.IsNullOrEmpty(month) == false && string.IsNullOrEmpty(year) == false)
+                {
+                    string dateSeparator = CultureInfo.CurrentCulture.DateTimeFormat.DateSeparator;
+                    string fullDate = $"{day}{dateSeparator}{month}{dateSeparator}{year}";
+                    DateTime date;
+                    if (DateTime.TryParseExact(fullDate, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
+                    {
+                        this.SelectedDate = date;
+                    }
                 }
             }
         }

@@ -18,6 +18,7 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
+                IsTextSearchEnabled="True"
                 KeyboardNavigation.TabIndex="10"
                 MaxLength="2" />
 
@@ -32,6 +33,7 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
+                IsTextSearchEnabled="True"
                 KeyboardNavigation.TabIndex="11"
                 MaxLength="2" />
 
@@ -46,6 +48,7 @@
                 Height="23"
                 VerticalAlignment="Center"
                 IsEditable="True"
+                IsTextSearchEnabled="True"
                 KeyboardNavigation.TabIndex="12"
                 MaxLength="4" />
         </StackPanel>
