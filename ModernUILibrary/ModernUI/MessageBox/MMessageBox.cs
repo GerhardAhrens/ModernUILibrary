@@ -6,18 +6,11 @@ namespace ModernIU.Controls
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using System.Windows.Media.Animation;
 
     using ModernIU.Base;
 
     internal sealed class MessageBoxModule : Window
     {
-        private Button PART_CloseButton;
-        /*
-        private Storyboard openStoryboard;
-        private Storyboard closedStoryboard;
-        */
-
         public static readonly DependencyProperty TypeProperty;
         public static readonly DependencyProperty MessageTextProperty;
         public static readonly DependencyProperty ButtonCollectionProperty;
@@ -28,6 +21,8 @@ namespace ModernIU.Controls
 
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MessageBoxModule), new PropertyMetadata(new CornerRadius(3d)));
+
+        private Button PART_CloseButton;
 
         public EnumPromptType Type
         {
