@@ -198,26 +198,6 @@ namespace ModernIU.Controls
 
                 if (showButton == true)
                 {
-                    //I want to reproduce this xaml in c#:
-                    //<Style TargetType="{x:Type Calendar}">
-                    //    <Setter Property="Template">
-                    //        <Setter.Value>
-                    //            <ControlTemplate TargetType="{x:Type Calendar}">
-                    //                <StackPanel Name="PART_Root"
-                    //                            HorizontalAlignment="Center">
-                    //                    <CalendarItem Name="PART_CalendarItem"
-                    //                                    Background="{TemplateBinding Control.Background}"
-                    //                                    BorderBrush="{TemplateBinding Control.BorderBrush}"
-                    //                                    BorderThickness="{TemplateBinding Control.BorderThickness}"
-                    //                                    Style="{TemplateBinding Calendar.CalendarItemStyle}" />
-                    //                    <Button Command="SelectToday"
-                    //                            Content="Today" />
-                    //                </StackPanel>
-                    //            </ControlTemplate>
-                    //        </Setter.Value>
-                    //    </Setter>
-                    //</Style>
-
                     Setter setter = new Setter();
                     setter.Property = Calendar.TemplateProperty;
                     ControlTemplate template = new ControlTemplate(typeof(Calendar));

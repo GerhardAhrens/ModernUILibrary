@@ -150,8 +150,12 @@
 
         private void OnDayPreviewKeyDown(object sender, KeyEventArgs e)
         {
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
             int key = (int)e.Key;
-            e.Handled = !(key >= 35 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
+            e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
 
             if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
             {
@@ -185,10 +189,6 @@
                         break;
                 }
             }
-        }
-
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
         }
 
         public override void OnApplyTemplate()
