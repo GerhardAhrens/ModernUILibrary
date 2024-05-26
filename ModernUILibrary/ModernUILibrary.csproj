@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <Folder Include="Behaviors\TextBox\" />
+    <Folder Include="Extensions\System.Enum\" />
     <Folder Include="ModernUIBase\Adorners\" />
+    <Folder Include="ModernUIBase\Comparer\" />
+    <Folder Include="ModernUIBase\ScreenCapture\" />
     <Folder Include="ModernUI\Alert\Themes\" />
     <Folder Include="ModernUI\Badge\Themes\" />
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
@@ -41,7 +44,6 @@
     <Folder Include="Converters\" />
     <Folder Include="ModernUI\ToolTip\Themes\" />
     <Folder Include="BehaviorsBase\" />
-    <Folder Include="Extensions\" />
     <Folder Include="Resources\" />
     <Folder Include="Themes\" />
   </ItemGroup>

@@ -78,6 +78,9 @@
     <Compile Update="MyControls\LayoutPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\NotifiactionBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\UploadControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +96,12 @@
     <Compile Update="MyControls\TextBoxStringControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MyControls\NotifiactionBoxControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

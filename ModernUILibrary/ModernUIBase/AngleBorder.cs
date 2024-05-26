@@ -1,6 +1,5 @@
 ﻿namespace ModernIU.Base
 {
-    using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
