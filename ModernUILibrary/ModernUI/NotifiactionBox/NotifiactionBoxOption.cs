@@ -18,7 +18,7 @@ namespace ModernIU.Controls
     using System.Windows;
     using System.Windows.Media;
 
-    public class NotifiactionBoxOption
+    public class NotificationBoxOption
     {
         public bool Topmost { get; set; } = false;
 
@@ -42,7 +42,7 @@ namespace ModernIU.Controls
 
         public ImageSource Icon { get; set; }
 
-        public NotificationResult NotifiactionResult { get; set; }
+        public NotificationResult NotificationResult { get; set; }
 
         public int AutoCloseDialogTime { get; set; } = 0;
 

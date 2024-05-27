@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NotifiactionResults.cs" company="Lifeprojects.de">
-//     Class: NotifiactionResults
+// <copyright file="NotificationResult.cs" company="Lifeprojects.de">
+//     Class: NotificationResult
 //     Copyright © Lifeprojects.de 2018
 // </copyright>
 //

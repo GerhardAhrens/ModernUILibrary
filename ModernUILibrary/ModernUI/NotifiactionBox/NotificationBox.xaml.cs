@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NotifiactionBox.cs" company="Lifeprojects.de">
-//     Class: NotifiactionBox
+// <copyright file="NotificationBox.cs" company="Lifeprojects.de">
+//     Class: NotificationBox
 //     Copyright © Lifeprojects.de 2018
 // </copyright>
 //
@@ -8,7 +8,7 @@
 // <email>developer@lifeprojects.de</email>
 // <date>24.08.2018</date>
 //
-// <summary>Implementierung einer Custom NotifiactionBox</summary>
+// <summary>Implementierung einer Custom NotificationBox</summary>
 //-----------------------------------------------------------------------
 
 namespace ModernIU.Controls
@@ -28,7 +28,7 @@ namespace ModernIU.Controls
     using ModernIU.Base;
 
     /// <summary>
-    /// Interaktionslogik für NotifiactionBox.xaml
+    /// Interaktionslogik für NotificationBox.xaml
     /// </summary>
     [SupportedOSPlatform("windows")]
     public partial class NotificationBox : Window
@@ -152,7 +152,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public NotificationBox(NotifiactionBoxOption messageBoxOption)
+        public NotificationBox(NotificationBoxOption messageBoxOption)
         {
             this.InitializeComponent();
 
@@ -672,7 +672,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public static NotificationResult Show(NotifiactionBoxOption messageBoxOption)
+        public static NotificationResult Show(NotificationBoxOption messageBoxOption)
         {
             customMessageBoxButton = messageBoxOption.MessageBoxButton;
             if (messageBoxOption.InstructionIcon == NotificationIcon.None)
@@ -684,7 +684,7 @@ namespace ModernIU.Controls
                 instructionIconSource = NotifiactionBoxIcons.GetIcon(messageBoxOption.InstructionIcon);
             }
 
-            customDialogResult = messageBoxOption.NotifiactionResult;
+            customDialogResult = messageBoxOption.NotificationResult;
             Create(null, messageBoxOption.Caption, messageBoxOption.InstructionHeading, messageBoxOption.InstructionText, messageBoxOption.AutoCloseDialogTime,string.Empty).ShowDialog();
             return customDialogResult;
         }
@@ -769,7 +769,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotificationResult ShowCustom(NotifiactionBoxOption messageBoxOption)
+        public static NotificationResult ShowCustom(NotificationBoxOption messageBoxOption)
         {
             customMessageBoxButton = messageBoxOption.MessageBoxButton;
             if (messageBoxOption.InstructionIcon == NotificationIcon.None)
@@ -781,7 +781,7 @@ namespace ModernIU.Controls
                 instructionIconSource = NotifiactionBoxIcons.GetIcon(messageBoxOption.InstructionIcon);
             }
 
-            customDialogResult = messageBoxOption.NotifiactionResult;
+            customDialogResult = messageBoxOption.NotificationResult;
             CreateCustom(messageBoxOption).ShowDialog();
             return customDialogResult;
         }
@@ -791,7 +791,7 @@ namespace ModernIU.Controls
             return new NotificationBox(owner, caption, instructionHeading, instructionText, autoCloseDialogTime, language);
         }
 
-        private static NotificationBox CreateCustom(NotifiactionBoxOption messageBoxOption)
+        private static NotificationBox CreateCustom(NotificationBoxOption messageBoxOption)
         {
             return new NotificationBox(messageBoxOption);
         }

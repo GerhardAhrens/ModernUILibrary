@@ -33,7 +33,7 @@
         #region Default NotifiactionBox
         private void ONotifiactionBoxAClick(object sender, RoutedEventArgs e)
         {
-            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : OK\nNotifiactionResults.No", MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
+            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : OK\nNotificationResult.No", MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
             if (dlgResult != NotificationResult.None)
             {
                 System.Windows.MessageBox.Show(owner: Application.Current.MainWindow, $"Gwählt: {dlgResult}");
@@ -43,7 +43,7 @@
 
         private void ONotifiactionBoxBClick(object sender, RoutedEventArgs e)
         {
-            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : Ja/Nein\nNotifiactionResults.No", MessageBoxButton.YesNo, NotificationIcon.Information, NotificationResult.No);
+            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : Ja/Nein\nNotificationResult.No", MessageBoxButton.YesNo, NotificationIcon.Information, NotificationResult.No);
             if (dlgResult != NotificationResult.None)
             {
                 System.Windows.MessageBox.Show(owner: Application.Current.MainWindow, $"Gwählt: {dlgResult}");
@@ -52,7 +52,7 @@
 
         private void ONotifiactionBoxCClick(object sender, RoutedEventArgs e)
         {
-            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : Yes/No\nNotifiactionResults.No", MessageBoxButton.YesNo, NotificationIcon.Information, NotificationResult.No,"EN");
+            NotificationResult dlgResult = NotificationBox.Show("Application", "NotifiactionBox.Show() ", "Für : Yes/No\nNotificationResult.No", MessageBoxButton.YesNo, NotificationIcon.Information, NotificationResult.No,"EN");
             if (dlgResult != NotificationResult.None)
             {
                 System.Windows.MessageBox.Show(owner: Application.Current.MainWindow, $"Gwählt: {dlgResult}");
@@ -82,16 +82,16 @@
         #region Custom NotifiactionBox
         private void ONotifiactionBoxFClick(object sender, RoutedEventArgs e)
         {
-            NotifiactionBoxOption msgOpt = new NotifiactionBoxOption();
+            NotificationBoxOption msgOpt = new NotificationBoxOption();
             msgOpt.DialogWidth = 700;
             msgOpt.Caption = "Applikation";
-            msgOpt.InstructionHeading = "InstructionHeading mit NotifiactionBoxOption Class";
+            msgOpt.InstructionHeading = "InstructionHeading mit NotificationBoxOption Class";
             msgOpt.InstructionHeadingFontSize = 18;
             msgOpt.InstructionHeadingFontSize = 14;
             msgOpt.InstructionText = "InstructionText.";
             msgOpt.MessageBoxButton = MessageBoxButton.YesNo;
             msgOpt.InstructionIcon = NotificationIcon.Information;
-            msgOpt.NotifiactionResult = NotificationResult.ButtonRight;
+            msgOpt.NotificationResult = NotificationResult.ButtonRight;
             msgOpt.ButtonRight = "Nein";
             msgOpt.ButtonMiddle = "Ja";
             NotificationResult dlgResult = NotificationBox.ShowCustom(msgOpt);
@@ -107,16 +107,16 @@
             string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string iconPath = $"{assemblyPath}\\Resources\\Picture\\app.ico";
 
-            NotifiactionBoxOption msgOpt = new NotifiactionBoxOption();
+            NotificationBoxOption msgOpt = new NotificationBoxOption();
             msgOpt.DialogWidth = 700;
             msgOpt.Caption = "Applikation";
-            msgOpt.InstructionHeading = "InstructionHeading mit NotifiactionBoxOption Class und Custom Icon";
+            msgOpt.InstructionHeading = "InstructionHeading mit NotificationBoxOption Class und Custom Icon";
             msgOpt.InstructionHeadingFontSize = 18;
             msgOpt.InstructionHeadingFontSize = 14;
             msgOpt.InstructionText = "InstructionText.";
             msgOpt.MessageBoxButton = MessageBoxButton.YesNo;
             msgOpt.InstructionIcon = NotificationIcon.None;
-            msgOpt.NotifiactionResult = NotificationResult.ButtonRight;
+            msgOpt.NotificationResult = NotificationResult.ButtonRight;
             msgOpt.ButtonRight = "Nein";
             msgOpt.ButtonMiddle = "Ja";
             msgOpt.Icon = new BitmapImage(new Uri(iconPath));
