@@ -47,6 +47,7 @@
             tabItemSource.Add(new TabControlItem($"MessageBox, NoticeMessage\nWindow", true));
             tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("NotifiactionBox Window", new NotifiactionBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
             tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));

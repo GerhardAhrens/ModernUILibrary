@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="NotifiactionIcon.cs" company="Lifeprojects.de">
-//     Class: NotifiactionIcon
+// <copyright file="NotificationIcon.cs" company="Lifeprojects.de">
+//     Class: NotificationIcon
 //     Copyright © Lifeprojects.de 2018
 // </copyright>
 //
@@ -15,7 +15,7 @@ namespace ModernIU.Controls
 {
     using System.ComponentModel;
 
-    public enum NotifiactionIcon
+    public enum NotificationIcon
     {
         [Description("Keine Auswahl")]
         None = 0,

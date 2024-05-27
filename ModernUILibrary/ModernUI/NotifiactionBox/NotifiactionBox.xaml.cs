@@ -31,9 +31,9 @@ namespace ModernIU.Controls
     /// Interaktionslogik für NotifiactionBox.xaml
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public partial class NotifiactionBox : Window
+    public partial class NotificationBox : Window
     {
-        private static NotifiactionResults customDialogResult = NotifiactionResults.None;
+        private static NotificationResult customDialogResult = NotificationResult.None;
         private static MessageBoxButton customMessageBoxButton = MessageBoxButton.YesNoCancel;
         private static ImageSource instructionIconSource = null;
         private readonly CultureInfo cultureInfo = CultureInfo.CurrentCulture;
@@ -43,7 +43,7 @@ namespace ModernIU.Controls
         private readonly IInputElement oldFocusedControl = null;
         private readonly bool isOptionSetting = false;
 
-        public NotifiactionBox(Window owner, string caption, string instructionHeading, string instructionText, int autoCloseDialogTime, string language)
+        public NotificationBox(Window owner, string caption, string instructionHeading, string instructionText, int autoCloseDialogTime, string language)
         {
             this.InitializeComponent();
 
@@ -152,7 +152,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public NotifiactionBox(NotifiactionBoxOption messageBoxOption)
+        public NotificationBox(NotifiactionBoxOption messageBoxOption)
         {
             this.InitializeComponent();
 
@@ -289,7 +289,7 @@ namespace ModernIU.Controls
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (sender is NotifiactionBox)
+            if (sender is NotificationBox)
             {
                 if (Keyboard.Modifiers == ModifierKeys.Control && e.SystemKey == Key.F4)
                 {
@@ -380,22 +380,22 @@ namespace ModernIU.Controls
                     {
                         if (customMessageBoxButton.In(MessageBoxButton.YesNo, MessageBoxButton.OKCancel, MessageBoxButton.YesNoCancel) == true)
                         {
-                            customDialogResult = NotifiactionResults.No;
+                            customDialogResult = NotificationResult.No;
                         }
                         else
                         {
-                            customDialogResult = NotifiactionResults.Ok;
+                            customDialogResult = NotificationResult.Ok;
                         }
                     }
                     else
                     {
                         if (customMessageBoxButton.In(MessageBoxButton.YesNo, MessageBoxButton.OKCancel, MessageBoxButton.YesNoCancel) == true)
                         {
-                            customDialogResult = NotifiactionResults.ButtonRight;
+                            customDialogResult = NotificationResult.ButtonRight;
                         }
                         else
                         {
-                            customDialogResult = NotifiactionResults.Ok;
+                            customDialogResult = NotificationResult.Ok;
                         }
                     }
 
@@ -409,11 +409,11 @@ namespace ModernIU.Controls
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Button1.Visibility = Visibility.Collapsed;
-            this.Button1.Tag = NotifiactionResults.None;
+            this.Button1.Tag = NotificationResult.None;
             this.Button2.Visibility = Visibility.Collapsed;
-            this.Button2.Tag = NotifiactionResults.None;
+            this.Button2.Tag = NotificationResult.None;
             this.Button3.Visibility = Visibility.Collapsed;
-            this.Button3.Tag = NotifiactionResults.None;
+            this.Button3.Tag = NotificationResult.None;
 
             this.ImgInstructionIcon.Source = instructionIconSource;
 
@@ -423,11 +423,11 @@ namespace ModernIU.Controls
         private void OnLoadedCustom(object sender, RoutedEventArgs e)
         {
             this.Button1.Visibility = Visibility.Collapsed;
-            this.Button1.Tag = NotifiactionResults.None;
+            this.Button1.Tag = NotificationResult.None;
             this.Button2.Visibility = Visibility.Collapsed;
-            this.Button2.Tag = NotifiactionResults.None;
+            this.Button2.Tag = NotificationResult.None;
             this.Button3.Visibility = Visibility.Collapsed;
-            this.Button3.Tag = NotifiactionResults.None;
+            this.Button3.Tag = NotificationResult.None;
 
             this.ImgInstructionIcon.Source = instructionIconSource;
 
@@ -493,7 +493,7 @@ namespace ModernIU.Controls
                 case MessageBoxButton.OK:
                     this.Button1.Visibility = Visibility.Visible;
                     this.Button1.Content = "Ok";
-                    this.Button1.Tag = NotifiactionResults.Ok;
+                    this.Button1.Tag = NotificationResult.Ok;
                     this.Button1.IsDefault = true;
                     this.Button1.Focus();
                     break;
@@ -501,18 +501,18 @@ namespace ModernIU.Controls
                 case MessageBoxButton.OKCancel:
                     this.Button1.Visibility = Visibility.Visible;
                     this.Button1.Content = isLanguageDE == true ? "Abbruch" : "Cancel";
-                    this.Button1.Tag = NotifiactionResults.Cancel;
+                    this.Button1.Tag = NotificationResult.Cancel;
 
                     this.Button2.Visibility = Visibility.Visible;
                     this.Button2.Content = "Ok";
-                    this.Button2.Tag = NotifiactionResults.Ok;
+                    this.Button2.Tag = NotificationResult.Ok;
 
-                    if (customDialogResult == NotifiactionResults.Cancel)
+                    if (customDialogResult == NotificationResult.Cancel)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.Ok)
+                    else if (customDialogResult == NotificationResult.Ok)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
@@ -523,18 +523,18 @@ namespace ModernIU.Controls
                 case MessageBoxButton.YesNo:
                     this.Button1.Visibility = Visibility.Visible;
                     this.Button1.Content = isLanguageDE == true ? "Nein" : "No";
-                    this.Button1.Tag = NotifiactionResults.No;
+                    this.Button1.Tag = NotificationResult.No;
 
                     this.Button2.Visibility = Visibility.Visible;
                     this.Button2.Content = isLanguageDE == true ? "Ja" : "Yes";
-                    this.Button2.Tag = NotifiactionResults.Yes;
+                    this.Button2.Tag = NotificationResult.Yes;
 
-                    if (customDialogResult == NotifiactionResults.No)
+                    if (customDialogResult == NotificationResult.No)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.Yes)
+                    else if (customDialogResult == NotificationResult.Yes)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
@@ -545,27 +545,27 @@ namespace ModernIU.Controls
                 case MessageBoxButton.YesNoCancel:
                     Button1.Visibility = Visibility.Visible;
                     this.Button1.Content = isLanguageDE == true ? "Abbruch" : "Cancel";
-                    Button1.Tag = NotifiactionResults.Cancel;
+                    Button1.Tag = NotificationResult.Cancel;
 
                     Button2.Visibility = Visibility.Visible;
                     Button2.Content = isLanguageDE == true ? "Nein" : "No";
-                    Button2.Tag = NotifiactionResults.No;
+                    Button2.Tag = NotificationResult.No;
 
                     Button3.Visibility = Visibility.Visible;
                     Button3.Content = isLanguageDE == true ? "Ja" : "Yes";
-                    Button3.Tag = NotifiactionResults.Yes;
+                    Button3.Tag = NotificationResult.Yes;
 
-                    if (customDialogResult == NotifiactionResults.Cancel)
+                    if (customDialogResult == NotificationResult.Cancel)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.No)
+                    else if (customDialogResult == NotificationResult.No)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.Yes)
+                    else if (customDialogResult == NotificationResult.Yes)
                     {
                         this.Button3.IsDefault = true;
                         this.Button3.Focus();
@@ -581,24 +581,24 @@ namespace ModernIU.Controls
             {
                 case MessageBoxButton.OK:
                     this.Button1.Visibility = Visibility.Visible;
-                    this.Button1.Tag = NotifiactionResults.ButtonRight;
+                    this.Button1.Tag = NotificationResult.ButtonRight;
                     this.Button1.IsDefault = true;
                     this.Button1.Focus();
                     break;
 
                 case MessageBoxButton.OKCancel:
                     this.Button1.Visibility = Visibility.Visible;
-                    this.Button1.Tag = NotifiactionResults.ButtonRight;
+                    this.Button1.Tag = NotificationResult.ButtonRight;
 
                     this.Button2.Visibility = Visibility.Visible;
-                    this.Button2.Tag = NotifiactionResults.ButtonMiddle;
+                    this.Button2.Tag = NotificationResult.ButtonMiddle;
 
-                    if (customDialogResult == NotifiactionResults.ButtonRight)
+                    if (customDialogResult == NotificationResult.ButtonRight)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.ButtonMiddle)
+                    else if (customDialogResult == NotificationResult.ButtonMiddle)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
@@ -608,17 +608,17 @@ namespace ModernIU.Controls
 
                 case MessageBoxButton.YesNo:
                     this.Button1.Visibility = Visibility.Visible;
-                    this.Button1.Tag = NotifiactionResults.ButtonRight;
+                    this.Button1.Tag = NotificationResult.ButtonRight;
 
                     this.Button2.Visibility = Visibility.Visible;
-                    this.Button2.Tag = NotifiactionResults.ButtonMiddle;
+                    this.Button2.Tag = NotificationResult.ButtonMiddle;
 
-                    if (customDialogResult == NotifiactionResults.ButtonRight)
+                    if (customDialogResult == NotificationResult.ButtonRight)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.ButtonMiddle)
+                    else if (customDialogResult == NotificationResult.ButtonMiddle)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
@@ -628,25 +628,25 @@ namespace ModernIU.Controls
 
                 case MessageBoxButton.YesNoCancel:
                     Button1.Visibility = Visibility.Visible;
-                    Button1.Tag = NotifiactionResults.ButtonRight;
+                    Button1.Tag = NotificationResult.ButtonRight;
 
                     Button2.Visibility = Visibility.Visible;
-                    Button2.Tag = NotifiactionResults.ButtonMiddle;
+                    Button2.Tag = NotificationResult.ButtonMiddle;
 
                     Button3.Visibility = Visibility.Visible;
-                    Button3.Tag = NotifiactionResults.ButtonLeft;
+                    Button3.Tag = NotificationResult.ButtonLeft;
 
-                    if (customDialogResult == NotifiactionResults.ButtonRight)
+                    if (customDialogResult == NotificationResult.ButtonRight)
                     {
                         this.Button1.IsDefault = true;
                         this.Button1.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.ButtonMiddle)
+                    else if (customDialogResult == NotificationResult.ButtonMiddle)
                     {
                         this.Button2.IsDefault = true;
                         this.Button2.Focus();
                     }
-                    else if (customDialogResult == NotifiactionResults.ButtonLeft)
+                    else if (customDialogResult == NotificationResult.ButtonLeft)
                     {
                         this.Button3.IsDefault = true;
                         this.Button3.Focus();
@@ -662,20 +662,20 @@ namespace ModernIU.Controls
 
             if (btn.Tag != null)
             {
-                customDialogResult = (NotifiactionResults)Enum.Parse(typeof(NotifiactionResults), btn.Tag.ToString(), true);
+                customDialogResult = (NotificationResult)Enum.Parse(typeof(NotificationResult), btn.Tag.ToString(), true);
                 this.DialogResult = true;
             }
             else
             {
-                customDialogResult = NotifiactionResults.None;
+                customDialogResult = NotificationResult.None;
                 this.DialogResult = true;
             }
         }
 
-        public static NotifiactionResults Show(NotifiactionBoxOption messageBoxOption)
+        public static NotificationResult Show(NotifiactionBoxOption messageBoxOption)
         {
             customMessageBoxButton = messageBoxOption.MessageBoxButton;
-            if (messageBoxOption.InstructionIcon == NotifiactionIcon.None)
+            if (messageBoxOption.InstructionIcon == NotificationIcon.None)
             {
                 instructionIconSource = messageBoxOption.Icon;
             }
@@ -684,12 +684,12 @@ namespace ModernIU.Controls
                 instructionIconSource = NotifiactionBoxIcons.GetIcon(messageBoxOption.InstructionIcon);
             }
 
-            customDialogResult = messageBoxOption.DialogResultsEx;
+            customDialogResult = messageBoxOption.NotifiactionResult;
             Create(null, messageBoxOption.Caption, messageBoxOption.InstructionHeading, messageBoxOption.InstructionText, messageBoxOption.AutoCloseDialogTime,string.Empty).ShowDialog();
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string instructionHeading)
+        public static NotificationResult Show(string instructionHeading)
         {
             customMessageBoxButton = MessageBoxButton.OK;
             instructionIconSource = NotifiactionBoxIcons.Application;
@@ -697,7 +697,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string instructionHeading, string language)
+        public static NotificationResult Show(string instructionHeading, string language)
         {
             customMessageBoxButton = MessageBoxButton.OK;
             instructionIconSource = NotifiactionBoxIcons.Application;
@@ -705,7 +705,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string language = "DE")
+        public static NotificationResult Show(string caption, string instructionHeading, string language = "DE")
         {
             customMessageBoxButton = MessageBoxButton.OK;
             instructionIconSource = NotifiactionBoxIcons.Application;
@@ -713,7 +713,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, string language = "DE")
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, string language = "DE")
         {
             customMessageBoxButton = messageBoxButton;
             instructionIconSource = NotifiactionBoxIcons.Application;
@@ -721,7 +721,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotifiactionIcon instructionIcon, string language = "DE")
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotificationIcon instructionIcon, string language = "DE")
         {
             customMessageBoxButton = messageBoxButton;
             instructionIconSource = NotifiactionBoxIcons.GetIcon(instructionIcon);
@@ -729,7 +729,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotifiactionIcon instructionIcon, NotifiactionResults dialogResult, string language = "DE")
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotificationIcon instructionIcon, NotificationResult dialogResult, string language = "DE")
         {
             customMessageBoxButton = messageBoxButton;
             instructionIconSource = NotifiactionBoxIcons.GetIcon(instructionIcon);
@@ -738,21 +738,21 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, string language = "DE",int autoCloseDialogTime = 0)
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, string language = "DE",int autoCloseDialogTime = 0)
         {
             customMessageBoxButton = MessageBoxButton.OK;
             Create(null, caption, instructionHeading, instructionText, autoCloseDialogTime, language).ShowDialog();
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, string language = "DE", int autoCloseDialogTime = 0)
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, string language = "DE", int autoCloseDialogTime = 0)
         {
             customMessageBoxButton = messageBoxButton;
             Create(null, caption, instructionHeading, instructionText, autoCloseDialogTime, language).ShowDialog();
             return customDialogResult;
         }
 
-        public static NotifiactionResults Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotifiactionResults dialogResult, string language = "DE", int autoCloseDialogTime = 0)
+        public static NotificationResult Show(string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotificationResult dialogResult, string language = "DE", int autoCloseDialogTime = 0)
         {
             customMessageBoxButton = messageBoxButton;
             customDialogResult = dialogResult;
@@ -760,7 +760,7 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults ShowWithOwner(Window owner, string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotifiactionIcon instructionIcon, NotifiactionResults dialogResult, string language = "DE")
+        public static NotificationResult ShowWithOwner(Window owner, string caption, string instructionHeading, string instructionText, MessageBoxButton messageBoxButton, NotificationIcon instructionIcon, NotificationResult dialogResult, string language = "DE")
         {
             customMessageBoxButton = messageBoxButton;
             instructionIconSource = NotifiactionBoxIcons.GetIcon(instructionIcon);
@@ -769,10 +769,10 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        public static NotifiactionResults ShowCustom(NotifiactionBoxOption messageBoxOption)
+        public static NotificationResult ShowCustom(NotifiactionBoxOption messageBoxOption)
         {
             customMessageBoxButton = messageBoxOption.MessageBoxButton;
-            if (messageBoxOption.InstructionIcon == NotifiactionIcon.None)
+            if (messageBoxOption.InstructionIcon == NotificationIcon.None)
             {
                 instructionIconSource = messageBoxOption.Icon;
             }
@@ -781,19 +781,19 @@ namespace ModernIU.Controls
                 instructionIconSource = NotifiactionBoxIcons.GetIcon(messageBoxOption.InstructionIcon);
             }
 
-            customDialogResult = messageBoxOption.DialogResultsEx;
+            customDialogResult = messageBoxOption.NotifiactionResult;
             CreateCustom(messageBoxOption).ShowDialog();
             return customDialogResult;
         }
 
-        private static NotifiactionBox Create(Window owner, string caption, string instructionHeading, string instructionText, int autoCloseDialogTime, string language)
+        private static NotificationBox Create(Window owner, string caption, string instructionHeading, string instructionText, int autoCloseDialogTime, string language)
         {
-            return new NotifiactionBox(owner, caption, instructionHeading, instructionText, autoCloseDialogTime, language);
+            return new NotificationBox(owner, caption, instructionHeading, instructionText, autoCloseDialogTime, language);
         }
 
-        private static NotifiactionBox CreateCustom(NotifiactionBoxOption messageBoxOption)
+        private static NotificationBox CreateCustom(NotifiactionBoxOption messageBoxOption)
         {
-            return new NotifiactionBox(messageBoxOption);
+            return new NotificationBox(messageBoxOption);
         }
 
         private void WindowsMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

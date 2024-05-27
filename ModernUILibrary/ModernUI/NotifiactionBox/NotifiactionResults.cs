@@ -15,7 +15,7 @@ namespace ModernIU.Controls
 {
     using System.ComponentModel;
 
-    public enum NotifiactionResults
+    public enum NotificationResult
     {
         [Description("Keine Auswahl")]
         None = 0,

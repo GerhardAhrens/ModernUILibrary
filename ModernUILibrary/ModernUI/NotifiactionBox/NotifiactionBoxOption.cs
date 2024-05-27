@@ -38,11 +38,11 @@ namespace ModernIU.Controls
 
         public MessageBoxButton MessageBoxButton { get; set; }
 
-        public NotifiactionIcon InstructionIcon { get; set; }
+        public NotificationIcon InstructionIcon { get; set; }
 
         public ImageSource Icon { get; set; }
 
-        public NotifiactionResults DialogResultsEx { get; set; }
+        public NotificationResult NotifiactionResult { get; set; }
 
         public int AutoCloseDialogTime { get; set; } = 0;
 

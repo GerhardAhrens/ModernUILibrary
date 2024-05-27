@@ -92,41 +92,41 @@ namespace ModernIU.Controls
             get { return instructionIcon[WinLogoIconID]; }
         }
 
-        public static ImageSource GetIcon(NotifiactionIcon icon)
+        public static ImageSource GetIcon(NotificationIcon icon)
         {
-            if (icon == NotifiactionIcon.Application)
+            if (icon == NotificationIcon.Application)
             {
                 return instructionIcon[ApplicationIconID];
             }
-            else if (icon == NotifiactionIcon.Asterisk)
+            else if (icon == NotificationIcon.Asterisk)
             {
                 return instructionIcon[AsteriskIconID];
             }
-            else if (icon == NotifiactionIcon.Error)
+            else if (icon == NotificationIcon.Error)
             {
                 return instructionIcon[ErrorIconID];
             }
-            else if (icon == NotifiactionIcon.Exclamation)
+            else if (icon == NotificationIcon.Exclamation)
             {
                 return instructionIcon[ExclamationIconID];
             }
-            else if (icon == NotifiactionIcon.Hand)
+            else if (icon == NotificationIcon.Hand)
             {
                 return instructionIcon[HandIconID];
             }
-            else if (icon == NotifiactionIcon.Information)
+            else if (icon == NotificationIcon.Information)
             {
                 return instructionIcon[InformationIconID];
             }
-            else if (icon == NotifiactionIcon.Question)
+            else if (icon == NotificationIcon.Question)
             {
                 return instructionIcon[QuestionIconID];
             }
-            else if (icon == NotifiactionIcon.Warning)
+            else if (icon == NotificationIcon.Warning)
             {
                 return instructionIcon[WarningIconID];
             }
-            else if (icon == NotifiactionIcon.WinLogo)
+            else if (icon == NotificationIcon.WinLogo)
             {
                 return instructionIcon[WinLogoIconID];
             }

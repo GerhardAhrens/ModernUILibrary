@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Picture\app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="BaseClass\" />
   </ItemGroup>
 
@@ -21,6 +25,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Picture\app.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
