@@ -18,13 +18,42 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <TextBlock FontSize="14" Text="Beispiel für Notification Service Window" />
         <Separator Height="3" Background="Green" />
 
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxA"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="Question mit Style Ja/Nein anzeigen und CheckBox"
+                    CornerRadius="2"
+                    Type="Yes" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxB"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="MessageBox Ok, HTML"
+                    CornerRadius="2"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxC"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="Auswahl von einer Listbox"
+                    CornerRadius="2"
+                    Type="info" />
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </UserControl>
