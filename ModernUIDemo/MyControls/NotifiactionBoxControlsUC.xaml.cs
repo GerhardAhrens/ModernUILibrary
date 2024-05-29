@@ -8,6 +8,8 @@
 
     using ModernIU.Controls;
 
+    using ModernUIDemo.Cryptography;
+
     /// <summary>
     /// Interaktionslogik für NotifiactionBoxControlsUC.xaml
     /// </summary>
@@ -24,6 +26,8 @@
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxE, "Click", this.ONotifiactionBoxEClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxF, "Click", this.ONotifiactionBoxFClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxG, "Click", this.ONotifiactionBoxGClick);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxH, "Click", this.ONotifiactionBoxHClick);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxI, "Click", this.ONotifiactionBoxIClick);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -129,5 +133,52 @@
         }
         #endregion Custom NotifiactionBox
 
+        #region NotifiactionBox with ListBox
+        private void ONotifiactionBoxHClick(object sender, RoutedEventArgs e)
+        {
+            List<string> randomTextList = new List<string>();
+
+            using (RandomDataContent rdn = new RandomDataContent())
+            {
+                for (int i = 0; i < 30; i++)
+                {
+                    string rdnText = $"{rdn.Letters(10)} : {rdn.AlphabetAndNumeric(10)} - {rdn.Letters(30)}  - {rdn.Letters(30)}";
+                    randomTextList.Add(rdnText);
+                }
+            }
+
+            string headLineText = "NotificationListBox.Show() mit OK, und Liste mit Sting-Daten\nals langer Text und einer Instruktion wie mit dem Listeninhalt umgegangen werden soll.";
+
+            NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, randomTextList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
+            if (dlgResult != NotificationResult.None)
+            {
+                System.Windows.MessageBox.Show(owner: Application.Current.MainWindow, $"Gwählt: {dlgResult}");
+
+            }
+        }
+
+        private void ONotifiactionBoxIClick(object sender, RoutedEventArgs e)
+        {
+            List<string> randomTextList = new List<string>();
+
+            using (RandomDataContent rdn = new RandomDataContent())
+            {
+                for (int i = 0; i < 30; i++)
+                {
+                    string rdnText = $"{rdn.Letters(10)} : {rdn.AlphabetAndNumeric(10)} - {rdn.Letters(30)}  - {rdn.Letters(30)}";
+                    randomTextList.Add(rdnText);
+                }
+            }
+
+            string headLineText = "NotificationListBox.Show() mit OK, und Liste mit Sting-Daten\nals langer Text und einer Instruktion wie mit dem Listeninhalt umgegangen werden soll.";
+
+            NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, randomTextList, MessageBoxButton.YesNo, NotificationIcon.Information, NotificationResult.No);
+            if (dlgResult != NotificationResult.None)
+            {
+                System.Windows.MessageBox.Show(owner: Application.Current.MainWindow, $"Gwählt: {dlgResult}");
+
+            }
+        }
+        #endregion
     }
 }

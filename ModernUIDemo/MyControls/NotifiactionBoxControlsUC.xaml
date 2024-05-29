@@ -75,7 +75,7 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="NotificationBox Custom with  Class" />
+                Header="NotificationBox Custom with Configuration Class" />
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:FlatButton
@@ -93,6 +93,31 @@
                     Height="30"
                     Margin="5,5"
                     Content="NotificationBox (Custom Class, Custom Icon)"
+                    CornerRadius="2"
+                    Type="info" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="NotificationBox with ListBox" />
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxH"
+                    Width="170"
+                    Height="30"
+                    Margin="5,5"
+                    Content="NotificationBox ListBox = Ok"
+                    CornerRadius="2"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxI"
+                    Width="170"
+                    Height="30"
+                    Margin="5,5"
+                    Content="NotificationBox ListBox = Ja/Nein"
                     CornerRadius="2"
                     Type="info" />
             </StackPanel>

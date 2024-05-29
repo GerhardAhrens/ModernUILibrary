@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MessageListBox.cs" company="Lifeprojects.de">
-//     Class: MessageListBox
+// <copyright file="NotificationListBox.cs" company="Lifeprojects.de">
+//     Class: NotificationListBox
 //     Copyright © company="Lifeprojects.de" 2018
 // </copyright>
 //
@@ -8,7 +8,7 @@
 // <email>developer@lifeprojects.de</email>
 // <date>24.08.2018</date>
 //
-// <summary>Implementierung einer Custom MessageListBox</summary>
+// <summary>Implementierung einer Custom NotificationListBox</summary>
 //-----------------------------------------------------------------------
 
 namespace ModernIU.Controls
@@ -29,10 +29,10 @@ namespace ModernIU.Controls
     using ModernIU.Base;
 
     /// <summary>
-    /// Interaktionslogik für MessageListBox.xaml
+    /// Interaktionslogik für NotificationListBox.xaml
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public partial class MessageListBox : Window
+    public partial class NotificationListBox : Window
     {
         private static NotificationResult customDialogResult = NotificationResult.None;
         private static MessageBoxButton customMessageBoxButton = MessageBoxButton.YesNoCancel;
@@ -45,7 +45,7 @@ namespace ModernIU.Controls
         private readonly bool isOptionSetting = false;
 
         [SupportedOSPlatform("windows")]
-        public MessageListBox(Window owner, string caption, string instructionHeading, IEnumerable<string> instructionSource, int autoCloseDialogTime)
+        public NotificationListBox(Window owner, string caption, string instructionHeading, IEnumerable<string> instructionSource, int autoCloseDialogTime)
         {
             this.InitializeComponent();
 
@@ -141,7 +141,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public MessageListBox(NotificationBoxOption messageBoxOption)
+        public NotificationListBox(NotificationBoxOption messageBoxOption)
         {
             this.InitializeComponent();
 
@@ -263,7 +263,7 @@ namespace ModernIU.Controls
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (sender is MessageListBox)
+            if (sender is NotificationListBox)
             {
                 if (Keyboard.Modifiers == ModifierKeys.Control && e.SystemKey == Key.F4)
                 {
@@ -753,14 +753,14 @@ namespace ModernIU.Controls
             return customDialogResult;
         }
 
-        private static MessageListBox Create(Window owner, string caption, string instructionHeading, IEnumerable<string> instructionSource, int autoCloseDialogTime)
+        private static NotificationListBox Create(Window owner, string caption, string instructionHeading, IEnumerable<string> instructionSource, int autoCloseDialogTime)
         {
-            return new MessageListBox(owner, caption, instructionHeading, instructionSource, autoCloseDialogTime);
+            return new NotificationListBox(owner, caption, instructionHeading, instructionSource, autoCloseDialogTime);
         }
 
-        private static MessageListBox CreateCustom(NotificationBoxOption messageBoxOption)
+        private static NotificationListBox CreateCustom(NotificationBoxOption messageBoxOption)
         {
-            return new MessageListBox(messageBoxOption);
+            return new NotificationListBox(messageBoxOption);
         }
 
         private void WindowsMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
