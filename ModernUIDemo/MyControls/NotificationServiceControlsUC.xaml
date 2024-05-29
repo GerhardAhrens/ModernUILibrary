@@ -36,6 +36,15 @@
                     Type="Yes" />
 
                 <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxA1"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="Question mit Style Ja/Nein anzeigen"
+                    CornerRadius="2"
+                    Type="Yes" />
+
+                <ModernUI:FlatButton
                     x:Name="BtnNotificationBoxB"
                     Width="auto"
                     Height="30"

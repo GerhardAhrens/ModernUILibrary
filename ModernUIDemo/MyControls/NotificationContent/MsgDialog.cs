@@ -28,12 +28,30 @@ namespace ModernUIDemo
             Tuple<string,string,double> msgText = new Tuple<string, string, double>("Programm beenden", $"Das ist ein Zusatztext \n mit CheckBox",18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
 
-            @this.ShowDialog<QuestionYesNoCheckBoxVM>(msgText, (result, tag) =>
+            @this.ShowDialog<QuestionYesCheckBoxVM>(msgText, (result, tag) =>
             {
                 resultDialog = result;
                 if (tag != null)
                 {
                     resultTag = (Tuple<NotificationBoxButton, object>)tag;
+                }
+            });
+
+            return resultTag;
+        }
+
+        public static Tuple<NotificationBoxButton> DeleteCurrent(this INotificationService @this)
+        {
+            bool? resultDialog = null;
+            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Löschen", $"Soll der ausgewählte Datensatz gelöscht werden", 18);
+            Tuple<NotificationBoxButton> resultTag = new Tuple<NotificationBoxButton>(NotificationBoxButton.None);
+
+            @this.ShowDialog<QuestionYesNoCheckBoxVM>(msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton>)tag;
                 }
             });
 

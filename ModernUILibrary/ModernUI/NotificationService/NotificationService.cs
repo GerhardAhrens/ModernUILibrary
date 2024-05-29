@@ -131,7 +131,7 @@ namespace ModernIU.Controls
                 Type type = _mappings[typeof(TViewModel)];
                 if (type != null)
                 {
-                    Tuple<string, string, double> text = new Tuple<string, string, double>("", addText, 14);
+                    Tuple<string, string, double> text = new Tuple<string, string, double>(string.Empty, addText, 14);
                     this.ShowDialogInternal(type, text, callBack, typeof(TViewModel));
                 }
             }

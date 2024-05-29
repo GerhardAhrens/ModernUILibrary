@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="BaseClass\DemoData\" />
     <Folder Include="BaseClass\ArgumentGuard\" />
-    <Folder Include="MyControls\NotificationContent\" />
   </ItemGroup>
 
   <ItemGroup>

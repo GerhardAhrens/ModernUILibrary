@@ -18,6 +18,7 @@
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxA, "Click", this.ONotifiactionBoxAClick);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxA1, "Click", this.ONotifiactionBoxA1Click);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxB, "Click", this.ONotifiactionBoxBClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxC, "Click", this.ONotifiactionBoxCClick);
         }
@@ -36,6 +37,16 @@
             if (result.Item1 != NotificationBoxButton.None)
             {
                 MessageBox.Show($"Ausgewählt: {result}\nCheckBox : {(bool?)result.Item2}", "Notification Service");
+            }
+        }
+
+        private void ONotifiactionBoxA1Click(object sender, RoutedEventArgs e)
+        {
+            Tuple<NotificationBoxButton> result = this._notificationService.DeleteCurrent();
+
+            if (result.Item1 != NotificationBoxButton.None)
+            {
+                MessageBox.Show($"Ausgewählt: {result.Item1}", "Notification Service");
             }
         }
 

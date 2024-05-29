@@ -7,11 +7,11 @@
     using ModernIU.Controls;
 
     /// <summary>
-    /// Interaktionslogik für QuestionYesNoCheckBox.xaml
+    /// Interaktionslogik für QuestionYesCheckBox.xaml
     /// </summary>
-    public partial class QuestionYesNoCheckBox : UserControl
+    public partial class QuestionYesCheckBox : UserControl
     {
-        public QuestionYesNoCheckBox()
+        public QuestionYesCheckBox()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
@@ -29,7 +29,7 @@
         private void BtnYes_Click(object sender, RoutedEventArgs e)
         {
             Window window = this.Parent as Window;
-            window.Tag = new Tuple<NotificationBoxButton>(NotificationBoxButton.Yes);
+            window.Tag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.Yes, this.ChkOption.IsChecked);
             window.DialogResult = true;
             window.Close();
         }
@@ -37,7 +37,7 @@
         private void BtnNo_Click(object sender, RoutedEventArgs e)
         {
             Window window = this.Parent as Window;
-            window.Tag = new Tuple<NotificationBoxButton>(NotificationBoxButton.No);
+            window.Tag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.No, this.ChkOption.IsChecked);
             window.DialogResult = false;
             window.Close();
         }
