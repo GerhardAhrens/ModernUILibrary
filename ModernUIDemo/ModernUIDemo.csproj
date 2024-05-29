@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="BaseClass\DemoData\" />
     <Folder Include="BaseClass\ArgumentGuard\" />
+    <Folder Include="MyControls\NotificationContent\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,6 +91,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\NotifiactionBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\NotificationServiceControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\UploadControlsUC.xaml.cs">
