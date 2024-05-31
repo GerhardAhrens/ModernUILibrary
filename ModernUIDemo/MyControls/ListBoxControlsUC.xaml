@@ -32,7 +32,7 @@
                 Height="15"
                 Margin="0,0,0,-20"
                 Background="Green"
-                Header="Splitbutton mit Liste" />
+                Header="Erweitere ComboBox" />
 
             <StackPanel
                 Grid.Row="1"
@@ -52,6 +52,7 @@
                         Width="100"
                         HorizontalAlignment="Left"
                         IsReadOnly="False"
+                        ModernUI:ComboBoxHelper.EditBackground="Green"
                         ItemsSource="{Binding Path=MComboBoxSource.Value}"
                         SelectedItem="{Binding Path=MComboBoxSourceSelectedItem.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -155,10 +156,10 @@
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <ModernUI:FilteredComboBox
+                        x:Name="cbFilteredComboBox"
                         Width="200"
                         Height="25"
                         Margin="5"
-                        x:Name="cbFilteredComboBox"
                         ItemsSource="{Binding Path=FilterdComboBoxSource.Value}">
                         <ModernUI:FilteredComboBox.ItemsPanel>
                             <ItemsPanelTemplate>

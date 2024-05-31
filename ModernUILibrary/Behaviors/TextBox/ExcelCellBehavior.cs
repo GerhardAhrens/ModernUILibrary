@@ -194,9 +194,8 @@ namespace ModernIU.Behaviors
         /// <returns><c>true</c> if [the specified text box] [is in excel mode] ; otherwise, <c>false</c>.</returns>
         public static bool IsTextBoxInExcelMode(TextBoxBase textBox)
         {
-            return (textBox.CaretBrush == Brushes.Transparent && textBox.SelectionBrush == Brushes.Transparent);
+            return textBox.CaretBrush == Brushes.Transparent && textBox.SelectionBrush == Brushes.Transparent;
         }
-
         #endregion
     }
 }

@@ -58,6 +58,9 @@
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBox Watermarket", new BehaviorWaterMControlsUC()));
+            tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()));
+            tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
 

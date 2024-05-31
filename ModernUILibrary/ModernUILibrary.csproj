@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Behaviors\CheckBox\" />
+    <Folder Include="Behaviors\Hyperlink\" />
     <Folder Include="Behaviors\TextBox\" />
     <Folder Include="Extensions\System.Enum\" />
     <Folder Include="ModernUIBase\Adorners\" />

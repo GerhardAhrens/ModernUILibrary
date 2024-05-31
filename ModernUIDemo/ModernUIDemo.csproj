@@ -95,6 +95,15 @@
     <Compile Update="MyControls\NotificationServiceControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\BehaviorWaterMControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\BehaviorExcelCellControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\BehaviorCheckBoxUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\UploadControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

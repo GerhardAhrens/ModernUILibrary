@@ -1,0 +1,95 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.BehaviorCheckBoxUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Behavior="clr-namespace:ModernIU.Behaviors;assembly=ModernUILibrary"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="GroupHeaderLeft" TargetType="ContentControl">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border
+                            Margin="0,0,0,5"
+                            BorderBrush="DarkBlue"
+                            BorderThickness="0,0,0,1">
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                TextBlock.Foreground="DarkBlue"
+                                TextBlock.TextAlignment="Left" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="14" Text="Beispiel für verschiedene Behavior CheckBox Erweiterungen" />
+        <Separator Height="3" Background="Green" />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <StackPanel Height="50" Orientation="Horizontal">
+                <CheckBox
+                    x:Name="chkTestA"
+                    Margin="5"
+                    Content="Standard-CheckBox&#10;mit Ampel-Behavior"
+                    IsThreeState="True">
+                    <i:Interaction.Behaviors>
+                        <Behavior:CheckBoxBehavior
+                            CheckedBrush="Green"
+                            IntermediateBrush="Orange"
+                            UncheckedBrush="Red" />
+                    </i:Interaction.Behaviors>
+                </CheckBox>
+
+                <ModernUI:MCheckBoxEx
+                    x:Name="chkTestB"
+                    Height="40"
+                    Margin="5"
+                    Content="Standard-CheckBox&#10;mit Ampel-Behavior"
+                    IsThreeState="True">
+                    <i:Interaction.Behaviors>
+                        <Behavior:CheckBoxBehavior
+                            CheckedBrush="Green"
+                            IntermediateBrush="Orange"
+                            UncheckedBrush="Red" />
+                    </i:Interaction.Behaviors>
+                </ModernUI:MCheckBoxEx>
+            </StackPanel>
+
+            <ContentControl
+                ModernUI:LayoutPanel.IsGroupHeader="True"
+                ModernUI:LayoutPanel.IsStandalone="False"
+                Content="CheckBox, die wie ein RadioButton über einem Behavior reagiert"
+                Style="{StaticResource ResourceKey=GroupHeaderLeft}" />
+
+            <StackPanel Behavior:ExclusiveCheckBoxBahavior.IsEnabled="True" Orientation="Horizontal">
+                <ModernUI:MCheckBoxEx Content="Entweder" IsChecked="{Binding Path=CheckBoxEntweder.Value}" />
+
+                <ModernUI:MCheckBoxEx Content="Oder" IsChecked="{Binding Path=CheckBoxOder.Value}" />
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
