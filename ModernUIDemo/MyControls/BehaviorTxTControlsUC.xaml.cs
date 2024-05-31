@@ -1,6 +1,6 @@
 ﻿namespace ModernUIDemo.MyControls
 {
-    using System.ComponentModel;
+    using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -30,12 +30,16 @@
         public XamlProperty<string> ValueDate { get; set; } = XamlProperty.Set<string>();
         public XamlProperty<string> HyperLinkEMailText { get; set; } = XamlProperty.Set<string>();
         public XamlProperty<string> HyperLinkURLText { get; set; } = XamlProperty.Set<string>();
+        public XamlProperty<ObservableCollection<string>> AutoCompleteList { get; set; } = XamlProperty.Set<ObservableCollection<string>>();
+        public XamlProperty<string> AutoCompleteListTT { get; set; } = XamlProperty.Set<string>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.ValueDate.Value = DateOnly.FromDateTime(DateTime.Now).ToShortDateString();
             this.HyperLinkEMailText.Value = "developer@lifeprojects.de";
             this.HyperLinkURLText.Value = "www.lifeprojects.de";
+            this.AutoCompleteList.Value = new ObservableCollection<string> { "Test", "Banane", "Pferd", "Hund", "Huhn", "Schlange", "Textur", "4711", "0815", "Gerhard", "Lifeprojects" };
+            this.AutoCompleteListTT.Value = string.Join(';',this.AutoCompleteList.Value);
         }
 
         private void OnButtonClick(object sender, RoutedEventArgs e)

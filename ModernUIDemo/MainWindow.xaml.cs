@@ -31,6 +31,8 @@
             tabItemSource.Add(new TabControlItem("Eingabe", true));
             tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
             tabItemSource.Add(new TabControlItem("ListBox Controls", new ListBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
