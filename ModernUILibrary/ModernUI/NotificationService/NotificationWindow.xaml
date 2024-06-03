@@ -23,7 +23,10 @@
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="32"
-            Text="Content Area für UserControl" />
+            FontSize="32">
+            <Run Text="Content Area für" />
+            <LineBreak />
+            <Run Text="NotificationUserControl" />
+        </TextBlock>
     </Grid>
 </Window>

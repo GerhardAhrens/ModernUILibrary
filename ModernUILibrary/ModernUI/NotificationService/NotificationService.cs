@@ -146,10 +146,18 @@ namespace ModernIU.Controls
         {
             try
             {
-                Type type = _mappings[typeof(TViewModel)];
-                if (type != null)
+                if (_mappings.ContainsKey(typeof(TViewModel)))
                 {
-                    this.ShowDialogInternal(type, addText, callBack, typeof(TViewModel));
+
+                    Type type = _mappings[typeof(TViewModel)];
+                    if (type != null)
+                    {
+                        this.ShowDialogInternal(type, addText, callBack, typeof(TViewModel));
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"Object '{typeof(TViewModel).Name}' not found!");
                 }
             }
             catch (Exception ex)

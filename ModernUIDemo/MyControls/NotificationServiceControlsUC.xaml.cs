@@ -25,6 +25,7 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            NotificationService.RegisterDialog<QuestionYesCheckBox, QuestionYesCheckBoxVM>();
             NotificationService.RegisterDialog<QuestionYesNoCheckBox, QuestionYesNoCheckBoxVM>();
             NotificationService.RegisterDialog<MessageOk>();
             NotificationService.RegisterDialog<SelectLB>();
