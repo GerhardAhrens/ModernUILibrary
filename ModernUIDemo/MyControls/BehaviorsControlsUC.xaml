@@ -55,6 +55,15 @@
                 </TextBlock>
             </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Behavior für Annimation" />
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>
