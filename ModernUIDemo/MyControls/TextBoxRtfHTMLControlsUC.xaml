@@ -5,9 +5,25 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="560"
     d:DesignWidth="900"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ModernUI:HtmlFormatter x:Key="HtmlFormatter" />
+        <LinearGradientBrush x:Key="LavenderWhiteBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="0" Color="Lavender" />
+            <GradientStop Offset="1" Color="White" />
+        </LinearGradientBrush>
+
+        <Style x:Key="HtmlTextBlockStyle" TargetType="ModernUI:RichTextBox">
+            <Setter Property="Height" Value="84" />
+            <Setter Property="Margin" Value="6" />
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="Background" Value="{StaticResource LavenderWhiteBrush}" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,7 +40,128 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="6,6,6,0"
+                    FontWeight="Bold"
+                    Text="Text Formatting" />
+
+                <ModernUI:RichTextBox
+                    x:Name="HtmlFormattingRichTextBox"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource ResourceKey=HtmlTextBlockStyle}" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="6,6,6,0"
+                    FontWeight="Bold"
+                    Text="Tables" />
+
+                <ModernUI:RichTextBox
+                    x:Name="HtmlTableRichTextBox"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource HtmlTextBlockStyle}"
+                    TextFormatter="{StaticResource HtmlFormatter}" />
+
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="6,6,6,0"
+                    FontWeight="Bold"
+                    Text="Binding" />
+
+                <ModernUI:RichTextBox
+                    x:Name="BoundHtmlRichTextBox"
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource HtmlTextBlockStyle}"
+                    Text="{Binding Message}"
+                    TextFormatter="{StaticResource HtmlFormatter}" />
+
+                <StackPanel
+                    Grid.Row="6"
+                    Margin="0,0,0,6"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="72"
+                        Height="24"
+                        Margin="6,0"
+                        Click="Button_Click"
+                        Content="EN" />
+
+                    <Button
+                        Width="72"
+                        Height="24"
+                        Margin="6,0"
+                        Click="Button_Click_1"
+                        Content="DE" />
+                </StackPanel>
+
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Margin="6,6,6,0"
+                    FontWeight="Bold"
+                    Text="Text mit HTML Tags eingeben" />
+
+                <Grid
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Margin="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        x:Name="InputHTML"
+                        Grid.Column="0"
+                        Text="Gib einen Text mit HTML Tags ein"
+                        TextWrapping="Wrap" />
+
+                    <Button
+                        Grid.Column="1"
+                        Height="24"
+                        Margin="6,0,0,0"
+                        Click="Button_Click_3"
+                        Content="=&gt;"
+                        FontWeight="Bold" />
+                </Grid>
+
+                <ModernUI:RichTextBox
+                    x:Name="ResultHTML"
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Margin="0,6,6,6"
+                    Style="{StaticResource HtmlTextBlockStyle}"
+                    TextFormatter="{StaticResource HtmlFormatter}" />
+            </Grid>
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -15,7 +15,10 @@ namespace ModernUIDemo.MyControls
         public string Message
         {
             get { return _Message; }
-            set { _Message = value; }
+            set 
+            { 
+                this.SetProperty(ref this._Message, value); 
+            }
         }
 
 
