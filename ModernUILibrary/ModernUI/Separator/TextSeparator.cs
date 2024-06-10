@@ -68,6 +68,10 @@ namespace ModernIU.Controls
                 {
                     control.WidthLeft = null;
                 }
+                else if (alignment.ToLower() == "c")
+                {
+                    control.WidthLeft = null;
+                }
             }
         }
 

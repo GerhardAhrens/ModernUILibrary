@@ -31,7 +31,7 @@
                 Background="Green"
                 Header="Separator, Text links" />
 
-            <ModernUI:TextSeparator Background="Blue" SeparatorAlignment="l">
+            <ModernUI:TextSeparator Background="Blue" SeparatorAlignment="c">
                 <TextBlock
                     Margin="5"
                     Background="Transparent"
