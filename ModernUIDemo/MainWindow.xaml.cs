@@ -41,8 +41,9 @@
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()));
-            tabItemSource.Add(new TabControlItem("Loyout Grid, Panel", true));
+            tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
+            tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));

@@ -29,4 +29,35 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type MUI:TextSeparator}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:TextSeparator}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{TemplateBinding WidthLeft}" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Separator
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Background="{TemplateBinding Background}" />
+
+                        <ContentPresenter
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding Content}" />
+
+                        <Separator
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Background="{TemplateBinding Background}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
