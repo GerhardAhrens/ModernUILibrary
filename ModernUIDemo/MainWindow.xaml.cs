@@ -33,11 +33,14 @@
             tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
             tabItemSource.Add(new TabControlItem("ListBox Controls", new ListBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
+            tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
+            tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()));
             tabItemSource.Add(new TabControlItem("Loyout Grid, Panel", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("View, Loading", true));

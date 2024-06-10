@@ -1,0 +1,291 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.TextBlockControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:ModernIU.Converters;assembly=ModernUILibrary"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Converter:StringToWordsConverter x:Key="StringToWordsConverter" />
+        <Converter:RegOptionsSetConverter x:Key="RegOptionsSetConverter" />
+
+        <ObjectDataProvider
+            x:Key="colorsType"
+            MethodName="GetType"
+            ObjectType="{x:Type sys:Type}">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>
+                    System.Windows.Media.Colors, PresentationCore,
+                    Version=4.0.0.0, Culture=neutral,
+                    PublicKeyToken=31bf3856ad364e35
+                </sys:String>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="colorProperties"
+            MethodName="GetProperties"
+            ObjectInstance="{StaticResource colorsType}" />
+
+        <ObjectDataProvider
+            x:Key="fontWeightType"
+            MethodName="GetType"
+            ObjectType="{x:Type sys:Type}">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>
+                    System.Windows.FontWeights, PresentationCore,
+                    Version=4.0.0.0, Culture=neutral,
+                    PublicKeyToken=31bf3856ad364e35
+                </sys:String>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="fontWeightProperties"
+            MethodName="GetProperties"
+            ObjectInstance="{StaticResource fontWeightType}" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="14" Text="Beispiel für TextBlock - Animiert" />
+        <Separator Height="3" Background="Green" />
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:AutoGrid
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    VerticalAlignment="Top"
+                    ChildHorizontalAlignment="Stretch"
+                    ChildMargin="5"
+                    ChildVerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Margin="5" Text="Segment Length" />
+                    <ComboBox
+                        Width="50"
+                        Margin="5"
+                        SelectedItem="{Binding ElementName=AnimatedTextBlock, Path=SegmentLength}">
+                        <sys:Int32>1</sys:Int32>
+                        <sys:Int32>2</sys:Int32>
+                        <sys:Int32>3</sys:Int32>
+                        <sys:Int32>4</sys:Int32>
+                        <sys:Int32>5</sys:Int32>
+                        <sys:Int32>6</sys:Int32>
+                        <sys:Int32>7</sys:Int32>
+                        <sys:Int32>8</sys:Int32>
+                        <sys:Int32>9</sys:Int32>
+                        <sys:Int32>10</sys:Int32>
+                    </ComboBox>
+
+                    <TextBlock Margin="5" Text="Mode" />
+                    <ComboBox Margin="5" SelectedItem="{Binding ElementName=AnimatedTextBlock, Path=Mode}">
+                        <ModernUI:AnimatedTextMode>None</ModernUI:AnimatedTextMode>
+                        <ModernUI:AnimatedTextMode>Reveal</ModernUI:AnimatedTextMode>
+                        <ModernUI:AnimatedTextMode>Hide</ModernUI:AnimatedTextMode>
+                        <ModernUI:AnimatedTextMode>RevealAndHide</ModernUI:AnimatedTextMode>
+                        <ModernUI:AnimatedTextMode>Spotlight</ModernUI:AnimatedTextMode>
+                    </ComboBox>
+
+                    <TextBlock Margin="5" Text="Order" />
+                    <ComboBox Margin="5" SelectedItem="{Binding ElementName=AnimatedTextBlock, Path=Order}">
+                        <ModernUI:AnimatedTextOrder>Forward</ModernUI:AnimatedTextOrder>
+                        <ModernUI:AnimatedTextOrder>Backward</ModernUI:AnimatedTextOrder>
+                        <ModernUI:AnimatedTextOrder>Random</ModernUI:AnimatedTextOrder>
+                    </ComboBox>
+
+                    <ModernUI:AnimatedTextBlock
+                        x:Name="AnimatedTextBlock"
+                        Grid.Row="6"
+                        Grid.RowSpan="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        FontFamily="Minion"
+                        FontSize="20"
+                        FontWeight="Medium"
+                        Foreground="ForestGreen"
+                        RepeatBehavior="Forever"
+                        Text="Gerhard Ahrens, Lifeprojects.de"
+                        TextAlignment="Justify"
+                        TextWrapping="Wrap"
+                        Typography.Capitals="SmallCaps" />
+                </ModernUI:AutoGrid>
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="TextBlock, durchsuchbar" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <WrapPanel Grid.Row="0" Margin="10,0">
+                        <Label Content="SearchableTextBlock:" />
+                        <ScrollViewer
+                            Height="{Binding ElementName=HighlightTextBlock1, Path=Height}"
+                            HorizontalScrollBarVisibility="Visible"
+                            VerticalScrollBarVisibility="Visible">
+                            <ModernUI:SearchableTextBlock
+                                x:Name="HighlightTextBlock1"
+                                Width="550"
+                                Height="80"
+                                Background="LightGray"
+                                HighlightBackground="{Binding ElementName=cbBackground, Path=SelectedValue, UpdateSourceTrigger=PropertyChanged}"
+                                HighlightFontWeight="{Binding ElementName=cbFontWeight, Path=SelectedValue, UpdateSourceTrigger=PropertyChanged}"
+                                HighlightForeground="{Binding ElementName=cbForeground, Path=SelectedValue, UpdateSourceTrigger=PropertyChanged}"
+                                HighlightableText="{Binding ElementName=TextString1, Path=Text, Mode=TwoWay}"
+                                RegexOptions="{Binding ElementName=chkCase, Path=IsChecked, Converter={StaticResource RegOptionsSetConverter}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                SearchWords="{Binding ElementName=CommaSeparatedWords, Path=Text, Converter={StaticResource ResourceKey=StringToWordsConverter}}"
+                                TextWrapping="Wrap" />
+                        </ScrollViewer>
+                    </WrapPanel>
+
+                    <WrapPanel Grid.Row="1" Margin="10,5">
+                        <CheckBox
+                            x:Name="chkCase"
+                            Margin="10,0"
+                            VerticalContentAlignment="Center"
+                            Content="Search Case sensitive"
+                            IsChecked="False" />
+
+                        <Label Content="Search Words:" />
+                        <TextBox
+                            Name="CommaSeparatedWords"
+                            Width="200"
+                            Margin="2"
+                            VerticalContentAlignment="Center"
+                            Text="ChatGPT" />
+
+                        <Label Content="RegEx:" />
+
+                        <TextBox
+                            Name="RegexTextBox"
+                            Width="200"
+                            Margin="2"
+                            VerticalContentAlignment="Center"
+                            Text="{Binding ElementName=HighlightTextBlock1, Path=RegularExpression, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </WrapPanel>
+
+                    <WrapPanel Grid.Row="2" Margin="10,5">
+                        <Label Content="Test String:" />
+                        <TextBox
+                            Name="TextString1"
+                            MinWidth="200"
+                            Margin="20,0"
+                            VerticalContentAlignment="Center"
+                            Text="Generative Künstliche Intelligenz wie ChatGPT antwortet oft falsch. Diese Halluzinationen genannten Fehler sowie kopierte Inhalte, ohne Verweis auf Urheber, sorgen die Moderatoren von Stack Overflow und dem Stack Exchange Network so sehr, dass sie in den Streik treten. Neue Richtlinien der Plattform für Entwickler sehen nämlich vor, dass Beiträge, die von KI generiert wurden, nicht gelöscht werden. Die Moderatoren sprechen von einer Flut solcher Inhalte und auch davon, dass die Qualität und Glaubwürdigkeit der Plattform drastisch in Mitleidenschaft gezogen werde." />
+                    </WrapPanel>
+
+                    <StackPanel
+                        Grid.Row="3"
+                        Margin="10,10"
+                        Orientation="Horizontal">
+                        <TextBlock Margin="0,2" Text="Highlight Background:" />
+                        <ComboBox
+                            x:Name="cbBackground"
+                            Width="100" Margin="10,0"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding Source={StaticResource colorProperties}}"
+                            SelectedIndex="52"
+                            SelectedValuePath="Name">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle
+                                            Width="100"
+                                            Height="10"
+                                            Margin="2"
+                                            Fill="{Binding Name}" />
+                                        <TextBlock Margin="2" Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Margin="10,2" Text="Highlight Foreground:" />
+                        <ComboBox
+                            x:Name="cbForeground"
+                            Width="100"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding Source={StaticResource colorProperties}}"
+                            SelectedIndex="7"
+                            SelectedValuePath="Name">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle
+                                            Width="100"
+                                            Height="10"
+                                            Margin="2"
+                                            Fill="{Binding Name}" />
+                                        <TextBlock Margin="2" Text="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Margin="10,2" Text="Highlight FontWeight:" />
+                        <ComboBox
+                            x:Name="cbFontWeight"
+                            Width="130"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding Source={StaticResource fontWeightProperties}}"
+                            SelectedIndex="9"
+                            SelectedValuePath="Name">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        x:Name="tbFontWeight"
+                                        Margin="2"
+                                        FontWeight="{Binding Name}"
+                                        Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
