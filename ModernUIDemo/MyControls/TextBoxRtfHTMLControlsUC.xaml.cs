@@ -12,7 +12,6 @@
     {
         TextBoxRtfHTMLControlsVM vmRoot = null;
 
-
         public TextBoxRtfHTMLControlsUC()
         {
             this.InitializeComponent();
@@ -21,7 +20,6 @@
 
             vmRoot = new TextBoxRtfHTMLControlsVM();
             this.DataContext = vmRoot;
-
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

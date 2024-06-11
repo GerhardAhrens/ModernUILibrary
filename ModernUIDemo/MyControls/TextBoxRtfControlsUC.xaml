@@ -39,13 +39,46 @@
                 <Button
                     Height="30"
                     Margin="10,0"
-                    Click="Button_Get"
+                    Command="{Binding Path=CmdAgg[GetRTFTextCommand]}"
                     Content="Get Document" />
 
                 <Button
                     Height="30"
                     Margin="10,0"
-                    Click="Button_Set"
+                    Command="{Binding Path=CmdAgg[SetRTFTextCommand]}"
+                    Content="Set Document" />
+            </StackPanel>
+
+            <ModernUI:TextSeparator
+                Margin="0,5"
+                Background="Blue"
+                SeparatorAlignment="Left">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="RTF TextBox ohne Toolbar" />
+            </ModernUI:TextSeparator>
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:TextBoxRtf
+                    Width="450"
+                    Height="100"
+                    HorizontalAlignment="Stretch"
+                    Document="{Binding Path=DocumentTextRTF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    IsReadOnly="False"
+                    IsShowIOButton="false"
+                    IsShowToolbar="False" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Command="{Binding Path=CmdAgg[GetRTFTextCommand]}"
+                    Content="Get Document" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Command="{Binding Path=CmdAgg[SetRTFTextCommand]}"
                     Content="Set Document" />
             </StackPanel>
 

@@ -448,14 +448,14 @@
             ContextMenu textBoxContextMenu = new ContextMenu();
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Kopiere";
-            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy, 16);
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             copyMenu.Command = ApplicationCommands.Copy;
             textBoxContextMenu.Items.Add(copyMenu);
 
             MenuItem pasteMenu = new MenuItem();
             pasteMenu.Header = "Einfügen";
             pasteMenu.Command = ApplicationCommands.Paste;
-            pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste, 16);
+            pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste,22);
             textBoxContextMenu.Items.Add(pasteMenu);
 
             MenuItem spezialMenu = new MenuItem();
@@ -474,25 +474,25 @@
             MenuItem formatBoldMenu = new MenuItem();
             formatBoldMenu.Header = "Fett";
             formatBoldMenu.Command = EditingCommands.ToggleBold;
-            formatBoldMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatBold, 16);
+            formatBoldMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatBold);
             textBoxContextMenu.Items.Add(formatBoldMenu);
 
             MenuItem formatItalicMenu = new MenuItem();
             formatItalicMenu.Header = "Italic";
             formatItalicMenu.Command = EditingCommands.ToggleItalic;
-            formatItalicMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatItalic, 16);
+            formatItalicMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatItalic);
             textBoxContextMenu.Items.Add(formatItalicMenu);
 
             MenuItem formatUnderlineMenu = new MenuItem();
             formatUnderlineMenu.Header = "Unterstreichen";
             formatUnderlineMenu.Command = EditingCommands.ToggleUnderline;
-            formatUnderlineMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatUnderline, 16);
+            formatUnderlineMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatUnderline);
             textBoxContextMenu.Items.Add(formatUnderlineMenu);
 
             MenuItem formatStrikeoutMenu = new MenuItem();
             formatStrikeoutMenu.Header = "Durchstreichen";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(formatStrikeoutMenu, "Click", this.OnStrikethrough);
-            formatStrikeoutMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatStrikethrough, 16);
+            formatStrikeoutMenu.Icon = Icons.GetPathGeometry(Icons.IconFormatStrikethrough);
             textBoxContextMenu.Items.Add(formatStrikeoutMenu);
 
             textBoxContextMenu.Items.Add(new Separator());
@@ -500,38 +500,38 @@
             MenuItem insertImageMenu = new MenuItem();
             insertImageMenu.Header = "Einfügen Bild";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(insertImageMenu, "Click", this.OnInsertImageMenu);
-            insertImageMenu.Icon = Icons.GetPathGeometry(Icons.IconInsertInmage, 16);
+            insertImageMenu.Icon = Icons.GetPathGeometry(Icons.IconInsertInmage);
             textBoxContextMenu.Items.Add(insertImageMenu);
 
             MenuItem insertLinkeMenu = new MenuItem();
             insertLinkeMenu.Header = "Einfügen Link";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(insertLinkeMenu, "Click", this.OnInsertLinkMenu);
-            insertLinkeMenu.Icon = Icons.GetPathGeometry(Icons.IconInsertLink,16);
+            insertLinkeMenu.Icon = Icons.GetPathGeometry(Icons.IconInsertLink);
             textBoxContextMenu.Items.Add(insertLinkeMenu);
 
             textBoxContextMenu.Items.Add(new Separator());
 
             MenuItem changeTextColorMenu = new MenuItem();
             changeTextColorMenu.Header = "Textfarbe";
-            changeTextColorMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor,16);
+            changeTextColorMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor);
             textBoxContextMenu.Items.Add(changeTextColorMenu);
 
             MenuItem changeBlueMenu = new MenuItem();
             changeBlueMenu.Header = "Blau";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(changeBlueMenu, "Click", this.OnChangeBlueMenu);
-            changeBlueMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor,Colors.Blue,16);
+            changeBlueMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor,Colors.Blue);
             changeTextColorMenu.Items.Add(changeBlueMenu);
 
             MenuItem changeRedMenu = new MenuItem();
             changeRedMenu.Header = "Rot";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(changeRedMenu, "Click", this.OnChangeRedMenu);
-            changeRedMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor, Colors.Red,16);
+            changeRedMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor, Colors.Red);
             changeTextColorMenu.Items.Add(changeRedMenu);
 
             MenuItem changeGreenMenu = new MenuItem();
             changeGreenMenu.Header = "Grün";
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(changeGreenMenu, "Click", this.OnChangeGreenMenu);
-            changeGreenMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor, Colors.Green,16);
+            changeGreenMenu.Icon = Icons.GetPathGeometry(Icons.IconChangeColor, Colors.Green);
             changeTextColorMenu.Items.Add(changeGreenMenu);
 
             return textBoxContextMenu;
@@ -738,7 +738,7 @@
         /// <param name="iconString">Icon String</param>
         /// <param name="iconColor">Icon Farbe</param>
         /// <returns></returns>
-        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, Color iconColor, int size = 24)
+        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, Color iconColor, int size = 22)
         {
             var path = new System.Windows.Shapes.Path
             {
@@ -756,7 +756,7 @@
         /// </summary>
         /// <param name="iconString">Icon String</param>
         /// <returns></returns>
-        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, int size = 24)
+        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, int size = 22)
         {
             return GetPathGeometry(iconString, Colors.Blue, size);
         }
