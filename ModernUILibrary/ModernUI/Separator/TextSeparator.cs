@@ -40,11 +40,19 @@ namespace ModernIU.Controls
 
         public static DependencyProperty SeparatorAlignmentProperty = DependencyProperty.Register(nameof(SeparatorAlignment), typeof(string), typeof(TextSeparator), new PropertyMetadata("C", OnTextAlignmentPropertyChange));
 
-        public static DependencyProperty WidthLeftProperty = DependencyProperty.Register(nameof(WidthLeft), typeof(double?), typeof(TextSeparator), new PropertyMetadata(null, OnWidthLeftPropertyChange));
+        public static DependencyProperty WidthLeftProperty = DependencyProperty.Register(nameof(WidthLeft), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(), OnWidthLeftPropertyChange));
 
-        public double? WidthLeft
+        //public static DependencyProperty WidthRightProperty = DependencyProperty.Register(nameof(WidthRight), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(), OnWidthRightPropertyChange));
+
+        public GridLength WidthLeft
         {
-            get { return (double)GetValue(WidthLeftProperty); }
+            get { return (GridLength)GetValue(WidthLeftProperty); }
+            set { SetValue(WidthLeftProperty, value); }
+        }
+
+        public GridLength WidthRight
+        {
+            get { return (GridLength)GetValue(WidthLeftProperty); }
             set { SetValue(WidthLeftProperty, value); }
         }
 
@@ -62,15 +70,18 @@ namespace ModernIU.Controls
                 string alignment  = (string)e.NewValue;
                 if (alignment.ToLower() == "l")
                 {
-                    control.WidthLeft = 10;
+                    control.WidthLeft = new GridLength(5, GridUnitType.Star);
+                    control.WidthRight = new GridLength(1, GridUnitType.Star);
                 }
                 else if (alignment.ToLower() == "r")
                 {
-                    control.WidthLeft = null;
+                    control.WidthLeft = new GridLength(1, GridUnitType.Star);
+                    //control.WidthRight = new GridLength(10);
                 }
                 else if (alignment.ToLower() == "c")
                 {
-                    control.WidthLeft = null;
+                    control.WidthLeft = new GridLength(1,GridUnitType.Star);
+                    control.WidthRight = new GridLength(1,GridUnitType.Star);
                 }
             }
         }
@@ -80,7 +91,16 @@ namespace ModernIU.Controls
             if (e.NewValue != null)
             {
                 var control = (TextSeparator)d;
-                control.WidthLeft = Convert.ToDouble(e.NewValue);
+                control.WidthLeft = (GridLength)e.NewValue;
+            }
+        }
+
+        private static void OnWidthRightPropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                var control = (TextSeparator)d;
+                control.WidthRight = (GridLength)e.NewValue;
             }
         }
     }
