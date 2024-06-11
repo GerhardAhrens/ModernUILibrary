@@ -24,7 +24,32 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:TextBoxRtf
+                    Width="450"
+                    Height="100"
+                    HorizontalAlignment="Stretch"
+                    Document="{Binding Path=DocumentTextRTF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    IsReadOnly="False"
+                    IsShowIOButton="false"
+                    IsShowToolbar="True" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Click="Button_Get"
+                    Content="Get Document" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Click="Button_Set"
+                    Content="Set Document" />
+            </StackPanel>
+
+        </StackPanel>
 
     </Grid>
 </UserControl>
