@@ -31,14 +31,14 @@
                 Background="Green"
                 Header="Separator, Text links" />
 
-            <ModernUI:TextSeparator Background="Blue" SeparatorAlignment="l">
+            <ModernUI:TextSeparator Background="Blue" SeparatorAlignment="Left">
                 <TextBlock
                     FontSize="14"
                     FontWeight="Bold"
                     Text="Zeile 1" />
             </ModernUI:TextSeparator>
 
-            <ModernUI:TextSeparator Background="Yellow" SeparatorAlignment="c">
+            <ModernUI:TextSeparator Background="Yellow" SeparatorAlignment="Center">
                 <TextBlock
                     Background="LightGray"
                     FontSize="14"
@@ -46,7 +46,7 @@
                     Text="Zeile 2" />
             </ModernUI:TextSeparator>
 
-            <ModernUI:TextSeparator Background="Red" SeparatorAlignment="r">
+            <ModernUI:TextSeparator Background="Red" SeparatorAlignment="Right">
                 <TextBlock
                     FontSize="14"
                     FontWeight="Bold"

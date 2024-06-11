@@ -25,7 +25,6 @@
 
 namespace ModernIU.Controls
 {
-    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -39,7 +38,7 @@ namespace ModernIU.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TextSeparator), new FrameworkPropertyMetadata(typeof(TextSeparator)));
         }
 
-        public static DependencyProperty SeparatorAlignmentProperty = DependencyProperty.Register(nameof(SeparatorAlignment), typeof(string), typeof(TextSeparator), new PropertyMetadata("C", OnTextAlignmentPropertyChange));
+        public static DependencyProperty SeparatorAlignmentProperty = DependencyProperty.Register(nameof(SeparatorAlignment), typeof(HorizontalSeparatorAlignment), typeof(TextSeparator), new PropertyMetadata(HorizontalSeparatorAlignment.Center, OnTextAlignmentPropertyChange));
 
         public static DependencyProperty WidthLeftProperty = DependencyProperty.Register(nameof(WidthLeft), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(1, GridUnitType.Star), OnWidthLeftPropertyChange));
 
@@ -57,9 +56,9 @@ namespace ModernIU.Controls
             set { SetValue(WidthRightProperty, value); }
         }
 
-        public string SeparatorAlignment
+        public HorizontalSeparatorAlignment SeparatorAlignment
         {
-            get { return (string)GetValue(SeparatorAlignmentProperty); }
+            get { return (HorizontalSeparatorAlignment)GetValue(SeparatorAlignmentProperty); }
             set { SetValue(SeparatorAlignmentProperty, value); }
         }
 
@@ -68,18 +67,18 @@ namespace ModernIU.Controls
             if (e.NewValue != null)
             {
                 var control = (TextSeparator)d;
-                string alignment  = (string)e.NewValue;
-                if (alignment.ToLower() == "l")
+                HorizontalSeparatorAlignment alignment  = (HorizontalSeparatorAlignment)e.NewValue;
+                if (alignment == HorizontalSeparatorAlignment.Left)
                 {
                     control.WidthRight = new GridLength(1, GridUnitType.Star);
                     control.WidthLeft = new GridLength(5);
                 }
-                else if (alignment.ToLower() == "r")
+                else if (alignment == HorizontalSeparatorAlignment.Right)
                 {
                     control.WidthRight = new GridLength(5);
                     control.WidthLeft = new GridLength(1,GridUnitType.Star);
                 }
-                else if (alignment.ToLower() == "c")
+                else if (alignment == HorizontalSeparatorAlignment.Center)
                 {
                     control.WidthLeft = new GridLength(1,GridUnitType.Star);
                     control.WidthRight = new GridLength(1,GridUnitType.Star);
@@ -104,5 +103,13 @@ namespace ModernIU.Controls
                 control.WidthRight = (GridLength)e.NewValue;
             }
         }
+    }
+
+    public enum HorizontalSeparatorAlignment : int
+    {
+        None = 0,
+        Left = 1,
+        Center = 2,
+        Right = 3,
     }
 }

@@ -1,0 +1,60 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
+
+    <Style BasedOn="{StaticResource {x:Type ItemsControl}}" TargetType="{x:Type MUI:ContentElements}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+        <Setter Property="VerticalTitleAlignments" Value="Center" />
+        <Setter Property="HorizontalTitleAlignments" Value="Left" />
+        <Setter Property="TitleMargins" Value="5,0" />
+        <Setter Property="HorizontalContentAlignments" Value="Stretch" />
+        <Setter Property="VerticalContentAlignments" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="ContentMargins" Value="0,2" />
+        <Setter Property="ContentFrameColors" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="{x:Type MUI:ContentFrame}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="ContentFrameColor" Value="{Binding Path=ContentFrameColors, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="VerticalTitleAlignment" Value="{Binding Path=VerticalTitleAlignments, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="HorizontalTitleAlignment" Value="{Binding Path=HorizontalTitleAlignments, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="TitleMargin" Value="{Binding Path=TitleMargins, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignments, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="HorizontalAlignment" Value="{Binding Path=HorizontalAlignment, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignments, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="ContentMargin" Value="{Binding Path=ContentMargins, RelativeSource={RelativeSource AncestorType={x:Type MUI:ContentElements}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:ContentFrame}">
+                    <Grid Background="{TemplateBinding ContentFrameColor}" ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="title" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="Green" BorderThickness="0,1,0,0">
+                            <ContentPresenter
+                                Grid.Column="0"
+                                Margin="{TemplateBinding TitleMargin}"
+                                HorizontalAlignment="{TemplateBinding HorizontalTitleAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalTitleAlignment}"
+                                ContentSource="Title"
+                                TextBlock.FontWeight="{TemplateBinding TitleFontWeight}"
+                                TextBlock.TextAlignment="Left" />
+                        </Border>
+
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Margin="{TemplateBinding ContentMargin}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

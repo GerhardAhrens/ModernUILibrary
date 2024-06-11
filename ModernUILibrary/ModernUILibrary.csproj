@@ -24,6 +24,7 @@
     <Folder Include="ModernUI\Button\Themes\" />
     <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
+    <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
