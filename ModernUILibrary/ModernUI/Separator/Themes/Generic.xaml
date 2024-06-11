@@ -35,9 +35,9 @@
                 <ControlTemplate TargetType="{x:Type MUI:TextSeparator}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="{TemplateBinding WidthLeft}" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="{TemplateBinding WidthRight}" />
                         </Grid.ColumnDefinitions>
 
                         <Separator
@@ -47,6 +47,7 @@
 
                         <ContentPresenter
                             Grid.Column="1"
+                            Margin="5,0,5,0"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding Content}" />
 

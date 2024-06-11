@@ -25,6 +25,7 @@
 
 namespace ModernIU.Controls
 {
+    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -40,9 +41,9 @@ namespace ModernIU.Controls
 
         public static DependencyProperty SeparatorAlignmentProperty = DependencyProperty.Register(nameof(SeparatorAlignment), typeof(string), typeof(TextSeparator), new PropertyMetadata("C", OnTextAlignmentPropertyChange));
 
-        public static DependencyProperty WidthLeftProperty = DependencyProperty.Register(nameof(WidthLeft), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(), OnWidthLeftPropertyChange));
+        public static DependencyProperty WidthLeftProperty = DependencyProperty.Register(nameof(WidthLeft), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(1, GridUnitType.Star), OnWidthLeftPropertyChange));
 
-        //public static DependencyProperty WidthRightProperty = DependencyProperty.Register(nameof(WidthRight), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(), OnWidthRightPropertyChange));
+        public static DependencyProperty WidthRightProperty = DependencyProperty.Register(nameof(WidthRight), typeof(GridLength), typeof(TextSeparator), new PropertyMetadata(new GridLength(1,GridUnitType.Star), OnWidthRightPropertyChange));
 
         public GridLength WidthLeft
         {
@@ -52,8 +53,8 @@ namespace ModernIU.Controls
 
         public GridLength WidthRight
         {
-            get { return (GridLength)GetValue(WidthLeftProperty); }
-            set { SetValue(WidthLeftProperty, value); }
+            get { return (GridLength)GetValue(WidthRightProperty); }
+            set { SetValue(WidthRightProperty, value); }
         }
 
         public string SeparatorAlignment
@@ -70,13 +71,13 @@ namespace ModernIU.Controls
                 string alignment  = (string)e.NewValue;
                 if (alignment.ToLower() == "l")
                 {
-                    control.WidthLeft = new GridLength(5, GridUnitType.Star);
                     control.WidthRight = new GridLength(1, GridUnitType.Star);
+                    control.WidthLeft = new GridLength(5);
                 }
                 else if (alignment.ToLower() == "r")
                 {
-                    control.WidthLeft = new GridLength(1, GridUnitType.Star);
-                    //control.WidthRight = new GridLength(10);
+                    control.WidthRight = new GridLength(5);
+                    control.WidthLeft = new GridLength(1,GridUnitType.Star);
                 }
                 else if (alignment.ToLower() == "c")
                 {

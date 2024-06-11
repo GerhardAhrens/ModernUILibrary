@@ -33,14 +33,27 @@
 
             <ModernUI:TextSeparator Background="Blue" SeparatorAlignment="l">
                 <TextBlock
-                    Margin="5"
-                    Background="Transparent"
                     FontSize="14"
                     FontWeight="Bold"
-                    Foreground="Black"
-                    Text="Test Test" />
+                    Text="Zeile 1" />
             </ModernUI:TextSeparator>
 
+            <ModernUI:TextSeparator Background="Yellow" SeparatorAlignment="c">
+                <TextBlock
+                    Background="LightGray"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="Zeile 2" />
+            </ModernUI:TextSeparator>
+
+            <ModernUI:TextSeparator Background="Red" SeparatorAlignment="r">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="Zeile 3" />
+            </ModernUI:TextSeparator>
+
+            <Label Height="10" />
         </StackPanel>
 
     </Grid>
