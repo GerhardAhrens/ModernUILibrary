@@ -65,7 +65,8 @@
             tabItemSource.Add(new TabControlItem("NotificationBox Window", new NotifiactionBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
             tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
-            tabItemSource.Add(new TabControlItem("Messaging", new MessagingControlsUC()));
+            tabItemSource.Add(new TabControlItem("Messaging mit zwei Controls", new MessagingAControlsUC()));
+            tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));

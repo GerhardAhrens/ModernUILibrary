@@ -55,6 +55,9 @@
     <Compile Update="MyControls\LoadingControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\MessagingBControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\NoticeMessageControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -112,7 +115,7 @@
     <Compile Update="MyControls\ContentFrameControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MyControls\MessagingControlsUC.xaml.cs">
+    <Compile Update="MyControls\MessagingAControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">

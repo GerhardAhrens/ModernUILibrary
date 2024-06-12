@@ -4,11 +4,11 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaktionslogik für MessagingControlsUC.xaml
+    /// Interaktionslogik für MessagingAControlsUC.xaml
     /// </summary>
-    public partial class MessagingControlsUC : UserControl
+    public partial class MessagingAControlsUC : UserControl
     {
-        public MessagingControlsUC()
+        public MessagingAControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
