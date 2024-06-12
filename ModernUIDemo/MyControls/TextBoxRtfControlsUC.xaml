@@ -26,9 +26,52 @@
             Grid.Column="0"
             Orientation="Vertical">
 
+            <ModernUI:TextSeparator
+                Margin="0,5"
+                Background="Blue"
+                SeparatorAlignment="Left">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="RTF TextBox Toolbar für alle Funktionen" />
+            </ModernUI:TextSeparator>
+
             <StackPanel Orientation="Horizontal">
                 <ModernUI:TextBoxRtf
-                    Width="450"
+                    Width="500"
+                    Height="100"
+                    HorizontalAlignment="Stretch"
+                    Document="{Binding Path=DocumentTextRTF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    IsReadOnly="False"
+                    IsShowIOButton="True"
+                    IsShowToolbar="True" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Command="{Binding Path=CmdAgg[GetRTFTextCommand]}"
+                    Content="Get Document" />
+
+                <Button
+                    Height="30"
+                    Margin="10,0"
+                    Command="{Binding Path=CmdAgg[SetRTFTextCommand]}"
+                    Content="Set Document" />
+            </StackPanel>
+
+            <ModernUI:TextSeparator
+                Margin="0,5"
+                Background="Blue"
+                SeparatorAlignment="Left">
+                <TextBlock
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="RTF TextBox Toolbar für Textbearbeitung" />
+            </ModernUI:TextSeparator>
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:TextBoxRtf
+                    Width="500"
                     Height="100"
                     HorizontalAlignment="Stretch"
                     Document="{Binding Path=DocumentTextRTF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -61,7 +104,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:TextBoxRtf
-                    Width="450"
+                    Width="500"
                     Height="100"
                     HorizontalAlignment="Stretch"
                     Document="{Binding Path=DocumentTextRTF, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
