@@ -18,6 +18,8 @@
   <ItemGroup>
     <Folder Include="BaseClass\DemoData\" />
     <Folder Include="BaseClass\ArgumentGuard\" />
+    <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
+    <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
   </ItemGroup>
 
   <ItemGroup>
