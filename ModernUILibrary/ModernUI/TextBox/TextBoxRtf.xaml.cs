@@ -264,7 +264,7 @@
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             this.DataChanged = true;
-            this.RichTextControl.MakeUrlsClickable();
+            /*this.RichTextControl.MakeUrlsClickable();*/
         }
 
         private void OnFontheightDropDownClosed(object sender, EventArgs e)
@@ -591,6 +591,20 @@
 
         private void OnInsertLinkMenu(object sender, RoutedEventArgs e)
         {
+            string linkName = Clipboard.GetText();
+
+            Paragraph para = new Paragraph();
+            para.Margin = new Thickness(0);
+
+            Hyperlink link = new Hyperlink();
+            link.IsEnabled = true;
+            link.Inlines.Add(linkName);
+            link.NavigateUri = new Uri(linkName);
+            link.RequestNavigate += (sender, args) => Process.Start(args.Uri.ToString());
+
+            para.Inlines.Add(link);
+
+            this.RichTextControl.Document.Blocks.Add(para);
         }
     }
 
@@ -792,12 +806,16 @@
                     MatchCollection matches = Regex.Matches(textRun, @"(http(s)?://[^\s]+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                     foreach (Match match in matches.Cast<Match>())
                     {
-                        TextPointer start = pointer.GetPositionAtOffset(match.Index);
-                        TextPointer end = start.GetPositionAtOffset(match.Length);
-                        Hyperlink hyperlink = new(start, end)
+                        if (match != null)
                         {
-                            NavigateUri = new Uri(match.Value)
-                        };
+                            TextPointer start = pointer.GetPositionAtOffset(match.Index);
+                            TextPointer end = start.GetPositionAtOffset(match.Length);
+
+                            Hyperlink hyperlink = new(start, end)
+                            {
+                                NavigateUri = new Uri(match.Value)
+                            };
+                        }
                     }
                 }
 
