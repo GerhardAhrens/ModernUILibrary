@@ -28,6 +28,7 @@
             tabItemSource.Add(new TabControlItem("Darstellung", true));
             tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
             tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
+
             tabItemSource.Add(new TabControlItem("Eingabe", true));
             tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
@@ -39,27 +40,33 @@
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
+
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()));
             tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
+
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Loading Animation Controls", new LoadingControlsUC()));
             tabItemSource.Add(new TabControlItem("Slider Controls", new SliderControlsUC()));
             tabItemSource.Add(new TabControlItem("ProgressBar Controls", new ProgressBarControlsUC()));
+            tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
+            tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
+            tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()));
+
             tabItemSource.Add(new TabControlItem($"MessageBox, NoticeMessage\nWindow", true));
             tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("NotificationBox Window", new NotifiactionBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
-            tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
-            tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
-            tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
-            tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()));
+            tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
+            tabItemSource.Add(new TabControlItem("Messaging", new MessagingControlsUC()));
+
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
