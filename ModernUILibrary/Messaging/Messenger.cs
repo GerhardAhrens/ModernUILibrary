@@ -55,8 +55,7 @@
             Register(recipient, token, false, action, keepTargetAlive);
         }
 
-        public virtual void Register<TMessage>(object recipient, object token, bool receiveDerivedMessagesToo, Action<TMessage> action,
-            bool keepTargetAlive = false)
+        public virtual void Register<TMessage>(object recipient, object token, bool receiveDerivedMessagesToo, Action<TMessage> action, bool keepTargetAlive = false)
         {
             lock (_registerLock)
             {
@@ -377,8 +376,7 @@
             {
                 // Clone to protect from people registering in a "receive message" method
                 // Correction Messaging BL0008.002
-                var listClone =
-                    _recipientsOfSubclassesAction.Keys.Take(_recipientsOfSubclassesAction.Count()).ToList();
+                var listClone = _recipientsOfSubclassesAction.Keys.Take(_recipientsOfSubclassesAction.Count()).ToList();
 
                 foreach (var type in listClone)
                 {
@@ -411,9 +409,7 @@
                 {
                     if (_recipientsStrictAction.ContainsKey(messageType))
                     {
-                        list = _recipientsStrictAction[messageType]
-                            .Take(_recipientsStrictAction[messageType].Count())
-                            .ToList();
+                        list = _recipientsStrictAction[messageType].Take(_recipientsStrictAction[messageType].Count()).ToList();
                     }
                 }
 
