@@ -13,7 +13,7 @@
             this._controlAViewModel = controlAViewModel;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = null;
 
         public bool CanExecute(object parameter) => true;
 
