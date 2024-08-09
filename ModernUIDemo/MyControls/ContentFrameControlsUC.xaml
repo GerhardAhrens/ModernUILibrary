@@ -29,7 +29,7 @@
                 BorderBrush="Black"
                 BorderThickness="1"
                 KeyboardNavigation.DirectionalNavigation="Contained">
-                <ModernUI:ContentFrame
+                <ModernUI:ContentFrame BorderBrush="Green" BorderThickness="0,2,0,0"
                     Title="TextBox ReadOnly"
                     HorizontalAlignment="Left"
                     ContentFrameColor="LightSalmon">

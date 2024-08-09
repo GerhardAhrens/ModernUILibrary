@@ -36,7 +36,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Border BorderBrush="Green" BorderThickness="0,1,0,0">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter
                                 Grid.Column="0"
                                 Margin="{TemplateBinding TitleMargin}"
