@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -16,7 +17,7 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnShowTodayButtonChanged));
+        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowTodayButtonChanged));
         public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
         private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "yyyy.MM", "yyyy.M", "MM.yyyy", "M.yyyy", "yyyy.MM" };
         private string day = string.Empty;
@@ -38,7 +39,7 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
-            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbDay, "PreviewKeyDown", this.OnDayPreviewKeyDown);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnToday, "Click", this.OnSetCurrentDate);
         }
 
         public bool IsReadOnly
@@ -59,9 +60,9 @@
             set { this.SetValue(SelectedDateProperty, value); }
         }
 
-        public bool ShowTodayButton
+        public bool? ShowTodayButton
         {
-            get { return (bool)GetValue(ShowTodayButtonProperty); }
+            get { return (bool?)GetValue(ShowTodayButtonProperty); }
             set { SetValue(ShowTodayButtonProperty, value); }
         }
 
@@ -95,15 +96,36 @@
             {
                 if (cb.Name == "cbDay")
                 {
-                    day = ((object[])e.AddedItems)[0].ToString();
+                    if (e.AddedItems.Count > 0)
+                    {
+                        day = ((object[])e.AddedItems)[0].ToString();
+                    }
+                    else
+                    {
+                        day = DateTime.Now.Day.ToString();
+                    }
                 }
                 else if (cb.Name == "cbMonth")
                 {
-                    month = ((object[])e.AddedItems)[0].ToString();
+                    if (e.AddedItems.Count > 0)
+                    {
+                        month = ((object[])e.AddedItems)[0].ToString();
+                    }
+                    else
+                    {
+                        month = DateTime.Now.Month.ToString();
+                    }
                 }
                 else if (cb.Name == "cbYear")
                 {
-                    year = ((object[])e.AddedItems)[0].ToString();
+                    if (e.AddedItems.Count > 0)
+                    {
+                        year = ((object[])e.AddedItems)[0].ToString();
+                    }
+                    else
+                    {
+                        year = DateTime.Now.Year.ToString();
+                    }
                 }
 
                 if (string.IsNullOrEmpty(day) == false && string.IsNullOrEmpty(month) == false && string.IsNullOrEmpty(year) == false)
@@ -149,6 +171,11 @@
                 bool showButton = (bool)(e.NewValue);
                 if (showButton == true)
                 {
+                    control.btnToday.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    control.btnToday.Visibility = Visibility.Collapsed;
                 }
             }
         }
@@ -167,8 +194,14 @@
             }
         }
 
-        private void OnDayPreviewKeyDown(object sender, KeyEventArgs e)
+        private void OnSetCurrentDate(object sender, RoutedEventArgs e)
         {
+            if (sender is Button control)
+            {
+                this.cbDay.SelectedValue = DateTime.Now.Day;
+                this.cbMonth.SelectedValue = DateTime.Now.Month;
+                this.cbYear.SelectedValue = DateTime.Now.Year;
+            }
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)

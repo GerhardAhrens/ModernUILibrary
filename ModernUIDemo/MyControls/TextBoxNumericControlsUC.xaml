@@ -140,18 +140,20 @@
             </StackPanel>
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxDate x:Name="TxtDateBox"
+                <ModernUI:TextBoxDate
+                    x:Name="TxtDateBox"
                     IsReadOnly="False"
                     SelectedDate="{Binding Path=DateTimePickerValue.Value, UpdateSourceTrigger=PropertyChanged}"
-                    ShowTodayButton="False" />
+                    ShowTodayButton="True" />
 
                 <TextBlock
                     Width="200"
                     Margin="5,0"
                     VerticalAlignment="Center"
+                    Language="DE"
                     Background="White">
                     <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=SelectedDate, ElementName=TxtDateBox}" />
+                    <Run Text="{Binding Path=SelectedDate, ElementName=TxtDateBox, StringFormat=d}" />
                 </TextBlock>
             </StackPanel>
 

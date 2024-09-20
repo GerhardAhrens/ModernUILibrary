@@ -173,7 +173,7 @@
                         Margin="5,0"
                         VerticalAlignment="Center"
                         Background="White">
-                        <Run Text="Auswah:" />
+                        <Run Text="Auswahl:" />
                         <Run Text="{Binding Path=SelectedValue, ElementName=cbFilteredComboBox}" />
                     </TextBlock>
                 </StackPanel>
