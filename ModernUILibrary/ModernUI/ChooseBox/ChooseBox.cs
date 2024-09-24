@@ -39,6 +39,32 @@
 
         #endregion
 
+        #region ExtensionFilter
+
+        public string ExtensionFilter
+        {
+            get { return (string)GetValue(ExtensionFilterProperty); }
+            set { SetValue(ExtensionFilterProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExtensionFilterProperty =
+            DependencyProperty.Register("ExtensionFilter", typeof(string), typeof(ChooseBox), new PropertyMetadata(string.Empty));
+
+        #endregion
+
+        #region DefaultExtension
+
+        public string DefaultExtension
+        {
+            get { return (string)GetValue(DefaultExtensionProperty); }
+            set { SetValue(DefaultExtensionProperty, value); }
+        }
+
+        public static readonly DependencyProperty DefaultExtensionProperty =
+            DependencyProperty.Register("DefaultExtension", typeof(string), typeof(ChooseBox), new PropertyMetadata("Alle|*.*"));
+
+        #endregion
+
         #region ChooseButtonWidth
 
         public double ChooseButtonWidth
@@ -90,14 +116,47 @@
                 case EnumChooseBoxType.SingleFile:
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Multiselect = false;
-                    //"文本文件|*.*|C#文件|*.cs|所有文件|*.*"
-                    //openFileDialog.Filter = this.Filter;
+
+                    if (string.IsNullOrEmpty(this.ExtensionFilter) == false)
+                    {
+                        //Alles|*.*|C# File|*.cs|Xaml-File|*.xaml
+                        openFileDialog.Filter = this.ExtensionFilter;
+                    }
+
+                    if (string.IsNullOrEmpty(this.DefaultExtension) == false)
+                    {
+                        openFileDialog.DefaultExt = this.DefaultExtension;
+                    }
+
                     if (openFileDialog.ShowDialog() == true)
                     {
                         this.Text = openFileDialog.FileName;
                     }
+
                     break;
                 case EnumChooseBoxType.MultiFile:
+                    break;
+                case EnumChooseBoxType.SaveFile:
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.CheckFileExists = true;
+                    saveFileDialog.CheckPathExists = true;
+                    saveFileDialog.RestoreDirectory = true;
+                    if (string.IsNullOrEmpty(this.ExtensionFilter) == false)
+                    {
+                        //Alles|*.*|C# File|*.cs|Xaml-File|*.xaml
+                        saveFileDialog.Filter = this.ExtensionFilter;
+                    }
+
+                    if (string.IsNullOrEmpty(this.DefaultExtension) == false)
+                    {
+                        saveFileDialog.DefaultExt = this.DefaultExtension;
+                    }
+
+                    if (saveFileDialog.ShowDialog() == true)
+                    {
+                        this.Text = saveFileDialog.FileName;
+                    }
+
                     break;
                 case EnumChooseBoxType.Folder:
                     OpenFolderDialog folderDialog = new OpenFolderDialog();

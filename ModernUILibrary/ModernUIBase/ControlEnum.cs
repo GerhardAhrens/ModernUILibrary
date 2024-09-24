@@ -175,6 +175,7 @@
     {
         SingleFile,
         MultiFile,
+        SaveFile,
         Folder,
     }
 }

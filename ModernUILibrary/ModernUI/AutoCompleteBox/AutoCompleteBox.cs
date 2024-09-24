@@ -19,7 +19,7 @@
 
         #region FilterItemSelectedEvent
 
-        public static readonly RoutedEvent FilterItemSelectedEvent = EventManager.RegisterRoutedEvent(nameof(FilterItemSelected),
+        public static readonly RoutedEvent FilterItemSelectedEvent = EventManager.RegisterRoutedEvent("FilterItemSelected",
             RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(AutoCompleteBox));
 
         public event RoutedPropertyChangedEventHandler<object> FilterItemSelected
@@ -53,7 +53,7 @@
         }
         
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(AutoCompleteBox), new PropertyMetadata(null));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(AutoCompleteBox), new PropertyMetadata(null));
 
         #endregion
 
@@ -66,7 +66,7 @@
         }
         
         public static readonly DependencyProperty DisplayMemberPathProperty =
-            DependencyProperty.Register(nameof(DisplayMemberPath), typeof(string), typeof(AutoCompleteBox), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("DisplayMemberPath", typeof(string), typeof(AutoCompleteBox), new PropertyMetadata(string.Empty));
 
         #endregion
 
@@ -79,7 +79,7 @@
         }
         
         public static readonly DependencyProperty FilterMemberSourceProperty =
-            DependencyProperty.Register(nameof(FilterMemberSource), typeof(ObservableCollection<PropertyFilterDescription>), typeof(AutoCompleteBox), new PropertyMetadata(new ObservableCollection<PropertyFilterDescription>()));
+            DependencyProperty.Register("FilterMemberSource", typeof(ObservableCollection<PropertyFilterDescription>), typeof(AutoCompleteBox), new PropertyMetadata(new ObservableCollection<PropertyFilterDescription>()));
 
         #endregion
 
@@ -92,7 +92,7 @@
         }
         
         public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register(nameof(IsDropDownOpen), typeof(bool), typeof(AutoCompleteBox), new PropertyMetadata(false));
+            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(AutoCompleteBox), new PropertyMetadata(false));
 
         #endregion
 
@@ -105,7 +105,7 @@
         }
         
         public static readonly DependencyProperty DropDownBoxStyleProperty =
-            DependencyProperty.Register(nameof(DropDownBoxStyle), typeof(Style), typeof(AutoCompleteBox), new PropertyMetadata(null));
+            DependencyProperty.Register("DropDownBoxStyle", typeof(Style), typeof(AutoCompleteBox), new PropertyMetadata(null));
 
         #endregion
 
@@ -118,7 +118,7 @@
         }
         
         public static readonly DependencyProperty DropDownBoxItemContainerStyleProperty =
-            DependencyProperty.Register(nameof(DropDownBoxItemContainerStyle), typeof(Style), typeof(AutoCompleteBox));
+            DependencyProperty.Register("DropDownBoxItemContainerStyle", typeof(Style), typeof(AutoCompleteBox));
 
         #endregion
 
@@ -131,7 +131,7 @@
         }
         
         public static readonly DependencyProperty DropDownBoxGroupStyleProperty =
-            DependencyProperty.Register(nameof(DropDownBoxGroupStyle), typeof(ObservableCollection<GroupStyle>), typeof(AutoCompleteBox));
+            DependencyProperty.Register("DropDownBoxGroupStyle", typeof(ObservableCollection<GroupStyle>), typeof(AutoCompleteBox));
 
         #endregion
 
@@ -144,7 +144,7 @@
         }
         
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(object), typeof(AutoCompleteBox), new PropertyMetadata(null));
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteBox), new PropertyMetadata(null));
 
         #endregion
 
@@ -157,7 +157,7 @@
         }
         
         public static readonly DependencyProperty MaxDropDownHeightProperty =
-            DependencyProperty.Register(nameof(MaxDropDownHeight), typeof(double), typeof(AutoCompleteBox), new PropertyMetadata(200d));
+            DependencyProperty.Register("MaxDropDownHeight", typeof(double), typeof(AutoCompleteBox), new PropertyMetadata(200d));
 
         #endregion
 
@@ -170,7 +170,7 @@
         }
 
         public static readonly DependencyProperty IsBusyProperty =
-            DependencyProperty.Register(nameof(IsBusy), typeof(bool), typeof(AutoCompleteBox), new PropertyMetadata(false));
+            DependencyProperty.Register("IsBusy", typeof(bool), typeof(AutoCompleteBox), new PropertyMetadata(false));
 
         #endregion
 
@@ -183,7 +183,7 @@
         }
 
         public static readonly DependencyProperty SelectedIndexProperty =
-            DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(AutoCompleteBox), new PropertyMetadata(0));
+            DependencyProperty.Register("SelectedIndex", typeof(int), typeof(AutoCompleteBox), new PropertyMetadata(0));
 
         #endregion
         #endregion
