@@ -69,6 +69,7 @@
             tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
+            tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));

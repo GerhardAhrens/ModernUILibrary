@@ -2,6 +2,7 @@
     x:Class="ModernUIDemo.MyControls.TextBoxStringControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUIbase="clr-namespace:ModernIU.Base;assembly=ModernUILibrary"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -210,9 +211,33 @@
                 Header="ReadOnly TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxReadOnly
-                            Width="150"
-                            Text="Test" />
+                <ModernUI:TextBoxReadOnly Width="150" Text="Test" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="AutoComplete TextBox" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:AutoCompleteBox
+                    x:Name="AutoCompleteBox"
+                    Width="250"
+                    Height="25"
+                    MUIbase:WatermarkAdorner.Watermark="Name">
+                    <ModernUI:AutoCompleteBox.FilterMemberSource>
+                        <ModernUI:PropertyFilterDescription PropertyName="Name" />
+                    </ModernUI:AutoCompleteBox.FilterMemberSource>
+                </ModernUI:AutoCompleteBox>
+
+                <TextBlock
+                    Width="300"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=Text, ElementName=AutoCompleteBox}" />
+                </TextBlock>
             </StackPanel>
         </StackPanel>
     </Grid>
