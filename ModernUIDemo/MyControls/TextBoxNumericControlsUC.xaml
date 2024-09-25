@@ -150,8 +150,8 @@
                     Width="200"
                     Margin="5,0"
                     VerticalAlignment="Center"
-                    Language="DE"
-                    Background="White">
+                    Background="White"
+                    Language="DE">
                     <Run Text="Ergebnis:" />
                     <Run Text="{Binding Path=SelectedDate, ElementName=TxtDateBox, StringFormat=d}" />
                 </TextBlock>
