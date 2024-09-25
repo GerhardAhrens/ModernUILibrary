@@ -37,7 +37,10 @@
                 Height="15"
                 Background="Green"
                 Header="Datei auswählen (Alles)" />
-            <ModernUI:ChooseBox Width="300" Height="28" />
+            <ModernUI:ChooseBox
+                Title="Alle Dateien auswählen"
+                Width="300"
+                Height="28" />
 
             <ModernUI:HeaderSeparator
                 Height="15"
@@ -51,19 +54,32 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="Datei speichern unter" />
+                Header="Mehrere Dateien auswählen" />
             <ModernUI:ChooseBox
+                Title="Alle Dateien auswählen"
                 Width="300"
                 Height="28"
+                ChooseBoxType="MultiFile" />
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Datei speichern unter" />
+            <ModernUI:ChooseBox
+                Title="Datei speichern unter ..."
+                Width="300"
+                Height="28"
+                ChooseBoxType="SaveFile"
                 DefaultExtension="Alle|*.*"
-                ExtensionFilter="Text File|*.txt|C# File|*.cs|Xaml-File|*.xaml"
-                ChooseBoxType="SaveFile" />
+                ExtensionFilter="Text File|*.txt|C# File|*.cs|Xaml-File|*.xaml" />
 
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
                 Header="Verzeichnis auswählen" />
+
             <ModernUI:ChooseBox
+                Title="Verzeichnis auswählen ..."
                 Width="300"
                 Height="28"
                 ChooseBoxType="Folder" />

@@ -23,6 +23,8 @@
             this.InitializeComponent();
 
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            WeakEventManager<Window, EventArgs>.AddHandler(this, "Closed", this.OnWindowClosed);
+
 
             List<TabControlItem> tabItemSource = new List<TabControlItem>();
             tabItemSource.Add(new TabControlItem("Darstellung", true));
@@ -90,6 +92,11 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void OnWindowClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         #region PropertyChanged Implementierung

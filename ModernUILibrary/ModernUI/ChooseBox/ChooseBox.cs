@@ -1,7 +1,10 @@
 ﻿namespace ModernIU.Controls
 {
+    using System.IO;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Interop;
+
     using Microsoft.Win32;
 
     using ModernIU.Base;
@@ -14,6 +17,19 @@
 
         #region DependencyProperty
 
+        #region Title
+
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register(nameof(Title), typeof(string), typeof(ChooseBox), new PropertyMetadata(null));
+
+        #endregion
+
         #region ChooseButtonStyle
         public Style ChooseButtonStyle
         {
@@ -22,7 +38,7 @@
         }
 
         public static readonly DependencyProperty ChooseButtonStyleProperty =
-            DependencyProperty.Register("ChooseButtonStyle", typeof(Style), typeof(ChooseBox));
+            DependencyProperty.Register(nameof(ChooseButtonStyle), typeof(Style), typeof(ChooseBox));
 
         #endregion
 
@@ -35,7 +51,7 @@
         }
 
         public static readonly DependencyProperty ChooseBoxTypeProperty =
-            DependencyProperty.Register("ChooseBoxType", typeof(EnumChooseBoxType), typeof(ChooseBox), new PropertyMetadata(EnumChooseBoxType.SingleFile));
+            DependencyProperty.Register(nameof(ChooseBoxType), typeof(EnumChooseBoxType), typeof(ChooseBox), new PropertyMetadata(EnumChooseBoxType.SingleFile));
 
         #endregion
 
@@ -48,7 +64,7 @@
         }
 
         public static readonly DependencyProperty ExtensionFilterProperty =
-            DependencyProperty.Register("ExtensionFilter", typeof(string), typeof(ChooseBox), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register(nameof(ExtensionFilter), typeof(string), typeof(ChooseBox), new PropertyMetadata(string.Empty));
 
         #endregion
 
@@ -61,7 +77,20 @@
         }
 
         public static readonly DependencyProperty DefaultExtensionProperty =
-            DependencyProperty.Register("DefaultExtension", typeof(string), typeof(ChooseBox), new PropertyMetadata("Alle|*.*"));
+            DependencyProperty.Register(nameof(DefaultExtension), typeof(string), typeof(ChooseBox), new PropertyMetadata("Alle|*.*"));
+
+        #endregion
+
+        #region InitialDirectory
+
+        public string InitialDirectory
+        {
+            get { return (string)GetValue(InitialDirectoryProperty); }
+            set { SetValue(InitialDirectoryProperty, value); }
+        }
+
+        public static readonly DependencyProperty InitialDirectoryProperty =
+            DependencyProperty.Register(nameof(InitialDirectory), typeof(string), typeof(ChooseBox), new PropertyMetadata(null));
 
         #endregion
 
@@ -74,7 +103,7 @@
         }
 
         public static readonly DependencyProperty ChooseButtonWidthProperty =
-            DependencyProperty.Register("ChooseButtonWidth", typeof(double), typeof(ChooseBox), new PropertyMetadata(20d));
+            DependencyProperty.Register(nameof(ChooseButtonWidth), typeof(double), typeof(ChooseBox), new PropertyMetadata(20d));
 
         #endregion
 
@@ -98,14 +127,10 @@
             this.PART_ChooseButton = this.GetTemplateChild("PART_ChooseButton") as Button;
             if(this.PART_ChooseButton != null)
             {
-                this.PART_ChooseButton.Click += PART_ChooseButton_Click;
+                WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.PART_ChooseButton, "Click", this.PART_ChooseButton_Click);
             }
         }
         
-        #endregion
-
-        #region private function
-
         #endregion
 
         #region Event Implement Function
@@ -116,6 +141,11 @@
                 case EnumChooseBoxType.SingleFile:
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Multiselect = false;
+
+                    if (string.IsNullOrEmpty(this.Title) == false)
+                    {
+                        openFileDialog.Title = this.Title;
+                    }
 
                     if (string.IsNullOrEmpty(this.ExtensionFilter) == false)
                     {
@@ -128,19 +158,75 @@
                         openFileDialog.DefaultExt = this.DefaultExtension;
                     }
 
+                    if (string.IsNullOrEmpty(this.InitialDirectory) == false)
+                    {
+                        openFileDialog.InitialDirectory = this.InitialDirectory;
+                    }
+                    else 
+                    {
+                        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        string initialDirectory = string.IsNullOrEmpty(this.InitialDirectory) == true ? myDocuments : this.InitialDirectory;
+                        openFileDialog.InitialDirectory = initialDirectory;
+                    }
+
                     if (openFileDialog.ShowDialog() == true)
                     {
                         this.Text = openFileDialog.FileName;
                     }
 
                     break;
+
                 case EnumChooseBoxType.MultiFile:
+                    OpenFileDialog openFileDialogMulti = new OpenFileDialog();
+                    openFileDialogMulti.Multiselect = true;
+
+                    if (string.IsNullOrEmpty(this.Title) == false)
+                    {
+                        openFileDialogMulti.Title = this.Title;
+                    }
+
+                    if (string.IsNullOrEmpty(this.ExtensionFilter) == false)
+                    {
+                        //Alles|*.*|C# File|*.cs|Xaml-File|*.xaml
+                        openFileDialogMulti.Filter = this.ExtensionFilter;
+                    }
+
+                    if (string.IsNullOrEmpty(this.DefaultExtension) == false)
+                    {
+                        openFileDialogMulti.DefaultExt = this.DefaultExtension;
+                    }
+
+                    if (string.IsNullOrEmpty(this.InitialDirectory) == false)
+                    {
+                        openFileDialogMulti.InitialDirectory = this.InitialDirectory;
+                    }
+                    else
+                    {
+                        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        string initialDirectory = string.IsNullOrEmpty(this.InitialDirectory) == true ? myDocuments : this.InitialDirectory;
+                        openFileDialogMulti.InitialDirectory = initialDirectory;
+                    }
+
+                    if (openFileDialogMulti.ShowDialog() == true)
+                    {
+                        string[] files = openFileDialogMulti.FileNames;
+                        this.Text = string.Join('|', files);
+                    }
+
                     break;
                 case EnumChooseBoxType.SaveFile:
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.CheckFileExists = true;
                     saveFileDialog.CheckPathExists = true;
                     saveFileDialog.RestoreDirectory = true;
+                    saveFileDialog.CreatePrompt = false;
+                    saveFileDialog.OverwritePrompt = true;
+
+                    if (string.IsNullOrEmpty(this.Title) == false)
+                    {
+                        saveFileDialog.Title = this.Title;
+                    }
+
                     if (string.IsNullOrEmpty(this.ExtensionFilter) == false)
                     {
                         //Alles|*.*|C# File|*.cs|Xaml-File|*.xaml
@@ -151,6 +237,21 @@
                     {
                         saveFileDialog.DefaultExt = this.DefaultExtension;
                     }
+                    else
+                    {
+                        saveFileDialog.DefaultExt = Path.GetExtension(this.Text);
+                    }
+
+                    if (string.IsNullOrEmpty(this.InitialDirectory) == false)
+                    {
+                        saveFileDialog.InitialDirectory = this.InitialDirectory;
+                    }
+                    else
+                    {
+                        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        string initialDirectory = string.IsNullOrEmpty(this.InitialDirectory) == true ? myDocuments : this.InitialDirectory;
+                        saveFileDialog.InitialDirectory = initialDirectory;
+                    }
 
                     if (saveFileDialog.ShowDialog() == true)
                     {
@@ -160,7 +261,23 @@
                     break;
                 case EnumChooseBoxType.Folder:
                     OpenFolderDialog folderDialog = new OpenFolderDialog();
-                    if(folderDialog.ShowDialog() == true)
+                    if (string.IsNullOrEmpty(this.Title) == false)
+                    {
+                        folderDialog.Title = this.Title;
+                    }
+
+                    if (string.IsNullOrEmpty(this.InitialDirectory) == false)
+                    {
+                        folderDialog.InitialDirectory = this.InitialDirectory;
+                    }
+                    else
+                    {
+                        string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        string initialDirectory = string.IsNullOrEmpty(this.InitialDirectory) == true ? myDocuments : this.InitialDirectory;
+                        folderDialog.InitialDirectory = initialDirectory;
+                    }
+
+                    if (folderDialog.ShowDialog() == true)
                     {
                         this.Text = folderDialog.FolderName;
                     }
