@@ -294,15 +294,13 @@
                 {
                     collectionView.Filter = (o) =>
                     {
-                        if (string.IsNullOrEmpty(this.DisplayMemberPath)
-                            && (this.FilterMemberSource.Count == 0 || this.FilterMemberSource == null))
+                        if (string.IsNullOrEmpty(this.DisplayMemberPath) && (this.FilterMemberSource.Count == 0 || this.FilterMemberSource == null))
                         {
                             return Convert.ToString(o).Contains(this.Text);
                         }
                         else
                         {
                             object value = CommonUtil.GetPropertyValue(o, this.DisplayMemberPath);
-                            System.Diagnostics.Debug.WriteLine(Convert.ToString(value));
                             return Convert.ToString(value).Contains(this.Text);
                         }
                     };
