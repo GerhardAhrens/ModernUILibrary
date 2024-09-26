@@ -1,0 +1,91 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.ComboTreeControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <PathGeometry x:Key="RootIcon" Figures="M409.6 102.4 102.4 102.4c-56.32 0-102.4 46.08-102.4 102.4l0 614.4c0 56.32 46.08 102.4 102.4 102.4l819.2 0c56.32 0 102.4-46.08 102.4-102.4L1024 307.2c0-56.32-46.08-102.4-102.4-102.4L512 204.8 409.6 102.4z" />
+        <PathGeometry x:Key="MiddleIcon" Figures="M904 875.9H120c-30.9 0-56-25.1-56-56V204.1c0-30.9 25.1-56 56-56h231.6c12.8 0 25.2 4.4 35.2 12.4L509.9 260H904c30.9 0 56 25.1 56 56v503.8c0 31-25.1 56.1-56 56.1z m0-56v28-28zM351.6 204.1H120v615.8h784l0.1-503.8H510c-12.8 0-25.3-4.4-35.3-12.5l-123.1-99.5z" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="14" Text="Beispiel für ComboTree Control ..." />
+        <Separator Height="3" Background="Green" />
+
+        <UniformGrid Grid.Row="2">
+            <ModernUI:ComboTree
+                x:Name="comboTree"
+                Width="250"
+                Height="25">
+                <ModernUI:ComboTree.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                            <Path
+                                x:Name="path"
+                                Width="12"
+                                Data="{StaticResource MiddleIcon}"
+                                Fill="#5696FF"
+                                Stretch="Uniform" />
+                            <TextBlock Margin="5,0,0,0" Text="{Binding Name}" />
+                        </StackPanel>
+                        <HierarchicalDataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding TreeNodeType, RelativeSource={RelativeSource AncestorType=ModernUI:MTreeViewItem}}" Value="RootNode">
+                                <Setter TargetName="path" Property="Data" Value="{StaticResource RootIcon}" />
+                                <Setter TargetName="path" Property="Fill" Value="#5696FF" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TreeViewItem}}" Value="True">
+                                <Setter TargetName="path" Property="Fill" Value="White" />
+                            </DataTrigger>
+                        </HierarchicalDataTemplate.Triggers>
+                    </HierarchicalDataTemplate>
+                </ModernUI:ComboTree.ItemTemplate>
+            </ModernUI:ComboTree>
+
+            <StackPanel>
+                <ModernUI:ComboTree
+                    x:Name="comboTree2"
+                    Width="250"
+                    Height="25"
+                    IsCloseWhenSelected="False">
+                    <ModernUI:ComboTree.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                <Path
+                                    x:Name="path"
+                                    Width="12"
+                                    Data="M904 875.9H120c-30.9 0-56-25.1-56-56V204.1c0-30.9 25.1-56 56-56h231.6c12.8 0 25.2 4.4 35.2 12.4L509.9 260H904c30.9 0 56 25.1 56 56v503.8c0 31-25.1 56.1-56 56.1z m0-56v28-28zM351.6 204.1H120v615.8h784l0.1-503.8H510c-12.8 0-25.3-4.4-35.3-12.5l-123.1-99.5z"
+                                    Fill="Blue"
+                                    Stretch="Uniform" />
+                                <TextBlock Margin="5,0,0,0" Text="{Binding Name}" />
+                            </StackPanel>
+                            <HierarchicalDataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TreeViewItem}}" Value="True">
+                                    <Setter TargetName="path" Property="Fill" Value="White" />
+                                </DataTrigger>
+                            </HierarchicalDataTemplate.Triggers>
+                        </HierarchicalDataTemplate>
+                    </ModernUI:ComboTree.ItemTemplate>
+                </ModernUI:ComboTree>
+                <TextBlock>
+                    <Run Text="Test：" />
+                    <Run Text="{Binding SelectedValue, ElementName=comboTree2}" />
+                </TextBlock>
+            </StackPanel>
+        </UniformGrid>
+    </Grid>
+</UserControl>

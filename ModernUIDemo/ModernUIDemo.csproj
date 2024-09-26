@@ -118,6 +118,9 @@
     <Compile Update="MyControls\MessagingAControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ComboTreeControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +152,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\ContentFrameControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\ComboTreeControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
