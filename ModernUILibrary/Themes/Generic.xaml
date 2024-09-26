@@ -13,6 +13,8 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ComboTree/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/GroupBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/DropDownButton/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/Flyout.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/FlyoutControl.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListUpDown/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Icons/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Loading/Themes/Generic.xaml" />

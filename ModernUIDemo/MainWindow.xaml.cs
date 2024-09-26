@@ -69,6 +69,7 @@
             tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
             tabItemSource.Add(new TabControlItem("Messaging mit zwei Controls", new MessagingAControlsUC()));
             tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
+            tabItemSource.Add(new TabControlItem("Flyout Window", new FlyoutControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));

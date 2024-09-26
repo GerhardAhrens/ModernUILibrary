@@ -27,6 +27,7 @@
     <Folder Include="ModernUI\ChooseBox\Themes\" />
     <Folder Include="ModernUI\ComboTree\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
+    <Folder Include="ModernUI\FlyoutControl\Themes\" />
     <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
