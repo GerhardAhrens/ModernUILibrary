@@ -38,6 +38,7 @@
             tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
             tabItemSource.Add(new TabControlItem("ListBox Controls", new ListBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
@@ -66,9 +67,9 @@
             tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("NotificationBox Window", new NotifiactionBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
-            tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
             tabItemSource.Add(new TabControlItem("Messaging mit zwei Controls", new MessagingAControlsUC()));
             tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
+            tabItemSource.Add(new TabControlItem("Flyout Window", new FlyoutControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));

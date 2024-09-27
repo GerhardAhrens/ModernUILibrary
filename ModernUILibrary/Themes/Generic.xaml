@@ -10,8 +10,11 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/CheckComboBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ChooseBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/CheckBox/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ComboTree/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/GroupBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/DropDownButton/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/Flyout.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/FlyoutControl.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListUpDown/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Icons/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Loading/Themes/Generic.xaml" />
@@ -30,6 +33,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/TitleBar/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToggleButton/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToolTip/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Tree/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Grid/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Resources/MenuItemStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>

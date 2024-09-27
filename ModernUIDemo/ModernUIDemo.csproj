@@ -20,6 +20,7 @@
     <Folder Include="BaseClass\ArgumentGuard\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
+    <Folder Include="Windows\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -118,6 +119,12 @@
     <Compile Update="MyControls\MessagingAControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ComboTreeControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\FlyoutControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +156,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\ContentFrameControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\ComboTreeControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
