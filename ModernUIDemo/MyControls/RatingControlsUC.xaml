@@ -43,7 +43,7 @@
                     SelectedColor="#FEDF32"
                     Value="4">
                     <ModernUI:RatingBar.Content>
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType={x:Type ModernUI:RatingBar}}, StringFormat={}{0} Star}" />
+                        <TextBlock Text="{Binding Path=Value, StringFormat={}{0} Star}" />
                     </ModernUI:RatingBar.Content>
                 </ModernUI:RatingBar>
 

@@ -15,26 +15,23 @@
 
     public class BadgeAdorner : Adorner
     {
-        public static readonly DependencyProperty HasAdornerProperty =
-    DependencyProperty.RegisterAttached("HasAdorner", typeof(bool),
-        typeof(BadgeAdorner), new PropertyMetadata(false, HasAdornerChangedCallBack));
+        public static readonly DependencyProperty HasAdornerProperty = 
+            DependencyProperty.RegisterAttached("HasAdorner", typeof(bool), typeof(BadgeAdorner), new PropertyMetadata(false, HasAdornerChangedCallBack));
 
-        public static readonly DependencyProperty IsShowAdornerProperty =
-            DependencyProperty.RegisterAttached("IsShowAdorner", typeof(bool),
-                typeof(BadgeAdorner), new PropertyMetadata(false, IsShowChangedCallBack));
+        public static readonly DependencyProperty IsShowAdornerProperty = 
+            DependencyProperty.RegisterAttached("IsShowAdorner", typeof(bool), typeof(BadgeAdorner), new PropertyMetadata(false, IsShowChangedCallBack));
 
-        public static readonly DependencyProperty NumberProperty =
-            DependencyProperty.RegisterAttached("Number", typeof(int),
-                typeof(BadgeAdorner), new PropertyMetadata(0, NumberChangedCallBack, CoerceNumberCallback));
+        public static readonly DependencyProperty NumberProperty = 
+            DependencyProperty.RegisterAttached("Number", typeof(int), typeof(BadgeAdorner), new PropertyMetadata(0, NumberChangedCallBack, CoerceNumberCallback));
 
-        public static readonly DependencyProperty BackgroundProperty =
+        public static readonly DependencyProperty BackgroundProperty = 
             DependencyProperty.RegisterAttached("Background", typeof(Brush), typeof(BadgeAdorner), new PropertyMetadata(Brushes.Red, BackgroundCallBack));
 
         public static readonly DependencyProperty BadgeTypeProperty =
             DependencyProperty.RegisterAttached("BadgeType", typeof(BadgeType), typeof(BadgeAdorner), new PropertyMetadata(BadgeType.Normal, BadgeTypeChangeCallback));
 
-        private Badge badge;
-        private VisualCollection _visuals;
+        private Badge badge = null;
+        private VisualCollection _visuals = null;
 
         public BadgeAdorner(UIElement adornedElement) : base(adornedElement)
         {
@@ -42,30 +39,30 @@
             TranslateTransform tt = new TranslateTransform();
             tt.X = 13;
             tt.Y = -10;
-            badge = new Badge()
+            this.badge = new Badge()
             {
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 VerticalAlignment = System.Windows.VerticalAlignment.Top,
                 RenderTransform = tt,
             };
 
-            badge.Background = this.BackColor;
-            badge.DataContext = adornedElement;
+            this.badge.Background = this.BackColor;
+            this.badge.DataContext = adornedElement;
 
-            _visuals.Add(badge);
+            this._visuals.Add(badge);
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            badge.Background = this.BackColor;
+            this.badge.Background = this.BackColor;
         }
 
         protected override int VisualChildrenCount
         {
             get
             {
-                return _visuals.Count;
+                return this._visuals.Count;
             }
         }
 
@@ -104,6 +101,7 @@
         {
             obj.SetValue(IsShowAdornerProperty, value);
         }
+
         public static int GetNumber(DependencyObject obj)
         {
             return (int)obj.GetValue(NumberProperty);
@@ -205,10 +203,15 @@
 
         private static void BackgroundCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            BadgeAdorner ad = d as BadgeAdorner;
-            if (ad != null)
+            BadgeAdorner adorner = BadgeAdorner.GetAdorner(d);
+
+            if (adorner == null)
             {
+                return;
             }
+
+            adorner.SetBackground(Brushes.Green);
+
         }
 
         private static object CoerceNumberCallback(DependencyObject d, object baseValue)
@@ -236,6 +239,11 @@
             {
                 adorner.ShowNormal();
             }
+        }
+
+        private void SetBackground(Brush backColor)
+        {
+            this.badge.Background = backColor;
         }
 
         private void ShowAdorner()

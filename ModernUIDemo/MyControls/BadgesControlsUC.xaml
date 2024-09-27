@@ -39,17 +39,20 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Number="88" />
+                    
                     <ModernUI:Badge
                         Margin="10,10"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Number="100" />
+                    
                     <ModernUI:Badge
                         Margin="10,10"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Background="#49C0F6"
                         Number="10" />
+                    
                     <ModernUI:Badge
                         Margin="10,10"
                         HorizontalAlignment="Center"
@@ -61,7 +64,7 @@
                         Width="100"
                         Height="30"
                         ModernUI:BadgeAdorner.Background="#5CB85C"
-                        ModernUI:BadgeAdorner.BadgeType="Normal"
+                        ModernUI:BadgeAdorner.BadgeType="Dot"
                         ModernUI:BadgeAdorner.HasAdorner="True"
                         ModernUI:BadgeAdorner.IsShowAdorner="True"
                         ModernUI:BadgeAdorner.Number="50"
@@ -89,7 +92,7 @@
                         x:Name="text"
                         Width="200"
                         Height="50"
-                        ModernUI:BadgeAdorner.Background="WhiteSmoke"
+                        ModernUI:BadgeAdorner.Background="Green"
                         ModernUI:BadgeAdorner.BadgeType="Dot"
                         ModernUI:BadgeAdorner.HasAdorner="True"
                         ModernUI:BadgeAdorner.IsShowAdorner="True"

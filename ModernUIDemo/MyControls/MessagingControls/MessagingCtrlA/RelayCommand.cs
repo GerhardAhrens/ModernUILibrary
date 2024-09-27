@@ -8,9 +8,10 @@
     {
         private ControlAViewModel _controlAViewModel;
 
-        public RelayCommand(ControlAViewModel controlAViewModel)
+        public RelayCommand(ControlAViewModel controlAViewModel, object canExecute = null)
         {
             this._controlAViewModel = controlAViewModel;
+            this.CanExecuteChanged = (EventHandler)canExecute;
         }
 
         public event EventHandler CanExecuteChanged = null;
