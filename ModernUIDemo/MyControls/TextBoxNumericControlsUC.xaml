@@ -64,7 +64,8 @@
                 <ModernUI:TextBoxInt
                     x:Name="txtIntTextBox"
                     Width="100"
-                    MaxLength="5" />
+                    MaxLength="5"
+                    Text="10" />
 
                 <TextBlock
                     Width="100"

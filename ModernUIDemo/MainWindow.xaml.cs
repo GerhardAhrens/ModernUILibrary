@@ -37,8 +37,8 @@
             tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
-            tabItemSource.Add(new TabControlItem("ListBox Controls", new ListBoxControlsUC()));
-            tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
+
+            tabItemSource.Add(new TabControlItem("Button", true));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
@@ -50,6 +50,8 @@
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
+            tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
 
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
@@ -74,6 +76,7 @@
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
+
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));
             tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()));
@@ -82,7 +85,6 @@
             tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()));
 
             this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
-
 
             this.DataContext = this;
         }

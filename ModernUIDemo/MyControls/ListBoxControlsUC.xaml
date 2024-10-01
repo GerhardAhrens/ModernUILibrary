@@ -51,8 +51,8 @@
                         x:Name="mComboBox"
                         Width="100"
                         HorizontalAlignment="Left"
-                        IsReadOnly="False"
                         ModernUI:ComboBoxHelper.EditBackground="Green"
+                        IsReadOnly="False"
                         ItemsSource="{Binding Path=MComboBoxSource.Value}"
                         SelectedItem="{Binding Path=MComboBoxSourceSelectedItem.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -139,15 +139,14 @@
                     Background="Green"
                     Header="ListBox" />
 
-                <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                <DockPanel HorizontalAlignment="Left">
                     <ModernUI:MultiSelectListbox
                         Width="200"
                         Height="100"
-                        VerticalAlignment="Top"
                         IsReadOnly="False"
                         ItemsSource="{Binding Path=ListBoxSource.Value}"
                         SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
+                </DockPanel>
 
                 <ModernUI:HeaderSeparator
                     Height="15"

@@ -11,9 +11,7 @@
 
     public class ChooseBox : TextBox
     {
-        #region private fields
         private Button PART_ChooseButton;
-        #endregion
 
         #region DependencyProperty
 
