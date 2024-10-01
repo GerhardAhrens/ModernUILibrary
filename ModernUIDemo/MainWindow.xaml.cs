@@ -46,13 +46,14 @@
 
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()));
+            tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
+
             tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
-            tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
-            tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
-            tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
 
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));

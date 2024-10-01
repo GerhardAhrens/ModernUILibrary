@@ -206,34 +206,34 @@ namespace ModernIU.Controls
         {
             base.OnApplyTemplate();
 
-            txtSearchinput = this.Template.FindName("TXT_SEARCHINPUT", this) as TextBox; 
-            txtSearchinput.TextChanged += TXT_SEARCHINPUT_TextChanged;
-            txtSearchinput.PreviewKeyDown += TXT_SEARCHINPUT_PreviewKeyDown;
+            this.txtSearchinput = this.Template.FindName("TXT_SEARCHINPUT", this) as TextBox;
+            this.txtSearchinput.TextChanged += this.TXT_SEARCHINPUT_TextChanged;
+            this.txtSearchinput.PreviewKeyDown += this.TXT_SEARCHINPUT_PreviewKeyDown;
 
-            listTextBoxPopup = this.Template.FindName("PUP_AC", this) as Popup;
+            this.listTextBoxPopup = this.Template.FindName("PUP_AC", this) as Popup;
 
-            listTextBoxDataGrid = this.Template.FindName("DG_AC", this) as DataGrid;
-            listTextBoxDataGrid.MouseLeftButtonUp += DG_AC_MouseLeftButtonUp;
+            this.listTextBoxDataGrid = this.Template.FindName("DG_AC", this) as DataGrid;
+            this.listTextBoxDataGrid.MouseLeftButtonUp += DG_AC_MouseLeftButtonUp;
             foreach (DataGridColumn column in this.ListTextBoxColumns)
             {
-                listTextBoxDataGrid.Columns.Add(column);
+                this.listTextBoxDataGrid.Columns.Add(column);
             }
         }
 
         //Select Item From List On Mouse Click
         private void DG_AC_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var item = listTextBoxDataGrid.SelectedItem;
+            var item = this.listTextBoxDataGrid.SelectedItem;
             if (item == null)
             {
                 this.SelectedItem = null;
                 return;
             }
 
-            if (listTextBoxPopup.IsOpen)
+            if (this.listTextBoxPopup.IsOpen)
             {
                 this.SelectedItem = item;
-                listTextBoxPopup.IsOpen = false;
+                this.listTextBoxPopup.IsOpen = false;
             }
         } 
 
@@ -244,23 +244,27 @@ namespace ModernIU.Controls
             {
                 if (listTextBoxDataGrid.Items.Count > 0)
                 {
-                    int SelectedIndex = listTextBoxDataGrid.SelectedIndex;
-                    if (SelectedIndex < listTextBoxDataGrid.Items.Count)
-                        listTextBoxDataGrid.SelectedIndex++;
+                    int selectedIndex = this.listTextBoxDataGrid.SelectedIndex;
+                    if (selectedIndex < this.listTextBoxDataGrid.Items.Count)
+                    {
+                        this.listTextBoxDataGrid.SelectedIndex++;
+                    }
                 }
             }
             else if (e.Key == System.Windows.Input.Key.Up)
             {
                 if (listTextBoxDataGrid.Items.Count > 0)
                 {
-                    int SelectedIndex = listTextBoxDataGrid.SelectedIndex;
-                    if (SelectedIndex > 0)
-                        listTextBoxDataGrid.SelectedIndex--;
+                    int selectedIndex = this.listTextBoxDataGrid.SelectedIndex;
+                    if (selectedIndex > 0)
+                    {
+                        this.listTextBoxDataGrid.SelectedIndex--;
+                    }
                 }
             }
             else if (e.Key == System.Windows.Input.Key.Enter)
             {
-                var item = listTextBoxDataGrid.SelectedItem;
+                var item = this.listTextBoxDataGrid.SelectedItem;
                 if (item == null)
                 {
                     this.SelectedItem = null;
@@ -270,9 +274,8 @@ namespace ModernIU.Controls
                 if (listTextBoxPopup.IsOpen)
                 {
                     this.SelectedItem = item;
-                    listTextBoxPopup.IsOpen = false;
+                    this.listTextBoxPopup.IsOpen = false;
                 }
-
             }
         }
 

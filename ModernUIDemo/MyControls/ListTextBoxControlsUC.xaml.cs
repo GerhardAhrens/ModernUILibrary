@@ -3,11 +3,9 @@
 namespace ModernUIDemo.MyControls
 {
     using System.Runtime.Versioning;
-    using System.Windows;
     using System.Windows.Controls;
-    using ModernIU.Controls;
 
-    using ModernUIDemo.Core;
+    using ModernIU.Controls;
 
     /// <summary>
     /// Interaktionslogik für ListTextBoxControlsUC.xaml
@@ -146,7 +144,6 @@ public class DemoData
 
         return this.demoModels;
     }
-
 }
 
 public class Artikel
