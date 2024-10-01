@@ -36,6 +36,7 @@
     <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\ComboBoxColor\" />
     <Folder Include="ModernUI\ListBox\" />
+    <Folder Include="ModernUI\ListTextBox\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NotificationService\" />
