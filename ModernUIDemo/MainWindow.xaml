@@ -49,10 +49,6 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
 
-            <!--
-                https://stackoverflow.com/questions/2138200/change-background-color-for-selected-listbox-item
-            -->
-
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
