@@ -31,12 +31,12 @@
     <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
+    <Folder Include="ModernUI\ListTextBox\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\MessageBox\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />
     <Folder Include="ModernUI\ComboBoxColor\" />
     <Folder Include="ModernUI\ListBox\" />
-    <Folder Include="ModernUI\ListTextBox\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NotificationService\" />

@@ -51,6 +51,7 @@
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
             tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
 
             tabItemSource.Add(new TabControlItem("View, Loading", true));

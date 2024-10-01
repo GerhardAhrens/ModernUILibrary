@@ -125,6 +125,9 @@
     <Compile Update="MyControls\FlyoutControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ListTextBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -159,6 +162,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\ComboTreeControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\ListTextBoxControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
