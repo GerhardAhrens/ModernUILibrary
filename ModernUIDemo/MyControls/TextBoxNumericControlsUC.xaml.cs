@@ -37,6 +37,7 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.txtIntTextBox.Text = "99";
             this.TextBoxDateValue = DateTime.Now;
             this.DateTimePickerValue.Value = DateTime.Now;
         }
