@@ -49,6 +49,7 @@
             tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
+            tabItemSource.Add(new TabControlItem("LED Controls", new LedControlsUC()));
 
             tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));

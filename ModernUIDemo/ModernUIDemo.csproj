@@ -128,6 +128,9 @@
     <Compile Update="MyControls\ListTextBoxControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\LedControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
