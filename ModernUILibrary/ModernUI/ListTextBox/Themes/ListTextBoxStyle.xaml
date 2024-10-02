@@ -16,13 +16,13 @@
                         </Grid.ColumnDefinitions>
 
                         <!--  Input TextBoxt  -->
-                        <TextBox
-                            x:Name="TXT_SEARCHINPUT"
+                        <MUI:TextBoxAll
+                            x:Name="ListTextBox_SearchInput"
                             Grid.Row="0"
                             Grid.Column="0" />
                         <!--  Popup to display records  -->
                         <Popup
-                            x:Name="PUP_AC"
+                            x:Name="ListTextBox_Popup"
                             HorizontalOffset="{Binding Path=ListTextBoxHorizontalOffset, RelativeSource={RelativeSource TemplatedParent}}"
                             Placement="{Binding Path=ListTextBoxPlacement, RelativeSource={RelativeSource TemplatedParent}}"
                             PlacementTarget="{Binding Path=ListTextBoxPlacementTarget, RelativeSource={RelativeSource TemplatedParent}}"
@@ -45,7 +45,7 @@
 
                                 <!--  DataGrid For ListTextBox List  -->
                                 <DataGrid
-                                    x:Name="DG_AC"
+                                    x:Name="ListTextBox_DataGrid"
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     Width="{Binding Path=ListTextBoxWidth, RelativeSource={RelativeSource TemplatedParent}}"

@@ -206,14 +206,14 @@ namespace ModernIU.Controls
         {
             base.OnApplyTemplate();
 
-            this.txtSearchinput = this.Template.FindName("TXT_SEARCHINPUT", this) as TextBox;
-            this.txtSearchinput.TextChanged += this.TXT_SEARCHINPUT_TextChanged;
-            this.txtSearchinput.PreviewKeyDown += this.TXT_SEARCHINPUT_PreviewKeyDown;
+            this.txtSearchinput = this.Template.FindName("ListTextBox_SearchInput", this) as TextBox;
+            this.txtSearchinput.TextChanged += this.OnListTextBoxTextChanged;
+            this.txtSearchinput.PreviewKeyDown += this.OnListTextBoxPreviewKeyDown;
 
-            this.listTextBoxPopup = this.Template.FindName("PUP_AC", this) as Popup;
+            this.listTextBoxPopup = this.Template.FindName("ListTextBox_Popup", this) as Popup;
 
-            this.listTextBoxDataGrid = this.Template.FindName("DG_AC", this) as DataGrid;
-            this.listTextBoxDataGrid.MouseLeftButtonUp += DG_AC_MouseLeftButtonUp;
+            this.listTextBoxDataGrid = this.Template.FindName("ListTextBox_DataGrid", this) as DataGrid;
+            this.listTextBoxDataGrid.MouseLeftButtonUp += TextBoxDataGridMouseLeftButtonUp;
             foreach (DataGridColumn column in this.ListTextBoxColumns)
             {
                 this.listTextBoxDataGrid.Columns.Add(column);
@@ -221,7 +221,7 @@ namespace ModernIU.Controls
         }
 
         //Select Item From List On Mouse Click
-        private void DG_AC_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TextBoxDataGridMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var item = this.listTextBoxDataGrid.SelectedItem;
             if (item == null)
@@ -238,7 +238,7 @@ namespace ModernIU.Controls
         } 
 
         // Navigatse through Items using Up/Down keyboard keys and select item on Enter key
-        private void TXT_SEARCHINPUT_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void OnListTextBoxPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Down)
             {
@@ -280,7 +280,7 @@ namespace ModernIU.Controls
         }
 
         //Displays AutoComplete Pupup On User Input And Fire Event  'OnTextChange' to filter records
-        private void TXT_SEARCHINPUT_TextChanged(object sender, TextChangedEventArgs e)
+        private void OnListTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.SelectedItem != null && this.SelectedItem.ToString() != this.txtSearchinput.Text)
             {

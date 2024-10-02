@@ -3,7 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    public class MTreeView : System.Windows.Controls.TreeView
+    public class MTreeView : TreeView
     {
         private CheckBox PART_CheckBox;
 
@@ -27,14 +27,12 @@
 
         #region Override
 
-        //protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
-        //{
-        //    base.PrepareContainerForItemOverride(element, item);
-
-        //    ZTreeViewItem treeViewItem = element as ZTreeViewItem;
-
-        //    treeViewItem.TreeNodeType = EnumTreeNodeType.RootNode;
-        //}
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+        {
+            base.PrepareContainerForItemOverride(element, item);
+            MTreeViewItem treeViewItem = element as MTreeViewItem;
+            treeViewItem.TreeNodeType = EnumTreeNodeType.RootNode;
+        }
 
         protected override DependencyObject GetContainerForItemOverride()
         {

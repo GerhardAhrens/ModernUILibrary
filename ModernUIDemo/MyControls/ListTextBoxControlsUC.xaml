@@ -31,7 +31,6 @@
             <ModernUI:ListTextBox
                 x:Name="txt"
                 Width="400"
-                Height="22"
                 HorizontalAlignment="Left"
                 DisplayMemberPath="FullName"
                 ListTextBoxHeight="150"
