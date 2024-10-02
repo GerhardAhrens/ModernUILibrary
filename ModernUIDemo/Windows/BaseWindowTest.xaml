@@ -1,0 +1,62 @@
+﻿<ModernUI:BaseWindow
+    x:Class="ModernUIDemo.Windows.BaseWindowTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernUIDemo.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="BaseWindowTest"
+    Width="800"
+    Height="450"
+    Foreground="White"
+    ShowMore="True"
+    TitleBackground="#BC2F2E"
+    mc:Ignorable="d">
+    <ModernUI:BaseWindow.MenuPanel>
+        <Grid Margin="10">
+            <Rectangle
+                Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                RadiusX="0"
+                RadiusY="0">
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                        BlurRadius="12"
+                        Opacity="0.4"
+                        ShadowDepth="0"
+                        Color="Brown" />
+                </Rectangle.Effect>
+            </Rectangle>
+            <ListBox>
+                <ListBoxItem>Eintrag 1</ListBoxItem>
+                <ListBoxItem>Eintrag 2</ListBoxItem>
+                <ListBoxItem>Eintrag 3</ListBoxItem>
+                <ListBoxItem>Eintrag 4</ListBoxItem>
+                <ListBoxItem>Eintrag 5</ListBoxItem>
+                <ListBoxItem>Eintrag 6</ListBoxItem>
+                <ListBoxItem>Eintrag 7</ListBoxItem>
+                <ListBoxItem>Eintrag 8</ListBoxItem>
+            </ListBox>
+        </Grid>
+    </ModernUI:BaseWindow.MenuPanel>
+
+    <Grid>
+        <StackPanel Margin="10">
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TitleTextBox
+                    Title="Vorname:"
+                    Width="240"
+                    Height="27"
+                    Margin="5,0"
+                    CanClearText="True" />
+
+                <ModernUI:TitleTextBox
+                    Title="Nachname:"
+                    Width="240"
+                    Height="27"
+                    Margin="5,0"
+                    CanClearText="True" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</ModernUI:BaseWindow>

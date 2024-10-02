@@ -221,6 +221,7 @@
                     Content="text"
                     CornerRadius="3"
                     Type="text" />
+                
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"

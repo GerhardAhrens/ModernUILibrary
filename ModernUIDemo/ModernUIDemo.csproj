@@ -20,7 +20,6 @@
     <Folder Include="BaseClass\ArgumentGuard\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
-    <Folder Include="Windows\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -129,6 +128,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\LedControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\TextBlockControlsUC.xaml.cs">
