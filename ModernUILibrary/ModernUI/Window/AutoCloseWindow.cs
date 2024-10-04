@@ -71,7 +71,7 @@
         }
 
         public static readonly DependencyProperty CloseBoxProperty =
-            DependencyProperty.Register("CloseBox", typeof(bool), typeof(BaseWindow), new PropertyMetadata(true));
+            DependencyProperty.Register("CloseBox", typeof(bool), typeof(AutoCloseWindow), new PropertyMetadata(true));
 
         public bool CloseBox
         {

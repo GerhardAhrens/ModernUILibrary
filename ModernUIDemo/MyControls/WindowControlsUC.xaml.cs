@@ -43,6 +43,7 @@
         private void BtnAutoWindowsBase_Click(object sender, RoutedEventArgs e)
         {
             ACWindow window = new ACWindow();
+            window.Title = "Auto Close Window";
             window.CloseButtonType = CloseBoxTypeEnum.Close;
             window.AutoClose = true;
             window.AutoCloseInterval = 5;

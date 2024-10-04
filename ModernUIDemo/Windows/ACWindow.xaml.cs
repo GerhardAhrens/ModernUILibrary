@@ -5,7 +5,7 @@
     /// <summary>
     /// Interaktionslogik für ACWindow.xaml
     /// </summary>
-    public partial class ACWindow : AutoCloseWindow
+    public partial class ACWindow : MWindow
     {
         public ACWindow()
         {
