@@ -9,7 +9,7 @@
     {
         public ACWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

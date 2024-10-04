@@ -24,13 +24,15 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BaseWindow), new FrameworkPropertyMetadata(typeof(BaseWindow)));
         }
 
-        private System.Windows.Controls.Button PART_Btn_Close; 
-        private System.Windows.Controls.Button PART_Btn_Minimized; 
-        private System.Windows.Controls.Button PART_Btn_Maximized; 
-        private System.Windows.Controls.Button PART_Btn_Restore; 
-        private System.Windows.Controls.Button PART_Btn_More; 
+        private Button PART_Btn_Close; 
+        private Button PART_Btn_Minimized; 
+        private Button PART_Btn_Maximized; 
+        private Button PART_Btn_Restore; 
+        private Button PART_Btn_More; 
+
         private Grid PART_TitleBar;
         private Popup PART_Popup_Menu;
+
         private double restore_window_width;
         private double restore_window_height;
         private double resotre_left;
@@ -133,10 +135,10 @@
         }
         public BaseWindow() : base()
         {
-            this.Loaded += BaseWindow_Loaded;
+            WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
         }
 
-        private void BaseWindow_Loaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             switch (this.WindowState)
             {
@@ -148,6 +150,7 @@
                     break;
             }
         }
+
         private void GridTitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!this.MaximizeBox) return;
@@ -172,14 +175,15 @@
                 }
             }
         }
+
         private void PART_Btn_Restore_Click(object sender, RoutedEventArgs e)
         {
-            SetWindowSizeRestore();
+            this.SetWindowSizeRestore();
         }
 
         private void PART_Btn_Maximized_Click(object sender, RoutedEventArgs e)
         {
-            SetWindowMaximized();
+            this.SetWindowMaximized();
         }
 
         private void Btn_close_Click(object sender, RoutedEventArgs e)
@@ -256,6 +260,7 @@
                 this.PART_Btn_Maximized.Visibility = Visibility.Visible;
             }
         }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

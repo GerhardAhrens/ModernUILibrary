@@ -75,7 +75,6 @@
         </Setter>
     </Style>
 
-    <!--  最小化按钮样式  -->
     <Style x:Key="MinimizedStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -105,7 +104,6 @@
         </Setter>
     </Style>
 
-    <!--  关闭按钮样式  -->
     <Style x:Key="CloseStyle" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>

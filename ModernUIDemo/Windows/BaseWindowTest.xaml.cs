@@ -9,7 +9,7 @@
     {
         public BaseWindowTest()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }
