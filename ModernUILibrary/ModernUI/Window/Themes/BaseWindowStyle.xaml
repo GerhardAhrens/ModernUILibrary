@@ -1,0 +1,348 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:ModernIU.Converters"
+    xmlns:MUI="clr-namespace:ModernIU.Controls"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+
+    <Converter:InverseVisibilityConverter x:Key="InverseVisibilityConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <SolidColorBrush x:Key="StrokeColor" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="MouseOverBgColor" Color="#20E81023" />
+    <SolidColorBrush x:Key="CloseMouseOverBgColor" Color="#E74450" />
+    <SolidColorBrush x:Key="Button_Default_Fill" Color="#5E5E5E" />
+    <SolidColorBrush x:Key="Window_Title_Background" Color="#21A7ED" />
+    <SolidColorBrush x:Key="Window_Button_Over_Background" Color="#A021A7ED" />
+
+    <PathGeometry x:Key="Icon_Max" Figures="M4,4L20,4 20,20 4,20 4,4 M6,8L6,18 18,18 18,8 6,8z" />
+    <PathGeometry x:Key="Icon_ShowMore" Figures="M934.48936 203.517183 89.511663 203.517183c-14.813381 0-26.824949-11.998265-26.824949-26.824949s12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.998265 26.824949 26.824949S949.302741 203.517183 934.48936 203.517183zM934.48936 538.824949 89.511663 538.824949c-14.813381 0-26.824949-11.997242-26.824949-26.824949 0-14.826684 12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.998265 26.824949 26.824949C961.313286 526.826684 949.302741 538.824949 934.48936 538.824949zM934.48936 874.132714 89.511663 874.132714c-14.813381 0-26.824949-11.997242-26.824949-26.824949s12.010545-26.824949 26.824949-26.824949l844.977697 0c14.813381 0 26.824949 11.997242 26.824949 26.824949S949.302741 874.132714 934.48936 874.132714z" />
+
+    <Style x:Key="MaximizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="bg"
+                        Width="40"
+                        Background="Transparent">
+                        <Path
+                            Width="11"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M128 160v704h768v-704H128z m722.56 657.984H174.72V206.08h675.84v611.904z"
+                            Fill="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Uniform"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RestoreStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="bg"
+                        Width="40"
+                        Background="Transparent">
+                        <Path
+                            x:Name="PathMin"
+                            Width="12"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M896 704.96h-128v-448H320V128h576c20.672 0 0 0 0 0v576.96z m-192 192H128l-0.384-577.92L704 320v576.96z m-448-832v192H64l0.32 702.08L768 960v-192l185.344-1.344L960 64.96H256z"
+                            Fill="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Uniform"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  最小化按钮样式  -->
+    <Style x:Key="MinimizedStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="bg"
+                        Width="40"
+                        Background="Transparent">
+                        <Path
+                            x:Name="PathMin"
+                            Height="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M0,9 13,9 13,10 0,10Z"
+                            Fill="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Uniform"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="#22000000" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  关闭按钮样式  -->
+    <Style x:Key="CloseStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="bg"
+                        Width="40"
+                        Background="Transparent">
+                        <Path
+                            x:Name="PathMin"
+                            Width="11"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M548.178991 512 815.105343 245.073648c9.990538-9.990538 9.990538-26.188452 0-36.178991-9.991562-9.990538-26.188452-9.990538-36.178991 0L512 475.819986 245.073648 208.894657c-9.991562-9.990538-26.188452-9.990538-36.178991 0-9.990538 9.990538-9.990538 26.188452 0 36.178991l266.926352 266.926352L208.894657 778.926352c-9.990538 9.991562-9.990538 26.188452 0 36.178991 4.995781 4.995781 11.542894 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648l266.926352-266.926352 266.926352 266.926352c4.995781 4.995781 11.541871 7.492648 18.090007 7.492648s13.094226-2.496867 18.090007-7.492648c9.990538-9.991562 9.990538-26.188452 0-36.178991L548.178991 512z"
+                            Fill="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Uniform"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{StaticResource CloseMouseOverBgColor}" />
+                            <Setter TargetName="PathMin" Property="Fill" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MoreStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid
+                        x:Name="bg"
+                        Width="40"
+                        Background="Transparent">
+                        <Path
+                            x:Name="PathMin"
+                            Width="12"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{StaticResource Icon_ShowMore}"
+                            Fill="{StaticResource StrokeColor}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Uniform"
+                            UseLayoutRounding="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="bg" Property="Background" Value="{StaticResource MouseOverBgColor}" />
+                            <Setter TargetName="PathMin" Property="Stroke" Value="#FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type MUI:BaseWindow}">
+        <Setter Property="AllowsTransparency" Value="true" />
+        <Setter Property="FontFamily" Value="Consolas, Microsoft YaHei" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="ResizeMode" Value="CanMinimize" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Width" Value="300" />
+        <Setter Property="MinHeight" Value="200" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{StaticResource Window_Title_Background}" />
+        <Setter Property="TitleBackground" Value="{StaticResource Window_Title_Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:BaseWindow}">
+                    <Grid Margin="20">
+                        <Border
+                            Background="#FFFFFF"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="10"
+                                    Opacity="0.4"
+                                    ShadowDepth="0"
+                                    Color="Brown" />
+                            </Border.Effect>
+                        </Border>
+                        <Border
+                            Margin="0,0,0,0"
+                            Padding="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding TitleBackground}"
+                            BorderThickness="1,0,1,1"
+                            CornerRadius="0"
+                            SnapsToDevicePixels="True"
+                            UseLayoutRounding="True">
+                            <Grid Background="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid
+                                    x:Name="PART_TitleBar"
+                                    Height="{TemplateBinding CaptionHeight}"
+                                    Background="{TemplateBinding TitleBackground}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Text="{TemplateBinding Title}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+
+                                        <Button
+                                            x:Name="PART_Btn_More"
+                                            Height="30"
+                                            Background="{TemplateBinding Foreground}"
+                                            Style="{StaticResource MoreStyle}"
+                                            Visibility="{TemplateBinding ShowMore,
+                                                                         Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <Popup
+                                            x:Name="PART_Popup_Menu"
+                                            AllowsTransparency="True"
+                                            Placement="Bottom"
+                                            PlacementTarget="{Binding ElementName=PART_Btn_More}"
+                                            StaysOpen="False" />
+
+                                        <Button
+                                            x:Name="PART_Btn_Minimized"
+                                            Height="30"
+                                            Background="{TemplateBinding Foreground}"
+                                            Style="{StaticResource MinimizedStyle}"
+                                            Visibility="{TemplateBinding MinimizeBox,
+                                                                         Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button.ToolTip>
+                                                <MUI:MToolTip
+                                                    Content="Minimized"
+                                                    IsShowShadow="False"
+                                                    PlacementEx="BottomCenter" />
+                                            </Button.ToolTip>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:ChangePropertyAction
+                                                        PropertyName="WindowState"
+                                                        TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                                        Value="Minimized" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
+                                        <Grid Visibility="{TemplateBinding MaximizeBox, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button
+                                                x:Name="PART_Btn_Maximized"
+                                                Height="30"
+                                                Background="{TemplateBinding Foreground}"
+                                                Style="{StaticResource MaximizedStyle}">
+                                                <Button.ToolTip>
+                                                    <MUI:MToolTip
+                                                        Content="Maximized"
+                                                        IsShowShadow="False"
+                                                        PlacementEx="BottomCenter" />
+                                                </Button.ToolTip>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+                                                        <i:ChangePropertyAction
+                                                            PropertyName="Visibility"
+                                                            TargetName="PART_Btn_Restore"
+                                                            Value="Visible" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Button
+                                                x:Name="PART_Btn_Restore"
+                                                Height="30"
+                                                Background="{TemplateBinding Foreground}"
+                                                Style="{StaticResource RestoreStyle}"
+                                                Visibility="{Binding Path=Visibility, ElementName=PART_Btn_Maximized, Converter={StaticResource InverseVisibilityConverter}}">
+                                                <Button.ToolTip>
+                                                    <MUI:MToolTip
+                                                        Content="Wiederherstellen"
+                                                        IsShowShadow="False"
+                                                        PlacementEx="BottomCenter" />
+                                                </Button.ToolTip>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <i:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+                                                        <i:ChangePropertyAction
+                                                            PropertyName="Visibility"
+                                                            TargetName="PART_Btn_Maximized"
+                                                            Value="Visible" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                        </Grid>
+                                        <Button
+                                            x:Name="PART_Btn_Close"
+                                            Height="30"
+                                            Margin="0,0,-1,0"
+                                            Background="{TemplateBinding Foreground}"
+                                            Style="{StaticResource CloseStyle}"
+                                            Visibility="{TemplateBinding CloseBox,
+                                                                         Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Button.ToolTip>
+                                                <MUI:MToolTip
+                                                    Content="Close"
+                                                    IsShowShadow="False"
+                                                    PlacementEx="BottomCenter" />
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </StackPanel>
+                                    <!--#endregion-->
+                                </Grid>
+
+                                <AdornerDecorator Grid.Row="1">
+                                    <ContentPresenter />
+                                </AdornerDecorator>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource WindowTemplateKey}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
