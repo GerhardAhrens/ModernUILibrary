@@ -119,9 +119,11 @@
 
             this.PART_ScrollViewer = VisualHelper.FindVisualElement<ScrollViewer>(this, "PART_ContentHost");
             this.PART_TextBlock = VisualHelper.FindVisualElement<TextBlock>(this, "PART_Counter");
-
-            this.PART_TextBlock.Text = $"Restzeichen: {this.MaxLength}";
-            this.PART_TextBlock.Foreground = Brushes.Green;
+            if (this.PART_TextBlock != null)
+            {
+                this.PART_TextBlock.Text = $"Restzeichen: {this.MaxLength}";
+                this.PART_TextBlock.Foreground = Brushes.Green;
+            }
 
             this.PreviewMouseWheel += TitleTextBox_PreviewMouseWheel;
             this.TextChanged += TitleTextBox_TextChanged;
@@ -147,17 +149,20 @@
 
         private void TitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double minRest = this.MaxLength * 0.1D;
-            int restCount = this.MaxLength - this.Text.Length;
+            if (this.PART_TextBlock != null)
+            {
+                double minRest = this.MaxLength * 0.1D;
+                int restCount = this.MaxLength - this.Text.Length;
 
-            this.PART_TextBlock.Text = $"Restzeichen: {restCount}";
-            if (restCount > (this.MaxLength - minRest))
-            {
-                this.PART_TextBlock.Foreground = Brushes.Green;
-            }
-            else if (restCount < minRest)
-            {
-                this.PART_TextBlock.Foreground = Brushes.Red;
+                this.PART_TextBlock.Text = $"Restzeichen: {restCount}";
+                if (restCount > (this.MaxLength - minRest))
+                {
+                    this.PART_TextBlock.Foreground = Brushes.Green;
+                }
+                else if (restCount < minRest)
+                {
+                    this.PART_TextBlock.Foreground = Brushes.Red;
+                }
             }
         }
 

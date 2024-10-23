@@ -43,7 +43,7 @@
                     x:Name="TxtMultilineTitle"
                     Title="Multiline:"
                     Width="400"
-                    Height="150"
+                    Height="100"
                     IsShowCounter="False"
                     IsShowTitle="True"
                     MaxLines="5"
@@ -67,11 +67,11 @@
                     x:Name="TxtMultilineTitle1"
                     Title="Langtext:"
                     Width="400"
-                    Height="150"
-                    MaxLength="100"
+                    Height="100"
                     IsShowCounter="True"
                     IsShowTitle="True"
-                    MaxLines="5"
+                    MaxLength="100"
+                    MaxLines="4"
                     TextWrapping="Wrap"
                     TitleOrientation="Vertical" />
 
@@ -85,13 +85,38 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
+                Header="Einzeilige TextBox mit Inside Titel, Custom" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TitleTextBox
+                    x:Name="TxtMultilineTitle2"
+                    Title="Kurztext:"
+                    Width="400"
+                    CanClearText="True"
+                    IsShowCounter="True"
+                    IsShowTitle="True"
+                    MaxLength="100"
+                    MaxLines="5"
+                    TextWrapping="Wrap"
+                    TitleOrientation="Horizontal" />
+
+                <TextBlock
+                    Width="300"
+                    Height="{Binding Path=ActualHeight, ElementName=TxtMultilineTitle2}"
+                    Margin="10,0"
+                    Text="{Binding Path=Text, ElementName=TxtMultilineTitle2}" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
                 Header="Mehrzeilige TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
                 <ModernUI:TextBoxMultiline
                     x:Name="TxtMultilineDefault"
                     Width="400"
-                    Height="150"
+                    Height="100"
                     HorizontalAlignment="Left"
                     Lines="5" />
 

@@ -4,7 +4,7 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/ModernUILibrary;component/Resources/AutoDisappearScrollViewerStyle.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/Resources/AutoDisappearScrollViewerStyle.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Resources/PathGeometry.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -29,43 +29,19 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Margin="5,3,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock
-                        x:Name="PART_Title"
-                        Grid.Column="0"
-                        Margin="0,0,0,3"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                        FontFamily="{TemplateBinding FontFamily}"
-                        FontSize="{TemplateBinding FontSize}"
-                        FontWeight="Bold"
-                        Foreground="DarkGray"
-                        Text="{TemplateBinding Title}"
-                        TextDecorations="Underline"
-                        Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-                    <TextBlock
-                        x:Name="PART_Counter"
-                        Grid.Column="1"
-                        Margin="0,0,0,3"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                        FontFamily="{TemplateBinding FontFamily}"
-                        FontSize="{TemplateBinding FontSize}"
-                        FontWeight="Bold"
-                        Foreground="DarkGray"
-                        Text="Restzeichen:"
-                        TextDecorations="Underline"
-                        Visibility="{Binding Path=IsShowCounter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </Grid>
+                <TextBlock
+                    x:Name="PART_Title"
+                    Grid.Column="0"
+                    Margin="0,0,0,3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    FontFamily="{TemplateBinding FontFamily}"
+                    FontSize="{TemplateBinding FontSize}"
+                    FontWeight="Bold"
+                    Foreground="DarkGray"
+                    Text="{TemplateBinding Title}"
+                    TextDecorations="Underline"
+                    Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <ScrollViewer
                     x:Name="PART_ContentHost"
@@ -78,14 +54,13 @@
                 <Border
                     x:Name="PART_ClearBorder"
                     Grid.Column="2"
-                    Visibility="{Binding CanClearText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    Visibility="{Binding Path=CanClearText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}">
                     <Path
                         x:Name="PART_ClearText"
-                        Grid.Column="2"
                         Width="13"
                         Margin="0,0,4,0"
-                        Data="M513.387603 3.840468c-280.262078 0-509.567601 229.305523-509.567601 509.567601s229.305523 509.567601 509.567601 509.567601 509.567601-229.305523 509.567601-509.567601S793.649682 3.840468 513.387603 3.840468zM768.171404 704.496176l-63.695694 63.695694L513.387603 577.104787 322.299497 768.192893l-63.695694-63.695694 191.088106-191.088106L258.602779 322.320986l63.695694-63.695694 191.088106 191.088106 191.088106-191.088106 63.695694 63.695694L577.083298 513.408069 768.171404 704.496176z"
-                        Fill="#DEDEDE"
+                        Data="{StaticResource ResourceKey=Icon_Delete}"
+                        Fill="DarkGray"
                         Stretch="Uniform">
                         <Path.Style>
                             <Style TargetType="{x:Type Path}">
