@@ -248,7 +248,7 @@
 
         private void OnPasteMenu(object sender, RoutedEventArgs e)
         {
-            this.Text = Clipboard.GetText();
+            this.InsertText(Clipboard.GetText());
         }
 
         private void OnDeleteMenu(object sender, RoutedEventArgs e)
@@ -260,6 +260,37 @@
         private void OnSetDateMenu(object sender, RoutedEventArgs e)
         {
             this.Text = DateTime.Now.ToShortDateString();
+        }
+
+        private void InsertText(string value)
+        {
+            // maxLength of insertedValue
+            var valueLength = this.MaxLength > 0 ? (this.MaxLength - this.Text.Length + this.SelectionLength) : value.Length;
+            if (valueLength <= 0)
+            {
+                // the value length is 0 - no need to insert anything
+                return;
+            }
+
+            // save the caretIndex and create trimmed text
+            var index = this.CaretIndex;
+            var trimmedValue = value.Length > valueLength ? value.Substring(0, valueLength) : value;
+
+            // if some text is selected, replace this text
+            if (this.SelectionLength > 0)
+            {
+                index = this.SelectionStart;
+                this.SelectedText = trimmedValue;
+            }
+            // insert the text to caret index position
+            else
+            {
+                var text = this.Text.Substring(0, index) + trimmedValue + this.Text.Substring(index);
+                this.Text = text;
+            }
+
+            // move caret to the end of inserted text
+            this.CaretIndex = index + valueLength;
         }
 
         private static void OnSetBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
