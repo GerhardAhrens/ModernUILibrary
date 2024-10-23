@@ -45,7 +45,7 @@
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         FontFamily="{TemplateBinding FontFamily}"
                         FontSize="{TemplateBinding FontSize}"
-                        Foreground="#9A9A9A"
+                        Foreground="Black"
                         Text="{TemplateBinding Title}"
                         Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
@@ -178,7 +178,7 @@
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         FontFamily="{TemplateBinding FontFamily}"
                         FontSize="{TemplateBinding FontSize}"
-                        Foreground="#9A9A9A"
+                        Foreground="Black"
                         Text="{TemplateBinding Title}"
                         Visibility="{Binding Path=IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
