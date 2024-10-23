@@ -5,6 +5,7 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
     d:DesignHeight="450"
     d:DesignWidth="900"
     mc:Ignorable="d">
@@ -44,11 +45,23 @@
                     Title="Multiline:"
                     Width="400"
                     Height="100"
+                    IsInactiveSelectionHighlightEnabled="true"
                     IsShowCounter="False"
                     IsShowTitle="True"
+                    Language="de-de"
                     MaxLines="5"
+                    SpellCheck.IsEnabled="True"
                     TextWrapping="Wrap"
-                    TitleOrientation="Vertical" />
+                    TitleOrientation="Vertical">
+                    <SpellCheck.CustomDictionaries>
+                        <sys:Uri>pack://application:,,,/ModernUIDemo;component/de-de.lex</sys:Uri>
+                    </SpellCheck.CustomDictionaries>
+                    <ModernUI:TitleTextBox.Resources>
+                        <ContextMenu x:Key="MyCustomContextMenu">
+                            <MenuItem Command="EditingCommands.IgnoreSpellingError" Header="Ignore All" />
+                        </ContextMenu>
+                    </ModernUI:TitleTextBox.Resources>
+                </ModernUI:TitleTextBox>
 
                 <TextBlock
                     Width="300"

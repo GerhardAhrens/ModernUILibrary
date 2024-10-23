@@ -14,6 +14,12 @@
         Vertical,
     }
 
+    /// <summary>
+    /// TextBox UserControl
+    /// </summary>
+    /// <remarks>
+    /// https://www.shujaat.net/2010/08/spell-checking-for-wpf-text-entry.html
+    /// </remarks>
     [TemplatePart(Name = "PART_ClearBorder", Type = typeof(Border))]
     [TemplatePart(Name = "PART_ClearText", Type = typeof(Path))]
     [TemplatePart(Name = "PART_ContentHost", Type = typeof(ScrollViewer))]
@@ -144,7 +150,7 @@
             this.Style = this.SetTriggerFunction();
 
             /* Spezifisches Kontextmenü für Control übergeben */
-            this.ContextMenu = this.BuildContextMenu();
+            //this.ContextMenu = this.BuildContextMenu();
         }
 
         private void TitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -262,7 +268,7 @@
 
         private void OnSetDateMenu(object sender, RoutedEventArgs e)
         {
-            this.Text = DateTime.Now.ToShortDateString();
+            this.InsertText(DateTime.Now.ToShortDateString());
         }
 
         private void InsertText(string value)

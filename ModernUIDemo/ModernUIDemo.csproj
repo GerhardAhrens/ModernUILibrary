@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="de-de.lex" />
     <None Remove="Resources\Picture\app.ico" />
   </ItemGroup>
 
@@ -34,6 +35,12 @@
     <Content Include="Resources\Picture\app.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="de-de.lex">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
