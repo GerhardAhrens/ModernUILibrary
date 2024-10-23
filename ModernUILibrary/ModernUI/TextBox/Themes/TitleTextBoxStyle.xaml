@@ -29,15 +29,37 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    x:Name="PART_Title"
-                    Margin="5,0,0,0"
-                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                    FontFamily="{TemplateBinding FontFamily}"
-                    FontSize="{TemplateBinding FontSize}"
-                    Foreground="#9A9A9A"
-                    Text="{TemplateBinding Title}"
-                    Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Grid Margin="5,3,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        x:Name="PART_Title"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        FontFamily="{TemplateBinding FontFamily}"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="#9A9A9A"
+                        Text="{TemplateBinding Title}"
+                        Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <TextBlock
+                        x:Name="PART_Counter"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        FontFamily="{TemplateBinding FontFamily}"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="#9A9A9A"
+                        Text="Verbleibende Zeichen:"
+                        Visibility="{Binding Path=IsShowCounter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </Grid>
 
                 <ScrollViewer
                     x:Name="PART_ContentHost"
@@ -53,7 +75,7 @@
                         Grid.Column="2"
                         Width="13"
                         Margin="0,0,4,0"
-                        Data="{StaticResource Icon_Delete}"
+                        Data="M513.387603 3.840468c-280.262078 0-509.567601 229.305523-509.567601 509.567601s229.305523 509.567601 509.567601 509.567601 509.567601-229.305523 509.567601-509.567601S793.649682 3.840468 513.387603 3.840468zM768.171404 704.496176l-63.695694 63.695694L513.387603 577.104787 322.299497 768.192893l-63.695694-63.695694 191.088106-191.088106L258.602779 322.320986l63.695694-63.695694 191.088106 191.088106 191.088106-191.088106 63.695694 63.695694L577.083298 513.408069 768.171404 704.496176z"
                         Fill="#DEDEDE"
                         Stretch="Uniform">
                         <Path.Style>
@@ -108,6 +130,7 @@
                 </Border>
             </Grid>
         </Border>
+
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="BorderThickness" Value="0" />
@@ -138,14 +161,35 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock
-                    Margin="5,3,0,0"
-                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                    FontFamily="{TemplateBinding FontFamily}"
-                    FontSize="{TemplateBinding FontSize}"
-                    Foreground="#9A9A9A"
-                    Text="{TemplateBinding Title}"
-                    Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Grid Margin="5,3,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        FontFamily="{TemplateBinding FontFamily}"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="#9A9A9A"
+                        Text="{TemplateBinding Title}"
+                        Visibility="{Binding Path=IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <TextBlock
+                        x:Name="PART_Counter"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        FontFamily="{TemplateBinding FontFamily}"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="#9A9A9A"
+                        Text="Verbleibende Zeichen:"
+                        Visibility="{Binding Path=IsShowCounter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </Grid>
 
                 <ScrollViewer
                     x:Name="PART_ContentHost"
@@ -187,7 +231,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Padding" Value="2,0,2,0" />
-        <Setter Property="Title" Value="标题:" />
+        <Setter Property="Title" Value="Titel:" />
         <Setter Property="Template" Value="{StaticResource TitleIsLeft}" />
         <Style.Triggers>
             <Trigger Property="TitleOrientation" Value="Vertical">

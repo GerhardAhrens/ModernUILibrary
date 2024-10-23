@@ -44,6 +44,7 @@
                     Title="Multiline:"
                     Width="400"
                     Height="150"
+                    IsShowCounter="True"
                     IsShowTitle="True"
                     MaxLines="5"
                     TextWrapping="Wrap"

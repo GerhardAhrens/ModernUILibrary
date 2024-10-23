@@ -15,22 +15,20 @@
 
     [TemplatePart(Name = "PART_ClearText", Type = typeof(Path))]
     [TemplatePart(Name = "PART_ContentHost", Type = typeof(ScrollViewer))]
+    [TemplatePart(Name = "PART_Counter", Type = typeof(TextBlock))]
     public class TitleTextBox : TextBox
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title" , typeof(string), typeof(TitleTextBox));
-
         public static readonly DependencyProperty IsShowTitleProperty = DependencyProperty.Register("IsShowTitle", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
-
+        public static readonly DependencyProperty IsShowCounterProperty = DependencyProperty.Register("IsShowCounter", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty CanClearTextProperty = DependencyProperty.Register("CanClearText", typeof(bool), typeof(TitleTextBox));
-
         public static readonly DependencyProperty TitleOrientationProperty = DependencyProperty.Register("TitleOrientation", typeof(TitleOrientationEnum), typeof(TitleTextBox));
-
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TitleTextBox), new PropertyMetadata(Brushes.Transparent));
-
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true, OnSetBorderChanged));
 
         private Path PART_ClearText;
         private ScrollViewer PART_ScrollViewer;
+        private TextBlock PART_TextBlock;
 
         static TitleTextBox()
         {
@@ -61,6 +59,11 @@
             set { SetValue(IsShowTitleProperty, value); }
         }
 
+        public bool IsShowCounter
+        {
+            get { return (bool)GetValue(IsShowCounterProperty); }
+            set { SetValue(IsShowCounterProperty, value); }
+        }
 
         public bool CanClearText
         {
@@ -90,6 +93,11 @@
         {
             base.OnApplyTemplate();
 
+            if (this.MaxLength == 0)
+            {
+                this.MaxLength = 10;
+            }
+
             this.PART_ClearText = VisualHelper.FindVisualElement<Path>(this, "PART_ClearText");
             if(this.PART_ClearText != null)
             {
@@ -107,8 +115,13 @@
             }
 
             this.PART_ScrollViewer = VisualHelper.FindVisualElement<ScrollViewer>(this, "PART_ContentHost");
+            this.PART_TextBlock = VisualHelper.FindVisualElement<TextBlock>(this, "PART_Counter");
+
+            this.PART_TextBlock.Text = $"Verbleibende Zeichen: {this.MaxLength}";
+            this.PART_TextBlock.Foreground = Brushes.Green;
 
             this.PreviewMouseWheel += TitleTextBox_PreviewMouseWheel;
+            this.TextChanged += TitleTextBox_TextChanged;
 
             /* Rahmen für Control festlegen */
             if (SetBorder == true)
@@ -127,6 +140,26 @@
 
             /* Spezifisches Kontextmenü für Control übergeben */
             this.ContextMenu = this.BuildContextMenu();
+        }
+
+        private void TitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int restCount = this.MaxLength - this.Text.Length;
+
+            double part = this.MaxLength / 3;
+            this.PART_TextBlock.Text = $"Verbleibende Zeichen: {restCount}";
+            if (restCount > (part *2))
+            {
+                this.PART_TextBlock.Foreground = Brushes.Green;
+            }
+            else if (restCount > part)
+            {
+                this.PART_TextBlock.Foreground = Brushes.Yellow;
+            }
+            else if (restCount < part)
+            {
+                this.PART_TextBlock.Foreground = Brushes.Red;
+            }
         }
 
         private void TitleTextBox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
