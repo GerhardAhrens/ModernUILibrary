@@ -13,6 +13,7 @@
         Vertical,
     }
 
+    [TemplatePart(Name = "PART_ClearBorder", Type = typeof(Border))]
     [TemplatePart(Name = "PART_ClearText", Type = typeof(Path))]
     [TemplatePart(Name = "PART_ContentHost", Type = typeof(ScrollViewer))]
     [TemplatePart(Name = "PART_Counter", Type = typeof(TextBlock))]
@@ -95,7 +96,7 @@
 
             if (this.MaxLength == 0)
             {
-                this.MaxLength = 10;
+                this.MaxLength = 1000;
             }
 
             this.PART_ClearText = VisualHelper.FindVisualElement<Path>(this, "PART_ClearText");

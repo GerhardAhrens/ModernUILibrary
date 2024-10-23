@@ -12,7 +12,7 @@
 
     <SolidColorBrush x:Key="TextBox.Static.Border" Color="#DEDEDE" />
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#BEBEBE" />
-    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#5DA9E9" />
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="Green" />
 
     <ControlTemplate x:Key="TitleIsLeft" TargetType="{x:Type MUI:TitleTextBox}">
         <Border
@@ -69,7 +69,10 @@
                     HorizontalScrollBarVisibility="Hidden"
                     VerticalScrollBarVisibility="Hidden" />
 
-                <Border Grid.Column="2" Visibility="{Binding CanClearText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border
+                    x:Name="PART_ClearBorder"
+                    Grid.Column="2"
+                    Visibility="{Binding CanClearText, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Path
                         x:Name="PART_ClearText"
                         Grid.Column="2"

@@ -44,7 +44,7 @@
                     Title="Multiline:"
                     Width="400"
                     Height="150"
-                    IsShowCounter="True"
+                    IsShowCounter="False"
                     IsShowTitle="True"
                     MaxLines="5"
                     TextWrapping="Wrap"
@@ -60,7 +60,31 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="Mehrzeilige TextBox Default" />
+                Header="Mehrzeilige TextBox mit Inside Titel, Custom" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TitleTextBox
+                    x:Name="TxtMultilineTitle1"
+                    Title="Langtext:"
+                    Width="400"
+                    Height="150"
+                    IsShowCounter="True"
+                    IsShowTitle="True"
+                    MaxLines="5"
+                    TextWrapping="Wrap"
+                    TitleOrientation="Vertical" />
+
+                <TextBlock
+                    Width="300"
+                    Height="{Binding Path=ActualHeight, ElementName=TxtMultilineTitle1}"
+                    Margin="10,0"
+                    Text="{Binding Path=Text, ElementName=TxtMultilineTitle1}" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Mehrzeilige TextBox" />
 
             <StackPanel Margin="0,2" Orientation="Horizontal">
                 <ModernUI:TextBoxMultiline

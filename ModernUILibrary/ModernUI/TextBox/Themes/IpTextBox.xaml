@@ -106,18 +106,6 @@
                             </MUI:Poptip>
                         </Grid>
                     </Border>
-
-                    <!--<ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Background" Value="LightGray" />
-                        </Trigger>
-                        <Trigger Property="IsHasError" Value="True">
-                            <Setter Property="BorderBrush" Value="Red" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="LightGray" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
