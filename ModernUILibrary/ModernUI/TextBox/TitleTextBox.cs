@@ -6,6 +6,7 @@
     using System.Windows.Shapes;
 
     using ModernIU.Base;
+    using static ModernIU.Controls.PopupEx;
 
     public enum TitleOrientationEnum
     {
@@ -44,6 +45,7 @@
             this.Height = ControlBase.DefaultHeight;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Top;
+            this.MinHeight = 23;
             this.IsReadOnly = false;
             this.Focusable = true;
         }
@@ -118,7 +120,7 @@
             this.PART_ScrollViewer = VisualHelper.FindVisualElement<ScrollViewer>(this, "PART_ContentHost");
             this.PART_TextBlock = VisualHelper.FindVisualElement<TextBlock>(this, "PART_Counter");
 
-            this.PART_TextBlock.Text = $"Verbleibende Zeichen: {this.MaxLength}";
+            this.PART_TextBlock.Text = $"Restzeichen: {this.MaxLength}";
             this.PART_TextBlock.Foreground = Brushes.Green;
 
             this.PreviewMouseWheel += TitleTextBox_PreviewMouseWheel;
@@ -145,19 +147,15 @@
 
         private void TitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            double minRest = this.MaxLength * 0.1D;
             int restCount = this.MaxLength - this.Text.Length;
 
-            double part = this.MaxLength / 3;
-            this.PART_TextBlock.Text = $"Verbleibende Zeichen: {restCount}";
-            if (restCount > (part *2))
+            this.PART_TextBlock.Text = $"Restzeichen: {restCount}";
+            if (restCount > (this.MaxLength - minRest))
             {
                 this.PART_TextBlock.Foreground = Brushes.Green;
             }
-            else if (restCount > part)
-            {
-                this.PART_TextBlock.Foreground = Brushes.Yellow;
-            }
-            else if (restCount < part)
+            else if (restCount < minRest)
             {
                 this.PART_TextBlock.Foreground = Brushes.Red;
             }

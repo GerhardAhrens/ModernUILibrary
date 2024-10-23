@@ -68,6 +68,7 @@
                     Title="Langtext:"
                     Width="400"
                     Height="150"
+                    MaxLength="100"
                     IsShowCounter="True"
                     IsShowTitle="True"
                     MaxLines="5"
