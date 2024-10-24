@@ -33,7 +33,6 @@
         public static readonly DependencyProperty IsShowCounterProperty = DependencyProperty.Register("IsShowCounter", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty CanClearTextProperty = DependencyProperty.Register("CanClearText", typeof(bool), typeof(TitleTextBox));
         public static readonly DependencyProperty CanSpellCheckProperty = DependencyProperty.Register("CanSpellCheck", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(false, OnCanSpellCheckChanged));
-
         public static readonly DependencyProperty TitleOrientationProperty = DependencyProperty.Register("TitleOrientation", typeof(TitleOrientationEnum), typeof(TitleTextBox));
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TitleTextBox), new PropertyMetadata(Brushes.Transparent));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true, OnSetBorderChanged));
