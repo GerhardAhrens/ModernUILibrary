@@ -1,7 +1,9 @@
 ﻿namespace ModernIU.Controls
 {
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Shapes;
 
@@ -30,6 +32,8 @@
         public static readonly DependencyProperty IsShowTitleProperty = DependencyProperty.Register("IsShowTitle", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty IsShowCounterProperty = DependencyProperty.Register("IsShowCounter", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty CanClearTextProperty = DependencyProperty.Register("CanClearText", typeof(bool), typeof(TitleTextBox));
+        public static readonly DependencyProperty CanSpellCheckProperty = DependencyProperty.Register("CanSpellCheck", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(false, OnCanSpellCheckChanged));
+
         public static readonly DependencyProperty TitleOrientationProperty = DependencyProperty.Register("TitleOrientation", typeof(TitleOrientationEnum), typeof(TitleTextBox));
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TitleTextBox), new PropertyMetadata(Brushes.Transparent));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true, OnSetBorderChanged));
@@ -78,6 +82,12 @@
         {
             get { return (bool)GetValue(CanClearTextProperty); }
             set { SetValue(CanClearTextProperty, value); }
+        }
+
+        public bool CanSpellCheck
+        {
+            get { return (bool)GetValue(CanSpellCheckProperty); }
+            set { SetValue(CanSpellCheckProperty, value); }
         }
 
         public TitleOrientationEnum TitleOrientation
@@ -135,7 +145,7 @@
             this.TextChanged += TitleTextBox_TextChanged;
 
             /* Rahmen für Control festlegen */
-            if (SetBorder == true)
+            if (this.SetBorder == true)
             {
                 this.BorderBrush = ControlBase.BorderBrush;
                 this.BorderThickness = ControlBase.BorderThickness;
@@ -149,8 +159,17 @@
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
 
-            /* Spezifisches Kontextmenü für Control übergeben */
-            //this.ContextMenu = this.BuildContextMenu();
+            if (this.CanSpellCheck == false)
+            {
+                /* Spezifisches Kontextmenü für Control übergeben */
+                this.ContextMenu = this.BuildContextMenu();
+                this.SpellCheck.IsEnabled = false;
+            }
+            else
+            {
+                this.SpellCheck.IsEnabled = true;
+                this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+            }
         }
 
         private void TitleTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -306,7 +325,7 @@
         {
             if (e.NewValue != null)
             {
-                var control = (TitleTextBox)d;
+                TitleTextBox control = (TitleTextBox)d;
 
                 if (e.NewValue.GetType() == typeof(bool))
                 {
@@ -319,6 +338,29 @@
                     {
                         control.BorderBrush = Brushes.Transparent;
                         control.BorderThickness = new Thickness(0);
+                    }
+                }
+            }
+        }
+
+        private static void OnCanSpellCheckChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                TitleTextBox control = (TitleTextBox)d;
+
+                if (e.NewValue.GetType() == typeof(bool))
+                {
+                    if ((bool)e.NewValue == true)
+                    {
+                        control.SpellCheck.IsEnabled = true;
+                        control.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag);
+                    }
+                    else
+                    {
+                        control.SpellCheck.IsEnabled = false;
+                        /* Spezifisches Kontextmenü für Control übergeben */
+                        control.ContextMenu = control.BuildContextMenu();
                     }
                 }
             }

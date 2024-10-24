@@ -45,12 +45,11 @@
                     Title="Multiline:"
                     Width="400"
                     Height="100"
-                    IsInactiveSelectionHighlightEnabled="true"
                     IsShowCounter="False"
                     IsShowTitle="True"
                     Language="de-de"
                     MaxLines="5"
-                    SpellCheck.IsEnabled="True"
+                    CanSpellCheck="True"
                     TextWrapping="Wrap"
                     TitleOrientation="Vertical">
                     <SpellCheck.CustomDictionaries>
