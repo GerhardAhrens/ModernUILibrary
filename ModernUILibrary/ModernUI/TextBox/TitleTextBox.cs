@@ -21,6 +21,7 @@
     /// </summary>
     /// <remarks>
     /// https://www.shujaat.net/2010/08/spell-checking-for-wpf-text-entry.html
+    /// https://www.pixata.co.uk/2018/05/23/enabling-spell-checking-in-wpf-and-using-a-custom-dictionary-across-the-application/
     /// </remarks>
     [TemplatePart(Name = "PART_ClearBorder", Type = typeof(Border))]
     [TemplatePart(Name = "PART_ClearText", Type = typeof(Path))]
