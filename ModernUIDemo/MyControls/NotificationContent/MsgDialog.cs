@@ -83,12 +83,29 @@ namespace ModernUIDemo
             return resultTag.Item1;
         }
 
-        public static Tuple<NotificationBoxButton, object> SeletFromListBox(this INotificationService @this)
+        public static Tuple<NotificationBoxButton, object> SelectFromListBox(this INotificationService @this)
         {
             bool? resultDialog = null;
             Tuple<string, string, double> msgText = new Tuple<string, string, double>("Eintrag auswählen", null, 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
             @this.ShowDialog<SelectLB>(msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton, object>)tag;
+                }
+            });
+
+            return resultTag;
+        }
+
+        public static Tuple<NotificationBoxButton, object> InputOneLine(this INotificationService @this, string inputText = "")
+        {
+            bool? resultDialog = null;
+            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Text eingeben", inputText, 18);
+            Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
+            @this.ShowDialog<InputOneLineYesNo>(msgText, (result, tag) =>
             {
                 resultDialog = result;
                 if (tag != null)

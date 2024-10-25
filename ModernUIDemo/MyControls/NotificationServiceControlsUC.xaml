@@ -25,6 +25,11 @@
             Grid.Row="1"
             Grid.Column="0"
             Orientation="Vertical">
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Meldungs Dialoge Ok, Ja/Nein, HTML Darstellung" />
+
             <StackPanel Orientation="Horizontal">
                 <ModernUI:FlatButton
                     x:Name="BtnNotificationBoxA"
@@ -52,7 +57,14 @@
                     Content="MessageBox Ok, HTML"
                     CornerRadius="2"
                     Type="info" />
+            </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Meldungs Dialoge Ok, Ja/nein" />
+
+            <StackPanel Orientation="Horizontal">
                 <ModernUI:FlatButton
                     x:Name="BtnNotificationBoxC"
                     Width="auto"
@@ -62,6 +74,23 @@
                     CornerRadius="2"
                     Type="info" />
             </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Meldungs Dialoge mit Eingabe, Ja/Nein" />
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxD1"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="Dialog mit Eingabe"
+                    CornerRadius="2"
+                    Type="info" />
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>

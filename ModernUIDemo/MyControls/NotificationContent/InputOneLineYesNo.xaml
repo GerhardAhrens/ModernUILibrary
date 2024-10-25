@@ -1,0 +1,104 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.InputOneLineYesNo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernUIDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Geometry x:Key="IconStop">M13,11.3814v18.115c0.0083,0.2845,0.2134,0.5036,0.4896,0.5036h4c0.2807,0,0.5104,-0.2297,0.5104,-0.5104v-18.088l7.6585,7.6695c0.1259,0.1261,0.3415,0.0369,0.3415,-0.1413v-6.2525c0,-0.2125,-0.0845,-0.4162,-0.2349,-0.5663l-9.934,-9.9139c-0.2999,-0.2654,-0.4015,-0.2654,-0.6944,0.0157L5.235,12.0908c-0.1504,0.1501,-0.235,0.3539,-0.235,0.5664v6.2414c0,0.1782,0.2154,0.2674,0.3414,0.1414L13,11.3814z</Geometry>
+        <Geometry x:Key="IconQuestion">M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z</Geometry>
+        <Geometry x:Key="IconOk">M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20M16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z</Geometry>
+        <Geometry x:Key="IconClose">M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M14.59,8L12,10.59L9.41,8L8,9.41L10.59,12L8,14.59L9.41,16L12,13.41L14.59,16L16,14.59L13.41,12L16,9.41L14.59,8Z</Geometry>
+        <Geometry x:Key="IconWarning">M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z</Geometry>
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <DockPanel
+                Grid.Row="0"
+                Background="LightBlue"
+                LastChildFill="True">
+
+                <Image
+                    Margin="4"
+                    HorizontalAlignment="Left"
+                    DockPanel.Dock="Left">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing Brush="#3E79B4" Geometry="{StaticResource ResourceKey=IconWarning}" />
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+
+                <TextBlock
+                    x:Name="TbHeader"
+                    Width="Auto"
+                    Margin="10,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Left"
+                    FontSize="14"
+                    FontWeight="Medium" />
+            </DockPanel>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                    Margin="10,10,0,0"
+                    FontSize="14"
+                    Text="Geben Sie einen Text ein" />
+
+                <TextBox
+                    x:Name="TxtInput"
+                    Width="400"
+                    Height="25"
+                    Margin="10,10,0,0"
+                    HorizontalAlignment="Left" />
+
+            </StackPanel>
+
+            <Border
+                Grid.Row="2"
+                Background="LightGray"
+                BorderBrush="Black"
+                BorderThickness="0,1,0,0">
+                <DockPanel Margin="5,0,5,0" LastChildFill="True">
+
+                    <Button
+                        x:Name="BtnNo"
+                        Width="100"
+                        Height="30"
+                        Click="BtnNo_Click"
+                        Content="Nein"
+                        DockPanel.Dock="Right" />
+
+                    <Button
+                        x:Name="BtnYes"
+                        Width="100"
+                        Height="30"
+                        Margin="20,0"
+                        HorizontalAlignment="Right"
+                        Click="BtnYes_Click"
+                        Content="Ja"
+                        DockPanel.Dock="Right" />
+
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

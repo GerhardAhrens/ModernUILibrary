@@ -21,6 +21,7 @@
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxA1, "Click", this.ONotifiactionBoxA1Click);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxB, "Click", this.ONotifiactionBoxBClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxC, "Click", this.ONotifiactionBoxCClick);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxD1, "Click", this.ONotifiactionBoxD1Click);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -29,6 +30,7 @@
             NotificationService.RegisterDialog<QuestionYesNoCheckBox, QuestionYesNoCheckBoxVM>();
             NotificationService.RegisterDialog<MessageOk>();
             NotificationService.RegisterDialog<SelectLB>();
+            NotificationService.RegisterDialog<InputOneLineYesNo>();
         }
 
         private void ONotifiactionBoxAClick(object sender, RoutedEventArgs e)
@@ -63,11 +65,20 @@
 
         private void ONotifiactionBoxCClick(object sender, RoutedEventArgs e)
         {
-            Tuple<NotificationBoxButton, object> result = this._notificationService.SeletFromListBox();
+            Tuple<NotificationBoxButton, object> result = this._notificationService.SelectFromListBox();
 
             if (result.Item1 == NotificationBoxButton.Yes)
             {
                 MessageBox.Show($"Ausgewählt: {result}\nListBoxItem : {((FooItem)result.Item2).Full}", "Notification Service");
+            }
+        }
+
+        private void ONotifiactionBoxD1Click(object sender, RoutedEventArgs e)
+        {
+            Tuple<NotificationBoxButton, object> result = this._notificationService.InputOneLine("Hallo");
+            if (result.Item1 == NotificationBoxButton.Yes)
+            {
+                MessageBox.Show($"Eingegebener Text: {result}\nTextBox.Text : {(string)result.Item2}", "Notification Service");
             }
         }
     }
