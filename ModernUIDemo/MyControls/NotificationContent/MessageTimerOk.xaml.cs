@@ -7,11 +7,11 @@
     using ModernIU.Controls;
 
     /// <summary>
-    /// Interaktionslogik für MessageOk.xaml
+    /// Interaktionslogik für MessageTimerOk.xaml
     /// </summary>
-    public partial class MessageOk : UserControl, INotificationServiceMessage
+    public partial class MessageTimerOk : UserControl, INotificationServiceMessage
     {
-        public MessageOk()
+        public MessageTimerOk()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);

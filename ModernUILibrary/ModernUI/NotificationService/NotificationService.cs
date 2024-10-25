@@ -62,7 +62,7 @@ namespace ModernIU.Controls
 
             try
             {
-                Tuple<string, string, double> text = new Tuple<string, string, double>(string.Empty, string.Empty, 14);
+                (string InfoText, string CustomText, int MaxLength, double FontSize) text = (string.Empty, string.Empty,20, 14);
                 Type type = Type.GetType($"{rootNamespace}.{name}");
                 this.ShowDialogInternal(type, text, callBack, null);
             }
@@ -79,7 +79,7 @@ namespace ModernIU.Controls
 
             try
             {
-                Tuple<string, string, double> text = new Tuple<string, string, double>(string.Empty, addText, 14);
+                (string InfoText, string CustomText, int MaxLength, double FontSize) text = (string.Empty, addText,20, 14);
                 Type type = Type.GetType($"{rootNamespace}.{name}");
                 this.ShowDialogInternal(type, text, callBack, null);
             }
@@ -90,7 +90,23 @@ namespace ModernIU.Controls
             }
         }
 
-        public void ShowDialog(string name, Tuple<string, string, double> addText, Action<bool?, object> callBack)
+        public void ShowDialog(string name, int countDown, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack)
+        {
+            string rootNamespace = GetCurrentNamespace();
+
+            try
+            {
+                Type type = Type.GetType($"{rootNamespace}.{name}");
+                this.ShowDialogInternal(type, countDown, addText, callBack, null);
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+        }
+
+        public void ShowDialog(string name, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack)
         {
             string rootNamespace = GetCurrentNamespace();
 
@@ -106,6 +122,22 @@ namespace ModernIU.Controls
             }
         }
 
+        public void ShowDialog(string name,(string InfoText, string CustomText, double FontSize) option, Action<bool?, object> callBack)
+        {
+            string rootNamespace = GetCurrentNamespace();
+
+            try
+            {
+                Type type = Type.GetType($"{rootNamespace}.{name}");
+                this.ShowDialogInternal(type, -1, option, callBack, null);
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+        }
+
         public void ShowDialog<TViewModel>(Action<bool?,object> callBack)
         {
             try
@@ -113,8 +145,8 @@ namespace ModernIU.Controls
                 Type type = _mappings[typeof(TViewModel)];
                 if (type != null)
                 {
-                    Tuple<string, string, double> text = new Tuple<string, string, double>(string.Empty, string.Empty, 14);
-                    this.ShowDialogInternal(type, text, callBack, typeof(TViewModel));
+                    (string InfoText, string CustomText, int MaxLength, double FontSize) option = (string.Empty, string.Empty,20, 14);
+                    this.ShowDialogInternal(type, option, callBack, typeof(TViewModel));
                 }
             }
             catch (Exception ex)
@@ -131,8 +163,8 @@ namespace ModernIU.Controls
                 Type type = _mappings[typeof(TViewModel)];
                 if (type != null)
                 {
-                    Tuple<string, string, double> text = new Tuple<string, string, double>(string.Empty, addText, 14);
-                    this.ShowDialogInternal(type, text, callBack, typeof(TViewModel));
+                    (string InfoText, string CustomText, int MaxLength, double FontSize) option = (string.Empty, addText,20, 14);
+                    this.ShowDialogInternal(type, option, callBack, typeof(TViewModel));
                 }
             }
             catch (Exception ex)
@@ -142,7 +174,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public void ShowDialog<TViewModel>(Tuple<string, string, double> addText, Action<bool?, object> callBack)
+        public void ShowDialog<TViewModel>((string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack)
         {
             try
             {
@@ -166,10 +198,47 @@ namespace ModernIU.Controls
                 throw;
             }
         }
-        private void ShowDialogInternal(Type type, Tuple<string, string, double> addText, Action<bool?,object> callBack, Type vmType)
+
+        public void ShowDialog<TViewModel>((string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack)
+        {
+            ShowDialog<TViewModel>(-1, addText, callBack);
+        }
+
+        public void ShowDialog<TViewModel>(int countDown, (string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack)
+        {
+            try
+            {
+                if (_mappings.ContainsKey(typeof(TViewModel)))
+                {
+
+                    Type type = _mappings[typeof(TViewModel)];
+                    if (type != null)
+                    {
+                        this.ShowDialogInternal(type, countDown, addText, callBack, typeof(TViewModel));
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"Object '{typeof(TViewModel).Name}' not found!");
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+        }
+
+        private void ShowDialogInternal(Type type, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?,object> callBack, Type vmType)
+        {
+            this.ShowDialogInternal(type, -1, addText, callBack, vmType);
+        }
+
+        private void ShowDialogInternal(Type type, int countDown, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack, Type vmType)
         {
             NotificationWindow dlg = new NotificationWindow();
             dlg.Topmost = false;
+            dlg.ShowInTaskbar = false;
             dlg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             dlg.WindowState = WindowState.Normal;
             dlg.Owner = Application.Current.MainWindow;
@@ -177,7 +246,7 @@ namespace ModernIU.Controls
             EventHandler closeEventHandler = null;
             closeEventHandler = (s, e) =>
             {
-                callBack(dlg.DialogResult,dlg.Tag);
+                callBack(dlg.DialogResult, dlg.Tag);
                 dlg.Closed -= closeEventHandler;
             };
 
@@ -185,10 +254,11 @@ namespace ModernIU.Controls
 
             if (type != null)
             {
-                UserControl content = Activator.CreateInstance(type) as UserControl;
+                INotificationServiceMessage content = Activator.CreateInstance(type) as INotificationServiceMessage;
 
                 if (content != null)
-                { 
+                {
+                    content.CountDown = countDown;
                     content.Tag = addText;
 
                     if (vmType != null)
@@ -204,6 +274,46 @@ namespace ModernIU.Controls
             }
         }
 
+
+        private void ShowDialogInternal(Type type, int countDown, (string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack, Type vmType)
+        {
+            NotificationWindow dlg = new NotificationWindow();
+            dlg.Topmost = false;
+            dlg.ShowInTaskbar = false;
+            dlg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            dlg.WindowState = WindowState.Normal;
+            dlg.Owner = Application.Current.MainWindow;
+
+            EventHandler closeEventHandler = null;
+            closeEventHandler =  closeEventHandler = (s, e) =>
+            {
+                callBack(dlg.DialogResult, dlg.Tag);
+                dlg.Closed -= closeEventHandler;
+            };
+
+            dlg.Closed += closeEventHandler;
+
+            if (type != null)
+            {
+                INotificationServiceMessage content = Activator.CreateInstance(type) as INotificationServiceMessage;
+
+                if (content != null)
+                {
+                    content.CountDown = countDown;
+                    content.Tag = addText;
+
+                    if (vmType != null)
+                    {
+                        var vm = Activator.CreateInstance(vmType);
+                        (content as FrameworkElement).DataContext = vm;
+                    }
+
+                    dlg.Content = content;
+                }
+
+                dlg.ShowDialog();
+            }
+        }
         private bool IsHtmlBody(string text)
         {
             bool result = false;

@@ -40,7 +40,6 @@
     <Folder Include="ModernUI\Led\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\TextBlock\" />
-    <Folder Include="ModernUI\NotificationService\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\ProgressBar\Themes\" />

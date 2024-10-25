@@ -86,7 +86,33 @@
                     Width="auto"
                     Height="30"
                     Margin="5,5"
-                    Content="Dialog mit Eingabe"
+                    Content="Dialog mit Text Eingabe"
+                    CornerRadius="2"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxD2"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Content="Dialog mit Integer Eingabe"
+                    CornerRadius="2"
+                    Type="info" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Meldungs Dialoge mit eimer Timer" />
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxT1"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Padding="5"
+                    Content="Dialog mit Timer"
                     CornerRadius="2"
                     Type="info" />
             </StackPanel>

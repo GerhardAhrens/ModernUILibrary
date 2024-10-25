@@ -21,11 +21,14 @@ namespace ModernIU.Controls
     {
         void ShowDialog(string name, Action<bool?, object> callBack);
         void ShowDialog(string name,string addText, Action<bool?, object> callBack);
-
-        void ShowDialog(string name, Tuple<string, string, double> addText, Action<bool?, object> callBack);
+        void ShowDialog(string name, (string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack);
+        void ShowDialog(string name, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack);
+        void ShowDialog(string name,int countDown, (string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack);
 
         void ShowDialog<ViewModel>(Action<bool?,object> callBack);
         void ShowDialog<ViewModel>(string addText,Action<bool?, object> callBack);
-        void ShowDialog<ViewModel>(Tuple<string, string, double> addText, Action<bool?, object> callBack);
+        void ShowDialog<ViewModel>(int countDown, (string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack);
+        void ShowDialog<ViewModel>((string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack);
+        void ShowDialog<ViewModel>((string InfoText, string CustomText, int MaxLength, double FontSize) addText, Action<bool?, object> callBack);
     }
 }

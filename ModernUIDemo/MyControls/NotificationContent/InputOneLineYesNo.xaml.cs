@@ -8,7 +8,7 @@
     /// <summary>
     /// Interaktionslogik für InputOneLineYesNo.xaml
     /// </summary>
-    public partial class InputOneLineYesNo : UserControl
+    public partial class InputOneLineYesNo : UserControl, INotificationServiceMessage
     {
         public InputOneLineYesNo()
         {
@@ -17,12 +17,15 @@
             WeakEventManager<TextBox, TextChangedEventArgs>.AddHandler(this.TxtInput, "TextChanged", this.OnTextChanged);
         }
 
+        public int CountDown { get; set; }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Tuple<string, string, double> textOption = (Tuple<string, string, double>)this.Tag;
+            (string InfoText, string CustomText, int MaxLength, double FontSize) textOption = ((string InfoText, string CustomText, int MaxLength, double FontSize))this.Tag;
 
-            this.TbHeader.Text = textOption.Item1;
-            this.TxtInput.Text = textOption.Item2;
+            this.TbHeader.Text = textOption.InfoText;
+            this.TxtInput.Text = textOption.CustomText;
+            this.TxtInput.MaxLength = textOption.MaxLength;
 
             if (string.IsNullOrEmpty(this.TxtInput.Text) == true)
             {

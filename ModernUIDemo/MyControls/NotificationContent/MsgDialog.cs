@@ -25,7 +25,7 @@ namespace ModernUIDemo
         public static Tuple<NotificationBoxButton, object> ApplicationExit(this INotificationService @this)
         {
             bool? resultDialog = null;
-            Tuple<string,string,double> msgText = new Tuple<string, string, double>("Programm beenden", $"Das ist ein Zusatztext \n mit CheckBox",18);
+            (string InfoText, string CustomText, double FontSize) msgText = ("Programm beenden", $"Das ist ein Zusatztext \n mit CheckBox", 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
 
             @this.ShowDialog<QuestionYesCheckBoxVM>(msgText, (result, tag) =>
@@ -43,7 +43,7 @@ namespace ModernUIDemo
         public static Tuple<NotificationBoxButton> DeleteCurrent(this INotificationService @this)
         {
             bool? resultDialog = null;
-            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Löschen", $"Soll der ausgewählte Datensatz gelöscht werden", 18);
+            (string InfoText, string CustomText, double FontSize) msgText = ("Löschen", $"Soll der ausgewählte Datensatz gelöscht werden", 18);
             Tuple<NotificationBoxButton> resultTag = new Tuple<NotificationBoxButton>(NotificationBoxButton.None);
 
             @this.ShowDialog<QuestionYesNoCheckBoxVM>(msgText, (result, tag) =>
@@ -68,7 +68,7 @@ namespace ModernUIDemo
             htmlContent.Append($"<h3 style=\"color:blue;\">Datum/Zeit: {DateTime.Now}</h3>");
             htmlContent.Append("</body></html>");
 
-            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Hinweis", htmlContent.ToString(), 0);
+            (string InfoText, string CustomText, double FontSize) msgText = ("Hinweis", htmlContent.ToString(), 0);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
 
             @this.ShowDialog<MessageOk>(msgText, (result, tag) =>
@@ -86,7 +86,7 @@ namespace ModernUIDemo
         public static Tuple<NotificationBoxButton, object> SelectFromListBox(this INotificationService @this)
         {
             bool? resultDialog = null;
-            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Eintrag auswählen", null, 18);
+            (string InfoText, string CustomText, double FontSize) msgText = ("Eintrag auswählen", null, 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
             @this.ShowDialog<SelectLB>(msgText, (result, tag) =>
             {
@@ -103,7 +103,7 @@ namespace ModernUIDemo
         public static Tuple<NotificationBoxButton, object> InputOneLine(this INotificationService @this, string inputText = "")
         {
             bool? resultDialog = null;
-            Tuple<string, string, double> msgText = new Tuple<string, string, double>("Text eingeben", inputText, 18);
+            (string InfoText, string CustomText, int MaxLength, double FontSize) msgText = ("Text eingeben", inputText,20, 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
             @this.ShowDialog<InputOneLineYesNo>(msgText, (result, tag) =>
             {
@@ -115,6 +115,49 @@ namespace ModernUIDemo
             });
 
             return resultTag;
+        }
+
+        public static Tuple<NotificationBoxButton, object> InputInteger(this INotificationService @this, int inputText = 0, Type resultType = null)
+        {
+            bool? resultDialog = null;
+            (string InfoText, string CustomText, int MaxLength, double FontSize) msgText = ("Nummerischen Wert eingeben", inputText.ToString(), 5, 18);
+            Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
+            @this.ShowDialog<InputNumericYesNo>(msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton, object>)tag;
+                }
+            });
+
+            resultTag = new Tuple<NotificationBoxButton, object>(resultTag.Item1, Convert.ChangeType(resultTag.Item2, resultType));
+
+            return resultTag;
+        }
+
+        public static NotificationBoxButton MessageWithTimer(this INotificationService @this, int countDown = 5)
+        {
+            bool? resultDialog = null;
+
+            StringBuilder htmlContent = new StringBuilder();
+            htmlContent.Append("<html><body scroll=\"no\">");
+            htmlContent.Append("Das ist eine Message mit einem Timer");
+            htmlContent.Append("</body></html>");
+
+            (string InfoText, string CustomText, double FontSize) msgText = ("Hinweis", htmlContent.ToString(), 18);
+            Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
+
+            @this.ShowDialog<MessageTimerOk>(5,msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton, object>)tag;
+                }
+            });
+
+            return resultTag.Item1;
         }
     }
 }

@@ -22,6 +22,8 @@
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxB, "Click", this.ONotifiactionBoxBClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxC, "Click", this.ONotifiactionBoxCClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxD1, "Click", this.ONotifiactionBoxD1Click);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxD2, "Click", this.ONotifiactionBoxD2Click);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxT1, "Click", this.ONotifiactionBoxT1Click);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -31,6 +33,8 @@
             NotificationService.RegisterDialog<MessageOk>();
             NotificationService.RegisterDialog<SelectLB>();
             NotificationService.RegisterDialog<InputOneLineYesNo>();
+            NotificationService.RegisterDialog<InputNumericYesNo>();
+            NotificationService.RegisterDialog<MessageTimerOk>();
         }
 
         private void ONotifiactionBoxAClick(object sender, RoutedEventArgs e)
@@ -79,6 +83,24 @@
             if (result.Item1 == NotificationBoxButton.Yes)
             {
                 MessageBox.Show($"Eingegebener Text: {result}\nTextBox.Text : {(string)result.Item2}", "Notification Service");
+            }
+        }
+
+        private void ONotifiactionBoxD2Click(object sender, RoutedEventArgs e)
+        {
+            Tuple<NotificationBoxButton, object> result = this._notificationService.InputInteger(0, typeof(decimal));
+            if (result.Item1 == NotificationBoxButton.Yes)
+            {
+                MessageBox.Show($"Eingegebener Text: {result}\nTextBox.Text : {result.Item2}", "Notification Service");
+            }
+        }
+
+        private void ONotifiactionBoxT1Click(object sender, RoutedEventArgs e)
+        {
+            NotificationBoxButton result = this._notificationService.MessageWithTimer(5);
+            if (result == NotificationBoxButton.Ok)
+            {
+                MessageBox.Show($"Ausgewählt: {result}", "Notification Service");
             }
         }
     }

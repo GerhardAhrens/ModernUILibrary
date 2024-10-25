@@ -8,7 +8,7 @@
     /// <summary>
     /// Interaktionslogik für SelectLB.xaml
     /// </summary>
-    public partial class SelectLB : UserControl
+    public partial class SelectLB : UserControl, INotificationServiceMessage
     {
         public SelectLB()
         {
@@ -17,9 +17,11 @@
 
         }
 
+        public int CountDown { get; set; }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Tuple<string, string, double> textOption = (Tuple<string, string, double>)this.Tag;
+            (string InfoText, string CustomText, double FontSize) textOption = ((string InfoText, string CustomText, double FontSize))this.Tag;
 
             this.TbHeader.Text = textOption.Item1;
             this.LBItems.ItemsSource = this.CreateFooItems();

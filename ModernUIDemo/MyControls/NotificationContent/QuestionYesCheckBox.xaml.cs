@@ -9,7 +9,7 @@
     /// <summary>
     /// Interaktionslogik für QuestionYesCheckBox.xaml
     /// </summary>
-    public partial class QuestionYesCheckBox : UserControl
+    public partial class QuestionYesCheckBox : UserControl, INotificationServiceMessage
     {
         public QuestionYesCheckBox()
         {
@@ -17,9 +17,11 @@
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
         }
 
+        public int CountDown { get; set; }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Tuple<string, string, double> textOption = (Tuple<string, string, double>)this.Tag;
+            (string InfoText, string CustomText, double FontSize) textOption = ((string InfoText, string CustomText, double FontSize))this.Tag;
 
             this.TbHeader.Text = textOption.Item1;
             this.TbFull.Text = textOption.Item2;
