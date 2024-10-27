@@ -33,7 +33,7 @@
             NotificationService.RegisterDialog<MessageOk>();
             NotificationService.RegisterDialog<SelectLB>();
             NotificationService.RegisterDialog<InputOneLineYesNo>();
-            NotificationService.RegisterDialog<InputNumericYesNo>();
+            NotificationService.RegisterDialog<InputIntegerYesNo>();
             NotificationService.RegisterDialog<MessageTimerOk>();
         }
 

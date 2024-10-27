@@ -9,13 +9,13 @@
     using ModernIU.Controls;
 
     /// <summary>
-    /// Interaktionslogik für InputNumericYesNo.xaml
+    /// Interaktionslogik für InputDecimalYesNo.xaml
     /// </summary>
-    public partial class InputNumericYesNo : UserControl, INotificationServiceMessage
+    public partial class InputDecimalYesNo : UserControl, INotificationServiceMessage
     {
         private static readonly Regex regexIntPattern = new Regex("[^0-9.-]+");
 
-        public InputNumericYesNo()
+        public InputDecimalYesNo()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
@@ -105,7 +105,7 @@
                 }
                 else
                 {
-                    InputNumericYesNo ctrl = (InputNumericYesNo)e.Source;
+                    InputDecimalYesNo ctrl = (InputDecimalYesNo)e.Source;
                     int cursorPos = ctrl.TxtInput.CaretIndex;
                     if (cursorPos == 0)
                     {

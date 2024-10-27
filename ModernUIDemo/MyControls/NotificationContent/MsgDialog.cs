@@ -122,7 +122,7 @@ namespace ModernUIDemo
             bool? resultDialog = null;
             (string InfoText, string CustomText, int MaxLength, double FontSize) msgText = ("Nummerischen Wert eingeben", inputText.ToString(), 5, 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
-            @this.ShowDialog<InputNumericYesNo>(msgText, (result, tag) =>
+            @this.ShowDialog<InputIntegerYesNo>(msgText, (result, tag) =>
             {
                 resultDialog = result;
                 if (tag != null)
