@@ -266,9 +266,10 @@
                     BorderBrush="Green"
                     BorderThickness="1"
                     DefaultNotificationStyleName="defaultTextBlockStyle"
-                    MaxCharactersAllowed="180"
+                    MaxCharactersAllowed="50"
                     NotificationStyleName="textblockStyle"
-                    NotifyLimit="100"
+                    NotifyLimit="40"
+                    RemainingFontSize="14"
                     RemainingText="Rest:" />
 
                 <TextBlock

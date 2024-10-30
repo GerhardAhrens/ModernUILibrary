@@ -11,14 +11,16 @@
 
     public class TextBoxCounter : RichTextBox, INotifyPropertyChanged
     {
-        public static DependencyProperty CharactersRemainingProperty;
-        public static DependencyProperty RemainingTextProperty;
-        public static DependencyProperty MaxCharactersAllowedProperty;
-        public static DependencyProperty NotiftyLimitProperty;
-        public static DependencyProperty NotificationStyleNameProperty;
-        public static DependencyProperty NotificationStyleProperty;
-        public static DependencyProperty DefaultNotificationStyleNameProperty;
-        public static DependencyProperty IsValidProperty;
+        public static readonly DependencyProperty CharactersRemainingProperty;
+        public static readonly DependencyProperty RemainingTextProperty;
+        public static readonly DependencyProperty RemainingFontSizeProperty;
+        public static readonly DependencyProperty MaxCharactersAllowedProperty;
+        public static readonly DependencyProperty NotiftyLimitProperty;
+        public static readonly DependencyProperty NotificationStyleNameProperty;
+        public static readonly DependencyProperty NotificationStyleProperty;
+        public static readonly DependencyProperty DefaultNotificationStyleNameProperty;
+        public static readonly DependencyProperty IsValidProperty;
+        public static readonly DependencyProperty SetBorderProperty;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,6 +28,7 @@
         {
             CharactersRemainingProperty = DependencyProperty.Register("CharactersRemaining", typeof(int), typeof(TextBoxCounter));
             RemainingTextProperty = DependencyProperty.Register("RemainingText", typeof(string), typeof(TextBoxCounter), new PropertyMetadata("Restzeichen:", RemainingTextChanged));
+            RemainingFontSizeProperty = DependencyProperty.Register("RemainingFontSize", typeof(double), typeof(TextBoxCounter), new PropertyMetadata(18d, RemainingFontSizeChanged));
             MaxCharactersAllowedProperty = DependencyProperty.Register("MaxCharactersAllowed", typeof(int),
                                                                        typeof(TextBoxCounter), new PropertyMetadata(0, MaxCharactersAllowedPropertyChanged));
 
@@ -37,6 +40,7 @@
                                                                                typeof(TextBoxCounter), new PropertyMetadata(null, DefaultNotificationStyleNamePropertyChanged));
 
             IsValidProperty = DependencyProperty.Register("IsValid", typeof(bool), typeof(TextBoxCounter));
+            SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxCounter), new PropertyMetadata(true, OnSetBorderChanged));
         }
 
         public TextBoxCounter()
@@ -46,6 +50,8 @@
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Center;
             this.Margin = new Thickness(2);
+            this.BorderBrush = Brushes.Green;
+            this.BorderThickness = new Thickness(1);
             this.MinHeight = 18;
             this.Height = 23;
             this.IsReadOnly = false;
@@ -60,7 +66,7 @@
             binding.PreviewCanExecute += binding_PreviewCanExecute;
             binding.PreviewExecuted += binding_PreviewExecuted;
 
-            CommandBindings.Add(binding);
+            this.CommandBindings.Add(binding);
 
             this.SetUpBindingForBackground();
         }
@@ -153,6 +159,48 @@
                 this.OnPropertyChanged();
             }
         }
+
+        public double RemainingFontSize
+        {
+            get
+            {
+                return (double)GetValue(RemainingFontSizeProperty);
+            }
+
+            set
+            {
+                SetValue(RemainingFontSizeProperty, value);
+                this.OnPropertyChanged();
+            }
+        }
+
+        public bool SetBorder
+        {
+            get { return (bool)GetValue(SetBorderProperty); }
+            set { SetValue(SetBorderProperty, value); }
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.SelectAll();
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.ContextMenu = this.BuildContextMenu();
+
+            /* Rahmen für Control festlegen */
+            if (SetBorder == true)
+            {
+                this.BorderBrush = Brushes.Green;
+                this.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                this.BorderBrush = Brushes.Transparent;
+                this.BorderThickness = new Thickness(0);
+            }
+        }
+
         /// <summary>
         /// Fired when the style name property is assigned from xaml 
         /// </summary>
@@ -203,6 +251,44 @@
             }
         }
 
+        private static void RemainingFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TextBoxCounter sharpRichTextBox = d as TextBoxCounter;
+
+            if (sharpRichTextBox == null)
+            {
+                return;
+            }
+
+            if (e.NewValue != null)
+            {
+                sharpRichTextBox.RemainingFontSize = (double)e.NewValue;
+                sharpRichTextBox.SetUpBindingForBackground();
+            }
+        }
+
+        private static void OnSetBorderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                TextBoxCounter control = (TextBoxCounter)d;
+
+                if (e.NewValue.GetType() == typeof(bool))
+                {
+                    if ((bool)e.NewValue == true)
+                    {
+                        control.BorderBrush = Brushes.Green;
+                        control.BorderThickness = new Thickness(1);
+                    }
+                    else
+                    {
+                        control.BorderBrush = Brushes.Transparent;
+                        control.BorderThickness = new Thickness(0);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// This method is used to setup the watermark background for the RichTextBox 
         /// </summary>
@@ -218,8 +304,8 @@
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Height = 35,
-                FontSize = 22d,
-                Margin = new Thickness(0,0,5,0),
+                FontSize = this.RemainingFontSize,
+                Margin = new Thickness(0,0,5,2),
             };
 
             var textBlock = new TextBlock()
@@ -230,7 +316,8 @@
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Height = 35,
                 Width = 120,
-                FontSize = 22d
+                FontSize = this.RemainingFontSize,
+                Margin = new Thickness(0, 0, 2, 2)
             };
 
             var styleBinding = new System.Windows.Data.Binding("NotificationStyle");
@@ -370,6 +457,71 @@
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        /// <summary>
+        /// Spezifisches Kontextmenü erstellen
+        /// </summary>
+        /// <returns></returns>
+        private ContextMenu BuildContextMenu()
+        {
+            ContextMenu textBoxContextMenu = new ContextMenu();
+            MenuItem copyMenu = new MenuItem();
+            copyMenu.Header = "Kopiere";
+            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
+            textBoxContextMenu.Items.Add(copyMenu);
+
+            if (this.IsReadOnly == false)
+            {
+                MenuItem pasteMenu = new MenuItem();
+                pasteMenu.Header = "Einfügen";
+                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
+                textBoxContextMenu.Items.Add(pasteMenu);
+
+                MenuItem deleteMenu = new MenuItem();
+                deleteMenu.Header = "Ausschneiden";
+                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
+                textBoxContextMenu.Items.Add(deleteMenu);
+
+                MenuItem setDateMenu = new MenuItem();
+                setDateMenu.Header = "Setze Datum";
+                setDateMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconClock);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(setDateMenu, "Click", this.OnSetDateMenu);
+                textBoxContextMenu.Items.Add(setDateMenu);
+            }
+
+            return textBoxContextMenu;
+        }
+
+        private void OnCopyMenu(object sender, RoutedEventArgs e)
+        {
+            this.Copy();
+        }
+
+        private void OnPasteMenu(object sender, RoutedEventArgs e)
+        {
+            this.InsertText(Clipboard.GetText());
+        }
+
+        private void OnDeleteMenu(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.Text);
+            this.SelectAll();
+            this.Selection.Text = string.Empty;
+        }
+
+        private void OnSetDateMenu(object sender, RoutedEventArgs e)
+        {
+            this.InsertText(DateTime.Now.ToShortDateString());
+        }
+
+        private void InsertText(string text)
+        {
+            this.CaretPosition = this.CaretPosition.GetPositionAtOffset(0, LogicalDirection.Forward);
+            this.CaretPosition.InsertTextInRun(text);
         }
     }
 }

@@ -116,6 +116,7 @@
                 this.PART_BOX1.GotFocus += (o, e) => { this.IsKeyboardFocused = true; };
                 this.PART_BOX1.LostFocus += (o, e) => { this.IsKeyboardFocused = false; };
                 this.PART_BOX1.PreviewKeyDown += PART_BOX1_PreviewKeyDown;
+                this.PART_BOX1.IsReadOnly = this.IsReadOnly;
             }
 
             if(this.PART_BOX2 != null)
@@ -125,6 +126,7 @@
                 this.PART_BOX2.GotFocus += (o, e) => { this.IsKeyboardFocused = true; };
                 this.PART_BOX2.LostFocus += (o, e) => { this.IsKeyboardFocused = false; };
                 this.PART_BOX2.PreviewKeyDown += PART_BOX1_PreviewKeyDown;
+                this.PART_BOX2.IsReadOnly = this.IsReadOnly;
             }
 
             if(this.PART_BOX3 != null)
@@ -134,6 +136,7 @@
                 this.PART_BOX3.GotFocus += (o, e) => { this.IsKeyboardFocused = true; };
                 this.PART_BOX3.LostFocus += (o, e) => { this.IsKeyboardFocused = false; };
                 this.PART_BOX3.PreviewKeyDown += PART_BOX1_PreviewKeyDown;
+                this.PART_BOX3.IsReadOnly = this.IsReadOnly;
             }
 
             if(this.PART_BOX4 != null)
@@ -142,13 +145,17 @@
                 this.PART_BOX4.GotFocus += (o, e) => { this.IsKeyboardFocused = true; };
                 this.PART_BOX4.LostFocus += (o, e) => { this.IsKeyboardFocused = false; };
                 this.PART_BOX4.PreviewKeyDown += PART_BOX1_PreviewKeyDown;
+                this.PART_BOX4.IsReadOnly = this.IsReadOnly;
             }
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
 
             /* Spezifisches Kontextmenü für Control übergeben */
-            //this.ContextMenu = this.BuildContextMenu();
+            this.PART_BOX1.ContextMenu = this.BuildContextMenu();
+            this.PART_BOX2.ContextMenu = this.BuildContextMenu();
+            this.PART_BOX3.ContextMenu = this.BuildContextMenu();
+            this.PART_BOX4.ContextMenu = this.BuildContextMenu();
         }
 
         private void PART_BOX1_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -471,6 +478,66 @@
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Spezifisches Kontextmenü erstellen
+        /// </summary>
+        /// <returns></returns>
+        private ContextMenu BuildContextMenu()
+        {
+            ContextMenu textBoxContextMenu = new ContextMenu();
+            MenuItem copyMenu = new MenuItem();
+            copyMenu.Header = "Kopiere";
+            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
+            textBoxContextMenu.Items.Add(copyMenu);
+
+            if (this.IsReadOnly == false)
+            {
+                MenuItem pasteMenu = new MenuItem();
+                pasteMenu.Header = "Einfügen";
+                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
+                textBoxContextMenu.Items.Add(pasteMenu);
+
+                MenuItem deleteMenu = new MenuItem();
+                deleteMenu.Header = "Ausschneiden";
+                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
+                textBoxContextMenu.Items.Add(deleteMenu);
+            }
+
+            return textBoxContextMenu;
+        }
+
+        private void OnCopyMenu(object sender, RoutedEventArgs e)
+        {
+            string ipText = $"{this.PART_BOX1.Text}.{this.PART_BOX2.Text}.{this.PART_BOX3.Text}.{this.PART_BOX4.Text}";
+            Clipboard.SetText(ipText);
+        }
+
+        private void OnPasteMenu(object sender, RoutedEventArgs e)
+        {
+            string ipText = Clipboard.GetText();
+            if (ipText.Split('.').Length == 4)
+            {
+                this.PART_BOX1.Text = ipText.Split('.')[0];
+                this.PART_BOX2.Text = ipText.Split('.')[1];
+                this.PART_BOX3.Text = ipText.Split('.')[2];
+                this.PART_BOX4.Text = ipText.Split('.')[3];
+            }
+        }
+
+        private void OnDeleteMenu(object sender, RoutedEventArgs e)
+        {
+            string ipText = $"{this.PART_BOX1.Text}|{this.PART_BOX2.Text}|{this.PART_BOX3.Text}|{this.PART_BOX4.Text}";
+            Clipboard.SetText(ipText);
+
+            this.PART_BOX1.Text = string.Empty;
+            this.PART_BOX2.Text = string.Empty;
+            this.PART_BOX3.Text = string.Empty;
+            this.PART_BOX4.Text = string.Empty;
         }
     }
 }
