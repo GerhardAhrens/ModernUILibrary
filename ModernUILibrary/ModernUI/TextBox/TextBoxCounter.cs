@@ -309,7 +309,7 @@
             var textBlockDesc = new TextBlock()
             {
                 Text = this.RemainingText,
-                Opacity = 0.3,
+                Opacity = 0.4,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Height = 35,
@@ -339,7 +339,7 @@
             textBlockDesc.SetBinding(TextBlock.StyleProperty, styleBinding);
             textBlock.SetBinding(TextBlock.StyleProperty, styleBinding);
 
-            stackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            stackPanel.Orientation = Orientation.Horizontal;
             stackPanel.Children.Add(textBlockDesc);
             stackPanel.Children.Add(textBlock);
 

@@ -278,7 +278,7 @@
                     Margin="5,0"
                     VerticalAlignment="Center"
                     Background="White"
-                    Style="{Binding ElementName=rtbTweet, Path=NotificationStyle}">
+                    Style="{Binding ElementName=txtCounter, Path=NotificationStyle}">
                     <Run Text="Ergebnis:" />
                     <Run Text="{Binding Path=CharactersRemaining, ElementName=txtCounter}" />
                 </TextBlock>
