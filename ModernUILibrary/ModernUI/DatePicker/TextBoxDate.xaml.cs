@@ -97,33 +97,33 @@
                 {
                     if (e.AddedItems.Count > 0)
                     {
-                        day = ((object[])e.AddedItems)[0].ToString();
+                        this.day = ((object[])e.AddedItems)[0].ToString();
                     }
                     else
                     {
-                        day = DateTime.Now.Day.ToString();
+                        this.day = DateTime.Now.Day.ToString();
                     }
                 }
                 else if (cb.Name == "cbMonth")
                 {
                     if (e.AddedItems.Count > 0)
                     {
-                        month = ((object[])e.AddedItems)[0].ToString();
+                        this.month = ((object[])e.AddedItems)[0].ToString();
                     }
                     else
                     {
-                        month = DateTime.Now.Month.ToString();
+                        this.month = DateTime.Now.Month.ToString();
                     }
                 }
                 else if (cb.Name == "cbYear")
                 {
                     if (e.AddedItems.Count > 0)
                     {
-                        year = ((object[])e.AddedItems)[0].ToString();
+                        this.year = ((object[])e.AddedItems)[0].ToString();
                     }
                     else
                     {
-                        year = DateTime.Now.Year.ToString();
+                        this.year = DateTime.Now.Year.ToString();
                     }
                 }
 
@@ -248,6 +248,69 @@
 
             this.BorderBrush = ControlBase.BorderBrush;
             this.BorderThickness = ControlBase.BorderThickness;
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.cbDay.ContextMenu = this.BuildContextMenu();
+            this.cbMonth.ContextMenu = this.BuildContextMenu();
+            this.cbYear.ContextMenu = this.BuildContextMenu();
+        }
+
+        /// <summary>
+        /// Spezifisches Kontextmenü erstellen
+        /// </summary>
+        /// <returns></returns>
+        private ContextMenu BuildContextMenu()
+        {
+            ContextMenu textBoxContextMenu = new ContextMenu();
+            MenuItem copyMenu = new MenuItem();
+            copyMenu.Header = "Kopiere";
+            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
+            textBoxContextMenu.Items.Add(copyMenu);
+
+            if (this.IsReadOnly == false)
+            {
+                MenuItem pasteMenu = new MenuItem();
+                pasteMenu.Header = "Einfügen";
+                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
+                textBoxContextMenu.Items.Add(pasteMenu);
+
+                MenuItem deleteMenu = new MenuItem();
+                deleteMenu.Header = "Ausschneiden";
+                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
+                textBoxContextMenu.Items.Add(deleteMenu);
+            }
+
+            return textBoxContextMenu;
+        }
+
+        private void OnCopyMenu(object sender, RoutedEventArgs e)
+        {
+            string dtFull = $"{this.cbDay.Text}.{this.cbMonth.Text}.{this.cbYear.Text}";
+            Clipboard.SetText(dtFull);
+        }
+
+        private void OnPasteMenu(object sender, RoutedEventArgs e)
+        {
+            string dtFull = Clipboard.GetText();
+            if (dtFull.Split('.').Length == 3)
+            {
+                this.day = dtFull.Split('.')[0];
+                this.month = dtFull.Split('.')[1];
+                this.year = dtFull.Split('.')[2];
+            }
+
+        }
+
+        private void OnDeleteMenu(object sender, RoutedEventArgs e)
+        {
+            string dtFull = $"{this.cbDay.Text}.{this.cbMonth.Text}.{this.cbYear.Text}";
+            Clipboard.SetText(dtFull);
+            this.day = string.Empty;
+            this.month = string.Empty;
+            this.year = string.Empty;
         }
     }
 }

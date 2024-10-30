@@ -266,6 +266,7 @@
                     BorderBrush="Green"
                     BorderThickness="1"
                     DefaultNotificationStyleName="defaultTextBlockStyle"
+                    IsReadOnly="False"
                     MaxCharactersAllowed="50"
                     NotificationStyleName="textblockStyle"
                     NotifyLimit="40"

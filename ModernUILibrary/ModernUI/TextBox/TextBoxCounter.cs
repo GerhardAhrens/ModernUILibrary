@@ -21,6 +21,7 @@
         public static readonly DependencyProperty DefaultNotificationStyleNameProperty;
         public static readonly DependencyProperty IsValidProperty;
         public static readonly DependencyProperty SetBorderProperty;
+        public static readonly DependencyProperty ReadOnlyColorProperty;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,9 +42,10 @@
 
             IsValidProperty = DependencyProperty.Register("IsValid", typeof(bool), typeof(TextBoxCounter));
             SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxCounter), new PropertyMetadata(true, OnSetBorderChanged));
-        }
+            ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxCounter), new PropertyMetadata(Brushes.LightYellow));
+    }
 
-        public TextBoxCounter()
+    public TextBoxCounter()
         {
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
@@ -52,6 +54,7 @@
             this.Margin = new Thickness(2);
             this.BorderBrush = Brushes.Green;
             this.BorderThickness = new Thickness(1);
+            this.Background = Brushes.Transparent;
             this.MinHeight = 18;
             this.Height = 23;
             this.IsReadOnly = false;
@@ -180,6 +183,12 @@
             set { SetValue(SetBorderProperty, value); }
         }
 
+        public Brush ReadOnlyColor
+        {
+            get { return (Brush)GetValue(ReadOnlyColorProperty); }
+            set { SetValue(ReadOnlyColorProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -189,7 +198,7 @@
             this.ContextMenu = this.BuildContextMenu();
 
             /* Rahmen für Control festlegen */
-            if (SetBorder == true)
+            if (this.SetBorder == true)
             {
                 this.BorderBrush = Brushes.Green;
                 this.BorderThickness = new Thickness(1);
@@ -503,14 +512,17 @@
 
         private void OnPasteMenu(object sender, RoutedEventArgs e)
         {
-            this.InsertText(Clipboard.GetText());
+            this.Paste();
+            var textRange = new TextRange(Document.ContentStart, Document.ContentEnd);
+            this.CharactersRemaining = this.MaxCharactersAllowed - textRange.Text.Replace("\r\n",string.Empty).Length;
         }
 
         private void OnDeleteMenu(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetText(this.Text);
+        {            
             this.SelectAll();
+            this.Copy();
             this.Selection.Text = string.Empty;
+            this.CharactersRemaining = this.MaxCharactersAllowed;
         }
 
         private void OnSetDateMenu(object sender, RoutedEventArgs e)
