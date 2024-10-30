@@ -9,6 +9,17 @@
     d:DesignHeight="450"
     d:DesignWidth="850"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="textblockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+
+        <Style x:Key="defaultTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Green" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -239,6 +250,38 @@
                     <Run Text="{Binding Path=Text, ElementName=AutoCompleteBox}" />
                 </TextBlock>
             </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="TextBox mit Counter" />
+
+            <StackPanel Margin="0,2" Orientation="Horizontal">
+                <ModernUI:TextBoxCounter
+                    x:Name="txtCounter"
+                    Width="250"
+                    Height="25"
+                    AcceptsReturn="False"
+                    AcceptsTab="False"
+                    BorderBrush="Green"
+                    BorderThickness="1"
+                    DefaultNotificationStyleName="defaultTextBlockStyle"
+                    MaxCharactersAllowed="180"
+                    NotificationStyleName="textblockStyle"
+                    NotifyLimit="100"
+                    RemainingText="Rest:" />
+
+                <TextBlock
+                    Width="300"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White"
+                    Style="{Binding ElementName=rtbTweet, Path=NotificationStyle}">
+                    <Run Text="Ergebnis:" />
+                    <Run Text="{Binding Path=CharactersRemaining, ElementName=txtCounter}" />
+                </TextBlock>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>
