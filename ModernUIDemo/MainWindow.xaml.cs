@@ -2,12 +2,16 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Data;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
 
     using Microsoft.VisualBasic;
+
+    using ModernIU.Controls;
 
     using ModernUIDemo.Core;
     using ModernUIDemo.Model;
@@ -18,6 +22,8 @@
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        List<TabControlItem> tabItemSource = null;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -26,17 +32,17 @@
             WeakEventManager<Window, EventArgs>.AddHandler(this, "Closed", this.OnWindowClosed);
 
 
-            List<TabControlItem> tabItemSource = new List<TabControlItem>();
-            tabItemSource.Add(new TabControlItem("Darstellung", true));
-            tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
-            tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
+            this.tabItemSource = new List<TabControlItem>();
+            this.tabItemSource.Add(new TabControlItem("Darstellung", true));
+            this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
 
-            tabItemSource.Add(new TabControlItem("Eingabe", true));
-            tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Eingabe", true));
+            this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
 
             tabItemSource.Add(new TabControlItem("Button", true));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
@@ -83,22 +89,101 @@
 
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()));
-            tabItemSource.Add(new TabControlItem("TextBox Watermarket", new BehaviorWaterMControlsUC()));
-            tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()));
-            tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()));
-
-            this.TabControlSource.Value = CollectionViewSource.GetDefaultView(tabItemSource);
+            tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()) { Stichworte="TextBox;Eingabe;Input;Masken;Pattern"});
+            tabItemSource.Add(new TabControlItem("TextBox Watermarket", new BehaviorWaterMControlsUC()) { Stichworte = "TextBox;Wasserzeichen;Watermarket;Behavior" });
+            tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()) { Stichworte = "Excel;Cell;Behavior" });
+            tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()) {Stichworte = "CheckBox;Behavior" });
 
             this.DataContext = this;
         }
 
-        public XamlProperty<ICollectionView> TabControlSource { get; set; } = XamlProperty.Set<ICollectionView>();
+        private ICollectionView listBoxSource;
 
-        public XamlProperty<UserControl> ContentItem { get; set; } = XamlProperty.Set<UserControl>();
+        public ICollectionView ListBoxSource
+        {
+            get { return this.listBoxSource; }
+            set
+            {
+                this.listBoxSource = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private TabControlItem currentSelectedItem;
+
+        public TabControlItem CurrentSelectedItem
+        {
+            get { return this.currentSelectedItem; }
+            set
+            {
+                this.currentSelectedItem = value;
+                this.OnPropertyChanged();
+                if (value.ItemContent != null)
+                {
+                    UserControl uc = value.ItemContent as UserControl;
+                    this.ContentItem = uc;
+                }
+            }
+        }
+
+        private string filterText;
+
+        public string FilterText
+        {
+            get { return filterText; }
+            set
+            {
+                this.filterText = value;
+                this.OnPropertyChanged();
+                this.RefreshDefaultFilter(value);
+            }
+        }
+
+        private UserControl contentItem;
+
+        public UserControl ContentItem
+        {
+            get { return this.contentItem; }
+            set
+            {
+                this.contentItem = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private int maxRowCount;
+
+        public int MaxRowCount
+        {
+            get { return this.maxRowCount; }
+            set
+            {
+                this.maxRowCount = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
+
+            this.ListBoxSource.Filter = item =>
+            {
+                TabControlItem vitem = item as TabControlItem;
+                if (vitem == null)
+                {
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(this.FilterText) == false && vitem.Stichworte != null)
+                {
+                    return vitem.Stichworte.ToLower().Contains(this.FilterText.ToLower());
+                }
+                else
+                {
+                    return true;
+                }
+            };
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
@@ -106,9 +191,19 @@
             Application.Current.Shutdown();
         }
 
+        private void RefreshDefaultFilter(string value)
+        {
+            if (this.ListBoxSource != null)
+            {
+                this.ListBoxSource.Refresh();
+                this.MaxRowCount = this.ListBoxSource.Cast<TabControlItem>().Count();
+                this.ListBoxSource.MoveCurrentToFirst();
+            }
+        }
+
         #region PropertyChanged Implementierung
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -124,16 +219,5 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox lb = sender as ListBox;
-            if (lb != null)
-            {
-                TabControlItem currrentItem = lb.SelectedItem as TabControlItem;
-                UserControl uc = currrentItem.ItemContent as UserControl;
-                this.ContentItem.Value = uc;
-            }
-        }
     }
 }

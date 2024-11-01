@@ -40,6 +40,11 @@ namespace ModernUIDemo.Core
             property.Value = value;
             return property;
         }
+
+        internal static XamlProperty<T1> Set<T1, T2>()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class XamlProperty<T> : XamlPropertyBase

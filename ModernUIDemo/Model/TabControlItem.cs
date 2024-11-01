@@ -47,6 +47,7 @@ namespace ModernUIDemo.Model
             this.ItemHeader = header;
             this.IsGroupItem = isGroupItem;
             this.ItemContent = tabItem;
+            this.Stichworte = string.Empty;
         }
 
         public int TabItemIndex { get; private set; }

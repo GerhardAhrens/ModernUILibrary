@@ -23,18 +23,19 @@
         </Grid.RowDefinitions>
 
         <ModernUI:TextBoxAll
+            x:Name="TxtFilterText"
             Grid.Row="0"
             Grid.Column="0"
             VerticalContentAlignment="Center"
             Background="LightGray"
-            Text="aa" />
+            Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
         <ListBox
             Grid.Row="1"
             Grid.Column="0"
             Width="200"
-            ItemsSource="{Binding Path=TabControlSource.Value}"
-            SelectionChanged="ListBox_SelectionChanged">
+            ItemsSource="{Binding Path=ListBoxSource}"
+            SelectedItem="{Binding Path=CurrentSelectedItem, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -92,7 +93,7 @@
             Grid.Column="1"
             Margin="5,0"
             Background="Silver"
-            Content="{Binding Path=ContentItem.Value, UpdateSourceTrigger=PropertyChanged}" />
+            Content="{Binding Path=ContentItem, UpdateSourceTrigger=PropertyChanged}" />
 
     </Grid>
 </Window>
