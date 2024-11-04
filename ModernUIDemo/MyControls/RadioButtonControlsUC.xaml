@@ -23,7 +23,7 @@
         <TextBlock
             Grid.ColumnSpan="2"
             FontSize="14"
-            Text="Beispiel für RadioButton, CheckBox" />
+            Text="Beispiel für RadioButton" />
         <Separator
             Grid.ColumnSpan="2"
             Height="3"
@@ -134,50 +134,5 @@
             <Run FontWeight="Bold" Text="FlatToggleButton C:" />
             <Run Text="{Binding Path=IsChecked, ElementName=tgC}" />
         </TextBlock>
-
-        <StackPanel
-            Grid.Row="3"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center">
-            <ModernUI:FlatCheckBox
-                x:Name="chkA"
-                Margin="0,5"
-                Content="Eins"
-                UnCheckedColor="Gray" />
-            <ModernUI:FlatCheckBox
-                x:Name="chkB"
-                Margin="0,5"
-                CheckedColor="Black"
-                Content="Zwei"
-                Skins="DefaultEllipse" />
-            <ModernUI:MCheckBox
-                x:Name="chkC"
-                Margin="0,5"
-                Content="Drei"
-                IsChecked="False" />
-
-            <ModernUI:MCheckBoxEx
-                x:Name="chkD"
-                Margin="0,5"
-                Content="Vier"
-                IsChecked="False" />
-        </StackPanel>
-
-        <TextBlock Grid.Row="3" Grid.Column="1">
-            <Run FontWeight="Bold" Text="Ergebnis:" />
-            <LineBreak />
-            <Run FontWeight="Bold" Text="CheckBox A:" />
-            <Run Text="{Binding Path=IsChecked, ElementName=chkA}" />
-            <LineBreak />
-            <Run FontWeight="Bold" Text="CheckBox B:" />
-            <Run Text="{Binding Path=IsChecked, ElementName=chkB}" />
-            <LineBreak />
-            <Run FontWeight="Bold" Text="CheckBox C:" />
-            <Run Text="{Binding Path=IsChecked, ElementName=chkC}" />
-            <LineBreak />
-            <Run FontWeight="Bold" Text="CheckBox D:" />
-            <Run Text="{Binding Path=IsChecked, ElementName=chkD}" />
-        </TextBlock>
-
     </Grid>
 </UserControl>

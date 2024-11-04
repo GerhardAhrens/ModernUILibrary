@@ -137,6 +137,12 @@
     <Compile Update="MyControls\LedControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\CheckBoxUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\DashboardControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -177,6 +183,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\ListTextBoxControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\CheckBoxUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

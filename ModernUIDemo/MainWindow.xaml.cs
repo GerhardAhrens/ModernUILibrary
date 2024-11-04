@@ -43,6 +43,7 @@
             this.tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
             this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
             this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("CheckBox Controls", new CheckBoxUC()){ Stichworte = "CheckBox;Flat"} );
 
             tabItemSource.Add(new TabControlItem("Button", true));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
@@ -51,11 +52,12 @@
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
 
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
-            tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
             tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
-            tabItemSource.Add(new TabControlItem("LED Controls", new LedControlsUC()));
+            tabItemSource.Add(new TabControlItem("LED Controls", new LedControlsUC()) { Stichworte = "Anzeige; LED" });
+            tabItemSource.Add(new TabControlItem("Dashboard Controls", new DashboardControlsUC()) {Stichworte="Anzeige" });
 
             tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
@@ -66,7 +68,7 @@
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Loading Animation Controls", new LoadingControlsUC()));
-            tabItemSource.Add(new TabControlItem("Slider Controls", new SliderControlsUC()));
+            tabItemSource.Add(new TabControlItem("Slider Controls", new SliderControlsUC()) { Stichworte = "Slider;Flat" });
             tabItemSource.Add(new TabControlItem("ProgressBar Controls", new ProgressBarControlsUC()));
             tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
@@ -88,7 +90,7 @@
             tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
-            tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()));
+            tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()) { Stichworte="TextBlock;" });
             tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()) { Stichworte="TextBox;Eingabe;Input;Masken;Pattern"});
             tabItemSource.Add(new TabControlItem("TextBox Watermarket", new BehaviorWaterMControlsUC()) { Stichworte = "TextBox;Wasserzeichen;Watermarket;Behavior" });
             tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()) { Stichworte = "Excel;Cell;Behavior" });
