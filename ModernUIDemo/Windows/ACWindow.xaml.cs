@@ -10,6 +10,7 @@
         public ACWindow()
         {
             this.InitializeComponent();
+            this.DataContext = this;
         }
     }
 }

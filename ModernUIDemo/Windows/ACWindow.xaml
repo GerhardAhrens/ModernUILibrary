@@ -6,13 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ModernUIDemo.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="AutoCloseWindow"
+    Title="AutoCloseWindow - Test"
     Width="800"
     Height="450"
     Background="Aqua"
     Foreground="White"
     TitleBackground="#BC2F2E"
     mc:Ignorable="d">
+
     <ModernUI:MWindow.MoreOnTitle>
         <StackPanel Orientation="Horizontal">
             <TextBlock VerticalAlignment="Center" Text="Hallo" />
@@ -20,8 +21,18 @@
     </ModernUI:MWindow.MoreOnTitle>
 
     <Grid Background="Transparent">
-        <StackPanel Margin="10">
-            <StackPanel Margin="0,2" Orientation="Horizontal">
+
+        <StackPanel
+            Margin="10"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+            <TextBlock FontSize="14" FontWeight="Bold">
+                <Run Foreground="Black" Text="Close Zeit" />
+                <Run Foreground="Blue" Text="{Binding Path=AutoCloseInterval}" />
+                <Run Foreground="Black" Text="Sek." />
+            </TextBlock>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                 <ModernUI:TitleTextBox
                     Title="Vorname:"
                     Width="240"

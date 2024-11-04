@@ -1,22 +1,15 @@
-﻿/*
- * https://www.codeproject.com/Tips/5295911/WPF-Auto-Closing-Modeless-Windows
- */
-
-namespace ModernIU.Controls
+﻿namespace ModernIU.Controls
 {
+    using System.ComponentModel;
     using System.Windows;
-    using System.Timers;
     using System.Windows.Media;
-    using System.Windows.Input;
+    using System.Windows.Threading;
 
     using ModernIU.Base;
-    using System.ComponentModel;
-    using System.Windows.Threading;
 
     public class MWindow : Window
     {
-        private DispatcherTimer mAutoCloseTimer = null;
-        private bool mIsMaximized = false;
+        private DispatcherTimer _AutoCloseTimer = null;
 
         #region DependencyProperty
         #region TitleBackground
@@ -174,13 +167,13 @@ namespace ModernIU.Controls
         {
             if (this.AutoClose == true)
             {
-                this.mAutoCloseTimer = new DispatcherTimer();
-                WeakEventManager<DispatcherTimer, EventArgs>.AddHandler(this.mAutoCloseTimer, "Tick", this.OnAutoCloseTimerElapsed);
-                this.mAutoCloseTimer.Interval = new TimeSpan(0,0,this.AutoCloseInterval);
+                this._AutoCloseTimer = new DispatcherTimer();
+                WeakEventManager<DispatcherTimer, EventArgs>.AddHandler(this._AutoCloseTimer, "Tick", this.OnAutoCloseTimerElapsed);
+                this._AutoCloseTimer.Interval = new TimeSpan(0,0,this.AutoCloseInterval);
 
-                if (this.mAutoCloseTimer.IsEnabled == false)
+                if (this._AutoCloseTimer.IsEnabled == false)
                 {
-                    this.mAutoCloseTimer.Start();
+                    this._AutoCloseTimer.Start();
                 }
             }
         }
@@ -188,14 +181,15 @@ namespace ModernIU.Controls
 
         private void OnAutoCloseTimerElapsed(object sender, EventArgs e)
         {
-            if (this.mAutoCloseTimer.IsEnabled == true)
+            if (this._AutoCloseTimer.IsEnabled == true)
             {
-                this.mAutoCloseTimer.Stop();
-                WeakEventManager<DispatcherTimer, EventArgs>.RemoveHandler(this.mAutoCloseTimer, "Tick", this.OnAutoCloseTimerElapsed);
+                this._AutoCloseTimer.Stop();
+                WeakEventManager<DispatcherTimer, EventArgs>.RemoveHandler(this._AutoCloseTimer, "Tick", this.OnAutoCloseTimerElapsed);
                 this.Close();
             }
         }
 
+        #region Override
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -217,40 +211,6 @@ namespace ModernIU.Controls
         {
             base.OnClosed(e);
         }
-
-        #region Override
-
-        /*
-        protected override void OnMouseEnter(MouseEventArgs e)
-        {
-            base.OnMouseEnter(e);
-
-            if ((this.AutoClose && !this.mIsMaximized) || this.mIsMaximized)
-            {
-                this.mAutoCloseTimer.IsEnabled = false;
-            }
-        }
-
-        protected override void OnMouseLeave(MouseEventArgs e)
-        {
-            base.OnMouseLeave(e);
-
-            if (this.mIsMaximized == true)
-            {
-                this.mAutoCloseTimer.IsEnabled = false;
-                return;
-            }
-
-            if (this.AutoClose == true && this.IsLoaded == true)
-            {
-                try
-                {
-                    this.mAutoCloseTimer.IsEnabled = true;
-                }
-                catch (Exception) {}
-            }
-        }
-        */
 
         public override void OnApplyTemplate()
         {

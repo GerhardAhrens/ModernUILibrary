@@ -6,9 +6,9 @@
 
     public class DialogHelper
     {
-        static Window GetWindowFromHwnd(IntPtr hwnd)
+        static Window GetWindowFromHwnd(IntPtr? hwnd)
         {
-            return (Window)HwndSource.FromHwnd(hwnd).RootVisual;
+            return (Window)HwndSource.FromHwnd((IntPtr)hwnd).RootVisual;
         }
 
         [DllImport("user32.dll")]
@@ -16,7 +16,7 @@
 
         static Window GetTopWindow()
         {
-            nint hwnd = GetForegroundWindow();
+            nint? hwnd = GetForegroundWindow();
             if (hwnd == null)
             {
                 return null;

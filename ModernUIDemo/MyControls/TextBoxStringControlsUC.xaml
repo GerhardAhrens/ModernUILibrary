@@ -270,8 +270,8 @@
                     MaxCharactersAllowed="50"
                     NotificationStyleName="textblockStyle"
                     NotifyLimit="40"
-                    RemainingFontSize="14"
-                    RemainingText="Rest:" />
+                    CounterFontSize="14"
+                    CounterText="Rest:" />
 
                 <TextBlock
                     Width="300"
@@ -280,7 +280,7 @@
                     Background="White"
                     Style="{Binding ElementName=txtCounter, Path=NotificationStyle}">
                     <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=CharactersRemaining, ElementName=txtCounter}" />
+                    <Run Text="{Binding Path=CharactersCounter, ElementName=txtCounter}" />
                 </TextBlock>
             </StackPanel>
 

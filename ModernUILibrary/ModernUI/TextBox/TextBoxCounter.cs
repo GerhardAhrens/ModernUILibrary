@@ -11,9 +11,9 @@
 
     public class TextBoxCounter : RichTextBox, INotifyPropertyChanged
     {
-        public static readonly DependencyProperty CharactersRemainingProperty;
-        public static readonly DependencyProperty RemainingTextProperty;
-        public static readonly DependencyProperty RemainingFontSizeProperty;
+        public static readonly DependencyProperty CharactersCounterProperty;
+        public static readonly DependencyProperty CounterTextProperty;
+        public static readonly DependencyProperty CounterFontSizeProperty;
         public static readonly DependencyProperty MaxCharactersAllowedProperty;
         public static readonly DependencyProperty NotiftyLimitProperty;
         public static readonly DependencyProperty NotificationStyleNameProperty;
@@ -27,9 +27,9 @@
 
         static TextBoxCounter()
         {
-            CharactersRemainingProperty = DependencyProperty.Register("CharactersRemaining", typeof(int), typeof(TextBoxCounter));
-            RemainingTextProperty = DependencyProperty.Register("RemainingText", typeof(string), typeof(TextBoxCounter), new PropertyMetadata("Restzeichen:", RemainingTextChanged));
-            RemainingFontSizeProperty = DependencyProperty.Register("RemainingFontSize", typeof(double), typeof(TextBoxCounter), new PropertyMetadata(18d, RemainingFontSizeChanged));
+            CharactersCounterProperty = DependencyProperty.Register(nameof(CharactersCounter), typeof(int), typeof(TextBoxCounter));
+            CounterTextProperty = DependencyProperty.Register(nameof(CounterText), typeof(string), typeof(TextBoxCounter), new PropertyMetadata("Restzeichen:", RemainingTextChanged));
+            CounterFontSizeProperty = DependencyProperty.Register(nameof(CounterFontSize), typeof(double), typeof(TextBoxCounter), new PropertyMetadata(18d, RemainingFontSizeChanged));
             MaxCharactersAllowedProperty = DependencyProperty.Register("MaxCharactersAllowed", typeof(int),
                                                                        typeof(TextBoxCounter), new PropertyMetadata(0, MaxCharactersAllowedPropertyChanged));
 
@@ -79,7 +79,7 @@
         /// </summary>
         public bool IsValid
         {
-            get { return CharactersRemaining <= MaxCharactersAllowed; }
+            get { return CharactersCounter <= MaxCharactersAllowed; }
 
         }
 
@@ -135,44 +135,44 @@
         /// <summary>
         /// number of characters that can be typed by the user in the textbox
         /// </summary>
-        public int CharactersRemaining
+        public int CharactersCounter
         {
             get
             {
-                return (int)GetValue(CharactersRemainingProperty);
+                return (int)GetValue(CharactersCounterProperty);
             }
 
             set
             {
-                SetValue(CharactersRemainingProperty, value);
+                SetValue(CharactersCounterProperty, value);
                 this.OnPropertyChanged();
             }
         }
 
-        public string RemainingText
+        public string CounterText
         {
             get
             {
-                return (string)GetValue(RemainingTextProperty);
+                return (string)GetValue(CounterTextProperty);
             }
 
             set
             {
-                SetValue(RemainingTextProperty, value);
+                SetValue(CounterTextProperty, value);
                 this.OnPropertyChanged();
             }
         }
 
-        public double RemainingFontSize
+        public double CounterFontSize
         {
             get
             {
-                return (double)GetValue(RemainingFontSizeProperty);
+                return (double)GetValue(CounterFontSizeProperty);
             }
 
             set
             {
-                SetValue(RemainingFontSizeProperty, value);
+                SetValue(CounterFontSizeProperty, value);
                 this.OnPropertyChanged();
             }
         }
@@ -241,7 +241,7 @@
                 return;
             }
 
-            sharpRichTextBox.CharactersRemaining = sharpRichTextBox.MaxCharactersAllowed;
+            sharpRichTextBox.CharactersCounter = sharpRichTextBox.MaxCharactersAllowed;
         }
 
         private static void RemainingTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -255,7 +255,7 @@
 
             if (e.NewValue != null)
             {
-                sharpRichTextBox.RemainingText = (string)e.NewValue;
+                sharpRichTextBox.CounterText = (string)e.NewValue;
                 sharpRichTextBox.SetUpBindingForBackground();
             }
         }
@@ -271,7 +271,7 @@
 
             if (e.NewValue != null)
             {
-                sharpRichTextBox.RemainingFontSize = (double)e.NewValue;
+                sharpRichTextBox.CounterFontSize = (double)e.NewValue;
                 sharpRichTextBox.SetUpBindingForBackground();
             }
         }
@@ -308,31 +308,31 @@
 
             var textBlockDesc = new TextBlock()
             {
-                Text = this.RemainingText,
+                Text = this.CounterText,
                 Opacity = 0.4,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Height = 35,
-                FontSize = this.RemainingFontSize,
+                FontSize = this.CounterFontSize,
                 Margin = new Thickness(0,0,5,2),
             };
 
             var textBlock = new TextBlock()
             {
-                Text = this.CharactersRemaining.ToString(),
+                Text = this.CharactersCounter.ToString(),
                 Opacity = 0.3,
                 HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Height = 35,
                 Width = 120,
-                FontSize = this.RemainingFontSize,
+                FontSize = this.CounterFontSize,
                 Margin = new Thickness(0, 0, 2, 2)
             };
 
             var styleBinding = new System.Windows.Data.Binding("NotificationStyle");
             styleBinding.Source = this;
 
-            var binding = new System.Windows.Data.Binding("CharactersRemaining");
+            var binding = new System.Windows.Data.Binding(nameof(CharactersCounter));
             binding.Source = this;
 
             textBlock.SetBinding(TextBlock.TextProperty, binding);
@@ -362,13 +362,13 @@
 
             var clipboardText = System.Windows.Clipboard.GetText();
 
-            if (clipboardText.Length <= CharactersRemaining)
+            if (clipboardText.Length <= CharactersCounter)
             {
                 this.AppendText(clipboardText);
             }
             else
             {
-                this.AppendText(clipboardText.Substring(0, CharactersRemaining));
+                this.AppendText(clipboardText.Substring(0, CharactersCounter));
             }
 
             e.Handled = true;
@@ -457,7 +457,7 @@
                 this.NotificationStyle = this.FindResource(DefaultNotificationStyleName) as Style;
             }
 
-            this.CharactersRemaining = this.MaxCharactersAllowed - noOfCharactersEntered;
+            this.CharactersCounter = this.MaxCharactersAllowed - noOfCharactersEntered;
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propName = "")
@@ -514,7 +514,7 @@
         {
             this.Paste();
             var textRange = new TextRange(Document.ContentStart, Document.ContentEnd);
-            this.CharactersRemaining = this.MaxCharactersAllowed - textRange.Text.Replace("\r\n",string.Empty).Length;
+            this.CharactersCounter = this.MaxCharactersAllowed - textRange.Text.Replace("\r\n",string.Empty).Length;
         }
 
         private void OnDeleteMenu(object sender, RoutedEventArgs e)
@@ -522,7 +522,7 @@
             this.SelectAll();
             this.Copy();
             this.Selection.Text = string.Empty;
-            this.CharactersRemaining = this.MaxCharactersAllowed;
+            this.CharactersCounter = this.MaxCharactersAllowed;
         }
 
         private void OnSetDateMenu(object sender, RoutedEventArgs e)
