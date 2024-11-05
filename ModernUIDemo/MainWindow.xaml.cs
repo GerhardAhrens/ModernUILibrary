@@ -34,11 +34,11 @@
 
             this.tabItemSource = new List<TabControlItem>();
             this.tabItemSource.Add(new TabControlItem("Darstellung", true));
-            this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()) { Stichworte = "Icon;PathGeometry" });
             this.tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
 
             this.tabItemSource.Add(new TabControlItem("Eingabe", true));
-            this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()) { Stichworte = "TextBox;String;Text;Icon" });
             this.tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()));
             this.tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()));
             this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
@@ -58,11 +58,15 @@
             tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()));
             tabItemSource.Add(new TabControlItem("LED Controls", new LedControlsUC()) { Stichworte = "Anzeige; LED" });
             tabItemSource.Add(new TabControlItem("Dashboard Controls", new DashboardControlsUC()) {Stichworte="Anzeige" });
+            tabItemSource.Add(new TabControlItem("Accordion Controls", new AccordionControlsUC()) { Stichworte = "Anzeige;Accordion" });
 
-            tabItemSource.Add(new TabControlItem("Loyout Grid, Panel, Separator", true));
+            tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
+
+            tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
+            tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
 
             tabItemSource.Add(new TabControlItem("View, Loading", true));
             tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));

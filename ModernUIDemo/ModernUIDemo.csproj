@@ -143,6 +143,12 @@
     <Compile Update="MyControls\DashboardControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\AccordionControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\FlatListViewControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

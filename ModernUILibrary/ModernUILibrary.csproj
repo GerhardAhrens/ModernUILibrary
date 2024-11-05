@@ -18,6 +18,7 @@
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
     <Folder Include="ModernUIBase\ScreenCapture\" />
+    <Folder Include="ModernUI\Accordion\Themes\" />
     <Folder Include="ModernUI\Alert\Themes\" />
     <Folder Include="ModernUI\AutoCompleteBox\Themes\" />
     <Folder Include="ModernUI\Badge\Themes\" />
@@ -34,6 +35,7 @@
     <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\ListTextBox\Themes\" />
+    <Folder Include="ModernUI\ListView\Themes\" />
     <Folder Include="ModernUI\Loading\Themes\" />
     <Folder Include="ModernUI\MessageBox\Themes\" />
     <Folder Include="ModernUI\Message\Themes\" />

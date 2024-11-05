@@ -2,6 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Alert/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Accordion/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/AutoCompleteBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Badge/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/BusyIndicator/Themes/Generic.xaml" />
@@ -16,6 +17,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/Flyout.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/FlyoutControl.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListUpDown/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListView/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListTextBox/Themes/ListTextBoxDataGrid.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListTextBox/Themes/ListTextBoxStyle.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Icons/Themes/Generic.xaml" />
