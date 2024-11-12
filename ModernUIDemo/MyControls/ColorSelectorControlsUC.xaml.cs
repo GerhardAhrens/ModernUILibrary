@@ -60,7 +60,7 @@
                 Color.FromRgb(153, 204, 255),
                 Color.FromRgb(204, 153, 255),
             };
-            this.ColorSelector.ItemsSource = new ReadOnlyCollection<Color>(list);
+            this.ColorSelectorA.ItemsSource = new ReadOnlyCollection<Color>(list);
         }
     }
 }

@@ -65,7 +65,7 @@ namespace ModernIU.Controls
 
         private void UpdateVisualState(bool useTransitions)
         {
-            if (!base.IsEnabled)
+            if (base.IsEnabled == false)
             {
                 VisualStateManager.GoToState(this, (base.Content is Control) ? "Normal" : "Disabled", useTransitions);
             }
@@ -123,7 +123,10 @@ namespace ModernIU.Controls
 
         private void ColorItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            this.ParentColorSelector.SetItemSelected(this);
+            if (this.ParentColorSelector != null)
+            {
+                this.ParentColorSelector.SetItemSelected(this);
+            }
         }
     }
 }

@@ -25,15 +25,34 @@
             Grid.Row="1"
             Grid.Column="0"
             Orientation="Vertical">
-            <ModernUI:ColorSelector x:Name="ColorSelector">
-                <!--<WPF.UI:ColorItem Width="30" Height="30" Color="#383838" />
-            <WPF.UI:ColorItem Width="30" Height="30" Color="#E42929" />
-            <WPF.UI:ColorItem Width="30" Height="30" Color="#279AD4"/>-->
-            </ModernUI:ColorSelector>
+            <ModernUI:ColorSelector x:Name="ColorSelectorA" Height="30" />
             <TextBlock>
                 <Run Text="Auswahl：" />
-                <Run Text="{Binding SelectedValue, ElementName=ColorSelector}" />
+                <Run Text="{Binding SelectedValue, ElementName=ColorSelectorA}" />
             </TextBlock>
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:ColorSelectorItem
+                    x:Name="ColorSelectorB"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Color="Gray" />
+
+                <ModernUI:ColorSelectorItem
+                    x:Name="ColorSelectorC"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Color="#E42929" />
+
+                <ModernUI:ColorSelectorItem
+                    x:Name="ColorSelectorD"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Color="#279AD4" />
+            </StackPanel>
         </StackPanel>
 
     </Grid>
