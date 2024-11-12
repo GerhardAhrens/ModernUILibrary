@@ -76,6 +76,7 @@
                 this.PART_Button.Click += PART_Button_Click;
             }
         }
+
         private void PART_Button_Click(object sender, RoutedEventArgs e)
         {
             this.OnItemClick(this.PART_Button.Content, this.PART_Button.Content);

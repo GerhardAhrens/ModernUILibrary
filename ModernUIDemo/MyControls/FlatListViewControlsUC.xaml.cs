@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernUIDemo.Core;
+
     /// <summary>
     /// Interaktionslogik für FlatListViewControlsUC.xaml
     /// </summary>
@@ -13,7 +15,23 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            this.CmdAgg.AddOrSetCommand("SelectedRowCommand", new RelayCommand(p1 => this.SelectedRowClick(p1), p2 => true));
+            this.CmdAgg.AddOrSetCommand("SelectionChangedCommand", new RelayCommand(p1 => this.SelectionChangedClick(p1), p2 => true));
+            this.DataContext = this;
         }
+
+        private void SelectionChangedClick(object p1)
+        {
+            this.SelectionChanged.Text = (((System.Tuple<int, string, string>)p1).Item1).ToString();
+        }
+
+        private void SelectedRowClick(object p1)
+        {
+            string item = (((System.Tuple<int, string, string>)p1).Item1).ToString();
+            MessageBox.Show(item);
+        }
+
+        public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
