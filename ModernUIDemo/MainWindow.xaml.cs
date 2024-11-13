@@ -35,8 +35,8 @@
             this.tabItemSource = new List<TabControlItem>();
             this.tabItemSource.Add(new TabControlItem("Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()) { Stichworte = "Icon;PathGeometry" });
-            this.tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Farbenauswahl", new ColorSelectorControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()) { Stichworte = "Color;Farbe" });
+            this.tabItemSource.Add(new TabControlItem("Farbenauswahl", new ColorSelectorControlsUC()) { Stichworte = "Color;Farbe" });
 
             this.tabItemSource.Add(new TabControlItem("Eingabe", true));
             this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()) { Stichworte = "TextBox;String;Text;Icon" });

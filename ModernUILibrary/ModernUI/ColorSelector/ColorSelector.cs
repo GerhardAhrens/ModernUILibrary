@@ -38,6 +38,7 @@
                         string errorText = ex.Message;
                         color = Color.FromRgb(255, 255, 255);
                     }
+
                     colorItem.SetValue(ColorSelectorItem.ColorProperty, new SolidColorBrush(color));
                 }
             }

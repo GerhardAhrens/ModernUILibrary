@@ -44,7 +44,7 @@ namespace ModernIU.Controls
         {
             base.OnApplyTemplate();
 
-            this.MouseLeftButtonUp += ColorItem_MouseLeftButtonUp;
+            this.MouseLeftButtonUp += this.OnMouseLeftButtonUp;
         }
 
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -65,7 +65,7 @@ namespace ModernIU.Controls
 
         private void UpdateVisualState(bool useTransitions)
         {
-            if (base.IsEnabled == false)
+            if (!base.IsEnabled)
             {
                 VisualStateManager.GoToState(this, (base.Content is Control) ? "Normal" : "Disabled", useTransitions);
             }
@@ -77,6 +77,7 @@ namespace ModernIU.Controls
             {
                 VisualStateManager.GoToState(this, "Normal", useTransitions);
             }
+
             if (this.IsSelected)
             {
                 if (Selector.GetIsSelectionActive(this))
@@ -121,7 +122,7 @@ namespace ModernIU.Controls
             base.RaiseEvent(e);
         }
 
-        private void ColorItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OnMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (this.ParentColorSelector != null)
             {

@@ -28,23 +28,14 @@
             <ModernUI:ColorSelector x:Name="ColorSelectorA" Height="30" />
             <TextBlock>
                 <Run Text="Auswahl：" />
-                <Run Text="{Binding SelectedValue, ElementName=ColorSelectorA}" />
+                <Run Text="{Binding Path=SelectedValue, ElementName=ColorSelectorA}" />
             </TextBlock>
 
             <StackPanel Orientation="Horizontal">
-                <ModernUI:ColorSelectorItem
-                    x:Name="ColorSelectorB"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Color="Gray" />
-
-                <ModernUI:ColorSelectorItem
-                    x:Name="ColorSelectorC"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Color="#E42929" />
+                <ModernUI:ColorSelector x:Name="ColorSelectorB" Height="30">
+                    <ModernUI:ColorSelectorItem Color="Gray" />
+                    <ModernUI:ColorSelectorItem Color="Red" />
+                </ModernUI:ColorSelector>
 
                 <ModernUI:ColorSelectorItem
                     x:Name="ColorSelectorD"
@@ -53,6 +44,16 @@
                     HorizontalAlignment="Left"
                     Color="#279AD4" />
             </StackPanel>
+
+            <TextBlock>
+                <Run Text="Auswahl Color-A：" />
+                <Run Text="{Binding Path=SelectedValue.Color, ElementName=ColorSelectorB}" />
+            </TextBlock>
+
+            <TextBlock>
+                <Run Text="Auswahl Color-B：" />
+                <Run Text="{Binding Path=Color, ElementName=ColorSelectorC}" />
+            </TextBlock>
         </StackPanel>
 
     </Grid>
