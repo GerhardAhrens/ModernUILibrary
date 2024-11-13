@@ -52,7 +52,7 @@
 
             <TextBlock>
                 <Run Text="Auswahl Color-B：" />
-                <Run Text="{Binding Path=Color, ElementName=ColorSelectorC}" />
+                <Run Text="{Binding Path=Color, ElementName=ColorSelectorD}" />
             </TextBlock>
         </StackPanel>
 
