@@ -24,7 +24,36 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="FilteredComboBox" />
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:FilteredComboBox
+                    x:Name="cbFilteredComboBox"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    ItemsSource="{Binding Path=FilterdComboBoxSource.Value}">
+                    <ModernUI:FilteredComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ModernUI:FilteredComboBox.ItemsPanel>
+                </ModernUI:FilteredComboBox>
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=SelectedValue, ElementName=cbFilteredComboBox}" />
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </UserControl>

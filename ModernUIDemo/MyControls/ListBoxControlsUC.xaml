@@ -43,7 +43,7 @@
                         x:Name="rComboBox"
                         Width="100"
                         HorizontalAlignment="Left"
-                        IsReadOnly="True"
+                        IsReadOnly="False"
                         ItemsSource="{Binding Path=MComboBoxSource.Value}"
                         SelectedItem="{Binding Path=MComboBoxSourceSelectedItem.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
