@@ -153,6 +153,20 @@
 
         #endregion
 
+        #region Text
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            private set { SetValue(TextProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string)
+                , typeof(Cascader), new PropertyMetadata(null));
+
+        #endregion
+
         static Cascader()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Cascader), new FrameworkPropertyMetadata(typeof(Cascader)));
@@ -268,6 +282,7 @@
             }
 
             this.PART_TextBox.Text = this.ShowText.TrimEnd(this.Separator.ToCharArray());
+            this.Text = this.PART_TextBox.Text;
         }
 
         private void Container_SelectionChanged(object sender, SelectionChangedEventArgs e)

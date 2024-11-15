@@ -28,5 +28,10 @@ namespace ModernUIDemo.Model
             get { return _Children; }
             set { _Children = value; }
         }
+
+        public override string ToString()
+        {
+            return $"{ID}.{Name}"; 
+        }
     }
 }

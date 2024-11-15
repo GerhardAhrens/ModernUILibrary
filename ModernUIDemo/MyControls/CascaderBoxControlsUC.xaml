@@ -72,9 +72,25 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" >
-            <ModernUI:Cascader x:Name="treeView" VerticalAlignment="Center" Height="28" Width="400" />
+            Orientation="Horizontal">
+            <ModernUI:Cascader
+                x:Name="treeView"
+                Width="400"
+                Height="28"
+                VerticalAlignment="Center"
+                ChildMemberPath="Children"
+                DisplayMemberPath="Name"
+                ItemsSource="{Binding Path=TreeData, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}" />
 
+            <TextBlock
+                Width="450"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Background="White">
+                <Run Text="Auswahl:" />
+                <Run Text="{Binding Path=Text, ElementName=treeView}" />
+            </TextBlock>
         </StackPanel>
 
     </Grid>
