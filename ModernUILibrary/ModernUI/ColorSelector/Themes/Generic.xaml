@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ColorSelector.xaml" />
+        <ResourceDictionary Source="ColorSelectorItem.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

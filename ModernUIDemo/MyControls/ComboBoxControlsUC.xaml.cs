@@ -17,23 +17,25 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+
+            this.DataContext = this;
         }
 
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+        public XamlProperty<Dictionary<int,string>> MComboBoxSource { get; set; } = XamlProperty.Set<Dictionary<int, string>>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            List<CheckComboBoxTest> data = new List<CheckComboBoxTest>();
-            data.Add(new CheckComboBoxTest(1, "C#"));
-            data.Add(new CheckComboBoxTest(2, "C++"));
-            data.Add(new CheckComboBoxTest(3, "VB.Net"));
-            data.Add(new CheckComboBoxTest(4, "Javascript"));
-            data.Add(new CheckComboBoxTest(5, "Object C"));
-            data.Add(new CheckComboBoxTest(6, "Java"));
+            Dictionary<int, string> mdataSource = new Dictionary<int, string>();
+            mdataSource.Add(1, "C#");
+            mdataSource.Add(2, "C++");
+            mdataSource.Add(3, "VB.Net");
+            mdataSource.Add(4, "Javascript");
+            mdataSource.Add(5, "Object C");
+            mdataSource.Add(6, "Java");
+            MComboBoxSource.Value = mdataSource;
 
             this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise", "Igel", "Elefant", "Hund", "Pferd", "Pinguin", "Zebra", "2001", "2010", "2024", "2030" };
-
-            this.DataContext = this;
         }
 
         #region PropertyChanged Implementierung

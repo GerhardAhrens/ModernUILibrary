@@ -155,6 +155,9 @@
     <Compile Update="MyControls\ComboBoxControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\CascaderBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,6 +201,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\CheckBoxUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\CascaderBoxControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

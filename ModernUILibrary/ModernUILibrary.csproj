@@ -25,6 +25,7 @@
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
     <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
+    <Folder Include="ModernUI\CascaderBox\Themes\" />
     <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\ChooseBox\Themes\" />
     <Folder Include="ModernUI\ComboBox\Themes\" />

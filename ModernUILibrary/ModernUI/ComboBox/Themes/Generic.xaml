@@ -216,7 +216,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5,0,0,0" />
-        <Setter Property="Watermark" Value="请选择..." />
+        <Setter Property="Watermark" Value="Auswahl..." />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Control.Template">
             <Setter.Value>

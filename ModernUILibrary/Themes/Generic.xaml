@@ -8,12 +8,13 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/BusyIndicator/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Button/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ButtonGroup/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/CascaderBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/CheckComboBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ChooseBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/CheckBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ComboTree/Themes/Generic.xaml" />
-        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ColorSelector/Themes/ColorSelector.xaml" />
-        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ColorSelector/Themes/ColorSelectorItem.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ComboBox/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ColorSelector/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/GroupBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/DropDownButton/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/FlyoutControl/Themes/Flyout.xaml" />

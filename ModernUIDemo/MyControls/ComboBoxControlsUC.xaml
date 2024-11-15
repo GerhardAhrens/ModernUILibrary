@@ -36,6 +36,8 @@
                     Width="200"
                     Height="25"
                     Margin="5"
+                    IsTextSearchCaseSensitive="False"
+                    IsTextSearchEnabled="True"
                     ItemsSource="{Binding Path=FilterdComboBoxSource.Value}">
                     <ModernUI:FilteredComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -51,6 +53,62 @@
                     Background="White">
                     <Run Text="Auswahl:" />
                     <Run Text="{Binding Path=SelectedValue, ElementName=cbFilteredComboBox}" />
+                </TextBlock>
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Default MComboBox mit Hintergrundtext" />
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:MComboBox
+                    x:Name="cbMComboBox"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    DisplayMemberPath="Value"
+                    IsEditable="True"
+                    IsTextSearchCaseSensitive="False"
+                    IsTextSearchEnabled="True"
+                    ItemsSource="{Binding Path=MComboBoxSource.Value}"
+                    SelectedValuePath="Key" />
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=SelectedItem, ElementName=cbMComboBox}" />
+                </TextBlock>
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Default MComboBox" />
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:ComboBoxEx
+                    x:Name="cbComboBoxEx"
+                    Width="200"
+                    Height="25"
+                    Margin="5"
+                    DisplayMemberPath="Value"
+                    IsEditable="True"
+                    IsTextSearchCaseSensitive="False"
+                    IsTextSearchEnabled="True"
+                    ItemsSource="{Binding Path=MComboBoxSource.Value}"
+                    SelectedValuePath="Key" />
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=SelectedItem, ElementName=cbComboBoxEx}" />
                 </TextBlock>
             </StackPanel>
         </StackPanel>
