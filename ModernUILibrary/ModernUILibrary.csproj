@@ -17,6 +17,7 @@
     <Folder Include="Extensions\System.Enum\" />
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
+    <Folder Include="ModernUIBase\EventArgs\" />
     <Folder Include="ModernUIBase\ScreenCapture\" />
     <Folder Include="ModernUI\Accordion\Themes\" />
     <Folder Include="ModernUI\Alert\Themes\" />
@@ -46,6 +47,7 @@
     <Folder Include="ModernUI\ListBox\" />
     <Folder Include="ModernUI\Led\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
+    <Folder Include="ModernUI\TabControl\Themes\" />
     <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
@@ -66,7 +68,7 @@
     <Folder Include="ModernUI\Tree\Themes\" />
     <Folder Include="ModernUI\Window\Themes\" />
     <Folder Include="Resources\" />
-    <Folder Include="Themes\" />
+    <Folder Include="Themes\Primitives\" />
   </ItemGroup>
 
   <ItemGroup>

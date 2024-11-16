@@ -115,48 +115,6 @@
                     <Run Text="{Binding Path=Text, ElementName=TxtMathTextBox}" />
                 </TextBlock>
             </StackPanel>
-
-            <ModernUI:HeaderSeparator
-                Height="15"
-                Background="Green"
-                Header="DatePicker TextBox" />
-
-            <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:DatePickerEx
-                    x:Name="dtPicker"
-                    IsReadOnly="False"
-                    SelectedDate="{Binding Path=DateTimePickerValue.Value, UpdateSourceTrigger=PropertyChanged}"
-                    ShowTodayButton="True" />
-
-                <TextBlock
-                    Width="200"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Background="White">
-                    <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=SelectedDate, ElementName=dtPicker}" />
-                </TextBlock>
-
-            </StackPanel>
-
-            <StackPanel Margin="0,2" Orientation="Horizontal">
-                <ModernUI:TextBoxDate
-                    x:Name="TxtDateBox"
-                    IsReadOnly="False"
-                    SelectedDate="{Binding Path=DateTimePickerValue.Value, UpdateSourceTrigger=PropertyChanged}"
-                    ShowTodayButton="True" />
-
-                <TextBlock
-                    Width="200"
-                    Margin="5,0"
-                    VerticalAlignment="Center"
-                    Background="White"
-                    Language="DE">
-                    <Run Text="Ergebnis:" />
-                    <Run Text="{Binding Path=SelectedDate, ElementName=TxtDateBox, StringFormat=d}" />
-                </TextBlock>
-            </StackPanel>
-
         </StackPanel>
     </Grid>
 </UserControl>

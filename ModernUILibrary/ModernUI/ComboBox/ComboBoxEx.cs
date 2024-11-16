@@ -191,7 +191,10 @@ namespace ModernIU.Controls
                 }
                 else
                 {
-                    comboBox._comboBoxTextBox.ContextMenu = null;
+                    if (comboBox._comboBoxTextBox != null)
+                    {
+                        comboBox._comboBoxTextBox.ContextMenu = null;
+                    }
                 }
             }
         }

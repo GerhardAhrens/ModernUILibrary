@@ -1,19 +1,12 @@
 ﻿namespace ModernUIDemo
 {
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
 
-    using Microsoft.VisualBasic;
-
-    using ModernIU.Controls;
-
-    using ModernUIDemo.Core;
     using ModernUIDemo.Model;
     using ModernUIDemo.MyControls;
 
@@ -45,6 +38,7 @@
             this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()));
             this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
             this.tabItemSource.Add(new TabControlItem("CheckBox Controls", new CheckBoxUC()){ Stichworte = "CheckBox;Flat"} );
+            this.tabItemSource.Add(new TabControlItem("DateTime Picker Controls", new DateTimeControlsUC()) { Stichworte = "DateTime;Datum;Flat" });
 
             tabItemSource.Add(new TabControlItem("Button", true));
             tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
