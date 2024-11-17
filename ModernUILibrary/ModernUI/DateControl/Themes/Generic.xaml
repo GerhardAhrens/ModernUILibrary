@@ -4,16 +4,16 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CalendarStyle.xaml" />
+        <ResourceDictionary Source="DateTimePicker_CalendarStyle.xaml" />
+        <ResourceDictionary Source="DateTimePickerStyle.xaml" />
+        <ResourceDictionary Source="FlatDatePickerStyle.xaml" />
         <ResourceDictionary Source="MCalendar.xaml" />
         <ResourceDictionary Source="MCalendarButton.xaml" />
         <ResourceDictionary Source="MCalendarDayButton.xaml" />
         <ResourceDictionary Source="MCalendarItem.xaml" />
         <ResourceDictionary Source="MDatePicker.xaml" />
-        <ResourceDictionary Source="FlatDatePickerStyle.xaml" />
-        <ResourceDictionary Source="CalendarStyle.xaml" />
         <ResourceDictionary Source="TimePickerStyle.xaml" />
-        <ResourceDictionary Source="DateTimePicker_CalendarStyle.xaml" />
-        <ResourceDictionary Source="DateTimePickerStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -37,6 +37,9 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+#if DEBUG
+            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+#endif
             this.TextBoxDateValue = DateTime.Now;
             this.DateTimePickerValue.Value = DateTime.Now;
         }

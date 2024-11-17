@@ -196,6 +196,7 @@
                             VerticalAlignment="Center" />
 
                         <ModernUI:MDatePicker
+                            x:Name="dateControl2"
                             Width="220"
                             Height="25"
                             HorizontalAlignment="Center"
@@ -203,11 +204,52 @@
                             IsShowConfirm="True" />
 
                         <ModernUI:MDatePicker
+                            x:Name="dateControl3"
                             Width="220"
                             Height="25"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             IsShowShortCuts="True" />
+
+                        <ModernUI:MDatePicker
+                            x:Name="dateControl4"
+                            Width="220"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Type="SingleDateRange" />
+
+                        <ModernUI:MDatePicker
+                            x:Name="dateControl5"
+                            Width="220"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsShowConfirm="True"
+                            Type="SingleDateRange" />
+
+                        <ModernUI:MDatePicker
+                            x:Name="dateControl6"
+                            Width="220"
+                            Height="28"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="3"
+                            DateStringFormat="dd.MM.yyyy"
+                            IsShowShortCuts="True"
+                            Type="SingleDateRange" />
+
+                        <ModernUI:MDatePicker
+                            x:Name="dateControl7"
+                            Width="220"
+                            Height="28"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            CornerRadius="3"
+                            DateStringFormat="dd.MM.yyyy"
+                            IsShowShortCuts="True"
+                            Type="DateTime" />
+
                     </UniformGrid>
                 </TabItem>
 

@@ -530,10 +530,9 @@
                     DateTime dateTime = new DateTime(this.DisplayDate.Year, month, 1);
 
                     this.CalendarButtons[i, j].DataContext = dateTime;
-                    this.CalendarButtons[i, j].Content = month + "月";
+                    this.CalendarButtons[i, j].Content = month;
                     this.CalendarButtons[i, j].HasSelectedDates = false;
-                    if (this.Owner != null && this.Owner.DisplayDate != null 
-                        && DateTimeHelper.MonthIsEqual(dateTime, this.Owner.DisplayDate))
+                    if (this.Owner != null && this.Owner.DisplayDate != null && DateTimeHelper.MonthIsEqual(dateTime, this.Owner.DisplayDate))
                     {
                         this.CalendarButtons[i, j].HasSelectedDates = true;
                     }
@@ -546,7 +545,7 @@
         private void SetDecadeModeHeaderButton()
         {
             int decadeStart = this.DisplayDate.Year - this.DisplayDate.Year % 10;
-            this.PART_HeaderButton.Content = string.Format("{0}Jahre - {1}Jahre", decadeStart, decadeStart + 9);
+            this.PART_HeaderButton.Content = string.Format("{0} - {1}", decadeStart, decadeStart + 9);
         }
 
         private void SetYearButtons()

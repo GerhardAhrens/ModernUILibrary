@@ -630,10 +630,6 @@
             {
                 return;
             }
-            if (e.NewValue == null)
-            {
-                return;
-            }
 
             if (this.Type == EnumDatePickerType.SingleDateRange)
             {
@@ -762,9 +758,7 @@
                         if (this.SelectedTime.HasValue && this.PART_TimeSelector != null)
                         {
                             this.PART_TimeSelector.SelectedTime = this.SelectedTime;
-                            this.PART_TextBox_New.Text = string.Format("{0} {1}"
-                                , selectedDate.Value.ToString(this.DateStringFormat)
-                                , this.SelectedTime.Value.ToString(this.TimeStringFormat));
+                            this.PART_TextBox_New.Text = $"{selectedDate.Value.ToString(this.DateStringFormat)} {this.SelectedTime.Value.ToString(this.TimeStringFormat)}";
                         }
                         break;
                 }

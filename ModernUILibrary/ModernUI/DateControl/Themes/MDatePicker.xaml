@@ -6,6 +6,11 @@
     <PathGeometry x:Key="DoubleLeft" Figures="M614.997333 511.146667l314.88 285.354666a30.549333 30.549333 0 0 1 0 46.336 37.888 37.888 0 0 1-25.6 9.557334 38.058667 38.058667 0 0 1-25.6-9.728L512.512 511.146667l366.165333-331.776a38.741333 38.741333 0 0 1 51.2 0 30.72 30.72 0 0 1 0 46.421333L614.997333 511.146667z m-428.032 0l314.88 285.354666a30.549333 30.549333 0 0 1 0 46.336 37.888 37.888 0 0 1-25.6 9.557334 38.229333 38.229333 0 0 1-25.6-9.728L84.48 511.146667l366.165333-331.776a38.741333 38.741333 0 0 1 51.2 0 30.72 30.72 0 0 1 0 46.421333L186.965333 511.146667z" />
     <PathGeometry x:Key="SingleLeft" Figures="M726.309 905.47l-393.143-393.144 393.699-393.699c12.497-12.497 12.497-32.759 0-45.255-12.497-12.497-32.759-12.497-45.255 0l-416.327 416.327c-12.496 12.497-12.496 32.759 0 45.256l415.772 415.771c12.498 12.497 32.758 12.497 45.255 0 12.496-12.497 12.497-32.757-0.001-45.255z" />
     <PathGeometry x:Key="ios-calendar-outline" Figures="M352,96V64h-16v32H176V64h-16v32H64v352h384V96H352z M432,432H80V192h352V432z M432,176H80v-64h80v32h16v-32h160v32h16v-32h80V176z" />
+    <PathGeometry x:Key="CloseIcon" Figures="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+    <PathGeometry x:Key="ClearIcon" Figures="M15 13H16.5V15.82L18.94 17.23L18.19 18.53L15 16.69V13M23 16C23 19.87 19.87 23 16 23C14.09 23 12.36 22.24 11.1 21H8C6.9 21 6 20.1 6 19V7H18V9.29C20.89 10.15 23 12.83 23 16M9 16C9 12.13 12.13 9 16 9H8V19H9.67C9.24 18.09 9 17.07 9 16M16 11C13.24 11 11 13.24 11 16C11 18.76 13.24 21 16 21C18.76 21 21 18.76 21 16C21 13.24 18.76 11 16 11M15.5 4H19V6H5V4H8.5L9.5 3H14.5L15.5 4Z" />
+    <PathGeometry x:Key="TodayIcon" Figures="M19 3H18V1H16V3H8V1H6V3H5C3.9 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H19C20.11 21 21 20.11 21 19V5C21 3.89 20.11 3 19 3M19 19H5V9H19V19M19 7H5V5H19M7 11H12V16H7" />
+    <PathGeometry x:Key="YesterdayIcon" Figures="M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.89 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.89 20.1 3 19 3M19 19H5V8H19V19M12 10V12H16V15H12V17L8 13.5L12 10Z" />
+    <PathGeometry x:Key="WeekIcon" Figures="M7 11H9V13H7V11M21 5V19C21 20.11 20.11 21 19 21H5C3.89 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H6V1H8V3H16V1H18V3H19C20.11 3 21 3.9 21 5M5 7H19V5H5V7M19 19V9H5V19H19M15 13V11H17V13H15M11 13V11H13V13H11M7 15H9V17H7V15M15 17V15H17V17H15M11 17V15H13V17H11Z" />
     <PathFigureCollection x:Key="Date_BottomPart">M704 192 704 128l-32 0 0 64L352 192 352 128l-32 0 0 64L128 192l0 704 768 0L896 192 704 192zM864 864 160 864 160 384l704 0L864 864zM864 352 160 352l0-128 160 0 0 64 32 0 0-64 320 0 0 64 32 0 0-64 160 0L864 352z</PathFigureCollection>
     <PathFigureCollection x:Key="Date_TopPart">M160 224 160 352 864 352 864 224Z</PathFigureCollection>
     <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
@@ -246,19 +251,36 @@
                                                     SnapsToDevicePixels="True"
                                                     Tag="Menü"
                                                     Visibility="Collapsed">
-                                                    <Button
+                                                    <MUI:PathButton
                                                         x:Name="PART_Btn_Today"
-                                                        Width="50"
-                                                        Content="Schliesen"
-                                                        Style="{StaticResource ShortCutButtonStyle}" />
-                                                    <Button
+                                                        Width="30"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Transparent"
+                                                        Foreground="#657180"
+                                                        PathData="{StaticResource ResourceKey=TodayIcon}"
+                                                        PathWidth="20" />
+
+                                                    <MUI:PathButton
                                                         x:Name="PART_Btn_Yestday"
-                                                        Content="Gestern"
-                                                        Style="{StaticResource ShortCutButtonStyle}" />
-                                                    <Button
+                                                        Width="30"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Transparent"
+                                                        Foreground="#657180"
+                                                        PathData="{StaticResource ResourceKey=YesterdayIcon}"
+                                                        PathWidth="20" />
+
+                                                    <MUI:PathButton
                                                         x:Name="PART_Btn_AWeekAgo"
-                                                        Content="Vor einer Woche"
-                                                        Style="{StaticResource ShortCutButtonStyle}" />
+                                                        Width="30"
+                                                        Height="30"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Transparent"
+                                                        Foreground="#657180"
+                                                        PathData="{StaticResource ResourceKey=WeekIcon}"
+                                                        PathWidth="20" />
+
                                                     <ItemsControl.ItemsPanel>
                                                         <ItemsPanelTemplate>
                                                             <StackPanel IsItemsHost="True" Orientation="Vertical" />
@@ -298,6 +320,7 @@
                                                     x:Name="PART_Calendar"
                                                     Grid.Column="1"
                                                     BorderThickness="0" />
+
                                                 <MUI:MCalendar
                                                     x:Name="PART_Calendar_Second"
                                                     Grid.Column="2"
@@ -325,27 +348,30 @@
                                                             DockPanel.Dock="Left"
                                                             Style="{StaticResource ChooseTimeToggleButton}"
                                                             Visibility="Collapsed" />
-                                                        
+
                                                         <StackPanel
                                                             HorizontalAlignment="Right"
                                                             DockPanel.Dock="Right"
                                                             Orientation="Horizontal">
-                                                            <MUI:FlatButton
+                                                            <MUI:PathButton
                                                                 x:Name="PART_ClearDate"
-                                                                Width="50"
+                                                                Width="40"
                                                                 Height="22"
                                                                 Margin="0,0,5,0"
                                                                 HorizontalAlignment="Right"
-                                                                Content="Löschen"
+                                                                Background="Transparent"
                                                                 Foreground="#657180"
-                                                                Type="text" />
-                                                            <MUI:FlatButton
+                                                                PathData="{StaticResource ResourceKey=ClearIcon}" />
+
+                                                            <MUI:PathButton
                                                                 x:Name="PART_ConfirmSelected"
-                                                                Width="50"
+                                                                Width="40"
                                                                 Height="22"
                                                                 Margin="0,0,7,0"
                                                                 HorizontalAlignment="Right"
-                                                                Content="Schliesen" />
+                                                                Background="Transparent"
+                                                                Foreground="#657180"
+                                                                PathData="{StaticResource ResourceKey=CloseIcon}" />
                                                         </StackPanel>
 
                                                         <Popup

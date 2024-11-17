@@ -101,10 +101,12 @@
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Grid.Resources>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+
                             <DatePickerTextBox
                                 x:Name="PART_TextBox"
                                 Grid.Row="0"
@@ -137,6 +139,7 @@
                                     StaysOpen="False"
                                     VerticalOffset="5" />
                             </Grid>
+
                             <Button
                                 x:Name="PART_Button"
                                 Grid.Row="0"
@@ -150,6 +153,7 @@
                                 Template="{StaticResource DropDownButtonTemplate}" />
                         </Grid>
                     </Border>
+
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
                             <Setter TargetName="PART_TextBox" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
