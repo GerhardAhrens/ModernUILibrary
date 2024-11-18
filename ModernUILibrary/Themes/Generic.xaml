@@ -45,6 +45,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ToolTip/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Tree/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Grid/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Window/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Themes/Primitives/NumberBoxStyle.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Resources/MenuItemStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>

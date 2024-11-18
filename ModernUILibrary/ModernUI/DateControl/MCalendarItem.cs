@@ -532,7 +532,7 @@
                     this.CalendarButtons[i, j].DataContext = dateTime;
                     this.CalendarButtons[i, j].Content = month;
                     this.CalendarButtons[i, j].HasSelectedDates = false;
-                    if (this.Owner != null && this.Owner.DisplayDate != null && DateTimeHelper.MonthIsEqual(dateTime, this.Owner.DisplayDate))
+                    if (this.Owner != null && DateTimeHelper.MonthIsEqual(dateTime, this.Owner.DisplayDate))
                     {
                         this.CalendarButtons[i, j].HasSelectedDates = true;
                     }
@@ -560,7 +560,7 @@
                 calendarButton.DataContext = dateTime;
                 calendarButton.Content = dateTime.Year;
                 calendarButton.HasSelectedDates = false;
-                if(this.Owner != null && this.Owner.DisplayDate != null && dateTime.Year == this.Owner.DisplayDate.Year)
+                if(this.Owner != null && dateTime.Year == this.Owner.DisplayDate.Year)
                 {
                     calendarButton.HasSelectedDates = true;
                 }

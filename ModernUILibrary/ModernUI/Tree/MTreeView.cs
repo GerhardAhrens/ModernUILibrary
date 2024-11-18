@@ -5,7 +5,7 @@
 
     public class MTreeView : TreeView
     {
-        private CheckBox PART_CheckBox;
+        /*private CheckBox PART_CheckBox;*/
 
         #region IsShowCheckBox
         public static readonly DependencyProperty IsShowCheckBoxProperty = DependencyProperty.Register(nameof(IsShowCheckBox) , typeof(bool), typeof(MTreeView), new PropertyMetadata(false));

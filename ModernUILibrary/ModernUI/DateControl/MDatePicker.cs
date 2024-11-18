@@ -626,11 +626,6 @@
 
         private void PART_Calendar_DisplayDateChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
-            if (e.NewValue == null)
-            {
-                return;
-            }
-
             if (this.Type == EnumDatePickerType.SingleDateRange)
             {
                 this.PART_Calendar_Second.DisplayDate = e.NewValue.AddMonths(1);
@@ -640,10 +635,6 @@
         private void PART_Calendar_Second_DisplayDateChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
             if (this.PART_Calendar == null)
-            {
-                return;
-            }
-            if (e.NewValue == null)
             {
                 return;
             }
