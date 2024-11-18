@@ -48,8 +48,8 @@
 
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
-            tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()));
-            tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()));
+            tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()) { Stichworte = "ListBox;ComboBox;Flat" });
+            tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()) { Stichworte = "ListBox;Flat;ListView" });
             tabItemSource.Add(new TabControlItem("ComboTree Controls", new ComboTreeControlsUC()) { Stichworte = "ComboBox;Tree;Flat" });
             tabItemSource.Add(new TabControlItem("ComboBox Controls", new ComboBoxControlsUC()) { Stichworte = "ComboBox;Flat" });
             tabItemSource.Add(new TabControlItem("CascaderBox Controls", new CascaderBoxControlsUC()) { Stichworte = "ComboBox;Flat;Tree" });
@@ -61,6 +61,7 @@
             tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
             tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
+            tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register" });
 
             tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });

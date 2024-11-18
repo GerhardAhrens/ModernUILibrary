@@ -161,6 +161,9 @@
     <Compile Update="MyControls\DateTimeControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\TabControlControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
