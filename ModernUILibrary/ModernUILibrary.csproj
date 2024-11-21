@@ -26,6 +26,7 @@
     <Folder Include="ModernUI\BusyIndicator\Themes\" />
     <Folder Include="ModernUI\ButtonGroup\Themes\" />
     <Folder Include="ModernUI\Button\Themes\" />
+    <Folder Include="ModernUI\Carousel\Themes\" />
     <Folder Include="ModernUI\CascaderBox\Themes\" />
     <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\ChooseBox\Themes\" />
@@ -37,6 +38,7 @@
     <Folder Include="ModernUI\FlyoutControl\Themes\" />
     <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />
+    <Folder Include="ModernUI\Heading\Themes\" />
     <Folder Include="ModernUI\Icons\Themes\" />
     <Folder Include="ModernUI\ListTextBox\Themes\" />
     <Folder Include="ModernUI\ListView\Themes\" />

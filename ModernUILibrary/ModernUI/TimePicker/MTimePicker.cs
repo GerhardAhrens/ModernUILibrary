@@ -59,6 +59,12 @@
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MTimePicker), new FrameworkPropertyMetadata(typeof(MTimePicker)));
         }
+
+        public MTimePicker()
+        {
+            this.Height = 25;
+        }
+
         #endregion
 
         #region Overrider

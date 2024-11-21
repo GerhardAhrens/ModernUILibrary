@@ -156,6 +156,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <WrapPanel Grid.Row="0" Margin="10,0">
@@ -222,7 +223,8 @@
                         <TextBlock Margin="0,2" Text="Highlight Background:" />
                         <ComboBox
                             x:Name="cbBackground"
-                            Width="100" Margin="10,0"
+                            Width="100"
+                            Margin="10,0"
                             HorizontalAlignment="Left"
                             ItemsSource="{Binding Source={StaticResource colorProperties}}"
                             SelectedIndex="52"
@@ -282,9 +284,19 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
-
                 </Grid>
             </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="TextBlock, Heading" />
+
+            <StackPanel Orientation="Vertical">
+                <ModernUI:Heading HeaderType="H1" Text="Heading - H1" />
+                <ModernUI:Heading HeaderType="H3" Text="Heading - H3" />
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>

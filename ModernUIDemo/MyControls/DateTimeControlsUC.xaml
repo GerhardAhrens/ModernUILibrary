@@ -253,6 +253,55 @@
                     </UniformGrid>
                 </TabItem>
 
+                <TabItem Header="TimePicker">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <ModernUI:TimeSelector
+                                x:Name="dtSelectorA"
+                                Width="160"
+                                Height="200"
+                                HorizontalAlignment="Left" />
+
+                            <TextBlock
+                                Width="200"
+                                Margin="5,0"
+                                VerticalAlignment="Top"
+                                Background="White">
+                                <Run Text="Ergebnis:" />
+                                <Run Text="{Binding Path=SelectedTime, ElementName=dtSelectorA, StringFormat=HH:mm:ss}" />
+                            </TextBlock>
+                        </StackPanel>
+
+                        <TextBlock FontSize="14" Text="Beispiel für MTimePicker " />
+                        <Separator Height="3" Background="Green" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <ModernUI:MTimePicker x:Name="TimePickerA" Width="150" />
+                            <TextBlock
+                                Width="200"
+                                Margin="5,0"
+                                VerticalAlignment="Top"
+                                Background="White">
+                                <Run Text="Ergebnis:" />
+                                <Run Text="{Binding Path=SelectedTime, ElementName=TimePickerA, StringFormat=HH:mm:ss}" />
+                            </TextBlock>
+                        </StackPanel>
+
+                        <TextBlock FontSize="14" Text="Beispiel für MTimePicker mit Event" />
+                        <Separator Height="3" Background="Green" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <ModernUI:MTimePicker
+                                x:Name="TimePickerB"
+                                Width="150"
+                                TimeStringFormat="HH:mm:ss" />
+
+                            <ModernUI:FlatButton x:Name="SetZeitButton" Content="Set Zeit" Margin="10,0,0,0" Click="OnSetZeitButton" Width="100" Type="Default"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </TabItem>
+
             </ModernUI:MTabControl>
         </StackPanel>
     </Grid>

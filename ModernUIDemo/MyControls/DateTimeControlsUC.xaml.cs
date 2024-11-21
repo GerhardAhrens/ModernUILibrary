@@ -78,5 +78,11 @@
                 MessageBox.Show(datum.SelectedDate.ToString());
             }
         }
+
+        private void OnSetZeitButton(object sender, RoutedEventArgs e)
+        {
+            this.TimePickerB.SelectedTime = DateTime.Now;
+
+        }
     }
 }
