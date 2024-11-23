@@ -25,34 +25,61 @@
             Grid.Row="1"
             Grid.Column="0"
             Orientation="Vertical">
-            <ModernUI:Carousel
-                x:Name="CarouseA"
-                HorizontalAlignment="Center" AutoPlay="True" AutoPlaySpeed="1000"
-                VerticalAlignment="Top"
-                ItemsSource="{Binding Path=CarouseASource, UpdateSourceTrigger=PropertyChanged}">
-                <ModernUI:Carousel.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            Padding="50,40"
-                            Background="#506B9E"
-                            SnapsToDevicePixels="True"
-                            UseLayoutRounding="True">
-                            <StackPanel
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Orientation="Horizontal">
-                                <TextBlock Foreground="White" Text="Carousel Item：" />
-                                <TextBlock
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:Carousel
+                    x:Name="CarouseA"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding Path=CarouseASource, UpdateSourceTrigger=PropertyChanged}">
+                    <ModernUI:Carousel.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Padding="50,40"
+                                Background="#506B9E"
+                                SnapsToDevicePixels="True"
+                                UseLayoutRounding="True">
+                                <StackPanel
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Foreground="White"
-                                    Text="{Binding .}" />
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ModernUI:Carousel.ItemTemplate>
-            </ModernUI:Carousel>
-        </StackPanel>
+                                    Orientation="Horizontal">
+                                    <TextBlock Foreground="White" Text="Carousel Item：" />
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="{Binding .}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ModernUI:Carousel.ItemTemplate>
+                </ModernUI:Carousel>
 
+                <ModernUI:MCheckBox
+                    x:Name="chlAutoPlay"
+                    Margin="10,0,0,0"
+                    IsChecked="{Binding Path=AutoPlay, ElementName=CarouseA, FallbackValue=False}" />
+
+                <ModernUI:TextBoxInt
+                    Width="30"
+                    Margin="10,0,0,0"
+                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseA, FallbackValue=2000}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:Carousel
+                    x:Name="Carousel2"
+                    Grid.Row="1"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    ItemsSource="{Binding Path=CarouseBSource, UpdateSourceTrigger=PropertyChanged}">
+                    <ModernUI:Carousel.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=ImageUrl, Mode=OneWay}" Stretch="Fill" />
+                        </DataTemplate>
+                    </ModernUI:Carousel.ItemTemplate>
+                </ModernUI:Carousel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

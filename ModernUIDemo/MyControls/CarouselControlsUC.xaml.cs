@@ -2,9 +2,15 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
+    using ModernUIDemo.Core;
 
     /// <summary>
     /// Interaktionslogik für CarouselControlsUC.xaml
@@ -16,9 +22,25 @@
             this.InitializeComponent();
 
             this.CarouseASource = new ObservableCollection<string>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10; i++)
             {
                 CarouseASource.Add(i.ToString());
+            }
+
+            this.CarouseBSource = new ObservableCollection<CarouselModel>();
+            string[] resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            for (int i = 1; i <= 5; i++)
+            {
+                if (resourceName[i].ToLower().EndsWith("png") == true)
+                {
+                    var picture = XAMLResourceManager.GetResourceContent<ImageSource>(resourceName[i]);
+
+                    this.CarouseBSource.Add(new CarouselModel()
+                    {
+                        Title = i.ToString(),
+                        ImageUrl = picture
+                    });
+                }
             }
 
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
@@ -37,6 +59,17 @@
             }
         }
 
+        private ObservableCollection<CarouselModel> _CarouseBSource;
+
+        public ObservableCollection<CarouselModel> CarouseBSource
+        {
+            get { return _CarouseBSource; }
+            set
+            {
+                _CarouseBSource = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -60,11 +93,53 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+
+        public static System.Windows.Controls.Image ConvertImageToWpfImage(System.Drawing.Image image)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException("image", "Image darf nicht null sein.");
+            }
+
+            using (System.Drawing.Bitmap dImg = new System.Drawing.Bitmap(image))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    dImg.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                    System.Windows.Media.Imaging.BitmapImage bImg = new System.Windows.Media.Imaging.BitmapImage();
+
+                    bImg.BeginInit();
+                    bImg.StreamSource = new MemoryStream(ms.ToArray());
+                    bImg.EndInit();
+
+                    System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                    img.Source = bImg;
+
+                    return img;
+                }
+            }
+        }
+
+        public static System.Drawing.Image ConvertWpfImageToImage(System.Windows.Controls.Image image)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException("image", "Image darf nicht null sein.");
+            }
+
+            BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+            MemoryStream ms = new MemoryStream();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)image.Source));
+            encoder.Save(ms);
+            System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
+            return img;
+        }
     }
 
     public class CarouselModel
     {
         public string Title { get; set; }
-        public string ImageUrl { get; set; }
+        public ImageSource ImageUrl { get; set; }
     }
 }

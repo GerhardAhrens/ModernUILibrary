@@ -7,7 +7,12 @@
     <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <FileVersion>1.0.2024.1</FileVersion>
+    <ApplicationIcon>LibLogo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="LibLogo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Behaviors\CheckBox\" />
@@ -35,6 +40,8 @@
     <Folder Include="ModernUI\ContentNavigation\Themes\" />
     <Folder Include="ModernUI\Dashboard\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
+    <Folder Include="ModernUI\Expander\Themes\" />
+    <Folder Include="ModernUI\FloatingAction\Themes\" />
     <Folder Include="ModernUI\FlyoutControl\Themes\" />
     <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />

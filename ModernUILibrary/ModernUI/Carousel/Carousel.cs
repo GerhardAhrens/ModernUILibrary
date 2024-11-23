@@ -33,7 +33,7 @@
             Carousel.ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource), typeof(IEnumerable), typeof(Carousel));
             Carousel.ItemTemplateProperty = DependencyProperty.Register(nameof(ItemTemplate), typeof(DataTemplate), typeof(Carousel));
             Carousel.AutoPlayProperty = DependencyProperty.Register(nameof(AutoPlay), typeof(bool), typeof(Carousel), new PropertyMetadata(false, OnAutoPlayChangedCallback));
-            Carousel.AutoPlaySpeedProperty = DependencyProperty.Register(nameof(AutoPlaySpeed), typeof(double), typeof(Carousel), new PropertyMetadata(2d, OnAutoPlaySpeedChangedCallback));
+            Carousel.AutoPlaySpeedProperty = DependencyProperty.Register(nameof(AutoPlaySpeed), typeof(int), typeof(Carousel), new PropertyMetadata(2, OnAutoPlaySpeedChangedCallback));
         }
 
         public Carousel()
@@ -42,7 +42,7 @@
             if (this.autoPlayTimer == null)
             {
                 this.autoPlayTimer = new Timer();
-                this.autoPlayTimer.Interval = this.AutoPlaySpeed;
+                this.autoPlayTimer.Interval = this.AutoPlaySpeed*1000;
                 this.autoPlayTimer.Elapsed += AutoPlayTimer_Elapsed;
             }
 
@@ -68,9 +68,9 @@
             get { return (bool)GetValue(AutoPlayProperty); }
             set { SetValue(AutoPlayProperty, value); }
         }
-        public double AutoPlaySpeed
+        public int AutoPlaySpeed
         {
-            get { return (double)GetValue(AutoPlaySpeedProperty); }
+            get { return (int)GetValue(AutoPlaySpeedProperty); }
             set { SetValue(AutoPlaySpeedProperty, value); }
         }
 

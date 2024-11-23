@@ -9,10 +9,16 @@
     <AssemblyVersion>1.0.2024.1</AssemblyVersion>
     <FileVersion>1.0.2024.1</FileVersion>
     <UseWindowsForms>False</UseWindowsForms>
+    <ApplicationIcon>AppLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="de-de.lex" />
+    <None Remove="Images\img1.png" />
+    <None Remove="Images\img2.png" />
+    <None Remove="Images\img3.png" />
+    <None Remove="Images\img4.png" />
+    <None Remove="Images\img5.png" />
     <None Remove="Resources\Picture\app.ico" />
   </ItemGroup>
 
@@ -32,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="AppLogo.ico" />
     <Content Include="Resources\Picture\app.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -41,6 +48,11 @@
     <Resource Include="de-de.lex">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <EmbeddedResource Include="Images\img1.png" />
+    <EmbeddedResource Include="Images\img2.png" />
+    <EmbeddedResource Include="Images\img3.png" />
+    <EmbeddedResource Include="Images\img4.png" />
+    <EmbeddedResource Include="Images\img5.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -165,6 +177,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\CarouselControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\FloatingActionControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">

@@ -45,6 +45,7 @@
             tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
             tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()));
+            tabItemSource.Add(new TabControlItem("FloatingAction Controls", new FloatingActionControlsUC()));
 
             tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
