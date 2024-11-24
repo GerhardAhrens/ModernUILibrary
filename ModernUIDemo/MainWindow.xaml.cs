@@ -64,6 +64,7 @@
             tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
             tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });
             tabItemSource.Add(new TabControlItem("CarouselControl", new CarouselControlsUC()) { Stichworte = "Anzeige;SlideSwitch;Carousel;Karusell;Layout" });
+            tabItemSource.Add(new TabControlItem("TagControl", new TagControlsUC()) { Stichworte = "Anzeige;Tag;Layout" });
 
             tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
@@ -74,7 +75,6 @@
             tabItemSource.Add(new TabControlItem("Loading Animation Controls", new LoadingControlsUC()));
             tabItemSource.Add(new TabControlItem("Slider Controls", new SliderControlsUC()) { Stichworte = "Slider;Flat" });
             tabItemSource.Add(new TabControlItem("ProgressBar Controls", new ProgressBarControlsUC()));
-            tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
             tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
             tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
             tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()));
@@ -88,6 +88,7 @@
             tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
             tabItemSource.Add(new TabControlItem("Flyout Window", new FlyoutControlsUC()));
             tabItemSource.Add(new TabControlItem("Window", new WindowControlsUC()));
+            tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
 
             tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));

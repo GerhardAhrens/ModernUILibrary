@@ -131,7 +131,10 @@ namespace ModernUIDemo
                 }
             });
 
-            resultTag = new Tuple<NotificationBoxButton, object>(resultTag.Item1, Convert.ChangeType(resultTag.Item2, resultType));
+            if (resultTag.Item2 != null)
+            {
+                resultTag = new Tuple<NotificationBoxButton, object>(resultTag.Item1, Convert.ChangeType(resultTag.Item2, resultType));
+            }
 
             return resultTag;
         }
