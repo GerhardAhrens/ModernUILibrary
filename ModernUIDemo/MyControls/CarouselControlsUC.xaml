@@ -60,6 +60,7 @@
                     IsChecked="{Binding Path=AutoPlay, ElementName=CarouseA, FallbackValue=False}" />
 
                 <ModernUI:TextBoxInt
+                    x:Name="AutoPlaySpeedA"
                     Width="30"
                     Margin="10,0,0,0"
                     Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseA, FallbackValue=2}" />
@@ -83,13 +84,13 @@
                 <ModernUI:MCheckBox
                     x:Name="chlAutoPlayB"
                     Margin="10,0,0,0"
-                    IsChecked="{Binding Path=AutoPlay, ElementName=CarouseB, FallbackValue=False}" />
+                    IsChecked="{Binding Path=AutoPlay, ElementName=CarouselB, FallbackValue=False}" />
 
                 <ModernUI:TextBoxInt
                     x:Name="AutoPlaySpeedB"
                     Width="30"
                     Margin="10,0,0,0"
-                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseB, FallbackValue=1}" />
+                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouselB, FallbackValue=1}" />
             </StackPanel>
         </StackPanel>
     </Grid>

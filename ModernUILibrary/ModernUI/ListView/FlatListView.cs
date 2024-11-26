@@ -11,12 +11,21 @@
     public class FlatListView : ListView
     {
         public static readonly DependencyProperty ItemCountProperty = 
-            DependencyProperty.Register("ItemCount", typeof(int), typeof(FlatListView), new FrameworkPropertyMetadata(0));
+            DependencyProperty.Register(nameof(ItemCount), typeof(int), typeof(FlatListView), new FrameworkPropertyMetadata(0));
 
         public int ItemCount
         {
             get { return (int)GetValue(ItemCountProperty); }
             set { SetValue(ItemCountProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedCountProperty =
+            DependencyProperty.Register("SelectedCount", typeof(int), typeof(FlatListView), new FrameworkPropertyMetadata(0));
+
+        public int SelectedCount
+        {
+            get { return (int)GetValue(SelectedCountProperty); }
+            set { SetValue(SelectedCountProperty, value); }
         }
 
         public static readonly DependencyProperty SelectedRowCommandProperty =
@@ -93,6 +102,7 @@
             if (this.SelectionChangedCommand != null && this.SelectionChangedCommand.CanExecute(this.SelectedItem) == true)
             {
                 this.SelectionChangedCommand.Execute(this.SelectedItem);
+                this.SelectedCount = this.SelectedItems.Count;
             }
         }
 

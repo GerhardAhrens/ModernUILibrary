@@ -18,7 +18,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <TextBlock FontSize="14" Text="Beispiel für ListView..." />
         <Separator Height="3" Background="Green" />
 
         <StackPanel
@@ -46,6 +46,8 @@
         <TextBlock Grid.Row="3" Grid.Column="0">
             <Run Text="Anzahl" />
             <Run Text="{Binding Path=ItemCount, ElementName=FlatListView}" />
+            <Run Text="Auswahl" />
+            <Run Text="{Binding Path=SelectedCount, ElementName=FlatListView}" />
             <LineBreak />
             <Run Text="Selected Item" />
             <Run x:Name="SelectionChanged" />
