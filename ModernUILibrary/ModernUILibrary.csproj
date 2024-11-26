@@ -55,6 +55,8 @@
     <Folder Include="ModernUI\ComboBoxColor\" />
     <Folder Include="ModernUI\ListBox\" />
     <Folder Include="ModernUI\Led\" />
+    <Folder Include="ModernUI\Decorator\" />
+    <Folder Include="ModernUI\Image\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\TabControl\Themes\" />
     <Folder Include="ModernUI\TextBlock\" />

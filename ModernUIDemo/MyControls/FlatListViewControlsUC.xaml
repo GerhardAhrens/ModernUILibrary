@@ -28,15 +28,33 @@
             <ModernUI:GridLineDecorator Height="400" GridLineBrush="Black">
                 <ModernUI:FlatListView
                     x:Name="FlatListView"
+                    ModernUI:ListViewSort.AutoSort="True"
                     AllowDrop="False"
                     AlternationCount="2"
                     SelectedRowCommand="{Binding Path=CmdAgg[SelectedRowCommand]}"
                     SelectionChangedCommand="{Binding Path=CmdAgg[SelectionChangedCommand]}">
                     <ModernUI:FlatListView.View>
                         <GridView AllowsColumnReorder="False">
-                            <GridViewColumn DisplayMemberBinding="{Binding Item1}" Header="Id" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Item2}" Header="Name" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Item3}" Header="Id-Item3" />
+                            <GridViewColumn
+                                Width="50"
+                                DisplayMemberBinding="{Binding Path=Item1}"
+                                Header="Id" />
+
+                            <GridViewColumn
+                                Width="100"
+                                ModernUI:ListViewSort.PropertyName="Item2"
+                                DisplayMemberBinding="{Binding Path=Item2}">
+                                <ModernUI:GridViewColumnHeaderEx
+                                    Height="30"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Azure"
+                                    Content="Name" />
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Width="100"
+                                DisplayMemberBinding="{Binding Path=Item3}"
+                                Header="Id-Item3" />
                         </GridView>
                     </ModernUI:FlatListView.View>
                 </ModernUI:FlatListView>

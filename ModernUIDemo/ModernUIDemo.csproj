@@ -185,6 +185,9 @@
     <Compile Update="MyControls\TagControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ExpanderControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -237,6 +240,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\TagControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\ExpanderControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

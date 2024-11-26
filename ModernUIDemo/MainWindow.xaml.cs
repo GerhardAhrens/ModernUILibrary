@@ -59,12 +59,13 @@
             this.tabItemSource.Add(new TabControlItem("Accordion Controls", new AccordionControlsUC()) { Stichworte = "Anzeige;Accordion" });
 
             this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
-            this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Grid ContentFrame", new ContentFrameControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
+            this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()) { Stichworte = "Anzeige;Layout;Separator" });
+            this.tabItemSource.Add(new TabControlItem("Expander Control", new ExpanderControlsUC()) { Stichworte = "Anzeige;Layout;Expander" });
             this.tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });
             this.tabItemSource.Add(new TabControlItem("CarouselControl", new CarouselControlsUC()) { Stichworte = "Anzeige;SlideSwitch;Carousel;Karusell;Layout" });
             this.tabItemSource.Add(new TabControlItem("TagControl", new TagControlsUC()) { Stichworte = "Anzeige;Tag;Layout" });
+            this.tabItemSource.Add(new TabControlItem("Poptip", new PoptipControlsUC()) { Stichworte = "Anzeige;Poptip;Layout" });
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
@@ -127,7 +128,7 @@
             {
                 this.currentSelectedItem = value;
                 this.OnPropertyChanged();
-                if (value.ItemContent != null)
+                if (value != null)
                 {
                     UserControl uc = value.ItemContent as UserControl;
                     this.ContentItem = uc;
