@@ -55,19 +55,19 @@
                 </ModernUI:Carousel>
 
                 <ModernUI:MCheckBox
-                    x:Name="chlAutoPlay"
+                    x:Name="chlAutoPlayA"
                     Margin="10,0,0,0"
                     IsChecked="{Binding Path=AutoPlay, ElementName=CarouseA, FallbackValue=False}" />
 
                 <ModernUI:TextBoxInt
                     Width="30"
                     Margin="10,0,0,0"
-                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseA, FallbackValue=2000}" />
+                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseA, FallbackValue=2}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:Carousel
-                    x:Name="Carousel2"
+                    x:Name="CarouselB"
                     Grid.Row="1"
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"
@@ -79,6 +79,17 @@
                         </DataTemplate>
                     </ModernUI:Carousel.ItemTemplate>
                 </ModernUI:Carousel>
+
+                <ModernUI:MCheckBox
+                    x:Name="chlAutoPlayB"
+                    Margin="10,0,0,0"
+                    IsChecked="{Binding Path=AutoPlay, ElementName=CarouseB, FallbackValue=False}" />
+
+                <ModernUI:TextBoxInt
+                    x:Name="AutoPlaySpeedB"
+                    Width="30"
+                    Margin="10,0,0,0"
+                    Text="{Binding Path=AutoPlaySpeed, ElementName=CarouseB, FallbackValue=1}" />
             </StackPanel>
         </StackPanel>
     </Grid>

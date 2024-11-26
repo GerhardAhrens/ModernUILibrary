@@ -79,7 +79,7 @@
             Carousel carousel = d as Carousel;
 
             carousel.autoPlayTimer.Enabled = false;
-            carousel.autoPlayTimer.Interval = (double)e.NewValue;
+            carousel.autoPlayTimer.Interval = ((int)e.NewValue * 1000);
             carousel.autoPlayTimer.Enabled = carousel.AutoPlay;
         }
 
