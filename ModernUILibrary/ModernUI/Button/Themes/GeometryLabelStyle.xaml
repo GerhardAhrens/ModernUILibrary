@@ -1,0 +1,56 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:MUI="clr-namespace:ModernIU.Controls"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Style TargetType="{x:Type MUI:GeometryLabel}">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Arrow" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:GeometryLabel}">
+                    <Border
+                        Background="{TemplateBinding Property=Background}"
+                        BorderBrush="{TemplateBinding Property=BorderBrush}"
+                        BorderThickness="{TemplateBinding Property=BorderThickness}">
+                        <Viewbox Stretch="Uniform">
+                            <StackPanel
+                                Height="{TemplateBinding Property=Height}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{TemplateBinding Property=Background}"
+                                Orientation="{TemplateBinding Property=Orientation}">
+
+                                <Viewbox
+                                    Margin="2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Stretch="Uniform"
+                                    Visibility="{TemplateBinding Property=IconVisibility}">
+
+                                    <Path
+                                        Data="{TemplateBinding Property=PathData}"
+                                        Fill="{TemplateBinding Property=Foreground}"
+                                        Stretch="Uniform" />
+                                </Viewbox>
+
+                                <ContentControl
+                                    Margin="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Property=Text}"
+                                    Visibility="{TemplateBinding Property=TextVisibility}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

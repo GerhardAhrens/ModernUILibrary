@@ -5,6 +5,7 @@
         <ResourceDictionary Source="PathButtonStyle.xaml" />
         <ResourceDictionary Source="PathIconButtonStyle.xaml" />
         <ResourceDictionary Source="PathTextButtonStyle.xaml" />
+        <ResourceDictionary Source="GeometryLabelStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
