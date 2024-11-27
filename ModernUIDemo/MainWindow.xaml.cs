@@ -69,6 +69,7 @@
             this.tabItemSource.Add(new TabControlItem("TagControl", new TagControlsUC()) { Stichworte = "Anzeige;Tag;Layout" });
             this.tabItemSource.Add(new TabControlItem("Poptip", new PoptipControlsUC()) { Stichworte = "Anzeige;Poptip;Layout" });
             this.tabItemSource.Add(new TabControlItem("StepBar Control", new StepBarControlsUC()) { Stichworte = "Anzeige;StepBar;Layout" });
+            this.tabItemSource.Add(new TabControlItem("WaterfallPanel Control", new WaterfallPanelControlsUC()) { Stichworte = "Anzeige;Panel;Layout" });
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
