@@ -14,6 +14,9 @@
 
   <ItemGroup>
     <None Remove="de-de.lex" />
+    <None Remove="Images\black-small-optimized-flipped.gif" />
+    <None Remove="Images\bomb.gif" />
+    <None Remove="Images\DonaldDuck.gif" />
     <None Remove="Images\img1.png" />
     <None Remove="Images\img2.png" />
     <None Remove="Images\img3.png" />
@@ -48,6 +51,9 @@
     <Resource Include="de-de.lex">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <EmbeddedResource Include="Images\black-small-optimized-flipped.gif" />
+    <EmbeddedResource Include="Images\bomb.gif" />
+    <EmbeddedResource Include="Images\DonaldDuck.gif" />
     <EmbeddedResource Include="Images\img1.png" />
     <EmbeddedResource Include="Images\img2.png" />
     <EmbeddedResource Include="Images\img3.png" />
@@ -188,7 +194,10 @@
     <Compile Update="MyControls\ExpanderControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MyControls\StepBarControlsUC.xaml.cs">
+    <Compile Update="MyControls\ImageGIFControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\LayoutControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\WindowControlsUC.xaml.cs">

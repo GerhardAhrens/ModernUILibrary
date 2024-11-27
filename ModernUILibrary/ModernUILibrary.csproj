@@ -24,7 +24,9 @@
   <ItemGroup>
     <Folder Include="Behaviors\CheckBox\" />
     <Folder Include="Behaviors\Hyperlink\" />
+    <Folder Include="Behaviors\Graphics\" />
     <Folder Include="Behaviors\TextBox\" />
+    <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Windows.Input\" />
     <Folder Include="Extensions\System.Enum\" />
     <Folder Include="ModernUIBase\Adorners\" />
@@ -79,7 +81,6 @@
     <Folder Include="ModernUI\TextBox\Themes\" />
     <Folder Include="ModernUI\TitleBar\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />
-    <Folder Include="Converters\" />
     <Folder Include="ModernUI\ToolTip\Themes\" />
     <Folder Include="BehaviorsBase\" />
     <Folder Include="Messaging\" />
