@@ -1,14 +1,19 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="GridEx.cs" company="Lifeprojects.de">
 //     Class: GridEx
-//     Copyright © Gerhard Ahrens, 2018
+//     Copyright © Gerhard Ahrens, 2019
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>
 // <email>development@lifeprojects.de</email>
-// <date>22.11.2018</date>
+// <date>22.08.2019</date>
 //
-// <summary>Class for UI Control GridLines</summary>
+// <summary>
+// Class for UI Control GridEx
+// </summary>
+// < Website >
+// https://thomaslevesque.com/tag/wpf/page/2/
+// </ Website >
 //-----------------------------------------------------------------------
 
 namespace ModernIU.Controls
@@ -19,21 +24,53 @@ namespace ModernIU.Controls
 
     public class GridEx : Grid
     {
-        public static readonly DependencyProperty GridLinesShowProperty =
-            DependencyProperty.Register("GridLinesShow", typeof(bool), typeof(GridEx), new UIPropertyMetadata(true));
+        private GridLengthCollection _rows;
+        private GridLengthCollection _columns;
 
-        public static readonly DependencyProperty GridLinesVisibilityProperty =
-            DependencyProperty.Register("GridLinesVisibility", typeof(GridLinesVisibility), typeof(GridEx), new UIPropertyMetadata(GridLinesVisibility.Both));
+        public static readonly DependencyProperty GridLinesShowProperty = DependencyProperty.Register("GridLinesShow", typeof(bool), typeof(GridEx), new UIPropertyMetadata(false));
 
-        public static readonly DependencyProperty GridLineBrushProperty =
-            DependencyProperty.Register("GridLineBrush", typeof(Brush), typeof(GridEx), new UIPropertyMetadata(Brushes.Black));
+        public static readonly DependencyProperty GridLinesVisibilityProperty = DependencyProperty.Register("GridLinesVisibility", typeof(GridLinesVisibility), typeof(GridEx), new UIPropertyMetadata(GridLinesVisibility.Both));
 
-        public static readonly DependencyProperty GridLineThicknessProperty =
-            DependencyProperty.Register("GridLineThickness", typeof(double), typeof(GridEx), new UIPropertyMetadata(1.0));
+        public static readonly DependencyProperty GridLineBrushProperty = DependencyProperty.Register("GridLineBrush", typeof(Brush), typeof(GridEx), new UIPropertyMetadata(Brushes.Black));
+
+        public static readonly DependencyProperty GridLineThicknessProperty = DependencyProperty.Register("GridLineThickness", typeof(double), typeof(GridEx), new UIPropertyMetadata(1.0));
 
         static GridEx()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GridEx), new FrameworkPropertyMetadata(typeof(GridEx)));
+        }
+
+
+        public GridLengthCollection Rows
+        {
+            get { return _rows; }
+            set
+            {
+                _rows = value;
+                RowDefinitions.Clear();
+                if (_rows == null)
+                    return;
+                foreach (var length in _rows)
+                {
+                    RowDefinitions.Add(new RowDefinition { Height = length });
+                }
+            }
+        }
+
+        public GridLengthCollection Columns
+        {
+            get { return _columns; }
+            set
+            {
+                _columns = value;
+                if (_columns == null)
+                    return;
+                ColumnDefinitions.Clear();
+                foreach (var length in _columns)
+                {
+                    ColumnDefinitions.Add(new ColumnDefinition { Width = length });
+                }
+            }
         }
 
         public bool GridLinesShow
@@ -99,5 +136,6 @@ namespace ModernIU.Controls
             }
 
             base.OnRender(dc);
-        }    }
+        }
+    }
 }

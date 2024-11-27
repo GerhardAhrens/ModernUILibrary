@@ -61,6 +61,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
             this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
+            this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
             this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()) { Stichworte = "Anzeige;Layout;Separator" });
             this.tabItemSource.Add(new TabControlItem("Expander Control", new ExpanderControlsUC()) { Stichworte = "Anzeige;Layout;Expander" });
             this.tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });

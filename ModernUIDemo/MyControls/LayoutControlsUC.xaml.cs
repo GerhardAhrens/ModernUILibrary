@@ -6,15 +6,14 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaktionslogik für TemplateControlsUC.xaml
+    /// Interaktionslogik für LayoutControlsUC.xaml
     /// </summary>
-    public partial class TemplateControlsUC : UserControl, INotifyPropertyChanged
+    public partial class LayoutControlsUC : UserControl, INotifyPropertyChanged
     {
-        public TemplateControlsUC()
+        public LayoutControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-            this.DataContext = this;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

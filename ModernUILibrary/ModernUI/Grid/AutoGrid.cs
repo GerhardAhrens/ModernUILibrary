@@ -115,6 +115,7 @@
         {
             ((AutoGrid)o)._shouldReindex = true;
         }
+
         /// <summary>
         ///     Measures the children of a <see cref="T:System.Windows.Controls.Grid" /> in anticipation of arranging them during
         ///     the <see cref="M:ArrangeOverride" /> pass.
