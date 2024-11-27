@@ -66,6 +66,7 @@
             this.tabItemSource.Add(new TabControlItem("CarouselControl", new CarouselControlsUC()) { Stichworte = "Anzeige;SlideSwitch;Carousel;Karusell;Layout" });
             this.tabItemSource.Add(new TabControlItem("TagControl", new TagControlsUC()) { Stichworte = "Anzeige;Tag;Layout" });
             this.tabItemSource.Add(new TabControlItem("Poptip", new PoptipControlsUC()) { Stichworte = "Anzeige;Poptip;Layout" });
+            this.tabItemSource.Add(new TabControlItem("StepBar Control", new StepBarControlsUC()) { Stichworte = "Anzeige;StepBar;Layout" });
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });

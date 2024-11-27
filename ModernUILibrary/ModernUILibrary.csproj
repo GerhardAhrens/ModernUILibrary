@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ModernUI\Dashboard\**" />
+    <EmbeddedResource Remove="ModernUI\Dashboard\**" />
+    <None Remove="ModernUI\Dashboard\**" />
+    <Page Remove="ModernUI\Dashboard\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="LibLogo.ico" />
   </ItemGroup>
 
@@ -38,7 +45,6 @@
     <Folder Include="ModernUI\ComboBox\Themes\" />
     <Folder Include="ModernUI\ComboTree\Themes\" />
     <Folder Include="ModernUI\ContentNavigation\Themes\" />
-    <Folder Include="ModernUI\Dashboard\Themes\" />
     <Folder Include="ModernUI\DropDownButton\Themes\" />
     <Folder Include="ModernUI\Expander\Themes\" />
     <Folder Include="ModernUI\FloatingAction\Themes\" />
@@ -58,6 +64,7 @@
     <Folder Include="ModernUI\Decorator\" />
     <Folder Include="ModernUI\Image\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
+    <Folder Include="ModernUI\StepBar\Themes\" />
     <Folder Include="ModernUI\TabControl\Themes\" />
     <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
