@@ -1,6 +1,9 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
@@ -10,14 +13,53 @@
     /// </summary>
     public partial class ImageGIFControlsUC : UserControl, INotifyPropertyChanged
     {
+        private string _CurrentPath;
+
         public ImageGIFControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+
+            this.DataContext = this;
+        }
+
+        public string CurrentPath
+        {
+            get { return _CurrentPath; }
+            set
+            {
+                if (_CurrentPath != value)
+                {
+                    _CurrentPath = value;
+                    this.OnPropertyChanged();
+                }
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            if (Debugger.IsAttached == true)
+            {
+                DirectoryInfo di = new DirectoryInfo(this.CurrentAssemblyPath());
+                string path = di.Parent.Parent.Parent.FullName;
+                this.CurrentPath = Path.Combine(path, @"Images\", "DonaldDuck.gif");
+            }
+            else
+            {
+                DirectoryInfo di = new DirectoryInfo(this.CurrentAssemblyPath());
+                string path = di.Parent.Parent.Parent.FullName;
+                this.CurrentPath = Path.Combine(path, @"Images\", "DonaldDuck.gif");
+            }
+
+        }
+
+        private string CurrentAssemblyPath()
+        {
+            string result = string.Empty;
+
+            result = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+            return result;
         }
 
         #region PropertyChanged Implementierung

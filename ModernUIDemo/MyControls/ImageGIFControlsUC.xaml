@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:MB="clr-namespace:ModernIU.Behaviors;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
@@ -24,7 +25,22 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <Border
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="Transparent"
+            BorderBrush="DarkBlue"
+            BorderThickness="1"
+            CornerRadius="5">
+                <Image
+                Width="200"
+                Height="200"
+                Margin="5"
+                MB:ImageGifBehavior.AnimatedSource="{Binding Path=CurrentPath, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                Stretch="Fill" />
+            </Border>
+        </StackPanel>
 
     </Grid>
 </UserControl>
