@@ -115,6 +115,7 @@
             }
             catch (Exception ex)
             {
+                string errorText = ex.Message;
                 return null;
             }
 
@@ -184,8 +185,9 @@
             }
             catch (Exception ex)
             {
-                
+                string errorText = ex.Message;    
             }
+
             return streamInfo.Stream;
         }
 
