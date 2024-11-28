@@ -22,7 +22,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernIU.Controls
+namespace ModernIU.Base
 {
     using System;
     using System.Reflection;

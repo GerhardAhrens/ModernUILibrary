@@ -75,6 +75,9 @@
             this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
 
+            this.tabItemSource.Add(new TabControlItem("Dialoge und Funktionen", true));
+            this.tabItemSource.Add(new TabControlItem("Dialoge", new FunctionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion" });
+
             this.tabItemSource.Add(new TabControlItem("View, Loading", true));
             this.tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));
             this.tabItemSource.Add(new TabControlItem("BusyIndicator Controls", new BusyIndicatorControlsUC()));
