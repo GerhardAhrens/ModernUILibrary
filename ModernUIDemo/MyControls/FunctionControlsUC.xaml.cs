@@ -50,7 +50,7 @@
             {
                 if (result.Cancelled == false)
                 {
-                    MMessageBox.Show($"Gewähltes Passwort: {result.Result}", EnumPromptType.Info);
+                    MessageBoxResult msg = MMessageBox.Show($"Gewähltes Passwort: {result.Result}", EnumPromptType.Info);
                 }
             }
         }
