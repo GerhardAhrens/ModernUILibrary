@@ -6,7 +6,7 @@
     using System.Windows.Controls;
     using System.Windows.Data;
 
-    using ModernUILibrary.ModernUIBase;
+    using ModernIU.Base;
 
     [TemplatePart(Name = "PART_MonthView", Type = typeof(Grid))]
     [TemplatePart(Name = "PART_YearView", Type = typeof(Grid))]

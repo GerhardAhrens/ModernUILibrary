@@ -7,8 +7,6 @@
 
     using ModernUIDemo.Windows;
 
-    using ModernUILibrary.ModernUIBase;
-
     /// <summary>
     /// Interaktionslogik für WindowControlsUC.xaml
     /// </summary>

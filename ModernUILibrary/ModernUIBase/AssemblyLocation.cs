@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernIU.Controls
+namespace ModernIU.Base
 {
     using System;
 

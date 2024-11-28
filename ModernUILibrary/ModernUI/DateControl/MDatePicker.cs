@@ -8,8 +8,6 @@
 
     using ModernIU.Base;
 
-    using ModernUILibrary.ModernUIBase;
-
     public class MDatePicker : Control
     {
         #region Popup

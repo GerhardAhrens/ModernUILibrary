@@ -24,7 +24,15 @@
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+
+            <ModernUI:FlatButton
+                x:Name="BtnPasswordgenerator"
+                Height="40"
+                Click="BtnPasswordgenerator_Click"
+                Content="Passwordgenerator" />
+
+        </StackPanel>
 
     </Grid>
 </UserControl>

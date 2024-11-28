@@ -1,4 +1,4 @@
-﻿namespace ModernUILibrary.ModernUIBase
+﻿namespace ModernIU.Base
 {
     using System;
     using System.Collections.Generic;

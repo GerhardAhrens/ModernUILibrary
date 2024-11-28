@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls.Primitives;
-
-namespace ModernIU.Base
+﻿namespace ModernIU.Base
 {
+    using System.Windows;
+    using System.Windows.Controls.Primitives;
+
     public class CircleBase : RangeBase
     {
         public static readonly DependencyProperty StartAngleProperty;

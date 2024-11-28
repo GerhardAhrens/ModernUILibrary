@@ -16,7 +16,7 @@
 // </Website>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.ModernUIBase
+namespace ModernIU.Base
 {
     using System.Collections.Generic;
     using System.Globalization;

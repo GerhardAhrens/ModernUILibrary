@@ -7,6 +7,11 @@
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
+    using System.Windows.Input;
+
+    using ModernIU.Base;
+
+    using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
     /// <summary>
     /// Interaktionslogik für PasswordGeneratorView.xaml
@@ -14,6 +19,11 @@
     [SupportedOSPlatform("windows")]
     public partial class PasswordGeneratorView : Window, INotifyPropertyChanged
     {
+        public ICommand PasswordGeneratorCommand => new UIButtonCommand(this.GeneratePasswordHandler);
+        public ICommand UsedFolderCommand => new UIButtonCommand(p => this.OnUsedFolderHandle(p));
+        public ICommand CancelButtonCommand => new UIButtonCommand(p => this.OnCancelButtonClick());
+        public ICommand OkButtonCommand => new UIButtonCommand(p => this.OnOKButtonClick(), p2 => this.CheckButtonStatus());
+
         private Dictionary<int, string> letterTypSource = null;
         private int letterTypSelected = 0;
         private int passwordLength = 0;
@@ -30,13 +40,6 @@
             this.InitializeComponent();
             WeakEventManager<Window, CancelEventArgs>.AddHandler(this, "Closing", this.OnClosing);
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-
-            /*
-            this.CmdAgg.AddOrSetCommand("PasswordGeneratorCommand", p1 => this.GeneratePasswordHandler(), p2 => true);
-            this.CmdAgg.AddOrSetCommand("UsedFolderCommand", p1 => this.OnUsedFolderHandle(p1), p2 => true);
-            this.CmdAgg.AddOrSetCommand("CancelButtonCommand", p1 => this.OnCancelButtonClick(), p2 => true);
-            this.CmdAgg.AddOrSetCommand("OkButtonCommand", p1 => this.OnOKButtonClick(), p2 => this.CheckButtonStatus());
-            */
 
             this.DataContext = this;
         }
@@ -182,7 +185,7 @@
         }
 
         [SupportedOSPlatform("windows")]
-        private void GeneratePasswordHandler()
+        private void GeneratePasswordHandler(object args)
         {
             IEnumerable<string> pwdList = null;
             using (PasswordGenerator pw = new PasswordGenerator())
@@ -203,6 +206,18 @@
         public static PasswordGeneratorResult Execute(Window owner, string headerText = null)
         {
             return ExecuteInternal(owner, headerText);
+        }
+
+        public static PasswordGeneratorResult Execute(string headerText = null)
+        {
+            Window actualWindow = Application.Current.Windows.Cast<Window>().Last(l => l.IsActive == true);
+
+            if (headerText != null)
+            {
+                headerText = "Passwortgenerator";
+            }
+
+            return ExecuteInternal(actualWindow, headerText);
         }
 
         public PasswordGeneratorResult Execute()

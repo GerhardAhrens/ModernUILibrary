@@ -5,6 +5,9 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernIU.Base;
+    using ModernIU.Controls;
+
     /// <summary>
     /// Interaktionslogik für FunctionControlsUC.xaml
     /// </summary>
@@ -39,5 +42,17 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+
+        private void BtnPasswordgenerator_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordGeneratorResult result = PasswordGeneratorView.Execute();
+            if (result != null && result.Error == null)
+            {
+                if (result.Cancelled == false)
+                {
+                    MMessageBox.Show($"Gewähltes Passwort: {result.Result}", EnumPromptType.Info);
+                }
+            }
+        }
     }
 }

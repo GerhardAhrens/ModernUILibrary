@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.ModernUIBase
+namespace ModernIU.Base
 {
     using System.Windows;
     using System.Windows.Input;
