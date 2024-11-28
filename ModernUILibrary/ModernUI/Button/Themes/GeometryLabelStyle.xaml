@@ -53,4 +53,61 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type MUI:GeometryButton}">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:GeometryButton}">
+                    <Border
+                        Background="{TemplateBinding Property=Background}"
+                        BorderBrush="{TemplateBinding Property=BorderBrush}"
+                        BorderThickness="{TemplateBinding Property=BorderThickness}">
+                        <Viewbox Stretch="Uniform">
+                            <StackPanel
+                                Height="{TemplateBinding Property=Height}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{TemplateBinding Property=Background}"
+                                Orientation="{TemplateBinding Property=Orientation}">
+
+                                <Viewbox
+                                    Margin="2,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Stretch="Uniform"
+                                    Visibility="{TemplateBinding Property=IconVisibility}">
+
+                                    <Path
+                                        Data="{TemplateBinding Property=PathData}"
+                                        Fill="{TemplateBinding Property=Foreground}"
+                                        Stretch="Uniform" />
+                                </Viewbox>
+
+                                <ContentControl
+                                    Margin="2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Content="{TemplateBinding Property=Text}"
+                                    Visibility="{TemplateBinding Property=TextVisibility}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
