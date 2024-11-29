@@ -20,6 +20,7 @@
         public CarouselControlsUC()
         {
             this.InitializeComponent();
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
 
             this.CarouseASource = new ObservableCollection<string>();
             for (int i = 0; i < 10; i++)
@@ -29,21 +30,18 @@
 
             this.CarouseBSource = new ObservableCollection<CarouselModel>();
             string[] resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            for (int i = 1; i <= 5; i++)
-            {
-                if (resourceName[i].ToLower().EndsWith("png") == true)
-                {
-                    var picture = XAMLResourceManager.GetResourceContent<ImageSource>(resourceName[i]);
 
-                    this.CarouseBSource.Add(new CarouselModel()
-                    {
-                        Title = i.ToString(),
-                        ImageUrl = picture
-                    });
-                }
+            foreach (string file in resourceName.Where(f => f.ToLower().EndsWith("png") == true))
+            {
+                var picture = XAMLResourceManager.GetResourceContent<ImageSource>(file);
+
+                this.CarouseBSource.Add(new CarouselModel()
+                {
+                    Title = file,
+                    ImageUrl = picture
+                });
             }
 
-            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             this.DataContext = this;
         }
 

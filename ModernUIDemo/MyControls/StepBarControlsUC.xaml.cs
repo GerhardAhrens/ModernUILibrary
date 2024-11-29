@@ -27,8 +27,6 @@
 
         }
 
-        private int _Step;
-
         public int Step
         {
             get
