@@ -117,6 +117,23 @@
                     Type="info" />
             </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Meldungs Dialoge für Login" />
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxL1"
+                    Width="auto"
+                    Height="30"
+                    Margin="5,5"
+                    Padding="5"
+                    Content="Login Dialog"
+                    CornerRadius="2"
+                    Type="info" />
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>

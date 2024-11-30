@@ -61,7 +61,7 @@
                 <TextBlock
                     Margin="10,10,0,0"
                     FontSize="14"
-                    Text="Geben Sie einen Text ein" />
+                    Text="Geben Sie eine Decimal Zahl ein" />
 
                 <TextBox
                     x:Name="TxtInput"

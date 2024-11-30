@@ -16,6 +16,7 @@
 namespace ModernUIDemo
 {
     using System;
+    using System.Net.Http;
     using System.Text;
 
     using ModernIU.Controls;
@@ -145,13 +146,13 @@ namespace ModernUIDemo
 
             StringBuilder htmlContent = new StringBuilder();
             htmlContent.Append("<html><body scroll=\"no\">");
-            htmlContent.Append("Das ist eine Message mit einem Timer");
+            htmlContent.Append($"Das ist eine Message mit einem Timer. Die Meldung schliesst sich in {countDown} Sek. autoamtsich. ");
             htmlContent.Append("</body></html>");
 
             (string InfoText, string CustomText, double FontSize) msgText = ("Hinweis", htmlContent.ToString(), 18);
             Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
 
-            @this.ShowDialog<MessageTimerOk>(5,msgText, (result, tag) =>
+            @this.ShowDialog<MessageTimerOk>(countDown, msgText, (result, tag) =>
             {
                 resultDialog = result;
                 if (tag != null)
@@ -161,6 +162,23 @@ namespace ModernUIDemo
             });
 
             return resultTag.Item1;
+        }
+
+        public static Tuple<NotificationBoxButton, string, string> LoginDialog(this INotificationService @this)
+        {
+            bool? resultDialog = null;
+            (string InfoText, string CustomText,double FontSize) msgText = ("Benutzer und Passwort eingeben",string.Empty , 18);
+            Tuple<NotificationBoxButton, string,string> resultTag = new Tuple<NotificationBoxButton, string, string>(NotificationBoxButton.None, null,null);
+            @this.ShowDialog<LoginView>(msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton, string,string>)tag;
+                }
+            });
+
+            return resultTag;
         }
     }
 }
