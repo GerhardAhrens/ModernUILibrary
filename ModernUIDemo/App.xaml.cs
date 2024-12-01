@@ -1,12 +1,7 @@
 ﻿namespace ModernUIDemo
 {
-    using System.Collections;
-    using System.Configuration;
-    using System.Data;
     using System.Globalization;
-    using System.IO;
     using System.Windows;
-    using System.Windows.Automation;
     using System.Windows.Markup;
 
     /// <summary>
@@ -19,6 +14,11 @@
         public App()
         {
             InitializeCultures();
+
+            /*
+            var aa = new CipherService().Encrypt("Gerhard", "2024202420242024");
+            var bb = new CipherService().Decrypt(aa,"2024202420242024");
+            */
         }
 
         public static string DatePattern { get; private set; }
