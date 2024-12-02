@@ -25,6 +25,7 @@
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxD2, "Click", this.ONotifiactionBoxD2Click);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxT1, "Click", this.ONotifiactionBoxT1Click);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnNotificationBoxL1, "Click", this.ONotifiactionBoxL1Click);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnApplicationAbout, "Click", this.ONotifiactionBoxABClick);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -37,6 +38,7 @@
             NotificationService.RegisterDialog<InputIntegerYesNo>();
             NotificationService.RegisterDialog<MessageTimerOk>();
             NotificationService.RegisterDialog<LoginView>();
+            NotificationService.RegisterDialog<ApplicationAbout>();
         }
 
         private void ONotifiactionBoxAClick(object sender, RoutedEventArgs e)
@@ -110,6 +112,16 @@
         {
             Tuple<NotificationBoxButton, string,string> result = this._notificationService.LoginDialog();
             if (result.Item1 == NotificationBoxButton.Yes)
+            {
+                MessageBox.Show($"Ausgewählt: {result}", "Notification Service");
+            }
+        }
+
+        private void ONotifiactionBoxABClick(object sender, RoutedEventArgs e)
+        {
+            NotificationBoxButton result = this._notificationService.ApplicationAbout();
+
+            if (result == NotificationBoxButton.Ok)
             {
                 MessageBox.Show($"Ausgewählt: {result}", "Notification Service");
             }

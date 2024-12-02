@@ -180,5 +180,24 @@ namespace ModernUIDemo
 
             return resultTag;
         }
+
+        public static NotificationBoxButton ApplicationAbout(this INotificationService @this)
+        {
+            bool? resultDialog = null;
+
+            (string InfoText, string CustomText, double FontSize) msgText = ("ApplicationAbout", string.Empty,0);
+            Tuple<NotificationBoxButton, object> resultTag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.None, null);
+
+            @this.ShowDialog<ApplicationAbout>(msgText, (result, tag) =>
+            {
+                resultDialog = result;
+                if (tag != null)
+                {
+                    resultTag = (Tuple<NotificationBoxButton, object>)tag;
+                }
+            });
+
+            return resultTag.Item1;
+        }
     }
 }

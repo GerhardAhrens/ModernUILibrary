@@ -121,7 +121,8 @@
                     CornerRadius="2"
                     Type="info" />
             </StackPanel>
-        </StackPanel>
 
+
+        </StackPanel>
     </Grid>
 </UserControl>
