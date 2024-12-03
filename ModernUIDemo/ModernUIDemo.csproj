@@ -63,6 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Core\AssemblyMetaInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\DropDownButtonControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

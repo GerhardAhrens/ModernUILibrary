@@ -1,8 +1,11 @@
 ﻿namespace ModernUIDemo
 {
     using System.Globalization;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Markup;
+
+    using ModernUILibrary.Core;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -18,6 +21,24 @@
             /*
             var aa = new CipherService().Encrypt("Gerhard", "2024202420242024");
             var bb = new CipherService().Decrypt(aa,"2024202420242024");
+            */
+
+            /*
+            Type ti = typeof(IAssemblyInfo);
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in asm.GetTypes())
+                {
+                    if (ti.IsAssignableFrom(type))
+                    {
+                        if (type != null)
+                        {
+                            var name = type.FullName;
+                            IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
+                        }
+                    }
+                }
+            }
             */
         }
 
@@ -54,6 +75,5 @@
             FrameworkPropertyMetadata frameworkMetadata = new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(new CultureInfo(language).IetfLanguageTag));
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), frameworkMetadata);
         }
-
     }
 }
