@@ -22,6 +22,7 @@
     <None Remove="Images\img3.png" />
     <None Remove="Images\img4.png" />
     <None Remove="Images\img5.png" />
+    <None Remove="Resources\BuildDate.txt" />
     <None Remove="Resources\Picture\app.ico" />
   </ItemGroup>
 
@@ -60,10 +61,11 @@
     <EmbeddedResource Include="Images\img3.png" />
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
+    <EmbeddedResource Include="Resources\BuildDate.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Core\AssemblyMetaInfo.cs">
+    <Compile Update="Core\AssemblyInfo\AssemblyMetaInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\DropDownButtonControlsUC.xaml.cs">
@@ -240,6 +242,18 @@
     <Compile Update="MyControls\TextBoxStringControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -272,4 +286,7 @@
     </Page>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="echo %25date%25 %25time%25 &gt; &quot;$(ProjectDir)\Resources\BuildDate.txt&quot;" />
+  </Target>
 </Project>

@@ -17,7 +17,8 @@ namespace ModernUILibrary.Core
 {
     public interface IAssemblyInfo
     {
-        string PacketVersion { get; }    
+        string PacketName { get; }
+        Version PacketVersion { get; }
         string AssemblyName { get; }
         Version AssemblyVersion { get; }
     }

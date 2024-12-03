@@ -26,11 +26,11 @@ namespace ModernUILibrary.Core
         {
         }
 
+        public string PacketName => "ModernUI";
+        public Version PacketVersion => new Version(1, 0, 2024, 0);
+
         public string AssemblyName => "ModernUILibrary";
 
         public Version AssemblyVersion => new Version(1, 0, 2024, 10);
-
-        public string PacketVersion => "BlaBla 1.0";
-
     }
 }
