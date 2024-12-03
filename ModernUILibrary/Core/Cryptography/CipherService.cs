@@ -11,7 +11,7 @@
 // <date>01.12.2024 18:42:02</date>
 //
 // <summary>
-// Klasse für 
+// Klasse für ver- und entschlüsselung von Strings
 // </summary>
 //-----------------------------------------------------------------------
 
