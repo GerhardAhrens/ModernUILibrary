@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ModernUILibrary/Resources/BuildDate.txt
+/ModernUIDemo/Resources/BuildDate.txt
