@@ -27,6 +27,13 @@ namespace ModernUILibrary.Core
         string Encrypt(string text, string key);
     }
 
+    /// <summary>
+    /// Serviceklasse zum Verschlüsseln, Entschlüsseln
+    /// </summary>
+    /// <remarks>
+    /// https://www.siakabaro.com/how-to-create-aes-encryption-256-bit-key-in-c/
+    /// https://propertyguru.tech/doing-aes-encryption-correct-in-your-net-application-5d66168b5b44
+    /// </remarks>
     public class CipherService : ICipherService
     {
         public string Decrypt(string text, string cryptKey)
