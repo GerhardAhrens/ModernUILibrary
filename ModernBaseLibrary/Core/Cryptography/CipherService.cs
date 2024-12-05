@@ -15,7 +15,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.Core
+namespace ModernBaseLibrary.Core
 {
     using System.IO;
     using System.Security.Cryptography;

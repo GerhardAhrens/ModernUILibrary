@@ -1,12 +1,10 @@
 ﻿namespace ModernUIDemo
 {
     using System.Globalization;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Markup;
 
-    using ModernUILibrary.AssemblyMeta;
-    using ModernUILibrary.Core;
+    using ModernBaseLibrary.Core;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -24,13 +22,11 @@
             var bb = new CipherService().Decrypt(aa,"2024202420242024");
             */
 
-            /*
             IEnumerable<IAssemblyInfo> metaInfo = null;
             using (AssemblyMetaService ams = new AssemblyMetaService())
             {
                 metaInfo = ams.GetMetaInfo();
             }
-            */
         }
 
         public static string DatePattern { get; private set; }

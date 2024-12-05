@@ -17,9 +17,11 @@ namespace ModernUIDemo.Core
 {
     using System;
     using System.Globalization;
+    using System.Runtime.Versioning;
 
-    using ModernUILibrary.Core;
+    using ModernBaseLibrary.Core;
 
+    [SupportedOSPlatform("windows")]
     public class AssemblyMetaInfo : IAssemblyInfo
     {
         /// <summary>
@@ -27,7 +29,6 @@ namespace ModernUIDemo.Core
         /// </summary>
         public AssemblyMetaInfo()
         {
-            var aa = BuildDateTime();
         }
 
         public string PacketName => "ModernUI";

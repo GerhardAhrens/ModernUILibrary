@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.AssemblyMeta
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Collections;
@@ -22,9 +22,6 @@ namespace ModernUILibrary.AssemblyMeta
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
-    using ModernIU.Base;
-
-    using ModernUILibrary.Core;
 
     public class AssemblyMetaService : DisposableCoreBase
     {
@@ -49,6 +46,22 @@ namespace ModernUILibrary.AssemblyMeta
                         {
                             IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
                             assemblyInfos.Add(assemblyInfoObject);
+                        }
+                    }
+                }
+
+                Assembly asmLUILib = AppDomain.CurrentDomain.Load("ModernUILibrary");
+                foreach (Type type in asmLUILib.GetTypes())
+                {
+                    if (ti.IsAssignableFrom(type))
+                    {
+                        if (type != null && type.IsInterface == false)
+                        {
+                            IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
+                            if (assemblyInfos.Any(f => f.AssemblyName == assemblyInfoObject.AssemblyName) == false)
+                            {
+                                assemblyInfos.Add(assemblyInfoObject);
+                            }
                         }
                     }
                 }

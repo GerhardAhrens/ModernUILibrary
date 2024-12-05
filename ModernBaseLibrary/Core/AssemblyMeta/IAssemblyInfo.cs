@@ -13,10 +13,8 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.Core
+namespace ModernBaseLibrary.Core
 {
-    using System.Diagnostics;
-
     public interface IAssemblyInfo
     {
         string PacketName { get; }

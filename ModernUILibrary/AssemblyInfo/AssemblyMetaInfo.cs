@@ -13,10 +13,11 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.Core
+namespace ModernUILibrary.AssemblyInfo
 {
     using System;
-    using System.Globalization;
+
+    using ModernBaseLibrary.Core;
 
     public class AssemblyMetaInfo : IAssemblyInfo
     {

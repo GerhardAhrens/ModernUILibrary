@@ -16,17 +16,15 @@
 namespace ModernIU.Controls
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
     using System.Runtime.Versioning;
     using System.Security.Cryptography;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using ModernIU.Base;
+
+    using ModernBaseLibrary.Core;
 
     [SupportedOSPlatform("windows")]
     public class PasswordGenerator : DisposableCoreBase

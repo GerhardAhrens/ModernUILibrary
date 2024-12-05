@@ -5,16 +5,18 @@
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
-    using ModernUIDemo.Core;
+    using ModernBaseLibrary.Core;
 
     /// <summary>
     /// Interaktionslogik für CarouselControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class CarouselControlsUC : UserControl, INotifyPropertyChanged
     {
         public CarouselControlsUC()
@@ -33,7 +35,7 @@
 
             foreach (string file in resourceName.Where(f => f.ToLower().EndsWith("png") == true))
             {
-                var picture = XAMLResourceManager.GetResourceContent<ImageSource>(file);
+                var picture = XAMLResourceManager.GetResourceContent<ImageSource>(file, AssemblyLocation.EntryAssembly);
 
                 this.CarouseBSource.Add(new CarouselModel()
                 {

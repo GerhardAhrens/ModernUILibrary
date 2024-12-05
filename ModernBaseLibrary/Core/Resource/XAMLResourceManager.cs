@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Collections.Generic;
@@ -77,6 +77,11 @@ namespace ModernUIDemo.Core
                 SetAssembly(assemblyResourceLocation);
                 string[] names = assembly.GetManifestResourceNames();
                 string resFullName = names.SingleOrDefault(p => p.Contains(resourceName, StringComparison.InvariantCultureIgnoreCase) == true);
+                if (string.IsNullOrEmpty (resFullName) == true)
+                {
+                    return default(TResult);
+                }
+
                 Stream resourceStream = assembly.GetManifestResourceStream(resFullName);
                 if (resourceStream != null)
                 {

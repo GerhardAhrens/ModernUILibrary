@@ -22,7 +22,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernIU.Base
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Diagnostics;
