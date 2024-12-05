@@ -15,6 +15,8 @@
 
 namespace ModernUILibrary.Core
 {
+    using System.Diagnostics;
+
     public interface IAssemblyInfo
     {
         string PacketName { get; }

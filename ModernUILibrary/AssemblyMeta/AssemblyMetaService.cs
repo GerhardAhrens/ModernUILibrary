@@ -19,9 +19,12 @@ namespace ModernUILibrary.AssemblyMeta
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
     using ModernIU.Base;
+
+    using ModernUILibrary.Core;
 
     public class AssemblyMetaService : DisposableCoreBase
     {
@@ -30,6 +33,28 @@ namespace ModernUILibrary.AssemblyMeta
         /// </summary>
         public AssemblyMetaService()
         {
+        }
+
+        public IEnumerable<IAssemblyInfo> GetMetaInfo()
+        {
+            List<IAssemblyInfo> assemblyInfos = new List<IAssemblyInfo>();
+            Type ti = typeof(IAssemblyInfo);
+            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type type in asm.GetTypes())
+                {
+                    if (ti.IsAssignableFrom(type))
+                    {
+                        if (type != null && type.IsInterface == false)
+                        {
+                            IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
+                            assemblyInfos.Add(assemblyInfoObject);
+                        }
+                    }
+                }
+            }
+
+            return assemblyInfos;
         }
 
         protected override void DisposeManagedResources()

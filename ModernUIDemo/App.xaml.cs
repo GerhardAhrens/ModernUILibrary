@@ -5,6 +5,7 @@
     using System.Windows;
     using System.Windows.Markup;
 
+    using ModernUILibrary.AssemblyMeta;
     using ModernUILibrary.Core;
 
     /// <summary>
@@ -24,20 +25,10 @@
             */
 
             /*
-            Type ti = typeof(IAssemblyInfo);
-            foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies())
+            IEnumerable<IAssemblyInfo> metaInfo = null;
+            using (AssemblyMetaService ams = new AssemblyMetaService())
             {
-                foreach (Type type in asm.GetTypes())
-                {
-                    if (ti.IsAssignableFrom(type))
-                    {
-                        if (type != null)
-                        {
-                            var name = type.FullName;
-                            IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
-                        }
-                    }
-                }
+                metaInfo = ams.GetMetaInfo();
             }
             */
         }

@@ -9,13 +9,14 @@
 // <date>03.12.2024 07:49:42</date>
 //
 // <summary>
-// Klasse für 
+// Klasse zur Darstellung von Assembly Meta Informationen
 // </summary>
 //-----------------------------------------------------------------------
 
 namespace ModernUILibrary.Core
 {
     using System;
+    using System.Globalization;
 
     public class AssemblyMetaInfo : IAssemblyInfo
     {
@@ -32,5 +33,10 @@ namespace ModernUILibrary.Core
         public string AssemblyName => "ModernUILibrary";
 
         public Version AssemblyVersion => new Version(1, 0, 2024, 10);
+
+        public override string ToString()
+        {
+            return $"{this.AssemblyName}, {this.AssemblyVersion}";
+        }
     }
 }
