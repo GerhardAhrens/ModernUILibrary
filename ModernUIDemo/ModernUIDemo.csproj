@@ -22,8 +22,8 @@
     <None Remove="Images\img3.png" />
     <None Remove="Images\img4.png" />
     <None Remove="Images\img5.png" />
-    <None Remove="Resources\BuildDate.txt" />
     <None Remove="Resources\Picture\app.ico" />
+    <None Remove="Resources\Source\Demo_A.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,7 +62,7 @@
     <EmbeddedResource Include="Images\img3.png" />
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
-    <EmbeddedResource Include="Resources\BuildDate.txt" />
+    <EmbeddedResource Include="Resources\Source\Demo_A.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -213,6 +213,9 @@
     <Compile Update="MyControls\FunctionControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\SyntaxBoxControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WaterfallPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -283,6 +286,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\ExpanderControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\SyntaxBoxControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

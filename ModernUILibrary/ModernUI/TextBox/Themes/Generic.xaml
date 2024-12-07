@@ -9,6 +9,7 @@
         <ResourceDictionary Source="IpTextBox.xaml" />
         <ResourceDictionary Source="MPasswordBox.xaml" />
         <ResourceDictionary Source="TextBoxCurrency.xaml" />
+        <ResourceDictionary Source="SyntaxBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
