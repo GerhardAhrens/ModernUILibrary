@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Doc", "_Doc", "{24D6D8AD-B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernBaseLibrary", "ModernBaseLibrary\ModernBaseLibrary.csproj", "{A75F19D2-5673-44F9-B5B5-5648B7C4B8F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernTest", "ModernTest\ModernTest.csproj", "{1724881B-EB99-4A4C-B245-96FF8ED9E543}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{A75F19D2-5673-44F9-B5B5-5648B7C4B8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A75F19D2-5673-44F9-B5B5-5648B7C4B8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A75F19D2-5673-44F9-B5B5-5648B7C4B8F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1724881B-EB99-4A4C-B245-96FF8ED9E543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1724881B-EB99-4A4C-B245-96FF8ED9E543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1724881B-EB99-4A4C-B245-96FF8ED9E543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1724881B-EB99-4A4C-B245-96FF8ED9E543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

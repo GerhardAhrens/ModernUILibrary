@@ -53,7 +53,11 @@
                                 Foreground="Purple"
                                 Keywords="!,+,-,/,*,%,=,&amp;,^,|,&lt;,&gt;"
                                 WholeWordsOnly="False" />
-                            <!--<syntax:RegexRule Op="Line" Foreground="Purple" Pattern="[\!+-\/\*%=&amp;\^|\?&lt;&gt;]" />-->
+
+                            <ModernUI:RegexRule
+                                Foreground="Purple"
+                                Op="Line"
+                                Pattern="[\!+-\/\*%=&amp;\^|\?&lt;&gt;]" />
 
                             <!--  Preproc directives  -->
                             <ModernUI:RegexRule
@@ -75,15 +79,15 @@
 
                             <!--  Comment  -->
                             <ModernUI:RegexRule
-                            Foreground="Green"
-                            Op="Line"
-                            Pattern="//.*" />
+                                Foreground="Green"
+                                Op="Line"
+                                Pattern="//.*" />
 
                             <!--  Multiline comment  -->
                             <ModernUI:RegexRule
-                            Foreground="Green"
-                            Op="Block"
-                            Pattern="(?m)/\*[^*]*\*+(?:[^\/*][^*]*\*+)*/" />
+                                Foreground="Green"
+                                Op="Block"
+                                Pattern="(?m)/\*[^*]*\*+(?:[^\/*][^*]*\*+)*/" />
 
 
                         </ModernUI:SyntaxConfig>

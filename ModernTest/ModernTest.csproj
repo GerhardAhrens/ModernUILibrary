@@ -1,0 +1,19 @@
+<Project Sdk="MSTest.Sdk/3.6.1">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <UseVSTest>true</UseVSTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="SyntaxBox_Test\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
+</Project>
