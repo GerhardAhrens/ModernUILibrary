@@ -8,16 +8,14 @@
     /// Aggregates a driver collection to be used using the singular ISyntaxDriver
     /// interface.
     /// </summary>
-    class AggregateSyntaxDriver : ISyntaxDriver
+    internal class AggregateSyntaxDriver : ISyntaxDriver
     {
         SyntaxDriverCollection _drivers;
 
-        // ...................................................................
         internal AggregateSyntaxDriver(SyntaxDriverCollection Drivers)
         {
             this._drivers = Drivers ?? throw new ArgumentNullException(nameof(Drivers));
         }
-        // ...................................................................
 
         #region ISyntaxDriver members
         // ...................................................................

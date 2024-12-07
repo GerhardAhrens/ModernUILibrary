@@ -9,14 +9,12 @@
         private Regex _regex = null;
 
         #region ISyntaxRule members
-        // ...................................................................
         public int RuleId { get; set; }
-        // ...................................................................
         /// <summary>
         /// The driver operation to apply (Line | Block | FullText).
         /// </summary>
         public DriverOperation Op { get; set; } = DriverOperation.None;
-        // ...................................................................
+
         /// <summary>
         /// Matches the rule against the provided text.
         /// Used internally, shouldn't be called by user code.
@@ -41,35 +39,34 @@
                 });
             }
         }
-        // ...................................................................
+
         #endregion
 
         #region Public members
-        // ...................................................................
         /// <summary>
         /// Background brush
         /// </summary>
         public Brush Background { get; set; }
-        // ...................................................................
+
         /// <summary>
         /// Foreground brush.
         /// </summary>
         public Brush Foreground { get; set; }
-        // ...................................................................
+
         /// <summary>
         /// Outline pen
         /// </summary>
         public Pen Outline { get; set; }
-        // ...................................................................
+
         /// <summary>
         /// The regex pattern to match.
         /// </summary>
         public string Pattern { get; set; }
-        // ...................................................................
+
         #endregion
 
         #region Private members
-        // ...................................................................
+
         private Regex GetRegex()
         {
             if (this._regex == null)
@@ -77,7 +74,6 @@
 
             return (this._regex);
         }
-        // ...................................................................
         #endregion
     }
 }

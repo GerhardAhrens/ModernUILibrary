@@ -1,12 +1,5 @@
 ﻿namespace ModernIU.Controls
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// Canonical algorithm for quickly finding all occurances of muiltiple 
     /// keywords in a longer text.
@@ -30,7 +23,6 @@
         private bool _overlappingMatches = false;
 
         #region Constructors
-        // ...................................................................
         /// <summary>
         /// Creates an Aho-Corasick keyword search automation.
         /// </summary>
@@ -62,11 +54,9 @@
             this.InitiateTables();
             this.InitiateAutomation();
         }
-        // ...................................................................
+
         #endregion
 
-        #region Private members
-        // ...................................................................
         /// <summary>
         /// Creates and initiates all automation tables
         /// </summary>
@@ -92,7 +82,7 @@
             for (int i = 1; i < _maxStates; i++)
                 this._goto.Add((int[])template.Clone());
         }
-        // ...................................................................
+
         /// <summary>
         /// Initiates the automation, loading it into the created tables.
         /// </summary>
@@ -215,7 +205,7 @@
                 }
             }
         }
-        // ...................................................................
+
         /// <summary>
         /// Finds the next state based on the current state and the next input 
         /// character.
@@ -233,8 +223,6 @@
 
             return (this._goto[current][InputChar]);
         }
-        // ...................................................................
-        #endregion
 
         #region Public members
         // ...................................................................
@@ -311,7 +299,6 @@
                 prevMatch = null;
             }
         }
-        // ...................................................................
         #endregion
     }
 }

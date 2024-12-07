@@ -16,11 +16,11 @@ namespace ModernIU.Controls
         private AhoCorasickSearch _engine = null;
 
         #region ISyntaxRule members
-        // ...................................................................
+
         public int RuleId { get; set; }
-        // ...................................................................
+
         public DriverOperation Op { get; set; } = DriverOperation.Line;
-        // ...................................................................
+
         /// <summary>
         /// Matches the rule against the provided text.
         /// Used internally, shouldn't be called by user code.
@@ -45,34 +45,34 @@ namespace ModernIU.Controls
             return (instructions);
                 
         }
-        // ...................................................................
+
         #endregion
 
         #region Public members
-        // ...................................................................
+
         /// <summary>
         /// Background brush
         /// </summary>
         public Brush Background { get; set; }
-        // ...................................................................
+
         /// <summary>
         /// Foreground brush.
         /// </summary>
         public Brush Foreground { get; set; }
-        // ...................................................................
+
         /// <summary>
         /// Outline pen
         /// </summary>
         public Pen Outline { get; set; }
-        // ...................................................................
+
         public string Keywords { get; set; }
-        // ...................................................................
+
         public bool WholeWordsOnly { get; set; } = true;
-        // ...................................................................
+
         #endregion
 
         #region Private members
-        // ...................................................................
+
         private AhoCorasickSearch GetEngine()
         {
             if (this._engine == null)
@@ -87,7 +87,7 @@ namespace ModernIU.Controls
             }
             return (this._engine);
         }
-        // ...................................................................
+
         #endregion
     }
 }

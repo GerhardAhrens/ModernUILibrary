@@ -398,6 +398,7 @@
             double left = 0d, width = 0d;
             if (From > 0)
             {
+#pragma warning disable
                 FormattedText prefix = new FormattedText(
                     Line.Substring(0, From),
                     System.Globalization.CultureInfo.CurrentCulture,
@@ -405,8 +406,12 @@
                     Typeface,
                     FontSize,
                     Brushes.Black);
+#pragma warning restore
+
                 left = prefix.WidthIncludingTrailingWhitespace;
             }
+
+#pragma warning disable
             FormattedText highlight = new FormattedText(
                     Line.Substring(From, Count),
                     System.Globalization.CultureInfo.CurrentCulture,
@@ -415,6 +420,8 @@
                     FontSize,
                     Brushes.Black);
             width = highlight.Width;
+#pragma warning restore
+
             return (new Rect(new Point(left -1, 0d),new Size(Math.Round(width + 2), highlight.Height)));
         }
 
@@ -435,12 +442,15 @@
             {
                 this._numDigits = digits;
                 string requiredChars = String.Empty.PadLeft(digits, '0');
+#pragma warning disable
                 FormattedText requiredText = new FormattedText(requiredChars,
                     System.Globalization.CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
                     Typeface,
                     this.Target.FontSize,
                     Brushes.Black);
+#pragma warning restore
+
                 this._numWidth = requiredText.Width + LN_MARGIN * 2;
             }
             

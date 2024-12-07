@@ -1,7 +1,6 @@
 ﻿namespace ModernIU.Controls
 {
     using System.Collections.Generic;
-    using System.Windows.Media;
 
     public interface ISyntaxRule
     {

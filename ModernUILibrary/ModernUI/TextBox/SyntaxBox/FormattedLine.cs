@@ -1,9 +1,6 @@
 ﻿namespace ModernIU.Controls
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// A formatted line of text.

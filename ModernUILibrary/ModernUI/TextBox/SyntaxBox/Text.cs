@@ -11,7 +11,6 @@
     {
         static readonly AhoCorasickSearch _search = new AhoCorasickSearch(new List<string> { "\r\n", "\n" }, false);
 
-        // ...................................................................
         /// <summary>
         /// Gets a TextLine representing the line at a specific char position 
         /// in Text.
@@ -44,7 +43,6 @@
                 start = 0;
             }
 
-            // Search right
             for (int i = Position; i < Text.Length; i++)
             {
                 if (Text[i] == nl && (nlen == 1 || Text.Length > i + 1 && Text[i + 1] == nlstr[1]))
@@ -68,7 +66,6 @@
 
             return line;
         }
-        // ...................................................................
         /// <summary>
         /// Parses the text returning a chunk of lines as TextLines starting at
         /// First line and ending on Last line or at the end of the text.
@@ -122,7 +119,6 @@
 
             return lines;
         }
-        // ...................................................................
         /// <summary>
         /// Parses the text returning a chunk of lines as TextLines starting at
         /// First line and ending on Last line or at the end of the text.
@@ -178,7 +174,6 @@
 
             return lines;
         }
-        // ...................................................................
         /// <summary>
         /// Determines if the Position in Text is is on a start-of-word-boundary,
         /// i.e. that the position is at the beginning of the string or that 
@@ -195,12 +190,7 @@
                 throw new ArgumentNullException(nameof(Text));
             }
 
-            return (
-                // Beginning of input is always a word boundary.
-                Position == 0 ||
-
-                // Alphanumeric characters and underscore are word digits
-                !Char.IsLetterOrDigit(Text, Position - 1) && Text[Position - 1] != '_');
+            return (Position == 0 || !Char.IsLetterOrDigit(Text, Position - 1) && Text[Position - 1] != '_');
         }
 
         /// <summary>
@@ -219,14 +209,9 @@
                 throw new ArgumentNullException(nameof(Text));
             }
 
-            return (
-                // End of input is always a word boundary.
-                Position >= Text.Length - 1 ||
-
-                // Alphanumeric characters and underscore are word digits
-                !Char.IsLetterOrDigit(Text, Position + 1) && Text[Position + 1] != '_');
+            return (Position >= Text.Length - 1 ||!Char.IsLetterOrDigit(Text, Position + 1) && Text[Position + 1] != '_');
         }
-        // ...................................................................
+
         public static void AddRange(this HashSet<int> Target, IEnumerable<int> Items)
         {
             foreach (var item in Items)

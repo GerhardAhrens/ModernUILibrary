@@ -12,7 +12,7 @@ namespace ModernIU.Controls
     using System.Linq;
     using System.Windows.Input;
 
-    // ###################################################################
+
     /// <summary>
     /// Entry point to create a multi-key binding sequence. Simply 
     /// introduces a new type converter for the Gesture property, to  parse
@@ -34,7 +34,7 @@ namespace ModernIU.Controls
             set => base.Gesture = value;
         }
     }
-    // ###################################################################
+
     /// <summary>
     /// Gesture implementation. Keeps a sequence of keys and advances the 
     /// pointer in the sequence if a keystroke matches.
@@ -120,7 +120,7 @@ namespace ModernIU.Controls
         // ...................................................................
         #endregion
     }
-    // ###################################################################
+
     /// <summary>
     /// Converts a string into either a KeyGEsture or a KeySequenceGesture 
     /// if multiple keys are specified.
@@ -187,5 +187,5 @@ namespace ModernIU.Controls
         // ...................................................................
         #endregion
     }
-    // ###################################################################
+
 }

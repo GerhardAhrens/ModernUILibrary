@@ -14,7 +14,7 @@
     public class LineBuffer : List<FormattedLine>
     {
         #region Constructors
-        // ...................................................................
+
         /// <summary>
         /// Constructor defaulting initial capacity to 1024 lines.
         /// </summary>
@@ -23,7 +23,7 @@
         {
             this.AddText(InitialText, 0, 0);
         }
-        // ...................................................................
+
         /// <summary>
         /// Constructor defaulting initial capacity to 1024 lines.
         /// </summary>
@@ -32,11 +32,11 @@
         {
             this.Add(new FormattedLine { Text = String.Empty });
         }
-        // ...................................................................
+
         #endregion
 
         #region Public members
-        // ...................................................................
+
         /// <summary>
         /// Apples a TextChange as provided by TextChanged event from TextBox.
         /// </summary>
@@ -58,7 +58,7 @@
                 this.AddText(AddedText, startLine, startLineOffset);
             }
         }
-        // ...................................................................
+
         public List<FormattedLine> GetLines(int FirstLine, int LastLine)
         {
             var lines = this
@@ -68,11 +68,11 @@
             
             return (lines);
         }
-        // ...................................................................
+
         #endregion
 
         #region Private members
-        // ...................................................................
+
         private void IdentifyChangeStart(TextChange Change, out int StartLine, out int StartLineOffset)
         {
             int lineStart = 0, charCount = 0;
@@ -85,7 +85,7 @@
             }
             StartLineOffset = Change.Offset - lineStart;
         }
-        // ...................................................................
+
         private void RemoveText(TextChange Change, int StartLine, int StartLineOffset)
         {
             // Delete old lines
@@ -94,7 +94,7 @@
             while (removedChars < Change.RemovedLength)
             {
                 int toRemove;
-                if (removedChars == 0) //currentLine == startLine) // FirstLine
+                if (removedChars == 0)
                 {
                     toRemove = Math.Min(Change.RemovedLength - removedChars, this[currentLine].Text.Length - StartLineOffset);
                     string prefix = this[currentLine].Text.Substring(0, StartLineOffset);
@@ -136,7 +136,7 @@
                 }
             }
         }
-        // ...................................................................
+
         private void AddText(string AddedText, int StartLine, int StartLineOffset)
         {
             // Identify new lines
@@ -154,11 +154,11 @@
             this.RemoveAt(StartLine);
             this.InsertRange(StartLine, addedLines);
         }
-        // ...................................................................
+
         #endregion
 
         #region Overrides
-        // ...................................................................
+
         /// <summary>
         /// Overrides ToString returning the all lines as a joined text.
         /// </summary>
@@ -167,7 +167,7 @@
         {
             return String.Join("", this.Select((x) => x.Text).ToArray());
         }
-        // ...................................................................
+
         #endregion
     }
 }

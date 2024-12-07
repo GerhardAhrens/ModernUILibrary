@@ -27,6 +27,7 @@
 
                         return this.GroupBy((rule) => rule.Op).ToDictionary((group) => group.Key, (group) => group.ToList());
                     },
+
                 System.Threading.LazyThreadSafetyMode.PublicationOnly);
         }
         #endregion
