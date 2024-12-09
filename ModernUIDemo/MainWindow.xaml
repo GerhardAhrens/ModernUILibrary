@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
@@ -31,13 +31,31 @@
             Background="LightGray"
             Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="2"
+            Orientation="Horizontal">
+            <ModernUI:MRadionButton
+                Margin="10,0,0,0"
+                Content="UI Controls"
+                GroupName="SOURCE"
+                IsChecked="{Binding Path=SourceWPF, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ModernUI:MRadionButton
+                Margin="10,0,0,0"
+                Content="C# Source"
+                GroupName="SOURCE"
+                IsChecked="{Binding Path=SourceCS, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
         <ListBox
+            x:Name="LbSourceBox"
             Grid.Row="1"
             Grid.Column="0"
             Width="200"
-            ItemsSource="{Binding Path=ListBoxSource}"
-            Focusable="True"
             FocusManager.IsFocusScope="True"
+            Focusable="True"
+            ItemsSource="{Binding Path=ListBoxSource}"
             SelectedIndex="1"
             SelectedItem="{Binding Path=CurrentSelectedItem, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
@@ -94,7 +112,7 @@
 
         <ContentControl
             x:Name="ccContent"
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="1"
             Margin="5,0"

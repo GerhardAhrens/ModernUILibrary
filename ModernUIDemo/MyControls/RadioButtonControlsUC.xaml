@@ -39,11 +39,13 @@
                 Margin="0,5"
                 Content="Eins"
                 GroupName="A" />
+            
             <ModernUI:MRadionButton
                 x:Name="rbZwei"
                 Margin="0,5"
                 Content="Zwei"
                 GroupName="A" />
+            
             <ModernUI:MRadionButton
                 x:Name="rbDrei"
                 Margin="0,5"

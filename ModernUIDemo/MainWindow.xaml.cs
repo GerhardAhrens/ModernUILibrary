@@ -24,7 +24,151 @@
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             WeakEventManager<Window, EventArgs>.AddHandler(this, "Closed", this.OnWindowClosed);
 
+            this.DataContext = this;
+        }
 
+        private ICollectionView listBoxSource;
+
+        public ICollectionView ListBoxSource
+        {
+            get { return this.listBoxSource; }
+            set
+            {
+                this.listBoxSource = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private TabControlItem currentSelectedItem;
+
+        public TabControlItem CurrentSelectedItem
+        {
+            get { return this.currentSelectedItem; }
+            set
+            {
+                this.currentSelectedItem = value;
+                this.OnPropertyChanged();
+                if (value != null && this.sourceWPF == true)
+                {
+                    UserControl uc = value.ItemContent as UserControl;
+                    this.ContentItem = uc;
+                }
+                else
+                {
+                    if (value != null)
+                    {
+                        UserControl uc = value.ItemContent as UserControl;
+                        this.ContentItem = uc;
+                    }
+                }
+            }
+        }
+
+        private string filterText;
+
+        public string FilterText
+        {
+            get { return filterText; }
+            set
+            {
+                this.filterText = value;
+                this.OnPropertyChanged();
+                this.RefreshDefaultFilter(value);
+            }
+        }
+
+        private int countSamples;
+
+        public int CountSamples
+        {
+            get { return this.countSamples; }
+            set
+            {
+                this.countSamples = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private bool sourceWPF;
+
+        public bool SourceWPF
+        {
+            get { return this.sourceWPF; }
+            set
+            {
+                this.sourceWPF = value;
+                this.OnPropertyChanged();
+                if (value == true)
+                {
+                    this.LoadUIControl();
+                }
+            }
+        }
+
+        private bool sourceCS;
+
+        public bool SourceCS
+        {
+            get { return this.sourceCS; }
+            set
+            {
+                this.sourceCS = value;
+                this.OnPropertyChanged();
+                if (value == true)
+                {
+                    this.LoadCSSource();
+                }
+            }
+        }
+
+        private UserControl contentItem;
+
+        public UserControl ContentItem
+        {
+            get { return this.contentItem; }
+            set
+            {
+                this.contentItem = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private int maxRowCount;
+
+        public int MaxRowCount
+        {
+            get { return this.maxRowCount; }
+            set
+            {
+                this.maxRowCount = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.SourceWPF = true;
+            this.SourceCS = false;
+        }
+
+        private void OnWindowClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void RefreshDefaultFilter(string value)
+        {
+            if (this.ListBoxSource != null)
+            {
+                this.ListBoxSource.Refresh();
+                this.MaxRowCount = this.ListBoxSource.Cast<TabControlItem>().Count();
+                this.ListBoxSource.MoveCurrentToFirst();
+            }
+        }
+
+        private void LoadUIControl()
+        {
+            this.ContentItem = null;
             this.tabItemSource = new List<TabControlItem>();
             this.tabItemSource.Add(new TabControlItem("Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()) { Stichworte = "Icon;PathGeometry" });
@@ -38,7 +182,7 @@
             this.tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()) { Stichworte = "TextBox;Zahl;Numeric" });
             this.tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()) { Stichworte = "TextBox;String;Text" });
             this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()) { Stichworte = "TextBox;String;Text;rtf" });
-            this.tabItemSource.Add(new TabControlItem("CheckBox Controls", new CheckBoxUC()){ Stichworte = "CheckBox;Flat"} );
+            this.tabItemSource.Add(new TabControlItem("CheckBox Controls", new CheckBoxUC()) { Stichworte = "CheckBox;Flat" });
             this.tabItemSource.Add(new TabControlItem("DateTime Picker Controls", new DateTimeControlsUC()) { Stichworte = "DateTime;Datum;Flat;Time;Picker" });
             this.tabItemSource.Add(new TabControlItem("Syntax Box Control", new SyntaxBoxControlsUC()) { Stichworte = "TextBox;Syntax" });
 
@@ -58,7 +202,7 @@
             this.tabItemSource.Add(new TabControlItem("ComboBox Controls", new ComboBoxControlsUC()) { Stichworte = "ComboBox;Flat" });
             this.tabItemSource.Add(new TabControlItem("CascaderBox Controls", new CascaderBoxControlsUC()) { Stichworte = "ComboBox;Flat;Tree" });
             this.tabItemSource.Add(new TabControlItem("LED Controls", new LedControlsUC()) { Stichworte = "Anzeige; LED" });
-            this.tabItemSource.Add(new TabControlItem("Dashboard Controls", new DashboardControlsUC()) {Stichworte="Anzeige" });
+            this.tabItemSource.Add(new TabControlItem("Dashboard Controls", new DashboardControlsUC()) { Stichworte = "Anzeige" });
             this.tabItemSource.Add(new TabControlItem("Accordion Controls", new AccordionControlsUC()) { Stichworte = "Anzeige;Accordion" });
 
             this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
@@ -105,97 +249,12 @@
             this.tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
 
             this.tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
-            this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()) { Stichworte="TextBlock;" });
-            this.tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()) { Stichworte="TextBox;Eingabe;Input;Masken;Pattern"});
+            this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()) { Stichworte = "TextBlock;" });
+            this.tabItemSource.Add(new TabControlItem("TextBox Controls", new BehaviorTxTControlsUC()) { Stichworte = "TextBox;Eingabe;Input;Masken;Pattern" });
             this.tabItemSource.Add(new TabControlItem("TextBox Watermarket", new BehaviorWaterMControlsUC()) { Stichworte = "TextBox;Wasserzeichen;Watermarket;Behavior" });
             this.tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()) { Stichworte = "Excel;Cell;Behavior" });
-            this.tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()) {Stichworte = "CheckBox;Behavior" });
+            this.tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()) { Stichworte = "CheckBox;Behavior" });
 
-            this.CountSamples = this.tabItemSource.Count(c => c.IsGroupItem == false);
-
-            this.DataContext = this;
-        }
-
-        private ICollectionView listBoxSource;
-
-        public ICollectionView ListBoxSource
-        {
-            get { return this.listBoxSource; }
-            set
-            {
-                this.listBoxSource = value;
-                this.OnPropertyChanged();
-            }
-        }
-
-        private TabControlItem currentSelectedItem;
-
-        public TabControlItem CurrentSelectedItem
-        {
-            get { return this.currentSelectedItem; }
-            set
-            {
-                this.currentSelectedItem = value;
-                this.OnPropertyChanged();
-                if (value != null)
-                {
-                    UserControl uc = value.ItemContent as UserControl;
-                    this.ContentItem = uc;
-                }
-            }
-        }
-
-        private string filterText;
-
-        public string FilterText
-        {
-            get { return filterText; }
-            set
-            {
-                this.filterText = value;
-                this.OnPropertyChanged();
-                this.RefreshDefaultFilter(value);
-            }
-        }
-
-        private int countSamples;
-
-        public int CountSamples
-        {
-            get { return countSamples; }
-            set
-            {
-                this.countSamples = value;
-                this.OnPropertyChanged();
-            }
-        }
-
-        private UserControl contentItem;
-
-        public UserControl ContentItem
-        {
-            get { return this.contentItem; }
-            set
-            {
-                this.contentItem = value;
-                this.OnPropertyChanged();
-            }
-        }
-
-        private int maxRowCount;
-
-        public int MaxRowCount
-        {
-            get { return this.maxRowCount; }
-            set
-            {
-                this.maxRowCount = value;
-                this.OnPropertyChanged();
-            }
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
@@ -216,22 +275,47 @@
                 }
             };
 
+            this.LbSourceBox.Focus();
+            this.ListBoxSource.Refresh();
             this.ListBoxSource.MoveCurrentTo(2);
+            this.LbSourceBox.Focus();
+
+            this.CountSamples = this.tabItemSource.Count(c => c.IsGroupItem == false);
         }
 
-        private void OnWindowClosed(object sender, EventArgs e)
+        private void LoadCSSource()
         {
-            Application.Current.Shutdown();
-        }
+            this.ContentItem = null;
+            this.tabItemSource = new List<TabControlItem>();
+            this.tabItemSource.Add(new TabControlItem("Pattern", true));
+            this.tabItemSource.Add(new TabControlItem("C# Pattern", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Singelton", SourceFile= "Pattern_Singelton.txt" });
 
-        private void RefreshDefaultFilter(string value)
-        {
-            if (this.ListBoxSource != null)
+            this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
+
+            this.ListBoxSource.Filter = item =>
             {
-                this.ListBoxSource.Refresh();
-                this.MaxRowCount = this.ListBoxSource.Cast<TabControlItem>().Count();
-                this.ListBoxSource.MoveCurrentToFirst();
-            }
+                TabControlItem vitem = item as TabControlItem;
+                if (vitem == null)
+                {
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(this.FilterText) == false && vitem.Stichworte != null)
+                {
+                    return vitem.Stichworte.ToLower().Contains(this.FilterText.ToLower());
+                }
+                else
+                {
+                    return true;
+                }
+            };
+
+            this.LbSourceBox.Focus();
+            this.ListBoxSource.Refresh();
+            this.ListBoxSource.MoveCurrentTo(2);
+            this.LbSourceBox.Focus();
+
+            this.CountSamples = this.tabItemSource.Count(c => c.IsGroupItem == false);
         }
 
         #region PropertyChanged Implementierung

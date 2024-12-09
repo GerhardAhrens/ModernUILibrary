@@ -1,0 +1,76 @@
+﻿public class Program
+{
+    private static void Main(string[] args)
+    {
+        MySingelton singletonObject = MySingelton.Instance;
+        Console.WriteLine(singletonObject.HelloWorld);
+        ConsoleHelper.Wait();
+
+        SafeSingeltonExample example = SafeSingeltonExample.GetInstance("Development");
+        Console.WriteLine(example.CurrentConfig);
+        ConsoleHelper.Wait();
+    }
+}
+
+/* Pattern - Singelton */
+public class MySingelton : SingletonBase<MySingelton>
+{
+    private const string HELLOWORLDMESSAGE = "Hello Gerhard - von MySingleton BaseClass";
+
+    private MySingelton()
+    {
+        this.HelloWorld = HELLOWORLDMESSAGE;
+    }
+
+    public string HelloWorld { get; private set; }
+}
+
+/* Pattern - Singelton */
+public class SafeSingeltonExample
+{
+    private static SafeSingeltonExample _instance;
+    private static readonly object _lock = new object();
+
+    private string _configurationSource;
+
+    // Private constructor
+    private SafeSingeltonExample(string configurationSource)
+    {
+        _configurationSource = configurationSource;
+        this.CurrentConfig = configurationSource;
+        this.LoadConfiguration();
+    }
+
+    private void LoadConfiguration()
+    {
+        if (_configurationSource == "File")
+        {
+            Console.WriteLine("Loading configuration from file...");
+            // Load from file
+        }
+        else if (_configurationSource == "Database")
+        {
+            Console.WriteLine("Loading configuration from database...");
+            // Load from database
+        }
+    }
+
+    public static SafeSingeltonExample GetInstance(string environment)
+    {
+        if (_instance == null)
+        {
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    string configSource = environment == "Development" ? "File" : "Database";
+                    _instance = new SafeSingeltonExample(configSource);
+                }
+            }
+        }
+
+        return _instance;
+    }
+
+    public string CurrentConfig { get; private set; }
+}

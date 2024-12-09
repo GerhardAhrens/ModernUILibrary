@@ -55,5 +55,6 @@ namespace ModernUIDemo.Model
         public string ItemHeader { get; private set; }
         public UserControl ItemContent { get; private set; }
         public string Stichworte { get; set; }
+        public string SourceFile { get; set; }
     }
 }
