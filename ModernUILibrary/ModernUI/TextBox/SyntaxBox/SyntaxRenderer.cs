@@ -201,7 +201,7 @@
                     FlowDirection.LeftToRight,
                     typeface,
                     this.Target.FontSize,
-                    lnForeground)
+                    lnForeground,0)
                 {
                     LineHeight = lineHeight,
                     TextAlignment = TextAlignment.Right
@@ -234,7 +234,7 @@
                 FlowDirection.LeftToRight,
                 typeface,
                 this.Target.FontSize,
-                synForeground)
+                synForeground,0)
             {
                 LineHeight = lineHeight
             };
