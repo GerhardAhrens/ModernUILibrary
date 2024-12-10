@@ -57,4 +57,9 @@ namespace ModernUIDemo.Model
         public string Stichworte { get; set; }
         public string SourceFile { get; set; }
     }
+
+    public interface ISourceControl
+    {
+        string SourceFile { get; set; }
+    }
 }

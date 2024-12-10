@@ -58,7 +58,9 @@
                     if (value != null)
                     {
                         UserControl uc = value.ItemContent as UserControl;
+                        uc.Tag = CurrentSelectedItem.SourceFile;
                         this.ContentItem = uc;
+                        this.Focus();
                     }
                 }
             }

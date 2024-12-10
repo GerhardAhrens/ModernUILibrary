@@ -25,23 +25,40 @@
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             this.DataContext = this;
-
-            string sourceDemo = string.Empty;
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ModernUIDemo.Resources.Source.Demo_A.txt";
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    sourceDemo = reader.ReadToEnd();
-                }
-            }
-
-            this.TxtSyntaxBox.Text = sourceDemo;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            if (this.Tag != null)
+            {
+                string sourceDemo = (string)this.Tag;
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                var resourceName = $"ModernUIDemo.Resources.Source.{sourceDemo}";
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        sourceDemo = reader.ReadToEnd();
+                    }
+                }
+
+                this.TxtSyntaxBox.Text = sourceDemo;
+            }
+            else
+            {
+                string sourceDemo = string.Empty;
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                var resourceName = "ModernUIDemo.Resources.Source.Demo_A.txt";
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        sourceDemo = reader.ReadToEnd();
+                    }
+                }
+
+                this.TxtSyntaxBox.Text = sourceDemo;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
