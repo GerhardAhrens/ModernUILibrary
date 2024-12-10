@@ -62,7 +62,8 @@
     <EmbeddedResource Include="Images\img3.png" />
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
-    <EmbeddedResource Include="Resources\Source\Pattern_Singelton.txt" />
+    <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
+    <EmbeddedResource Include="Resources\Source\Pattern\Pattern_Singelton.txt" />
     <EmbeddedResource Include="Resources\Source\Demo_A.txt" />
   </ItemGroup>
 

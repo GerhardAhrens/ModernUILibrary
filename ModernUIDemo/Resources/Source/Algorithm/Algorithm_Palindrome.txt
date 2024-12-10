@@ -1,0 +1,15 @@
+﻿/* Palindrome mit Integer */
+int eingabe = 12321;
+int result = Palindrome<int>.Get(eingabe);
+if (result == eingabe)
+{
+    Console.WriteLine($"{result} ist ein Palindrom");
+}
+
+/* Palindrome mit String */
+string eingabe = "reacecar";
+string result = Palindrome<string>.Get(eingabe);
+if (result == eingabe)
+{
+    Console.WriteLine($"{result} ist ein Palindrom");
+}

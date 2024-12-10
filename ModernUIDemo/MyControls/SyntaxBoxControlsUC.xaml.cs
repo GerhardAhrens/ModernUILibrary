@@ -1,6 +1,7 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.ComponentModel;
+    using System.Diagnostics.Eventing.Reader;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
@@ -33,12 +34,19 @@
             {
                 string sourceDemo = (string)this.Tag;
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                var resourceName = $"ModernUIDemo.Resources.Source.{sourceDemo}";
+                string resourceName = $"ModernUIDemo.Resources.Source.{sourceDemo}";
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    using (StreamReader reader = new StreamReader(stream))
+                    if (stream != null)
                     {
-                        sourceDemo = reader.ReadToEnd();
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            sourceDemo = reader.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        sourceDemo = $"Die Source Datei '{resourceName}' wurde nicht gefunden!";
                     }
                 }
 
@@ -51,9 +59,16 @@
                 var resourceName = "ModernUIDemo.Resources.Source.Demo_A.txt";
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    using (StreamReader reader = new StreamReader(stream))
+                    if (stream != null)
                     {
-                        sourceDemo = reader.ReadToEnd();
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            sourceDemo = reader.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        sourceDemo = $"Die Source Datei '{resourceName}' wurde nicht gefunden!";
                     }
                 }
 

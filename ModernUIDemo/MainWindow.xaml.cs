@@ -6,6 +6,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
+    using ModernBaseLibrary.Core.Algorithm;
 
     using ModernUIDemo.Model;
     using ModernUIDemo.MyControls;
@@ -27,6 +28,7 @@
             this.DataContext = this;
         }
 
+        #region Properties
         private ICollectionView listBoxSource;
 
         public ICollectionView ListBoxSource
@@ -146,6 +148,7 @@
                 this.OnPropertyChanged();
             }
         }
+        #endregion Properties
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -290,7 +293,10 @@
             this.ContentItem = null;
             this.tabItemSource = new List<TabControlItem>();
             this.tabItemSource.Add(new TabControlItem("Pattern", true));
-            this.tabItemSource.Add(new TabControlItem("C# Pattern", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Singelton", SourceFile= "Pattern_Singelton.txt" });
+            this.tabItemSource.Add(new TabControlItem("Singelton", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Singelton", SourceFile= "Pattern.Pattern_Singelton.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("Algorithm ", true));
+            this.tabItemSource.Add(new TabControlItem("Palindrome", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Palindrome", SourceFile = "Algorithm.Algorithm_Palindrome.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
