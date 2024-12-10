@@ -78,9 +78,7 @@ namespace ModernIU.Controls
             if (this._engine == null)
             {
                 var keywordList = (this.Keywords ?? String.Empty)
-                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select((x) => x.Trim())
-                    .ToList();
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select((x) => x.Trim()).ToList();
                 this._engine = new AhoCorasickSearch(
                     keywordList,
                     this.WholeWordsOnly);

@@ -23,6 +23,7 @@
         /// <returns></returns>
         IEnumerable<FormatInstruction> Match(DriverOperation Operation, string Text);
     }
+
     public class FormatInstruction
     {
         public int RuleId;
@@ -32,6 +33,7 @@
         public Brush Foreground;
         public Pen Outline;
     }
+
     [Flags]
     public enum DriverOperation : byte
     {

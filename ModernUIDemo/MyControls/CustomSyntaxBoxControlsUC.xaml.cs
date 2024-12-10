@@ -1,9 +1,6 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.ComponentModel;
-    using System.Diagnostics.Eventing.Reader;
-    using System.IO;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Text;
@@ -14,14 +11,14 @@
     using ModernIU.Controls;
 
     /// <summary>
-    /// Interaktionslogik für SyntaxBoxControlsUC.xaml
+    /// Interaktionslogik für CustomSyntaxBoxControlsUC.xaml
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public partial class SyntaxBoxControlsUC : UserControl, INotifyPropertyChanged
+    public partial class CustomSyntaxBoxControlsUC : UserControl, INotifyPropertyChanged
     {
         const string LINE_COMMENT = "//";
 
-        public SyntaxBoxControlsUC()
+        public CustomSyntaxBoxControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
@@ -41,52 +38,10 @@
         }
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (this.Tag != null)
-            {
-                Tuple<string,string> fromTag = (Tuple<string, string>)this.Tag;
-                string sourceDemo = fromTag.Item1;
-                this.DialogTitel = $"Beispiel zu: {fromTag.Item2}";
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                string resourceName = $"ModernUIDemo.Resources.Source.{sourceDemo}";
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                {
-                    if (stream != null)
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            sourceDemo = reader.ReadToEnd();
-                        }
-                    }
-                    else
-                    {
-                        sourceDemo = $"Die Source Datei '{resourceName}' wurde nicht gefunden!";
-                    }
-                }
 
-                this.TxtSyntaxBox.Text = sourceDemo;
-            }
-            else
-            {
-                string sourceDemo = string.Empty;
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                var resourceName = "ModernUIDemo.Resources.Source.Demo_A.txt";
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                {
-                    if (stream != null)
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            sourceDemo = reader.ReadToEnd();
-                        }
-                    }
-                    else
-                    {
-                        sourceDemo = $"Die Source Datei '{resourceName}' wurde nicht gefunden!";
-                    }
-                }
+            this.DialogTitel = $"Beispiel zu: ";
 
-                this.TxtSyntaxBox.Text = sourceDemo;
-            }
+            this.TxtSyntaxBox.Text = "/*Beispiel */\nHallo, viele Grüße von Gerhard";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -221,11 +176,5 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
-    }
-
-    public static class ToggleCommands
-    {
-        public static ICommand CommentCommand = new RoutedCommand();
-        public static ICommand UncommentCommand = new RoutedCommand();
     }
 }

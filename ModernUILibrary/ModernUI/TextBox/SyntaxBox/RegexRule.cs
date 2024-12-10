@@ -70,7 +70,9 @@
         private Regex GetRegex()
         {
             if (this._regex == null)
+            {
                 this._regex = new Regex(this.Pattern);
+            }
 
             return (this._regex);
         }

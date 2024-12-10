@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Windows.Controls;
 
     /// <summary>
@@ -61,12 +60,9 @@
 
         public List<FormattedLine> GetLines(int FirstLine, int LastLine)
         {
-            var lines = this
-                .Skip(FirstLine)
-                .Take(LastLine - FirstLine + 1)
-                .ToList();
+            var lines = this.Skip(FirstLine).Take(LastLine - FirstLine + 1).ToList();
             
-            return (lines);
+            return lines;
         }
 
         #endregion
@@ -79,10 +75,14 @@
             for (StartLine = 0; StartLine < this.Count; StartLine++)
             {
                 if (StartLine == this.Count - 1 || (charCount + this[StartLine].Text.Length) > Change.Offset)
+                {
                     break;
+                }
+
                 lineStart += this[StartLine].Text.Length;
                 charCount += this[StartLine].Text.Length;
             }
+
             StartLineOffset = Change.Offset - lineStart;
         }
 
@@ -141,8 +141,7 @@
         {
             // Identify new lines
             var addedLines = AddedText.GetLines(0, Int32.MaxValue, out int count)
-                .Select((x) => new FormattedLine { Text = x.Text })
-                .ToList();
+                .Select((x) => new FormattedLine { Text = x.Text }).ToList();
 
             // Insert new lines
             string prefix = this[StartLine].Text.Substring(0, StartLineOffset);

@@ -191,11 +191,12 @@
                     new Point(-requiredWidth, 0),
                     new Size(requiredWidth, this.ActualHeight - this.Target.Padding.Bottom - scrollBarSize.Height)
                 );
+
                 drawingContext.PushClip(new RectangleGeometry(numbersRect));
 
                 // Create the line numbers text
-                string numbers = String.Join(Environment.NewLine, 
-                    visibleLines.Select((l) => (l.LineNumber + 1).ToString()).ToArray());
+                string numbers = String.Join(Environment.NewLine, visibleLines.Select((l) => (l.LineNumber + 1).ToString()).ToArray());
+
                 FormattedText numbersText = new FormattedText(numbers,
                     System.Globalization.CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
@@ -209,22 +210,13 @@
 
                 // Draw the line numbers. Since the text is right-aligned,
                 // the origin point is top-right rather than top-right.
-                drawingContext.DrawText(
-                    numbersText,
-                    new Point(
-                        -LN_MARGIN,
-                        (firstVisible) * lineHeight - this.Target.VerticalOffset)
-                );
-                
+                drawingContext.DrawText(numbersText, new Point(-LN_MARGIN,(firstVisible) * lineHeight - this.Target.VerticalOffset));                
                 drawingContext.Pop();
             }
 
             // Draw the syntax text.
             // Set a drawing clip matching the renderer size, sans the scrollbars.
-            Rect clipRect = new Rect(
-                new Size(this.ActualWidth - this.Target.Padding.Right - scrollBarSize.Width,
-                this.ActualHeight - this.Target.Padding.Bottom - scrollBarSize.Height)
-            );
+            Rect clipRect = new Rect(new Size(this.ActualWidth - this.Target.Padding.Right - scrollBarSize.Width, this.ActualHeight - this.Target.Padding.Bottom - scrollBarSize.Height));
             drawingContext.PushClip(new RectangleGeometry(clipRect));
 
             // Join the visible lines into a single text.
@@ -287,8 +279,7 @@
                                 }
                             }
                         )
-                        .GroupBy((x) => x.lineno, (x) => x.instruction)
-                        .ToDictionary((x) => x.Key, (x) => x.ToList());
+                        .GroupBy((x) => x.lineno, (x) => x.instruction).ToDictionary((x) => x.Key, (x) => x.ToList());
 
                     // Apply the line instructions to the block
                     //var none = new List<FormatInstruction>(0);
@@ -323,11 +314,7 @@
                     {
                         if (instruction.Foreground != null)
                         {
-
-                            syntaxText.SetForegroundBrush(
-                                instruction.Foreground,
-                                instruction.FromChar + localOffset,
-                                instruction.Length);
+                            syntaxText.SetForegroundBrush(instruction.Foreground, instruction.FromChar + localOffset, instruction.Length);
                         }
                         if (instruction.Background != null || instruction.Outline != null)
                         {
@@ -339,9 +326,7 @@
                                 this.Target.FontSize,
                                 FlowDirection.LeftToRight);
 
-                            highlight.Offset(
-                                2d - this.Target.HorizontalOffset,
-                                (line.LineNumber) * lineHeight - this.Target.VerticalOffset);
+                            highlight.Offset(2d - this.Target.HorizontalOffset, (line.LineNumber) * lineHeight - this.Target.VerticalOffset);
                             drawingContext.DrawRectangle(instruction.Background, instruction.Outline, highlight);
                         }
                     }
@@ -349,12 +334,7 @@
             }
            
             // Draw the text onto the context.
-            drawingContext.DrawText(
-                syntaxText,
-                new Point(
-                    2 - this.Target.HorizontalOffset,
-                    (firstVisible) * lineHeight - this.Target.VerticalOffset)
-            );
+            drawingContext.DrawText(syntaxText, new Point(2 - this.Target.HorizontalOffset, (firstVisible) * lineHeight - this.Target.VerticalOffset));
             drawingContext.Pop();
 #if DEBUG
             sw.Stop();
@@ -363,7 +343,7 @@
 #endif
             base.OnRender(drawingContext);
         }
-        // ...................................................................
+
         #endregion
 
         #region Private members
@@ -454,9 +434,9 @@
                 this._numWidth = requiredText.Width + LN_MARGIN * 2;
             }
             
-            return (this._numWidth);
+            return this._numWidth;
         }
-        // ...................................................................
+
         /// <summary>
         /// Gets the scroll viewer part. 
         /// </summary>
@@ -466,7 +446,7 @@
             this.AttachScrollViewer();
             return (this._scrollViewer);
         }
-        // ...................................................................
+
         /// <summary>
         /// Attaches the scroll viewer ScrollChanged event. Since the ScrollViewer
         /// isn't created untill after the renderer is initialized, the scroll 
@@ -485,7 +465,7 @@
                 }
             }
         }
-        // ...................................................................
+
         /// <summary>
         /// Gets visible size of the scroll bars as a size. 
         /// Width => vertical scroll bar Width,
@@ -505,16 +485,16 @@
                     : SystemParameters.HorizontalScrollBarHeight
                 ));
         }
-        // ...................................................................
+
         private Canvas GetLineNumbersCanvas()
         {
             if (this._lineNumbers == null)
             {
                 this._lineNumbers = (Canvas)this.Target?.Template?.FindName("PART_LineNumbers", this.Target);
             }
-            return (this._lineNumbers);
+            return this._lineNumbers;
         }
-        // ...................................................................
+
         /// <summary>
         /// Calls the TextBox.GetLineHeight of Target via reflection.
         /// </summary>
@@ -526,7 +506,7 @@
             // Using this, the synchronization doesn't seem to be needed.
             return ((double)_getLineHeight.Invoke(this.Target, null));
         }
-        // ...................................................................
+
         /// <summary>
         /// Decreases the indentation of the current text selection.
         /// </summary>
@@ -575,20 +555,17 @@
             var firstAffected = this.Target.Text.GetLines(firstLine, firstLine, out totalLines).Single();
             var lastAffected = this.Target.Text.GetLines(lastLine, lastLine, out totalLines).Single();
             selStart = Math.Max(firstAffected.StartIndex, firstAffected.EndIndex - selStartOffset);
-            selEnd = Math.Max(
-                lastAffected.StartIndex,
-                lastAffected.EndIndex - selEndOffset);
+            selEnd = Math.Max(lastAffected.StartIndex, lastAffected.EndIndex - selEndOffset);
             selLength = selEnd - selStart;
             this.Target.Select(selStart, selLength);
         }
-        // ...................................................................
+
         /// <summary>
         /// Increases the indentation of the current text selection.
         /// </summary>
         private void IncreaseBlockIndent()
         {
-            int
-                selStart = this.Target.SelectionStart,
+            int selStart = this.Target.SelectionStart,
                 selLength = this.Target.SelectionLength,
                 selEnd = selStart + selLength,
                 firstLine = this.Target.GetLineIndexFromCharacterIndex(selStart),
@@ -616,8 +593,7 @@
                 string addString = String.Empty.PadLeft(addCount, INDENT_CHAR);
                 string indented = addString + line.Text;
                 return (indented);
-            })
-            .ToArray());
+            }).ToArray());
 
             // Update the text
             StringBuilder sb = new StringBuilder();
@@ -634,7 +610,7 @@
             selLength = selEnd - selStart;
             this.Target.Select(selStart, selLength);
         }
-        // ...................................................................
+
         /// <summary>
         /// Decreases the indentation at the current caret position.
         /// </summary>
@@ -667,7 +643,7 @@
                 }
             }
         }
-        // ...................................................................
+
         /// <summary>
         /// Icreases the indentation at the current caret position.
         /// </summary>
@@ -698,11 +674,10 @@
                 );
             }
         }
-        // ...................................................................
+
         #endregion
 
         #region Event handlers
-        // ...................................................................
         /// <summary>
         /// Triggered when the target textbox changes. Detaches from any old 
         /// textbox and attaches events on the new instance.
@@ -737,24 +712,24 @@
                 renderer._lineBuffer = new LineBuffer();
             }
         }
-        // ...................................................................
+
         public static void OnDefaultForegroundChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             SyntaxRenderer renderer = (SyntaxRenderer)sender;
             renderer._defaultFg = e.NewValue as Brush;
         }
-        // ...................................................................
+
         public static void OnLineNumbersForegroundChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             SyntaxRenderer renderer = (SyntaxRenderer)sender;
             renderer._lineNumbersFg = e.NewValue as Brush;
         }
-        // ...................................................................
+
         private void SyntaxScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             this.InvalidateVisual();
         }
-        // ...................................................................
+
         /// <summary>
         /// Invalidates the control on TextChanged, allowing syntax highlighting 
         /// to execute.
@@ -768,9 +743,10 @@
                 string addedText = this.Target.Text.Substring(change.Offset, change.AddedLength);
                 this._lineBuffer.ApplyChange(change, addedText);
             }
+
             this.InvalidateVisual();
         }
-        // ...................................................................
+
         /// <summary>
         /// Handles keyboard input like tab indent expansion.
         /// </summary>
@@ -779,7 +755,9 @@
         private void TargetPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (this.Target != (TextBox)sender)
+            {
                 return;
+            }
 
             if (e.Key == System.Windows.Input.Key.Tab)
             {
@@ -827,7 +805,9 @@
                         {
                             char c = line.Text[len];
                             if (!(Char.IsWhiteSpace(c) && c != '\n' && c != '\r'))
+                            {
                                 break;
+                            }
                         }
                         string prefix = line.Text.Substring(0, len);
                         System.Windows.Documents.EditingCommands.EnterLineBreak.Execute(null, this.Target);
@@ -841,7 +821,6 @@
                 }
             }
         }
-        // ...................................................................
         #endregion
     }
 }
