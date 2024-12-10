@@ -21,12 +21,6 @@
             var aa = new CipherService().Encrypt("Gerhard", "2024202420242024");
             var bb = new CipherService().Decrypt(aa,"2024202420242024");
             */
-
-            IEnumerable<IAssemblyInfo> metaInfo = null;
-            using (AssemblyMetaService ams = new AssemblyMetaService())
-            {
-                metaInfo = ams.GetMetaInfo();
-            }
         }
 
         public static string DatePattern { get; private set; }

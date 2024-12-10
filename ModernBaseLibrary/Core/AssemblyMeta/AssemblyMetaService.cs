@@ -49,22 +49,6 @@ namespace ModernBaseLibrary.Core
                         }
                     }
                 }
-
-                Assembly asmLUILib = AppDomain.CurrentDomain.Load("ModernUILibrary");
-                foreach (Type type in asmLUILib.GetTypes())
-                {
-                    if (ti.IsAssignableFrom(type))
-                    {
-                        if (type != null && type.IsInterface == false)
-                        {
-                            IAssemblyInfo assemblyInfoObject = (IAssemblyInfo)Activator.CreateInstance(type);
-                            if (assemblyInfos.Any(f => f.AssemblyName == assemblyInfoObject.AssemblyName) == false)
-                            {
-                                assemblyInfos.Add(assemblyInfoObject);
-                            }
-                        }
-                    }
-                }
             }
 
             return assemblyInfos;

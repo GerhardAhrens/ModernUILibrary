@@ -6,7 +6,11 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
+
+    using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Core.Algorithm;
+
+    using ModernIU.Controls;
 
     using ModernUIDemo.Model;
     using ModernUIDemo.MyControls;
@@ -24,7 +28,7 @@
 
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             WeakEventManager<Window, EventArgs>.AddHandler(this, "Closed", this.OnWindowClosed);
-
+            WeakEventManager<PathButton, EventArgs>.AddHandler(this.BtnAbout, "Click", this.OnBtnAboutClick);
             this.DataContext = this;
         }
 
@@ -154,6 +158,8 @@
         {
             this.SourceWPF = true;
             this.SourceCS = false;
+
+            NotificationService.RegisterDialog<SelectLB>();
         }
 
         private void OnWindowClosed(object sender, EventArgs e)
@@ -324,6 +330,25 @@
             this.LbSourceBox.Focus();
 
             this.CountSamples = this.tabItemSource.Count(c => c.IsGroupItem == false);
+        }
+
+        private void OnBtnAboutClick(object sender, EventArgs e)
+        {
+            IEnumerable<IAssemblyInfo> metaInfo = null;
+            using (AssemblyMetaService ams = new AssemblyMetaService())
+            {
+                metaInfo = ams.GetMetaInfo();
+            }
+
+            List<string> assemblyList = new List<string>();
+            foreach (IAssemblyInfo assembly in metaInfo)
+            {
+                assemblyList.Add($"{assembly.AssemblyName}; {assembly.AssemblyVersion}");
+            }
+
+            string headLineText = "Versionen zur Modern Library.";
+
+            NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, assemblyList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
         }
 
         #region PropertyChanged Implementierung
