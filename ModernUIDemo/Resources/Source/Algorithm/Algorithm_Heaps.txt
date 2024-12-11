@@ -1,0 +1,23 @@
+﻿/* Permutationen einer gegebenen Folge mit Integer */
+int[] tasks = { 1, 2, 3 };
+List<int[]> permutations = new List<int[]>();
+
+HeapsAlgorithm.GeneratePermutations(tasks, tasks.Length, permutations);
+
+Console.WriteLine("Alle möglichen Permutationen:");
+foreach (var permutation in permutations)
+{
+    Console.WriteLine(string.Join(", ", permutation));
+}
+
+/* Permutationen einer gegebenen Folge mit String */
+char[] tasks = { 'A', 'B', 'C' };
+List<char[]> permutations = new List<char[]>();
+
+HeapsAlgorithm.GeneratePermutations(tasks, tasks.Length, permutations);
+
+Console.WriteLine("Alle möglichen Permutationen:");
+foreach (var permutation in permutations)
+{
+    Console.WriteLine(string.Join(", ", permutation));
+}

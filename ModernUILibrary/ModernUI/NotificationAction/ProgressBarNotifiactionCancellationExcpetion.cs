@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace EasyPrototypingNET.WPF
+namespace ModernIU.Controls
 {
     using System;
     using System.Runtime.Serialization;

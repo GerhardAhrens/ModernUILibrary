@@ -24,19 +24,14 @@ namespace ModernUIDemo.Core
     [SupportedOSPlatform("windows")]
     public class AssemblyMetaInfo : IAssemblyInfo
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblyMetaInfo"/> class.
-        /// </summary>
-        public AssemblyMetaInfo()
-        {
-        }
-
         public string PacketName => "ModernUI";
         public Version PacketVersion => new Version(1, 0, 2024, 0);
 
         public string AssemblyName => $"ModernUIDemo";
 
         public Version AssemblyVersion => new Version(1,0,2024,8);
+
+        public string Description => "Demoprogramm für UI Controls und C# Klassen";
 
         private DateTime BuildDateTime()
         {

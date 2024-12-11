@@ -64,6 +64,7 @@
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
     <EmbeddedResource Include="Resources\BuildDate.txt" />
+    <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
     <EmbeddedResource Include="Resources\Source\Pattern\Pattern_Singelton.txt" />
     <EmbeddedResource Include="Resources\Source\Demo_A.txt" />

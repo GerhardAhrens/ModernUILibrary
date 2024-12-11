@@ -21,19 +21,14 @@ namespace ModernBaseLibrary.AssemblyInfo
 
     public class AssemblyMetaInfo : IAssemblyInfo
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AssemblyMetaInfo"/> class.
-        /// </summary>
-        public AssemblyMetaInfo()
-        {
-        }
-
         public string PacketName => "ModernUI";
         public Version PacketVersion => new Version(1, 0, 2024, 0);
 
         public string AssemblyName => "ModernBaseLibrary";
 
         public Version AssemblyVersion => new Version(1, 0, 2024, 10);
+
+        public string Description => "Bibliothek mit Basis C# Klassen";
 
         public override string ToString()
         {

@@ -32,6 +32,7 @@
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
     <Folder Include="ModernUIBase\EventArgs\" />
+    <Folder Include="ModernUIBase\WIN32API\" />
     <Folder Include="ModernUIBase\ScreenCapture\" />
     <Folder Include="ModernUI\Accordion\Themes\" />
     <Folder Include="ModernUI\Alert\Themes\" />

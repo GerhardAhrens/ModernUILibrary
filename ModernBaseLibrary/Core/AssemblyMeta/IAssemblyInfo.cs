@@ -17,6 +17,7 @@ namespace ModernBaseLibrary.Core
 {
     public interface IAssemblyInfo
     {
+        string Description { get; }
         string PacketName { get; }
         Version PacketVersion { get; }
         string AssemblyName { get; }

@@ -25,12 +25,14 @@
         <Grid Grid.Row="1" Background="LightGray">
             <DockPanel>
                 <Button
+                    Width="180"
+                    HorizontalAlignment="Left"
                     Click="Button_Click"
-                    Content="Toggle"
+                    Content="Zeilennummer anzeigen ja/nein"
                     DockPanel.Dock="Bottom" />
+
                 <TextBox
                     x:Name="TxtSyntaxBox"
-                    Padding="0,0,0,0"
                     ModernUI:SyntaxBox.AutoIndent="True"
                     ModernUI:SyntaxBox.Enable="True"
                     ModernUI:SyntaxBox.ExpandTabs="False"

@@ -179,8 +179,145 @@
 
             }
         }
-
         #endregion
 
+        #region ActionDialog
+
+        public void OnActionDialogButtonClick(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as Button).Tag.ToString())
+            {
+                case "Default":
+                    this.ActionDialogTestDefault();
+                    break;
+                case "WithSettings":
+                    this.ActionDialogTestWithSettings();
+                    break;
+                case "WithSettingsAndStepA":
+                    this.ActionDialogTestWithSettingsAndStepByStepA();
+                    break;
+                case "WithSettingsAndStepB":
+                    this.ActionDialogTestWithSettingsAndStepByStepB();
+                    break;
+            }
+        }
+
+        private void ActionDialogTestDefault()
+        {
+            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => { Thread.Sleep(4000); });
+
+            if (result.OperationFailed)
+            {
+                MessageBox.Show("ActionDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ActionDialog successfully executed.");
+            }
+        }
+
+        private void ActionDialogTestWithSettings()
+        {
+            int millisecondsTimeout = 250;
+            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+
+                for (int i = 1; i <= 20; i++)
+                {
+                    ActionDialog.Current.ReportWithCancellation("Executing step {0}/20...", i);
+
+                    Thread.Sleep(millisecondsTimeout);
+                }
+
+            }, new ActionDialogType(true, true, true));
+
+            if (result.Cancelled)
+            {
+                MessageBox.Show("ActionDialog cancelled.");
+            }
+            else if (result.OperationFailed)
+            {
+                MessageBox.Show("ActionDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ActionDialog successfully executed.");
+            }
+        }
+
+        private void ActionDialogTestWithSettingsAndStepByStepA()
+        {
+            int millisecondsTimeout = 1000;
+            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+
+                ActionDialog.Current.ReportWithCancellation("Bearbeiten Step 1");
+                Thread.Sleep(millisecondsTimeout);
+
+                ActionDialog.Current.ReportWithCancellation("Bearbeiten Step 2");
+                Thread.Sleep(millisecondsTimeout);
+
+                ActionDialog.Current.ReportWithCancellation("Bearbeiten Step 3");
+                Thread.Sleep(millisecondsTimeout);
+
+                ActionDialog.Current.ReportWithCancellation("Bearbeiten Step ...");
+                Thread.Sleep(millisecondsTimeout);
+
+            }, new ActionDialogType(true, true, true));
+
+            if (result.Cancelled)
+            {
+                MessageBox.Show("ActionDialog cancelled.");
+            }
+            else if (result.OperationFailed)
+            {
+                MessageBox.Show("ActionDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ActionDialog successfully executed.");
+            }
+        }
+
+        private void ActionDialogTestWithSettingsAndStepByStepB()
+        {
+            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+
+                return this.ActionStepValue();
+
+            }, new ActionDialogType(true, true, false));
+
+            if (result.Cancelled)
+            {
+                MessageBox.Show("ActionDialog cancelled.");
+            }
+            else if (result.OperationFailed)
+            {
+                MessageBox.Show("ActionDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ActionDialog successfully executed.");
+            }
+        }
+
+        private string ActionStepValue()
+        {
+            int millisecondsTimeout = 2000;
+
+            ActionDialog.Current.ReportWithCancellation("Lese Daten A\n- Adressen", "Bearbeiten Step 1");
+            Thread.Sleep(millisecondsTimeout);
+
+            ActionDialog.Current.ReportWithCancellation("Lese Daten B\n- Rechnungen\n-Rechnungspositionen", "Bearbeiten Step 2");
+            Thread.Sleep(millisecondsTimeout);
+
+            ActionDialog.Current.ReportWithCancellation("Lese Daten C", "Bearbeiten Step 3");
+            Thread.Sleep(millisecondsTimeout);
+
+            ActionDialog.Current.ReportWithCancellation("Schreibe alle Daten", "Bearbeiten Step ...");
+            Thread.Sleep(millisecondsTimeout);
+
+            return "Ok";
+        }
+
+        #endregion ActionDialog
     }
 }
