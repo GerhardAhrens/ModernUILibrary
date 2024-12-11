@@ -204,7 +204,9 @@
 
         private void ActionDialogTestDefault()
         {
-            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => { Thread.Sleep(4000); });
+            Action action = () => { Thread.Sleep(4000); };
+            Window mainWindow = Application.Current.MainWindow;
+            ActionDialogResult result = ActionDialog.Execute(mainWindow, "Loading data...", action);
 
             if (result.OperationFailed)
             {
@@ -218,8 +220,9 @@
 
         private void ActionDialogTestWithSettings()
         {
+            Window mainWindow = Application.Current.MainWindow;
             int millisecondsTimeout = 250;
-            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+            ActionDialogResult result = ActionDialog.Execute(mainWindow, "Loading data...", () => {
 
                 for (int i = 1; i <= 20; i++)
                 {
@@ -246,8 +249,9 @@
 
         private void ActionDialogTestWithSettingsAndStepByStepA()
         {
+            Window mainWindow = Application.Current.MainWindow;
             int millisecondsTimeout = 1000;
-            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+            ActionDialogResult result = ActionDialog.Execute(mainWindow, "Loading data...", () => {
 
                 ActionDialog.Current.ReportWithCancellation("Bearbeiten Step 1");
                 Thread.Sleep(millisecondsTimeout);
@@ -279,7 +283,8 @@
 
         private void ActionDialogTestWithSettingsAndStepByStepB()
         {
-            ActionDialogResult result = ActionDialog.Execute(this, "Loading data...", () => {
+            Window mainWindow = Application.Current.MainWindow;
+            ActionDialogResult result = ActionDialog.Execute(mainWindow, "Loading data...", () => {
 
                 return this.ActionStepValue();
 
@@ -319,5 +324,137 @@
         }
 
         #endregion ActionDialog
+
+        #region Progressbar Action
+        public void OnProgressDialogButtonClick(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as Button).Tag.ToString())
+            {
+                case "Default":
+                    this.ProgressDialogTestDefault();
+                    break;
+                case "WithSubLabel":
+                    this.ProgressDialogTestWithSubLabel();
+                    break;
+                case "WithCancelButton":
+                    this.ProgressDialogTestWithCancelButton();
+                    break;
+                case "WithCancelButtonAndProgressDisplay":
+                    this.ProgressDialogTestWithCancelButtonAndProgressDisplay();
+                    break;
+            }
+        }
+
+        private void ProgressDialogTestDefault()
+        {
+            Window mainWindow = Application.Current.MainWindow;
+            ProgressBarDialogResult result = ProgressDialog.Execute(mainWindow, "Loading data...", () => {
+
+                Thread.Sleep(4000);
+
+            });
+
+            if (result.OperationFailed)
+            {
+                MessageBox.Show("ProgressDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ProgressDialog successfully executed.");
+            }
+        }
+
+        private void ProgressDialogTestWithSubLabel()
+        {
+            Window mainWindow = Application.Current.MainWindow;
+            ProgressBarDialogResult result = ProgressDialog.Execute(mainWindow, "Loading data", () =>
+            {
+                return this.ProgressStepValue();
+            }, ProgressBarDialogType.WithSubLabel);
+
+            if (result.OperationFailed)
+            {
+                MessageBox.Show("ProgressDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ProgressDialog successfully executed.");
+            }
+        }
+
+        private int ProgressStepValue()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                ProgressDialog.Current.Report("Executing step {0}/5... \nThat is a very long Text for the ProgressDialog ", i);
+
+                Thread.Sleep(1500);
+            }
+
+            return 5;
+        }
+
+        private void ProgressDialogTestWithCancelButton()
+        {
+            int millisecondsTimeout = 1500;
+            Window mainWindow = Application.Current.MainWindow;
+
+            ProgressBarDialogResult result = ProgressDialog.Execute(mainWindow, "Loading data", () => {
+
+                for (int i = 1; i <= 50; i++)
+                {
+                    ProgressDialog.Current.ReportWithCancellationCheck("Executing step {0}/50...", i);
+
+                    Thread.Sleep(millisecondsTimeout);
+                }
+
+            }, ProgressBarDialogType.WithSubLabelAndCancel);
+
+            if (result.Cancelled)
+            {
+                MessageBox.Show("ProgressDialog cancelled.");
+            }
+            else if (result.OperationFailed)
+            {
+                MessageBox.Show("ProgressDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ProgressDialog successfully executed.");
+            }
+        }
+
+        private void ProgressDialogTestWithCancelButtonAndProgressDisplay()
+        {
+            // Easy way to pass data to the async method
+            int millisecondsTimeout = 250;
+            Window mainWindow = Application.Current.MainWindow;
+
+            ProgressBarDialogResult result = ProgressDialog.Execute(mainWindow, "Loading data", () =>
+            {
+                for (int i = 1; i <= 20; i++)
+                {
+                    ProgressDialog.Current.ReportWithCancellationCheck(i * 5, "Executing step {0}/20...", i);
+
+                    Thread.Sleep(millisecondsTimeout);
+                }
+
+            }, new ProgressBarDialogType(true, true, false));
+
+            if (result.Cancelled)
+            {
+                MessageBox.Show("ProgressDialog cancelled.");
+            }
+            else if (result.OperationFailed)
+            {
+                MessageBox.Show("ProgressDialog failed.");
+            }
+            else
+            {
+                MessageBox.Show("ProgressDialog successfully executed.");
+            }
+        }
+
+        #endregion Progressbar Action
     }
 }

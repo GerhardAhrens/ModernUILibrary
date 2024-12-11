@@ -125,12 +125,11 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="NotificationBox with Progress Function" />
+                Header="NotificationBox with Step Function" />
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:FlatButton
                     x:Name="BtnNotificationBoxActionA"
-                    Width="170"
                     Height="30"
                     Margin="5,5"
                     Click="OnActionDialogButtonClick"
@@ -139,6 +138,82 @@
                     Tag="Default"
                     Type="info" />
 
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxActionB"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnActionDialogButtonClick"
+                    Content="ActionDialog with Settings and For i"
+                    CornerRadius="2"
+                    Tag="WithSettings"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxActionC"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnActionDialogButtonClick"
+                    Content="ActionDialog with Settings and Step by Step (Action)"
+                    CornerRadius="2"
+                    Tag="WithSettingsAndStepA"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxActionD"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnActionDialogButtonClick"
+                    Content="ActionDialog with Settings and Step by Step (Func)"
+                    CornerRadius="2"
+                    Tag="WithSettingsAndStepB"
+                    Type="info" />
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="NotificationBox with Progress Function" />
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxProgressA"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnProgressDialogButtonClick"
+                    Content="Progressbar Default"
+                    CornerRadius="2"
+                    Tag="Default"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxProgressB"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnProgressDialogButtonClick"
+                    Content="ProgressDialog With SubLabel"
+                    CornerRadius="2"
+                    Tag="WithSubLabel"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxProgressC"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnProgressDialogButtonClick"
+                    Content="ProgressDialog With Cancel Button"
+                    CornerRadius="2"
+                    Tag="WithCancelButton"
+                    Type="info" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnNotificationBoxProgressD"
+                    Height="30"
+                    Margin="5,5"
+                    Click="OnProgressDialogButtonClick"
+                    Content="ProgressDialog With Cancel Button And Progress Display"
+                    CornerRadius="2"
+                    Tag="WithCancelButtonAndProgressDisplay"
+                    Type="info" />
             </StackPanel>
 
         </StackPanel>
