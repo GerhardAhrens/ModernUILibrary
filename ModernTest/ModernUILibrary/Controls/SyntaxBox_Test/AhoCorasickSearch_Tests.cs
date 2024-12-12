@@ -185,6 +185,7 @@
                 .OrderBy((x) => x.FromChar)
                 .ThenBy((x) => x.Length)
                 .ToList();
+
             var acs = input
                 .SelectMany((x) => acsRule.Match(x))
                 .OrderBy((x) => x.FromChar)
@@ -202,12 +203,14 @@
             {
                 Keywords = "abstract,as,base,bool,break,byte,case,catch,char,checked,class,const,continue,decimal,default,delegate,do,double,else,enum,event,explicit,extern,false,finally,fixed,float,for,foreach,goto,if,implicit,in,int,interface,internal,is,lock,long,namespace,new,null,object,operator,out,override,params,private,protected,public,readonly,ref,return,sbyte,sealed,short,sizeof,stackalloc,static,string,struct,switch,this,throw,true,try,typeof,uint,ulong,unchecked,unsafe,ushort,using,using,static,virtual,void,volatile,while,get,set,yield,var"
             };
+
             acsRule.Match("empty"); // Warm it up
 
             RegexRule regexRule = new RegexRule
             {
                 Pattern = @"\babstract\b|\bas\b|\bbase\b|\bbool\b|\bbreak\b|\bbyte\b|\bcase\b|\bcatch\b|\bchar\b|\bchecked\b|\bclass\b|\bconst\b|\bcontinue\b|\bdecimal\b|\bdefault\b|\bdelegate\b|\bdo\b|\bdouble\b|\belse\b|\benum\b|\bevent\b|\bexplicit\b|\bextern\b|\bfalse\b|\bfinally\b|\bfixed\b|\bfloat\b|\bfor\b|\bforeach\b|\bgoto\b|\bif\b|\bimplicit\b|\bin\b|\bint\b|\binterface\b|\binternal\b|\bis\b|\block\b|\blong\b|\bnamespace\b|\bnew\b|\bnull\b|\bobject\b|\boperator\b|\bout\b|\boverride\b|\bparams\b|\bprivate\b|\bprotected\b|\bpublic\b|\breadonly\b|\bref\b|\breturn\b|\bsbyte\b|\bsealed\b|\bshort\b|\bsizeof\b|\bstackalloc\b|\bstatic\b|\bstring\b|\bstruct\b|\bswitch\b|\bthis\b|\bthrow\b|\btrue\b|\btry\b|\btypeof\b|\buint\b|\bulong\b|\bunchecked\b|\bunsafe\b|\bushort\b|\busing\b|\busing\b|\bstatic\b|\bvirtual\b|\bvoid\b|\bvolatile\b|\bwhile\b|\bget\b|\bset\b|\byield\b|\bvar\b"
             };
+
             regexRule.Match("empty"); // Warm it up
 
             int iter = 10;
