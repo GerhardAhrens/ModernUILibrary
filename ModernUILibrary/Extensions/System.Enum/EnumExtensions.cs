@@ -24,7 +24,7 @@
 
 namespace System
 {
-    public static partial class EnumExtensions
+    internal static partial class EnumExtensions
     {
         /// <summary>
         /// A T extension method to determines whether the object is equal to any of the provided values.

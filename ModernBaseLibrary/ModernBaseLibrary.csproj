@@ -20,4 +20,9 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\ArgumentGuard\" />
+    <Folder Include="Extensions\System.SecureString\" />
+  </ItemGroup>
+
 </Project>
