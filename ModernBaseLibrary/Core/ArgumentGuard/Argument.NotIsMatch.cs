@@ -3,7 +3,7 @@
     using System;
     using System.Text.RegularExpressions;
 
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string NOTISMATCHTEMPLATE = @"[{0}] does not match the pattern [{1}].";
 
@@ -20,7 +20,7 @@
         {
             var message = string.Format(NOTISMATCHTEMPLATE, GENERICPARAMETERNAME, regexPattern);
 
-            Guard.NotIsMatch(param, paramName, regexPattern, message, regexOptions);
+            Argument.NotIsMatch(param, paramName, regexPattern, message, regexOptions);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@
             }
 
             var argumentException = new ArgumentException(message, paramName);
-            Guard.NotIsMatch(param, regexPattern, argumentException, regexOptions);
+            Argument.NotIsMatch(param, regexPattern, argumentException, regexOptions);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@
         {
             var message = string.Format(NOTISMATCHTEMPLATE, GENERICPARAMETERNAME, regexPattern);            
 
-            Guard.NotIsMatch<TException>(param, regexPattern, message, regexOptions);
+            Argument.NotIsMatch<TException>(param, regexPattern, message, regexOptions);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@
 
             TException exception = CreateException<TException>(message);
 
-            Guard.NotIsMatch(param, regexPattern, exception, regexOptions);
+            Argument.NotIsMatch(param, regexPattern, exception, regexOptions);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            Guard.For(() => !Regex.IsMatch(param, regexPattern, regexOptions), exception);
+            Argument.For(() => !Regex.IsMatch(param, regexPattern, regexOptions), exception);
         }
     }
 }

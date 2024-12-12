@@ -51,7 +51,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotEqualTo(input, @value, exception);
+                Argument.NotEqualTo(input, @value, exception);
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotEqualTo(input, @value, exception);
+                Argument.NotEqualTo(input, @value, exception);
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             int @value = 10;
             Exception exception = new Exception();
 
-            Guard.NotEqualTo(input, @value, exception);
+            Argument.NotEqualTo(input, @value, exception);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             string @value = "11";
             Exception exception = new Exception();
 
-            Guard.NotEqualTo(input, @value, exception);
+            Argument.NotEqualTo(input, @value, exception);
         }
 
         [DataRow(null, null)]
@@ -105,7 +105,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             Exception exception = new Exception();
 
-            Guard.NotEqualTo(input, @value, exception);
+            Argument.NotEqualTo(input, @value, exception);
         }
 
         [TestMethod]
@@ -117,7 +117,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotEqualTo(input, @value, exception);
+                Argument.NotEqualTo(input, @value, exception);
             }
             catch (Exception ex)
             {
@@ -132,7 +132,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             int @value = 10;
             Exception exception = null;
 
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => Guard.NotEqualTo(input, @value, exception));
+            var ex = Assert.ThrowsException<ArgumentNullException>(() => Argument.NotEqualTo(input, @value, exception));
         }
 
         [DataRow("", "")]

@@ -61,7 +61,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotInRange(input, minValue, maxValue, paramName, errorMessage);
+                Argument.NotInRange(input, minValue, maxValue, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -80,7 +80,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotInRange(input, minValue, maxValue, exception);
+                Argument.NotInRange(input, minValue, maxValue, exception);
             }
             catch (Exception ex)
             {
@@ -101,11 +101,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotInRange<int, InvalidOperationException>(input, minValue, maxValue);
+                    Argument.NotInRange<int, InvalidOperationException>(input, minValue, maxValue);
                 }
                 else
                 {
-                    Guard.NotInRange<int, InvalidOperationException>(input, minValue, maxValue, message);
+                    Argument.NotInRange<int, InvalidOperationException>(input, minValue, maxValue, message);
                 }
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotInRange(input, minValue, maxValue, exception);
+                Argument.NotInRange(input, minValue, maxValue, exception);
             }
             catch (Exception ex)
             {
@@ -136,7 +136,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         [TestMethod]
         public void NotInRange_ValidInput_DoesNotThrowException(int input, int minValue, int maxValue)
         {
-            Guard.NotInRange(input, minValue, maxValue, nameof(input), null);
+            Argument.NotInRange(input, minValue, maxValue, nameof(input), null);
         }
 
         [DataRow("", "")]

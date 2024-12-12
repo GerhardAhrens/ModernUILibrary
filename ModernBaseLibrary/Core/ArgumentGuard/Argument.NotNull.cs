@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string NOTNULLMESSAGETEMPLATE = @"[{0}] cannot be Null.";
 
@@ -43,7 +43,7 @@
             }
 
             var argumentNullException = new ArgumentNullException(paramName, message);
-            Guard.NotNull(param, argumentNullException);
+            Argument.NotNull(param, argumentNullException);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@
         {
             var message = string.Format(NOTNULLMESSAGETEMPLATE, GENERICPARAMETERNAME);
 
-            Guard.NotNull<TParam, TException>(param, message);
+            Argument.NotNull<TParam, TException>(param, message);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@
 
             TException exception = CreateException<TException>(message);
 
-            Guard.NotNull(param, exception);
+            Argument.NotNull(param, exception);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            Guard.For(() => param == null, exception);
+            Argument.For(() => param == null, exception);
         }
     }
 }

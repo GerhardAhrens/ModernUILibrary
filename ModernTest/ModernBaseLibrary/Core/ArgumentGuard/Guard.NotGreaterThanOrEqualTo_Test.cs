@@ -60,7 +60,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotGreaterThanOrEqualTo(input, threshold, paramName, errorMessage);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotGreaterThanOrEqualTo(input, threshold, exception);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -95,7 +95,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotGreaterThanOrEqualTo(input, threshold, exception);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -114,11 +114,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold);
+                    Argument.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Guard.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold, message);
+                    Argument.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         [TestMethod]
         public void NotGreaterThanOrEqualTo_ValidInput_DoesNotThrowException(int input, int threshold)
         {
-            Guard.NotGreaterThanOrEqualTo(input, threshold, nameof(input), null);
+            Argument.NotGreaterThanOrEqualTo(input, threshold, nameof(input), null);
         }
 
         [DataRow("", "")]

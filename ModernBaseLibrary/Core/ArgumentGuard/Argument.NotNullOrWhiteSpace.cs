@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string NOTNULLORWHITESPACETEMPLATE = @"[{0}] cannot be Null, empty or white-space.";
 
@@ -39,7 +39,7 @@
             }
 
             var argumentException = new ArgumentException(message, paramName);
-            Guard.NotNullOrWhitespace(param, argumentException);
+            Argument.NotNullOrWhitespace(param, argumentException);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@
         {
             var message = String.Format(NOTNULLORWHITESPACETEMPLATE, GENERICPARAMETERNAME);
 
-            Guard.NotNullOrWhitespace<TException>(param, message);
+            Argument.NotNullOrWhitespace<TException>(param, message);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@
 
             TException exception = CreateException<TException>(message);
 
-            Guard.NotNullOrWhitespace(param, exception);
+            Argument.NotNullOrWhitespace(param, exception);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            Guard.For(() => String.IsNullOrWhiteSpace(param), exception);
+            Argument.For(() => String.IsNullOrWhiteSpace(param), exception);
         }
     }
 }

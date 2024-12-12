@@ -45,8 +45,8 @@ namespace System
 
         public static bool IsEqualTo(this SecureString ss1, SecureString ss2)
         {
-            Guard.NotNull(ss1, nameof(ss1));
-            Guard.NotNull(ss2, nameof(ss2));
+            Argument.NotNull(ss1, nameof(ss1));
+            Argument.NotNull(ss2, nameof(ss2));
 
             IntPtr bstr1 = IntPtr.Zero;
             IntPtr bstr2 = IntPtr.Zero;

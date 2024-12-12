@@ -59,7 +59,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotLessThan(input, threshold, paramName, errorMessage);
+                Argument.NotLessThan(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotLessThan(input, threshold, nameof(input));
+                Argument.NotLessThan(input, threshold, nameof(input));
             }
             catch (Exception ex)
             {
@@ -91,7 +91,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotLessThan(input, threshold, nameof(input));
+                Argument.NotLessThan(input, threshold, nameof(input));
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotLessThan(input, threshold, exception);
+                Argument.NotLessThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -126,7 +126,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotLessThan(input, threshold, exception);
+                Argument.NotLessThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -146,11 +146,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotLessThan<int, InvalidOperationException>(input, threshold);
+                    Argument.NotLessThan<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Guard.NotLessThan<int, InvalidOperationException>(input, threshold, message);
+                    Argument.NotLessThan<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -164,7 +164,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         [TestMethod]
         public void NotLessThan_ValidInput_DoesNotThrowException(int input, int threshold)
         {
-            Guard.NotLessThan(input, threshold, nameof(input), null);
+            Argument.NotLessThan(input, threshold, nameof(input), null);
         }
 
         [DataRow("", "")]

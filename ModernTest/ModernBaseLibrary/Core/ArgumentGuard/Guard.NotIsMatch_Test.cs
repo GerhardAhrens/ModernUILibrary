@@ -60,7 +60,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             Exception exception = new Exception();
 
-            Guard.NotIsMatch(input, pattern, exception, options);
+            Argument.NotIsMatch(input, pattern, exception, options);
         }
 
         [DataRow("123", "1234")]
@@ -77,7 +77,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotIsMatch(input, pattern, exception);
+                Argument.NotIsMatch(input, pattern, exception);
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotIsMatch(input, paramName, pattern, errorMessage);
+                Argument.NotIsMatch(input, paramName, pattern, errorMessage);
             }
             catch (Exception ex)
             {
@@ -121,11 +121,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotIsMatch<InvalidOperationException>(input, pattern);
+                    Argument.NotIsMatch<InvalidOperationException>(input, pattern);
                 }
                 else
                 {
-                    Guard.NotIsMatch<InvalidOperationException>(input, pattern, message);
+                    Argument.NotIsMatch<InvalidOperationException>(input, pattern, message);
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             string pattern = "";
             Exception exception = null;
 
-            Guard.NotIsMatch(input, pattern, exception);
+            Argument.NotIsMatch(input, pattern, exception);
         }
 
         [DataRow("", "")]

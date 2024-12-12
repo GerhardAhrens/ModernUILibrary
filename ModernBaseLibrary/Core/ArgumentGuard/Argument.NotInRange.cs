@@ -3,7 +3,7 @@ namespace ModernBaseLibrary.Core
 {
     using System;
 
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string NOTINRANGETEMPLATE = @"[{0}] cannot be in Range between {1} and {2}.";
 
@@ -19,7 +19,7 @@ namespace ModernBaseLibrary.Core
         public static void NotInRange<TParam>(TParam param, TParam minValue, TParam maxValue, string paramName) 
             where TParam : IComparable<TParam>
         {
-            Guard.NotInRange(param, minValue, maxValue, paramName, null);
+            Argument.NotInRange(param, minValue, maxValue, paramName, null);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace ModernBaseLibrary.Core
             }
 
             var argumentOutOfRangeException = new ArgumentOutOfRangeException(paramName, message);
-            Guard.NotInRange(param, minValue, maxValue, argumentOutOfRangeException);
+            Argument.NotInRange(param, minValue, maxValue, argumentOutOfRangeException);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace ModernBaseLibrary.Core
         {
             var message = string.Format(NOTINRANGETEMPLATE, GENERICPARAMETERNAME, minValue, maxValue);
 
-            Guard.NotInRange<TParam, TException>(param, minValue, maxValue, message);
+            Argument.NotInRange<TParam, TException>(param, minValue, maxValue, message);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace ModernBaseLibrary.Core
 
             TException exception = CreateException<TException>(message);
 
-            Guard.NotInRange(param, minValue, maxValue, exception);
+            Argument.NotInRange(param, minValue, maxValue, exception);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace ModernBaseLibrary.Core
                 throw new ArgumentNullException(nameof(exception));
             }
 
-            Guard.For(() => !(param.CompareTo(minValue) >= 0 && param.CompareTo(maxValue) <= 0), exception);
+            Argument.For(() => !(param.CompareTo(minValue) >= 0 && param.CompareTo(maxValue) <= 0), exception);
         }
     }
 }

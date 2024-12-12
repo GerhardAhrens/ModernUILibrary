@@ -53,7 +53,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.For(predicate, exception);
+                Argument.For(predicate, exception);
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.For(predicate, exception);
+                Argument.For(predicate, exception);
             }
             catch (Exception ex)
             {
@@ -89,11 +89,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.For<InvalidOperationException>(predicate);
+                    Argument.For<InvalidOperationException>(predicate);
                 }
                 else
                 {
-                    Guard.For<InvalidOperationException>(predicate, message);
+                    Argument.For<InvalidOperationException>(predicate, message);
                 }
             }
             catch (Exception ex)
@@ -113,7 +113,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.For(predicate, exception);
+                Argument.For(predicate, exception);
             }
             catch (Exception ex)
             {

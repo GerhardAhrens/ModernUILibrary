@@ -61,7 +61,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNull(input, paramName, errorMessage);
+                Argument.NotNull(input, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNull(input, exception);
+                Argument.NotNull(input, exception);
             }
             catch (Exception ex)
             {
@@ -94,7 +94,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNull(input, exception);
+                Argument.NotNull(input, exception);
             }
             catch (Exception ex)
             {
@@ -113,11 +113,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotNull<object, InvalidOperationException>(input);
+                    Argument.NotNull<object, InvalidOperationException>(input);
                 }
                 else
                 {
-                    Guard.NotNull<object, InvalidOperationException>(input, message);
+                    Argument.NotNull<object, InvalidOperationException>(input, message);
                 }
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNull(input, nameof(input), null);
+                Argument.NotNull(input, nameof(input), null);
             }
             catch (Exception ex)
             {

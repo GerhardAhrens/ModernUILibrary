@@ -60,7 +60,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotLessThanOrEqualTo(input, threshold, paramName, errorMessage);
+                Argument.NotLessThanOrEqualTo(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotLessThanOrEqualTo(input, threshold, nameof(input));
+                Argument.NotLessThanOrEqualTo(input, threshold, nameof(input));
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotLessThanOrEqualTo(input, threshold, exception);
+                Argument.NotLessThanOrEqualTo(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -109,11 +109,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotLessThanOrEqualTo<int, InvalidOperationException>(input, threshold);
+                    Argument.NotLessThanOrEqualTo<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Guard.NotLessThanOrEqualTo<int, InvalidOperationException>(input, threshold, message);
+                    Argument.NotLessThanOrEqualTo<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotLessThanOrEqualTo(input, threshold, nameof(input), null);
+                Argument.NotLessThanOrEqualTo(input, threshold, nameof(input), null);
             }
             catch (Exception ex)
             {

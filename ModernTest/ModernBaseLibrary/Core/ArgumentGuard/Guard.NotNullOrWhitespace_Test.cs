@@ -71,7 +71,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNullOrWhitespace(input, paramName, errorMessage);
+                Argument.NotNullOrWhitespace(input, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -88,7 +88,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNullOrWhitespace(input, exception);
+                Argument.NotNullOrWhitespace(input, exception);
             }
             catch (Exception ex)
             {
@@ -104,7 +104,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNullOrWhitespace(input, exception);
+                Argument.NotNullOrWhitespace(input, exception);
             }
             catch (Exception ex)
             {
@@ -123,11 +123,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotNullOrWhitespace<InvalidOperationException>(input);
+                    Argument.NotNullOrWhitespace<InvalidOperationException>(input);
                 }
                 else
                 {
-                    Guard.NotNullOrWhitespace<InvalidOperationException>(input, message);
+                    Argument.NotNullOrWhitespace<InvalidOperationException>(input, message);
                 }
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotNullOrWhitespace(input, nameof(input), null);
+                Argument.NotNullOrWhitespace(input, nameof(input), null);
             }
             catch (Exception ex)
             {

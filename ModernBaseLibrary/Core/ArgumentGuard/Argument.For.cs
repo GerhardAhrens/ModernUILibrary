@@ -7,7 +7,7 @@
     /// Facilitates runtime checks of code and allows to define preconditions and invariants within a method.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string GENERICPARAMETERNAME = "parameter";
         private const string FORMESSAGETEMPLATE = "Precondition not met.";
@@ -21,7 +21,7 @@
         public static void For<TException>(Func<bool> predicate)
             where TException : Exception, new()
         {
-            Guard.For<TException>(predicate, FORMESSAGETEMPLATE);
+            Argument.For<TException>(predicate, FORMESSAGETEMPLATE);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@
 
             TException exception = CreateException<TException>(message);
 
-            Guard.For(predicate, exception);
+            Argument.For(predicate, exception);
         }
 
         /// <summary>

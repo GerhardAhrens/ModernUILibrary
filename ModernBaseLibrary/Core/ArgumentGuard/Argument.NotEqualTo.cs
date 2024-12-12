@@ -4,7 +4,7 @@ namespace ModernBaseLibrary.Core
     using System;
     using System.Collections.Generic;
 
-    public static partial class Guard
+    public static partial class Argument
     {
         private const string NOTEQUALTOTEMPLATE = "Equality precondition not met.";
 
@@ -20,7 +20,7 @@ namespace ModernBaseLibrary.Core
         public static void NotEqualTo<TParam, TException>(TParam param, TParam @value) 
             where TException : Exception, new()
         {
-            Guard.NotEqualTo<TParam, TException>(param, value, NOTEQUALTOTEMPLATE);
+            Argument.NotEqualTo<TParam, TException>(param, value, NOTEQUALTOTEMPLATE);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ModernBaseLibrary.Core
 
             TException exception = CreateException<TException>(message);
 
-            Guard.NotEqualTo(param, value, exception);
+            Argument.NotEqualTo(param, value, exception);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace ModernBaseLibrary.Core
 
             var comparer = EqualityComparer<TParam>.Default;
 
-            Guard.For(() => !comparer.Equals(param, @value), exception);
+            Argument.For(() => !comparer.Equals(param, @value), exception);
         }
     }
 }

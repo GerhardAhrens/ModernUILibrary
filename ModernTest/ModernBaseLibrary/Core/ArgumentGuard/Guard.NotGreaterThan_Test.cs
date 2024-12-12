@@ -54,7 +54,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         {
             try
             {
-                Guard.NotGreaterThan(input, threshold, paramName, errorMessage);
+                Argument.NotGreaterThan(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotGreaterThan(input, threshold, exception);
+                Argument.NotGreaterThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -89,7 +89,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotGreaterThan(input, threshold, exception);
+                Argument.NotGreaterThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -109,11 +109,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotGreaterThan<int, InvalidOperationException>(input, threshold);
+                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Guard.NotGreaterThan<int, InvalidOperationException>(input, threshold, message);
+                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -127,7 +127,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         [TestMethod]
         public void NotGreaterThan_ValidInput_DoesNotThrowException(int input, int threshold)
         {
-            Guard.NotGreaterThan(input, threshold, nameof(input), null);
+            Argument.NotGreaterThan(input, threshold, nameof(input), null);
         }
 
         [DataRow("", "")]

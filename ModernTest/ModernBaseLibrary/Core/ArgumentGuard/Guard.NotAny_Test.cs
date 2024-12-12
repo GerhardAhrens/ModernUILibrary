@@ -51,7 +51,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotAny(items, exception);
+                Argument.NotAny(items, exception);
             }
             catch (Exception ex)
             {
@@ -69,11 +69,11 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             {
                 if (message == null)
                 {
-                    Guard.NotAny<int, InvalidOperationException>(items);
+                    Argument.NotAny<int, InvalidOperationException>(items);
                 }
                 else
                 {
-                    Guard.NotAny<int, InvalidOperationException>(items, message);
+                    Argument.NotAny<int, InvalidOperationException>(items, message);
                 }
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotAny(items, exception);
+                Argument.NotAny(items, exception);
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotAny(items, exception);
+                Argument.NotAny(items, exception);
             }
             catch (Exception ex)
             {
@@ -121,7 +121,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
             try
             {
-                Guard.NotAny(items, nameof(items));
+                Argument.NotAny(items, nameof(items));
             }
             catch (Exception ex)
             {
