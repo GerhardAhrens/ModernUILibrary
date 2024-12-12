@@ -67,6 +67,7 @@
     <Folder Include="ModernUI\Decorator\" />
     <Folder Include="ModernUI\Image\" />
     <Folder Include="ModernUI\Cryptography\" />
+    <Folder Include="ModernUI\NotificationProgress\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\StepBar\Themes\" />
     <Folder Include="ModernUI\TabControl\Themes\" />

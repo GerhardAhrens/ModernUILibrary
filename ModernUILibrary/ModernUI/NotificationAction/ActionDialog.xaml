@@ -92,7 +92,7 @@
                                 <Path
                                     Width="17"
                                     Height="17"
-                                    Data="{DynamicResource ResourceKey=BtnCancel}"
+                                    Data="{DynamicResource ResourceKey=CloseIcon}"
                                     Fill="Red"
                                     Stretch="Fill" />
                             </Button.Content>

@@ -55,6 +55,8 @@ namespace ModernIU.Controls
                 this.txtInstructionText.Visibility = Visibility.Collapsed;
             }
 
+            this.txtHeaderText.Text = HeaderText;
+
             this.BtnCancelButton.Visibility = settings.ShowCancelButton ? Visibility.Visible : Visibility.Hidden;
         }
 
@@ -103,6 +105,8 @@ namespace ModernIU.Controls
 
             ActionDialogResult result = null;
             this.isBusy = true;
+
+            this.txtHeaderText.Text = HeaderText;
 
             this.worker = new BackgroundWorker();
             this.worker.WorkerReportsProgress = true;
