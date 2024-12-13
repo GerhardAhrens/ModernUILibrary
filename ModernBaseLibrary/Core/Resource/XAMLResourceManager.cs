@@ -30,6 +30,8 @@ namespace ModernBaseLibrary.Core
     public class XAMLResourceManager
     {
         private static Assembly assembly;
+        private const string RootResource = "Resources";
+        private const string RootNamespace = "Mainova.Tools.Resources";
 
         static XAMLResourceManager()
         {
