@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\System.Windows\" />
+    <Folder Include="Core\Enum\" />
+    <Folder Include="Core\Attribute\" />
+    <Folder Include="Extensions\System.Enum\" />
     <Folder Include="Extensions\System.String\" />
     <Folder Include="Extensions\System.Type\" />
     <Folder Include="Extensions\System.Object\" />

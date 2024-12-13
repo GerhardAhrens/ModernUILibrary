@@ -26,9 +26,7 @@
     <Folder Include="Behaviors\Hyperlink\" />
     <Folder Include="Behaviors\Graphics\" />
     <Folder Include="Behaviors\TextBox\" />
-    <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Windows.Input\" />
-    <Folder Include="Extensions\System.Enum\" />
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
     <Folder Include="ModernUIBase\EventArgs\" />

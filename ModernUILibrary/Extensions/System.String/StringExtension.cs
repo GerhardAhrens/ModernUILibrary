@@ -30,7 +30,7 @@ namespace System
     using System.Windows.Documents;
 
     [SupportedOSPlatform("windows")]
-    public static partial class StringExtension
+    internal static partial class StringExtension
     {
         internal static string ToRegex(this List<string> @this)
         {

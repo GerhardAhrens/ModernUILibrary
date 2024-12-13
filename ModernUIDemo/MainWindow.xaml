@@ -127,22 +127,30 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <ContentControl
-            x:Name="ccContent"
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="1"
-            Margin="5,0"
-            Background="Silver"
-            Content="{Binding Path=ContentItem, UpdateSourceTrigger=PropertyChanged}" />
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+            <ContentControl
+                x:Name="ccContent"
+                Margin="5,0"
+                Background="Silver"
+                Content="{Binding Path=ContentItem, UpdateSourceTrigger=PropertyChanged}" />
+        </ScrollViewer>
 
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            FontSize="14">
             <Run Text="Anzahl:" />
-            <Run Text="{Binding Path=CountSamples, FallbackValue=0}" />
+            <Run Foreground="Blue" Text="{Binding Path=CountSamples, FallbackValue=0}" />
         </TextBlock>
 
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            FontSize="14">
+            <Run Text="Source in:" />
+            <Run Foreground="Blue" Text="{Binding Path=SourceName, FallbackValue='Kein Sourcename'}" />
+        </TextBlock>
     </Grid>
 </Window>

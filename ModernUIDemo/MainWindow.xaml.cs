@@ -57,6 +57,7 @@
                 if (value != null && this.sourceWPF == true)
                 {
                     UserControl uc = value.ItemContent as UserControl;
+                    this.SourceName = uc.GetType().Name;
                     this.ContentItem = uc;
                 }
                 else
@@ -66,6 +67,7 @@
                         UserControl uc = value.ItemContent as UserControl;
                         uc.Tag = new Tuple<string,string>(this.CurrentSelectedItem.SourceFile, this.CurrentSelectedItem.Stichworte);
                         this.ContentItem = uc;
+                        this.SourceName = uc.GetType().Name;
                         this.Focus();
                     }
                 }
@@ -93,6 +95,18 @@
             set
             {
                 this.countSamples = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        private string sourceName;
+
+        public string SourceName
+        {
+            get { return this.sourceName; }
+            set
+            {
+                this.sourceName = value;
                 this.OnPropertyChanged();
             }
         }
@@ -234,6 +248,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Dialoge und Funktionen", true));
             this.tabItemSource.Add(new TabControlItem("Dialoge", new FunctionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion" });
+            this.tabItemSource.Add(new TabControlItem("Exception Dialoge", new ExceptionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion;Exception" });
 
             this.tabItemSource.Add(new TabControlItem("View, Loading", true));
             this.tabItemSource.Add(new TabControlItem("Badges Controls", new BadgesControlsUC()));

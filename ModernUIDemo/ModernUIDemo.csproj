@@ -224,6 +224,9 @@
     <Compile Update="MyControls\SyntaxBoxControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\ExceptionControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WaterfallPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
