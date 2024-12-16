@@ -209,6 +209,7 @@
             this.tabItemSource.Add(new TabControlItem("TextBox RTF Controls", new TextBoxRtfControlsUC()) { Stichworte = "TextBox;String;Text;rtf" });
             this.tabItemSource.Add(new TabControlItem("CheckBox Controls", new CheckBoxUC()) { Stichworte = "CheckBox;Flat" });
             this.tabItemSource.Add(new TabControlItem("DateTime Picker Controls", new DateTimeControlsUC()) { Stichworte = "DateTime;Datum;Flat;Time;Picker" });
+            this.tabItemSource.Add(new TabControlItem("Timeline Controls", new TimelineControlsUC()) { Stichworte = "DateTime;Datum;Timeline" });
             this.tabItemSource.Add(new TabControlItem("Syntax Box Control", new SyntaxBoxControlsUC()) { Stichworte = "TextBox;Syntax" });
             this.tabItemSource.Add(new TabControlItem("Custom Syntax Box Control", new CustomSyntaxBoxControlsUC()) { Stichworte = "TextBox;Syntax" });
 

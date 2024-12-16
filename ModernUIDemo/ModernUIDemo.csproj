@@ -230,6 +230,9 @@
     <Compile Update="MyControls\SwitchMenuControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\TimelineControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WaterfallPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

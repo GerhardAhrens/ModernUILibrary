@@ -109,7 +109,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <TextBlock FontSize="14" Text="Beispiel für DateTime Control" />
         <Separator Height="3" Background="Green" />
 
         <StackPanel
@@ -296,7 +296,13 @@
                                 Width="150"
                                 TimeStringFormat="HH:mm:ss" />
 
-                            <ModernUI:FlatButton x:Name="SetZeitButton" Content="Set Zeit" Margin="10,0,0,0" Click="OnSetZeitButton" Width="100" Type="Default"/>
+                            <ModernUI:FlatButton
+                                x:Name="SetZeitButton"
+                                Width="100"
+                                Margin="10,0,0,0"
+                                Click="OnSetZeitButton"
+                                Content="Set Zeit"
+                                Type="Default" />
                         </StackPanel>
 
                     </StackPanel>
