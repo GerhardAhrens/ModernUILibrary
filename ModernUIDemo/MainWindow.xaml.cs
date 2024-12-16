@@ -214,14 +214,14 @@
             this.tabItemSource.Add(new TabControlItem("Custom Syntax Box Control", new CustomSyntaxBoxControlsUC()) { Stichworte = "TextBox;Syntax" });
 
             this.tabItemSource.Add(new TabControlItem("Button", true));
-            this.tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Button Controls", new ButtonControlsUC()) { Stichworte = "Button" });
+            this.tabItemSource.Add(new TabControlItem("DropDownButton Controls", new DropDownButtonControlsUC()) { Stichworte = "Button;DropDownButton" });
+            this.tabItemSource.Add(new TabControlItem("RadioButton Controls", new RadioButtonControlsUC()) { Stichworte = "Button;RadioButton" });
             this.tabItemSource.Add(new TabControlItem("FloatingAction Controls", new FloatingActionControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("GeometryButton Controls", new GeometryButtonControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("GeometryButton Controls", new GeometryButtonControlsUC()) { Stichworte = "Button;Icon;Flat" });
 
             this.tabItemSource.Add(new TabControlItem("Menü", true));
-            this.tabItemSource.Add(new TabControlItem("SwitchMenu Controls", new SwitchMenuControlsUC()) { Stichworte = "SwitchMenu;Menü" });
+            this.tabItemSource.Add(new TabControlItem("SwitchMenu Controls", new SwitchMenuControlsUC()) { Stichworte = "SwitchMenu;Menü;Button" });
 
             this.tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });

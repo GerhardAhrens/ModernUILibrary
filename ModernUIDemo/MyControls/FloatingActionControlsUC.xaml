@@ -22,29 +22,30 @@
         <Separator Height="3" Background="Green" />
 
         <UniformGrid Grid.Row="1" Columns="4">
-            <StackPanel VerticalAlignment="Center">
-                <ModernUI:FloatingActionMenu
-                    x:Name="FloatingActionMenu"
-                    ItemClick="FloatingActionMenu_ItemClick"
-                    PlacementDirection="Top" />
-            </StackPanel>
+            <ModernUI:FloatingActionMenu
+                x:Name="FloatingActionMenu"
+                Width="100"
+                VerticalAlignment="Bottom"
+                ItemClick="FloatingActionMenu_ItemClick"
+                PlacementDirection="Top" />
 
             <ModernUI:FloatingActionMenu
-                Margin="40,0,0,0" x:Name="FloatingActionMenuA"
-                ItemClick="FloatingActionMenuA_ItemClick"
-                VerticalAlignment="Center"
+                x:Name="FloatingActionMenuA"
+                Width="100"
+                VerticalAlignment="top"
                 Foreground="White"
+                ItemClick="FloatingActionMenuA_ItemClick"
                 PlacementDirection="Bottom"
                 Trigger="Click">
                 <ModernUI:FloatingActionButton Background="#00CC66" Content="1" />
-                
+
                 <ModernUI:FloatingActionButton
                     Background="#2DB7F5"
                     Content="2"
                     TipContent="fdasfadsfads" />
-                
+
                 <ModernUI:FloatingActionButton Background="#FF9900" Content="3" />
-                
+
                 <ModernUI:FloatingActionButton
                     Background="#FF3300"
                     Content="4"
@@ -53,7 +54,8 @@
             </ModernUI:FloatingActionMenu>
 
             <ModernUI:FloatingActionMenu
-                Margin="40,0,0,0"
+                Width="100"
+                Margin="0,0,100,0"
                 VerticalAlignment="Center"
                 Foreground="White"
                 PlacementDirection="Left"
@@ -66,7 +68,8 @@
             </ModernUI:FloatingActionMenu>
 
             <ModernUI:FloatingActionMenu
-                Margin="40,0,0,0"
+                Width="100"
+                Margin="100,0,0,0"
                 VerticalAlignment="Center"
                 Foreground="White"
                 PlacementDirection="Right"
