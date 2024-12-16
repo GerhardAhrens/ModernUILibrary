@@ -219,6 +219,9 @@
             this.tabItemSource.Add(new TabControlItem("FloatingAction Controls", new FloatingActionControlsUC()));
             this.tabItemSource.Add(new TabControlItem("GeometryButton Controls", new GeometryButtonControlsUC()));
 
+            this.tabItemSource.Add(new TabControlItem("Menü", true));
+            this.tabItemSource.Add(new TabControlItem("SwitchMenu Controls", new SwitchMenuControlsUC()) { Stichworte = "SwitchMenu;Menü" });
+
             this.tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
             this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));

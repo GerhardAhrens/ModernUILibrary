@@ -227,6 +227,9 @@
     <Compile Update="MyControls\ExceptionControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\SwitchMenuControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\WaterfallPanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

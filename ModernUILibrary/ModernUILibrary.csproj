@@ -68,6 +68,7 @@
     <Folder Include="ModernUI\NotificationProgress\" />
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\StepBar\Themes\" />
+    <Folder Include="ModernUI\SwitchMenu\Themes\" />
     <Folder Include="ModernUI\TabControl\Themes\" />
     <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
