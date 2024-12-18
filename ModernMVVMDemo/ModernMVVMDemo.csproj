@@ -8,4 +8,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
 </Project>
