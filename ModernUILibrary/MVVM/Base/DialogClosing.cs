@@ -22,7 +22,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernIU.MVVM.Base
+namespace ModernUI.MVVM.Base
 {
     using System.ComponentModel;
     using System.Windows;
@@ -30,23 +30,23 @@ namespace ModernIU.MVVM.Base
 
     public sealed class DialogClosing
     {
-        public static bool GetRaiseClosingHandler(DependencyObject obj)
+        public static readonly DependencyProperty IsClosingProperty =
+            DependencyProperty.RegisterAttached("IsClosing", typeof(bool), typeof(DialogClosing), new PropertyMetadata(false, OnRegistration));
+
+        public static bool GetIsClosing(DependencyObject obj)
         {
-            return (bool)obj.GetValue(RaiseClosingHandlerProperty);
+            return (bool)obj.GetValue(IsClosingProperty);
         }
 
-        public static void SetRaiseClosingHandler(DependencyObject obj, bool value)
+        public static void SetIsClosing(DependencyObject obj, bool value)
         {
-            obj.SetValue(RaiseClosingHandlerProperty, value);
+            obj.SetValue(IsClosingProperty, value);
         }
-
-        public static readonly DependencyProperty RaiseClosingHandlerProperty =
-            DependencyProperty.RegisterAttached("DialogClosingHandler", typeof(bool), typeof(DialogClosing), new PropertyMetadata(false, OnRegistration));
 
         private static void OnRegistration(DependencyObject depObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             Window window = depObject as Window;
-            if (window != null && GetRaiseClosingHandler(depObject) == true)
+            if (window != null && GetIsClosing(depObject) == true)
             {
                 window.Loaded += (s, e) => RegisterClosingAfterWindowIsLoaded(window);
             }

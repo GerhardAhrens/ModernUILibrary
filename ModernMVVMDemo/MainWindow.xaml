@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:ModernMVVMDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
+    winbase:DialogClosing.IsClosing="True"
     Title="{Binding Path=DialogDescription}"
     Width="800"
     Height="450"

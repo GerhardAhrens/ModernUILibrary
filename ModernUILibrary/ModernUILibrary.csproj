@@ -103,6 +103,12 @@
     <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MVVM\Base\UserControlBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
         <Exec Command="echo %25date%25 %25time%25 &gt; &quot;$(ProjectDir)\Resources\BuildDate.txt&quot;" />
   </Target>
