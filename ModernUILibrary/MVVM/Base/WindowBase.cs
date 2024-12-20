@@ -34,10 +34,12 @@ namespace ModernUI.MVVM.Base
     using System.Windows;
     using System.Windows.Media;
 
+    using ModernIU.Controls;
+
     [DebuggerStepThrough]
     [Serializable]
     [SupportedOSPlatform("windows")]
-    public class WindowBase : Window, INotifyPropertyChanged
+    public class WindowBase : MWindow, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ExpandoObject viewState = new ExpandoObject();

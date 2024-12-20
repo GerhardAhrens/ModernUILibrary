@@ -26,8 +26,6 @@ namespace ModernUIDemo.Cryptography
 
     using ModernBaseLibrary.Core;
 
-    using ModernUIDemo.Core;
-
     public class RandomDataContent : DisposableCoreBase
     {
         private Random random = null;

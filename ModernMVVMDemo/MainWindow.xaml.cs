@@ -43,7 +43,8 @@
             Window window = Application.Current.MainWindow;
             if (window != null)
             {
-                this.Close();
+                Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                Application.Current.Shutdown();
             }
         }
     }
