@@ -29,6 +29,8 @@
     <Folder Include="Core\Attribute\" />
     <Folder Include="Core\EventObserver\" />
     <Folder Include="Core\IO\" />
+    <Folder Include="Extensions\System.Reflection\" />
+    <Folder Include="Extensions\System.Int\" />
     <Folder Include="Extensions\System.Drawing\" />
     <Folder Include="Extensions\System.Double\" />
     <Folder Include="Extensions\System\" />
@@ -39,6 +41,9 @@
     <Folder Include="Extensions\System.Collections\" />
     <Folder Include="Extensions\System.SecureString\" />
     <Folder Include="Exception\" />
+    <Folder Include="Graphics\Barcode\LinearBarcode\" />
+    <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
+    <Folder Include="Graphics\SvgToXaml\" />
   </ItemGroup>
 
 </Project>

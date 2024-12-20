@@ -1,5 +1,6 @@
 ﻿namespace ModernBaseLibrary.Extension
 {
+    using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Runtime.Versioning;
 
