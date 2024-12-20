@@ -24,10 +24,11 @@ namespace ModernUIDemo.Cryptography
     using System.Text;
     using System.Windows.Controls;
 
-    using ModernUIDemo.Core;
-    using ModernUIDemo.Pattern;
+    using ModernBaseLibrary.Core;
 
-    public class RandomDataContent : DisposableBase
+    using ModernUIDemo.Core;
+
+    public class RandomDataContent : DisposableCoreBase
     {
         private Random random = null;
 

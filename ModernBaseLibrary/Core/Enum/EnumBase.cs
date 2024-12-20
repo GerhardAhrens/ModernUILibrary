@@ -11,7 +11,7 @@
 // <summary>Class of EnumBase Base Implemation</summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Runtime.Serialization;

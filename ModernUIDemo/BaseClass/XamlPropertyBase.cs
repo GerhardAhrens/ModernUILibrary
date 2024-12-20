@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="BindableBase.cs" company="Lifeprojects.de">
-//     Class: BindableBase
+// <copyright file="XamlPropertyBase.cs" company="Lifeprojects.de">
+//     Class: XamlPropertyBase
 //     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
