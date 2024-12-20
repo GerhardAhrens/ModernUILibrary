@@ -1,14 +1,18 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.Collections.ObjectModel;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
+
+    using ModernUI.MVVM.Base;
 
     using ModernUIDemo.Core;
 
     /// <summary>
     /// Interaktionslogik für FlatListViewControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class FlatListViewControlsUC : UserControl
     {
         public FlatListViewControlsUC()

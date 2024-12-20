@@ -14,6 +14,8 @@
 
         public static bool IsSubstractKey(Key key) => key == Key.Subtract || key == Key.OemMinus;
 
+        public static bool IsAddKey(Key key) => key == Key.Add;
+
         public static bool IsDeleteKey(Key key) => key == Key.Delete;
 
         public static bool IsIgnoredKey(Key key) => key == Key.Tab;

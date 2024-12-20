@@ -1,14 +1,14 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="RelaySPCommand.cs" company="PTA GmbH">
-//     Class: RelaySPCommand
-//     Copyright © PTA GmbH 2018
+// <copyright file="RelayTCommand.cs" company="Lifeprojects.de">
+//     Class: RelayCommand
+//     Copyright © Lifeprojects.de 2018
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
 // <date>18.09.2018</date>
 //
-// <summary>Class with RelaySPCommand Definition</summary>
+// <summary>Class with RelayCommand(TArgs) Definition</summary>
 //-----------------------------------------------------------------------
 
 namespace ModernUI.MVVM.Base
@@ -18,17 +18,18 @@ namespace ModernUI.MVVM.Base
     using System.Windows.Input;
 
     [DebuggerStepThrough]
-    public class RelayCommand : ICommand
+
+    public class RelayCommand<TArgs> : ICommand
     {
         /// <summary>
         /// The execute delegate.
         /// </summary>
-        protected Action<object> executeDelegate;
+        protected Action<TArgs> executeDelegate;
 
         /// <summary>
         /// The can execute delegate.
         /// </summary>
-        protected Predicate<object> canExecuteDelegate;
+        protected Predicate<TArgs> canExecuteDelegate;
 
         /// <summary>
         /// The pre action delegate.
@@ -44,7 +45,7 @@ namespace ModernUI.MVVM.Base
         /// Creates a new command that can always execute.
         /// </summary>
         /// <param name="execute">The execution logic.</param>
-        public RelayCommand(Action<object> execute) : this(execute, null)
+        public RelayCommand(Action<TArgs> execute) : this(execute, null)
         {
         }
 
@@ -53,11 +54,11 @@ namespace ModernUI.MVVM.Base
         /// </summary>
         /// <param name="execute">The execution logic.</param>
         /// <param name="canExecute">The execution status logic.</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<TArgs> execute, Predicate<TArgs> canExecute)
         {
             if (execute == null)
             {
-                this.executeDelegate = new Action<object>(p1 => { });
+                this.executeDelegate = new Action<TArgs>(p1 => { });
             }
 
             this.executeDelegate = execute;
@@ -71,11 +72,11 @@ namespace ModernUI.MVVM.Base
         /// <param name="canExecute">The execution status logic.</param>
         /// <param name="preAction">The pre action.</param>
         /// <param name="postAction">The post action.</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute, Action preAction, Action postAction)
+        public RelayCommand(Action<TArgs> execute, Predicate<TArgs> canExecute, Action preAction, Action postAction)
         {
             if (execute == null)
             {
-                this.executeDelegate = new Action<object>(p1 => { });
+                this.executeDelegate = new Action<TArgs>(p1 => { });
             }
 
             this.executeDelegate = execute;
@@ -93,7 +94,14 @@ namespace ModernUI.MVVM.Base
         /// </returns>
         public virtual bool CanExecute(object parameter)
         {
-            return this.canExecuteDelegate == null ? true : this.canExecuteDelegate(parameter);
+            if (parameter != null)
+            {
+                return this.canExecuteDelegate == null ? true : this.canExecuteDelegate((TArgs)parameter);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
@@ -112,7 +120,7 @@ namespace ModernUI.MVVM.Base
         public virtual void Execute(object parameter)
         {
             preActionDelegate?.Invoke();
-            executeDelegate?.Invoke(parameter);
+            executeDelegate?.Invoke((TArgs)parameter);
             postActionDelegate?.Invoke();
         }
 

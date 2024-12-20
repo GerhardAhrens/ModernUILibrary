@@ -11,7 +11,7 @@
 // <summary>Class with RelayCommand Definition</summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Diagnostics;

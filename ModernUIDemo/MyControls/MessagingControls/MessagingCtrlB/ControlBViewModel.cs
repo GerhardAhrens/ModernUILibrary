@@ -1,9 +1,11 @@
 ﻿namespace ModernUIDemo.Messaging
 {
     using System.ComponentModel;
+    using System.Runtime.Versioning;
 
     using ModernIU.Messaging;
 
+    [SupportedOSPlatform("windows")]
     public class ControlBViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

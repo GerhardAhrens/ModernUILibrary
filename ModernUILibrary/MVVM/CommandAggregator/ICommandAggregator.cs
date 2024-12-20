@@ -11,7 +11,7 @@
 // <summary>Interface Class with ICommandAggregator Definition</summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Threading.Tasks;
