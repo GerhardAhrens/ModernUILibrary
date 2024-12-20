@@ -194,7 +194,7 @@ namespace ModernUIDemo.Cryptography
         [SupportedOSPlatform("windows")]
         public byte[] GetByteArray(int size)
         {
-            Guard.NotGreaterThan<int>(0,size, "The Value must Greater 0");
+            Argument.NotGreaterThan<int>(0,size, "The Value must Greater 0");
 
             Random rnd = new Random();
             byte[] b = new byte[size];

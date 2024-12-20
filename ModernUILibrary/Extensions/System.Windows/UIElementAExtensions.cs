@@ -17,7 +17,7 @@ namespace System.Windows
     using System.Linq;
     using System.Windows.Documents;
 
-    public static partial class UIElementExtensions
+    internal static partial class UIElementExtensions
     {
         public static Adorner GetOrAddAdorner(this UIElement uIElement,Type type) {
             AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(uIElement);

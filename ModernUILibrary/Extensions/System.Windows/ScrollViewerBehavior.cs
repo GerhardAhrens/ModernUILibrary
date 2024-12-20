@@ -3,7 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    public class ScrollViewerBehavior
+    internal class ScrollViewerBehavior
     {
         public static DependencyProperty VerticalOffsetProperty =
             DependencyProperty.RegisterAttached("VerticalOffset", typeof(double), typeof(ScrollViewerBehavior), new UIPropertyMetadata(0.0, OnVerticalOffsetChanged));

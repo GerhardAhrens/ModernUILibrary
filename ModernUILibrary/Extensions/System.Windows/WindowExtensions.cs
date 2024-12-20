@@ -20,7 +20,7 @@ namespace System.Windows
 
     using ModernBaseLibrary.Core;
 
-    public static class WindowExtensions
+    internal static class WindowExtensions
     {
         private static bool firstTime = true;
 

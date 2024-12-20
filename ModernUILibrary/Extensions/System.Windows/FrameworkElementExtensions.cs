@@ -21,7 +21,7 @@ namespace System.Windows
     using System.Windows.Controls;
     using System.Windows.Media;
 
-    public static partial class FrameworkElementExtensions
+    internal static partial class FrameworkElementExtensions
     {
         public static void DoWhenLoaded<T>(this T element, Action<T> action)
             where T : FrameworkElement

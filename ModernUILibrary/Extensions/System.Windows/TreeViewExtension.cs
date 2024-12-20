@@ -5,7 +5,7 @@ namespace ModernIU.BehaviorsBase
     using System.Windows.Controls;
     using System.Windows.Media;
 
-    public static class TreeViewExtension
+    internal static class TreeViewExtension
     {
         public static int GetDepth(this TreeViewItem item)
         {

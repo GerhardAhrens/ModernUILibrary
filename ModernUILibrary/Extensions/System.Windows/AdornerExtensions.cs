@@ -27,7 +27,7 @@ namespace ModernIU.BehaviorsBase
     using System.Windows;
     using System.Windows.Documents;
 
-    public static class AdornerExtensions
+    internal static class AdornerExtensions
     {
         public static void TryRemoveAdorners<T>(this UIElement @this) where T : System.Windows.Documents.Adorner
         {

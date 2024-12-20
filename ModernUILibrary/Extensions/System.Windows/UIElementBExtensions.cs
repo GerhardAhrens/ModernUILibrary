@@ -20,7 +20,7 @@ namespace ModernIU.BehaviorsBase
     using System.Windows.Documents;
 
     [SupportedOSPlatform("windows")]
-    public static partial class UIElementExtensions
+    internal static partial class UIElementExtensions
     {
         public static Adorner GetOrAddAdorner(this UIElement uIElement,Type type) {
             AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(uIElement);

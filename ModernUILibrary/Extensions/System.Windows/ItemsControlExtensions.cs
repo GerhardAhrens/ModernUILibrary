@@ -8,7 +8,7 @@
 
     using ModernIU.Base;
 
-    public static class ItemsControlExtensions
+    internal static class ItemsControlExtensions
     {
         public static void AnimateScrollIntoView(this ItemsControl itemsControl, object item)
         {
