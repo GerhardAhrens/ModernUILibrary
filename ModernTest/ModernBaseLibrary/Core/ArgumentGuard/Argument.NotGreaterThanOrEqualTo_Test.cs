@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="GuardNotGreaterThan_Test.cs" company="Lifeprojects.de">
-//     Class: GuardNotGreaterThan_Test
+// <copyright file="GuardNotGreaterThanOrEqualTo_Test.cs" company="Lifeprojects.de">
+//     Class: GuardNotGreaterThanOrEqualTo_Test
 //     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
@@ -24,10 +24,10 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class GuardNotGreaterThan_Test
+    public class ArgumentNotGreaterThanOrEqualTo_Test
     {
-        private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
-        private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
+        const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
+        const string PARAMETERMESSAGE = " (Parameter 'parameter')";
 
         [TestInitialize]
         public void Initialize()
@@ -38,23 +38,29 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotGreaterThan_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotGreaterThanOrEqualTo_Test"/> class.
         /// </summary>
-        public GuardNotGreaterThan_Test()
+        public ArgumentNotGreaterThanOrEqualTo_Test()
         {
         }
 
         [DataRow(11, 10, "paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
-        [DataRow(11, 10, "paramName", null, "[paramName] cannot be greater than 10." + PARAMNAMEMESSAGE)]
-        [DataRow(11, 10, "", null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
-        [DataRow(11, 10, " ", null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
-        [DataRow(11, 10, null, null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, "paramName", null, "[paramName] cannot be greater than or equal to 10." + PARAMNAMEMESSAGE)]
+        [DataRow(11, 10, "", null, "[parameter] cannot be greater than or equal to 10." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, " ", null, "[parameter] cannot be greater than or equal to 10." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, null, null, "[parameter] cannot be greater than or equal to 10." + PARAMETERMESSAGE)]
+        [DataRow(10, 10, null, null, "[parameter] cannot be greater than or equal to 10." + PARAMETERMESSAGE)]
         [TestMethod]
-        public void NotGreaterThan_InvalidInputDefaultException_ThrowsException(int input, int threshold, string paramName, string errorMessage, string expectedErrorMessage)
+        public void NotGreaterThanOrEqualTo_InvalidInputDefaultException_ThrowsException(
+                    int input,
+                    int threshold,
+                    string paramName,
+                    string errorMessage,
+                    string expectedErrorMessage)
         {
             try
             {
-                Argument.NotGreaterThan(input, threshold, paramName, errorMessage);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -62,17 +68,17 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             }
         }
 
+        [DataRow(11, 10)]
+        [DataRow(10, 10)]
         [TestMethod]
-        public void NotGreaterThan_InvalidInputCustomException_ThrowsException()
+        public void NotGreaterThanOrEqualTo_InvalidInputCustomException_ThrowsException(int input, int threshold)
         {
-            int input = 11;
-            int threshold = 10;
-            var expectedErrorMessage = "error message" + PARAMNAMEMESSAGE;
+            var expectedErrorMessage = "error message" + PARAMETERMESSAGE;
             var exception = new Exception(expectedErrorMessage);
 
             try
             {
-                Argument.NotGreaterThan(input, threshold, exception);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -80,16 +86,16 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             }
         }
 
+        [DataRow(11, 10)]
+        [DataRow(10, 10)]
         [TestMethod]
-        public void NotGreaterThan_InvalidInputNullCustomException_ThrowsException()
+        public void NotGreaterThanOrEqualTo_InvalidInputNullCustomException_ThrowsException(int input, int threshold)
         {
-            int input = 11;
-            int threshold = 10;
             Exception exception = null;
 
             try
             {
-                Argument.NotGreaterThan(input, threshold, exception);
+                Argument.NotGreaterThanOrEqualTo(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -97,23 +103,22 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             }
         }
 
-        [DataRow(null)]
-        [DataRow("custom message")]
+        [DataRow(11, 10, null)]
+        [DataRow(10, 10, null)]
+        [DataRow(11, 10, "custom message")]
+        [DataRow(10, 10, "custom message")]
         [TestMethod]
-        public void NotGreaterThan_InvalidNullCustomException2_ThrowsException(string message)
+        public void NotGreaterThanOrEqualTo_InvalidNullCustomException2_ThrowsException(int input, int threshold, string message)
         {
-            int input = 11;
-            int threshold = 10;
-
             try
             {
                 if (message == null)
                 {
-                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold);
+                    Argument.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold, message);
+                    Argument.NotGreaterThanOrEqualTo<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -123,11 +128,10 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         [DataRow(9, 10)]
-        [DataRow(10, 10)]
         [TestMethod]
-        public void NotGreaterThan_ValidInput_DoesNotThrowException(int input, int threshold)
+        public void NotGreaterThanOrEqualTo_ValidInput_DoesNotThrowException(int input, int threshold)
         {
-            Argument.NotGreaterThan(input, threshold, nameof(input), null);
+            Argument.NotGreaterThanOrEqualTo(input, threshold, nameof(input), null);
         }
 
         [DataRow("", "")]

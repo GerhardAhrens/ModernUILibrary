@@ -12,7 +12,7 @@
 // <example>easyLibCore:CommandShortcut.Hotkey="Control+X"</example>
 //-----------------------------------------------------------------------
 
-namespace ModernIU.Base
+namespace ModernIU.WPF.Base
 {
     using System;
     using System.Linq;

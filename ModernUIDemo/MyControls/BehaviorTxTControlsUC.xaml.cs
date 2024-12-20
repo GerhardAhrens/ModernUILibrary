@@ -1,14 +1,18 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.Collections.ObjectModel;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
+
+    using ModernIU.WPF.Base;
 
     using ModernUIDemo.Core;
 
     /// <summary>
     /// Interaktionslogik für BehaviorTxTControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class BehaviorTxTControlsUC : UserControl
     {
         public BehaviorTxTControlsUC()

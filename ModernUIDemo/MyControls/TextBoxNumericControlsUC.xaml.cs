@@ -2,14 +2,16 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
 
-    using ModernUIDemo.Core;
+    using ModernIU.WPF.Base;
 
     /// <summary>
     /// Interaktionslogik für TextBoxNumericControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class TextBoxNumericControlsUC : UserControl, INotifyPropertyChanged
     {
         public TextBoxNumericControlsUC()

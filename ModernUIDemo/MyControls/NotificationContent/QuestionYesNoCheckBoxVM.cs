@@ -15,9 +15,9 @@
 
 namespace ModernUIDemo
 {
-    using ModernUIDemo.Core;
+    using ModernIU.WPF.Base;
 
-    public class QuestionYesNoCheckBoxVM : BindableBase
+    public class QuestionYesNoCheckBoxVM : PropertyBindingBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestionYesNo"/> class.

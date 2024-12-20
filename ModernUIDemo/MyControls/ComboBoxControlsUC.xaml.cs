@@ -2,15 +2,16 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
-    using ModernUIDemo.Core;
 
-    using static ModernUIDemo.MyControls.ListBoxControlsUC;
+    using ModernIU.WPF.Base;
 
     /// <summary>
     /// Interaktionslogik für ComboBoxControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class ComboBoxControlsUC : UserControl, INotifyPropertyChanged
     {
         public ComboBoxControlsUC()

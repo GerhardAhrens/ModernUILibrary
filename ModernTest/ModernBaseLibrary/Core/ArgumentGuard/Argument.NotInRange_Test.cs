@@ -24,7 +24,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class GuardNotInRange_Test
+    public class ArgumentNotInRange_Test
     {
         private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
         private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
@@ -38,9 +38,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotInRange_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotInRange_Test"/> class.
         /// </summary>
-        public GuardNotInRange_Test()
+        public ArgumentNotInRange_Test()
         {
         }
 

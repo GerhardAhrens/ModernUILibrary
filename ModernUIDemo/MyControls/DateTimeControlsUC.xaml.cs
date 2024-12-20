@@ -2,16 +2,20 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
 
     using ModernIU.Controls;
+    using ModernIU.MVVM.Base;
+    using ModernIU.WPF.Base;
 
     using ModernUIDemo.Core;
 
     /// <summary>
     /// Interaktionslogik für DateTimeControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class DateTimeControlsUC : UserControl, INotifyPropertyChanged
     {
         public DateTimeControlsUC()

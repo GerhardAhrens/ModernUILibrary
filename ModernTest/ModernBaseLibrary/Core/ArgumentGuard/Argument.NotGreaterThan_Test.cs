@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="GuardNotNull_Test.cs" company="Lifeprojects.de">
-//     Class: GuardNotNull_Test
+// <copyright file="GuardNotGreaterThan_Test.cs" company="Lifeprojects.de">
+//     Class: GuardNotGreaterThan_Test
 //     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
@@ -16,7 +16,6 @@
 namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Threading;
 
@@ -24,9 +23,8 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
     [TestClass]
-    public class GuardNotNull_Test
+    public class ArgumentNotGreaterThan_Test
     {
         private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
         private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
@@ -40,45 +38,41 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotNull_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotGreaterThan_Test"/> class.
         /// </summary>
-        public GuardNotNull_Test()
+        public ArgumentNotGreaterThan_Test()
         {
         }
 
-        [DataRow("paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
-        [DataRow("paramName", null, "[paramName] cannot be Null." + PARAMNAMEMESSAGE)]
-        [DataRow("", null, "[parameter] cannot be Null." + PARAMETERMESSAGE)]
-        [DataRow(" ", null, "[parameter] cannot be Null." + PARAMETERMESSAGE)]
-        [DataRow(null, null, "[parameter] cannot be Null." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, "paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
+        [DataRow(11, 10, "paramName", null, "[paramName] cannot be greater than 10." + PARAMNAMEMESSAGE)]
+        [DataRow(11, 10, "", null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, " ", null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
+        [DataRow(11, 10, null, null, "[parameter] cannot be greater than 10." + PARAMETERMESSAGE)]
         [TestMethod]
-        public void NotNull_InvalidInputDefaultException_ThrowsException(
-            string paramName,
-            string errorMessage,
-            string expectedErrorMessage)
+        public void NotGreaterThan_InvalidInputDefaultException_ThrowsException(int input, int threshold, string paramName, string errorMessage, string expectedErrorMessage)
         {
-            object input = null;
-
             try
             {
-                Argument.NotNull(input, paramName, errorMessage);
+                Argument.NotGreaterThan(input, threshold, paramName, errorMessage);
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex.GetType() == typeof(ArgumentNullException));
+                Assert.IsTrue(ex.GetType() == typeof(ArgumentOutOfRangeException));
             }
         }
 
         [TestMethod]
-        public void NotNull_InvalidInputCustomException_ThrowsException()
+        public void NotGreaterThan_InvalidInputCustomException_ThrowsException()
         {
-            object input = null;
+            int input = 11;
+            int threshold = 10;
             var expectedErrorMessage = "error message" + PARAMNAMEMESSAGE;
             var exception = new Exception(expectedErrorMessage);
 
             try
             {
-                Argument.NotNull(input, exception);
+                Argument.NotGreaterThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
@@ -87,37 +81,39 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         [TestMethod]
-        public void NotNull_InvalidNullCustomException_ThrowsException()
+        public void NotGreaterThan_InvalidInputNullCustomException_ThrowsException()
         {
-            object input = null;
+            int input = 11;
+            int threshold = 10;
             Exception exception = null;
 
             try
             {
-                Argument.NotNull(input, exception);
+                Argument.NotGreaterThan(input, threshold, exception);
             }
             catch (Exception ex)
             {
-                Assert.IsTrue(ex.GetType() == typeof(ArgumentNullException));
+                Assert.IsTrue(ex.GetType() == typeof(Exception));
             }
         }
 
         [DataRow(null)]
         [DataRow("custom message")]
         [TestMethod]
-        public void NotNull_InvalidNullCustomException2_ThrowsException(string message)
+        public void NotGreaterThan_InvalidNullCustomException2_ThrowsException(string message)
         {
-            object input = null;
+            int input = 11;
+            int threshold = 10;
 
             try
             {
                 if (message == null)
                 {
-                    Argument.NotNull<object, InvalidOperationException>(input);
+                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold);
                 }
                 else
                 {
-                    Argument.NotNull<object, InvalidOperationException>(input, message);
+                    Argument.NotGreaterThan<int, InvalidOperationException>(input, threshold, message);
                 }
             }
             catch (Exception ex)
@@ -126,19 +122,12 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             }
         }
 
+        [DataRow(9, 10)]
+        [DataRow(10, 10)]
         [TestMethod]
-        public void NotNull_ValidInput_DoesNotThrowException()
+        public void NotGreaterThan_ValidInput_DoesNotThrowException(int input, int threshold)
         {
-            var input = new object();
-
-            try
-            {
-                Argument.NotNull(input, nameof(input), null);
-            }
-            catch (Exception ex)
-            {
-                Assert.IsTrue(ex.GetType() == typeof(ArgumentNullException));
-            }
+            Argument.NotGreaterThan(input, threshold, nameof(input), null);
         }
 
         [DataRow("", "")]

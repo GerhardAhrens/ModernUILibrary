@@ -4,12 +4,12 @@ namespace ModernUIDemo.MyControls
     using System.Runtime.Versioning;
     using System.Windows;
 
+    using ModernIU.WPF.Base;
+
     using ModernUI.MVVM.Base;
 
-    using ModernUIDemo.Core;
-
     [SupportedOSPlatform("windows")]
-    public class TextBoxRtfControlsVM : BindableBase
+    public class TextBoxRtfControlsVM : PropertyBindingBase
     {
         private string _DocumentTextRTF;
 

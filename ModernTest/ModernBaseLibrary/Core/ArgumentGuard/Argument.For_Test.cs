@@ -27,7 +27,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
 
     [TestClass]
-    public class GuardFor_Test
+    public class ArgumentFor_Test
     {
         [TestInitialize]
         public void Initialize()
@@ -38,9 +38,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardFor_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentFor_Test"/> class.
         /// </summary>
-        public GuardFor_Test()
+        public ArgumentFor_Test()
         {
         }
 

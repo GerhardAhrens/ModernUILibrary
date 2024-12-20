@@ -1,24 +1,24 @@
 //-----------------------------------------------------------------------
-// <copyright file="XamlPropertyBase.cs" company="Lifeprojects.de">
-//     Class: XamlPropertyBase
-//     Copyright © Lifeprojects.de 2023
+// <copyright file="PropertyBindingBase.cs" company="Lifeprojects.de">
+//     Class: PropertyBindingBase
+//     Copyright © Lifeprojects.de 2024
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>
 // <email>Gerhard Ahrens@Lifeprojects.de</email>
-// <date>06.11.2023 15:19:08</date>
+// <date>20.12.2024</date>
 //
 // <summary>
 // Klasse zum Binden eines Property im XAML Code an ein Control
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernIU.WPF.Base
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    public class XamlPropertyBase : INotifyPropertyChanged
+    public class PropertyBindingBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,9 +1,9 @@
 ﻿
 namespace ModernUIDemo.MyControls
 {
-    using ModernUIDemo.Core;
+    using ModernIU.WPF.Base;
 
-    public class TextBoxRtfHTMLControlsVM : BindableBase
+    public class TextBoxRtfHTMLControlsVM : PropertyBindingBase
     {
         private string _Message;
 

@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernIU.MVVM.Base
+namespace ModernIU.WPF.Base
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;

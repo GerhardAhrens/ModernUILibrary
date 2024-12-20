@@ -18,7 +18,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernIU.Base
+namespace ModernIU.WPF.Base
 {
     using System;
     using System.Windows;

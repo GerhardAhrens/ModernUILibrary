@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="XamlProperty.cs" company="Lifeprojects.de">
+// <copyright file="XamlProperty.cs" company="PTA GmbH">
 //     Class: XamlProperty
-//     Copyright © Lifeprojects.de 2023
+//     Copyright © PTA GmbH 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>Gerhard Ahrens@Lifeprojects.de</email>
+// <author>Gerhard Ahrens - PTA GmbH</author>
+// <email>gerhard.ahrens@pta.de</email>
 // <date>06.11.2023 15:21:45</date>
 //
 // <summary>
@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Core
+namespace ModernIU.WPF.Base
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -39,11 +39,6 @@ namespace ModernUIDemo.Core
             var property = new XamlProperty<T>(default(T), propertyName);
             property.Value = value;
             return property;
-        }
-
-        internal static XamlProperty<T1> Set<T1, T2>()
-        {
-            throw new NotImplementedException();
         }
     }
 

@@ -24,7 +24,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class GuardNotLessThan_Test
+    public class ArgumentNotLessThan_Test
     {
         private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
         private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
@@ -38,9 +38,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotLessThan_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotLessThan_Test"/> class.
         /// </summary>
-        public GuardNotLessThan_Test()
+        public ArgumentNotLessThan_Test()
         {
         }
 

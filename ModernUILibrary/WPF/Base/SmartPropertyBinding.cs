@@ -1,4 +1,4 @@
-﻿namespace ModernIU.MVVM.Base
+﻿namespace ModernIU.WPF.Base
 {
     using System;
     using System.Collections.Concurrent;

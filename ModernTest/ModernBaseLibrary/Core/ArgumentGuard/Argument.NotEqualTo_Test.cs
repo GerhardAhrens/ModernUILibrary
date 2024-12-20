@@ -25,7 +25,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
 
     [TestClass]
-    public class GuardNotEqualTo_Test
+    public class ArgumentNotEqualTo_Test
     {
         [TestInitialize]
         public void Initialize()
@@ -36,9 +36,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotEqualTo_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotEqualTo_Test"/> class.
         /// </summary>
-        public GuardNotEqualTo_Test()
+        public ArgumentNotEqualTo_Test()
         {
         }
 

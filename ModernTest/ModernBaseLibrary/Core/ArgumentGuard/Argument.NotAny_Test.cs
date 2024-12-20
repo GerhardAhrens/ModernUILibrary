@@ -26,7 +26,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
 
     [TestClass]
-    public class GuardNotAny_Test
+    public class ArgumentNotAny_Test
     {
         [TestInitialize]
         public void Initialize()
@@ -37,9 +37,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotAny_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotAny_Test"/> class.
         /// </summary>
-        public GuardNotAny_Test()
+        public ArgumentNotAny_Test()
         {
         }
 

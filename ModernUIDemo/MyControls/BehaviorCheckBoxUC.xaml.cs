@@ -1,13 +1,15 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
 
-    using ModernUIDemo.Core;
+    using ModernIU.WPF.Base;
 
     /// <summary>
     /// Interaktionslogik für BehaviorCheckBoxUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class BehaviorCheckBoxUC : UserControl
     {
         public BehaviorCheckBoxUC()

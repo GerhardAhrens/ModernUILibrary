@@ -1,4 +1,8 @@
-﻿using ModernUIDemo.Core;
+﻿using System.Runtime.Versioning;
+
+using ModernIU.WPF.Base;
+
+using ModernUIDemo.Core;
 
 namespace ModernUIDemo.MyControls
 {
@@ -84,7 +88,8 @@ namespace ModernUIDemo.MyControls
     }
 }
 
-public class ListTextBoxControlsVM : BindableBase
+[SupportedOSPlatform("windows")]
+public class ListTextBoxControlsVM : PropertyBindingBase
 {
     private IEnumerable<Artikel> _DialogDataView;
     private object _CurrentSelectedItem;

@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="GuardNotNullOrWhitespace_Test.cs" company="Lifeprojects.de">
-//     Class: GuardNotNullOrWhitespace_Test
+// <copyright file="GuardNotNullOrEmpty_Test.cs" company="Lifeprojects.de">
+//     Class: GuardNotNullOrEmpty_Test
 //     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
@@ -26,7 +26,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
 
 
     [TestClass]
-    public class GuardNotNullOrWhitespace_Test
+    public class ArgumentNotNullOrEmpty_Test
     {
         private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
         private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
@@ -40,38 +40,32 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotNullOrWhitespace_Test"/> class.
+        /// Initializes a new instance of the <see cref="GuardNotNullOrEmpty_Test"/> class.
         /// </summary>
-        public GuardNotNullOrWhitespace_Test()
+        public ArgumentNotNullOrEmpty_Test()
         {
         }
 
-        [TestMethod]
         [DataRow(null, "paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
-        [DataRow(null, "paramName", null, "[paramName] cannot be Null, empty or white-space." + PARAMNAMEMESSAGE)]
-        [DataRow(null, "", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow(null, " ", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow(null, null, null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
+        [DataRow(null, "paramName", null, "[paramName] cannot be Null or empty." + PARAMNAMEMESSAGE)]
+        [DataRow(null, "", null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
+        [DataRow(null, " ", null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
+        [DataRow(null, null, null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
         [DataRow("", "paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
-        [DataRow("", "paramName", null, "[paramName] cannot be Null, empty or white-space." + PARAMNAMEMESSAGE)]
-        [DataRow("", "", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow("", " ", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow("", null, null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow(" ", "paramName", "custom error message", "custom error message" + PARAMNAMEMESSAGE)]
-        [DataRow(" ", "paramName", null, "[paramName] cannot be Null, empty or white-space." + PARAMNAMEMESSAGE)]
-        [DataRow(" ", "", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow(" ", " ", null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        [DataRow(" ", null, null, "[parameter] cannot be Null, empty or white-space." + PARAMETERMESSAGE)]
-        public void NotNullOrWhitespace_InvalidInputDefaultException_ThrowsException(
+        [DataRow("", "paramName", null, "[paramName] cannot be Null or empty." + PARAMNAMEMESSAGE)]
+        [DataRow("", "", null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
+        [DataRow("", " ", null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
+        [DataRow("", null, null, "[parameter] cannot be Null or empty." + PARAMETERMESSAGE)]
+        [TestMethod]
+        public void NotNullOrEmpty_InvalidInputDefaultException_ThrowsException(
             string input,
             string paramName,
             string errorMessage,
             string expectedErrorMessage)
-            {
-
+        {
             try
             {
-                Argument.NotNullOrWhitespace(input, paramName, errorMessage);
+                Argument.NotNullOrEmpty(input, paramName, errorMessage);
             }
             catch (Exception ex)
             {
@@ -80,15 +74,15 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         [TestMethod]
-        public void NotNullOrWhitespace_InvalidInputCustomException_ThrowsException()
+        public void NotNullOrEmpty_InvalidInputCustomException_ThrowsException()
         {
             string input = null;
-            var expectedErrorMessage = "error message" + PARAMETERMESSAGE;
+            var expectedErrorMessage = "error message";
             var exception = new Exception(expectedErrorMessage);
 
             try
             {
-                Argument.NotNullOrWhitespace(input, exception);
+                Argument.NotNullOrEmpty(input, exception);
             }
             catch (Exception ex)
             {
@@ -97,14 +91,14 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         [TestMethod]
-        public void NotNullOrWhitespace_InvalidInputNullCustomException_ThrowsException()
+        public void NotNullOrEmpty_InvalidInputNullCustomException_ThrowsException()
         {
             string input = null;
             Exception exception = null;
 
             try
             {
-                Argument.NotNullOrWhitespace(input, exception);
+                Argument.NotNullOrEmpty(input, exception);
             }
             catch (Exception ex)
             {
@@ -117,17 +111,17 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         [DataRow(null, "custom message")]
         [DataRow("", "custom message")]
         [TestMethod]
-        public void NotNullOrWhitespace_InvalidNullCustomException2_ThrowsException(string input, string message)
+        public void NotNullOrEmpty_InvalidNullCustomException2_ThrowsException(string input, string message)
         {
             try
             {
                 if (message == null)
                 {
-                    Argument.NotNullOrWhitespace<InvalidOperationException>(input);
+                    Argument.NotNullOrEmpty<InvalidOperationException>(input);
                 }
                 else
                 {
-                    Argument.NotNullOrWhitespace<InvalidOperationException>(input, message);
+                    Argument.NotNullOrEmpty<InvalidOperationException>(input, message);
                 }
             }
             catch (Exception ex)
@@ -136,14 +130,14 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
             }
         }
 
+        [DataRow("input")]
+        [DataRow(" ")]
         [TestMethod]
-        public void NotNullOrWhitespace_ValidInput_DoesNotThrowException()
+        public void NotNullOrEmpty_ValidInput_DoesNotThrowException(string input)
         {
-            var input = "input";
-
             try
             {
-                Argument.NotNullOrWhitespace(input, nameof(input), null);
+                Argument.NotNullOrEmpty(input, nameof(input), null);
             }
             catch (Exception ex)
             {

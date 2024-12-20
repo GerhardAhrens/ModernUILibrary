@@ -25,7 +25,7 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class GuardNotIsMatch_Test
+    public class ArgumentNotIsMatch_Test
     {
         private const string PARAMNAMEMESSAGE = " (Parameter 'paramName')";
         private const string PARAMETERMESSAGE = " (Parameter 'parameter')";
@@ -39,9 +39,9 @@ namespace ModernTest.ModernBaseLibrary.Core.ArgumentGuard
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GuardNotIsMatch_Test"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentNotIsMatch_Test"/> class.
         /// </summary>
-        public GuardNotIsMatch_Test()
+        public ArgumentNotIsMatch_Test()
         {
         }
 
