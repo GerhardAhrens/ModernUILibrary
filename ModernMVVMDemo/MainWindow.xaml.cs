@@ -28,8 +28,6 @@
             set => this.SetValue(value);
         }
 
-        public int MyProperty { get; set; }
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.DialogDescription = "MVVM Demo Programm";
