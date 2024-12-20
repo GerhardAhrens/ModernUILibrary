@@ -11,7 +11,7 @@
 // <summary>Extension Class</summary>
 //-----------------------------------------------------------------------
 
-namespace System
+namespace ModernBaseLibrary.Extension
 {
     using System.Collections;
     using System.Collections.Generic;

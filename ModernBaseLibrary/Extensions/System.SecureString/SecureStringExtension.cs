@@ -11,7 +11,7 @@
 // <summary>Class with SecureString Definition</summary>
 //-----------------------------------------------------------------------
 
-namespace System
+namespace ModernBaseLibrary.Extension
 {
     using System.Net;
     using System.Runtime.InteropServices;

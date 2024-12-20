@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DemoData\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
     <Folder Include="Resources\Style\" />

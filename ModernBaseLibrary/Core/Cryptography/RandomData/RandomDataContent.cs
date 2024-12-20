@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUIDemo.Cryptography
+namespace ModernBaseLibrary.Cryptography
 {
     using System;
     using System.Collections.Generic;

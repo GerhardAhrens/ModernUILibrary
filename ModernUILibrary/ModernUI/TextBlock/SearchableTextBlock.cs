@@ -10,6 +10,8 @@ namespace ModernIU.Controls
     using System.Windows.Documents;
     using System.Windows.Media;
 
+    using ModernBaseLibrary.Extension;
+
     [SupportedOSPlatform("windows")]
     public class SearchableTextBlock : TextBlock
     {

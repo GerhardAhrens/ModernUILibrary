@@ -20,6 +20,7 @@
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             WeakEventManager<Window, CancelEventArgs>.AddHandler(this, "Closing", this.OnClosing);
             this.DataContext = this;
+            List<Window> list = new List<Window>();
         }
 
         public string DialogDescription

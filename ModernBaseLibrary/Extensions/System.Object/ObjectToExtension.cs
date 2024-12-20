@@ -25,7 +25,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace System
+namespace ModernBaseLibrary.Extension
 {
     using System.ComponentModel;
     using System.Linq;

@@ -22,6 +22,8 @@ namespace ModernIU.Controls
 
     using Microsoft.VisualBasic.ApplicationServices;
 
+    using ModernBaseLibrary.Extension;
+
     [SupportedOSPlatform("windows")]
     public class LoginDialogOption
     {

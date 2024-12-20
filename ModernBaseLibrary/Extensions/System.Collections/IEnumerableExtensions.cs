@@ -22,11 +22,12 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace System.Collections.Generic
+namespace ModernBaseLibrary.Extension
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.Versioning;

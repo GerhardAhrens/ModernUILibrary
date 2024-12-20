@@ -25,6 +25,8 @@ namespace ModernIU.Controls
     using System.Windows.Media;
     using System.Windows.Threading;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernIU.Base;
 
     /// <summary>

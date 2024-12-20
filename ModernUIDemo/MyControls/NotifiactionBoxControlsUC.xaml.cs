@@ -2,17 +2,19 @@
 {
     using System.IO;
     using System.Reflection;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Imaging;
 
-    using ModernIU.Controls;
+    using ModernBaseLibrary.Cryptography;
 
-    using ModernUIDemo.Cryptography;
+    using ModernIU.Controls;
 
     /// <summary>
     /// Interaktionslogik für NotifiactionBoxControlsUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class NotifiactionBoxControlsUC : UserControl
     {
         public NotifiactionBoxControlsUC()

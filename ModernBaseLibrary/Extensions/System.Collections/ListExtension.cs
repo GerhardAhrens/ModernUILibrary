@@ -22,16 +22,13 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace System.Collections
+namespace ModernBaseLibrary.Extension
 {
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Versioning;
     using System.Text;
-    using System.Windows.Documents;
-    using System.Windows.Forms.VisualStyles;
 
     [SupportedOSPlatform("windows")]
     public static class ListExtension

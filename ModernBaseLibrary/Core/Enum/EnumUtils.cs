@@ -29,6 +29,8 @@ namespace ModernBaseLibrary.Core
     using System.ComponentModel;
     using System.Linq;
 
+    using ModernBaseLibrary.Extension;
+
     public static class EnumUtils
     {
         private static readonly Random Rng = new Random();

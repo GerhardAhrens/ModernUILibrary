@@ -21,14 +21,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Core\Cryptography\Blake\" />
+    <Folder Include="Core\Cryptography\File\" />
+    <Folder Include="Core\Cryptography\HashSum\" />
+    <Folder Include="Core\Cryptography\Steganographie\" />
     <Folder Include="Core\Enum\" />
     <Folder Include="Core\Attribute\" />
+    <Folder Include="Core\EventObserver\" />
+    <Folder Include="Core\IO\" />
+    <Folder Include="Extensions\System.Drawing\" />
+    <Folder Include="Extensions\System.Double\" />
+    <Folder Include="Extensions\System\" />
     <Folder Include="Extensions\System.Enum\" />
     <Folder Include="Extensions\System.String\" />
     <Folder Include="Extensions\System.Type\" />
     <Folder Include="Extensions\System.Object\" />
     <Folder Include="Extensions\System.Collections\" />
     <Folder Include="Extensions\System.SecureString\" />
+    <Folder Include="Exception\" />
   </ItemGroup>
 
 </Project>

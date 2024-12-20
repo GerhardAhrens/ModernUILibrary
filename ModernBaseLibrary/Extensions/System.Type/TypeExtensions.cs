@@ -35,15 +35,13 @@
 // <summary>Extensions Class for Data Types</summary>
 //-----------------------------------------------------------------------
 
-namespace System
+namespace ModernBaseLibrary.Extension
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.Versioning;
-
-    using Text;
 
     [SupportedOSPlatform("windows")]
     public static class TypeExtensions

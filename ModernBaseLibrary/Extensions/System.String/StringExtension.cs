@@ -22,7 +22,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace System
+namespace ModernBaseLibrary.Extension
 {
     using System.Collections.Generic;
     using System.Data;
@@ -32,8 +32,6 @@ namespace System
     using System.Runtime.Versioning;
     using System.Text;
     using System.Text.RegularExpressions;
-    using System.Windows;
-    using System.Windows.Documents;
 
     [SupportedOSPlatform("windows")]
     public static partial class StringExtension
