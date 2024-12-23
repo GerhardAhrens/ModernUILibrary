@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Images\SVG\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
     <Folder Include="Resources\Style\" />
@@ -228,6 +229,12 @@
     <Compile Update="MyControls\SwitchMenuControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\GraphicsControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\BarcodeControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TimelineControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -269,6 +276,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Images\SVG\Demo_A.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -304,6 +314,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MyControls\SyntaxBoxControlsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyControls\GraphicsControlsUC.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

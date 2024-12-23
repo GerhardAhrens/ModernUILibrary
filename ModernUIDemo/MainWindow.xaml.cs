@@ -223,6 +223,10 @@
             this.tabItemSource.Add(new TabControlItem("Menü", true));
             this.tabItemSource.Add(new TabControlItem("SwitchMenu Controls", new SwitchMenuControlsUC()) { Stichworte = "SwitchMenu;Menü;Button" });
 
+            this.tabItemSource.Add(new TabControlItem("Grafik", true));
+            this.tabItemSource.Add(new TabControlItem("Lesen SVG", new GraphicsControlsUC()) { Stichworte = "Grafik;SVG" });
+            this.tabItemSource.Add(new TabControlItem("Erstelle QRCode/Barcode", new BarcodeControlsUC()) { Stichworte = "Grafik;QRCode" });
+
             this.tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
             this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
