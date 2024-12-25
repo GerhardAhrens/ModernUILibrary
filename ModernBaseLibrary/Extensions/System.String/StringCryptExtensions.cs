@@ -22,7 +22,7 @@ namespace ModernBaseLibrary.Extension
     using ModernBaseLibrary.Core;
 
     [SupportedOSPlatform("windows")]
-    public static class StringCryptExtensions
+    public static partial class StringExtension
     {
         // <summary>
         /// A string extension method that encrypts the string with fixed Vector.

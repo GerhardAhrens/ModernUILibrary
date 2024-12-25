@@ -30,6 +30,27 @@
     <Folder Include="Core\EventObserver\" />
     <Folder Include="Core\IO\" />
     <Folder Include="Core\Collection\" />
+    <Folder Include="Extensions\System.Windows\" />
+    <Folder Include="Extensions\System.Threading\" />
+    <Folder Include="Extensions\System.Text\" />
+    <Folder Include="Extensions\System.Short\" />
+    <Folder Include="Extensions\System.Management\" />
+    <Folder Include="Extensions\System.Long\" />
+    <Folder Include="Extensions\System.IO.Compression\" />
+    <Folder Include="Extensions\System.IO\" />
+    <Folder Include="Extensions\System.Globalization\" />
+    <Folder Include="Extensions\System.Float\" />
+    <Folder Include="Extensions\System.Dynamic\" />
+    <Folder Include="Extensions\System.DirectoryServices\" />
+    <Folder Include="Extensions\System.Diagnostics\" />
+    <Folder Include="Extensions\System.Decimal\" />
+    <Folder Include="Extensions\System.Char\" />
+    <Folder Include="Extensions\System.Byte\" />
+    <Folder Include="Extensions\System.Array\" />
+    <Folder Include="Extensions\System.DateTime\" />
+    <Folder Include="Extensions\System.Guid\" />
+    <Folder Include="Extensions\System.Boolean\" />
+    <Folder Include="Extensions\Primitives\" />
     <Folder Include="Extensions\System.Reflection\" />
     <Folder Include="Extensions\System.Int\" />
     <Folder Include="Extensions\System.Drawing\" />
@@ -45,6 +66,13 @@
     <Folder Include="Graphics\Barcode\LinearBarcode\" />
     <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
     <Folder Include="Graphics\SvgToXaml\" />
+    <Folder Include="WIN32API\MessageBox\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="9.0.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.0" />
+    <PackageReference Include="System.Management" Version="9.0.0" />
   </ItemGroup>
 
 </Project>
