@@ -26,9 +26,9 @@ namespace ModernBaseLibrary.Core
 {
     using System;
 
-    internal class Subscription<TMessage> : ISubscription<TMessage> where TMessage : IObserverArgs
+    internal class Subscription<TMessage> : ISubscription<TMessage> where TMessage : IEventAggregatorArgs
     {
-        public Subscription(IEventObserver eventAggregator, Action<TMessage> action)
+        public Subscription(IEventAggregator eventAggregator, Action<TMessage> action)
         {
             if (eventAggregator == null)
             {
@@ -46,7 +46,7 @@ namespace ModernBaseLibrary.Core
 
         public Action<TMessage> Action { get; private set; }
 
-        public IEventObserver EventObserver { get; private set; }
+        public IEventAggregator EventObserver { get; private set; }
 
         public void Dispose()
         {

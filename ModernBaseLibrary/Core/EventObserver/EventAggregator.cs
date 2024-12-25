@@ -29,7 +29,7 @@ namespace ModernBaseLibrary.Core
     using System.Collections.Generic;
     using System.Linq;
 
-    public class EventObserver : IEventObserver
+    public class EventAggregator : IEventAggregator
     {
         /// <summary>
         /// The subscriptions.
@@ -43,7 +43,7 @@ namespace ModernBaseLibrary.Core
         /// </summary>
         /// <typeparam name="TPayload">The type of the message.</typeparam>
         /// <param name="payload">The payload.</param>
-        public void Publish<TPayload>(TPayload payload) where TPayload : IObserverArgs
+        public void Publish<TPayload>(TPayload payload) where TPayload : IEventAggregatorArgs
         {
             if (payload == null)
             {
@@ -64,7 +64,7 @@ namespace ModernBaseLibrary.Core
             }
         }
 
-        public bool ExistKey<TPayload>() where TPayload : IObserverArgs
+        public bool ExistKey<TPayload>() where TPayload : IEventAggregatorArgs
         {
             bool result = false;
             Type messageType = typeof(TPayload);
@@ -88,7 +88,7 @@ namespace ModernBaseLibrary.Core
             return result;
         }
 
-        public int CountValues<TPayload>() where TPayload : IObserverArgs
+        public int CountValues<TPayload>() where TPayload : IEventAggregatorArgs
         {
             int result = 0;
             Type messageType = typeof(TPayload);
@@ -107,7 +107,7 @@ namespace ModernBaseLibrary.Core
         /// <typeparam name="TPayload">The type of the message.</typeparam>
         /// <param name="action">The action.</param>
         /// <returns>The subscription.</returns>
-        public ISubscription<TPayload> Subscribe<TPayload>(Action<TPayload> action) where TPayload : IObserverArgs
+        public ISubscription<TPayload> Subscribe<TPayload>(Action<TPayload> action) where TPayload : IEventAggregatorArgs
         {
             Type messageType = typeof(TPayload);
 
@@ -130,7 +130,7 @@ namespace ModernBaseLibrary.Core
         /// </summary>
         /// <typeparam name="TPayload">The type of the message.</typeparam>
         /// <param name="subscription">The subscription.</param>
-        public void UnSubscribe<TPayload>(ISubscription<TPayload> subscription) where TPayload : IObserverArgs
+        public void UnSubscribe<TPayload>(ISubscription<TPayload> subscription) where TPayload : IEventAggregatorArgs
         {
             Type messageType = typeof(TPayload);
 
@@ -145,7 +145,7 @@ namespace ModernBaseLibrary.Core
         /// </summary>
         /// <typeparam name="TPayload">The type of the payload.</typeparam>
         /// <param name="action">The action.</param>
-        public void UnSubscribe<TPayload>(Action<TPayload> action) where TPayload : IObserverArgs
+        public void UnSubscribe<TPayload>(Action<TPayload> action) where TPayload : IEventAggregatorArgs
         {
             Type messageType = typeof(TPayload);
 
@@ -155,7 +155,7 @@ namespace ModernBaseLibrary.Core
             }
         }
 
-        public void UnSubscribe<TPayload>() where TPayload : IObserverArgs
+        public void UnSubscribe<TPayload>() where TPayload : IEventAggregatorArgs
         {
             Type messageType = typeof(TPayload);
 

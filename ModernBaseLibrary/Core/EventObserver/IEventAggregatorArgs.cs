@@ -24,7 +24,7 @@
 
 namespace ModernBaseLibrary.Core
 {
-    public interface IObserverArgs
+    public interface IEventAggregatorArgs
     {
     }
 }

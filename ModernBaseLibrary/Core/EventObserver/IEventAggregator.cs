@@ -26,13 +26,13 @@ namespace ModernBaseLibrary.Core
 {
     using System;
 
-    public interface IEventObserver
+    public interface IEventAggregator
     {
-        void Publish<TPayload>(TPayload payload) where TPayload : IObserverArgs;
+        void Publish<TPayload>(TPayload payload) where TPayload : IEventAggregatorArgs;
 
-        ISubscription<TPayload> Subscribe<TPayload>(Action<TPayload> action) where TPayload : IObserverArgs;
+        ISubscription<TPayload> Subscribe<TPayload>(Action<TPayload> action) where TPayload : IEventAggregatorArgs;
 
-        void UnSubscribe<TPayload>(ISubscription<TPayload> subscription) where TPayload : IObserverArgs;
+        void UnSubscribe<TPayload>(ISubscription<TPayload> subscription) where TPayload : IEventAggregatorArgs;
 
         void ClearAllSubscriptions();
 

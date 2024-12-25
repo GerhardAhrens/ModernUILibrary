@@ -26,10 +26,10 @@ namespace ModernBaseLibrary.Core
 {
     using System;
 
-    public interface ISubscription<TPayload> : IDisposable where TPayload : IObserverArgs
+    public interface ISubscription<TPayload> : IDisposable where TPayload : IEventAggregatorArgs
     {
         Action<TPayload> Action { get; }
 
-        IEventObserver EventObserver { get; }
+        IEventAggregator EventObserver { get; }
     }
 }

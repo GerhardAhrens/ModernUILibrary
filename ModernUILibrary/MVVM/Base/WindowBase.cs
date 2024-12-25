@@ -34,6 +34,9 @@ namespace ModernUI.MVVM.Base
     using System.Windows;
     using System.Windows.Media;
 
+    using Microsoft.Xaml.Behaviors;
+    using ModernBaseLibrary.Core;
+
     using ModernIU.Controls;
 
     [DebuggerStepThrough]
@@ -86,6 +89,16 @@ namespace ModernUI.MVVM.Base
         }
 
         public Type BaseType { get; set; }
+
+        public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
+
+        public EventAggregator EventAgg { get; } = new EventAggregator();
+
+        public virtual void InitCommands() { }
+
+        public virtual void OnViewIsClosing(CancelEventArgs eventArgs)
+        {
+        }
 
         #region Get/Set Implementierung
         private T GetPropertyValueInternal<T>(string propertyName)

@@ -39,7 +39,7 @@
             e.Cancel = false;
         }
 
-        public void OnViewIsClosing(CancelEventArgs eventArgs)
+        public override void OnViewIsClosing(CancelEventArgs eventArgs)
         {
             Window window = Application.Current.MainWindow;
             if (window != null)
