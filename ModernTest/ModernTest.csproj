@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ModernBaseLibrary\Enum\**" />
+    <EmbeddedResource Remove="ModernBaseLibrary\Enum\**" />
+    <None Remove="ModernBaseLibrary\Enum\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
   </ItemGroup>
 
@@ -29,6 +35,11 @@
 
   <ItemGroup>
     <PackageReference Update="MSTest.TestFramework" Version="3.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModernBaseLibrary\Core\Enum\" />
+    <Folder Include="AssertHelper\" />
   </ItemGroup>
 
 </Project>

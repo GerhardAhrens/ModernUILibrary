@@ -199,7 +199,6 @@
             this.tabItemSource.Add(new TabControlItem("Icon (PathGeometry)", new IconsControlsUC()) { Stichworte = "Icon;PathGeometry" });
             this.tabItemSource.Add(new TabControlItem("Farben", new ColorControlsUC()) { Stichworte = "Color;Farbe" });
             this.tabItemSource.Add(new TabControlItem("Farbenauswahl", new ColorSelectorControlsUC()) { Stichworte = "Color;Farbe" });
-            this.tabItemSource.Add(new TabControlItem("Image GIF", new ImageGIFControlsUC()) { Stichworte = "Image;Gif;Grafik" });
 
             this.tabItemSource.Add(new TabControlItem("Eingabe", true));
             this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()) { Stichworte = "TextBox;String;Text;Icon" });
@@ -226,6 +225,7 @@
             this.tabItemSource.Add(new TabControlItem("Grafik", true));
             this.tabItemSource.Add(new TabControlItem("Lesen SVG", new GraphicsControlsUC()) { Stichworte = "Grafik;SVG" });
             this.tabItemSource.Add(new TabControlItem("Erstelle QRCode/Barcode", new BarcodeControlsUC()) { Stichworte = "Grafik;QRCode" });
+            this.tabItemSource.Add(new TabControlItem("Image GIF", new ImageGIFControlsUC()) { Stichworte = "Image;Gif;Grafik" });
 
             this.tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
             this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });

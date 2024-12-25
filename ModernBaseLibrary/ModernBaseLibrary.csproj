@@ -29,6 +29,7 @@
     <Folder Include="Core\Attribute\" />
     <Folder Include="Core\EventObserver\" />
     <Folder Include="Core\IO\" />
+    <Folder Include="Core\Collection\" />
     <Folder Include="Extensions\System.Reflection\" />
     <Folder Include="Extensions\System.Int\" />
     <Folder Include="Extensions\System.Drawing\" />

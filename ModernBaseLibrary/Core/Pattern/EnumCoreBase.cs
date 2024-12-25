@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="EnumBase.cs" company="Lifeprojects.de">
-//     Class: EnumBase
+// <copyright file="EnumCoreBase.cs" company="Lifeprojects.de">
+//     Class: EnumCoreBase
 //     Copyright © Gerhard Ahrens, 2017
 // </copyright>
 //
@@ -8,49 +8,50 @@
 // <email>development@lifeprojects.de</email>
 // <date>1.1.2016</date>
 //
-// <summary>Class of EnumBase Base Implemation</summary>
+// <summary>Class of EnumCoreBase Base Implemation</summary>
 //-----------------------------------------------------------------------
 
-namespace ModernBaseLibrary.Core
+namespace EasyPrototypingNET.BaseClass
 {
     using System;
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
-    public class EnumBase : ISerializable
+    public class EnumCoreBase : ISerializable
     {
         protected readonly int Value;
 
         [NonSerialized]
         protected readonly string Description;
 
-        public EnumBase(SerializationInfo info, StreamingContext context)
+        public EnumCoreBase(SerializationInfo info, StreamingContext context)
         {
             this.Description = (string)info.GetValue("Description", typeof(string));
             this.Value = (int)info.GetValue("Value", typeof(int));
         }
 
-        protected EnumBase(int value, string description)
+        protected EnumCoreBase(int value, string description)
         {
             this.Value = value;
             this.Description = description;
         }
 
-        public static bool operator ==(EnumBase x, EnumBase y)
+        public static bool operator ==(EnumCoreBase x, EnumCoreBase y)
         {
             return ((object)x != null && x.Equals(y)) || ((object)x == null && (object)y == null);
         }
 
-        public static bool operator !=(EnumBase x, EnumBase y)
+        public static bool operator !=(EnumCoreBase x, EnumCoreBase y)
         {
             return ((object)x != null && !x.Equals(y)) || ((object)x == null && (object)y != null);
         }
 
         public override bool Equals(object obj)
         {
-            return this.Equals(obj as EnumBase);
+            return this.Equals(obj as EnumCoreBase);
         }
 
-        public bool Equals(EnumBase p)
+        public bool Equals(EnumCoreBase p)
         {
             return !object.ReferenceEquals(p, null) && this.Value.Equals(p.Value);
         }

@@ -13,7 +13,7 @@
 }
 
 /* Pattern - Singelton */
-public class MySingelton : SingletonBase<MySingelton>
+public class MySingelton : SingletonCoreBase<MySingelton>
 {
     private const string HELLOWORLDMESSAGE = "Hello Gerhard - von MySingleton BaseClass";
 

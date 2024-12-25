@@ -1,11 +1,14 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.Collections;
     using System.ComponentModel;
+    using System.Drawing.Imaging;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
     using ModernBaseLibrary.Barcode;
@@ -28,6 +31,8 @@
         {
             this.CreateSmallNumeric();
             this.CreateSmallText();
+            this.CreateLinearBarcode39();
+            this.CreateLinearBarcodeEAN13();
         }
 
         public void CreateSmallNumeric()
@@ -71,6 +76,59 @@
             {
                 this.tbQRCodeText.Text = $"Inhalt: {qrCodeContent}";
                 this.QRCodeImageB.Source = new BitmapImage(new Uri(fullPath));
+            }
+        }
+
+        public void CreateLinearBarcode39()
+        {
+            string fullPath = Path.Combine(CurrentAssemblyPath(), "Barcode", "Code39.png");
+            LinearBarcode newBarcode = new LinearBarcode("Gerhard-Ahrens", Symbology.Code39)
+            {
+                Encoder = { Dpi = 300, BarcodeHeight = 200 }
+            };
+
+            string barcodeContent = "Ein kleiner Text";
+            newBarcode.Encoder.HumanReadableValue = barcodeContent;
+            newBarcode.Encoder.SetHumanReadablePosition("Above");
+            newBarcode.Encoder.SetHumanReadableFont("Arial", 10);
+            newBarcode.Encoder.ShowEncoding = false;
+            string zplString = newBarcode.ZplEncode;
+
+            byte[] barcodeImage = newBarcode.SaveImage("PNG");
+            using (System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(barcodeImage)))
+            {
+                image.Save(fullPath, ImageFormat.Png);
+            }
+
+            if (File.Exists(fullPath))
+            {
+                this.tbLinearBarcode39.Text = $"Inhalt: {barcodeContent}";
+                this.LinearBarcode39.Source = new BitmapImage(new Uri(fullPath));
+            }
+        }
+
+        public void CreateLinearBarcodeEAN13()
+        {
+            string fullPath = Path.Combine(CurrentAssemblyPath(), "Barcode", "EAN13.png");
+
+            LinearBarcode newBarcode = new LinearBarcode("4042448073150", Symbology.Ean13)
+            {
+                Encoder = { Dpi = 300, BarcodeHeight = 200 }
+            };
+
+            string barcodeContent = "4042448073150";
+            newBarcode.Encoder.HumanReadableValue = barcodeContent;
+            newBarcode.Encoder.SetHumanReadablePosition("Above");
+            newBarcode.Encoder.SetHumanReadableFont("Arial", 9);
+            newBarcode.Encoder.ShowEncoding = false;
+            string zplString = newBarcode.ZplEncode;
+
+            byte[] barcodeImage = newBarcode.SaveImage("PNG");
+            using (MemoryStream stream = new MemoryStream(barcodeImage))
+            {
+                this.LinearBarcodeEAN13.Source = BitmapFrame.Create(stream,
+                                                  BitmapCreateOptions.None,
+                                                  BitmapCacheOption.OnLoad);
             }
         }
 
