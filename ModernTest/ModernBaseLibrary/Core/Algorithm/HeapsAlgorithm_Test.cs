@@ -24,7 +24,6 @@ namespace ModernTest.ModernBaseLibrary.Core.Algorithm
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
     [TestClass]
     public class HeapsAlgorithm_Test
     {

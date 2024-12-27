@@ -1,0 +1,89 @@
+﻿namespace Console.CommandLine
+{
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            Flags04(args);
+        }
+
+        private static void CmdHelp01()
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program --help");
+            CommandParser parser = new CommandParser(cmdArgs);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+            string helpText = parser.GetHelpInfo<FileCopyModel>();
+        }
+
+        private static void Flags01(string[] args)
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program -q text.txt -z neu.txt");
+            CommandParser parser = new CommandParser(args);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+            string helpText = parser.GetHelpInfo<FileCopyModel>();
+        }
+
+        private static void Flags02(string[] args)
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program -u=gerhard");
+            CommandParser parser = new CommandParser(cmdArgs);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+        }
+
+        private static void Flags03(string[] args)
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program -a");
+            CommandParser parser = new CommandParser(cmdArgs);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+        }
+
+        private static void Flags04(string[] args)
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program -d");
+            CommandParser parser = new CommandParser(cmdArgs);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+        }
+    }
+
+    [Help("== This is a Test Model ==")]
+    public class FileCopyModel
+    {
+        [Flag("quelle","q")]
+        [Help("Quellverzeichnis")]
+        public string source { get; set; }
+
+        [Flag("ziel", "z")]
+        [Help("Zielverzeichnis")]
+        public string destination { get; set; }
+
+        [Flag("username", "u")]
+        [Help("This is the Username property")]
+        public string Username { get; set; }
+
+        [Flag("delete", "d")]
+        public bool IsDeleted
+        {
+            get
+            {
+                return this.Actions.Any(a => a == Action.Delete);
+            }
+            set
+            {
+                if (this.Actions.Any(a => a == Action.Delete) == false)
+                {
+                    this.Actions.Add(Action.Delete);
+                }
+            }
+        }
+
+        [Flag("action", "a")]
+        public List<Action> Actions { get; set; } = Enum.GetValues(typeof(Action)).Cast<Action>().Select(v => v).ToList();
+
+        public enum Action
+        {
+            Delete,
+            Copy,
+            Move
+        }
+    }
+}

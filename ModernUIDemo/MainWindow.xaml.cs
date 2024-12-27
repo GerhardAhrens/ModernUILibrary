@@ -329,6 +329,9 @@
             this.tabItemSource.Add(new TabControlItem("Palindrome", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Palindrome", SourceFile = "Algorithm.Algorithm_Palindrome.txt" });
             this.tabItemSource.Add(new TabControlItem("Permutationen", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Permutationen", SourceFile = "Algorithm.Algorithm_Heaps.txt" });
 
+            this.tabItemSource.Add(new TabControlItem("Console ", true));
+            this.tabItemSource.Add(new TabControlItem("CommandLine", new SyntaxBoxControlsUC()) { Stichworte = "Console;CommandLine", SourceFile = "Console.Console_CommandLine.txt" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>

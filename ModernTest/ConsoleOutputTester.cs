@@ -20,13 +20,13 @@
 
         public ConsoleOutputTester()
         {
-            _originalOutput = Console.Out;
-            Console.SetOut(_consoleOutput);
+            _originalOutput = System.Console.Out;
+            System.Console.SetOut(_consoleOutput);
         }
 
         public void Dispose()
         {
-            Console.SetOut(_originalOutput);
+            System.Console.SetOut(_originalOutput);
             _consoleOutput.Dispose();
         }
 

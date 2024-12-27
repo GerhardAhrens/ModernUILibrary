@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Console\CommandLine\Attributes\" />
+    <Folder Include="Console\CommandLine\Exception\" />
+    <Folder Include="Console\ConsoleMenu\" />
+    <Folder Include="Console\ConsoleTable\" />
     <Folder Include="Core\Cryptography\Blake\" />
     <Folder Include="Core\Cryptography\File\" />
     <Folder Include="Core\Cryptography\HashSum\" />
@@ -29,6 +33,12 @@
     <Folder Include="Core\Attribute\" />
     <Folder Include="Core\IO\" />
     <Folder Include="Core\Collection\" />
+    <Folder Include="Core\Application\" />
+    <Folder Include="Core\ApplicationHotKeys\" />
+    <Folder Include="Core\ArrayCollection\" />
+    <Folder Include="Core\Caching\" />
+    <Folder Include="Core\Pattern\Result\" />
+    <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />
     <Folder Include="Extensions\System.Text\" />

@@ -629,7 +629,7 @@ namespace ModernBaseLibrary.Extension
         {
             if (string.IsNullOrEmpty(@this) == false)
             {
-                TextWriter writer = Console.Out;
+                TextWriter writer = System.Console.Out;
                 writer.Write(@this);
             }
         }

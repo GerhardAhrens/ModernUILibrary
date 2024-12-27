@@ -20,7 +20,8 @@ namespace ModernBaseLibrary.Win32API
     using System.Text;
     using System.Windows;
     using System.Windows.Interop;
-    using ModernIU.Base;
+
+    using ModernBaseLibrary.Core;
 
     public class Win32API : SingletonCoreBase<Win32API>
     {

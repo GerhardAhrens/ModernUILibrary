@@ -11,7 +11,7 @@
 // <summary>Class of EnumCoreBase Base Implemation</summary>
 //-----------------------------------------------------------------------
 
-namespace EasyPrototypingNET.BaseClass
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Runtime.Serialization;

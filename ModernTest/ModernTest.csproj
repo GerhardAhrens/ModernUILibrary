@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
   </ItemGroup>
 
@@ -38,8 +39,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ModernBaseLibrary\Console\CommandLine\" />
+    <Folder Include="ModernBaseLibrary\Console\DebugTextWriter\" />
     <Folder Include="ModernBaseLibrary\Core\Enum\" />
     <Folder Include="AssertHelper\" />
+    <Folder Include="ModernBaseLibrary\Core\ArrayCollection\" />
+    <Folder Include="ModernBaseLibrary\Core\Pattern\Result\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.String\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Object\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Dynamic\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Collections\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System\" />
   </ItemGroup>
 
 </Project>

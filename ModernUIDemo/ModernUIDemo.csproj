@@ -31,6 +31,7 @@
     <Folder Include="Images\SVG\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
+    <Folder Include="MyControls\HotKeys\" />
     <Folder Include="Resources\Style\" />
   </ItemGroup>
 
@@ -65,6 +66,7 @@
     <EmbeddedResource Include="Resources\BuildDate.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
     <EmbeddedResource Include="Resources\Source\Pattern\Pattern_Singelton.txt" />
     <EmbeddedResource Include="Resources\Source\Demo_A.txt" />
   </ItemGroup>

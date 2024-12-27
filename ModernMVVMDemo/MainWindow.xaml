@@ -29,5 +29,34 @@
         </StackPanel>
     </ModernUI:MWindow.MoreOnTitle>
 
-    <Grid />
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <ModernUI:FlatButton
+                Width="150"
+                Height="50"
+                Command="{Binding Path=CmdAgg[CloseWindowCommand]}">
+                <ModernUI:FlatButton.Content>
+                    <TextBlock>
+                        <Run Text="Beenden mit" />
+                        <LineBreak />
+                        <Run Text="mit Command Aggregator" />
+                    </TextBlock>
+                </ModernUI:FlatButton.Content>
+            </ModernUI:FlatButton>
+
+            <ModernUI:FlatButton
+                Width="150"
+                Height="50"
+                Margin="50,0,0,0"
+                Command="{Binding Path=CloseWindow2Command}">
+                <ModernUI:FlatButton.Content>
+                    <TextBlock>
+                        <Run Text="Beenden mit" />
+                        <LineBreak />
+                        <Run Text="mit ICommand" />
+                    </TextBlock>
+                </ModernUI:FlatButton.Content>
+            </ModernUI:FlatButton>
+        </StackPanel>
+    </Grid>
 </winbase:WindowBase>

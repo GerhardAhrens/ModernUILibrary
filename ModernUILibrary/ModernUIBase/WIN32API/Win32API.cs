@@ -21,6 +21,8 @@ namespace ModernIU.Base.Win32API
     using System.Windows;
     using System.Windows.Interop;
 
+    using ModernBaseLibrary.Core;
+
     public class Win32API : SingletonCoreBase<Win32API>
     {
         #region Windows Dialog Frame

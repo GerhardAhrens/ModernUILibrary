@@ -1,4 +1,4 @@
-﻿namespace EasyPrototypingNET.Test
+﻿namespace ModernTest.ModernBaseLibrary
 {
     using System;
     using System.Collections.Generic;
