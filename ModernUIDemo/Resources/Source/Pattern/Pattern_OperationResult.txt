@@ -1,0 +1,23 @@
+﻿public void OperationResultSuccessTrue()
+{
+    OperationResult<List<string>> textList = GenerateListWithResultTrue();
+    List<string> liste = textList.Result;
+
+    Assert.IsNotNull(textList.Result);
+    Assert.IsNotNull(liste);
+    Assert.IsTrue(liste.Count > 0);
+    Assert.IsTrue((bool)textList.OperationResultState);
+}
+
+private static OperationResult<List<string>> GenerateListWithResultTrue(int count = 10)
+{
+    List<string> result = new List<string>();
+
+    Random rnd = new Random();
+    for (int i = 0; i < count; i++)
+    {
+        result.Add(GenerateCoupon(10, rnd));
+    }
+
+    return OperationResult<List<string>>.SuccessResult(result, true);
+}

@@ -53,13 +53,5 @@ namespace ModernBaseLibrary.Core
 
             return assemblyInfos;
         }
-
-        protected override void DisposeManagedResources()
-        {
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-        }
     }
 }

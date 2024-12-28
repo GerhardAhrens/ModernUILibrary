@@ -30,9 +30,6 @@ namespace ModernBaseLibrary.Core
 
         public HotKeyAlreadyRegisteredException(string message, HotKey hotKey, Exception inner) : base(message, inner) { this.HotKey = hotKey; }
 
-        protected HotKeyAlreadyRegisteredException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
 
         public HotKey HotKey { get; private set; }
     }

@@ -1,0 +1,16 @@
+﻿public sealed class HashFile : DisposableCoreBase
+{
+	public HashFile()
+	{
+	}
+
+	/*
+	* Weitere Methoden und Properties
+	*/
+}
+
+/* Aufrufen */
+using(HashFile hf = new HashFile())
+{
+	/* Aufrufen von Methoden und Properties */
+}

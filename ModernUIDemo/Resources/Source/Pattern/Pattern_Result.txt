@@ -1,0 +1,23 @@
+﻿public void ResultSuccessNotNull()
+{
+    Result<List<string>> textList = GenerateListWithResultNotNull();
+    List<string> liste = textList.Value;
+
+    Assert.IsNotNull(textList.Value);
+    Assert.IsNotNull(liste);
+    Assert.IsTrue(liste.Count > 0);
+    Assert.IsTrue(textList.ResultState == true);
+}
+
+private static Result<List<string>> GenerateListWithResultNotNull(int count = 10)
+{
+    List<string> result = new List<string>();
+
+    Random rnd = new Random();
+    for (int i = 0; i < count; i++)
+    {
+        result.Add(GenerateCoupon(10, rnd));
+    }
+
+    return Result<List<string>>.SuccessResult(result,"Mit Werten", true,1);
+}

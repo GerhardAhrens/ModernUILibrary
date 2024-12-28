@@ -46,9 +46,9 @@ namespace ModernBaseLibrary.Core
             GC.SuppressFinalize(this);
         }
 
-        protected abstract void DisposeManagedResources();
+        public virtual void DisposeManagedResources() { }
 
-        protected abstract void DisposeUnmanagedResources();
+        public virtual void DisposeUnmanagedResources() { }
 
         private void Dispose(bool disposing)
         {

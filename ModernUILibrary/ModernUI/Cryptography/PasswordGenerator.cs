@@ -364,16 +364,6 @@ namespace ModernIU.Controls
             return passwordStrengthResult;
         }
 
-        protected override void DisposeManagedResources()
-        {
-            /* Behandeln von Managed Resources bem verlassen der Klasse */
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-            /* Behandeln von UnManaged Resources bem verlassen der Klasse */
-        }
-
         private string GetRandomString(int length, IEnumerable<char> characterSet)
         {
             if (length < 0)

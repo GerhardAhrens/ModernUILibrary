@@ -324,6 +324,9 @@
             this.tabItemSource = new List<TabControlItem>();
             this.tabItemSource.Add(new TabControlItem("Pattern", true));
             this.tabItemSource.Add(new TabControlItem("Singelton", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Singelton", SourceFile= "Pattern.Pattern_Singelton.txt" });
+            this.tabItemSource.Add(new TabControlItem("Dispose", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Dispose", SourceFile = "Pattern.Pattern_DisposableCoreBase.txt" });
+            this.tabItemSource.Add(new TabControlItem("Result", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;Result", SourceFile = "Pattern.Pattern_Result.txt" });
+            this.tabItemSource.Add(new TabControlItem("OperationResult", new SyntaxBoxControlsUC()) { Stichworte = "Pattern;OperationResult", SourceFile = "Pattern.Pattern_OperationResult.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Algorithm ", true));
             this.tabItemSource.Add(new TabControlItem("Palindrome", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Palindrome", SourceFile = "Algorithm.Algorithm_Palindrome.txt" });
@@ -331,6 +334,10 @@
 
             this.tabItemSource.Add(new TabControlItem("Console ", true));
             this.tabItemSource.Add(new TabControlItem("CommandLine", new SyntaxBoxControlsUC()) { Stichworte = "Console;CommandLine", SourceFile = "Console.Console_CommandLine.txt" });
+            this.tabItemSource.Add(new TabControlItem("Spinner", new SyntaxBoxControlsUC()) { Stichworte = "Console;Spinner", SourceFile = "Console.Console_Spinner.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("Application ", true));
+            this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 

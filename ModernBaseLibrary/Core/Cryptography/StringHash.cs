@@ -66,15 +66,6 @@ namespace ModernBaseLibrary.Cryptography
             return result;
         }
 
-        protected override void DisposeManagedResources()
-        {
-            this.Text = null;
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-        }
-
         private string ComputeHashMD5()
         {
             if (string.IsNullOrEmpty(this.Text) == false)

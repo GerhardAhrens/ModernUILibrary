@@ -110,13 +110,5 @@ namespace ModernBaseLibrary.Console
 
 
         private static ConsoleColor MenuPointColor { get; set; } = ConsoleColor.Green;
-
-        protected override void DisposeManagedResources()
-        {
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-        }
     }
 }

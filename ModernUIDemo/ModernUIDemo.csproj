@@ -66,7 +66,12 @@
     <EmbeddedResource Include="Resources\BuildDate.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
+    <EmbeddedResource Include="Resources\Source\CoreBase\CoreBase_SmartSettings.txt" />
+    <EmbeddedResource Include="Resources\Source\Pattern\Pattern_DisposableCoreBase.txt" />
+    <EmbeddedResource Include="Resources\Source\Pattern\Pattern_OperationResult.txt" />
+    <EmbeddedResource Include="Resources\Source\Pattern\Pattern_Result.txt" />
     <EmbeddedResource Include="Resources\Source\Pattern\Pattern_Singelton.txt" />
     <EmbeddedResource Include="Resources\Source\Demo_A.txt" />
   </ItemGroup>

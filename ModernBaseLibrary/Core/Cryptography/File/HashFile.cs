@@ -197,15 +197,5 @@ namespace ModernBaseLibrary.Cryptography
 
             return result;
         }
-
-        protected override void DisposeManagedResources()
-        {
-            /* Behandeln von Managed Resources bem verlassen der Klasse */
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-            /* Behandeln von UnManaged Resources bem verlassen der Klasse */
-        }
     }
 }

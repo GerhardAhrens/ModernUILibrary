@@ -201,14 +201,5 @@ namespace ModernBaseLibrary.Cryptography
             rnd.NextBytes(b);
             return b;
         }
-
-        protected override void DisposeManagedResources()
-        {
-            random = null;
-        }
-
-        protected override void DisposeUnmanagedResources()
-        {
-        }
     }
 }
