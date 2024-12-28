@@ -28,6 +28,7 @@ namespace ModernBaseLibrary.Extension
     using System.Linq;
     using System.Runtime.Versioning;
 
+    using ModernBaseLibrary.Collection;
     using ModernBaseLibrary.Core;
 
     [SupportedOSPlatform("windows")]

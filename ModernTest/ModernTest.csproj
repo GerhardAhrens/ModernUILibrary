@@ -42,6 +42,7 @@
     <Folder Include="ModernBaseLibrary\Console\CommandLine\" />
     <Folder Include="ModernBaseLibrary\Console\DebugTextWriter\" />
     <Folder Include="ModernBaseLibrary\CoreBase\SmartSetting\DemoSettingsClass\" />
+    <Folder Include="ModernBaseLibrary\Core\Collection\" />
     <Folder Include="ModernBaseLibrary\Core\Enum\" />
     <Folder Include="AssertHelper\" />
     <Folder Include="ModernBaseLibrary\Core\ArrayCollection\" />

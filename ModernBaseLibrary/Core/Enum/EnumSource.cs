@@ -28,6 +28,8 @@ namespace ModernBaseLibrary.Core
     using System.Collections.Generic;
     using System.Diagnostics;
 
+    using ModernBaseLibrary.Collection;
+
     /// <summary>
     /// Die Klasse stellt Methoden zur Verfügung um ein Enum als Datasource verwenden.
     /// </summary>

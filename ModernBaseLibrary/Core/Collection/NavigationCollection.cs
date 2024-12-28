@@ -14,7 +14,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernBaseLibrary.Core
+namespace ModernBaseLibrary.Collection
 {
     using System;
     using System.Collections.Generic;

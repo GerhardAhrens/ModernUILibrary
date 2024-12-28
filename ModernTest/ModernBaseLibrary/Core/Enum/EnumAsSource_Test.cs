@@ -3,12 +3,11 @@
     using System.Collections.Generic;
     using System.ComponentModel;
 
+    using global::ModernBaseLibrary.Collection;
     using global::ModernBaseLibrary.Core;
     using global::ModernBaseLibrary.Extension;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using ModernBaseLibrary.Core;
 
     [TestClass]
     public class EnumAsSource_Test

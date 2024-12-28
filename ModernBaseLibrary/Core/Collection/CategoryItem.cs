@@ -1,16 +1,16 @@
 ﻿/*
- * <copyright file="ValueListItem.cs" company="Lifeprojects.de">
- *     Class: ValueListItem
+ * <copyright file="CategoryDictionary.cs" company="Lifeprojects.de">
+ *     Class: CategoryDictionary
  *     Copyright © Lifeprojects.de 2022
  * </copyright>
  *
  * <author>Gerhard Ahrens - Lifeprojects.de</author>
  * <email>developer@lifeprojects.de</email>
- * <date>28.09.2022</date>
+ * <date>27.09.2022</date>
  * <Project>EasyPrototypingNET</Project>
  *
  * <summary>
- * ValueListItem class for EnumHelper
+ * Definition of CategoryItem Class for Category
  * </summary>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,14 +25,23 @@
 namespace ModernBaseLibrary.Collection
 {
     using System;
-    using System.Diagnostics;
 
-    [DebuggerDisplay("Key={Key};Value={Value]")]
-    [Serializable]
-    public class ValueListItem
+    /// <summary>
+    /// Beinhaltet die Werte für die Klasse CategoryDictionary
+    /// </summary>
+    public class CategoryItem : Tuple<string, object, Type>
     {
-        public int Key { get; set; }
+        public CategoryItem(string item1, object item2, Type item3) : base(item1, item2, item3)
+        {
+            this.Value = item1;
+            this.ValueX = item2;
+            this.ValueXType = item3;
+        }
 
-        public string Value { get; set; }
+        public string Value { get; private set; }
+
+        public object ValueX { get; private set; }
+
+        public Type ValueXType { get; private set; }
     }
 }
