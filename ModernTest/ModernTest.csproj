@@ -46,6 +46,11 @@
     <Folder Include="ModernBaseLibrary\Core\Enum\" />
     <Folder Include="AssertHelper\" />
     <Folder Include="ModernBaseLibrary\Core\ArrayCollection\" />
+    <Folder Include="ModernBaseLibrary\Core\Comparer\" />
+    <Folder Include="ModernBaseLibrary\Core\Converter\" />
+    <Folder Include="ModernBaseLibrary\Core\Enumeration\" />
+    <Folder Include="ModernBaseLibrary\Core\ExpressionEngine\" />
+    <Folder Include="ModernBaseLibrary\Core\Guid\" />
     <Folder Include="ModernBaseLibrary\Core\Pattern\Result\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.String\" />

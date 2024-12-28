@@ -9,6 +9,64 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Sound\AccessAllowedTone.wav" />
+    <None Remove="Resources\Sound\ArabianMysteryNotification.wav" />
+    <None Remove="Resources\Sound\ArcadeMagicNotification.wav" />
+    <None Remove="Resources\Sound\BellNotification.wav" />
+    <None Remove="Resources\Sound\CashMachineKeyPress.wav" />
+    <None Remove="Resources\Sound\ClearAnnounceTones.wav" />
+    <None Remove="Resources\Sound\ConfirmationTone.wav" />
+    <None Remove="Resources\Sound\CorrectAnswerReward.wav" />
+    <None Remove="Resources\Sound\GuitarNotificationAlert.wav" />
+    <None Remove="Resources\Sound\HappyBellsNotification.wav" />
+    <None Remove="Resources\Sound\MagicMarimba.wav" />
+    <None Remove="Resources\Sound\MelodicalFluteMusicNotification.wav" />
+    <None Remove="Resources\Sound\MusicalAlertNotification.wav" />
+    <None Remove="Resources\Sound\MusicalReveal.wav" />
+    <None Remove="Resources\Sound\OrchestralEmergencyAlarm.wav" />
+    <None Remove="Resources\Sound\PositiveNotification.wav" />
+    <None Remove="Resources\Sound\SoftwareInterfaceBack.wav" />
+    <None Remove="Resources\Sound\SoundCapture.wav" />
+    <None Remove="Resources\Sound\SoundFailure.wav" />
+    <None Remove="Resources\Sound\SoundMonitorPowerOff.wav" />
+    <None Remove="Resources\Sound\SoundNews.wav" />
+    <None Remove="Resources\Sound\SoundNotice.wav" />
+    <None Remove="Resources\Sound\SoundSignal.wav" />
+    <None Remove="Resources\Sound\SoundSuccess.wav" />
+    <None Remove="Resources\Sound\SuccessTone.wav" />
+    <None Remove="Resources\Sound\UpliftingFluteNotification.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sound\AccessAllowedTone.wav" />
+    <EmbeddedResource Include="Resources\Sound\ArabianMysteryNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\ArcadeMagicNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\BellNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\CashMachineKeyPress.wav" />
+    <EmbeddedResource Include="Resources\Sound\ClearAnnounceTones.wav" />
+    <EmbeddedResource Include="Resources\Sound\ConfirmationTone.wav" />
+    <EmbeddedResource Include="Resources\Sound\CorrectAnswerReward.wav" />
+    <EmbeddedResource Include="Resources\Sound\GuitarNotificationAlert.wav" />
+    <EmbeddedResource Include="Resources\Sound\HappyBellsNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\MagicMarimba.wav" />
+    <EmbeddedResource Include="Resources\Sound\MelodicalFluteMusicNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\MusicalAlertNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\MusicalReveal.wav" />
+    <EmbeddedResource Include="Resources\Sound\OrchestralEmergencyAlarm.wav" />
+    <EmbeddedResource Include="Resources\Sound\PositiveNotification.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoftwareInterfaceBack.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundCapture.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundFailure.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundMonitorPowerOff.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundNews.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundNotice.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundSignal.wav" />
+    <EmbeddedResource Include="Resources\Sound\SoundSuccess.wav" />
+    <EmbeddedResource Include="Resources\Sound\SuccessTone.wav" />
+    <EmbeddedResource Include="Resources\Sound\UpliftingFluteNotification.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="AssemblyInfo\AssemblyMetaInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -33,12 +91,29 @@
     <Folder Include="Core\Cryptography\Steganographie\" />
     <Folder Include="Core\Enum\" />
     <Folder Include="Core\Attribute\" />
-    <Folder Include="Core\IO\" />
     <Folder Include="Core\Application\" />
     <Folder Include="Core\ApplicationHotKeys\" />
     <Folder Include="Core\ArrayCollection\" />
     <Folder Include="Core\Caching\" />
+    <Folder Include="Core\Comparer\" />
+    <Folder Include="Core\Cultures\" />
+    <Folder Include="Core\Diagnostics\" />
+    <Folder Include="Core\Enumeration\" />
+    <Folder Include="Core\Converter\" />
+    <Folder Include="Core\ExpressionEngine\" />
+    <Folder Include="Core\ExpressionEvaluator\" />
+    <Folder Include="Core\Guid\" />
+    <Folder Include="Core\Indexer\" />
+    <Folder Include="Core\IO\FileCryptography\" />
+    <Folder Include="Core\IO\FileSystemWatcher\" />
+    <Folder Include="Core\IO\VirtualDrive\" />
+    <Folder Include="Core\IO\USBDisk\" />
+    <Folder Include="Core\LinqExpression\" />
+    <Folder Include="Core\Markdown\" />
+    <Folder Include="Core\Mathematic\" />
+    <Folder Include="Core\Media\" />
     <Folder Include="Core\Pattern\Result\" />
+    <Folder Include="Data\DynamicXML\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />

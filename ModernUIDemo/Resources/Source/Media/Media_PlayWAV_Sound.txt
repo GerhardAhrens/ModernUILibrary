@@ -1,0 +1,14 @@
+﻿/* WAV Datei aus Resource abspielen */
+bool result = ResourcesSound.ArabianMysteryNotification.HasSound;
+if (result == true)
+{
+    ResourcesSound.ArabianMysteryNotification.Play();
+}
+
+/* System Sound abspielen */
+bool result = SystemSound.Default.HasSound;
+if (result == true)
+{
+    SystemSound.Default.Play();
+}
+

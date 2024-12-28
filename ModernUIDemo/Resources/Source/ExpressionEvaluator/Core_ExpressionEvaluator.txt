@@ -1,0 +1,40 @@
+﻿public class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.Clear();
+        do
+        {
+            ConsoleHelper.ClearScreen();
+            ConsoleHelper.WriteLine("Geben Sie einen Ausdruck zum berechnen ein. Z.B. 2+3 [ENTER].");
+            ConsoleHelper.WriteLine("Für eine Dezimalkomma muß ein Punkt eingegeben werden.");
+            string content = string.Empty;
+            content = Console.ReadLine();
+
+            ConsoleKey key = ConsoleHelper.Wait("Wählen Sie ENTER zum auswerten des Ausdruck oder 'X' für Ende", ConsoleColor.Red);
+            if (key == ConsoleKey.X)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                if (key == ConsoleKey.Enter)
+                {
+                        
+                    if (string.IsNullOrEmpty(content) == false)
+                    {
+                        decimal calcResult = 0m;
+                        ExpressionEvaluator engine = new ExpressionEvaluator();
+                        calcResult = engine.Evaluate(content.Replace(",","."));
+
+                        (int,int) currentPos = Console.GetCursorPosition();
+                        Console.SetCursorPosition(0, currentPos.Item2+1);
+                        Console.WriteLine($"Ergebnis: {calcResult.ToString("0.##")}");
+                        Console.ReadKey();
+                    }
+                }
+            }
+        }
+        while (true);
+    }
+}

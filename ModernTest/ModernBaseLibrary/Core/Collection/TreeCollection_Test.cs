@@ -1,5 +1,5 @@
 ﻿
-namespace ModernTest.ModernBaseLibrary.Core
+namespace ModernTest.ModernBaseLibrary.Collection
 {
     using System;
     using System.Collections.Generic;

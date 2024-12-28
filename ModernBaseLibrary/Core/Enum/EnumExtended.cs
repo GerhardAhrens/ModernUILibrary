@@ -57,7 +57,7 @@ namespace ModernBaseLibrary.Core
 
         public static int AbsoluteDifference(EnumExtended firstValue, EnumExtended secondValue)
         {
-            var absoluteDifference = Math.Abs(firstValue.Value - secondValue.Value);
+            var absoluteDifference = System.Math.Abs(firstValue.Value - secondValue.Value);
             return absoluteDifference;
         }
 

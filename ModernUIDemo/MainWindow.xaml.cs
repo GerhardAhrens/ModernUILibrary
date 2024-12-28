@@ -9,6 +9,7 @@
 
     using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Core.Algorithm;
+    using ModernBaseLibrary.Core.Media;
 
     using ModernIU.Controls;
 
@@ -331,6 +332,12 @@
             this.tabItemSource.Add(new TabControlItem("Algorithm ", true));
             this.tabItemSource.Add(new TabControlItem("Palindrome", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Palindrome", SourceFile = "Algorithm.Algorithm_Palindrome.txt" });
             this.tabItemSource.Add(new TabControlItem("Permutationen", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Permutationen", SourceFile = "Algorithm.Algorithm_Heaps.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("Core ", true));
+            this.tabItemSource.Add(new TabControlItem("ExpressionEvaluator", new SyntaxBoxControlsUC()) { Stichworte = "Expression;Evaluator", SourceFile = "ExpressionEvaluator.Core_ExpressionEvaluator.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("Media ", true));
+            this.tabItemSource.Add(new TabControlItem("ResourcesSound", new SyntaxBoxControlsUC()) { Stichworte = "WAV;Sound;Resources", SourceFile = "Media.Media_PlayWAV_Sound.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Console ", true));
             this.tabItemSource.Add(new TabControlItem("CommandLine", new SyntaxBoxControlsUC()) { Stichworte = "Console;CommandLine", SourceFile = "Console.Console_CommandLine.txt" });
