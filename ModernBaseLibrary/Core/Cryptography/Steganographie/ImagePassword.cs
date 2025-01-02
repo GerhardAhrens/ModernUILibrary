@@ -76,13 +76,13 @@
             var asciiValues = Convert.FromBase64String(encryptedText);
 
             //Set correct Width and Height values
-            Helper.SetWidthHeight(drawingScheme, out int height, out int width, asciiValues.Length);
+            CryptographyHelper.SetWidthHeight(drawingScheme, out int height, out int width, asciiValues.Length);
 
             //Create Image with correct Sizes
             var encryptedImage = new Bitmap(width, height, PixelFormat.Format32bppArgb);
 
             //Draw onto the Image
-            Helper.DrawCorrectScheme(encryptedImage, drawingScheme, colorScheme, asciiValues);
+            CryptographyHelper.DrawCorrectScheme(encryptedImage, drawingScheme, colorScheme, asciiValues);
 
             return encryptedImage;
         }
@@ -118,16 +118,16 @@
             }
 
             //Set Width and Y for Image Reading
-            Helper.SetWidthY(drawingScheme, out int y, out int width, encryptedImage.Width);
+            CryptographyHelper.SetWidthY(drawingScheme, out int y, out int width, encryptedImage.Width);
 
             //Get all Colors from the Image
-            var colors = Helper.GetPixelsFromImage(width, y, drawingScheme, colorScheme, encryptedImage);
+            var colors = CryptographyHelper.GetPixelsFromImage(width, y, drawingScheme, colorScheme, encryptedImage);
 
             //Fill ASCII Values with Color's R Value (R = G = B)
             var asciiValues = new byte[width];
             for (int i = 0; i < width; i++)
             {
-                asciiValues[i] = Helper.GetAsciiValue(colorScheme, colors[i]);
+                asciiValues[i] = CryptographyHelper.GetAsciiValue(colorScheme, colors[i]);
             }
 
             // Decrypt result

@@ -15,7 +15,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernBaseLibrary.Core
+namespace ModernBaseLibrary.Cryptography
 {
     using System.IO;
     using System.Security.Cryptography;

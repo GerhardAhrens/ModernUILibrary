@@ -22,7 +22,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernBaseLibrary.Cryptography.File
+namespace ModernBaseLibrary.Cryptography
 {
     using System.IO;
     using System.Runtime.Versioning;

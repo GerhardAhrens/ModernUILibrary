@@ -20,6 +20,7 @@ namespace ModernBaseLibrary.Extension
     using System.Text;
     using System.Text.RegularExpressions;
     using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.Cryptography;
 
     [SupportedOSPlatform("windows")]
     public static partial class StringExtension

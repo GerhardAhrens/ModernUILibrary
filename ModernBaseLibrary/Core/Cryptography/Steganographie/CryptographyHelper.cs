@@ -9,7 +9,7 @@
     ///     Helper class for System.Drawing functions
     /// </summary>
     [SupportedOSPlatform("windows")]
-    internal static class Helper
+    internal static class CryptographyHelper
     {
         /// <summary>
         ///     Creates Graphics and draws all the Text (ASCII Values/bytes) onto a Image with the correct
