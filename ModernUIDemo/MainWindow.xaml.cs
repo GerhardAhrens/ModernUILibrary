@@ -254,6 +254,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
+            this.tabItemSource.Add(new TabControlItem("FilterDataGrid Control", new FilterDataGridControlsUC()) { Stichworte = "DataGrid;Filter;Flat" });
 
             this.tabItemSource.Add(new TabControlItem("Dialoge und Funktionen", true));
             this.tabItemSource.Add(new TabControlItem("Dialoge", new FunctionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion" });
