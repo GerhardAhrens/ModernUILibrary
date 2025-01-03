@@ -33,6 +33,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
     using System.Threading;
 
     using global::ModernBaseLibrary.Cryptography;
+    using global::ModernBaseLibrary.Extension;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -68,6 +69,30 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
             return user;
         }
 
+        [TestMethod]
+        public void GenerateTestData_SetTimeStamp()
+        {
+            IEnumerable<UserTestGenerator> users = TestDataGenerator<UserTestGenerator>.CreateTestData<UserTestGenerator>(ConfigObjectSetTimeStamp, 100);
+            Console.SetOut(new DebugTextWriter());
+            users.ForEach<UserTestGenerator>(user =>
+            {
+                Console.WriteLine($"{user.CreateOn};{user.CreateBy}|{user.ModifiedOn};{user.ModifiedBy}");
+            });
+
+            Assert.AreEqual(users.Count(), 100);
+        }
+
+        private UserTestGenerator ConfigObjectSetTimeStamp(UserTestGenerator user)
+        {
+            var timeStamp = TestDataGenerator.SetTimeStamp();
+            user.CreateOn = timeStamp.CreateOn;
+            user.CreateBy = timeStamp.CreateBy;
+            user.ModifiedOn = timeStamp.ModifiedOn;
+            user.ModifiedBy = timeStamp.ModifiedBy;
+
+            return user;
+        }
+
         [DataRow("", "")]
         [TestMethod]
         public void DataRowInputTest(string input, string expected)
@@ -92,5 +117,9 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
     public class UserTestGenerator
     {
         public string UserName { get; set; }
+        public DateTime CreateOn { get; set; }
+        public string CreateBy { get; set; }
+        public DateTime ModifiedOn { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

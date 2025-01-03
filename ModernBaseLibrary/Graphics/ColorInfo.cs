@@ -19,6 +19,7 @@ namespace ModernBaseLibrary.Graphics
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using System.Reflection;
     using System.Runtime.Versioning;
     using System.Windows.Media;
 
@@ -27,6 +28,18 @@ namespace ModernBaseLibrary.Graphics
     [SupportedOSPlatform("windows")]
     public sealed class ColorInfo
     {
+        public static List<string> ListOfColorNames()
+        {
+            List<string> colorNames = new List<string>();
+            Type colorType = typeof(System.Drawing.Color);
+            PropertyInfo[] propInfos = colorType.GetProperties(BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Public);
+            foreach (PropertyInfo propInfo in propInfos)
+            {
+                colorNames.Add(propInfo.Name);
+            }
+
+            return colorNames;
+        }
 
         public ColorInfo(string colorName)
         {
