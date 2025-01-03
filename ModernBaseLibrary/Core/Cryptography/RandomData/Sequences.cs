@@ -88,7 +88,7 @@ namespace ModernBaseLibrary.Cryptography
         public static IEnumerable<TResult> Numbers<TResult>(TResult start, int count, TResult step)
         {
             Type typ = typeof(TResult);
-            if (typ.IsNumeric() == false)
+            if (typ.IsNumericType() == false)
             {
                 yield return (TResult)Convert.ChangeType(0, typeof(TResult), CultureInfo.InvariantCulture);
             }

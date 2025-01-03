@@ -139,7 +139,14 @@ namespace ModernIU.Controls
             bool Predicate(object o)
             {
                 var value = o.GetType().GetProperty(this.FieldName)?.GetValue(o, null);
-                return !PreviouslyFilteredItems.Contains(value);
+                if (value is DateTime dt)
+                {
+                    return !PreviouslyFilteredItems.Contains(new DateTime(dt.Year,dt.Month,dt.Day));
+                }
+                else
+                {
+                    return !PreviouslyFilteredItems.Contains(value);
+                }
             }
 
             criteria.Add(this.FieldName, Predicate);

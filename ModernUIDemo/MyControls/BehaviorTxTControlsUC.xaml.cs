@@ -7,6 +7,8 @@
 
     using ModernIU.WPF.Base;
 
+    using ModernUI.MVVM.Base;
+
     using ModernUIDemo.Core;
 
     /// <summary>

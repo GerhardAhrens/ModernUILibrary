@@ -181,8 +181,7 @@ namespace ModernIU.Controls
         /// <summary>
         ///     Finds an ancestor object by name and type
         /// </summary>
-        public static T FindAncestor<T>(DependencyObject current, string parentName)
-            where T : DependencyObject
+        public static T FindAncestor<T>(DependencyObject current, string parentName) where T : DependencyObject
         {
             while (current != null)
             {

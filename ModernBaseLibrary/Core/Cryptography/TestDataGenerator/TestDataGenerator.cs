@@ -165,7 +165,7 @@ namespace ModernBaseLibrary.Cryptography
         {
             const string chars = "0123456789";
 
-            if (typeof(TResult).IsNumeric() == false)
+            if (typeof(TResult).IsNumericType() == false)
             {
                 throw new ArgumentException($"Der übergebene Typ muss nummerisch sein. Argument ist '{typeof(TResult).Name}'");
             }

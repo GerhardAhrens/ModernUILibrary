@@ -21,10 +21,127 @@
         <TextBlock FontSize="14" Text="Beispiel für DataGrid mit Column-Filter" />
         <Separator Height="3" Background="Green" />
 
-        <StackPanel
+        <Grid
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Margin="30,20,30,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
+            <Grid
+                Grid.Row="0"
+                Margin="0,10"
+                HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,20,0"
+                        VerticalAlignment="Bottom"
+                        Content="Suche über alles (Vor- und Nachname)"
+                        FontWeight="Bold" />
+                    <TextBox
+                        Height="26"
+                        MinWidth="200"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button
+                        Width="Auto"
+                        Margin="20,0,0,0"
+                        Padding="4"
+                        Command="{Binding Path=RefreshCommand}"
+                        Content="Aktualisieren"
+                        Cursor="Hand" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <Label Content="{x:Static ModernUI:DataGridLoc.LanguageName}" ContentStringFormat="FilterDataGrid Sprache : {0}" />
+                </StackPanel>
+
+            </Grid>
+
+            <ModernUI:FilterDataGrid
+                x:Name="FilterDataGrid"
+                Grid.Row="1"
+                Grid.Column="0"
+                Height="300"
+                Margin="10,10,0,2"
+                AlternatingRowBackground="WhiteSmoke"
+                AlternationCount="2"
+                AutoGenerateColumns="False"
+                Background="Transparent"
+                CanUserAddRows="False"
+                ColumnWidth="*"
+                DateFormatString="d"
+                HorizontalGridLinesBrush="LightGray"
+                IsReadOnly="False"
+                ItemsSource="{Binding Path=FilteredList, UpdateSourceTrigger=PropertyChanged}"
+                LoadingRowCommand="{Binding Path=LoadingRowCommand}"
+                MinColumnWidth="50"
+                RowHeaderWidth="40"
+                SelectedRowCommand="{Binding Path=SelectedRowCommand}"
+                ShowElapsedTime="True"
+                ShowStatusBar="True"
+                VerticalGridLinesBrush="LightGray"
+                VerticalScrollBarVisibility="Visible"
+                VirtualizingStackPanel.IsVirtualizing="True">
+                <ModernUI:FilterDataGrid.Columns>
+                    <ModernUI:DataGridTemplateColumn
+                        FieldName="LastName"
+                        Header="Nachname"
+                        IsColumnFiltered="True"
+                        SortMemberPath="LastName">
+                        <ModernUI:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="local:Employe">
+                                <TextBlock Text="{Binding LastName}" />
+                            </DataTemplate>
+                        </ModernUI:DataGridTemplateColumn.CellTemplate>
+                    </ModernUI:DataGridTemplateColumn>
+
+                    <ModernUI:DataGridTemplateColumn
+                        FieldName="FirstName"
+                        Header="Vorname"
+                        IsColumnFiltered="True"
+                        SortMemberPath="FirstName">
+                        <ModernUI:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="local:Employe">
+                                <TextBlock Text="{Binding FirstName}" />
+                            </DataTemplate>
+                        </ModernUI:DataGridTemplateColumn.CellTemplate>
+                    </ModernUI:DataGridTemplateColumn>
+
+                    <ModernUI:DataGridTextColumn
+                        Binding="{Binding Salary}"
+                        Header="Salary"
+                        IsColumnFiltered="True" />
+
+                    <ModernUI:DataGridTextColumn
+                        Binding="{Binding Manager}"
+                        Header="Manager"
+                        IsColumnFiltered="True" />
+
+                    <ModernUI:DataGridTextColumn
+                        Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}"
+                        Header="Start Datum"
+                        IsColumnFiltered="True" />
+
+                </ModernUI:FilterDataGrid.Columns>
+            </ModernUI:FilterDataGrid>
+
+
+        </Grid>
     </Grid>
 </UserControl>

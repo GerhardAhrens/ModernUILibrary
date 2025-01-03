@@ -88,8 +88,8 @@ namespace ModernIU.Controls
             {
                 "Status", new[]
                 {
-                    "{0:### ### ###} record(s) found on {1:### ### ###}",
-                    "{0:### ### ###} Datensatz(e) gefunden am {1:### ### ###}",
+                    "record(s) {0:### ### ###} / Selected {1:### ### ###}",
+                    "Anzahl {0:### ### ###} / Markiert {1:### ### ###}",
                 }
             },
             {

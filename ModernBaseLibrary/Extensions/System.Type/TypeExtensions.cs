@@ -40,6 +40,7 @@ namespace ModernBaseLibrary.Extension
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Numerics;
     using System.Reflection;
     using System.Runtime.Versioning;
 
@@ -246,25 +247,11 @@ namespace ModernBaseLibrary.Extension
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool IsNumericType(Type type)
+        public static bool IsNumericType(this Type @this)
         {
-            switch (Type.GetTypeCode(type))
-            {
-                case TypeCode.Byte:
-                case TypeCode.SByte:
-                case TypeCode.UInt16:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                case TypeCode.Int16:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                case TypeCode.Decimal:
-                case TypeCode.Double:
-                case TypeCode.Single:
-                    return true;
-                default:
-                    return false;
-            }
+            var numType = typeof(INumber<>);
+            var result = @this.GetInterfaces().Any(i => i.IsGenericType && (i.GetGenericTypeDefinition() == numType));
+            return result;
         }
 
         public static string GetName<T>(this Expression<Func<T>> action)

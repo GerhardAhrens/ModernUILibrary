@@ -18,6 +18,7 @@ namespace ModernBaseLibrary.Extension
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Numerics;
     using System.Reflection;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
@@ -365,46 +366,6 @@ namespace ModernBaseLibrary.Extension
             {
                 return string.IsNullOrEmpty(@this.ToString());
             }
-        }
-
-        public static bool IsNumeric(this object @this)
-        {
-            if (@this == null || @this is DateTime)
-            {
-                return false;
-            }
-
-            if (@this is short || @this is int || @this is long || @this is decimal || @this is float || @this is double || @this is bool)
-            {
-                return true;
-            }
-
-            try
-            {
-                if (@this is string)
-                {
-                    double outValue;
-                    if (double.TryParse(@this as string, out outValue) == true)
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    double outValue;
-                    if (double.TryParse(@this as string, out outValue) == true)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-            catch
-            {
-            }
-
-            return false;
         }
 
         public static int ToInt(this object @this, int defaultInt = 0)

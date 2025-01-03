@@ -85,8 +85,8 @@
         public static readonly DependencyProperty DateFormatStringProperty =
             DependencyProperty.Register("DateFormatString", typeof(string), typeof(FilterDataGrid), new PropertyMetadata("d"));
 
-        public static readonly DependencyProperty RowCountProperty =
-                    DependencyProperty.Register(nameof(RowCount), typeof(int), typeof(FilterDataGrid), new PropertyMetadata());
+        public static readonly DependencyProperty ItemsSelectedCountProperty =
+                    DependencyProperty.Register(nameof(ItemsSelectedCount), typeof(int), typeof(FilterDataGrid), new PropertyMetadata());
 
         #endregion Public DependencyProperty
 
@@ -115,7 +115,6 @@
             if (this.LoadingRowCommand != null)
             {
                 this.LoadingRowCommand.Execute(e);
-                this.RowCount = Items.Count;
             }
         }
 
@@ -213,10 +212,10 @@
         }
 
 
-        public int RowCount
+        public int ItemsSelectedCount
         {
-            get { return (int)GetValue(RowCountProperty); }
-            set { SetValue(RowCountProperty, value); }
+            get { return (int)GetValue(ItemsSelectedCountProperty); }
+            set { SetValue(ItemsSelectedCountProperty, value); }
         }
         #endregion Public Properties
 
@@ -417,7 +416,7 @@
         #region Private Methods
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.RowCount = this.ItemsSourceCount;
+            this.ItemsSelectedCount = 0;
         }
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -454,6 +453,7 @@
         {
             if (this.SelectedRowCommand != null && this.SelectedRowCommand.CanExecute(this.SelectedItem) == true)
             {
+                this.ItemsSelectedCount = this.SelectedItems.Count;
                 this.SelectedRowCommand.Execute(this.SelectedItem);
             }
         }
@@ -536,7 +536,10 @@
             var item = (DataGridFilterItem)e.Parameter;
 
             // only when the item[0] (select all) is checked or unchecked
-            if (item?.Id != 0 || ItemCollectionView == null) return;
+            if (item?.Id != 0 || ItemCollectionView == null)
+            {
+                return;
+            }
 
             foreach (var obj in ItemCollectionView?.Cast<DataGridFilterItem>().Skip(1).Where(f => f.IsChecked != item.IsChecked))
             {
@@ -655,8 +658,9 @@
             }
 
             if (item.FieldType == typeof(DateTime))
-                return ((DateTime?)item.Content)?.ToString("d")
-                    .IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
+            {
+                return ((DateTime?)item.Content)?.ToString("d").IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
+            }
 
             return item.Content?.ToString().IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
         }
@@ -904,8 +908,7 @@
                         listBox.UpdateLayout();
 
                         // scroll to top of view
-                        var scrollViewer =
-                            VisualTreeHelpersDG.GetDescendantByType(listBox, typeof(ScrollViewer)) as ScrollViewer;
+                        var scrollViewer = VisualTreeHelpersDG.GetDescendantByType(listBox, typeof(ScrollViewer)) as ScrollViewer;
                         scrollViewer?.ScrollToTop();
                     }
 
@@ -1030,16 +1033,19 @@
                 if ((uncheckedItems.Any() || contain) && CurrentFilter != null)
                 {
                     // fill the PreviouslyFilteredItems HashSet with unchecked items
-                    CurrentFilter.PreviouslyFilteredItems =
-                        new HashSet<object>(uncheckedItems, EqualityComparer<object>.Default);
+                    CurrentFilter.PreviouslyFilteredItems = new HashSet<object>(uncheckedItems, EqualityComparer<object>.Default);
 
                     // add a filter if it is not already added previously
                     if (!CurrentFilter.IsFiltered)
+                    {
                         CurrentFilter.AddFilter(criteria);
+                    }
 
                     // add current filter to GlobalFilterList
                     if (GlobalFilterList.All(f => f.FieldName != CurrentFilter.FieldName))
+                    {
                         GlobalFilterList.Add(CurrentFilter);
+                    }
 
                     // set the current field name as the last filter name
                     lastFilter = CurrentFilter.FieldName;
@@ -1051,11 +1057,13 @@
                     pathFilterIcon.Data = iconFilterSet;
 
                     // apply filter
-                    CollectionViewSource.Refresh();
+                    this.CollectionViewSource.Refresh();
 
                     // remove the current filter if there is no items to filter
                     if (!CurrentFilter.PreviouslyFilteredItems.Any())
-                        RemoveCurrentFilter();
+                    {
+                        this.RemoveCurrentFilter();
+                    }
                 }
             }
             catch (Exception ex)
@@ -1068,8 +1076,6 @@
                 pending = false;
                 ResetCursor();
                 ElapsedTime = elased.Add(DateTime.Now - start);
-
-                Debug.WriteLineIf(DebugMode, $"Elapsed time : m:{ElapsedTime.Minutes} s:{ElapsedTime.Seconds}\r\n");
             }
         }
 
@@ -1149,8 +1155,7 @@
         /// <returns></returns>
         private bool Filter(object o)
         {
-            return criteria.Values
-                .Aggregate(true, (prevValue, predicate) => prevValue && predicate(o));
+            return criteria.Values.Aggregate(true, (prevValue, predicate) => prevValue && predicate(o));
         }
 
         /// <summary>
@@ -1168,8 +1173,7 @@
         private static async void ResetCursor()
         {
             // reset cursor
-            await UiDispatcher.BeginInvoke((Action)(() => { Mouse.OverrideCursor = null; }),
-                DispatcherPriority.ContextIdle);
+            await UiDispatcher.BeginInvoke((Action)(() => { Mouse.OverrideCursor = null; }), DispatcherPriority.ContextIdle);
         }
 
         #endregion Private Methods
