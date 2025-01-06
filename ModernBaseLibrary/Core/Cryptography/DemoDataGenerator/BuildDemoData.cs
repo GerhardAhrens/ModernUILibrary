@@ -23,24 +23,27 @@
 */
 
 
-namespace ModernBaseLibrary.Cryptography
+namespace DemoDataGeneratorLib.Base
 {
     using System;
-    using System.Globalization;
+    using System.Data;
+    using System.IO;
+    using System.Reflection;
+    using System.Text.Json;
+    using System.Windows.Controls;
 
-    using ModernBaseLibrary.Extension;
     using ModernBaseLibrary.Graphics;
 
-    public static class TestDataGenerator<Tin>
+    public static class BuildDemoData<Tin>
     {
-        static TestDataGenerator()
+        static BuildDemoData()
         {
         }
 
         public static Func<Tin,Tin> ConfigObject { get; private set; }
+        public static Func<Tin,object, Tin> ConfigObjectDict { get; private set; }
 
-
-        public static List<Tin> CreateTestData<Tín>(Func<Tin,Tin> method, int count = 1000)
+        public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
         {
             List<Tin> testDataSource = null;
             Type type = typeof(Tin);
@@ -59,19 +62,87 @@ namespace ModernBaseLibrary.Cryptography
 
             return testDataSource;
         }
+
+        public static DataTable CreateForDataTable<Tín>(Func<Tin, Tin> method, int count = 1000)
+        {
+            DataTable testDataSource = null;
+            Type type = typeof(Tin);
+            object result = null;
+            if (method != null)
+            {
+                testDataSource = new DataTable();
+                var properties = type.GetProperties();
+                foreach (PropertyInfo info in properties)
+                {
+                    testDataSource.Columns.Add(new DataColumn(info.Name, Nullable.GetUnderlyingType(info.PropertyType) ?? info.PropertyType));
+                }
+
+                testDataSource.AcceptChanges();
+
+                ConfigObject = method;
+                for (int i = 0; i < count; i++)
+                {
+                    object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                    result = ConfigObject((Tin)obj);
+                    if (result != null)
+                    {
+                        object[] values = new object[properties.Length];
+                        for (int ii = 0; ii < properties.Length; ii++)
+                        {
+                            values[ii] = properties[ii].GetValue(result);
+                        }
+
+                        testDataSource.Rows.Add(values);
+                        testDataSource.AcceptChanges();
+                    }
+                }
+            }
+
+            return testDataSource;
+        }
+
+        public static Dictionary<object,object> CreateForDictionary<Tín>(Func<Tin,object, Tin> method, int count = 1000)
+        {
+            Dictionary<object, object> testDataSource = null;
+            Type type = typeof(Tin);
+            dynamic result = null;
+            if (method != null)
+            {
+                Type[] argTypes = type.GetGenericArguments();
+                Type typeKey = argTypes[0];
+                Type typeValue = argTypes[1];
+
+                testDataSource = new Dictionary<object, object>();
+                ConfigObjectDict = method;
+                for (int i = 0; i < count; i++)
+                {
+                    Tin obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                    result = ConfigObjectDict((Tin)obj,i+1);
+                    testDataSource.Add(Convert.ChangeType(result.Key, typeKey), Convert.ChangeType(result.Value, typeValue));
+                }
+            }
+
+            return testDataSource;
+        }
     }
 
-    public static class TestDataGenerator
+    internal class CityModel
     {
-        private static readonly string[] Consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","ß","t","v","w","x","z"};
-        private static readonly string[] vokale = { "a", "e", "i", "o", "u" };
+        public string area { get; set; }
+        public string name { get; set; }
+        public string state { get; set; }
+        public (string lat, string lon) coords { get; set; }
+    }
+
+    public static class BuildDemoData
+    {
         private static readonly string[] firstNames =
         {
             "Aiden","Jackson","Mason","Liam","Jacob","Jayden","Ethan","Noah","Lucas","Logan","Caleb","Caden","Jack","Ryan","Connor","Michael","Elijah","Brayden","Benjamin","Nicholas","Alexander",
             "William","Matthew","James","Landon","Nathan","Dylan","Evan","Luke","Andrew","Gabriel","Gavin","Joshua","Owen","Daniel","Carter","Tyler","Cameron","Christian","Wyatt","Henry","Eli",
             "Joseph","Max","Isaac","Samuel","Anthony","Grayson","Zachary","David","Christopher","John","Isaiah","Levi","Jonathan","Oliver","Chase","Cooper","Tristan","Colton","Austin","Colin",
             "Charlie","Dominic","Parker","Hunter","Thomas","Alex","Ian","Jordan","Cole","Julian","Aaron","Carson","Miles","Blake","Brody","Adam","Sebastian","Adrian","Nolan","Sean","Riley",
-            "Bentley","Xavier","Hayden","Jeremiah","Jason","Jake","Asher","Micah","Jace","Brandon","Josiah","Hudson","Nathaniel","Bryson","Ryder","Justin","Bryce",  null
+            "Bentley","Xavier","Hayden","Jeremiah","Jason","Jake","Asher","Micah","Jace","Brandon","Josiah","Hudson","Nathaniel","Bryson","Ryder","Justin","Bryce"
         };
 
         private static readonly string[] lastNames =
@@ -81,10 +152,10 @@ namespace ModernBaseLibrary.Cryptography
             "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers",
             "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres", "Peterson", "Gray", "Ramirez", "James", "Watson", "Brooks",
             "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes", "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell", "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler",
-            "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes", null
+            "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes"
         };
 
-        private static readonly string[] countries = { "Aalen","Mannheim","Ludwigshafen", "Neuhofen","Hamburg","Hannover","Berlin","Bremen","Frankfurt","Dresden","Erfurt","Schwerin","Bremen","Koblenz","Konstanz","Passau","Regensburg","München","Rosenheim" };
+        private static readonly string[] cities = { "" };
 
         private static readonly string[] symbols = 
         { 
@@ -102,8 +173,23 @@ namespace ModernBaseLibrary.Cryptography
 
         private static readonly Random rnd;
 
-        static TestDataGenerator()
+        static BuildDemoData()
         {
+            var resourceCity = "DemoDataGeneratorLib.Resources.GermanyCities.json";
+
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceCity))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonFileContent = reader.ReadToEnd();
+                        List<CityModel> cityList = JsonSerializer.Deserialize<List<CityModel>>(jsonFileContent);
+                        cities = cityList.Select(s => s.name).ToArray();
+                    }
+                }
+            }
+
             rnd = new Random();
         }
 
@@ -161,25 +247,63 @@ namespace ModernBaseLibrary.Cryptography
             return result;
         }
 
-        public static TResult Numbers<TResult>(int length) where TResult : new()
+        public static string Username(int lengthLetter = 4, int lengthNumber = 4)
         {
-            const string chars = "0123456789";
+            const string charsLetter = "abcdefghijklmnopqrstuvwxyz";
+            const string charsNumber = "0123456789";
 
-            if (typeof(TResult).IsNumericType() == false)
+
+            if (lengthLetter > charsLetter.Length && lengthNumber > charsNumber.Length)
             {
-                throw new ArgumentException($"Der übergebene Typ muss nummerisch sein. Argument ist '{typeof(TResult).Name}'");
+                return string.Empty;
             }
 
-            if (length > chars.Length)
-            {
-                return (TResult)Convert.ChangeType(0, typeof(TResult), CultureInfo.InvariantCulture);
-            }
+            string resultLetter = new string(Enumerable.Repeat(charsLetter, lengthLetter).Select(s => s[rnd.Next(s.Length)]).ToArray()).ToLower();
+            string resultNumber = new string(Enumerable.Repeat(charsNumber, lengthNumber).Select(s => s[rnd.Next(s.Length)]).ToArray());
 
-            string nums = new string(Enumerable.Repeat(chars, length).Select(s => s[rnd.Next(s.Length)]).ToArray());
-
-            return (TResult)Convert.ChangeType(nums, typeof(TResult), CultureInfo.InvariantCulture);
+            return $"{resultLetter}{resultNumber}";
         }
 
+        public static double Double(double min, double max, int countDigits = 2)
+        {
+            var value = rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, countDigits, MidpointRounding.AwayFromZero);
+        }
+
+        public static decimal Decimal(decimal min, decimal max, int countDigits = 2)
+        {
+            decimal value = (decimal)rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = (decimal)rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, countDigits, MidpointRounding.AwayFromZero);
+        }
+
+        public static decimal Currency(decimal min, decimal max)
+        {
+            decimal value = (decimal)rnd.NextDouble() * (max - min) + min;
+
+            if (value == 0)
+            {
+                value = (decimal)rnd.NextDouble() * (max - min) + min;
+            }
+
+            return Math.Round(value, 2, MidpointRounding.AwayFromZero);
+        }
+
+        public static int Integer(int min, int max)
+        {
+            return rnd.Next(min, max);
+        }
         public static DateTime Dates(DateTime from, DateTime to)
         {
             TimeSpan range = to - from;
@@ -219,9 +343,9 @@ namespace ModernBaseLibrary.Cryptography
             return lastNames[rnd.Next(lastNames.Length)];
         }
 
-        public static string Country()
+        public static string City()
         {
-            return countries[rnd.Next(countries.Length)];
+            return cities[rnd.Next(cities.Length)];
         }
 
         public static string ColorName()
@@ -229,6 +353,11 @@ namespace ModernBaseLibrary.Cryptography
             List<string> colorNames = ColorInfo.ListOfColorNames().ToList();
 
             return colorNames[rnd.Next(colorNames.Count())];
+        }
+
+        public static string Symbols()
+        {
+            return symbols[rnd.Next(symbols.Length)];
         }
 
         public static (DateTime CreateOn, string CreateBy, DateTime ModifiedOn, string ModifiedBy) SetTimeStamp()

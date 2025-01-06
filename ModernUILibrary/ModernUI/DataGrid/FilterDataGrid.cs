@@ -338,6 +338,9 @@
 
             try
             {
+                DateTime start = DateTime.Now;
+                this.ElapsedTime = new TimeSpan(0, 0, 0);
+
                 // remove the filter set and reset the column
                 if (this.GlobalFilterList.Count > 0)
                 {
@@ -379,13 +382,14 @@
                 this.GlobalFilterList = new List<DataGridFilterCommon>();
                 this.ItemsSourceCount = Items.Count;
                 this.OnPropertyChanged("ItemsSourceCount");
-                this.ElapsedTime = new TimeSpan(0, 0, 0);
 
                 // if there is no item in ItemsSource, the Cast fails and an error occurs
                 if (this.ItemsSourceCount > 0)
                 {
                     this.collectionType = ItemsSource?.Cast<object>().First().GetType();
                 }
+
+                this.ElapsedTime = DateTime.Now - start;
             }
             catch (Exception ex)
             {
@@ -611,8 +615,8 @@
             this.button.Opacity = 0.5;
             this.pathFilterIcon.Data = this.iconFilter;
 
-            var start = DateTime.Now;
-            ElapsedTime = new TimeSpan(0, 0, 0);
+            DateTime start = DateTime.Now;
+            this.ElapsedTime = new TimeSpan(0, 0, 0);
 
             Mouse.OverrideCursor = Cursors.Wait;
 
@@ -941,7 +945,7 @@
             finally
             {
                 // show open popup elapsed time in UI
-                ElapsedTime = DateTime.Now - start;
+                this.ElapsedTime = DateTime.Now - start;
 
                 // reset cursor
                 ResetCursor();
@@ -957,7 +961,7 @@
         {
             Debug.WriteLineIf(DebugMode, "\r\nApplyFilterCommand");
 
-            var start = DateTime.Now;
+            DateTime start = DateTime.Now;
             pending = true;
             popup.IsOpen = false; // raise PopupClosed event
 

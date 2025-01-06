@@ -7,6 +7,7 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
+    using DemoDataGeneratorLib.Base;
 
     using ModernBaseLibrary.Cryptography;
 
@@ -70,8 +71,7 @@
         private void FillData()
         {
             this.Search = string.Empty;
-            IEnumerable<Employe> employe = TestDataGenerator<Employe>.CreateTestData<Employe>(ConfigObject, 100);
-
+            IEnumerable<Employe> employe = BuildDemoData<Employe>.CreateForList<Employe>(ConfigObject, 1_000);
             this.Employes = new ObservableCollection<Employe>(employe.AsParallel().OrderBy(o => o.LastName));
 
             this.FilteredList = new ObservableCollection<Employe>(this.Employes);
@@ -85,12 +85,12 @@
         private Employe ConfigObject(Employe employe)
         {
 
-            var timeStamp = TestDataGenerator.SetTimeStamp();
-            employe.FirstName = TestDataGenerator.FirstName();
-            employe.LastName = TestDataGenerator.LastName();
-            employe.Salary = TestDataGenerator.Numbers<int>(5);
-            employe.StartDate = TestDataGenerator.Dates(new DateTime(2000,1,1),DateTime.Now);
-            employe.Manager = TestDataGenerator.Boolean();
+            var timeStamp = BuildDemoData.SetTimeStamp();
+            employe.FirstName = BuildDemoData.FirstName();
+            employe.LastName = BuildDemoData.LastName();
+            employe.Salary = BuildDemoData.Integer(1_000,10_000);
+            employe.StartDate = BuildDemoData.Dates(new DateTime(2000,1,1),DateTime.Now);
+            employe.Manager = BuildDemoData.Boolean();
             employe.CreateOn = timeStamp.CreateOn;
             employe.CreateBy = timeStamp.CreateBy;
             employe.ModifiedOn = timeStamp.ModifiedOn;
