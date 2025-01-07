@@ -160,6 +160,7 @@
     <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
     <Folder Include="Graphics\SvgToXaml\" />
     <Folder Include="WIN32API\MessageBox\" />
+    <Folder Include="WMI\WMIClass\" />
   </ItemGroup>
 
   <ItemGroup>

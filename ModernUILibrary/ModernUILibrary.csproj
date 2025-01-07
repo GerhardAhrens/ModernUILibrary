@@ -26,6 +26,7 @@
     <Folder Include="Behaviors\Hyperlink\" />
     <Folder Include="Behaviors\Graphics\" />
     <Folder Include="Behaviors\TextBox\" />
+    <Folder Include="Converters\ConverterBase\" />
     <Folder Include="Extensions\System.Windows.Input\" />
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
