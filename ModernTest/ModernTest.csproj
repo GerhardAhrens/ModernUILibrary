@@ -51,7 +51,9 @@
     <Folder Include="ModernBaseLibrary\Core\Enumeration\" />
     <Folder Include="ModernBaseLibrary\Core\ExpressionEngine\" />
     <Folder Include="ModernBaseLibrary\Core\Guid\" />
-    <Folder Include="ModernBaseLibrary\Core\Pattern\Result\" />
+    <Folder Include="ModernBaseLibrary\Core\Dump\" />
+    <Folder Include="ModernBaseLibrary\Core\Performance\" />
+    <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.String\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />

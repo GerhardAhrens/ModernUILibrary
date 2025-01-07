@@ -1,0 +1,130 @@
+﻿private static void MenuPoint1()
+{
+    Console.Clear();
+
+    SendClass sc = new SendClass();
+    WeakEventManager<SendClass, TestEventArgs>.AddHandler(sc, "MyEvent", OnEventHandler);
+    WeakEventManager<SendClass, TestEventArgs>.AddHandler(sc, "MyEventList", OnEventListHandler);
+
+    while (true)
+    {
+        ConsoleHelper.ClearScreen();
+        ConsoleKey key = ConsoleHelper.Wait("X = Ende, 1 = Send Event, 2 = Send EvenList");
+        if (key == ConsoleKey.X)
+        {
+            Environment.Exit(0);
+        }
+        else if (key == ConsoleKey.D1)
+        {
+            sc.OnMyEvent("Gerhard");
+        }
+
+        else if (key == ConsoleKey.D2)
+        {
+            sc.OnMyEventList();
+        }
+    }
+}
+
+private static void MenuPoint2()
+{
+    Console.Clear();
+
+    SendClass sc = new SendClass();
+    sc.MyEvent += (sender,e) => Console.WriteLine(e.Value);
+    sc.DoAction();
+
+    ConsoleHelper.Wait();
+}
+
+private static void OnEventHandler(object sender, TestEventArgs e)
+{
+    ConsoleHelper.ClearScreen();
+    ConsoleHelper.WriteLine($"{sender.ToString()}; EventArgs Key={e.Key}; Value={e.Value}", ConsoleColor.Green);
+    ConsoleHelper.Wait();
+}
+
+private static void OnEventListHandler(object sender, TestEventArgs e)
+{
+    ConsoleHelper.ClearScreen();
+    ConsoleHelper.WriteLine($"{sender.ToString()}; EventArgs Key={e.Key}", ConsoleColor.Green);
+
+    foreach (var (item, index) in WithIndex(e.Value as List<string>))
+    {
+        ConsoleHelper.WriteLine($"{item}; Index={index}", ConsoleColor.Yellow);
+    }
+
+    ConsoleHelper.Wait();
+}
+
+public static IEnumerable<(T item, int index)> WithIndex<T>(IEnumerable<T> source)
+{
+    return source.Select((item, index) => (item, index));
+}
+
+/************************************************************************************/
+
+public class SendClass
+{
+    private readonly WeakEventEx<TestEventArgs> _myEvent = null;
+
+    public event EventHandler<TestEventArgs> MyEvent
+    {
+        add { _myEvent.AddHandler(value); }
+        remove { _myEvent.RemoveHandler(value); }
+    }
+
+    private readonly WeakEventEx<TestEventArgs> _myEventList = null;
+    public event EventHandler<TestEventArgs> MyEventList
+    {
+        add { _myEventList.AddHandler(value); }
+        remove { _myEventList.RemoveHandler(value); }
+    }
+
+    public SendClass()
+    {
+        _myEvent = new WeakEventEx<TestEventArgs>();
+        _myEventList = new WeakEventEx<TestEventArgs>();
+    }
+
+    public void OnMyEvent(string value)
+    {
+        if (_myEvent != null)
+        {
+            TestEventArgs e = new TestEventArgs();
+            e.Key = this._myEvent.GetType().Name;
+            e.Value = value;
+            _myEvent.Raise(this, e);
+        }
+    }
+
+    public void OnMyEventList()
+    {
+        List<string> liste = new List<string>();
+        liste.Add("Gerhard");
+        liste.Add("Ahrens");
+
+        if (_myEventList != null)
+        {
+            TestEventArgs e = new TestEventArgs();
+            e.Key = this._myEvent.GetType().Name;
+            e.Value = liste;
+            _myEventList.Raise(this, e);
+        }
+    }
+
+    public void DoAction()
+    {
+        TestEventArgs e = new TestEventArgs();
+        e.Key = this._myEvent.GetType().Name;
+        e.Value = "Hallo Gerhard";
+        _myEvent.Raise(this, e);
+    }
+}
+
+
+public class TestEventArgs : EventArgs
+{
+    public string Key { get; set; }
+    public object Value { get; set; }
+}

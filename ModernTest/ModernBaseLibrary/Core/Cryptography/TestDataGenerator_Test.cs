@@ -31,6 +31,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
     using System.Linq;
     using System.Runtime.ExceptionServices;
     using System.Threading;
+    using DemoDataGeneratorLib.Base;
 
     using global::ModernBaseLibrary.Cryptography;
     using global::ModernBaseLibrary.Extension;
@@ -58,13 +59,13 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
         [TestMethod]
         public void GenerateTestData_String()
         {
-            IEnumerable<UserTestGenerator> users = TestDataGenerator<UserTestGenerator>.CreateTestData<UserTestGenerator>(ConfigObject,100);
+            IEnumerable<UserTestGenerator> users = BuildDemoData<UserTestGenerator>.CreateForList<UserTestGenerator>(ConfigObject,100);
             Assert.AreEqual(users.Count(), 100);
         }
 
         private UserTestGenerator ConfigObject(UserTestGenerator user)
         {
-            user.UserName = TestDataGenerator.LastName();
+            user.UserName = BuildDemoData.LastName();
 
             return user;
         }
@@ -72,7 +73,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
         [TestMethod]
         public void GenerateTestData_SetTimeStamp()
         {
-            IEnumerable<UserTestGenerator> users = TestDataGenerator<UserTestGenerator>.CreateTestData<UserTestGenerator>(ConfigObjectSetTimeStamp, 100);
+            IEnumerable<UserTestGenerator> users = BuildDemoData<UserTestGenerator>.CreateForList<UserTestGenerator>(ConfigObjectSetTimeStamp, 100);
             Console.SetOut(new DebugTextWriter());
             users.ForEach<UserTestGenerator>(user =>
             {
@@ -84,7 +85,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
 
         private UserTestGenerator ConfigObjectSetTimeStamp(UserTestGenerator user)
         {
-            var timeStamp = TestDataGenerator.SetTimeStamp();
+            var timeStamp = BuildDemoData.SetTimeStamp();
             user.CreateOn = timeStamp.CreateOn;
             user.CreateBy = timeStamp.CreateBy;
             user.ModifiedOn = timeStamp.ModifiedOn;

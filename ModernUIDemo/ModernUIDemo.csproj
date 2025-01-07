@@ -70,6 +70,7 @@
     <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
     <EmbeddedResource Include="Resources\Source\CoreBase\CoreBase_SmartSettings.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_ArtofGenerics.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\CSharp_WeakEvent.txt" />
     <EmbeddedResource Include="Resources\Source\ExpressionEvaluator\Core_ExpressionEvaluator.txt" />
     <EmbeddedResource Include="Resources\Source\Media\Media_PlayWAV_Sound.txt" />
     <EmbeddedResource Include="Resources\Source\Pattern\Pattern_DisposableCoreBase.txt" />
