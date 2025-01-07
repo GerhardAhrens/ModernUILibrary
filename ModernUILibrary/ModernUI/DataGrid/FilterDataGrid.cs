@@ -40,11 +40,18 @@
 
         ~FilterDataGrid()
         {
-            this.Loaded -= this.OnLoaded;
-            this.LoadingRow -= this.OnLoadingRow;
-            this.SelectionChanged -= this.OnSelectionChanged;
-            this.MouseDoubleClick -= this.OnMouseDoubleClick;
-            this.KeyDown -= this.OnKeyDown;
+            try
+            {
+                this.Loaded -= this.OnLoaded;
+                this.LoadingRow -= this.OnLoadingRow;
+                this.SelectionChanged -= this.OnSelectionChanged;
+                this.MouseDoubleClick -= this.OnMouseDoubleClick;
+                this.KeyDown -= this.OnKeyDown;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+            }
         }
 
         #endregion Public Constructors

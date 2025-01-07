@@ -292,6 +292,9 @@
             this.tabItemSource.Add(new TabControlItem("Excel Cell Behavior für Controls", new BehaviorExcelCellControlsUC()) { Stichworte = "Excel;Cell;Behavior" });
             this.tabItemSource.Add(new TabControlItem("CheckBox Behavior", new BehaviorCheckBoxUC()) { Stichworte = "CheckBox;Behavior" });
 
+            this.tabItemSource.Add(new TabControlItem($"Spiel", true));
+            this.tabItemSource.Add(new TabControlItem("Tic Tac Toe", new GamesControlsUC()) { Stichworte = "Spiel;Tic Tac Toe" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
@@ -346,6 +349,9 @@
 
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("C# Technik ", true));
+            this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 

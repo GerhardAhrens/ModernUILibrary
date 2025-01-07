@@ -113,6 +113,7 @@
     <Folder Include="Core\Markdown\" />
     <Folder Include="Core\Mathematic\" />
     <Folder Include="Core\Media\" />
+    <Folder Include="Core\FormatTo\" />
     <Folder Include="Core\Pattern\Result\" />
     <Folder Include="Data\DynamicXML\" />
     <Folder Include="Extensions\System.LINQ\" />

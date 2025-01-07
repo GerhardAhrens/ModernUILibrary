@@ -50,6 +50,7 @@
     <Folder Include="ModernUI\Expander\Themes\" />
     <Folder Include="ModernUI\FloatingAction\Themes\" />
     <Folder Include="ModernUI\FlyoutControl\Themes\" />
+    <Folder Include="ModernUI\Game\TicTacToe\" />
     <Folder Include="ModernUI\Grid\UIElements\" />
     <Folder Include="ModernUI\GroupBox\Themes\" />
     <Folder Include="ModernUI\Heading\Themes\" />

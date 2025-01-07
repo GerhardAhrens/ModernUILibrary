@@ -1,0 +1,70 @@
+﻿private static void MenuPoint1()
+{
+    Console.Clear();
+
+    DemoA aa = CreateInstance<DemoA>();
+
+    Console.WriteLine("Menüpunkt 1, eine Taste drücken für zurück!");
+    Console.ReadKey();
+}
+
+private static void MenuPoint2()
+{
+    Console.Clear();
+
+    var employeeWorker = new GenericWorker<Employee>();
+    var result = employeeWorker.DoWork();
+
+    Console.WriteLine("Menüpunkt 2, eine Taste drücken für zurück!");
+    Console.ReadKey();
+}
+
+private static T CreateInstance<T>() where T : new()
+{
+    return new T();
+}
+
+/****************************************************************/
+
+public class Employee : IConstructor
+{
+    public string Name { get; private set; }
+    public int Age { get; private set; }
+
+    public Employee()
+    {                
+    }
+
+    public Employee(string name, int age)
+    {
+        ((IConstructor)this).Constructor(name, age);
+    }
+
+    void IConstructor.Constructor(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+
+public class DemoA
+{
+    public int Prop1 { get; set; }
+    public string Prop2 { get; set; }
+}
+
+public class GenericWorker<T> where T : IConstructor
+{
+    public T DoWork()
+    {
+        T employee = Activator.CreateInstance<T>();
+        employee.Constructor("John Doe", 105);
+
+        return employee;
+    }
+}
+
+public interface IConstructor
+{
+    void Constructor(string name, int age);
+}
