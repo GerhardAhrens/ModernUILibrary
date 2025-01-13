@@ -16,7 +16,7 @@
 // </Website>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.ModernUI.Grid
+namespace ModernIU.Controls
 {
     using System;
     using System.Linq;
