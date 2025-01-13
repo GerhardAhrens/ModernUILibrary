@@ -1,14 +1,18 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using DemoDataGeneratorLib.Base;
 
     using ModernIU.Controls;
     using ModernIU.WPF.Base;
+
+    using ModernUIDemo.Model;
 
     /// <summary>
     /// Interaktionslogik für ListBoxControlsUC.xaml
@@ -26,7 +30,7 @@
         }
 
         public XamlProperty<List<string>> MComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
-        public XamlProperty<List<string>> ListBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+        public XamlProperty<IEnumerable<CheckComboBoxTest>> ListBoxSource { get; set; } = XamlProperty.Set<IEnumerable<CheckComboBoxTest>>();
         public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
         public XamlProperty<Brush> SelectedColorItem { get; set; } = XamlProperty.Set<Brush>();
 
@@ -44,6 +48,8 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            /*
+
             List<CheckComboBoxTest> data = new List<CheckComboBoxTest>();
             data.Add(new CheckComboBoxTest(1, "C#"));
             data.Add(new CheckComboBoxTest(2, "C++"));
@@ -57,24 +63,27 @@
             this.CheckComboBox.Items.Add(data[1]);
             this.CheckComboBox.Items.Add(data[2]);
             this.CheckComboBox.DisplayMemberPath = "Content";
+            */
 
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
-            this.ListBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
             this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise","Igel", "Elefant", "Hund","Pferd","Pinguin", "Zebra" , "2001", "2010", "2024","2030"};
-
             this.SelectedColorItem.Value = Brushes.Transparent;
+            this.FillData();
         }
 
-        internal class CheckComboBoxTest
+        private void FillData()
         {
-            public int ID { get; set; }
-            public string Content { get; set; }
+            IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigMultiSelectListbox, 1_000);
+            listBoxSorce = new ObservableCollection<CheckComboBoxTest>(listBoxSorce.AsParallel().OrderBy(o => o.ID));
+            this.ListBoxSource.Value = listBoxSorce;
+        }
 
-            public CheckComboBoxTest(int id, string content)
-            {
-                this.ID = id;
-                this.Content = content;
-            }
+        private CheckComboBoxTest ConfigMultiSelectListbox(CheckComboBoxTest listBoxDemoData)
+        {
+            listBoxDemoData.ID = BuildDemoData.Integer(1, 10_000);
+            listBoxDemoData.Content = BuildDemoData.LastName();
+
+            return listBoxDemoData;
         }
 
         private void btnGetContent_Click(object sender, RoutedEventArgs e)
@@ -100,5 +109,11 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+    }
+
+    public class CheckComboBoxTest
+    {
+        public int ID { get; set; }
+        public string Content { get; set; }
     }
 }

@@ -142,6 +142,8 @@
                 <DockPanel HorizontalAlignment="Left">
                     <ModernUI:MultiSelectListbox
                         Width="200"
+                        DisplayMemberPath="Content"
+                        SelectedValuePath="ID"
                         Height="100"
                         IsReadOnly="False"
                         ItemsSource="{Binding Path=ListBoxSource.Value}"
