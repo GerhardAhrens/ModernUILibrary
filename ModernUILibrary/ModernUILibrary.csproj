@@ -12,9 +12,13 @@
 
   <ItemGroup>
     <Compile Remove="ModernUI\Dashboard\**" />
+    <Compile Remove="WPF\Command\**" />
     <EmbeddedResource Remove="ModernUI\Dashboard\**" />
+    <EmbeddedResource Remove="WPF\Command\**" />
     <None Remove="ModernUI\Dashboard\**" />
+    <None Remove="WPF\Command\**" />
     <Page Remove="ModernUI\Dashboard\**" />
+    <Page Remove="WPF\Command\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,7 +97,6 @@
     <Folder Include="ModernUI\Tree\Themes\" />
     <Folder Include="ModernUI\Window\Themes\" />
     <Folder Include="Themes\Primitives\" />
-    <Folder Include="WPF\Command\" />
   </ItemGroup>
 
   <ItemGroup>
