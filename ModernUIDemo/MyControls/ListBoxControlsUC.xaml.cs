@@ -44,38 +44,39 @@
             }
         }
 
+        private IEnumerable<CheckComboBoxTest> _ListBoxBSource;
+        public IEnumerable<CheckComboBoxTest> ListBoxBSource
+        {
+            get { return _ListBoxBSource; }
+            set
+            {
+                SetField(ref _ListBoxBSource, value);
+            }
+        }
+
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            /*
-
-            List<CheckComboBoxTest> data = new List<CheckComboBoxTest>();
-            data.Add(new CheckComboBoxTest(1, "C#"));
-            data.Add(new CheckComboBoxTest(2, "C++"));
-            data.Add(new CheckComboBoxTest(3, "VB.Net"));
-            data.Add(new CheckComboBoxTest(4, "Javascript"));
-            data.Add(new CheckComboBoxTest(5, "Object C"));
-            data.Add(new CheckComboBoxTest(6, "Java"));
-
-            //this.CheckComboBox.ItemsSource = data;
-            this.CheckComboBox.Items.Add(data[0]);
-            this.CheckComboBox.Items.Add(data[1]);
-            this.CheckComboBox.Items.Add(data[2]);
-            this.CheckComboBox.DisplayMemberPath = "Content";
-            */
-
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
             this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise","Igel", "Elefant", "Hund","Pferd","Pinguin", "Zebra" , "2001", "2010", "2024","2030"};
             this.SelectedColorItem.Value = Brushes.Transparent;
-            this.FillData();
+            this.FillDataListBoxA();
+            this.FillDataListBoxB();
         }
 
-        private void FillData()
+        private void FillDataListBoxA()
         {
             IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigMultiSelectListbox, 1_000);
             listBoxSorce = new ObservableCollection<CheckComboBoxTest>(listBoxSorce.AsParallel().OrderBy(o => o.ID));
             this.ListBoxSource.Value = listBoxSorce;
+        }
+
+        private void FillDataListBoxB()
+        {
+            IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigMultiSelectListbox, 1_000);
+            listBoxSorce = new ObservableCollection<CheckComboBoxTest>(listBoxSorce.AsParallel().OrderBy(o => o.ID));
+            this.ListBoxBSource = listBoxSorce;
         }
 
         private CheckComboBoxTest ConfigMultiSelectListbox(CheckComboBoxTest listBoxDemoData)

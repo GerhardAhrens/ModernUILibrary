@@ -17,6 +17,7 @@ namespace ModernIU.Controls
 {
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media;
     using ModernIU.Base;
 
@@ -30,22 +31,29 @@ namespace ModernIU.Controls
             this.BorderThickness = ControlBase.BorderThickness;
             this.SelectionMode = SelectionMode.Extended;
 
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
+
             this.IsSynchronizedWithCurrentItem = true;
-            this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.VerticalContentAlignment = VerticalAlignment.Top;
             this.Padding = new Thickness(2);
             this.Margin = new Thickness(2);
             this.ClipToBounds = false;
             this.MinHeight = 24;
             this.MinWidth = 60;
             this.SnapsToDevicePixels = true;
-            this.VerticalAlignment = VerticalAlignment.Center;
+            this.VerticalAlignment = VerticalAlignment.Top;
+            this.BorderBrush = Brushes.Green;
+            this.BorderThickness = new Thickness(1);
+            this.Margin = new Thickness(2);
+            this.SetValue(KeyboardNavigation.IsTabStopProperty, false);
+            this.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, false);
+            this.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+            this.SetValue(VirtualizingPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
             this.Resources.Add(SystemColors.WindowBrushKey, Brushes.WhiteSmoke);
             this.Resources.Add(SystemColors.WindowTextBrushKey, Colors.White);
             this.Resources.Add(SystemColors.HighlightColorKey, Colors.Gray);
-
-            /* Trigger an Style übergeben */
-            this.Style = this.SetTriggerFunction();
-
+            Validation.SetErrorTemplate(this, null);
         }
 
         private Style SetTriggerFunction()

@@ -140,17 +140,28 @@
                     Header="ListBox" />
 
                 <DockPanel HorizontalAlignment="Left">
-                    <ModernUI:MultiSelectListbox
-                        x:Name="ListBoxA"
-                        Width="200"
-                        Height="100"
-                        DisplayMemberPath="Content"
-                        IsReadOnly="False"
-                        ItemsSource="{Binding Path=ListBoxSource.Value}"
-                        SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedValuePath="ID" />
+                    <StackPanel Orientation="Horizontal">
+                        <ModernUI:MultiSelectListbox
+                            x:Name="ListBoxA"
+                            Width="200"
+                            Height="100"
+                            DisplayMemberPath="Content"
+                            IsReadOnly="False"
+                            ItemsSource="{Binding Path=ListBoxSource.Value}"
+                            SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedValuePath="ID" />
 
-                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=ListBoxSourceSelectedItem.Count}" />
+                        <TextBlock Margin="10,0,0,0" Text="{Binding Path=ListBoxSourceSelectedItem.Count, FallbackValue=0, StringFormat=Anzahl: {0:N0}}" />
+
+                        <ModernUI:ListBoxEx
+                            x:Name="ListboxB"
+                            Width="200"
+                            Height="100"
+                            Margin="10,0,0,0"
+                            DisplayMemberPath="Content"
+                            ItemsSource="{Binding Path=ListBoxBSource}"
+                            SelectedValuePath="ID" />
+                    </StackPanel>
                 </DockPanel>
 
                 <ModernUI:HeaderSeparator
