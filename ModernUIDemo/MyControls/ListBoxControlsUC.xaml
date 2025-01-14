@@ -141,13 +141,16 @@
 
                 <DockPanel HorizontalAlignment="Left">
                     <ModernUI:MultiSelectListbox
+                        x:Name="ListBoxA"
                         Width="200"
-                        DisplayMemberPath="Content"
-                        SelectedValuePath="ID"
                         Height="100"
+                        DisplayMemberPath="Content"
                         IsReadOnly="False"
                         ItemsSource="{Binding Path=ListBoxSource.Value}"
-                        SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedValuePath="ID" />
+
+                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=ListBoxSourceSelectedItem.Count}" />
                 </DockPanel>
 
                 <ModernUI:HeaderSeparator

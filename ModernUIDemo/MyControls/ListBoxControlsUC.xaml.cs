@@ -34,8 +34,8 @@
         public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
         public XamlProperty<Brush> SelectedColorItem { get; set; } = XamlProperty.Set<Brush>();
 
-        private Dictionary<string, object> _ListBoxSourceSelectedItem;
-        public Dictionary<string, object> ListBoxSourceSelectedItem
+        private IEnumerable<CheckComboBoxTest> _ListBoxSourceSelectedItem;
+        public IEnumerable<CheckComboBoxTest> ListBoxSourceSelectedItem
         {
             get { return _ListBoxSourceSelectedItem; }
             set
