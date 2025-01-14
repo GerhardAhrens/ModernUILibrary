@@ -39,7 +39,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class TestDataGenerator_Test
+    public class DemoDataGenerator_Test
     {
         [TestInitialize]
         public void Initialize()
@@ -52,7 +52,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
         /// <summary>
         /// Initializes a new instance of the <see cref="TestDataGenerator"/> class.
         /// </summary>
-        public TestDataGenerator_Test()
+        public DemoDataGenerator_Test()
         {
         }
 
