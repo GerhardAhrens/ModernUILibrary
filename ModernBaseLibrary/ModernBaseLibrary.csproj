@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DemoDataGenerator\Animals.json" />
+    <None Remove="Resources\DemoDataGenerator\Countries.json" />
+    <None Remove="Resources\DemoDataGenerator\Currency.json" />
+    <None Remove="Resources\DemoDataGenerator\Nachnamen.json" />
+    <None Remove="Resources\DemoDataGenerator\Vornamen.json" />
     <None Remove="Resources\Sound\AccessAllowedTone.wav" />
     <None Remove="Resources\Sound\ArabianMysteryNotification.wav" />
     <None Remove="Resources\Sound\ArcadeMagicNotification.wav" />
@@ -39,6 +44,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\DemoDataGenerator\Animals.json" />
+    <EmbeddedResource Include="Resources\DemoDataGenerator\Countries.json" />
+    <EmbeddedResource Include="Resources\DemoDataGenerator\Currency.json" />
+    <EmbeddedResource Include="Resources\DemoDataGenerator\Nachnamen.json" />
+    <EmbeddedResource Include="Resources\DemoDataGenerator\Vornamen.json" />
     <EmbeddedResource Include="Resources\Sound\AccessAllowedTone.wav" />
     <EmbeddedResource Include="Resources\Sound\ArabianMysteryNotification.wav" />
     <EmbeddedResource Include="Resources\Sound\ArcadeMagicNotification.wav" />

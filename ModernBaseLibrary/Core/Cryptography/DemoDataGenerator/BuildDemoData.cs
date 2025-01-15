@@ -27,6 +27,7 @@ namespace DemoDataGeneratorLib.Base
 {
     using System;
     using System.Data;
+    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
     using System.Text.Json;
@@ -126,12 +127,33 @@ namespace DemoDataGeneratorLib.Base
         }
     }
 
+    [DebuggerDisplay("Name={this.name};{this.district}")]
     internal class CityModel
     {
         public string area { get; set; }
+        public Coords coords { get; set; }
+        public string district { get; set; }
         public string name { get; set; }
+        public string population { get; set; }
         public string state { get; set; }
-        public (string lat, string lon) coords { get; set; }
+    }
+
+    [DebuggerDisplay("Koordinaten={this.lat}:{this.lon}")]
+    internal class Coords
+    {
+        public string lat { get; set; }
+        public string lon { get; set; }
+    }
+
+    internal class Currency
+    {
+        public string symbol { get; set; }
+        public string name { get; set; }
+        public string symbol_native { get; set; }
+        public int decimal_digits { get; set; }
+        public int rounding { get; set; }
+        public string code { get; set; }
+        public string name_plural { get; set; }
     }
 
     public static class BuildDemoData
