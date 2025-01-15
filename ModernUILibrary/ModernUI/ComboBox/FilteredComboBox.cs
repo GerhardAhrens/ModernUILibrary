@@ -96,7 +96,10 @@ namespace ModernIU.Controls
             if (oldValue != null)
             {
                 var view = CollectionViewSource.GetDefaultView(oldValue);
-                if (view != null) view.Filter -= FilterItem;
+                if (view != null)
+                {
+                    view.Filter -= FilterItem;
+                }
             }
 
             base.OnItemsSourceChanged(oldValue, newValue);
@@ -109,6 +112,9 @@ namespace ModernIU.Controls
                 case Key.Tab:
                 case Key.Enter:
                     this.IsDropDownOpen = false;
+                    break;
+                case Key.Back:
+                    this.IsDropDownOpen = true;
                     break;
                 case Key.Escape:
                     this.IsDropDownOpen = false;
