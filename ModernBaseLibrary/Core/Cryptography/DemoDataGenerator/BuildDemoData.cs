@@ -22,7 +22,6 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 namespace DemoDataGeneratorLib.Base
 {
     using System;
@@ -55,9 +54,18 @@ namespace DemoDataGeneratorLib.Base
                 ConfigObject = method;
                 for (int i = 0; i < count; i++)
                 {
-                    object obj = (Tin)Activator.CreateInstance(typeof(Tin));
-                    result = ConfigObject((Tin)obj);
-                    testDataSource.Add((Tin)result);
+                    if (typeof(Tin) ==  typeof(string))
+                    {
+                        object obj = null;
+                        result = ConfigObject((Tin)obj);
+                        testDataSource.Add((Tin)result);
+                    }
+                    else
+                    {
+                        object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                        result = ConfigObject((Tin)obj);
+                        testDataSource.Add((Tin)result);
+                    }
                 }
             }
 
@@ -158,29 +166,11 @@ namespace DemoDataGeneratorLib.Base
 
     public static class BuildDemoData
     {
-        private static readonly string[] firstNames =
-        {
-            "Aiden","Jackson","Mason","Liam","Jacob","Jayden","Ethan","Noah","Lucas","Logan","Caleb","Caden","Jack","Ryan","Connor","Michael","Elijah","Brayden","Benjamin","Nicholas","Alexander",
-            "William","Matthew","James","Landon","Nathan","Dylan","Evan","Luke","Andrew","Gabriel","Gavin","Joshua","Owen","Daniel","Carter","Tyler","Cameron","Christian","Wyatt","Henry","Eli",
-            "Joseph","Max","Isaac","Samuel","Anthony","Grayson","Zachary","David","Christopher","John","Isaiah","Levi","Jonathan","Oliver","Chase","Cooper","Tristan","Colton","Austin","Colin",
-            "Charlie","Dominic","Parker","Hunter","Thomas","Alex","Ian","Jordan","Cole","Julian","Aaron","Carson","Miles","Blake","Brody","Adam","Sebastian","Adrian","Nolan","Sean","Riley",
-            "Bentley","Xavier","Hayden","Jeremiah","Jason","Jake","Asher","Micah","Jace","Brandon","Josiah","Hudson","Nathaniel","Bryson","Ryder","Justin","Bryce"
-        };
-
-        private static readonly string[] lastNames =
-                {
-            "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia",
-            "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams", "Baker",
-            "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner", "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez", "Morris", "Rogers",
-            "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey", "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres", "Peterson", "Gray", "Ramirez", "James", "Watson", "Brooks",
-            "Kelly", "Sanders", "Price", "Bennett", "Wood", "Barnes", "Ross", "Henderson", "Coleman", "Jenkins", "Perry", "Powell", "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler",
-            "Simmons", "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes"
-        };
-
+        private static readonly string[] firstNames = { "" };
+        private static readonly string[] lastNames = { "" };
         private static readonly string[] cities = { "" };
-
         private static readonly string[] programmingLanguage = { "" };
-
+        private static readonly string[] currencyInfo = { "" };
         private static readonly string[] symbols = 
         { 
             "M17,21L14.25,18L15.41,16.84L17,18.43L20.59,14.84L21.75,16.25M12.8,21H5C3.89,21 3,20.11 3,19V5C3,3.89 3.89,3 5,3H19C20.11,3 21,3.89 21,5V12.8C20.39,12.45 19.72,12.2 19,12.08V5H5V19H12.08C12.2,19.72 12.45,20.39 12.8,21M12,17H7V15H12M14.68,13H7V11H17V12.08C16.15,12.22 15.37,12.54 14.68,13M17,9H7V7H17",
@@ -200,7 +190,6 @@ namespace DemoDataGeneratorLib.Base
         static BuildDemoData()
         {
             var resourceCity = "ModernBaseLibrary.Resources.DemoDataGenerator.GermanyCities.json";
-
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceCity))
             {
                 if (stream != null)
@@ -208,8 +197,20 @@ namespace DemoDataGeneratorLib.Base
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string jsonFileContent = reader.ReadToEnd();
-                        List<CityModel> cityList = JsonSerializer.Deserialize<List<CityModel>>(jsonFileContent);
-                        cities = cityList.Select(s => s.name).ToArray();
+                        cities = JsonSerializer.Deserialize<List<CityModel>>(jsonFileContent).Select(s => s.name).ToArray();
+                    }
+                }
+            }
+
+            var resourceCurrency = "ModernBaseLibrary.Resources.DemoDataGenerator.Currency.json";
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceCurrency))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonFileContent = reader.ReadToEnd();
+                        currencyInfo = JsonSerializer.Deserialize<List<Currency>>(jsonFileContent).Select(s => s.code).ToArray();
                     }
                 }
             }
@@ -222,8 +223,33 @@ namespace DemoDataGeneratorLib.Base
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string jsonFileContent = reader.ReadToEnd();
-                        List<string> progsList = JsonSerializer.Deserialize<List<string>>(jsonFileContent);
-                        programmingLanguage = progsList.ToArray();
+                        programmingLanguage = JsonSerializer.Deserialize<List<string>>(jsonFileContent).ToArray();
+                    }
+                }
+            }
+
+            var resourceFirstNames = "ModernBaseLibrary.Resources.DemoDataGenerator.Vornamen.json";
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceFirstNames))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonFileContent = reader.ReadToEnd();
+                        firstNames = JsonSerializer.Deserialize<List<string>>(jsonFileContent).Where(w =>w != string.Empty).ToArray();
+                    }
+                }
+            }
+
+            var resourceLastNames = "ModernBaseLibrary.Resources.DemoDataGenerator.Nachnamen.json";
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceLastNames))
+            {
+                if (stream != null)
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string jsonFileContent = reader.ReadToEnd();
+                        lastNames = JsonSerializer.Deserialize<List<string>>(jsonFileContent).Where(w => w != string.Empty).ToArray();
                     }
                 }
             }
@@ -299,7 +325,7 @@ namespace DemoDataGeneratorLib.Base
             string resultLetter = new string(Enumerable.Repeat(charsLetter, lengthLetter).Select(s => s[rnd.Next(s.Length)]).ToArray()).ToLower();
             string resultNumber = new string(Enumerable.Repeat(charsNumber, lengthNumber).Select(s => s[rnd.Next(s.Length)]).ToArray());
 
-            return $"{resultLetter}{resultNumber}";
+            return $"{resultLetter.ToUpper()}{resultNumber}";
         }
 
         public static double Double(double min, double max, int countDigits = 2)
@@ -326,7 +352,7 @@ namespace DemoDataGeneratorLib.Base
             return Math.Round(value, countDigits, MidpointRounding.AwayFromZero);
         }
 
-        public static decimal Currency(decimal min, decimal max)
+        public static decimal CurrencyValue(decimal min, decimal max)
         {
             decimal value = (decimal)rnd.NextDouble() * (max - min) + min;
 
@@ -401,6 +427,11 @@ namespace DemoDataGeneratorLib.Base
         public static string ProgrammingLanguage()
         {
             return programmingLanguage[rnd.Next(programmingLanguage.Length)];
+        }
+
+        public static string CurrencyText()
+        {
+            return currencyInfo[rnd.Next(currencyInfo.Length)];
         }
 
         public static (DateTime CreateOn, string CreateBy, DateTime ModifiedOn, string ModifiedBy) SetTimeStamp()

@@ -108,6 +108,7 @@
                         VerticalAlignment="Center"
                         IsEnabled="True"
                         IsShowFilterBox="True"
+                        ItemsSource="{Binding Path=ListBoxCSource}"
                         MaxShowNumber="3" />
                 </StackPanel>
 
@@ -147,7 +148,7 @@
                             Height="100"
                             DisplayMemberPath="Content"
                             IsReadOnly="False"
-                            ItemsSource="{Binding Path=ListBoxSource.Value}"
+                            ItemsSource="{Binding Path=ListBoxASource}"
                             SelectedItemsList="{Binding Path=ListBoxSourceSelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedValuePath="ID" />
 
@@ -161,6 +162,8 @@
                             DisplayMemberPath="Content"
                             ItemsSource="{Binding Path=ListBoxBSource}"
                             SelectedValuePath="ID" />
+
+                        <TextBlock Margin="10,0,0,0" Text="{Binding Path=SelectedItem, ElementName=ListboxB}" />
                     </StackPanel>
                 </DockPanel>
 

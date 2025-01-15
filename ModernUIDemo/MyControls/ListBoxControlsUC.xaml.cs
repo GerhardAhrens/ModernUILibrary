@@ -2,17 +2,17 @@
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+
     using DemoDataGeneratorLib.Base;
 
     using ModernIU.Controls;
     using ModernIU.WPF.Base;
-
-    using ModernUIDemo.Model;
 
     /// <summary>
     /// Interaktionslogik für ListBoxControlsUC.xaml
@@ -34,6 +34,16 @@
         public XamlProperty<string> MComboBoxSourceSelectedItem { get; set; } = XamlProperty.Set<string>();
         public XamlProperty<Brush> SelectedColorItem { get; set; } = XamlProperty.Set<Brush>();
 
+        private IEnumerable<CheckComboBoxTest> _ListBoxASource;
+        public IEnumerable<CheckComboBoxTest> ListBoxASource
+        {
+            get { return _ListBoxASource; }
+            set
+            {
+                SetField(ref _ListBoxASource, value);
+            }
+        }
+
         private IEnumerable<CheckComboBoxTest> _ListBoxSourceSelectedItem;
         public IEnumerable<CheckComboBoxTest> ListBoxSourceSelectedItem
         {
@@ -54,6 +64,16 @@
             }
         }
 
+        private IEnumerable<string> _ListBoxCSource;
+        public IEnumerable<string> ListBoxCSource
+        {
+            get { return _ListBoxCSource; }
+            set
+            {
+                SetField(ref _ListBoxCSource, value);
+            }
+        }
+
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -63,20 +83,27 @@
             this.SelectedColorItem.Value = Brushes.Transparent;
             this.FillDataListBoxA();
             this.FillDataListBoxB();
+            this.FillDataListBoxC();
         }
 
         private void FillDataListBoxA()
         {
             IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigMultiSelectListbox, 1_000);
             listBoxSorce = new ObservableCollection<CheckComboBoxTest>(listBoxSorce.AsParallel().OrderBy(o => o.ID));
-            this.ListBoxSource.Value = listBoxSorce;
+            this.ListBoxASource = listBoxSorce;
         }
 
         private void FillDataListBoxB()
         {
-            IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigMultiSelectListbox, 1_000);
+            IEnumerable<CheckComboBoxTest> listBoxSorce = BuildDemoData<CheckComboBoxTest>.CreateForList<CheckComboBoxTest>(ConfigListboxEx, 1_000);
             listBoxSorce = new ObservableCollection<CheckComboBoxTest>(listBoxSorce.AsParallel().OrderBy(o => o.ID));
             this.ListBoxBSource = listBoxSorce;
+        }
+
+        private void FillDataListBoxC()
+        {
+            IEnumerable<string> listBoxSorce = BuildDemoData<string>.CreateForList<string>(CheckComboBoxData, 20);
+            this.ListBoxCSource = listBoxSorce;
         }
 
         private CheckComboBoxTest ConfigMultiSelectListbox(CheckComboBoxTest listBoxDemoData)
@@ -85,6 +112,19 @@
             listBoxDemoData.Content = BuildDemoData.LastName();
 
             return listBoxDemoData;
+        }
+
+        private CheckComboBoxTest ConfigListboxEx(CheckComboBoxTest listBoxDemoData)
+        {
+            listBoxDemoData.ID = BuildDemoData.Integer(1, 10_000);
+            listBoxDemoData.Content = BuildDemoData.LastName();
+
+            return listBoxDemoData;
+        }
+
+        private string CheckComboBoxData(string text)
+        {
+            return BuildDemoData.ProgrammingLanguage();
         }
 
         private void btnGetContent_Click(object sender, RoutedEventArgs e)
@@ -112,9 +152,15 @@
         #endregion PropertyChanged Implementierung
     }
 
+    [DebuggerDisplay("ID={this.ID};Content={this.Content}")]
     public class CheckComboBoxTest
     {
         public int ID { get; set; }
         public string Content { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID={this.ID};Content={this.Content}";
+        }
     }
 }
