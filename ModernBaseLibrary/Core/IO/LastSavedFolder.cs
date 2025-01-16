@@ -20,28 +20,32 @@ namespace ModernBaseLibrary.Core.IO
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Versioning;
+    using System.Text.Json;
     using System.Xml;
+    using Microsoft.VisualBasic.ApplicationServices;
 
     using ModernBaseLibrary.CoreBase;
     using ModernBaseLibrary.Extension;
     using ModernBaseLibrary.XML;
+    using static System.Windows.Forms.Design.AxImporter;
 
     [SupportedOSPlatform("windows")]
     public sealed class LastSavedFolder
     {
         private const string XmlRootPath = "/configuration/LastFolder";
 
-        private static readonly ConcurrentDictionary<string, string> SavedFolder = null;
+        private static List<LastTagetFolder> SavedFolder = null;
 
         static LastSavedFolder()
         {
             if (SavedFolder == null)
             {
-                SavedFolder = new ConcurrentDictionary<string, string>();
+                SavedFolder = new List<LastTagetFolder>();
             }
 
             Load();
@@ -72,9 +76,9 @@ namespace ModernBaseLibrary.Core.IO
         {
             string result = string.Empty;
 
-            if (SavedFolder.ContainsKey(typ) == true)
+            if (SavedFolder.Any(w =>w.Typ == typ) == true)
             {
-                result = SavedFolder[typ];
+                result = SavedFolder.SingleOrDefault(w => w.Typ == typ).Folder;
                 if (string.IsNullOrEmpty(result) == true)
                 {
                     result = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -93,9 +97,9 @@ namespace ModernBaseLibrary.Core.IO
             string result = string.Empty;
             string typName = typ.GetFriendlyName();
 
-            if (SavedFolder.ContainsKey(typName) == true)
+            if (SavedFolder.Any(w => w.Typ == typName) == true)
             {
-                result = SavedFolder[typName];
+                result = SavedFolder.SingleOrDefault(w => w.Folder == typName).Folder;
                 if (string.IsNullOrEmpty(result) == true)
                 {
                     result = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -112,15 +116,21 @@ namespace ModernBaseLibrary.Core.IO
         public static string GetOrSet(string typ, string folder = "")
         {
             string result = string.Empty;
-
-            if (SavedFolder.ContainsKey(typ) == true)
+            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typ) == true)
             {
-                result = SavedFolder[typ] = folder;
+                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typ);
+                int pos = SavedFolder.IndexOf(lastFolder);
+                result = SavedFolder[pos].Folder = folder;
             }
             else
             {
-                SavedFolder.TryAdd(typ, folder);
-                result = SavedFolder[typ] = folder;
+                LastTagetFolder lastFolder = new LastTagetFolder();
+                lastFolder.Typ =typ;
+                lastFolder.Folder = folder;
+                lastFolder.User = $"{Environment.UserDomainName}\\{Environment.UserName}";
+
+                SavedFolder.Add(lastFolder);
+                result = lastFolder.Folder;
             }
 
             return result;
@@ -131,20 +141,21 @@ namespace ModernBaseLibrary.Core.IO
             string result = string.Empty;
             string typName = typ.GetFriendlyName();
 
-            if (SavedFolder.ContainsKey(typName) == true)
+            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typName) == true)
             {
-                result = SavedFolder[typName] = folder;
+                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typName);
+                int pos = SavedFolder.IndexOf(lastFolder);
+                result = SavedFolder[pos].Folder = folder;
             }
             else
             {
-                if (SavedFolder.TryAdd(typName, folder) == true)
-                {
-                    result = SavedFolder[typName] = folder;
-                }
-                else
-                {
-                    result = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                }
+                LastTagetFolder lastFolder = new LastTagetFolder();
+                lastFolder.Typ = typName;
+                lastFolder.Folder = folder;
+                lastFolder.User = $"{Environment.UserDomainName}\\{Environment.UserName}";
+
+                SavedFolder.Add(lastFolder);
+                result = lastFolder.Folder;
             }
 
             return result;
@@ -153,45 +164,27 @@ namespace ModernBaseLibrary.Core.IO
         public static Dictionary<string, string> ToDictionary()
         {
             Dictionary<string, string> export = new Dictionary<string, string>();
-            foreach (KeyValuePair<string, string> item in SavedFolder)
+            foreach (LastTagetFolder item in SavedFolder)
             {
-                export.Add(item.Key, item.Value);
+                export.Add(item.Typ, item.Folder);
             }
 
             return export;
         }
 
-        public static Dictionary<string, string> ToDictionary(Func<KeyValuePair<string, string>, bool> predicate)
-        {
-            Dictionary<string, string> export = new Dictionary<string, string>();
-            foreach (KeyValuePair<string, string> item in SavedFolder)
-            {
-                export.Add(item.Key, item.Value);
-            }
-
-            return SavedFolder.Where(predicate).ToDictionary(x => x.Key, x => x.Value);
-        }
-
         public static List<string> GetFolders()
         {
-            List<string> folders = new List<string>();
-            IEnumerable<IGrouping<string,KeyValuePair<string,string>>> groupFolders = SavedFolder.GroupBy(g => g.Value);
-            foreach (IGrouping<string, KeyValuePair<string, string>> folder in groupFolders)
-            {
-                folders.Add(folder.Key);
-            }
-
-            return folders;
+            return SavedFolder.Select(s => s.Folder).ToList();
         }
 
         public static void Remove(string typ)
         {
             if (SavedFolder.Count > 0)
             {
-                if (SavedFolder.ContainsKey(typ) == true)
+                if (SavedFolder.Any(w => w.Typ == typ) == true)
                 {
-                    string outValue;
-                    bool isRemoved = SavedFolder.TryRemove(typ, out outValue);
+                    LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typ);
+                    bool isRemoved = SavedFolder.Remove(lastFolder);
                     if (isRemoved == true)
                     {
                         Save();
@@ -205,10 +198,10 @@ namespace ModernBaseLibrary.Core.IO
             if (SavedFolder.Count > 0)
             {
                 string typName = typ.GetFriendlyName();
-                if (SavedFolder.ContainsKey(typName) == true)
+                if (SavedFolder.Any(w => w.Typ == typName) == true)
                 {
-                    string outValue;
-                    bool isRemoved = SavedFolder.TryRemove(typName, out outValue);
+                    LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typName);
+                    bool isRemoved = SavedFolder.Remove(lastFolder);
                     if (isRemoved == true)
                     {
                         Save();
@@ -225,41 +218,13 @@ namespace ModernBaseLibrary.Core.IO
 
             if (File.Exists(settingsFile) == true)
             {
-                string xmlResult = File.ReadAllText(settingsFile);
-
-                SavedFolder.Clear();
-
-                using (DynamicXml xmlRead = new DynamicXml(xmlResult))
-                {
-                    XmlNodeList lastFolders = xmlRead.XmlDocument.SelectNodes(XmlRootPath);
-                    XmlNode childNotes = lastFolders[0];
-                    if (((XmlElement)childNotes).HasAttributes == true)
-                    {
-                        foreach (XmlNode item in ((XmlElement)childNotes).Attributes)
-                        {
-                            string typName = item.Name;
-                            string typValue = item.Value;
-                        }
-                    }
-
-                    if (childNotes.HasChildNodes == true)
-                    {
-                        foreach (XmlNode item in childNotes.ChildNodes)
-                        {
-                            if (SavedFolder.ContainsKey(item.Name) == false)
-                            {
-                                SavedFolder.TryAdd(item.Name, item.InnerText);
-                            }
-                        }
-                    }
-                }
+                string jsonText = File.ReadAllText(settingsFile);
+                SavedFolder = JsonSerializer.Deserialize<List<LastTagetFolder>>(jsonText);
             }
         }
 
         public static void Save()
         {
-            string xmlResult = string.Empty;
-
             string settingsPath = CurrentSettingsPath();
             string settingsName = UserSettingsName();
             string settingsFile = Path.Combine(settingsPath, settingsName);
@@ -269,19 +234,29 @@ namespace ModernBaseLibrary.Core.IO
                 Directory.CreateDirectory(settingsPath);
             }
 
-            using (DynamicXml xmlWrite = new DynamicXml())
+            if (SavedFolder.Count > 0)
             {
-                XmlNode application = xmlWrite.CreateNew(XmlRootPath);
-                xmlWrite.Write($"{XmlRootPath }/@Typ", "String");
-                foreach (KeyValuePair<string,string> item in SavedFolder)
-                {
-                    xmlWrite.Write(application, item.Key, item.Value);
-                }
+                string jsonText = JsonSerializer.Serialize(SavedFolder);
+                File.WriteAllText(settingsFile, jsonText);
+            }
+        }
 
-                xmlResult = xmlWrite.Xml;
+        public static void Clear()
+        {
+            string settingsPath = CurrentSettingsPath();
+            string settingsName = UserSettingsName();
+            string settingsFile = Path.Combine(settingsPath, settingsName);
+
+            if (Directory.Exists(settingsPath) == false)
+            {
+                Directory.CreateDirectory(settingsPath);
             }
 
-            File.WriteAllText(settingsFile, xmlResult);
+            if (SavedFolder.Count > 0)
+            {
+                SavedFolder.Clear();
+                File.Delete(settingsFile);
+            }
         }
 
         public static bool Exist()
@@ -376,5 +351,23 @@ namespace ModernBaseLibrary.Core.IO
 
             public static bool IsInUnitTest { get; private set; }
         }
+    }
+
+    internal enum LastFolderModus : int
+    {
+        [Description("Keine Funktion")]
+        none = 0,
+        [Description("Auswählen oder öffenen")]
+        Open = 1,
+        [Description("Speichern")]
+        Save = 2
+    }
+
+    internal class LastTagetFolder
+    {
+        public LastFolderModus Modus { get; set; }
+        public string Typ { get; set; }
+        public string Folder { get; set; }
+        public string User { get; set; }
     }
 }
