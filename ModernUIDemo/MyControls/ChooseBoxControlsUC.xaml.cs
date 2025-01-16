@@ -1,19 +1,7 @@
 ﻿namespace ModernUIDemo.MyControls
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
 
     /// <summary>
     /// Interaktionslogik für ChooseBoxControlsUC.xaml
@@ -22,7 +10,27 @@
     {
         public ChooseBoxControlsUC()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            /*UI.Dialoge*/
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnSelectFolderOpen, "Click", this.OnSelectFolderOpen);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnSelectFolderSave, "Click", this.OnSelectFolderSave);
+        }
+
+        private void OnSelectFolderOpen(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnSelectFolderSave(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }

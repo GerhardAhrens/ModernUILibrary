@@ -108,6 +108,28 @@
                     </Style>
                 </ModernUI:ChooseBox.ChooseButtonStyle>
             </ModernUI:ChooseBox>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="Save / Open Dialog" />
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <ModernUI:FlatButton
+                    x:Name="btnSelectFolderOpen"
+                    Width="200"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Content="Datei aus Verzeichnis öffen" />
+
+                <ModernUI:FlatButton Margin="20,0,0,0"
+                    x:Name="btnSelectFolderSave"
+                    Width="200"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    Content="Datei in Verzeichnis speichern" />
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>
