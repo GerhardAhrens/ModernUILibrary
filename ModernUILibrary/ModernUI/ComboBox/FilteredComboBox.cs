@@ -52,6 +52,10 @@ namespace ModernIU.Controls
             this.IsReadOnly = false;
             this.IsEditable = true;
             this.IsTextSearchEnabled = false;
+            this.SetValue(KeyboardNavigation.IsTabStopProperty, false);
+            this.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, false);
+            this.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+            this.SetValue(VirtualizingPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
         }
 
         [Description("Length of the search string that triggers filtering.")]
@@ -115,7 +119,9 @@ namespace ModernIU.Controls
                     break;
                 case Key.Back:
                     this.IsDropDownOpen = true;
-                    break;
+                    this.SelectedIndex = -1;
+                    this.Text = currentFilter;
+                    return;
                 case Key.Escape:
                     this.IsDropDownOpen = false;
                     this.SelectedIndex = -1;
