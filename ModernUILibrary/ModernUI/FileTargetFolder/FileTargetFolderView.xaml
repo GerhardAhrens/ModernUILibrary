@@ -95,6 +95,82 @@
                     Text="tbDescriptionText"
                     TextWrapping="Wrap" />
 
+                <libWPF:ListBoxEx
+                    x:Name="folderList"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="{Binding Path=ActualWidth, ElementName=foldersGrid, Converter={StaticResource maxWidthConverter}, ConverterParameter=115}"
+                    Height="{Binding Path=ActualHeight, ElementName=foldersGrid, Converter={StaticResource maxWidthConverter}, ConverterParameter=10}"
+                    Margin="3"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding Path=DialogDataView}"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    SelectedValue="{Binding Path=SelectFolderValue, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Single"
+                    VirtualizingPanel.ScrollUnit="Item"
+                    VirtualizingStackPanel.IsVirtualizing="True"
+                    VirtualizingStackPanel.VirtualizationMode="Recycling">
+                    <libWPF:ListBoxEx.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Blue" BorderThickness="1">
+                                <libWPF:SimpleGrid Columns="40,Auto,40" Rows="Auto">
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="&#xEd25;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        FontSize="24"
+                                        FontWeight="ExtraBold" />
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Width="{Binding Path=ActualWidth, ElementName=folderList, Converter={StaticResource maxWidthConverter}, ConverterParameter=120}"
+                                        Height="Auto"
+                                        Margin="3"
+                                        VerticalAlignment="Center">
+                                        <Run
+                                            FontWeight="Bold"
+                                            Foreground="Blue"
+                                            Text="{Binding ., Converter={StaticResource ResourceKey=shortFolderConverter}}" />
+                                        <LineBreak />
+                                        <Run Text="{Binding .}" />
+                                    </TextBlock>
+
+                                    <Button
+                                        x:Name="BtnCancelButtonItem"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Margin="0,0,8,0"
+                                        Padding="6"
+                                        HorizontalAlignment="Right"
+                                        Command="{Binding Path=CmdAgg[CancelButtonItemCommand], RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                        CommandParameter="{Binding ElementName=folderList, Path=SelectedItem}"
+                                        Content="{StaticResource ResourceKey=fntCancle}"
+                                        DockPanel.Dock="Right"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        FontSize="18"
+                                        FontWeight="ExtraBold"
+                                        IsDefault="True"
+                                        KeyboardNavigation.IsTabStop="False"
+                                        ToolTip="Verzeichnisauswahl abbrechen"
+                                        Visibility="Visible" />
+                                </libWPF:SimpleGrid>
+                            </Border>
+                        </DataTemplate>
+                    </libWPF:ListBoxEx.ItemTemplate>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding Path=DataContext.CmdAgg[UsedFolderCommand], RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" CommandParameter="{Binding ElementName=folderList, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </libWPF:ListBoxEx>
             </libWPF:SimpleGrid>
 
             <DockPanel

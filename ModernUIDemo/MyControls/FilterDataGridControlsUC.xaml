@@ -90,7 +90,8 @@
                 IsReadOnly="False"
                 ItemsSource="{Binding Path=FilteredList, UpdateSourceTrigger=PropertyChanged}"
                 LoadingRowCommand="{Binding Path=LoadingRowCommand}"
-                MinColumnWidth="50"
+                MinColumnWidth="60"
+                MouseDoubleClickCommand="{Binding Path=MouseDoubleClickCommand}"
                 RowHeaderWidth="40"
                 SelectedRowCommand="{Binding Path=SelectedRowCommand}"
                 ShowElapsedTime="True"
@@ -99,14 +100,33 @@
                 VerticalScrollBarVisibility="Visible"
                 VirtualizingStackPanel.IsVirtualizing="True">
                 <ModernUI:FilterDataGrid.Columns>
+
+                    <ModernUI:DataGridTemplateColumn
+                        Width="SizeToCells"
+                        Header="Symbol"
+                        IsColumnFiltered="False">
+                        <ModernUI:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Path
+                                        Width="16"
+                                        Height="16"
+                                        Data="{Binding Path=Symbol}"
+                                        Fill="Green"
+                                        Stretch="Fill" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ModernUI:DataGridTemplateColumn.CellTemplate>
+                    </ModernUI:DataGridTemplateColumn>
+
                     <ModernUI:DataGridTemplateColumn
                         FieldName="LastName"
                         Header="Nachname"
                         IsColumnFiltered="True"
                         SortMemberPath="LastName">
                         <ModernUI:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="local:Employe">
-                                <TextBlock Text="{Binding LastName}" />
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=LastName}" />
                             </DataTemplate>
                         </ModernUI:DataGridTemplateColumn.CellTemplate>
                     </ModernUI:DataGridTemplateColumn>
@@ -117,24 +137,24 @@
                         IsColumnFiltered="True"
                         SortMemberPath="FirstName">
                         <ModernUI:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate DataType="local:Employe">
-                                <TextBlock Text="{Binding FirstName}" />
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=FirstName}" />
                             </DataTemplate>
                         </ModernUI:DataGridTemplateColumn.CellTemplate>
                     </ModernUI:DataGridTemplateColumn>
 
                     <ModernUI:DataGridTextColumn
-                        Binding="{Binding Salary}"
+                        Binding="{Binding Path=Salary}"
                         Header="Salary"
                         IsColumnFiltered="True" />
 
                     <ModernUI:DataGridTextColumn
-                        Binding="{Binding Manager}"
+                        Binding="{Binding Path=Manager}"
                         Header="Manager"
                         IsColumnFiltered="True" />
 
                     <ModernUI:DataGridTextColumn
-                        Binding="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}"
+                        Binding="{Binding Path=StartDate, StringFormat=\{0:dd/MM/yyyy\}}"
                         Header="Start Datum"
                         IsColumnFiltered="True" />
 

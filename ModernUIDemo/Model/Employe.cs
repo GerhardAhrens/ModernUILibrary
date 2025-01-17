@@ -23,10 +23,16 @@
         public string LastName { get; set; }
         public bool Manager { get; set; }
         public int Salary { get; set; }
+        public string Symbol { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime CreateOn { get; set; }
         public string CreateBy { get; set; }
         public DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.FirstName}, {this.LastName}";
+        }
     }
 }

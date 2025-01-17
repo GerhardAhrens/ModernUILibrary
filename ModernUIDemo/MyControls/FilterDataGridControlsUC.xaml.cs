@@ -26,6 +26,7 @@
         public ICommand RefreshCommand => new DelegateCommand(this.RefreshData);
         public ICommand LoadingRowCommand => new DelegateCommand(this.LoadingRowHandler);
         public ICommand SelectedRowCommand => new DelegateCommand(this.SelectedRowHandler);
+        public ICommand MouseDoubleClickCommand => new DelegateCommand(this.MouseDoubleClickHandler);
 
         public ObservableCollection<Employe> Employes { get; set; }
         public ObservableCollection<Employe> FilteredList { get; set; }
@@ -71,7 +72,7 @@
         private void FillData()
         {
             this.Search = string.Empty;
-            IEnumerable<Employe> employe = BuildDemoData<Employe>.CreateForList<Employe>(ConfigObject, 1_000);
+            IEnumerable<Employe> employe = BuildDemoData<Employe>.CreateForList<Employe>(ConfigObject, 10_000);
             this.Employes = new ObservableCollection<Employe>(employe.AsParallel().OrderBy(o => o.LastName));
 
             this.FilteredList = new ObservableCollection<Employe>(this.Employes);
@@ -89,6 +90,7 @@
             employe.FirstName = BuildDemoData.FirstName();
             employe.LastName = BuildDemoData.LastName();
             employe.Salary = BuildDemoData.Integer(1_000,10_000);
+            employe.Symbol = BuildDemoData.Symbols();
             employe.StartDate = BuildDemoData.Dates(new DateTime(2000,1,1),DateTime.Now);
             employe.Manager = BuildDemoData.Boolean();
             employe.CreateOn = timeStamp.CreateOn;
@@ -108,11 +110,17 @@
         {
             DataGridRowEventArgs e = (DataGridRowEventArgs)obj;
             var index = e.Row.GetIndex() + 1;
-            e.Row.Header = $"{index}";
+            e.Row.Header = $"{index:00000}";
         }
 
         private void SelectedRowHandler(object obj)
         {
+            /*MessageBox.Show(obj.ToString());*/
+        }
+
+        private void MouseDoubleClickHandler(object obj)
+        {
+            MessageBox.Show($"MouseDoubleClick: {obj.ToString()}");
         }
 
         #region PropertyChanged Implementierung

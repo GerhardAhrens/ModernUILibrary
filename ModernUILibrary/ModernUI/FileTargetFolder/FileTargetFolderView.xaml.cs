@@ -53,8 +53,6 @@ namespace ModernIU.Controls
             this.DataContext = this;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ICollectionView DialogDataView
         {
             get { return this.dialogDataView; }
@@ -89,47 +87,7 @@ namespace ModernIU.Controls
 
         private SelectFolderAction FolderAction { get; set; }
 
-        public static SelectFolderResult Execute(Window owner, string headerText, string instructionText, List<string> folders)
-        {
-            FileTargetFolderView dialog = new FileTargetFolderView();
-            dialog.Owner = owner;
-            dialog.WindowState = WindowState.Normal;
-            dialog.WindowStyle = WindowStyle.None;
-            dialog.ResizeMode = ResizeMode.NoResize;
-            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            dialog.txtHeaderText.Text = string.IsNullOrEmpty(headerText) == true ? "Speichern unter ..." : headerText;
-            if (string.IsNullOrEmpty(instructionText) == true)
-            {
-                dialog.txtInstructionText.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                dialog.txtInstructionText.Text = instructionText;
-            }
-
-            SelectFolderSettings settings = new SelectFolderSettings();
-            settings.Folders = folders;
-
-            return dialog.InternalExecute(settings);
-        }
-
-        public static SelectFolderResult Execute(Window owner, string headerText, List<string> folders)
-        {
-            FileTargetFolderView dialog = new FileTargetFolderView();
-            dialog.Owner = owner;
-            dialog.WindowState = WindowState.Normal;
-            dialog.WindowStyle = WindowStyle.None;
-            dialog.ResizeMode = ResizeMode.NoResize;
-            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            dialog.txtHeaderText.Text = string.IsNullOrEmpty(headerText) == true ? "Speichern unter ..." : headerText;
-            //dialog.tbDescriptionText.Text = string.Empty;
-            dialog.txtInstructionText.Visibility = Visibility.Hidden;
-
-            SelectFolderSettings settings = new SelectFolderSettings();
-            settings.Folders = folders;
-
-            return dialog.InternalExecute(settings);
-        }
+        #region Public Execute (Dialog anzeigen)
 
         public static SelectFolderResult Execute(SelectFolderSettings settings)
         {
@@ -151,15 +109,19 @@ namespace ModernIU.Controls
 
             if (string.IsNullOrEmpty(settings.DescriptionText) == true)
             {
-                //dialog.tbDescriptionText.Visibility = Visibility.Hidden;
+                dialog.tbDescriptionText.Visibility = Visibility.Hidden;
             }
             else
             {
-                //dialog.tbDescriptionText.Text = settings.DescriptionText;
+                dialog.tbDescriptionText.Text = settings.DescriptionText;
             }
 
             return dialog.InternalExecute(settings);
         }
+        #endregion Public Execute (Dialog anzeigen)
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -172,7 +134,9 @@ namespace ModernIU.Controls
             var e = new PropertyChangedEventArgs(propertyName);
             handler(this, e);
         }
+        #endregion INotifyPropertyChanged
 
+        #region Execute Internal
         private SelectFolderResult InternalExecute(SelectFolderSettings settings)
         {
             SelectFolderResult result = null;
@@ -235,7 +199,9 @@ namespace ModernIU.Controls
 
             return result;
         }
+        #endregion Execute
 
+        #region Command Methode Handler
         private void OnClosing(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
@@ -325,6 +291,8 @@ namespace ModernIU.Controls
             }
         }
 
+        #endregion Command Methode Handler
+
         private string SaveFile(string saveName, string description, FileFilter fileFilter, string initialDirectory = "")
         {
             string currentFileName = string.Empty;
@@ -389,6 +357,14 @@ namespace ModernIU.Controls
             }
 
             return currentFileName;
+        }
+
+        public static void GetFolderType(string folder)
+        {
+        }
+
+        public static void Save()
+        {
         }
     }
 }

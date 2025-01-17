@@ -202,6 +202,7 @@
                             FontWeight="{TemplateBinding FontWeight}"
                             MaxLength="{TemplateBinding MaxLength}"
                             Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
+
                         <TextBox
                             Margin="{TemplateBinding Margin}"
                             Padding="{TemplateBinding Padding}"
@@ -236,7 +237,6 @@
 
     <!--  CONTROL TEMPLATE FOR DATAGRID  -->
     <ControlTemplate x:Key="ControlTemplateDatagrid" TargetType="{x:Type DataGrid}">
-
         <Border
             Padding="{TemplateBinding Padding}"
             Background="{TemplateBinding Background}"
@@ -267,7 +267,7 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
+                                
                                 <Button
                                     Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                     Command="{x:Static DataGrid.SelectAllCommand}"
@@ -275,17 +275,20 @@
                                     Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle,
                                                                                   TypeInTargetAssembly={x:Type DataGrid}}}"
                                     Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+
                                 <DataGridColumnHeadersPresenter
                                     x:Name="PART_ColumnHeadersPresenter"
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+
                                 <ScrollContentPresenter
                                     x:Name="PART_ScrollContentPresenter"
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="2"
                                     CanContentScroll="{TemplateBinding CanContentScroll}" />
+
                                 <ScrollBar
                                     x:Name="PART_VerticalScrollBar"
                                     Grid.Row="1"
@@ -295,11 +298,13 @@
                                     ViewportSize="{TemplateBinding ViewportHeight}"
                                     Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                     Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
                                 <Grid Grid.Row="2" Grid.Column="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    
                                     <ScrollBar
                                         x:Name="PART_HorizontalScrollBar"
                                         Grid.Column="1"
@@ -342,13 +347,13 @@
                             FontWeight="Medium">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{x:Static control:DataGridLoc.Status}">
-                                    <Binding Path="Items.Count" FallbackValue="0"/>
-                                    <Binding Path="ItemsSelectedCount" FallbackValue="0" />
+                                    <Binding FallbackValue="0" Path="Items.Count" />
+                                    <Binding FallbackValue="0" Path="ItemsSelectedCount" />
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        
-                        <TextBlock HorizontalAlignment="Right" Text="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged, StringFormat={x:Static control:DataGridLoc.ElapsedTime}, FallbackValue=00:00.00}">
+
+                        <TextBlock HorizontalAlignment="Right" Text="{Binding Path=ElapsedTime, UpdateSourceTrigger=PropertyChanged, StringFormat={x:Static control:DataGridLoc.ElapsedTime}, FallbackValue=00:00.00}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Visibility" Value="Collapsed" />

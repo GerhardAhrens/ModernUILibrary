@@ -115,15 +115,16 @@
             get { return (ICommand)GetValue(SelectedRowCommandProperty); }
             set { SetValue(SelectedRowCommandProperty, value); }
         }
-        #endregion Public DependencyICommand
 
-        private void OnLoadingRow(object sender, DataGridRowEventArgs e)
+        public static readonly DependencyProperty MouseDoubleClickCommandProperty =
+            DependencyProperty.Register(nameof(MouseDoubleClickCommand), typeof(ICommand), typeof(FilterDataGrid), new PropertyMetadata(null));
+
+        public ICommand MouseDoubleClickCommand
         {
-            if (this.LoadingRowCommand != null)
-            {
-                this.LoadingRowCommand.Execute(e);
-            }
+            get { return (ICommand)GetValue(MouseDoubleClickCommandProperty); }
+            set { SetValue(MouseDoubleClickCommandProperty, value); }
         }
+        #endregion Public DependencyICommand
 
         #region Public Event
 
@@ -243,8 +244,6 @@
         /// <param name="e"></param>
         protected override void OnInitialized(EventArgs e)
         {
-            Debug.WriteLineIf(DebugMode, "OnInitialized");
-
             base.OnInitialized(e);
 
             try
@@ -334,13 +333,6 @@
         /// <param name="newValue"></param>
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
-            Debug.WriteLineIf(DebugMode, "OnItemsSourceChanged");
-
-            // order call :
-            // Constructor
-            // OnInitialized
-            // OnItemsSourceChanged
-
             base.OnItemsSourceChanged(oldValue, newValue);
 
             try
@@ -430,6 +422,14 @@
             this.ItemsSelectedCount = 0;
         }
 
+        private void OnLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            if (this.LoadingRowCommand != null)
+            {
+                this.LoadingRowCommand.Execute(e);
+            }
+        }
+
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DependencyObject originalSource = (DependencyObject)e.OriginalSource;
@@ -443,9 +443,9 @@
                 }
             }
 
-            if (this.SelectedRowCommand != null && this.SelectedRowCommand.CanExecute(this.SelectedItem) == true)
+            if (this.MouseDoubleClickCommand != null && this.MouseDoubleClickCommand.CanExecute(this.SelectedItem) == true)
             {
-                this.SelectedRowCommand.Execute(this.SelectedItem);
+                this.MouseDoubleClickCommand.Execute(this.SelectedItem);
             }
         }
 
@@ -453,9 +453,9 @@
         {
             if (e.Key == Key.Enter)
             {
-                if (this.SelectedRowCommand != null && this.SelectedRowCommand.CanExecute(this.SelectedItem) == true)
+                if (this.MouseDoubleClickCommand != null && this.MouseDoubleClickCommand.CanExecute(this.SelectedItem) == true)
                 {
-                    this.SelectedRowCommand.Execute(this.SelectedItem);
+                    this.MouseDoubleClickCommand.Execute(this.SelectedItem);
                 }
             }
         }
@@ -622,9 +622,6 @@
             this.button.Opacity = 0.5;
             this.pathFilterIcon.Data = this.iconFilter;
 
-            DateTime start = DateTime.Now;
-            this.ElapsedTime = new TimeSpan(0, 0, 0);
-
             Mouse.OverrideCursor = Cursors.Wait;
 
             if (this.CurrentFilter.IsFiltered && criteria.Remove(this.CurrentFilter.FieldName))
@@ -639,8 +636,6 @@
 
             // set the last filter applied
             lastFilter = this.GlobalFilterList.LastOrDefault()?.FieldName;
-
-            this.ElapsedTime = DateTime.Now - start;
 
             ResetCursor();
         }
@@ -723,10 +718,6 @@
         private async void ShowFilterCommand(object sender, ExecutedRoutedEventArgs e)
         {
             Debug.WriteLineIf(DebugMode, "\r\nShowFilterCommand");
-
-            // reset previous  elapsed time
-            ElapsedTime = new TimeSpan(0, 0, 0);
-            var start = DateTime.Now;
 
             // clear search text (important)
             searchText = string.Empty;
@@ -951,9 +942,6 @@
             }
             finally
             {
-                // show open popup elapsed time in UI
-                this.ElapsedTime = DateTime.Now - start;
-
                 // reset cursor
                 ResetCursor();
             }
@@ -1079,14 +1067,12 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"ApplyFilterCommand error : {ex.Message}");
                 throw;
             }
             finally
             {
                 pending = false;
                 ResetCursor();
-                ElapsedTime = elased.Add(DateTime.Now - start);
             }
         }
 

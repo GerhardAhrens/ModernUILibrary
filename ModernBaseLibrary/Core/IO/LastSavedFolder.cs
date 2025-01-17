@@ -37,8 +37,6 @@ namespace ModernBaseLibrary.Core.IO
     [SupportedOSPlatform("windows")]
     public sealed class LastSavedFolder
     {
-        private const string XmlRootPath = "/configuration/LastFolder";
-
         private static List<LastTagetFolder> SavedFolder = null;
 
         static LastSavedFolder()
