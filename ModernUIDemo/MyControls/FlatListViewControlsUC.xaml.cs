@@ -21,6 +21,7 @@
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             this.CmdAgg.AddOrSetCommand("SelectedRowCommand", new RelayCommand(p1 => this.SelectedRowClick(p1), p2 => true));
             this.CmdAgg.AddOrSetCommand("SelectionChangedCommand", new RelayCommand(p1 => this.SelectionChangedClick(p1), p2 => true));
+            this.CmdAgg.AddOrSetCommand("MouseDoubleClickCommand", new RelayCommand(p1 => this.SelectionChangedClick(p1), p2 => true));
             this.DataContext = this;
         }
 

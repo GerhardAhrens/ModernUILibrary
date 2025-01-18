@@ -30,6 +30,7 @@
             set { SetValue(SelectedCountProperty, value); }
         }
 
+        #region Public DependencyICommand
         public static readonly DependencyProperty SelectedRowCommandProperty =
             DependencyProperty.Register(nameof(SelectedRowCommand), typeof(ICommand), typeof(FlatListView), new PropertyMetadata(null));
 
@@ -47,6 +48,16 @@
             get { return (ICommand)GetValue(SelectionChangedCommandProperty); }
             set { SetValue(SelectionChangedCommandProperty, value); }
         }
+
+        public static readonly DependencyProperty MouseDoubleClickCommandProperty =
+            DependencyProperty.Register(nameof(MouseDoubleClickCommand), typeof(ICommand), typeof(FilterDataGrid), new PropertyMetadata(null));
+
+        public ICommand MouseDoubleClickCommand
+        {
+            get { return (ICommand)GetValue(MouseDoubleClickCommandProperty); }
+            set { SetValue(MouseDoubleClickCommandProperty, value); }
+        }
+        #endregion Public DependencyICommand
 
         static FlatListView()
         {
@@ -96,9 +107,9 @@
                 }
             }
 
-            if (this.SelectedRowCommand != null && this.SelectedRowCommand.CanExecute(this.SelectedItem) == true)
+            if (this.MouseDoubleClickCommand != null && this.MouseDoubleClickCommand.CanExecute(this.SelectedItem) == true)
             {
-                this.SelectedRowCommand.Execute(this.SelectedItem);
+                this.MouseDoubleClickCommand.Execute(this.SelectedItem);
             }
         }
 
@@ -115,9 +126,9 @@
         {
             if (e.Key == Key.Enter)
             {
-                if (this.SelectedRowCommand != null && this.SelectedRowCommand.CanExecute(this.SelectedItem) == true)
+                if (this.MouseDoubleClickCommand != null && this.MouseDoubleClickCommand.CanExecute(this.SelectedItem) == true)
                 {
-                    this.SelectedRowCommand.Execute(this.SelectedItem);
+                    this.MouseDoubleClickCommand.Execute(this.SelectedItem);
                 }
             }
         }
