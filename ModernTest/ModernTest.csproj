@@ -53,6 +53,8 @@
     <Folder Include="ModernBaseLibrary\Core\Guid\" />
     <Folder Include="ModernBaseLibrary\Core\Dump\" />
     <Folder Include="ModernBaseLibrary\Core\IO\" />
+    <Folder Include="ModernBaseLibrary\Core\LINQ\" />
+    <Folder Include="ModernBaseLibrary\Core\TypConverter\" />
     <Folder Include="ModernBaseLibrary\Core\Performance\" />
     <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
@@ -62,6 +64,8 @@
     <Folder Include="ModernBaseLibrary\Extensions\System.Dynamic\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Collections\" />
     <Folder Include="ModernBaseLibrary\Extensions\System\" />
+    <Folder Include="ModernBaseLibrary\FluentAPI\API\" />
+    <Folder Include="ModernBaseLibrary\FluentAPI\Type\" />
   </ItemGroup>
 
 </Project>

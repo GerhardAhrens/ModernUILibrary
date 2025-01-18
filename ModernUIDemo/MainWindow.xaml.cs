@@ -353,6 +353,7 @@
             this.tabItemSource.Add(new TabControlItem("C# Technik ", true));
             this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
             this.tabItemSource.Add(new TabControlItem("WeakEvent", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
+            this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 

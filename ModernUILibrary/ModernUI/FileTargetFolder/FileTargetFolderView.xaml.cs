@@ -139,6 +139,7 @@ namespace ModernIU.Controls
         #region Execute Internal
         private FileTargetFolderResult InternalExecute(FileTargetFolderSettings settings)
         {
+            /*
             FileTargetFolderResult result = null;
             SelectFolderEventArgs args = null;
             bool? resultDialog = false;
@@ -198,6 +199,8 @@ namespace ModernIU.Controls
             }
 
             return result;
+            */
+            return default;
         }
         #endregion Execute
 
@@ -223,6 +226,7 @@ namespace ModernIU.Controls
 
         private void OnCancelButtonItemClick(object cmdParameter)
         {
+            /*
             this.Settings.Folders.Remove(cmdParameter.ToString());
             if (this.Settings.Folders != null)
             {
@@ -237,10 +241,12 @@ namespace ModernIU.Controls
                     LastSavedFolder.Remove(item.Key);
                 }
             }
+            */
         }
 
         private void OnSelectFolderButtonClick()
         {
+            /*
             this.FolderAction = FileTargetFolderModus.SelectFolder;
             this.DialogResult = true;
             this.Close();
@@ -270,6 +276,7 @@ namespace ModernIU.Controls
                     this.SelectFolderValue = this.BrowseFolder(this.Settings.HeaderText, this.Settings.InitialFolder);
                 }
             }
+            */
         }
 
         private void OnUsedFolderHandle(object p1)
@@ -278,6 +285,7 @@ namespace ModernIU.Controls
             this.DialogResult = true;
             this.Close();
 
+            /*
             if (string.IsNullOrEmpty(this.Settings.InitialFile) == false)
             {
                 if (this.Settings.FolderAction == FileTargetFolderModus.OpenFile)
@@ -289,6 +297,7 @@ namespace ModernIU.Controls
                     this.SelectFolderValue = this.SaveFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, this.SelectFolderValue);
                 }
             }
+            */
         }
 
         #endregion Command Methode Handler

@@ -1067,6 +1067,7 @@
             }
             catch (Exception ex)
             {
+                string errorText = ex.Message;
                 throw;
             }
             finally

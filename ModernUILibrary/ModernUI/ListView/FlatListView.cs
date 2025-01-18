@@ -50,7 +50,7 @@
         }
 
         public static readonly DependencyProperty MouseDoubleClickCommandProperty =
-            DependencyProperty.Register(nameof(MouseDoubleClickCommand), typeof(ICommand), typeof(FilterDataGrid), new PropertyMetadata(null));
+            DependencyProperty.Register(nameof(MouseDoubleClickCommand), typeof(ICommand), typeof(FlatListView), new PropertyMetadata(null));
 
         public ICommand MouseDoubleClickCommand
         {

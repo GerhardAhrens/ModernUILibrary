@@ -1,0 +1,22 @@
+﻿private static void MenuPoint1()
+{
+    Console.Clear();
+
+    dynamic positions = new ExpandoObject();
+    positions.Id = Guid.Empty;
+    positions.Pos = 1;
+
+    dynamic x = new ExpandoObject();
+    x.Id = Guid.NewGuid();
+    x.Name = "Gerhard";
+    x.Age = 63;
+    x.Positions = positions;
+    x.Positions.Id = x.Id;
+
+
+    string resultJson = JsonSerializer.Serialize(x);
+
+    ExpandoObject resultObj = (ExpandoObject)JsonSerializer.Deserialize<ExpandoObject>(resultJson);
+
+    Console.ReadKey();
+}
