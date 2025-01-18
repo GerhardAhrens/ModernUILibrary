@@ -17,7 +17,7 @@ namespace ModernIU.Controls
 {
     using System.ComponentModel;
 
-    public enum SelectFolderAction : int
+    public enum FileTargetFolderModus : int
     {
         [Description("Unbekannt")]
         None = 0,

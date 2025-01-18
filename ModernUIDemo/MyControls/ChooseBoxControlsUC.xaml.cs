@@ -3,6 +3,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernIU.Controls;
+
     /// <summary>
     /// Interaktionslogik für ChooseBoxControlsUC.xaml
     /// </summary>
@@ -23,6 +25,23 @@
 
         private void OnSelectFolderOpen(object sender, RoutedEventArgs e)
         {
+            string outPathFile = string.Empty;
+            string[] fileFilter = new string[] { "eff", "txt" }; 
+
+            FileTargetFolderSettings settings = new FileTargetFolderSettings();
+            settings.Owner = Application.Current.MainWindow;
+            settings.HeaderText = "Auswahl Datenbank ...";
+            settings.InstructionText = "Öffnen einer PERT Datenbank mit einer Aufwandsschätzungen...";
+            settings.DescriptionText = "Wählen Sie ein Verzeichnis aus der Liste oder ein neues Verzeichnis über den Button unten.";
+            settings.SelectFolderText = "Wählen sie einen anderen Ordner...";
+            settings.FileFilter = fileFilter;
+            settings.FolderAction = FileTargetFolderModus.OpenFile;
+
+            var result = FileTargetFolderView.Execute(settings);
+            if (result != null)
+            {
+                MessageBox.Show("Ausgewählt zum öffnen", result.SelectFolder, MessageBoxButton.OK);
+            }
 
         }
 

@@ -83,13 +83,13 @@ namespace ModernIU.Controls
             }
         }
 
-        private SelectFolderSettings Settings { get; set; }
+        private FileTargetFolderSettings Settings { get; set; }
 
-        private SelectFolderAction FolderAction { get; set; }
+        private FileTargetFolderModus FolderAction { get; set; }
 
         #region Public Execute (Dialog anzeigen)
 
-        public static SelectFolderResult Execute(SelectFolderSettings settings)
+        public static FileTargetFolderResult Execute(FileTargetFolderSettings settings)
         {
             FileTargetFolderView dialog = new FileTargetFolderView();
             dialog.Owner = settings.Owner;
@@ -137,9 +137,9 @@ namespace ModernIU.Controls
         #endregion INotifyPropertyChanged
 
         #region Execute Internal
-        private SelectFolderResult InternalExecute(SelectFolderSettings settings)
+        private FileTargetFolderResult InternalExecute(FileTargetFolderSettings settings)
         {
-            SelectFolderResult result = null;
+            FileTargetFolderResult result = null;
             SelectFolderEventArgs args = null;
             bool? resultDialog = false;
 
@@ -180,7 +180,7 @@ namespace ModernIU.Controls
                             args.FolderAction = this.FolderAction;
                         }
 
-                        result = new SelectFolderResult(args);
+                        result = new FileTargetFolderResult(args);
                     }
                     else
                     {
@@ -194,7 +194,7 @@ namespace ModernIU.Controls
             }
             finally
             {
-                result = new SelectFolderResult(args);
+                result = new FileTargetFolderResult(args);
             }
 
             return result;
@@ -241,7 +241,7 @@ namespace ModernIU.Controls
 
         private void OnSelectFolderButtonClick()
         {
-            this.FolderAction = SelectFolderAction.SelectFolder;
+            this.FolderAction = FileTargetFolderModus.SelectFolder;
             this.DialogResult = true;
             this.Close();
 
@@ -249,7 +249,7 @@ namespace ModernIU.Controls
             {
                 string initFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                if (this.Settings.FolderAction == SelectFolderAction.OpenFile)
+                if (this.Settings.FolderAction == FileTargetFolderModus.OpenFile)
                 {
                     this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, initFolder);
                 }
@@ -274,13 +274,13 @@ namespace ModernIU.Controls
 
         private void OnUsedFolderHandle(object p1)
         {
-            this.FolderAction = SelectFolderAction.UsedFolder;
+            this.FolderAction = FileTargetFolderModus.UsedFolder;
             this.DialogResult = true;
             this.Close();
 
             if (string.IsNullOrEmpty(this.Settings.InitialFile) == false)
             {
-                if (this.Settings.FolderAction == SelectFolderAction.OpenFile)
+                if (this.Settings.FolderAction == FileTargetFolderModus.OpenFile)
                 {
                     this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, this.SelectFolderValue);
                 }

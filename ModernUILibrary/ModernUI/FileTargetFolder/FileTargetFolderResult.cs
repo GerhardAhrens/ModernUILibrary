@@ -17,9 +17,9 @@ namespace ModernIU.Controls
 {
     using System;
 
-    public class SelectFolderResult
+    public class FileTargetFolderResult
     {
-        public SelectFolderResult(SelectFolderEventArgs e)
+        public FileTargetFolderResult(SelectFolderEventArgs e)
         {
             if (e.Cancel == true)
             {
@@ -36,7 +36,7 @@ namespace ModernIU.Controls
             }
         }
 
-        public SelectFolderAction FolderAction { get; private set; }
+        public FileTargetFolderModus FolderAction { get; private set; }
 
         public string SelectFolder { get; private set; }
 

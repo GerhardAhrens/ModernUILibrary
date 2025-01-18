@@ -20,7 +20,7 @@ namespace ModernIU.Controls
 
     public class SelectFolderEventArgs : CancelEventArgs
     {
-        public SelectFolderAction FolderAction { get; set; }
+        public FileTargetFolderModus FolderAction { get; set; }
 
         public object Result { get; set; }
 
