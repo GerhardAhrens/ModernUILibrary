@@ -132,6 +132,7 @@
     <Folder Include="Core\QueryAttributeService\" />
     <Folder Include="Core\Performance\" />
     <Folder Include="Core\ObjectMapping\" />
+    <Folder Include="Data\DBase\Encoders\" />
     <Folder Include="Data\DynamicXML\" />
     <Folder Include="Data\ExcelReader\BinaryFormat\" />
     <Folder Include="Data\ExcelReader\Exceptions\" />

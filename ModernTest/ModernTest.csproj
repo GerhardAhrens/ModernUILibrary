@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbf" />
+    <None Remove="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbt" />
     <None Remove="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xls" />
     <None Remove="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xlsx" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
@@ -23,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbf" />
+    <Content Include="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbt" />
     <Content Include="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xls" />
     <Content Include="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xlsx" />
     <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
