@@ -28,12 +28,6 @@
             this.testAssembly = Assembly.GetEntryAssembly();
             this.TestAssembly = this.testAssembly;
 
-            string pathToDll = @"E:\PTA2890\_Development\Sourcen\EasyPrototypingNET\EasyPrototypingNET\bin\Debug\net7.0-windows\EasyPrototypingNET.dll";
-            if (File.Exists(pathToDll) == true)
-            {
-                this.BaseAssembly = Assembly.LoadFile(pathToDll);
-            }
-
             Thread.CurrentThread.CurrentCulture = new CultureInfo("de-DE");
         }
 

@@ -15,6 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
+    <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.txt" />
+    <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\LINQDemo.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
+    <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.txt" />
+    <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\LINQDemo.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
   </ItemGroup>

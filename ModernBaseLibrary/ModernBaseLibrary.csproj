@@ -133,6 +133,8 @@
     <Folder Include="Core\Performance\" />
     <Folder Include="Core\ObjectMapping\" />
     <Folder Include="Data\DynamicXML\" />
+    <Folder Include="Data\LinqToFile\CSV\" />
+    <Folder Include="Data\LinqToFile\Flat\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />
