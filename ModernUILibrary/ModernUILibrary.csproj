@@ -109,9 +109,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MVVM\Base\UserControlBase.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Update="MVVM\Base\UserControlBase.cs" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

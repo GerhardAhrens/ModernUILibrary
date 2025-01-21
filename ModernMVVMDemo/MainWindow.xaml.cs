@@ -6,7 +6,9 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using ModernIU.Controls;
     using ModernIU.MVVM.Base;
+    using ModernMVVMDemo.Message;
 
     using ModernUI.MVVM.Base;
 
@@ -17,13 +19,12 @@
     public partial class MainWindow : WindowBase, IDialogClosing
     {
         public ICommand CloseWindow2Command => new RelayCommand(p1 => this.CloseWindowHandler(p1), p2 => true);
+        private INotificationService _notificationService = new NotificationService();
 
         public MainWindow() : base(typeof(MainWindow))
         {
             this.InitializeComponent();
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-            WeakEventManager<Window, CancelEventArgs>.AddHandler(this, "Closing", this.OnClosing);
-            List<Window> list = new List<Window>();
             this.InitCommands();
             this.DataContext = this;
         }
@@ -41,26 +42,36 @@
 
         private void CloseWindowHandler(object p1)
         {
-            this.Close();
+            NotificationBoxButton result = this._notificationService.ApplicationExit();
+            if (result == NotificationBoxButton.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.DialogDescription = "MVVM Demo Programm";
+            NotificationService.RegisterDialog<QuestionYesNo>();
+            NotificationService.RegisterDialog<QuestionHtmlYesNo>();
         }
 
-        private void OnClosing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = false;
-        }
-
-        public override void OnViewIsClosing(CancelEventArgs eventArgs)
+        public override void OnViewIsClosing(CancelEventArgs e)
         {
             Window window = Application.Current.MainWindow;
             if (window != null)
             {
-                Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-                Application.Current.Shutdown();
+                NotificationBoxButton result = this._notificationService.ApplicationExit2();
+                if (result == NotificationBoxButton.Yes)
+                {
+                    e.Cancel = false;
+                    Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }

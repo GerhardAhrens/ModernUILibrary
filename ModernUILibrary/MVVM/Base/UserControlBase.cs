@@ -26,11 +26,14 @@ namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Windows.Controls;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Dynamic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
+
+    using ModernBaseLibrary.Core;
 
     [DebuggerStepThrough]
     [Serializable]
@@ -78,6 +81,12 @@ namespace ModernUI.MVVM.Base
         }
 
         public Type BaseType { get; set; }
+
+        public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
+
+        public EventAggregator EventAgg { get; } = new EventAggregator();
+
+        public virtual void InitCommands() { }
 
         #region Get/Set Implementierung
         private T GetPropertyValueInternal<T>(string propertyName)
