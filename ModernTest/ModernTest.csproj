@@ -15,12 +15,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xls" />
+    <None Remove="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xlsx" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.txt" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\LINQDemo.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xls" />
+    <Content Include="ModernBaseLibrary\Data\ExcelReader\DemoData\Mengengerüst PPV Funktionen.xlsx" />
     <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
     <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.txt" />
     <Content Include="ModernBaseLibrary\Data\LinqToFile\DemoData\LINQDemo.txt" />
@@ -77,6 +81,7 @@
     <Folder Include="ModernBaseLibrary\Extensions\System\" />
     <Folder Include="ModernBaseLibrary\FluentAPI\API\" />
     <Folder Include="ModernBaseLibrary\FluentAPI\Type\" />
+    <Folder Include="ModernBaseLibrary\CustomDataTypes\" />
   </ItemGroup>
 
 </Project>

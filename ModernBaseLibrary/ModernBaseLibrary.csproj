@@ -133,8 +133,14 @@
     <Folder Include="Core\Performance\" />
     <Folder Include="Core\ObjectMapping\" />
     <Folder Include="Data\DynamicXML\" />
+    <Folder Include="Data\ExcelReader\BinaryFormat\" />
+    <Folder Include="Data\ExcelReader\Exceptions\" />
+    <Folder Include="Data\ExcelReader\Logger\" />
+    <Folder Include="Data\ExcelReader\OpenXmlFormat\" />
     <Folder Include="Data\LinqToFile\CSV\" />
     <Folder Include="Data\LinqToFile\Flat\" />
+    <Folder Include="Data\ExcelCsv\" />
+    <Folder Include="Data\ExcelWriter\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />
@@ -175,6 +181,7 @@
     <Folder Include="Graphics\Barcode\LinearBarcode\" />
     <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
     <Folder Include="Graphics\SvgToXaml\" />
+    <Folder Include="CustomDataTypes\" />
     <Folder Include="TextAnalysis\Template\" />
     <Folder Include="TextAnalysis\StringTokenizer\" />
     <Folder Include="WIN32API\MessageBox\" />
