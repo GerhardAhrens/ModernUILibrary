@@ -114,9 +114,9 @@ namespace ModernBaseLibrary.Core.IO
         public static string GetOrSet(string typ, string folder = "")
         {
             string result = string.Empty;
-            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typ) == true)
+            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typ && w.Folder == folder) == true)
             {
-                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typ);
+                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typ && w.Folder == folder);
                 int pos = SavedFolder.IndexOf(lastFolder);
                 result = SavedFolder[pos].Folder = folder;
             }
@@ -139,9 +139,9 @@ namespace ModernBaseLibrary.Core.IO
             string result = string.Empty;
             string typName = typ.GetFriendlyName();
 
-            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typName) == true)
+            if (SavedFolder.Any(w => w.Typ != null && w.Typ == typName && w.Folder == folder) == true)
             {
-                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typName);
+                LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typName && w.Folder == folder);
                 int pos = SavedFolder.IndexOf(lastFolder);
                 result = SavedFolder[pos].Folder = folder;
             }
@@ -164,7 +164,10 @@ namespace ModernBaseLibrary.Core.IO
             Dictionary<string, string> export = new Dictionary<string, string>();
             foreach (LastTagetFolder item in SavedFolder)
             {
-                export.Add(item.Typ, item.Folder);
+                if (export.ContainsKey(item.Typ) == false)
+                {
+                    export.Add(item.Typ, item.Folder);
+                }
             }
 
             return export;
@@ -175,13 +178,13 @@ namespace ModernBaseLibrary.Core.IO
             return SavedFolder.Select(s => s.Folder).ToList();
         }
 
-        public static void Remove(string typ)
+        public static void Remove(string folder)
         {
             if (SavedFolder.Count > 0)
             {
-                if (SavedFolder.Any(w => w.Typ == typ) == true)
+                if (SavedFolder.Any(w => w.Folder == folder) == true)
                 {
-                    LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Typ == typ);
+                    LastTagetFolder lastFolder = SavedFolder.SingleOrDefault(w => w.Folder == folder);
                     bool isRemoved = SavedFolder.Remove(lastFolder);
                     if (isRemoved == true)
                     {

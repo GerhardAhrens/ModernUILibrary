@@ -282,8 +282,7 @@
             this.tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
 
             this.tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
-            this.tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new ChooseBoxControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Upload Controls", new UploadControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new FileFolderBoxControlsUC()) { Stichworte = "Dialog;Verzeichnis;Dateien;File;Folder" });
 
             this.tabItemSource.Add(new TabControlItem($"Behavior Control\nErweiterungen", true));
             this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new BehaviorsControlsUC()) { Stichworte = "TextBlock;" });

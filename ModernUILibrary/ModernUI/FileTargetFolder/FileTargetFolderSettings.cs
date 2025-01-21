@@ -60,6 +60,8 @@ namespace ModernIU.Controls
 
         public string Folder { get; set; }
 
+        public string InitialFile { get; set; }
+
         public FileTargetFolderModus FolderAction { get; set; }
     }
 }

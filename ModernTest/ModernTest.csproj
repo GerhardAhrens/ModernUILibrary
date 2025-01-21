@@ -52,7 +52,6 @@
     <Folder Include="ModernBaseLibrary\Core\ExpressionEngine\" />
     <Folder Include="ModernBaseLibrary\Core\Guid\" />
     <Folder Include="ModernBaseLibrary\Core\Dump\" />
-    <Folder Include="ModernBaseLibrary\Core\IO\" />
     <Folder Include="ModernBaseLibrary\Core\LINQ\" />
     <Folder Include="ModernBaseLibrary\Core\TypConverter\" />
     <Folder Include="ModernBaseLibrary\Core\Performance\" />

@@ -18,6 +18,7 @@ namespace ModernIU.Controls
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
@@ -139,7 +140,6 @@ namespace ModernIU.Controls
         #region Execute Internal
         private FileTargetFolderResult InternalExecute(FileTargetFolderSettings settings)
         {
-            /*
             FileTargetFolderResult result = null;
             SelectFolderEventArgs args = null;
             bool? resultDialog = false;
@@ -148,18 +148,24 @@ namespace ModernIU.Controls
             {
                 this.Settings = settings;
 
-                //this.folderList.Focus();
-                this.SelectFolderValue = settings.InitialFolder;
-                if (settings.Folders == null || settings.Folders.Count == 0)
+                this.folderList.Focus();
+                if (settings.FolderTyp == null || string.IsNullOrEmpty(settings.Folder) == true)
                 {
                     string defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    settings.Folders.Add(defaultFolder);
+                    this.SelectFolderValue = Path.GetDirectoryName(defaultFolder);
+                    this.Folders.Add(defaultFolder);
+                }
+                else
+                {
+                    this.SelectFolderValue = LastSavedFolder.GetOrSet(settings.FolderTyp, settings.Folder);
+                    LastSavedFolder.Save();
+                    LastSavedFolder.Load();
+                    this.Folders = LastSavedFolder.GetFolders();
                 }
 
-
-                if (settings.Folders != null)
+                if (this.Folders != null)
                 {
-                    this.DialogDataView = CollectionViewSource.GetDefaultView(settings.Folders);
+                    this.DialogDataView = CollectionViewSource.GetDefaultView(this.Folders);
                     this.DialogDataView.MoveCurrentToFirst();
                 }
 
@@ -199,8 +205,6 @@ namespace ModernIU.Controls
             }
 
             return result;
-            */
-            return default;
         }
         #endregion Execute
 
@@ -226,27 +230,19 @@ namespace ModernIU.Controls
 
         private void OnCancelButtonItemClick(object cmdParameter)
         {
-            /*
-            this.Settings.Folders.Remove(cmdParameter.ToString());
-            if (this.Settings.Folders != null)
+            this.Folders.Remove(cmdParameter.ToString());
+            if (this.Folders != null)
             {
-                this.DialogDataView = CollectionViewSource.GetDefaultView(this.Settings.Folders);
+                this.DialogDataView = CollectionViewSource.GetDefaultView(this.Folders);
                 this.DialogDataView.Refresh();
                 this.DialogDataView.MoveCurrentToFirst();
 
-                Dictionary<string,string> folders = LastSavedFolder.ToDictionary();
-                if (folders.ContainsValue(cmdParameter.ToString()) == true)
-                {
-                    KeyValuePair<string, string> item = folders.FirstOrDefault(f => f.Value == cmdParameter.ToString());
-                    LastSavedFolder.Remove(item.Key);
-                }
+                LastSavedFolder.Remove(cmdParameter.ToString());
             }
-            */
         }
 
         private void OnSelectFolderButtonClick()
         {
-            /*
             this.FolderAction = FileTargetFolderModus.SelectFolder;
             this.DialogResult = true;
             this.Close();
@@ -255,28 +251,49 @@ namespace ModernIU.Controls
             {
                 string initFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+                FileFilter fileFilter = new FileFilter();
+                foreach (string item in Settings.FileFilter)
+                {
+                    fileFilter.AddFilter(item.Split("|")[0], item.Split("|")[1], false);
+                }
+
+                if (this.Settings.FileFilter != null && this.Settings.FileFilter.Length > 0)
+                {
+                    fileFilter.SetDefaultFilter(this.Settings.FileFilter.FirstOrDefault().Split("|")[0]);
+                }
+
                 if (this.Settings.FolderAction == FileTargetFolderModus.OpenFile)
                 {
-                    this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, initFolder);
+                    this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, fileFilter, initFolder);
                 }
                 else
                 {
-                    this.SelectFolderValue = this.SaveFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, initFolder);
+                    this.SelectFolderValue = this.SaveFile(this.Settings.InitialFile, this.Settings.HeaderText, fileFilter, initFolder);
+                }
+
+                LastSavedFolder.GetOrSet(this.Settings.FolderTyp, Path.GetDirectoryName(this.SelectFolderValue));
+                LastSavedFolder.Save();
+                LastSavedFolder.Load();
+                this.Folders = LastSavedFolder.GetFolders();
+
+                if (this.Folders != null)
+                {
+                    this.DialogDataView = CollectionViewSource.GetDefaultView(this.Folders);
+                    this.DialogDataView.MoveCurrentToFirst();
                 }
             }
             else
             {
-                if (string.IsNullOrEmpty(this.Settings.InitialFolder) == true)
+                if (string.IsNullOrEmpty(this.Settings.Folder) == true)
                 {
                     string initFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     this.SelectFolderValue = this.BrowseFolder(this.Settings.HeaderText, initFolder);
                 }
                 else
                 {
-                    this.SelectFolderValue = this.BrowseFolder(this.Settings.HeaderText, this.Settings.InitialFolder);
+                    this.SelectFolderValue = this.BrowseFolder(this.Settings.HeaderText, this.Settings.Folder);
                 }
             }
-            */
         }
 
         private void OnUsedFolderHandle(object p1)
@@ -285,19 +302,28 @@ namespace ModernIU.Controls
             this.DialogResult = true;
             this.Close();
 
-            /*
             if (string.IsNullOrEmpty(this.Settings.InitialFile) == false)
             {
+                FileFilter fileFilter = new FileFilter();
+                foreach (string item in Settings.FileFilter)
+                {
+                    fileFilter.AddFilter(item.Split("|")[0], item.Split("|")[1], false);
+                }
+
+                if (this.Settings.FileFilter != null && this.Settings.FileFilter.Length > 0)
+                {
+                    fileFilter.SetDefaultFilter(this.Settings.FileFilter.FirstOrDefault().Split("|")[0]);
+                }
+
                 if (this.Settings.FolderAction == FileTargetFolderModus.OpenFile)
                 {
-                    this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, this.SelectFolderValue);
+                    this.SelectFolderValue = this.OpenFile(this.Settings.InitialFile, this.Settings.HeaderText, fileFilter, this.SelectFolderValue);
                 }
                 else
                 {
-                    this.SelectFolderValue = this.SaveFile(this.Settings.InitialFile, this.Settings.HeaderText, this.Settings.FileFilter, this.SelectFolderValue);
+                    this.SelectFolderValue = this.SaveFile(this.Settings.InitialFile, this.Settings.HeaderText, fileFilter, this.SelectFolderValue);
                 }
             }
-            */
         }
 
         #endregion Command Methode Handler

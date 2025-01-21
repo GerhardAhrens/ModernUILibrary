@@ -142,24 +142,32 @@
                                         <Run Text="{Binding .}" />
                                     </TextBlock>
 
-                                    <Button
+                                    <libWPF:FlatButton
                                         x:Name="BtnCancelButtonItem"
                                         Grid.Row="0"
                                         Grid.Column="2"
-                                        Margin="0,0,8,0"
-                                        Padding="6"
+                                        Margin="0,0,4,0"
+                                        Padding="3"
                                         HorizontalAlignment="Right"
                                         Command="{Binding Path=CmdAgg[CancelButtonItemCommand], RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                         CommandParameter="{Binding ElementName=folderList, Path=SelectedItem}"
-                                        Content="{StaticResource ResourceKey=fntCancle}"
                                         DockPanel.Dock="Right"
-                                        FontFamily="Segoe MDL2 Assets"
                                         FontSize="18"
                                         FontWeight="ExtraBold"
                                         IsDefault="True"
                                         KeyboardNavigation.IsTabStop="False"
-                                        ToolTip="Verzeichnisauswahl abbrechen"
-                                        Visibility="Visible" />
+                                        Visibility="Visible">
+                                        <Button.Content>
+                                            <StackPanel>
+                                                <Path
+                                                    Width="17"
+                                                    Height="17"
+                                                    Data="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
+                                                    Fill="Red"
+                                                    Stretch="Fill" />
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </libWPF:FlatButton>
                                 </libWPF:SimpleGrid>
                             </Border>
                         </DataTemplate>

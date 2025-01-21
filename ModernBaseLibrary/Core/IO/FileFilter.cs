@@ -74,6 +74,16 @@ namespace ModernBaseLibrary.Core.IO
             }
         }
 
+        public void SetDefaultFilter(string name)
+        {
+            if (this.fileFilterList == null)
+            {
+                return;
+            }
+
+            this.fileFilterList.SingleOrDefault(s => s.Name == name).Default = true;
+        }
+
         public string GetFilterName(string filter)
         {
             string getFilterName = string.Empty;

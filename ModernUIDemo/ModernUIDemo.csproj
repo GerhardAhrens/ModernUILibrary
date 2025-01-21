@@ -271,9 +271,6 @@
     <Compile Update="MyControls\TextBoxRtfControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MyControls\UploadControlsUC.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="MyControls\TemplateControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
