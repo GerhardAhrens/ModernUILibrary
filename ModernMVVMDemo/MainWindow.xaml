@@ -29,8 +29,12 @@
         </StackPanel>
     </ModernUI:MWindow.MoreOnTitle>
 
-    <Grid>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+    <ModernUI:SimpleGrid Columns="*" Rows="90,*">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
             <ModernUI:FlatButton
                 Width="150"
                 Height="50"
@@ -58,5 +62,26 @@
                 </ModernUI:FlatButton.Content>
             </ModernUI:FlatButton>
         </StackPanel>
-    </Grid>
+
+        <!--#region Contentbereich-->
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            BorderBrush="Black"
+            BorderThickness="0,1,0,1">
+            <ContentControl
+                x:Name="mainContent"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="LightGray"
+                Content="{Binding Path=WorkContent, UpdateSourceTrigger=PropertyChanged}"
+                KeyboardNavigation.IsTabStop="False"
+                KeyboardNavigation.TabNavigation="None"
+                ScrollViewer.CanContentScroll="True"
+                VirtualizingPanel.IsVirtualizing="True"
+                Visibility="Visible" />
+        </Border>
+        <!--#endregion Contentbereich-->
+
+    </ModernUI:SimpleGrid>
 </winbase:WindowBase>

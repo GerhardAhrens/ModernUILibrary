@@ -4,11 +4,13 @@
     using System.ComponentModel;
     using System.Runtime.Versioning;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
 
     using ModernIU.Controls;
     using ModernIU.MVVM.Base;
     using ModernMVVMDemo.Message;
+    using ModernMVVMDemo.View;
 
     using ModernUI.MVVM.Base;
 
@@ -35,6 +37,12 @@
             set => this.SetValue(value);
         }
 
+        public UserControl WorkContent
+        {
+            get { return base.GetValue<UserControl>(); }
+            set { base.SetValue(value); }
+        }
+
         public override void InitCommands()
         {
             base.CmdAgg.AddOrSetCommand("CloseWindowCommand", new RelayCommand(p1 => this.CloseWindowHandler(p1), p2 => true));
@@ -54,6 +62,8 @@
             this.DialogDescription = "MVVM Demo Programm";
             NotificationService.RegisterDialog<QuestionYesNo>();
             NotificationService.RegisterDialog<QuestionHtmlYesNo>();
+
+            this.WorkContent = new ContentA_UC();
         }
 
         public override void OnViewIsClosing(CancelEventArgs e)
