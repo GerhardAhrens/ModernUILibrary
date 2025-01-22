@@ -9,7 +9,7 @@
 // <date>22.01.2025 10:45:53</date>
 //
 // <summary>
-// Klasse für 
+// Klasse zur Erstellung eines Object Hash => als Integer
 // </summary>
 //-----------------------------------------------------------------------
 
@@ -19,6 +19,7 @@ namespace ModernBaseLibrary.Core
 
     public static class HashHelper
     {
+        private const int BASEHASH = 31;
         public static int GetHashCode(params object[] arg)
         {
             unchecked
@@ -28,7 +29,7 @@ namespace ModernBaseLibrary.Core
                 {
                     if (o != null)
                     {
-                        result = result * 31 + o.GetHashCode();
+                        result = result * BASEHASH + o.GetHashCode();
                     }
                 }
 
@@ -41,8 +42,8 @@ namespace ModernBaseLibrary.Core
             unchecked
             {
                 int hash = 0;
-                hash = 31 * hash + arg1.GetHashCode();
-                hash = 31 * hash + arg2.GetHashCode();
+                hash = BASEHASH * hash + arg1.GetHashCode();
+                hash = BASEHASH * hash + arg2.GetHashCode();
                 return hash;
             }
         }
@@ -52,9 +53,9 @@ namespace ModernBaseLibrary.Core
             unchecked
             {
                 int hash = 0;
-                hash = 31 * hash + arg1.GetHashCode();
-                hash = 31 * hash + arg2.GetHashCode();
-                hash = 31 * hash + arg3.GetHashCode();
+                hash = BASEHASH * hash + arg1.GetHashCode();
+                hash = BASEHASH * hash + arg2.GetHashCode();
+                hash = BASEHASH * hash + arg3.GetHashCode();
                 return hash;
             }
         }
@@ -64,10 +65,10 @@ namespace ModernBaseLibrary.Core
             unchecked
             {
                 int hash = 0;
-                hash = 31 * hash + arg1.GetHashCode();
-                hash = 31 * hash + arg2.GetHashCode();
-                hash = 31 * hash + arg3.GetHashCode();
-                hash = 31 * hash + arg4.GetHashCode();
+                hash = BASEHASH * hash + arg1.GetHashCode();
+                hash = BASEHASH * hash + arg2.GetHashCode();
+                hash = BASEHASH * hash + arg3.GetHashCode();
+                hash = BASEHASH * hash + arg4.GetHashCode();
                 return hash;
             }
         }
@@ -79,7 +80,7 @@ namespace ModernBaseLibrary.Core
                 int hash = 0;
                 foreach (var item in list)
                 {
-                    hash = 31 * hash + item.GetHashCode();
+                    hash = BASEHASH * hash + item.GetHashCode();
                 }
 
                 return hash;
@@ -93,8 +94,9 @@ namespace ModernBaseLibrary.Core
                 int hash = 0;
                 foreach (var item in list)
                 {
-                    hash = 31 * hash + item.GetHashCode();
+                    hash = BASEHASH * hash + item.GetHashCode();
                 }
+
                 return hash;
             }
         }
@@ -115,7 +117,8 @@ namespace ModernBaseLibrary.Core
                     hash += item.GetHashCode();
                     count++;
                 }
-                return 31 * hash + count.GetHashCode();
+
+                return BASEHASH * hash + count.GetHashCode();
             }
         }
 
@@ -128,7 +131,7 @@ namespace ModernBaseLibrary.Core
         {
             unchecked
             {
-                return 31 * hashCode + arg.GetHashCode();
+                return BASEHASH * hashCode + arg.GetHashCode();
             }
         }
     }
