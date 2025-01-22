@@ -68,7 +68,7 @@
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"Name = `{Name}`, Type = `{(char)Type}`, Length = `{Length}`, Precision = `{Precision}`";
+            return $"Name = `{this.Name}`, Type = `{(char)this.Type}`, Length = `{this.Length}`, Precision = `{this.Precision}`";
         }
 
         internal DbfField(BinaryReader reader, Encoding encoding)
@@ -116,6 +116,18 @@
             writer.Write(Flags);
 
             for (int i = 0; i < 8; i++) writer.Write((byte)0); // 8 reserved bytes.
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            hash = hash * 31 + this.Name.GetHashCode();
+            hash = hash * 31 + this.Type.GetHashCode();
+            hash = hash * 31 + this.Length.GetHashCode();
+            hash = hash * 31 + this.Precision.GetHashCode();
+            hash = hash * 31 + this.WorkAreaID.GetHashCode();
+            hash = hash * 31 + this.Flags.GetHashCode();
+            return hash;
         }
     }
 }
