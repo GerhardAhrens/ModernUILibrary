@@ -1,0 +1,18 @@
+﻿private static void Main(string[] args)
+{
+    try
+    {
+        Currency cur1 = new Currency("XXX");
+    }
+    catch (Exception ex)
+    {
+        if (ex.GetType() == typeof(ArgumentException))
+        {
+
+        }
+    }
+
+    Money cur2 = 10.99m;
+
+    ConsoleHelper.Wait();
+}

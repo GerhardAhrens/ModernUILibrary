@@ -1,0 +1,17 @@
+﻿private static void Main(string[] args)
+{
+    Roman romanEins = "I";
+    Roman romanZwei = "II";
+
+    Roman romanResult = romanEins + romanZwei;
+    ConsoleHelper.WriteLine($"Ergebnis: {romanResult}, als Zahl: {romanResult.ToInt()}");
+    ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+    Roman romanA = "X";
+    Roman romanB = "XI";
+    Roman romanResultB = romanA + romanB;
+    ConsoleHelper.WriteLine($"Ergebnis: {romanResultB}, als Zahl: {romanResultB.ToInt()}");
+    ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+    ConsoleHelper.Wait();
+}

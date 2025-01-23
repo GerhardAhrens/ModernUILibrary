@@ -1,0 +1,35 @@
+﻿DateTime geburtstag = new DateTime(1960, 6, 28);
+
+Birthday blabla = new DateTime(1960, 6, 28);
+
+Birthday birthdayA = new DateTime(1960, 6, 28);
+ConsoleHelper.WriteLine($"Ergebnis: {birthdayA}");
+ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+DateTime birthdayVar = new DateTime(1960, 6, 28);
+Birthday birthdayB = birthdayVar;
+ConsoleHelper.WriteLine($"Ergebnis: {birthdayB}");
+ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+Type typ = birthdayB.GetType();
+ConsoleHelper.WriteLine($"Ergebnis: {typ.Name}");
+ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+int ageYear = birthdayA.AgeInYear();
+int ageDays = birthdayB.AgeInDays();
+ConsoleHelper.WriteLine($"Ergebnis: Alter in Jahren:{ageYear}; in Tagen: {ageDays}");
+ConsoleHelper.RepeatLine("*", 40, ConsoleColor.Green);
+
+Birthday birthday1 = new DateTime(1960, 6, 28);
+Birthday birthday2 = new DateTime(1960, 6, 28);
+
+if(birthday1 == birthday2)
+{
+    ConsoleHelper.WriteLine($"Beide Werte für Gebutstag sind gleich!");
+}
+else
+{
+    ConsoleHelper.WriteLine($"Einer der Werte für Gebutstag sind ungleich!");
+}
+
+ConsoleHelper.Wait();
