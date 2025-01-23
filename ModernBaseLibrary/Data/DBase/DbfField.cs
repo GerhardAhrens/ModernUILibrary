@@ -35,7 +35,7 @@
         /// <summary>
         /// Default value to write.
         /// </summary>
-        internal string DefaultValue => defaultValue ?? (defaultValue = new string(' ', Length));
+        public string DefaultValue => defaultValue ?? (defaultValue = new string(' ', Length));
 
         public DbfField(string name, DbfFieldType type, byte length, byte precision = 0)
         {

@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Text;
 
-    internal class NumericEncoder : IEncoder
+    public class NumericEncoder : IEncoder
     {
         private static NumericEncoder instance;
 

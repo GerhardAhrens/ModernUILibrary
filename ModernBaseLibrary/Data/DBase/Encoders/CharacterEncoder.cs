@@ -5,7 +5,7 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    internal class CharacterEncoder : IEncoder
+    public class CharacterEncoder : IEncoder
     {
         private static CharacterEncoder instance;
 

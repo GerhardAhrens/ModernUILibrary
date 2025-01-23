@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Text;
 
-    internal class DateEncoder : IEncoder
+    public class DateEncoder : IEncoder
     {
         private const string format = "yyyyMMdd";
 
