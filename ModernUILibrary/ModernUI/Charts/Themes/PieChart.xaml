@@ -1,0 +1,97 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ModernIU.Converters"
+    xmlns:MUI="clr-namespace:ModernIU.Controls.Chart">
+
+    <converters:PieChartHeightConverter x:Key="pieChartHeightConverter" />
+    <converters:PieChartWidthConverter x:Key="pieChartWidthConverter" />
+    <converters:PieChartCenterConverter x:Key="pieChartCenterConverter" />
+
+    <Style TargetType="{x:Type MUI:PieChart}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MUI:PieChart}">
+                    <Border
+                        x:Name="pieChartBorder"
+                        Background="{Binding Path=ChartBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}"
+                        BorderBrush="{Binding Path=ChartBackgroundBorderColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}"
+                        BorderThickness="{Binding Path=ChartBackgroundBorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}"
+                        CornerRadius="{Binding Path=ChartBackgroundCornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}">
+                        <Grid x:Name="PieChartGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                FontSize="12">
+                                <Label.Content>
+                                    <Binding Path="Caption" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}" />
+                                </Label.Content>
+                            </Label>
+                            <ItemsControl
+                                x:Name="itemsControl"
+                                Grid.Row="1"
+                                Margin="5"
+                                ItemsSource="{Binding}"
+                                ToolTip="{StaticResource ResourceKey=toolTipStyle}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Grid IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <MUI:PiePiece
+                                            x:Name="pie"
+                                            Caption="{Binding Path=Caption, UpdateSourceTrigger=PropertyChanged}"
+                                            ClientHeight="{Binding Path=ActualHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=1}, UpdateSourceTrigger=PropertyChanged}"
+                                            ClientWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=1}, UpdateSourceTrigger=PropertyChanged}"
+                                            Fill="{Binding Path=ChartBrush, UpdateSourceTrigger=PropertyChanged}"
+                                            Id="{Binding Path=Id}"
+                                            Items="{Binding Path=Items, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}, AncestorLevel=1}, UpdateSourceTrigger=PropertyChanged}"
+                                            Stroke="{Binding Path=ChartBorderColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}"
+                                            Value="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                                        <DataTemplate.Triggers>
+                                            <Trigger SourceName="pie" Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="pie" Property="Fill" Value="{Binding Path=ChartColorMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}" />
+                                            </Trigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl
+                                Grid.Row="2"
+                                Margin="5"
+                                ItemsSource="{Binding Path=ChartLegend, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}"
+                                Visibility="{Binding Path=ChartLegendVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle
+                                                Width="20"
+                                                Height="10"
+                                                Fill="{Binding Path=ItemBrush}"
+                                                Stroke="Black"
+                                                StrokeThickness="0.5" />
+                                            <Label Content="{Binding Path=Caption}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

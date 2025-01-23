@@ -31,6 +31,7 @@
     <Folder Include="Behaviors\Graphics\" />
     <Folder Include="Behaviors\TextBox\" />
     <Folder Include="Converters\ConverterBase\" />
+    <Folder Include="Converters\Chart\" />
     <Folder Include="Extensions\System.Windows.Input\" />
     <Folder Include="ModernUIBase\Adorners\" />
     <Folder Include="ModernUIBase\Comparer\" />
@@ -46,6 +47,9 @@
     <Folder Include="ModernUI\Button\Themes\" />
     <Folder Include="ModernUI\Carousel\Themes\" />
     <Folder Include="ModernUI\CascaderBox\Themes\" />
+    <Folder Include="ModernUI\Charts\ChartBar\" />
+    <Folder Include="ModernUI\Charts\PieChart\" />
+    <Folder Include="ModernUI\Charts\StackedChart\" />
     <Folder Include="ModernUI\CheckComboBox\Themes\" />
     <Folder Include="ModernUI\ChooseBox\Themes\" />
     <Folder Include="ModernUI\ComboBox\Themes\" />
