@@ -13,34 +13,19 @@
         #region Fields
 
         public static readonly DependencyProperty ChartCornerRadiusProperty =
-            DependencyProperty.Register("ChartCornerRadius",
-            typeof(CornerRadius),
-            typeof(BarChart),
-            new PropertyMetadata(new CornerRadius(3, 3, 0, 0)));
+            DependencyProperty.Register("ChartCornerRadius", typeof(CornerRadius), typeof(BarChart), new PropertyMetadata(new CornerRadius(3, 3, 0, 0)));
 
         public static readonly DependencyProperty ChartItemWidthProperty =
-           DependencyProperty.Register("ChartItemWidth",
-           typeof(double),
-           typeof(BarChart),
-           new PropertyMetadata(30.0));
+           DependencyProperty.Register("ChartItemWidth", typeof(double), typeof(BarChart), new PropertyMetadata(30.0));
 
         public static readonly DependencyProperty ChartScrollBarVisibilityProperty =
-           DependencyProperty.Register("ShowScrollbars",
-           typeof(ScrollBarVisibility),
-           typeof(BarChart),
-           new PropertyMetadata(ScrollBarVisibility.Disabled));
+           DependencyProperty.Register("ShowScrollbars", typeof(ScrollBarVisibility), typeof(BarChart), new PropertyMetadata(ScrollBarVisibility.Disabled));
 
         public static readonly DependencyProperty ChartShowCaptionProperty =
-            DependencyProperty.Register("ChartShowCaption",
-            typeof(Visibility),
-            typeof(BarChart),
-            new PropertyMetadata(Visibility.Visible));
+            DependencyProperty.Register("ChartShowCaption", typeof(Visibility), typeof(BarChart), new PropertyMetadata(Visibility.Visible));
 
         public static readonly DependencyProperty ChartShowValuesProperty =
-            DependencyProperty.Register("ChartShowValues",
-            typeof(Visibility),
-            typeof(BarChart),
-            new PropertyMetadata(Visibility.Hidden));
+            DependencyProperty.Register("ChartShowValues", typeof(Visibility), typeof(BarChart), new PropertyMetadata(Visibility.Hidden));
 
         #endregion Fields
 

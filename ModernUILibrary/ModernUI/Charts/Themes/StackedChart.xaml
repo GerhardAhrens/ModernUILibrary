@@ -4,6 +4,10 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls.Chart"
     xmlns:converters="clr-namespace:ModernIU.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Charts/Themes/ChartToolTip.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <converters:BarChartItemWidthConverter x:Key="itemWidthConverter" />
     <converters:StackedChartHeightConverter x:Key="itemHeightConverter" />
     <converters:BarChartItemVisibilityRowDefinitionConverter x:Key="itemVisibilityRowDefinitionConverter" />
@@ -24,6 +28,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
                             <Label
                                 Grid.Row="0"
                                 HorizontalAlignment="Center"
@@ -32,6 +37,7 @@
                                     <Binding Path="Caption" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:StackedChart}, AncestorLevel=1}" />
                                 </Label.Content>
                             </Label>
+                            
                             <ScrollViewer
                                 Grid.Row="1"
                                 HorizontalScrollBarVisibility="{Binding Path=ChartScrollBarVisibility, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:StackedChart}, AncestorLevel=1}}"
@@ -122,6 +128,7 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </ScrollViewer>
+                            
                             <ItemsControl
                                 Grid.Row="2"
                                 Margin="5"

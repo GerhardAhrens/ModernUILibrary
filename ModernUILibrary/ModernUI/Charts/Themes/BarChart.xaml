@@ -1,8 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:ModernIU.Converters"
-    xmlns:MUI="clr-namespace:ModernIU.Controls.Chart">
+    xmlns:MUI="clr-namespace:ModernIU.Controls.Chart"
+    xmlns:converters="clr-namespace:ModernIU.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Charts/Themes/ChartToolTip.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <converters:BarChartItemWidthConverter x:Key="itemWidthConverter" />
     <converters:BarChartItemHeightConverter x:Key="itemHeightConverter" />
@@ -23,6 +27,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
                             <TextBlock
                                 Grid.Row="0"
                                 HorizontalAlignment="Center"
@@ -31,6 +36,7 @@
                                     <Binding Path="Caption" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}" />
                                 </TextBlock.Text>
                             </TextBlock>
+                            
                             <ScrollViewer
                                 x:Name="scrollViewer"
                                 Grid.Row="1"
@@ -63,6 +69,7 @@
                                                         </RowDefinition.Height>
                                                     </RowDefinition>
                                                 </Grid.RowDefinitions>
+                                                
                                                 <Border
                                                     x:Name="border"
                                                     Grid.Row="0"
@@ -73,7 +80,7 @@
                                                     BorderThickness="{Binding Path=ChartBorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}}"
                                                     CornerRadius="{Binding Path=ChartCornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}}">
                                                     <Border.ToolTip>
-                                                        <ToolTip Style="{StaticResource toolTipStyle}" />
+                                                        <ToolTip Style="{StaticResource ResourceKey=toolTipStyle}" />
                                                     </Border.ToolTip>
                                                     <Border.Height>
                                                         <MultiBinding Converter="{StaticResource itemHeightConverter}" UpdateSourceTrigger="PropertyChanged">
@@ -91,17 +98,20 @@
                                                             <Binding Path="ChartItemWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}" />
                                                         </MultiBinding>
                                                     </Border.Width>
+                                                    
                                                     <Label
                                                         HorizontalAlignment="Center"
                                                         Content="{Binding Path=Value}"
                                                         Visibility="{Binding Path=ChartShowValues, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}}" />
                                                 </Border>
+                                                
                                                 <Label
                                                     Grid.Row="1"
                                                     HorizontalAlignment="Center"
                                                     Content="{Binding Path=Caption}"
                                                     Visibility="{Binding Path=ChartShowCaption, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}}" />
                                             </Grid>
+                                            
                                             <DataTemplate.Triggers>
                                                 <Trigger SourceName="border" Property="IsMouseOver" Value="True">
                                                     <Setter TargetName="border" Property="Background" Value="{Binding Path=ChartColorMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:BarChart}, AncestorLevel=1}}" />
@@ -111,6 +121,7 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </ScrollViewer>
+                            
                             <ItemsControl
                                 Grid.Row="2"
                                 Margin="5"

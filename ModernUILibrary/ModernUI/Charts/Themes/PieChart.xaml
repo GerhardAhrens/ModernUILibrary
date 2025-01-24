@@ -4,6 +4,10 @@
     xmlns:converters="clr-namespace:ModernIU.Converters"
     xmlns:MUI="clr-namespace:ModernIU.Controls.Chart">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Charts/Themes/ChartToolTip.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <converters:PieChartHeightConverter x:Key="pieChartHeightConverter" />
     <converters:PieChartWidthConverter x:Key="pieChartWidthConverter" />
     <converters:PieChartCenterConverter x:Key="pieChartCenterConverter" />
@@ -24,6 +28,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
                             <Label
                                 Grid.Row="0"
                                 HorizontalAlignment="Center"
@@ -32,6 +37,7 @@
                                     <Binding Path="Caption" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}" />
                                 </Label.Content>
                             </Label>
+                            
                             <ItemsControl
                                 x:Name="itemsControl"
                                 Grid.Row="1"

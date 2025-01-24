@@ -4,10 +4,10 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ChartToolTip.xaml" />
         <ResourceDictionary Source="BarChart.xaml" />
         <ResourceDictionary Source="StackedChart.xaml" />
         <ResourceDictionary Source="PieChart.xaml" />
-        <ResourceDictionary Source="ChartToolTip.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

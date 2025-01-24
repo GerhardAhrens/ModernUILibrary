@@ -192,7 +192,7 @@
                 context.LineTo(outerStartPoint, true, true);
                 context.ArcTo(outerEndPoint, outerSize, 0, isLarge, SweepDirection.Clockwise, true, true);
 
-                ToolTip = Caption;
+                this.ToolTip = this.Caption;
 
             }
         }

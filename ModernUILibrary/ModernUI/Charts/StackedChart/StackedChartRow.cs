@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
-    using ModernIU.Controls.Chart;
 
     public class StackedChartRow : ChartCoreBase
     {
