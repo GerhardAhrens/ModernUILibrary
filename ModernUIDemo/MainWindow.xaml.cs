@@ -350,13 +350,16 @@
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
 
+            this.tabItemSource.Add(new TabControlItem("Custom Data Type ", true));
+            this.tabItemSource.Add(new TabControlItem("Custom Data Type Birthday", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Birthday.txt" });
+            this.tabItemSource.Add(new TabControlItem("Custom Data Type Currency", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Currency.txt" });
+            this.tabItemSource.Add(new TabControlItem("Custom Data Type Roman", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Roman.txt" });
+
             this.tabItemSource.Add(new TabControlItem("C# Technik ", true));
             this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
             this.tabItemSource.Add(new TabControlItem("WeakEvent", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
             this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });
-            this.tabItemSource.Add(new TabControlItem("Custom Data Type Birthday", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Birthday.txt" });
-            this.tabItemSource.Add(new TabControlItem("Custom Data Type Currency", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Currency.txt" });
-            this.tabItemSource.Add(new TabControlItem("Custom Data Type Roman", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Roman.txt" });
+            this.tabItemSource.Add(new TabControlItem("Override Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Override Methode", SourceFile = "CSharp.CSharp_Override_Methode.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 

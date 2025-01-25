@@ -1,0 +1,55 @@
+﻿/* Beispiel 1 */
+public class BaseClass
+{
+    public virtual void DisplayMessage()
+    {
+        Console.WriteLine("Message from BaseClass.");
+    }
+}
+public class DerivedClass : BaseClass
+{
+    public override void DisplayMessage()
+    {
+        Console.WriteLine("Message from DerivedClass.");
+    }
+}
+
+/* Beispiel 2 */
+namespace Override_Polymorphism
+{
+    public class Employee
+    {
+        public virtual void Work()
+        {
+            Console.WriteLine("Employee is working.");
+            Console.WriteLine(); // Adds an empty line
+        }
+    }
+    public class Developer : Employee
+    {
+        public override void Work()
+        {
+            Console.WriteLine("Developer is writing code.");
+            Console.WriteLine(); // Adds an empty line
+        }
+    }
+    public class Manager : Employee
+    {
+        public override void Work()
+        {
+            Console.WriteLine("Manager is managing the team.");
+            Console.WriteLine(); // Adds an empty line
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Employee emp1 = new Developer();
+            Employee emp2 = new Manager();
+
+            emp1.Work();
+            emp2.Work();
+        }
+    }
+}

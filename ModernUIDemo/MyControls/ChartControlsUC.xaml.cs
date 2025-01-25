@@ -91,91 +91,11 @@
             }
         }
 
-        private TreeMapPanelItem _Panel1;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public TreeMapPanelItem Panel1
-        {
-            get { return (this._Panel1); }
-            set
-            {
-                if (this._Panel1 != value)
-                {
-                    this._Panel1 = value;
-                }
-            }
-        }
-
-        private TreeMapPanelItem _Panel2;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public TreeMapPanelItem Panel2
-        {
-            get { return (this._Panel2); }
-            set
-            {
-                if (this._Panel2 != value)
-                {
-                    this._Panel2 = value;
-                }
-            }
-        }
-
-        private TreeMapPanelItem _Panel3;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public TreeMapPanelItem Panel3
-        {
-            get { return (this._Panel3); }
-            set
-            {
-                if (this._Panel3 != value)
-                {
-                    this._Panel3 = value;
-                }
-            }
-        }
-
-        private TreeMapPanelItem _Panel4;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public TreeMapPanelItem Panel4
-        {
-            get { return (this._Panel4); }
-            set
-            {
-                if (this._Panel4 != value)
-                {
-                    this._Panel4 = value;
-                }
-            }
-        }
-
-        private TreeMapPanelItem _Panel5;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public TreeMapPanelItem Panel5
-        {
-            get { return (this._Panel5); }
-            set
-            {
-                if (this._Panel5 != value)
-                {
-                    this._Panel5 = value;
-                }
-            }
-        }
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.PrepareBarChart();
             this.PreparePieChart();
             this.PrepareStackedChart();
-            this.PrepareTreeMapPanel();
         }
 
         private void PrepareBarChart()
@@ -232,15 +152,6 @@
             this.StackedLegend.Add(new ChartLegendItem("Stacked-Value 3", Colors.Red));
             this.StackedLegend.Add(new ChartLegendItem("Stacked-Value 4", Colors.Yellow));
             this.StackedLegend.Add(new ChartLegendItem("Stacked-Value 5", Colors.DarkOrange));
-        }
-
-        private void PrepareTreeMapPanel()
-        {
-            this.Panel1 = new TreeMapPanelItem(5, "Red");
-            this.Panel2 = new TreeMapPanelItem(10, "Blue");
-            this.Panel3 = new TreeMapPanelItem(15, "Gray");
-            this.Panel4 = new TreeMapPanelItem(20, "Aqua");
-            this.Panel5 = new TreeMapPanelItem(5, "Yellow");
         }
 
         private void AddStackedChartRow(string caption, double value1, double value2, double value3, double value4, double value5)
@@ -313,82 +224,5 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
-    }
-
-    public class TreeMapPanelItem : INotifyPropertyChanged
-    {
-
-        public TreeMapPanelItem(double pFill, string pColor)
-        {
-
-            this.FillWeight = pFill;
-            this.FillTooltip = $"Wichtung {this.FillWeight}";
-            this.FillColor = pColor;
-
-        }
-
-        private double _FillWeight;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public double FillWeight
-        {
-            get { return (this._FillWeight); }
-            set
-            {
-                if (this._FillWeight != value)
-                {
-                    this._FillWeight = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _FillTooltip;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public string FillTooltip
-        {
-            get { return (this._FillTooltip); }
-            set
-            {
-                if (this._FillTooltip != value)
-                {
-                    this._FillTooltip = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _FillColor;
-        /// <summary>
-        /// Beschreibung zum Property
-        /// </summary>
-        public string FillColor
-        {
-            get { return (this._FillColor); }
-            set
-            {
-                if (this._FillColor != value)
-                {
-                    this._FillColor = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        #region INotifyPropertyChanged Member
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
-
     }
 }

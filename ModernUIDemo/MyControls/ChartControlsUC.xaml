@@ -91,42 +91,6 @@
                         DataContext="{Binding Path=StackedRows, ElementName=ChartControls}" />
                 </Grid>
             </TabItem>
-
-            <TabItem Header="Treemap" IsSelected="False">
-                <Grid>
-                    <ModernUIChart:RegionTreeMapsPanel x:Name="treemapDemo" Grid.Column="0">
-                        <Rectangle
-                            x:Name="recPanel1"
-                            ModernUIChart:TreeMapsPanel.Weight="{Binding Path=Panel1.FillWeight, UpdateSourceTrigger=PropertyChanged}"
-                            Fill="{Binding Path=Panel1.FillColor, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Path=Panel1.FillTooltip, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <Rectangle
-                            x:Name="recPanel2"
-                            ModernUIChart:TreeMapsPanel.Weight="{Binding Path=Panel2.FillWeight, UpdateSourceTrigger=PropertyChanged}"
-                            Fill="{Binding Path=Panel2.FillColor, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Path=Panel2.FillTooltip, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <Rectangle
-                            x:Name="recPanel3"
-                            ModernUIChart:TreeMapsPanel.Weight="{Binding Path=Panel3.FillWeight, UpdateSourceTrigger=PropertyChanged}"
-                            Fill="{Binding Path=Panel3.FillColor, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Path=Panel3.FillTooltip, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <Rectangle
-                            x:Name="recPanel4"
-                            ModernUIChart:TreeMapsPanel.Weight="{Binding Path=Panel4.FillWeight, UpdateSourceTrigger=PropertyChanged}"
-                            Fill="{Binding Path=Panel4.FillColor, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Path=Panel4.FillTooltip, UpdateSourceTrigger=PropertyChanged}" />
-
-                        <Rectangle
-                            x:Name="recPanel5"
-                            ModernUIChart:TreeMapsPanel.Weight="{Binding Path=Panel5.FillWeight, UpdateSourceTrigger=PropertyChanged}"
-                            Fill="{Binding Path=Panel5.FillColor, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Path=Panel5.FillTooltip, UpdateSourceTrigger=PropertyChanged}" />
-                    </ModernUIChart:RegionTreeMapsPanel>
-                </Grid>
-            </TabItem>
         </TabControl>
 
     </Grid>
