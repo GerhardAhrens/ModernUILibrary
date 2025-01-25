@@ -8,6 +8,7 @@
         <ResourceDictionary Source="BarChart.xaml" />
         <ResourceDictionary Source="StackedChart.xaml" />
         <ResourceDictionary Source="PieChart.xaml" />
+        <ResourceDictionary Source="TreemapStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
