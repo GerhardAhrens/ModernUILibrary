@@ -182,6 +182,8 @@
     <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
     <Folder Include="Graphics\SvgToXaml\" />
     <Folder Include="CustomDataTypes\" />
+    <Folder Include="Network\SmtpMail\" />
+    <Folder Include="TextAnalysis\HumanText\" />
     <Folder Include="TextAnalysis\Template\" />
     <Folder Include="TextAnalysis\StringTokenizer\" />
     <Folder Include="WIN32API\MessageBox\" />

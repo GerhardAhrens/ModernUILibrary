@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
-// <copyright file="HeapsAlgorithm.cs" company="www.pta.de">
+// <copyright file="HeapsAlgorithm.cs" company="www.lifeprojects.de">
 //     Class: HeapsAlgorithm
-//     Copyright © www.pta.de 2024
+//     Copyright © www.lifeprojects.de 2024
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
 // <email>gerhard.ahrens@pta.de</email>
 // <date>11.12.2024 13:23:56</date>
 //

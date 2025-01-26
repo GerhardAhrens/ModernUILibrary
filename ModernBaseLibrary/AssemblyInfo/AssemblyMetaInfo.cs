@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
-// <copyright file="AssemblyMetaInfo.cs" company="www.pta.de">
+// <copyright file="AssemblyMetaInfo.cs" company="www.lifeprojects.de">
 //     Class: AssemblyMetaInfo
-//     Copyright © www.pta.de 2024
+//     Copyright © www.lifeprojects.de 2024
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
 // <email>gerhard.ahrens@pta.de</email>
 // <date>03.12.2024 07:49:42</date>
 //

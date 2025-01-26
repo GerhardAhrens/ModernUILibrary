@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
 // <copyright file="IncrementExtensions.cs" company="Lifeprojects.de">
 //     Class: IncrementExtensions
-//     Copyright © www.pta.de 2022
+//     Copyright © www.lifeprojects.de 2022
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
 // <email>developer@lifeprojects.de</email>
 // <date>23.05.2022 09:52:48</date>
 //

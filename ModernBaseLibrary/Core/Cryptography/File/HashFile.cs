@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
-// <copyright file="HashFile.cs" company="www.pta.de">
+// <copyright file="HashFile.cs" company="www.lifeprojects.de">
 //     Class: HashFile
-//     Copyright © www.pta.de 2023
+//     Copyright © www.lifeprojects.de 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
 // <email>gerhard.ahrens@pta.de</email>
 // <date>09.06.2023 09:39:12</date>
 //
