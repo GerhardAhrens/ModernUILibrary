@@ -12,4 +12,10 @@
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="AssemblyInfo\AssemblyMetaInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

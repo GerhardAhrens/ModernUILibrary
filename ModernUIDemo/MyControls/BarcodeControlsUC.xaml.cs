@@ -95,15 +95,25 @@
             string zplString = newBarcode.ZplEncode;
 
             byte[] barcodeImage = newBarcode.SaveImage("PNG");
-            using (System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(barcodeImage)))
-            {
-                image.Save(fullPath, ImageFormat.Png);
-            }
 
-            if (File.Exists(fullPath))
+            lock (this)
             {
-                this.tbLinearBarcode39.Text = $"Inhalt: {barcodeContent}";
-                this.LinearBarcode39.Source = new BitmapImage(new Uri(fullPath));
+                try
+                {
+                    using (System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(barcodeImage)))
+                    {
+                        image.Save(fullPath, ImageFormat.Png);
+                    }
+
+                    if (File.Exists(fullPath))
+                    {
+                        this.tbLinearBarcode39.Text = $"Inhalt: {barcodeContent}";
+                        this.LinearBarcode39.Source = new BitmapImage(new Uri(fullPath));
+                    }
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 

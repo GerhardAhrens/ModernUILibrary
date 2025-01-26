@@ -91,6 +91,16 @@
                         DataContext="{Binding Path=StackedRows, ElementName=ChartControls}" />
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Treemap" IsSelected="False">
+                <Grid>
+                    <ModernUIChart:TreeMapControl
+                        ItemClickCommand="{Binding Path=ItemClickCommand}"
+                        ItemsSource="{Binding Path=TreeMapItems}"
+                        PopupDelay="500"
+                        SelectedItem="{Binding Path=SelectedTreeMapItem, Mode=TwoWay}" />
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

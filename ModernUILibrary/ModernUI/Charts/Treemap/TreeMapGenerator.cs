@@ -2,6 +2,7 @@ namespace ModernIU.Controls.Chart
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -12,12 +13,19 @@ namespace ModernIU.Controls.Chart
     using System.Windows.Shapes;
     using System.Windows.Threading;
 
+    [DebuggerDisplay("Label={this.Label}; Percentage={this.Percentage}")]
     public class TreeMapItem
     {
         public string Label { get; set; }
         public double Percentage { get; set; }
-        public Brush Color { get; set; }
+        public Brush Background { get; set; }
+        public Brush Foreground { get; set; } = Brushes.Black;
         public object Id { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Label};{this.Percentage}";
+        }
     }
 
     public class TreeMapControl : Canvas
@@ -29,11 +37,70 @@ namespace ModernIU.Controls.Chart
         private TreeMapItem pendingPopupItem;
         private DispatcherTimer popupTimer;
 
+        #region Dependency Properties
+
+        public static readonly DependencyProperty ItemsSourceProperty =
+            DependencyProperty.Register(
+                nameof(ItemsSource),
+                typeof(IEnumerable<TreeMapItem>),
+                typeof(TreeMapControl),
+                new PropertyMetadata(null, OnItemsSourceChanged));
+
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register(
+                nameof(SelectedItem),
+                typeof(TreeMapItem),
+                typeof(TreeMapControl),
+                new PropertyMetadata(null, OnSelectedItemChanged));
+
+        public static readonly DependencyProperty ItemClickCommandProperty =
+            DependencyProperty.Register(
+                nameof(ItemClickCommand),
+                typeof(ICommand),
+                typeof(TreeMapControl));
+
+        public static readonly DependencyProperty PopupDelayProperty =
+            DependencyProperty.Register(
+                nameof(PopupDelay),
+                typeof(int),
+                typeof(TreeMapControl),
+                new PropertyMetadata(500)); // Default 500ms delay
+
+        #endregion
+
         public TreeMapControl()
         {
-            InitializePopup();
-            InitializeTimer();
+            this.InitializePopup();
+            this.InitializeTimer();
         }
+
+        #region Properties
+
+        public IEnumerable<TreeMapItem> ItemsSource
+        {
+            get => (IEnumerable<TreeMapItem>)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
+        }
+
+        public TreeMapItem SelectedItem
+        {
+            get => (TreeMapItem)GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
+        }
+
+        public ICommand ItemClickCommand
+        {
+            get => (ICommand)GetValue(ItemClickCommandProperty);
+            set => SetValue(ItemClickCommandProperty, value);
+        }
+
+        public int PopupDelay
+        {
+            get => (int)GetValue(PopupDelayProperty);
+            set => SetValue(PopupDelayProperty, value);
+        }
+
+        #endregion
 
         private void InitializePopup()
         {
@@ -52,7 +119,7 @@ namespace ModernIU.Controls.Chart
                 Interval = TimeSpan.FromMilliseconds(PopupDelay)
             };
 
-            this.popupTimer.Tick += PopupTimer_Tick;
+            this.popupTimer.Tick += this.PopupTimer_Tick;
         }
 
         private void PopupTimer_Tick(object sender, EventArgs e)
@@ -95,30 +162,32 @@ namespace ModernIU.Controls.Chart
 
         private void UpdateTreeMap()
         {
-            Children.Clear();
-            if (ItemsSource == null) return;
+            this.Children.Clear();
+            if (this.ItemsSource == null)
+            {
+                return;
+            }
 
-            var items = new List<TreeMapItem>(ItemsSource);
-            if (items.Count == 0)
+            List<TreeMapItem> items = new List<TreeMapItem>(ItemsSource);
+            if (items == null || items.Count == 0)
             {
                 return;
             }
 
             items.Sort((a, b) => b.Percentage.CompareTo(a.Percentage));
-            LayoutItems(items);
+            this.LayoutItems(items);
         }
 
         private void LayoutItems(List<TreeMapItem> items)
         {
-            var totalArea = ActualWidth * ActualHeight;
-            var totalPercentage = items.Sum(item => item.Percentage);
+            double totalArea = ActualWidth * ActualHeight;
+            double totalPercentage = items.Sum(item => item.Percentage);
             double currentX = 0, currentY = 0;
             double remainingWidth = ActualWidth, remainingHeight = ActualHeight;
 
-            foreach (var item in items)
+            foreach (TreeMapItem item in items)
             {
-                var (container, width, height) = CreateItemContainer(item, totalArea, totalPercentage,
-                    remainingWidth, remainingHeight);
+                var (container, width, height) = CreateItemContainer(item, totalArea, totalPercentage, remainingWidth, remainingHeight);
 
                 SetLeft(container, currentX);
                 SetTop(container, currentY);
@@ -137,11 +206,10 @@ namespace ModernIU.Controls.Chart
             }
         }
 
-        private (Grid container, double width, double height) CreateItemContainer(
-            TreeMapItem item, double totalArea, double totalPercentage, double remainingWidth, double remainingHeight)
+        private (Grid container, double width, double height) CreateItemContainer(TreeMapItem item, double totalArea, double totalPercentage, double remainingWidth, double remainingHeight)
         {
-            var percentage = item.Percentage / totalPercentage;
-            var area = totalArea * percentage;
+            double percentage = item.Percentage / totalPercentage;
+            double area = totalArea * percentage;
             double width, height;
 
             if (remainingWidth > remainingHeight)
@@ -171,7 +239,7 @@ namespace ModernIU.Controls.Chart
 
         private Grid CreateVisualContainer(TreeMapItem item, double width, double height)
         {
-            var brush = item.Color ?? GetRandomBrush();
+            var brush = item.Background ?? GetRandomBrush();
             var container = new Grid
             {
                 Width = width,
@@ -191,7 +259,7 @@ namespace ModernIU.Controls.Chart
             var label = new TextBlock
             {
                 Text = $"{item.Label}\n{item.Percentage:F1}%",
-                Foreground = Brushes.White,
+                Foreground = item.Foreground,
                 TextAlignment = TextAlignment.Center,
                 FontWeight = FontWeights.Bold,
                 FontSize = 14,
@@ -264,22 +332,20 @@ namespace ModernIU.Controls.Chart
         private void AdjustCurrentPopupPlacement()
         {
             var window = Window.GetWindow(this);
-            var position = Mouse.GetPosition(window); // Position relative to the window
+            var position = Mouse.GetPosition(window); 
             var popupSize = this.currentPopup.Child.DesiredSize;
 
             // Get screen position of the window and mouse position
             var cursorScreenPosition = window.PointToScreen(position);
 
-            double offsetX = 10;
-            double offsetY = 10;
+            double offsetX = -50;
+            double offsetY = -50;
 
-            // Check right edge
             if (cursorScreenPosition.X + popupSize.Width + offsetX > SystemParameters.WorkArea.Width)
             {
                 offsetX = -popupSize.Width - 10;
             }
 
-            // Check bottom edge
             if (cursorScreenPosition.Y + popupSize.Height + offsetY > SystemParameters.WorkArea.Height)
             {
                 offsetY = -popupSize.Height - 10;
@@ -302,21 +368,21 @@ namespace ModernIU.Controls.Chart
 
         private void ShowPopup(TreeMapItem item, Grid sourceContainer, Brush background)
         {
-            var popupContent = new Border
+            Border popupContent = new Border
             {
                 Background = background,
-                BorderBrush = Brushes.White,
+                BorderBrush = item.Foreground,
                 BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(4),
                 Padding = new Thickness(10)
             };
 
-            var popupText = new TextBlock
+            TextBlock popupText = new TextBlock
             {
                 Text = $"{item.Label}\nPercentage: {item.Percentage:F2}%",
-                Foreground = Brushes.White,
+                Foreground = item.Foreground,
                 FontSize = 16,
-                FontWeight = FontWeights.SemiBold,
+                FontWeight = FontWeights.Bold,
                 TextAlignment = TextAlignment.Center
             };
 
@@ -326,66 +392,6 @@ namespace ModernIU.Controls.Chart
             this.AdjustCurrentPopupPlacement();
             this.currentPopup.IsOpen = true;
         }
-
-
-        #region Dependency Properties
-
-        public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register(
-                nameof(ItemsSource),
-                typeof(IEnumerable<TreeMapItem>),
-                typeof(TreeMapControl),
-                new PropertyMetadata(null, OnItemsSourceChanged));
-
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(
-                nameof(SelectedItem),
-                typeof(TreeMapItem),
-                typeof(TreeMapControl),
-                new PropertyMetadata(null, OnSelectedItemChanged));
-
-        public static readonly DependencyProperty ItemClickCommandProperty =
-            DependencyProperty.Register(
-                nameof(ItemClickCommand),
-                typeof(ICommand),
-                typeof(TreeMapControl));
-
-        public static readonly DependencyProperty PopupDelayProperty =
-            DependencyProperty.Register(
-                nameof(PopupDelay),
-                typeof(int),
-                typeof(TreeMapControl),
-                new PropertyMetadata(500)); // Default 500ms delay
-
-        #endregion
-
-        #region Properties
-
-        public IEnumerable<TreeMapItem> ItemsSource
-        {
-            get => (IEnumerable<TreeMapItem>)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
-        }
-
-        public TreeMapItem SelectedItem
-        {
-            get => (TreeMapItem)GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
-        }
-
-        public ICommand ItemClickCommand
-        {
-            get => (ICommand)GetValue(ItemClickCommandProperty);
-            set => SetValue(ItemClickCommandProperty, value);
-        }
-
-        public int PopupDelay
-        {
-            get => (int)GetValue(PopupDelayProperty);
-            set => SetValue(PopupDelayProperty, value);
-        }
-
-        #endregion
     }
 }
  

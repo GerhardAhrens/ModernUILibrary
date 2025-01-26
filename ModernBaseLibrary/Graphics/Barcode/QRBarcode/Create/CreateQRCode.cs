@@ -144,9 +144,18 @@ namespace ModernBaseLibrary.Barcode
         /// <param name="scale">Size of a module, in pixels.</param>
         public void Save(string imagePath, int scale)
         {
-            using (Bitmap b = ToBitmap(scale))
+            lock (this)
             {
-                b.Save(imagePath, ImageFormat.Png);
+                try
+                {
+                    using (Bitmap b = ToBitmap(scale))
+                    {
+                        b.Save(imagePath, ImageFormat.Png);
+                    }
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 

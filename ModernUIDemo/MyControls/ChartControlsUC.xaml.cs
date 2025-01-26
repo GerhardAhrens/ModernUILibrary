@@ -13,6 +13,8 @@
 
     using ModernIU.Controls.Chart;
 
+    using ModernUI.MVVM.Base;
+
     /// <summary>
     /// Interaktionslogik für ChartControlsUC.xaml
     /// </summary>
@@ -24,6 +26,9 @@
         private ObservableCollection<ChartRow> _pieRows = new ObservableCollection<ChartRow>();
         private ObservableCollection<ChartLegendItem> _stackedLegend = new ObservableCollection<ChartLegendItem>();
         private ObservableCollection<StackedChartRow> _stackedRows = new ObservableCollection<StackedChartRow>();
+        private ObservableCollection<TreeMapItem> _treeMapItems = new ObservableCollection<TreeMapItem>();
+        private TreeMapItem _selectedTreeMapItem;
+        private ICommand _itemClickCommand;
 
         public ChartControlsUC()
         {
@@ -91,11 +96,34 @@
             }
         }
 
+        public ICommand ItemClickCommand => _itemClickCommand ??= new RelayCommand<TreeMapItem>(OnTreeMapItemClick);
+
+        public TreeMapItem SelectedTreeMapItem
+        {
+            get => _selectedTreeMapItem;
+            set
+            {
+                _selectedTreeMapItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<TreeMapItem> TreeMapItems
+        {
+            get => _treeMapItems;
+            set
+            {
+                _treeMapItems = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.PrepareBarChart();
             this.PreparePieChart();
             this.PrepareStackedChart();
+            this.PrepareTreemap();
         }
 
         private void PrepareBarChart()
@@ -167,6 +195,26 @@
 
             _stackedRows.Add(row);
         }
+
+        private void PrepareTreemap()
+        {
+            TreeMapItems = new ObservableCollection<TreeMapItem>
+        {
+            new() { Label = "C#", Percentage = 35.0, Background = Brushes.Green },
+            new() { Label = "VB.Net", Percentage = 5.555, Background = Brushes.Green },
+            new() { Label = "WPF", Percentage = 18.3, Background = Brushes.Red },
+            new() { Label = "JavaScript", Percentage = 15.7, Background = Brushes.Yellow },
+            new() { Label = "Java", Percentage = 8.2, Background = Brushes.Blue },
+            new() { Label = "Cobol", Percentage = 5.1, Background = Brushes.Orange }
+        };
+        }
+
+        private void OnTreeMapItemClick(TreeMapItem item)
+        {
+            this.SelectedTreeMapItem = item;
+            MessageBox.Show(this.SelectedTreeMapItem.ToString(), "Auswahl");
+        }
+
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             string pathFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), DateTime.Now.Ticks.ToString());
