@@ -1,0 +1,48 @@
+﻿namespace Console.CallBackFunction
+{
+    using System;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("q = Ende, c = Callback ausführen");
+                ConsoleKeyInfo result = Console.ReadKey();
+                if (result.KeyChar == 'q')
+                {
+                    break;
+                }
+                else if (result.KeyChar == 'c')
+                {
+                    CallbackRequest<string> sr = new CallbackRequest<string>();
+                    sr.Callback += new CallbackRequest<string>.CallbackEventHandler(sr_Callback);
+                    sr.DoCallback("myRequest");
+                }
+            }
+        }
+
+        private static void sr_Callback(string something)
+        {
+            Console.WriteLine($"Callback Nachricht: {something}");
+            Console.ReadKey();
+        }
+
+    }
+
+    public class CallbackRequest<TResult>
+    {
+        public delegate void CallbackEventHandler(TResult value);
+        public event CallbackEventHandler Callback;
+
+        public void DoCallback(TResult value)
+        {
+            if (Callback != null)
+            {
+                Callback(value);
+            }
+        }
+    }
+}

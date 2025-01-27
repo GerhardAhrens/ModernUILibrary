@@ -1,0 +1,70 @@
+﻿namespace Console.IsCollectionDemo
+{
+    using System;
+    using System.CodeDom;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Windows;
+
+    using EasyPrototypingNET.Core.Comparer;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. IsCollection");
+                Console.WriteLine("X. Beenden");
+
+                Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
+                ConsoleKey key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        MenuPoint1();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void MenuPoint1()
+        {
+            Console.Clear();
+
+            Department dept = new Department();
+            dept.DepartmentId = 1;
+            dept.DepartmentName = "PTA";
+            List<Department> deptList = new List<Department>();
+            deptList.Add(dept);
+
+            var isCollection = deptList.IsCollection();
+            var collName1 = deptList.GetType().GetFriendlyTypeName();
+            var collName2 = deptList.GetType().GetFriendlyName();
+
+            MessageBox.Show($"IsCollection() = {isCollection}\nGetFriendlyTypeName() = {collName1}", "Result");
+
+            ConsoleHelper.Wait();
+        }
+
+        [DebuggerDisplay("Id={this.DepartmentId};DepartmentName={this.DepartmentName}")]
+        private class Department
+        {
+            public int DepartmentId { get; set; }
+
+            public string DepartmentName { get; set; }
+
+            public override string ToString()
+            {
+                return $"Id={this.DepartmentId};DepartmentName={this.DepartmentName}";
+            }
+        }
+    }
+}

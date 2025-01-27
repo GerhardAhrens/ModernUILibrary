@@ -360,6 +360,15 @@
             this.tabItemSource.Add(new TabControlItem("WeakEvent", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
             this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });
             this.tabItemSource.Add(new TabControlItem("Override Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Override Methode", SourceFile = "CSharp.CSharp_Override_Methode.txt" });
+            this.tabItemSource.Add(new TabControlItem("Callback Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Callback Methode", SourceFile = "CSharp.CSharp_Callback_Function.txt" });
+            this.tabItemSource.Add(new TabControlItem("Compare Objects", new SyntaxBoxControlsUC()) { Stichworte = "C#;Compare", SourceFile = "Object.CSharp_CompareObjects.txt" });
+            this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("Network ", true));
+            this.tabItemSource.Add(new TabControlItem("Network-Ping", new SyntaxBoxControlsUC()) { Stichworte = "C#;Network;Ping", SourceFile = "Network.CSharp_Network_Ping.txt" });
+
+            this.tabItemSource.Add(new TabControlItem("IO ", true));
+            this.tabItemSource.Add(new TabControlItem("TarFile", new SyntaxBoxControlsUC()) { Stichworte = "C#;File;Compressed", SourceFile = "IO.File_TarFile.txt" });
 
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 

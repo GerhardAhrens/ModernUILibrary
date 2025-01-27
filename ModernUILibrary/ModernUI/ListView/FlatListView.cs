@@ -1,14 +1,12 @@
 ﻿namespace ModernIU.Controls
 {
     using System.ComponentModel;
-    using System.Windows.Documents;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-
-    using ModernIU.Base;
 
     public class FlatListView : ListView
     {

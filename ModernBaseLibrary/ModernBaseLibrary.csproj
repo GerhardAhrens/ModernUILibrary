@@ -121,7 +121,6 @@
     <Folder Include="Core\IO\VirtualDrive\" />
     <Folder Include="Core\IO\USBDisk\" />
     <Folder Include="Core\LinqExpression\" />
-    <Folder Include="Core\Markdown\" />
     <Folder Include="Core\Mathematic\" />
     <Folder Include="Core\Media\" />
     <Folder Include="Core\FormatTo\" />

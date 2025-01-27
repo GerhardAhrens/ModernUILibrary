@@ -1,0 +1,44 @@
+﻿private static string CheckInternet(string checkURL, int countEcho = 10)
+{
+    long totalTime = 0;
+    string ipAddress = string.Empty;
+    string result = string.Empty;
+    Ping myPing = new Ping();
+
+    try
+    {
+        for (int i = 0; i < countEcho; i++)
+        {
+            PingReply reply = myPing.Send(checkURL, 10000, new byte[32], new PingOptions(64, true));
+            if (reply != null)
+            {
+                if (reply.Address != null)
+                {
+                    ipAddress = reply.Address.ToString();
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        totalTime += reply.RoundtripTime;
+                    }
+
+                    if (totalTime == 0)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (string.IsNullOrEmpty(ipAddress) == true)
+        {
+            ipAddress = "0.0.0.0";
+        }
+
+        result = $"{ipAddress}, Ping: {totalTime / countEcho} ms";
+    }
+    catch (Exception ex)
+    {
+        string errText = ex.Message;
+    }
+
+    return result;
+}

@@ -1,5 +1,4 @@
-﻿
-namespace ModernIU.Converters
+﻿namespace ModernIU.Converters
 {
     using System;
     using System.Text.RegularExpressions;

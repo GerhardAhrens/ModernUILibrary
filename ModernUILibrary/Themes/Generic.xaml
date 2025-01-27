@@ -33,6 +33,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Heading/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Icons/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Loading/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Markdown/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Message/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/MessageBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/NumericUpDown/Themes/Generic.xaml" />
