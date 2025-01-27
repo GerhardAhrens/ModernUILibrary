@@ -24,6 +24,7 @@
     <None Remove="Images\img5.png" />
     <None Remove="Resources\BuildDate.txt" />
     <None Remove="Resources\MDText\DemoText.md" />
+    <None Remove="Resources\MDText\sampleimage.jpg" />
     <None Remove="Resources\Picture\app.ico" />
     <None Remove="Resources\Source\Demo_A.txt" />
   </ItemGroup>
@@ -66,6 +67,7 @@
     <EmbeddedResource Include="Images\img5.png" />
     <EmbeddedResource Include="Resources\BuildDate.txt" />
     <EmbeddedResource Include="Resources\MDText\DemoText.md" />
+    <EmbeddedResource Include="Resources\MDText\sampleimage.jpg" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />

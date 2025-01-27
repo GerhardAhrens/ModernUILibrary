@@ -122,6 +122,15 @@ _ _ _
     _ _ _
 
 ***
+![image1](http://placehold.it/350x150)
+
+![imageleft](http://placehold.it/100x150/0000FF)![imageright](http://placehold.it/100x150/00FFFF)
+
+* Local images
+
+![localimage](sampleimage.jpg)
+***
+
 Just a [URL](/url/).
 
 [URL and title](/url/ "title").
