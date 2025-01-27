@@ -106,7 +106,7 @@
             this.ListBoxCSource = listBoxSorce;
         }
 
-        private CheckComboBoxTest ConfigMultiSelectListbox(CheckComboBoxTest listBoxDemoData)
+        private CheckComboBoxTest ConfigMultiSelectListbox(CheckComboBoxTest listBoxDemoData, int counter)
         {
             listBoxDemoData.ID = BuildDemoData.Integer(1, 10_000);
             listBoxDemoData.Content = BuildDemoData.LastName();
@@ -114,7 +114,7 @@
             return listBoxDemoData;
         }
 
-        private CheckComboBoxTest ConfigListboxEx(CheckComboBoxTest listBoxDemoData)
+        private CheckComboBoxTest ConfigListboxEx(CheckComboBoxTest listBoxDemoData, int counter)
         {
             listBoxDemoData.ID = BuildDemoData.Integer(1, 10_000);
             listBoxDemoData.Content = BuildDemoData.LastName();
@@ -122,7 +122,7 @@
             return listBoxDemoData;
         }
 
-        private string CheckComboBoxData(string text)
+        private string CheckComboBoxData(string text, int counter)
         {
             return BuildDemoData.ProgrammingLanguage();
         }

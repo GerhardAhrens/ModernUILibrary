@@ -4,10 +4,12 @@
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
+    using DemoDataGeneratorLib.Base;
 
     using ModernUI.MVVM.Base;
 
     using ModernUIDemo.Core;
+    using ModernUIDemo.Model;
 
     /// <summary>
     /// Interaktionslogik für FlatListViewControlsUC.xaml
@@ -25,14 +27,16 @@
             this.DataContext = this;
         }
 
+        public ObservableCollection<Employe> Employes { get; set; }
+
         private void SelectionChangedClick(object p1)
         {
-            this.SelectionChanged.Text = (((System.Tuple<int, string, string>)p1).Item1).ToString();
+            this.SelectionChanged.Text = ((Employe)p1).LastName;
         }
 
         private void SelectedRowClick(object p1)
         {
-            string item = (((System.Tuple<int, string, string>)p1).Item1).ToString();
+            string item = ((Employe)p1).LastName; ;
             MessageBox.Show(item);
         }
 
@@ -40,14 +44,27 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<Tuple<int, string, string>> list = new ObservableCollection<Tuple<int, string, string>>();
+            this.Employes = BuildDemoData<Employe>.CreateForObservableCollection<Employe>(ConfigObject, 1_000);
+            this.FlatListView.ItemsSource = this.Employes;
+        }
 
-            for (int i = 0; i < 300; i++)
-            {
-                list.Add(new Tuple<int, string, string>(i, i.ToString(), i.ToString()));
-            }
+        private Employe ConfigObject(Employe employe, int counter)
+        {
 
-            this.FlatListView.ItemsSource = list;
+            var timeStamp = BuildDemoData.SetTimeStamp();
+            employe.Id = counter;
+            employe.FirstName = BuildDemoData.FirstName();
+            employe.LastName = BuildDemoData.LastName();
+            employe.Salary = BuildDemoData.Integer(1_000, 10_000);
+            employe.Symbol = BuildDemoData.Symbols();
+            employe.StartDate = BuildDemoData.Dates(new DateTime(2000, 1, 1), DateTime.Now);
+            employe.Manager = BuildDemoData.Boolean();
+            employe.CreateOn = timeStamp.CreateOn;
+            employe.CreateBy = timeStamp.CreateBy;
+            employe.ModifiedOn = timeStamp.ModifiedOn;
+            employe.ModifiedBy = timeStamp.ModifiedBy;
+
+            return employe;
         }
     }
 }

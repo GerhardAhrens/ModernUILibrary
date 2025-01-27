@@ -83,7 +83,7 @@
             this.OnPropertyChanged("FilteredList");
         }
 
-        private Employe ConfigObject(Employe employe)
+        private Employe ConfigObject(Employe employe, int counter)
         {
 
             var timeStamp = BuildDemoData.SetTimeStamp();

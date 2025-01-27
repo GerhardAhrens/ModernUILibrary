@@ -37,13 +37,32 @@
                         <GridView AllowsColumnReorder="False">
                             <GridViewColumn
                                 Width="50"
-                                DisplayMemberBinding="{Binding Path=Item1}"
+                                DisplayMemberBinding="{Binding Path=Id}"
                                 Header="Id" />
+
+                            <GridViewColumn Width="50" Header="Symbol">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Path
+                                            Width="14"
+                                            Height="14"
+                                            Data="{Binding Path=Symbol}"
+                                            Fill="Green"
+                                            Stretch="Fill" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
 
                             <GridViewColumn
                                 Width="100"
-                                ModernUI:ListViewSort.PropertyName="Item2"
-                                DisplayMemberBinding="{Binding Path=Item2}">
+                                DisplayMemberBinding="{Binding Path=FirstName}"
+                                Header="Vorname" />
+
+                            <GridViewColumn
+                                Width="100"
+                                ModernUI:ListViewSort.PropertyName="LastName"
+                                DisplayMemberBinding="{Binding Path=LastName}">
                                 <ModernUI:GridViewColumnHeaderEx
                                     Height="30"
                                     HorizontalContentAlignment="Left"
@@ -53,8 +72,8 @@
 
                             <GridViewColumn
                                 Width="100"
-                                DisplayMemberBinding="{Binding Path=Item3}"
-                                Header="Id-Item3" />
+                                DisplayMemberBinding="{Binding Path=Salary}"
+                                Header="Gehalt" />
                         </GridView>
                     </ModernUI:FlatListView.View>
                 </ModernUI:FlatListView>

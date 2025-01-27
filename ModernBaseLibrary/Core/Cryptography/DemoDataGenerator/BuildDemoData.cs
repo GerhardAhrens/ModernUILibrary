@@ -25,6 +25,7 @@
 namespace DemoDataGeneratorLib.Base
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Data;
     using System.Diagnostics;
     using System.IO;
@@ -40,10 +41,10 @@ namespace DemoDataGeneratorLib.Base
         {
         }
 
-        public static Func<Tin,Tin> ConfigObject { get; private set; }
+        public static Func<Tin,int,Tin> ConfigObject { get; private set; }
         public static Func<Tin,object, Tin> ConfigObjectDict { get; private set; }
 
-        public static List<Tin> CreateForList<Tín>(Func<Tin,Tin> method, int count = 1000)
+        public static List<Tin> CreateForList<Tín>(Func<Tin,int,Tin> method, int count = 1000)
         {
             List<Tin> testDataSource = null;
             Type type = typeof(Tin);
@@ -57,13 +58,13 @@ namespace DemoDataGeneratorLib.Base
                     if (typeof(Tin) ==  typeof(string))
                     {
                         object obj = null;
-                        result = ConfigObject((Tin)obj);
+                        result = ConfigObject((Tin)obj,i);
                         testDataSource.Add((Tin)result);
                     }
                     else
                     {
                         object obj = (Tin)Activator.CreateInstance(typeof(Tin));
-                        result = ConfigObject((Tin)obj);
+                        result = ConfigObject((Tin)obj,i);
                         testDataSource.Add((Tin)result);
                     }
                 }
@@ -72,7 +73,36 @@ namespace DemoDataGeneratorLib.Base
             return testDataSource;
         }
 
-        public static DataTable CreateForDataTable<Tín>(Func<Tin, Tin> method, int count = 1000)
+        public static ObservableCollection<Tin> CreateForObservableCollection<Tín>(Func<Tin,int, Tin> method, int count = 1000)
+        {
+            ObservableCollection<Tin> testDataSource = null;
+            Type type = typeof(Tin);
+            object result = null;
+            if (method != null)
+            {
+                testDataSource = new ObservableCollection<Tin>();
+                ConfigObject = method;
+                for (int i = 0; i < count; i++)
+                {
+                    if (typeof(Tin) == typeof(string))
+                    {
+                        object obj = null;
+                        result = ConfigObject((Tin)obj, i);
+                        testDataSource.Add((Tin)result);
+                    }
+                    else
+                    {
+                        object obj = (Tin)Activator.CreateInstance(typeof(Tin));
+                        result = ConfigObject((Tin)obj,i);
+                        testDataSource.Add((Tin)result);
+                    }
+                }
+            }
+
+            return testDataSource;
+        }
+
+        public static DataTable CreateForDataTable<Tín>(Func<Tin, int,Tin> method, int count = 1000)
         {
             DataTable testDataSource = null;
             Type type = typeof(Tin);
@@ -92,7 +122,7 @@ namespace DemoDataGeneratorLib.Base
                 for (int i = 0; i < count; i++)
                 {
                     object obj = (Tin)Activator.CreateInstance(typeof(Tin));
-                    result = ConfigObject((Tin)obj);
+                    result = ConfigObject((Tin)obj, i);
                     if (result != null)
                     {
                         object[] values = new object[properties.Length];
