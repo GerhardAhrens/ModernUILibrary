@@ -339,8 +339,8 @@
 #if DEBUG
             sw.Stop();
             ms += sw.Elapsed;
-            count++;
 #endif
+            count++;
             base.OnRender(drawingContext);
         }
 
