@@ -2,6 +2,7 @@
 
 [![NET](https://img.shields.io/badge/NET-8.0-green.svg)](https://www.microsoft.com/net/download/windows)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/abbaye/wpf-currency-textbox/blob/ExpendedFunctionality/LICENSE)
+[![VS2022](https://img.shields.io/badge/Visual%20Studio-2022-white.svg)](https://www.microsoft.com/net/download/windows)
 
 Die Funktionalität ist in die Bibliotheken
 - ModernUI

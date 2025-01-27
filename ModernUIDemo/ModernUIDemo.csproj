@@ -23,6 +23,7 @@
     <None Remove="Images\img4.png" />
     <None Remove="Images\img5.png" />
     <None Remove="Resources\BuildDate.txt" />
+    <None Remove="Resources\MDText\DemoText.md" />
     <None Remove="Resources\Picture\app.ico" />
     <None Remove="Resources\Source\Demo_A.txt" />
   </ItemGroup>
@@ -64,6 +65,7 @@
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
     <EmbeddedResource Include="Resources\BuildDate.txt" />
+    <EmbeddedResource Include="Resources\MDText\DemoText.md" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />
@@ -263,6 +265,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\ChartControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\MarkdownControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\TimelineControlsUC.xaml.cs">

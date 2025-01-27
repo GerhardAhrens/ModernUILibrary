@@ -108,4 +108,23 @@
         <Setter Property="StrokeThickness" Value="2" />
         <Setter Property="StrokeDashArray" Value="2 2" />
     </Style>
+
+    <Style x:Key="TableStyle" TargetType="Table">
+        <Setter Property="CellSpacing" Value="0" />
+        <Setter Property="BorderThickness" Value="0.5" />
+        <Setter Property="BorderBrush" Value="Gray" />
+        <Style.Resources>
+            <Style TargetType="TableCell">
+                <Setter Property="BorderThickness" Value="0.5" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Padding" Value="2" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="TableHeaderStyle" TargetType="TableRowGroup">
+        <Setter Property="FontWeight" Value="DemiBold" />
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+
 </ResourceDictionary>
