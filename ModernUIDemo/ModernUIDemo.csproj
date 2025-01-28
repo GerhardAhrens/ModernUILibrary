@@ -70,6 +70,7 @@
     <EmbeddedResource Include="Resources\MDText\sampleimage.jpg" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Console_Table.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
     <EmbeddedResource Include="Resources\Source\CoreBase\CoreBase_SmartSettings.txt" />
@@ -81,7 +82,10 @@
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_Override_Methode.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_Callback_Function.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_IsCollection.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StringBasedEnums.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StaticClassWithExtension.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_WeakEvent.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\WeakEventManager.txt" />
     <EmbeddedResource Include="Resources\Source\ExpressionEvaluator\Core_ExpressionEvaluator.txt" />
     <EmbeddedResource Include="Resources\Source\IO\File_TarFile.txt" />
     <EmbeddedResource Include="Resources\Source\Media\Media_PlayWAV_Sound.txt" />

@@ -1,0 +1,80 @@
+﻿namespace Console.StringBasedEnums
+{
+    using System;
+    using System.ComponentModel;
+    using System.Runtime.Serialization;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            Roles currentRole = Roles.Admin;
+            Roles teamLeadRole = Roles.TeamLead;
+            string descTL = GetDescription(teamLeadRole);
+            Console.WriteLine($"Role Before Conversion to string: {currentRole.ToString()}");
+
+            // Conversion Enum to string
+            string roleString = currentRole.ToString();
+            string enumToStringValue = GetEnumValue(currentRole);
+            string desc = GetDescription(currentRole);
+            Console.WriteLine($"Role After Conversion to string: {roleString}");
+
+            // Conversion string to Enum
+            var roleEnum = GetEnumFromString<Roles>(enumToStringValue);
+            Console.WriteLine($"Role After Conversion to Enum: {roleEnum}");
+
+            Console.ReadKey();
+        }
+
+
+        // Conversion string to Enum
+        public static string GetEnumValue<T>(T enumValue) where T : Enum
+        {
+            var type = enumValue.GetType();
+            var memInfo = type.GetMember(enumValue.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(EnumMemberAttribute), false);
+            return attributes.Length > 0 ? ((EnumMemberAttribute)attributes[0]).Value : string.Empty;
+        }
+
+        public static string GetDescription<T>(T enumValue) where T : Enum
+        {
+            var type = enumValue.GetType();
+            var memInfo = type.GetMember(enumValue.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return attributes.Length > 0 ? ((DescriptionAttribute)attributes[0]).Description : string.Empty;
+        }
+
+        // Conversion Enum to string
+        public static T GetEnumFromString<T>(string value) where T : Enum
+        {
+            var type = typeof(T);
+            foreach (var field in type.GetFields())
+            {
+                var attribute = Attribute.GetCustomAttribute(field, typeof(EnumMemberAttribute)) as EnumMemberAttribute;
+                if (attribute != null && attribute.Value == value)
+                {
+                    return (T)field.GetValue(null);
+                }
+            }
+
+            throw new ArgumentException($"Unknown value: {value}");
+        }
+    }
+
+    [DataContract]
+    public enum Roles
+    {
+        [Description("Administrator")]
+        [EnumMember(Value = "Admin")]
+        Admin,
+
+        [EnumMember(Value = "Developer")]
+        Developer,
+
+        [EnumMember(Value = "Manager")]
+        Manager,
+
+        [EnumMember(Value = "TeamLead")]
+        TeamLead
+    }
+}

@@ -253,9 +253,37 @@ namespace DemoDataGeneratorLib.Base
             /* alert-circle */
             "M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z",
             /* Database */
-            "M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"
+            "M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z",
             /* Calendar */
             "M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1"
+        };
+
+        private static readonly string[] isbn13Number =
+ {
+            "978-5-1781-5937-8",
+            "978-0-4380-0455-9",
+            "978-6-6125-0040-4",
+            "978-4-8427-6833-5",
+            "978-5-0449-4343-8",
+            "978-0-3503-8226-1",
+            "978-5-2726-4417-6",
+            "978-1-4923-5117-7",
+            "978-1-7999-2467-8",
+            "978-0-7402-1301-4",
+            "978-2-3910-5992-8",
+            "978-3-4659-2938-3",
+            "978-9-3124-2684-5",
+            "978-8-3155-3191-4",
+            "978-1-6083-0841-5",
+            "978-7-3142-0055-5",
+            "978-4-6346-2792-5",
+            "978-0-5034-2790-0",
+            "978-3-7718-0454-1",
+            "978-8-6667-8218-8",
+            "978-1-8317-4415-8",
+            "978-9-9877-0412-5",
+            "978-4-4115-1452-3",
+            "978-2-1244-9853-6"
         };
 
         private static readonly Random rnd;
@@ -505,6 +533,23 @@ namespace DemoDataGeneratorLib.Base
         public static string CurrencyText()
         {
             return currencyInfo[rnd.Next(currencyInfo.Length)];
+        }
+
+        public static string ISBN13()
+        {
+            return isbn13Number[rnd.Next(isbn13Number.Length)];
+        }
+
+        public static string IpAddress()
+        {
+            return $"{rnd.Next(1, 255)}.{rnd.Next(0, 255)}.{rnd.Next(0, 255)}.{rnd.Next(0, 255)}";
+        }
+
+        public static string MacAddress()
+        {
+            var buffer = new byte[6];
+            rnd.NextBytes(buffer);
+            return string.Join(':', buffer.Select(x => x.ToString("X2")));
         }
 
         public static (DateTime CreateOn, string CreateBy, DateTime ModifiedOn, string ModifiedBy) SetTimeStamp()

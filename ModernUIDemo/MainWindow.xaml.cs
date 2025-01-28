@@ -347,6 +347,7 @@
             this.tabItemSource.Add(new TabControlItem("Console ", true));
             this.tabItemSource.Add(new TabControlItem("CommandLine", new SyntaxBoxControlsUC()) { Stichworte = "Console;CommandLine", SourceFile = "Console.Console_CommandLine.txt" });
             this.tabItemSource.Add(new TabControlItem("Spinner", new SyntaxBoxControlsUC()) { Stichworte = "Console;Spinner", SourceFile = "Console.Console_Spinner.txt" });
+            this.tabItemSource.Add(new TabControlItem("Table", new SyntaxBoxControlsUC()) { Stichworte = "Console;Table", SourceFile = "Console.Console_Table.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
@@ -358,12 +359,15 @@
 
             this.tabItemSource.Add(new TabControlItem("C# Technik ", true));
             this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
-            this.tabItemSource.Add(new TabControlItem("WeakEvent", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
+            this.tabItemSource.Add(new TabControlItem("WeakEvent 1", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
+            this.tabItemSource.Add(new TabControlItem("WeakEvent 2", new SyntaxBoxControlsUC()) { Stichworte = "C#;WeakEventManager;Event", SourceFile = "CSharp.WeakEventManager.txt" });
             this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });
             this.tabItemSource.Add(new TabControlItem("Override Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Override Methode", SourceFile = "CSharp.CSharp_Override_Methode.txt" });
             this.tabItemSource.Add(new TabControlItem("Callback Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Callback Methode", SourceFile = "CSharp.CSharp_Callback_Function.txt" });
             this.tabItemSource.Add(new TabControlItem("Compare Objects", new SyntaxBoxControlsUC()) { Stichworte = "C#;Compare", SourceFile = "Object.CSharp_CompareObjects.txt" });
             this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
+            this.tabItemSource.Add(new TabControlItem("StringBasedEnums", new SyntaxBoxControlsUC()) { Stichworte = "C#;Enum", SourceFile = "CSharp.CSharp_StringBasedEnums.txt" });
+            this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Network ", true));
             this.tabItemSource.Add(new TabControlItem("Network-Ping", new SyntaxBoxControlsUC()) { Stichworte = "C#;Network;Ping", SourceFile = "Network.CSharp_Network_Ping.txt" });

@@ -1,0 +1,158 @@
+﻿namespace ConsoleTable
+{
+    using System;
+
+    using EasyPrototypingNET.Console;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            do
+            {
+                ConsoleHelper.ClearScreen();
+                ConsoleHelper.WriteLine("1. Demo 1, Format Default-Table", ConsoleColor.Green);
+                ConsoleHelper.WriteLine("2. Demo 2, Format MarkDown-Table", ConsoleColor.Green);
+                ConsoleHelper.WriteLine("3. Demo 3, Format Alternative-Table", ConsoleColor.Green);
+                ConsoleHelper.WriteLine("4. Demo 3, Format Minimal-Table", ConsoleColor.Green);
+                ConsoleHelper.WriteLine("5. Demo 5, Nur Tabellenkopf", ConsoleColor.Blue);
+                ConsoleHelper.WriteLine("6. Demo 6, Komplex mit Klasse", ConsoleColor.Yellow);
+                ConsoleHelper.WriteLine("X. Beenden", ConsoleColor.Yellow);
+
+                ConsoleKey key = ConsoleHelper.Wait("Wählen Sie [1-0] oder 'X' für Ende", ConsoleColor.Red);
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        Demo01();
+                    }
+                    else if (key == ConsoleKey.D2)
+                    {
+                        Demo02();
+                    }
+                    else if (key == ConsoleKey.D3)
+                    {
+                        Demo03();
+                    }
+                    else if (key == ConsoleKey.D4)
+                    {
+                        Demo04();
+                    }
+                    else if (key == ConsoleKey.D5)
+                    {
+                        Demo05();
+                    }
+                    else if (key == ConsoleKey.D6)
+                    {
+                        Demo06();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void Demo01()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var table = new ConsoleTable("one", "two", "three");
+            table.AddRow(1, 2, 3)
+                 .AddRow("this line should be longer", "yes it is", "oh");
+
+            Console.WriteLine("\nFORMAT: Default:\n");
+            table.Write();
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+
+        private static void Demo02()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var table = new ConsoleTable("one", "two", "three");
+            table.AddRow(1, 2, 3)
+                 .AddRow("this line should be longer", "yes it is", "oh");
+
+            Console.WriteLine("\nFORMAT: MarkDown:\n");
+            table.Write(ConsoleTableFormat.MarkDown);
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+
+        private static void Demo03()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var table = new ConsoleTable("one", "two", "three");
+            table.AddRow(1, 2, 3)
+                 .AddRow("this line should be longer", "yes it is", "oh");
+
+            Console.WriteLine("\nFORMAT: Alternative:\n");
+            table.Write(ConsoleTableFormat.Alternative);
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+
+        private static void Demo04()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var table = new ConsoleTable("one", "two", "three");
+            table.AddRow(1, 2, 3)
+                 .AddRow("this line should be longer", "yes it is", "oh");
+
+            Console.WriteLine("\nFORMAT: Minimal:\n");
+            table.Write(ConsoleTableFormat.Minimal);
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+
+        private static void Demo05()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var table = new ConsoleTable("Header 1", "Header 2", "Header 3");
+            table.Options.EnableCount = false;
+            table.Write();
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+
+        private static void Demo06()
+        {
+            ConsoleHelper.ClearScreen();
+
+            var noCount = new ConsoleTable(new ConsoleTableOptions
+            {
+                Columns = new[] { "TotalLine", "LineOfCode", "Total Class", "Abstract Class", "Enum", "Interface" },
+                EnableCount = false
+            });
+
+            int totalLine = 100000;
+            int lineOfCode = 90000;
+            int totalClass = 300;
+            int abstractClassCount = 4;
+            int enumCount = 7;
+            int interfaceCount = 5;
+            noCount.AddRow(totalLine.ToString("N0"), lineOfCode.ToString("N0"), totalClass.ToString("N0"), abstractClassCount.ToString("N0"), enumCount.ToString("N0"), interfaceCount.ToString("N0")).Write();
+
+            ConsoleHelper.Wait("Eine Taste für zurück");
+        }
+    }
+
+    public class ProjectSum
+    {
+        public ProjectSum()
+        {
+
+        }
+
+        public int TotalLine { get; set; }
+
+        public int LineOfCode { get; set; }
+    }
+}

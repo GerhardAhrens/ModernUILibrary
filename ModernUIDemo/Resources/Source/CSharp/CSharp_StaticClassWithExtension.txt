@@ -1,0 +1,125 @@
+﻿namespace Console.StaticClassWithExtension
+{
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
+    using System.Windows.Forms;
+    using System.Xml.Linq;
+
+    using EasyPrototypingNET.Core;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. Menüpunkt 1");
+                Console.WriteLine("2. Menüpunkt 2");
+                Console.WriteLine("X. Beenden");
+
+                Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
+                ConsoleKey key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        MenuPoint1();
+                    }
+                    else if (key == ConsoleKey.D2)
+                    {
+                        MenuPoint2();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void MenuPoint1()
+        {
+            Console.Clear();
+
+            ResultInfo<string> result = DemoBuilder.Build<string>().ToUpper();
+
+            ConsoleHelper.Wait();
+        }
+
+        private static void MenuPoint2()
+        {
+            Console.Clear();
+            Console.WriteLine("Menüpunkt 2, eine Taste drücken für zurück!");
+            ConsoleHelper.Wait();
+        }
+    }
+
+    public static class DemoBuilder
+    {
+        [return: NotNull]
+        public static ResultInfo<T> Build<T>() where T : notnull
+        {
+            string setValue = "Hello Gerhard";
+
+            T value = (T)Convert.ChangeType(setValue, typeof(T));
+            return new ResultInfo<T>(ResultState.Success, value, nameof(setValue),string.Empty);
+        }
+
+        [return: NotNull]
+        public static ResultInfo<T> Build<T>([NotNull] T value, [CallerArgumentExpression(nameof(value))] string name = null) where T : notnull
+        {
+            return new ResultInfo<T>(ResultState.Success, value, name, string.Empty);
+        }
+    }
+
+    public ref struct ResultInfo<T> where T : notnull
+    {
+        public ResultInfo(ResultState state, T value, string name, string message)
+        {
+            this.State = state;
+            this.Value = value;
+            this.Name = name;
+            this.Message = message;
+        }
+
+        public ResultInfo(ResultState state, T value)
+        {
+            this.State = state;
+            this.Value = value;
+            this.Name = string.Empty;
+            this.Message = string.Empty;
+        }
+
+        public readonly ResultState State { get; }
+
+        public T Value { get; set; }
+
+        public readonly string Name { get; }
+
+        public readonly string Message { get; }
+    }
+
+    public enum ResultState
+    { 
+        None = 0, 
+        Success = 1, 
+        Failure = 2
+    }
+
+    internal static class StringResultInfoExtensions
+    {
+        public static ResultInfo<string> ToUpper(this ResultInfo<string> argInfo)
+        {
+            if (argInfo.Value.Length > 0)
+            {
+                argInfo.Value = argInfo.Value.ToUpper();
+                return argInfo;
+            }
+
+            throw new ArgumentException("String darf nicht leer sein", argInfo.Name);
+        }
+    }
+}
