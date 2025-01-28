@@ -24,11 +24,11 @@
                         BorderBrush="{StaticResource SolidBorderBrush}"
                         BorderThickness="1"
                         CornerRadius="4">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Path=Caption}" />
-                            <Label>:</Label>
-                            <Label Content="{Binding Path=Value}" />
-                        </StackPanel>
+                        <TextBlock>
+                            <Run Text="{Binding Path=Caption, UpdateSourceTrigger=PropertyChanged}" />
+                            <Run Text=":" />
+                            <Run Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="true">
