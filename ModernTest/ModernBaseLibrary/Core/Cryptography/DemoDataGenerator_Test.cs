@@ -63,7 +63,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
             Assert.AreEqual(users.Count(), 100);
         }
 
-        private UserTestGenerator ConfigObject(UserTestGenerator user)
+        private UserTestGenerator ConfigObject(UserTestGenerator user, int counter)
         {
             user.UserName = BuildDemoData.LastName();
 
@@ -83,7 +83,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
             Assert.AreEqual(users.Count(), 100);
         }
 
-        private UserTestGenerator ConfigObjectSetTimeStamp(UserTestGenerator user)
+        private UserTestGenerator ConfigObjectSetTimeStamp(UserTestGenerator user, int counter)
         {
             var timeStamp = BuildDemoData.SetTimeStamp();
             user.CreateOn = timeStamp.CreateOn;

@@ -86,6 +86,9 @@
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StaticClassWithExtension.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_WeakEvent.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\WeakEventManager.txt" />
+    <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTableDemo.txt" />
+    <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTable.txt" />
+    <EmbeddedResource Include="Resources\Source\Data\CSharp_DataTable.txt" />
     <EmbeddedResource Include="Resources\Source\ExpressionEvaluator\Core_ExpressionEvaluator.txt" />
     <EmbeddedResource Include="Resources\Source\IO\File_TarFile.txt" />
     <EmbeddedResource Include="Resources\Source\Media\Media_PlayWAV_Sound.txt" />

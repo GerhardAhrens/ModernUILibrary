@@ -1,0 +1,186 @@
+﻿namespace Console.CustomDataRow
+{
+    using System;
+    using System.Data;
+    using System.Reflection;
+
+    public delegate void MyDataRowChangedDlgt(MyDataTable sender, MyDataRowChangedEventArgs args);
+
+    public class MyDataRowChangedEventArgs
+    {
+        protected DataRowAction action;
+        protected MyDataRow row;
+
+        public DataRowAction Action
+        {
+            get { return action; }
+        }
+
+        public MyDataRow Row
+        {
+            get { return row; }
+        }
+
+        public MyDataRowChangedEventArgs(DataRowAction action, MyDataRow row)
+        {
+            this.action = action;
+            this.row = row;
+        }
+    }
+
+    public class MyDataTable : DataTable
+    {
+        public event MyDataRowChangedDlgt MyDataRowChanged;
+
+        public MyDataTable()
+        {
+            PropertyInfo[] piArray = this.GetRowType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            foreach (PropertyInfo pinfo in piArray)
+            {
+                if (pinfo.DeclaringType.Name == this.GetRowType().Name)
+                {
+                    base.Columns.Add(new DataColumn(pinfo.Name, pinfo.PropertyType));
+                }
+            }
+        }
+
+        public MyDataRow this[int idx]
+        {
+            get 
+            {
+                return (MyDataRow)base.Rows[idx]; 
+            }
+        }
+
+        public int Count
+        {
+            get { return base.Rows.Count; }
+        }
+
+        public void Add(MyDataRow row)
+        {
+            base.Rows.Add(row);
+        }
+
+        public void Remove(MyDataRow row)
+        {
+            base.Rows.Remove(row);
+        }
+
+        public MyDataRow GetNewRow()
+        {
+            MyDataRow row = (MyDataRow)NewRow();
+
+            return row;
+        }
+
+        public MyDataRow Clone(int rowPos, bool newId = false)
+        {
+            MyDataRow row = (MyDataRow)NewRow();
+            row.ItemArray = base.Rows[rowPos].ItemArray;
+            if (newId == true)
+            {
+                row.SetField<Guid>("Id", Guid.NewGuid());
+            }
+
+            base.Rows.Add(row);
+            base.AcceptChanges();
+            return row;
+        }
+
+        public MyDataRow Clone(MyDataRow rowOriginal, bool newId = false)
+        {
+            MyDataRow row = (MyDataRow)NewRow();
+            row.ItemArray = rowOriginal.ItemArray;
+            if (newId == true)
+            {
+                row.SetField<Guid>("Id", Guid.NewGuid());
+            }
+
+            base.Rows.Add(row);
+            base.AcceptChanges();
+            return row;
+        }
+
+        protected override Type GetRowType()
+        {
+            return typeof(MyDataRow);
+        }
+
+        protected override DataRow NewRowFromBuilder(DataRowBuilder builder)
+        {
+            return new MyDataRow(builder);
+        }
+
+        protected override void OnRowChanged(DataRowChangeEventArgs e)
+        {
+            base.OnRowChanged(e);
+            MyDataRowChangedEventArgs args = new MyDataRowChangedEventArgs(e.Action, (MyDataRow)e.Row);
+            OnMyDataRowRowChanged(args);
+        }
+
+        protected virtual void OnMyDataRowRowChanged(MyDataRowChangedEventArgs args)
+        {
+            if (this.MyDataRowChanged != null)
+            {
+                this.MyDataRowChanged(this, args);
+            }
+        }
+    }
+
+    public class MyDataRow : DataRow
+    {
+        public Guid Id
+        {
+            get { return (Guid)base["Id"]; }
+            set { base["Id"] = value; }
+        }
+
+        public string TextTyp
+        {
+            get { return (string)base["TextTyp"]; }
+            set { base["TextTyp"] = value; }
+        }
+
+        public DateTime DatumTyp
+        {
+            get { return (DateTime)base["DatumTyp"]; }
+            set { base["DatumTyp"] = value; }
+        }
+
+        public double DoubleTyp
+        {
+            get { return (double)base["DoubleTyp"]; }
+            set { base["DoubleTyp"] = value; }
+        }
+
+        public decimal DecimalTyp
+        {
+            get { return (decimal)base["DecimalTyp"]; }
+            set { base["DecimalTyp"] = value; }
+        }
+
+        public int IntTyp
+        {
+            get { return (int)base["IntTyp"]; }
+            set { base["IntTyp"] = value; }
+        }
+
+        public int NullIntTyp
+        {
+            get { return (int)base["NullIntTyp"]; }
+            set { base["NullIntTyp"] = value; }
+        }
+
+        internal MyDataRow(DataRowBuilder builder) : base(builder)
+        {
+            this.Id = Guid.NewGuid();
+            this.TextTyp = string.Empty;
+            this.DatumTyp = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.DoubleTyp = 0.0;
+            this.DecimalTyp = 0.0M;
+            this.IntTyp = 0;
+            this.NullIntTyp = int.MinValue;
+        }
+    }
+}

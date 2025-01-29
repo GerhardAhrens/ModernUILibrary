@@ -77,6 +77,11 @@
             get { return this.TestContext.TestName; }
         }
 
+        protected virtual void Trace(object message, params object[] args)
+        {
+            System.Diagnostics.Trace.WriteLine(string.Format(message.ToString(), args));
+        }
+
         protected virtual void Trace(object message)
         {
             System.Diagnostics.Trace.WriteLine(message);

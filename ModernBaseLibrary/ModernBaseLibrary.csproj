@@ -140,6 +140,8 @@
     <Folder Include="Data\LinqToFile\Flat\" />
     <Folder Include="Data\ExcelCsv\" />
     <Folder Include="Data\ExcelWriter\" />
+    <Folder Include="Data\EnumerableDataReader\" />
+    <Folder Include="Extensions\System.Data\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />

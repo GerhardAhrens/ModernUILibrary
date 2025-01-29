@@ -375,6 +375,11 @@
             this.tabItemSource.Add(new TabControlItem("IO ", true));
             this.tabItemSource.Add(new TabControlItem("TarFile", new SyntaxBoxControlsUC()) { Stichworte = "C#;File;Compressed", SourceFile = "IO.File_TarFile.txt" });
 
+            this.tabItemSource.Add(new TabControlItem("Data ", true));
+            this.tabItemSource.Add(new TabControlItem("DataTable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_DataTable.txt" });
+            this.tabItemSource.Add(new TabControlItem("Custom DataTable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_CustomDataTable.txt" });
+            this.tabItemSource.Add(new TabControlItem("Custom DataTable Demo", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_CustomDataTableDemo.txt" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
