@@ -34,10 +34,10 @@
         /// <param name="value1"></param>
         public ChartRow(string caption, double value)
         {
-            _caption = caption;
-            _value = value;
-            _id = Guid.NewGuid();
-            _chartBrush = new SolidColorBrush(ColorGenerator.Instance.GetNext());
+            this._caption = caption;
+            this._value = value;
+            this._id = Guid.NewGuid();
+            this._chartBrush = new SolidColorBrush(ColorGenerator.Instance.GetNext());
         }
 
         /// <summary>
@@ -49,10 +49,10 @@
         /// <param name="chartBrush"></param>
         public ChartRow(string caption, double value, Brush chartBrush)
         {
-            _caption = caption;
-            _chartBrush = chartBrush;
-            _id = Guid.NewGuid();
-            _value = value;
+            this._caption = caption;
+            this._chartBrush = chartBrush;
+            this._id = Guid.NewGuid();
+            this._value = value;
         }
 
         /// <summary>
@@ -63,10 +63,10 @@
         /// <param name="value"></param>
         public ChartRow(string caption, double value, Color color)
         {
-            _caption = caption;
-            _value = value;
-            _id = Guid.NewGuid();
-            _chartBrush = new SolidColorBrush(color);
+            this._caption = caption;
+            this._value = value;
+            this._id = Guid.NewGuid();
+            this._chartBrush = new SolidColorBrush(color);
         }
 
         #endregion Constructors
@@ -79,11 +79,11 @@
         /// <value>The caption.</value>
         public string Caption
         {
-            get { return _caption; }
+            get { return this._caption; }
             set
             {
-                _caption = value;
-                OnPropertyChanged();
+                this._caption = value;
+                base.OnPropertyChanged();
             }
         }
 
@@ -93,11 +93,11 @@
         /// <value>The chart brush.</value>
         public Brush ChartBrush
         {
-            get { return _chartBrush; }
+            get { return this._chartBrush; }
             set
             {
-                _chartBrush = value;
-                OnPropertyChanged();
+                this._chartBrush = value;
+                base.OnPropertyChanged();
             }
         }
 
@@ -107,7 +107,7 @@
         /// <value>The id.</value>
         public Guid Id
         {
-            get { return _id; }
+            get { return this._id; }
         }
 
         /// <summary>
@@ -116,11 +116,11 @@
         /// <value>The value.</value>
         public double Value
         {
-            get { return _value; }
+            get { return this._value; }
             set
             {
-                _value = value;
-                OnPropertyChanged();
+                this._value = value;
+                base.OnPropertyChanged();
             }
         }
 

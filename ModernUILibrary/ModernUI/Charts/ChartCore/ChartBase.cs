@@ -1,7 +1,5 @@
 ﻿namespace ModernIU.Controls.Chart
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -9,7 +7,6 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Media;
-
 
     public class ChartBase : Control
     {
@@ -28,13 +25,13 @@
             DependencyProperty.Register("ChartBackgroundCornerRadius", typeof(CornerRadius), typeof(ChartBase), new PropertyMetadata(new CornerRadius(3, 3, 0, 0)));
 
         public static readonly DependencyProperty ChartBackgroundProperty =
-            DependencyProperty.Register("ChartBackground", typeof(Brush), typeof(ChartBase),new PropertyMetadata(Brushes.White));
+            DependencyProperty.Register("ChartBackground", typeof(Brush), typeof(ChartBase), new PropertyMetadata(Brushes.White));
 
         public static readonly DependencyProperty ChartBorderColorProperty =
             DependencyProperty.Register("ChartBorderColor", typeof(Brush), typeof(ChartBase), new PropertyMetadata(Brushes.Gray));
 
         public static readonly DependencyProperty ChartBorderThicknessProperty =
-            DependencyProperty.Register("ChartBorderThickness", typeof(Thickness),typeof(ChartBase), new PropertyMetadata(new Thickness(0.5, 0.5, 0.5, 0.5)));
+            DependencyProperty.Register("ChartBorderThickness", typeof(Thickness), typeof(ChartBase), new PropertyMetadata(new Thickness(0.5, 0.5, 0.5, 0.5)));
 
         public static readonly DependencyProperty ChartColorMouseOverProperty =
             DependencyProperty.Register("ChartColorMouseOver", typeof(Brush), typeof(ChartBase), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
@@ -43,7 +40,7 @@
             DependencyProperty.Register("ChartColor", typeof(Brush), typeof(ChartBase), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
 
         public static readonly DependencyProperty ChartLegendProperty =
-            DependencyProperty.Register("ChartLegend", typeof(ObservableCollection<ChartLegendItem>),typeof(ChartBase), new PropertyMetadata(null));
+            DependencyProperty.Register("ChartLegend", typeof(ObservableCollection<ChartLegendItem>), typeof(ChartBase), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ChartLegendVisibilityProperty =
             DependencyProperty.Register("ChartLegendVisibility", typeof(Visibility), typeof(ChartBase), new PropertyMetadata(Visibility.Visible));
@@ -69,7 +66,7 @@
 
         #endregion Fields
 
-            #region Constructors
+        #region Constructors
 
         public ChartBase()
         {

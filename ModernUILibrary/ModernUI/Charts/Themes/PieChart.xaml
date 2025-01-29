@@ -1,16 +1,53 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:ModernIU.Converters"
-    xmlns:MUI="clr-namespace:ModernIU.Controls.Chart">
-
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Charts/Themes/ChartToolTip.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+    xmlns:MUI="clr-namespace:ModernIU.Controls.Chart"
+    xmlns:converters="clr-namespace:ModernIU.Converters">
 
     <converters:PieChartHeightConverter x:Key="pieChartHeightConverter" />
     <converters:PieChartWidthConverter x:Key="pieChartWidthConverter" />
     <converters:PieChartCenterConverter x:Key="pieChartCenterConverter" />
+
+    <LinearGradientBrush x:Key="LightBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Offset="0.0" Color="#FFF" />
+                <GradientStop Offset="1.0" Color="#EEE" />
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+
+    <Style x:Key="toolTipStyle" TargetType="ToolTip">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border
+                        Name="Border"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{StaticResource LightBrush}"
+                        BorderBrush="{StaticResource SolidBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <TextBlock>
+                            <Run Text="{Binding Path=Caption, UpdateSourceTrigger=PropertyChanged}" />
+                            <Run Text=":" />
+                            <Run Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow" Value="true">
+                            <Setter TargetName="Border" Property="CornerRadius" Value="4" />
+                            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type MUI:PieChart}">
         <Setter Property="Template">
@@ -28,7 +65,7 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            
+
                             <Label
                                 Grid.Row="0"
                                 HorizontalAlignment="Center"
@@ -37,7 +74,7 @@
                                     <Binding Path="Caption" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type MUI:PieChart}, AncestorLevel=1}" />
                                 </Label.Content>
                             </Label>
-                            
+
                             <ItemsControl
                                 x:Name="itemsControl"
                                 Grid.Row="1"
@@ -84,11 +121,13 @@
                                         <StackPanel Orientation="Horizontal">
                                             <Rectangle
                                                 Width="20"
-                                                Height="10"
+                                                Height="Auto"
                                                 Fill="{Binding Path=ItemBrush}"
                                                 Stroke="Black"
                                                 StrokeThickness="0.5" />
-                                            <Label Content="{Binding Path=Caption}" />
+                                            <TextBlock Margin="2,0,5,0" TextWrapping="Wrap">
+                                                <Run Text="{Binding Path=Caption}" />
+                                            </TextBlock>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

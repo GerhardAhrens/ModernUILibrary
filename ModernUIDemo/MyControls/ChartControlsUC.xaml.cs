@@ -149,20 +149,24 @@
 
         private void PreparePieChart()
         {
-            this.PieRows.Add(new ChartRow("Pie-Value 1", 20, Colors.Green));
-            this.PieRows.Add(new ChartRow("Pie-Value 2", 10, Colors.Violet));
-            this.PieRows.Add(new ChartRow("Pie-Value 3", 30, Colors.Red));
-            this.PieRows.Add(new ChartRow("Pie-Value 4", 5, Colors.Yellow));
-            this.PieRows.Add(new ChartRow("Pie-Value 5", 30, Colors.DarkOrange));
-            this.PieRows.Add(new ChartRow("Pie-Value 6", 15, Colors.LawnGreen));
+            this.PieRows.Add(new ChartRow("2024", 11553, Colors.Green));
+            this.PieRows.Add(new ChartRow("2023", 13263, Colors.YellowGreen));
+            this.PieRows.Add(new ChartRow("2022", 12223, Colors.Red));
+            this.PieRows.Add(new ChartRow("2021", 16670, Colors.Yellow));
+            this.PieRows.Add(new ChartRow("2020", 14031, Colors.Blue));
+            this.PieRows.Add(new ChartRow("2019", 17916, Colors.Orange));
+            this.PieRows.Add(new ChartRow("2018", 13413, Colors.Violet));
+            this.PieRows.Add(new ChartRow("2017", 20987, Colors.Turquoise));
 
             this.PieLegend.Clear();
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 1", Colors.Green));
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 2", Colors.Violet));
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 3", Colors.Red));
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 4", Colors.Yellow));
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 5", Colors.DarkOrange));
-            this.PieLegend.Add(new ChartLegendItem("Pie-Value 6", Colors.LawnGreen));
+            this.PieLegend.Add(new ChartLegendItem($"2024\n{11553.ToString("N0")}", Colors.Green));
+            this.PieLegend.Add(new ChartLegendItem($"2023\n{13263.ToString("N0")}", Colors.YellowGreen));
+            this.PieLegend.Add(new ChartLegendItem($"2022\n{12223.ToString("N0")}", Colors.Red));
+            this.PieLegend.Add(new ChartLegendItem($"2021\n{16670.ToString("N0")}", Colors.Yellow));
+            this.PieLegend.Add(new ChartLegendItem($"2020\n{14031.ToString("N0")}", Colors.Blue));
+            this.PieLegend.Add(new ChartLegendItem($"2019\n{17916.ToString("N0")}", Colors.Orange));
+            this.PieLegend.Add(new ChartLegendItem($"2018\n{13413.ToString("N0")}", Colors.Violet));
+            this.PieLegend.Add(new ChartLegendItem($"2017\n{20987.ToString("N0")}", Colors.Turquoise));
         }
 
         private void PrepareStackedChart()
@@ -200,12 +204,14 @@
         {
             TreeMapItems = new ObservableCollection<TreeMapItem>
         {
-            new() { Label = "C#", Percentage = 35.0, Background = Brushes.Green },
-            new() { Label = "VB.Net", Percentage = 5.555, Background = Brushes.Green },
-            new() { Label = "WPF", Percentage = 18.3, Background = Brushes.Red },
-            new() { Label = "JavaScript", Percentage = 15.7, Background = Brushes.Yellow },
-            new() { Label = "Java", Percentage = 8.2, Background = Brushes.Blue },
-            new() { Label = "Cobol", Percentage = 5.1, Background = Brushes.Orange }
+            new() { Label = "2024", Percentage = 11553, Background = Brushes.Green },
+            new() { Label = "2023", Percentage = 13263, Background = Brushes.YellowGreen },
+            new() { Label = "2022", Percentage = 12223, Background = Brushes.Red },
+            new() { Label = "2021", Percentage = 16670, Background = Brushes.Yellow },
+            new() { Label = "2020", Percentage = 14031, Background = Brushes.Blue },
+            new() { Label = "2019", Percentage = 17916, Background = Brushes.Orange },
+            new() { Label = "2018", Percentage = 13413, Background = Brushes.Violet },
+            new() { Label = "2017", Percentage = 20987, Background = Brushes.Turquoise }
         };
         }
 

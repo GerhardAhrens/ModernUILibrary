@@ -192,7 +192,7 @@
                 context.LineTo(outerStartPoint, true, true);
                 context.ArcTo(outerEndPoint, outerSize, 0, isLarge, SweepDirection.Clockwise, true, true);
 
-                this.ToolTip = this.Caption;
+                this.ToolTip = $"{this.Caption}:{this.Value}";
 
             }
         }
@@ -254,7 +254,10 @@
                 if (item is ChartRow)
                 {
                     ChartRow row = item as ChartRow;
-                    if (row.Id == Id) { result = row; }
+                    if (row.Id == Id)
+                    { 
+                        result = row; 
+                    }
                 }
             }
 
