@@ -65,11 +65,6 @@
                         SnapsToDevicePixels="True"
                         UseLayoutRounding="True">
                         <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
-                            <Button
-                                x:Name="BtnCallHotKey"
-                                Width="100"
-                                Content="Hote Keys" />
-
                             <TextBlock
                                 FontSize="16"
                                 Foreground="#FFF"

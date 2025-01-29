@@ -283,6 +283,9 @@
     <Compile Update="MyControls\FactoryControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\HotKeyControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TimelineControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

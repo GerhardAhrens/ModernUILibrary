@@ -101,6 +101,8 @@
     <Folder Include="ModernUI\Tree\Themes\" />
     <Folder Include="ModernUI\Window\Themes\" />
     <Folder Include="Themes\Primitives\" />
+    <Folder Include="WPF\CustomBinding\" />
+    <Folder Include="WPF\EnumBindingSource\" />
   </ItemGroup>
 
   <ItemGroup>

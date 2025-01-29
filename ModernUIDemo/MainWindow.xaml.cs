@@ -223,6 +223,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Menü", true));
             this.tabItemSource.Add(new TabControlItem("SwitchMenu Controls", new SwitchMenuControlsUC()) { Stichworte = "SwitchMenu;Menü;Button" });
+            this.tabItemSource.Add(new TabControlItem("Hotkey, CustomBinding", new HotKeyControlsUC()) { Stichworte = "HotKey;Menü" });
 
             this.tabItemSource.Add(new TabControlItem("Grafik", true));
             this.tabItemSource.Add(new TabControlItem("Lesen SVG", new GraphicsControlsUC()) { Stichworte = "Grafik;SVG" });
