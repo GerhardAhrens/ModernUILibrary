@@ -140,6 +140,7 @@
     <Folder Include="Data\ExcelCsv\" />
     <Folder Include="Data\ExcelWriter\" />
     <Folder Include="Data\EnumerableDataReader\" />
+    <Folder Include="Data\VCard\" />
     <Folder Include="Extensions\System.Data\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
@@ -183,6 +184,7 @@
     <Folder Include="Graphics\SvgToXaml\" />
     <Folder Include="CustomDataTypes\" />
     <Folder Include="Network\SmtpMail\" />
+    <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
     <Folder Include="TextAnalysis\Template\" />
     <Folder Include="TextAnalysis\StringTokenizer\" />

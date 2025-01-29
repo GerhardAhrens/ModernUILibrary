@@ -296,6 +296,9 @@
             this.tabItemSource.Add(new TabControlItem($"Spiel", true));
             this.tabItemSource.Add(new TabControlItem("Tic Tac Toe", new GamesControlsUC()) { Stichworte = "Spiel;Tic Tac Toe" });
 
+            this.tabItemSource.Add(new TabControlItem($"C#, Methoden/Funktionen", true));
+            this.tabItemSource.Add(new TabControlItem("Factory/Handler", new FactoryControlsUC()) { Stichworte = "C#;Pattern" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
@@ -368,6 +371,7 @@
             this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
             this.tabItemSource.Add(new TabControlItem("StringBasedEnums", new SyntaxBoxControlsUC()) { Stichworte = "C#;Enum", SourceFile = "CSharp.CSharp_StringBasedEnums.txt" });
             this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
+            this.tabItemSource.Add(new TabControlItem("EnvironmentVariable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Environment;Variable", SourceFile = "Environment.EnvironmentVariable.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Network ", true));
             this.tabItemSource.Add(new TabControlItem("Network-Ping", new SyntaxBoxControlsUC()) { Stichworte = "C#;Network;Ping", SourceFile = "Network.CSharp_Network_Ping.txt" });

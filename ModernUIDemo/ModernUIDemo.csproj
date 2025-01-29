@@ -89,6 +89,7 @@
     <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTableDemo.txt" />
     <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTable.txt" />
     <EmbeddedResource Include="Resources\Source\Data\CSharp_DataTable.txt" />
+    <EmbeddedResource Include="Resources\Source\Environment\EnvironmentVariable.txt" />
     <EmbeddedResource Include="Resources\Source\ExpressionEvaluator\Core_ExpressionEvaluator.txt" />
     <EmbeddedResource Include="Resources\Source\IO\File_TarFile.txt" />
     <EmbeddedResource Include="Resources\Source\Media\Media_PlayWAV_Sound.txt" />
@@ -277,6 +278,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\MarkdownControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\FactoryControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\TimelineControlsUC.xaml.cs">
