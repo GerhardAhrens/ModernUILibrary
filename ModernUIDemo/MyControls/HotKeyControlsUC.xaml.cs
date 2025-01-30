@@ -7,6 +7,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Interop;
+    using System.Windows.Media;
 
     using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Extension;
@@ -17,7 +18,7 @@
     /// <summary>
     /// Interaktionslogik für HotKeyControlsUC.xaml
     /// </summary>
-    public partial class HotKeyControlsUC : UserControl, INotifyPropertyChanged
+    public partial class HotKeyControlsUC : UserControl, INotifyPropertyChanged, IFocusMover
     {
         public HotKeyControlsUC()
         {
@@ -28,12 +29,37 @@
 
         private HotKeyHost HotKeys { get; set; }
 
+        private string firstName;
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set 
+            { 
+                firstName = value; 
+                this.OnPropertyChanged();
+            }
+        }
+
+        private int age;
+
+        public int Age
+        {
+            get { return age; }
+            set { age = value; }
+        }
+
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.HotKeys = new HotKeyHost((HwndSource)HwndSource.FromVisual(App.Current.MainWindow));
             this.HotKeys.AddHotKey(new HotKeyToMessageBox("ShowMessageBox", Key.C, ModifierKeys.Alt, "Show MessageBox"));
 
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnHotkey, "Click", this.OnHotkeyClick);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusF, "Click", this.OnMoveToFHandler);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusA, "Click", this.OnMoveToAHandler);
+
+            this.txtFirstName.CaretBrush = (this.txtFirstName.CaretBrush == Brushes.Red) ? Brushes.Blue : Brushes.Red;
         }
 
         private void OnHotkeyClick(object sender, RoutedEventArgs e)
@@ -42,6 +68,16 @@
             string hotkeyList = hotKeys.ToStringAll<string>();
 
             MessageBox.Show(hotkeyList, "Liste Hotkeys");
+        }
+
+        private void OnMoveToFHandler(object sender, RoutedEventArgs e)
+        {
+            this.RaiseMoveFocus("FirstName");
+        }
+
+        private void OnMoveToAHandler(object sender, RoutedEventArgs e)
+        {
+            this.RaiseMoveFocus("Age");
         }
 
         private void cbContent_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -54,6 +90,22 @@
                 //this.tbSelectetItem.Text = li.ToString();
             }
         }
+
+        #region IFocusMover Members
+
+        public event EventHandler<MoveFocusEventArgs> MoveFocus;
+
+        private void RaiseMoveFocus(string focusedProperty)
+        {
+            var handler = this.MoveFocus;
+            if (handler != null)
+            {
+                var args = new MoveFocusEventArgs(focusedProperty);
+                handler(this, args);
+            }
+        }
+
+        #endregion
 
         #region PropertyChanged Implementierung
         public event PropertyChangedEventHandler PropertyChanged;
@@ -201,7 +253,7 @@
 
             if (sender is TextBox)
             {
-                ((TextBox)sender).Text = "Beate";
+                ((TextBox)sender).Text = "Charlie";
             }
         }
 
