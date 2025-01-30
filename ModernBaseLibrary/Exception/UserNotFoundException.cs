@@ -1,5 +1,4 @@
-﻿
-namespace ModernBaseLibrary.Core
+﻿namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Collections;

@@ -22,11 +22,11 @@ namespace ModernUILibrary.AssemblyInfo
     public class AssemblyMetaInfo : IAssemblyInfo
     {
         public string PacketName => "ModernUI";
-        public Version PacketVersion => new Version(1, 0, 2024, 0);
+        public Version PacketVersion => new Version(1, 0, 2025, 10);
 
         public string AssemblyName => "ModernUILibrary";
 
-        public Version AssemblyVersion => new Version(1, 0, 2024, 10);
+        public Version AssemblyVersion => new Version(1, 0, 2025, 10);
 
         public string Description => "Bibliothek für UI Controls";
 

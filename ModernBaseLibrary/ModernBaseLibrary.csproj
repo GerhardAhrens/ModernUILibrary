@@ -49,6 +49,8 @@
     <EmbeddedResource Include="Resources\DemoDataGenerator\Currency.json" />
     <EmbeddedResource Include="Resources\DemoDataGenerator\Nachnamen.json" />
     <EmbeddedResource Include="Resources\DemoDataGenerator\Vornamen.json" />
+    <EmbeddedResource Include="Resources\Picture\ApplicationLogo.png" />
+    <EmbeddedResource Include="Resources\Picture\ECv2.ico" />
     <EmbeddedResource Include="Resources\Sound\AccessAllowedTone.wav" />
     <EmbeddedResource Include="Resources\Sound\ArabianMysteryNotification.wav" />
     <EmbeddedResource Include="Resources\Sound\ArcadeMagicNotification.wav" />

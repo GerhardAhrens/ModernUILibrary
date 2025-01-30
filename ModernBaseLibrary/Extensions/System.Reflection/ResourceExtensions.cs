@@ -31,11 +31,8 @@ namespace ModernBaseLibrary.Extension
     using System.Reflection;
     using System.Runtime.Versioning;
     using System.Text.RegularExpressions;
-    using System.Windows.Media.Imaging;
 
     using ModernBaseLibrary.Core;
-
-    using static System.Windows.Forms.DataFormats;
 
     [SupportedOSPlatform("windows")]
     public static class ResourceExtensions
@@ -47,15 +44,14 @@ namespace ModernBaseLibrary.Extension
         {
             if (UnitTestDetector.IsInUnitTest == true)
             {
-                assmbly = Assembly.GetEntryAssembly();
-                assmbly = Assembly.GetExecutingAssembly();
+                assmbly = Assembly.GetCallingAssembly();
             }
             else
             {
                 assmbly = Assembly.GetExecutingAssembly();
             }
 
-            resourceList = assmbly.GetManifestResourceNames();
+            resourceList = assmbly.GetResourceNames().ToArray();
         }
 
         public static Icon GetIconFromResource(this Bitmap @this, string pictureResource)
@@ -121,10 +117,17 @@ namespace ModernBaseLibrary.Extension
             {
                 if (string.IsNullOrEmpty(resourceName) == false)
                 {
-                    using (Stream imageStream = @this.GetManifestResourceStream(resourceName))
+                    using (Stream imageStream = assmbly.GetManifestResourceStream(resourceName))
                     {
-                        Bitmap bmpResource = new Bitmap(imageStream);
-                        return ((Image)bmpResource);
+                        if (imageStream != null)
+                        {
+                            Bitmap bmpResource = new Bitmap(imageStream);
+                            return ((Image)bmpResource);
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
 
                 }
