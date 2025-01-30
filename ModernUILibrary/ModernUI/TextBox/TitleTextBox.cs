@@ -7,6 +7,8 @@
     using System.Windows.Media;
     using System.Windows.Shapes;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernIU.Base;
     using static ModernIU.Controls.PopupEx;
 
@@ -30,6 +32,7 @@
     public class TitleTextBox : TextBox
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title" , typeof(string), typeof(TitleTextBox));
+        public static readonly DependencyProperty TitleForegroundProperty = DependencyProperty.Register("TitleForeground", typeof(Brush), typeof(TitleTextBox), new PropertyMetadata(Brushes.DarkGray));
         public static readonly DependencyProperty IsShowTitleProperty = DependencyProperty.Register("IsShowTitle", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty IsShowCounterProperty = DependencyProperty.Register("IsShowCounter", typeof(bool), typeof(TitleTextBox), new PropertyMetadata(true));
         public static readonly DependencyProperty CanClearTextProperty = DependencyProperty.Register("CanClearText", typeof(bool), typeof(TitleTextBox));
@@ -70,6 +73,12 @@
         {
             get { return (bool)GetValue(IsShowTitleProperty); }
             set { SetValue(IsShowTitleProperty, value); }
+        }
+
+        public Brush TitleForeground
+        {
+            get { return (Brush)GetValue(TitleForegroundProperty); }
+            set { SetValue(TitleForegroundProperty, value); }
         }
 
         public bool IsShowCounter
@@ -189,6 +198,13 @@
                     this.PART_TextBlock.Foreground = Brushes.Red;
                 }
             }
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            MenuItem copyMenu = (MenuItem)this.ContextMenu.Items[0];
+            copyMenu.IsEnabled = this.Text.IsNotEmpty();
+
+            MenuItem deleteMenu = (MenuItem)this.ContextMenu.Items[2];
+            deleteMenu.IsEnabled = this.Text.IsNotEmpty();
         }
 
         private void TitleTextBox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
@@ -239,9 +255,10 @@
         private ContextMenu BuildContextMenu()
         {
             ContextMenu textBoxContextMenu = new ContextMenu();
-            MenuItem copyMenu = new MenuItem();
+            MenuItem copyMenu = new MenuItem(); 
             copyMenu.Header = "Kopiere";
             copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyMenu.IsEnabled = this.Text.IsNotEmpty();
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
             textBoxContextMenu.Items.Add(copyMenu);
 
@@ -256,6 +273,7 @@
                 MenuItem deleteMenu = new MenuItem();
                 deleteMenu.Header = "Ausschneiden";
                 deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                deleteMenu.IsEnabled = this.Text.IsNotEmpty();
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
                 textBoxContextMenu.Items.Add(deleteMenu);
 

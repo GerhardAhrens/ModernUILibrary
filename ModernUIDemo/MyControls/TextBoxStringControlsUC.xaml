@@ -54,6 +54,7 @@
                 <ModernUI:TitleTextBox
                     x:Name="txtA"
                     Title="Vorname:"
+                    TitleForeground="DarkBlue"
                     Width="240"
                     CanClearText="True" />
 

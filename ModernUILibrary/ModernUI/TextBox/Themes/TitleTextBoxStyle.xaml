@@ -38,7 +38,7 @@
                     FontFamily="{TemplateBinding FontFamily}"
                     FontSize="{TemplateBinding FontSize}"
                     FontWeight="Bold"
-                    Foreground="DarkGray"
+                    Foreground="{TemplateBinding TitleForeground}"
                     Text="{TemplateBinding Title}"
                     TextDecorations="Underline"
                     Visibility="{Binding IsShowTitle, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
