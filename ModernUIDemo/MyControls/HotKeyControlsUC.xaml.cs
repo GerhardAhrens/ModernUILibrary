@@ -93,11 +93,11 @@
 
         #region IFocusMover Members
 
-        public event EventHandler<MoveFocusEventArgs> MoveFocus;
+        public event EventHandler<MoveFocusEventArgs> MoveFocusUC;
 
         private void RaiseMoveFocus(string focusedProperty)
         {
-            var handler = this.MoveFocus;
+            var handler = this.MoveFocusUC;
             if (handler != null)
             {
                 var args = new MoveFocusEventArgs(focusedProperty);
@@ -194,9 +194,9 @@
                 return;
             }
 
-            if (sender is TextBox)
+            if (sender.GetType().BaseType == typeof(TextBox))
             {
-                controlName = ((TextBox)sender).Name;
+                controlName = string.IsNullOrEmpty(((TitleTextBox)sender).Name) ? sender.GetType().Name : ((TitleTextBox)sender).Name;
             }
 
             string msg = $"Lookup key '{lookupKey}' from Control '{controlName}' was pressed";
@@ -243,9 +243,9 @@
                 return;
             }
 
-            if (sender is TextBox)
+            if (sender.GetType().BaseType == typeof(TextBox))
             {
-                controlName = ((TextBox)sender).Name;
+                controlName = string.IsNullOrEmpty(((TitleTextBox)sender).Name) ? sender.GetType().Name : ((TitleTextBox)sender).Name;
             }
 
             string msg = $"Lookup key '{lookupKey}' from Control '{controlName}' was pressed";

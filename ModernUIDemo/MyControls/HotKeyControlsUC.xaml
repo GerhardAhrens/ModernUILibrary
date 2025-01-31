@@ -72,6 +72,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:TitleTextBox
+                    x:Name="TxtNameA"
                     Title="Name (F5):"
                     Width="240"
                     Height="20"
@@ -86,6 +87,7 @@
 
             <StackPanel Margin="0,5" Orientation="Horizontal">
                 <ModernUI:TitleTextBox
+                    x:Name="TxtNameB"
                     Title="Name (F6):"
                     Width="240"
                     Height="20"

@@ -22,7 +22,7 @@
         }
 
         [TestMethod]
-        new public void ToString()
+        public void That_ToString()
         {
             int input = 100;
             string result = input.That().ToString();
