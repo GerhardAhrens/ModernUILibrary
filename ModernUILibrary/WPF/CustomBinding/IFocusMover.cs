@@ -29,7 +29,7 @@ namespace ModernIU.WPF.Base
         /// a control whose 'active' dependency property 
         /// is bound to the specified property.
         /// </summary>
-        event EventHandler<MoveFocusEventArgs> MoveFocus;
+        event EventHandler<MoveFocusEventArgs> MoveFocusUC;
     }
 
     public class MoveFocusEventArgs : EventArgs

@@ -83,7 +83,7 @@ namespace ModernIU.WPF.Base
             else
             {
                 var handler = new MoveFocusSink(element as UIElement, property);
-                focusMover.MoveFocus += handler.HandleMoveFocus;
+                focusMover.MoveFocusUC += handler.HandleMoveFocus;
                 element.SetValue(MoveFocusSinkProperty, handler);
             }
         }

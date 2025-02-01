@@ -41,6 +41,18 @@
             }
         }
 
+        private string lastName;
+
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         private int age;
 
         public int Age
@@ -58,6 +70,8 @@
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnHotkey, "Click", this.OnHotkeyClick);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusF, "Click", this.OnMoveToFHandler);
             WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusA, "Click", this.OnMoveToAHandler);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusL, "Click", this.OnMoveToFHandler);
+            WeakEventManager<FlatButton, RoutedEventArgs>.AddHandler(this.BtnMoveFocusN, "Click", this.OnMoveToLHandler);
 
             this.txtFirstName.CaretBrush = (this.txtFirstName.CaretBrush == Brushes.Red) ? Brushes.Blue : Brushes.Red;
         }
@@ -72,12 +86,17 @@
 
         private void OnMoveToFHandler(object sender, RoutedEventArgs e)
         {
-            this.RaiseMoveFocus("FirstName");
+            this.RaiseMoveFocus(nameof(this.FirstName));
+        }
+
+        private void OnMoveToLHandler(object sender, RoutedEventArgs e)
+        {
+            this.RaiseMoveFocus(nameof(this.LastName));
         }
 
         private void OnMoveToAHandler(object sender, RoutedEventArgs e)
         {
-            this.RaiseMoveFocus("Age");
+            this.RaiseMoveFocus(nameof(this.Age));
         }
 
         private void cbContent_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -93,11 +112,11 @@
 
         #region IFocusMover Members
 
-        public event EventHandler<MoveFocusEventArgs> MoveFocus;
+        public event EventHandler<MoveFocusEventArgs> MoveFocusUC;
 
         private void RaiseMoveFocus(string focusedProperty)
         {
-            var handler = this.MoveFocus;
+            var handler = this.MoveFocusUC;
             if (handler != null)
             {
                 var args = new MoveFocusEventArgs(focusedProperty);
@@ -194,9 +213,9 @@
                 return;
             }
 
-            if (sender is TextBox)
+            if (sender.GetType().BaseType == typeof(TextBox))
             {
-                controlName = ((TextBox)sender).Name;
+                controlName = string.IsNullOrEmpty(((TitleTextBox)sender).Name) ? sender.GetType().Name : ((TitleTextBox)sender).Name;
             }
 
             string msg = $"Lookup key '{lookupKey}' from Control '{controlName}' was pressed";
@@ -243,9 +262,9 @@
                 return;
             }
 
-            if (sender is TextBox)
+            if (sender.GetType().BaseType == typeof(TextBox))
             {
-                controlName = ((TextBox)sender).Name;
+                controlName = string.IsNullOrEmpty(((TitleTextBox)sender).Name) ? sender.GetType().Name : ((TitleTextBox)sender).Name;
             }
 
             string msg = $"Lookup key '{lookupKey}' from Control '{controlName}' was pressed";

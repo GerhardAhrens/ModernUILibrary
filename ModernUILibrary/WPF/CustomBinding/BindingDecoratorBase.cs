@@ -263,11 +263,17 @@ namespace ModernIU.WPF.Base
         {
             target = null;
             dp = null;
-            if (provider == null) return false;
+            if (provider == null)
+            {
+                return false;
+            }
 
             //create a binding and assign it to the target
             IProvideValueTarget service = (IProvideValueTarget)provider.GetService(typeof(IProvideValueTarget));
-            if (service == null) return false;
+            if (service == null)
+            {
+                return false;
+            }
 
             //we need dependency objects / properties
             target = service.TargetObject as DependencyObject;

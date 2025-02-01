@@ -72,6 +72,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <ModernUI:TitleTextBox
+                    x:Name="TxtNameA"
                     Title="Name (F5):"
                     Width="240"
                     Height="20"
@@ -86,6 +87,7 @@
 
             <StackPanel Margin="0,5" Orientation="Horizontal">
                 <ModernUI:TitleTextBox
+                    x:Name="TxtNameB"
                     Title="Name (F6):"
                     Width="240"
                     Height="20"
@@ -118,6 +120,13 @@
                     Height="25"
                     Margin="10,0"
                     Content="Move to Alter" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnMoveFocusN"
+                    Width="110"
+                    Height="25"
+                    Margin="10,0"
+                    Content="Move to Nachname" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
@@ -131,6 +140,24 @@
 
                 <ModernUI:FlatButton
                     x:Name="BtnMoveFocusF"
+                    Width="100"
+                    Height="25"
+                    Margin="10,0"
+                    Content="Move to Vorname" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <ModernUI:TitleTextBox
+                    Title="Nachname"
+                    Width="240"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="{ModernUIWPF:FocusBinding Path=LastName,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                    TitleForeground="DarkBlue" />
+
+                <ModernUI:FlatButton
+                    x:Name="BtnMoveFocusL"
                     Width="100"
                     Height="25"
                     Margin="10,0"
