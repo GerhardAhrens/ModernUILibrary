@@ -23,6 +23,7 @@
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.csv" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\Book1.txt" />
     <None Remove="ModernBaseLibrary\Data\LinqToFile\DemoData\LINQDemo.txt" />
+    <None Remove="ModernBaseLibrary\Data\VCalendar\DemoData\Test.ics" />
     <None Remove="Resources\Picture\ApplicationLogo.png" />
     <None Remove="Resources\Picture\ECv2.ico" />
   </ItemGroup>
@@ -39,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="ModernBaseLibrary\Data\VCalendar\DemoData\Test.ics" />
     <EmbeddedResource Include="Resources\Picture\ApplicationLogo.png" />
     <EmbeddedResource Include="Resources\Picture\ECv2.ico" />
   </ItemGroup>

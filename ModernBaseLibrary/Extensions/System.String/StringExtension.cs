@@ -1431,6 +1431,104 @@ namespace ModernBaseLibrary.Extension
             return result;
         }
 
+        /// <summary>
+        /// Removes the specified string from the trailing end of the input string, if there's a match
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="suffixToRemove"></param>
+        /// <param name="comparisonType"></param>
+        /// <returns>The string with the specified suffix trimmed</returns>
+        public static string TrimEnd(this string input, string suffixToRemove, StringComparison comparisonType)
+        {
+            if (suffixToRemove == null)
+            {
+                return input;
+            }
+
+            return input?.EndsWith(suffixToRemove, comparisonType) ?? false
+                ? input.Substring(0, input.Length - suffixToRemove.Length)
+                : input;
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="TrimEnd(string,string,System.StringComparison)"/> using StringComparison.CurrentCulture
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="suffixToRemove"></param>
+        /// <returns></returns>
+        public static string TrimEnd(this string input, string suffixToRemove)
+            => TrimEnd(input, suffixToRemove, StringComparison.Ordinal);
+
+        /// <summary>
+        /// Removes the specified string from the beginning of the input string, if there's a match
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="prefixToRemove"></param>
+        /// <param name="comparisonType"></param>
+        /// <returns>The string with the specified prefix trimmed</returns>
+        public static string TrimStart(this string input, string prefixToRemove, StringComparison comparisonType)
+        {
+            if (prefixToRemove == null)
+            {
+                return input;
+            }
+
+            return input?.StartsWith(prefixToRemove, comparisonType) ?? false
+                ? input.Substring(prefixToRemove.Length, input.Length - prefixToRemove.Length)
+                : input;
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="TrimStart(string,string,System.StringComparison)"/> using StringComparison.CurrentCulture
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="prefixToRemove"></param>
+        /// <returns></returns>
+        public static string TrimStart(this string input, string prefixToRemove)
+            => TrimEnd(input, prefixToRemove, StringComparison.Ordinal);
+
+        /// <summary>
+        /// Removes the specified string from both the beginning and end of the input string, if there's a match
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="prefixAndSuffixPrefixToRemove"></param>
+        /// <param name="comparisonType"></param>
+        /// <returns>The string with the specified string removed from both ends</returns>
+        public static string Trim(this string input, string prefixAndSuffixPrefixToRemove, StringComparison comparisonType)
+            => input.TrimStart(prefixAndSuffixPrefixToRemove, comparisonType).TrimEnd(prefixAndSuffixPrefixToRemove, comparisonType);
+
+        // <summary>
+        /// Taken from StackOverflow: https://stackoverflow.com/q/6309379
+        ///
+        /// Substantially faster (1251 ns) than wrapping with a try-catch and using `Convert` (20,281 ns)
+        /// </summary>
+        public static bool IsBase64(this string @this)  => (@this.Length % 4 == 0) && _base64Regex.IsMatch(@this);
+
+        private static readonly Regex _base64Regex = new Regex(@"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Returns true if the entire contents of the string is an ASCII digit (0 1 2 3 4 6 7 8 9)
+        /// </summary>
+        public static bool IsAsciiDigits(this string @this)
+        {
+            if (string.IsNullOrEmpty(@this))
+            {
+                return false;
+            }
+
+            // Compiled regex is slower, LINQ is slower, direct access by index is slower than the foreach(!).
+            foreach (var needle in @this)
+            {
+                if (needle < '0' || needle > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
         #region String Replace
         /// <summary>
         /// Erstetzt in einem String exact die Fundstellen

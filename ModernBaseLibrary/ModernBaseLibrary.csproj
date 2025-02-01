@@ -142,6 +142,7 @@
     <Folder Include="Data\ExcelCsv\" />
     <Folder Include="Data\ExcelWriter\" />
     <Folder Include="Data\EnumerableDataReader\" />
+    <Folder Include="Data\VCalendar\" />
     <Folder Include="Data\VCard\" />
     <Folder Include="Extensions\System.Data\" />
     <Folder Include="Extensions\System.LINQ\" />

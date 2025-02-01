@@ -28,9 +28,24 @@ namespace ModernBaseLibrary.Extension
         /// </summary>
         /// <param name="this">String</param>
         /// <returns>Typ of SecureString</returns>
-        public static SecureString ToSecureString(this string @this)
+        public static SecureString ToSecureString(this string @this, bool isNetworkCredential =false)
         {
-            return new NetworkCredential(string.Empty, @this).SecurePassword;
+            if (isNetworkCredential == true)
+            {
+                return new NetworkCredential(string.Empty, @this).SecurePassword;
+            }
+            else
+            {
+                var secureString = new SecureString();
+                var passwordCharacters = @this.ToCharArray();
+
+                foreach (var character in passwordCharacters)
+                {
+                    secureString.AppendChar(character);
+                }
+
+                return secureString;
+            }
         }
 
         /// <summary>
