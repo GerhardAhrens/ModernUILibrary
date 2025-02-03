@@ -186,7 +186,6 @@ namespace ModernIU.Controls
         private static void ShowTodayButtonContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             SetShowTodayButton(d, !GetShowTodayButton(d));
-            //SetShowTodayButton(d, !GetShowTodayButton(d));
         }
 
         private static void ShowTodayButtonChanged(object sender, DependencyPropertyChangedEventArgs e)

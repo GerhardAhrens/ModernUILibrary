@@ -255,9 +255,10 @@
             this.tabItemSource.Add(new TabControlItem("StepBar Control", new StepBarControlsUC()) { Stichworte = "Anzeige;StepBar;Layout" });
             this.tabItemSource.Add(new TabControlItem("WaterfallPanel Control", new WaterfallPanelControlsUC()) { Stichworte = "Anzeige;Panel;Layout" });
 
-            this.tabItemSource.Add(new TabControlItem("Listen, Collection Darstellung", true));
+            this.tabItemSource.Add(new TabControlItem("Listen, Collection, XML Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
             this.tabItemSource.Add(new TabControlItem("FilterDataGrid Control", new FilterDataGridControlsUC()) { Stichworte = "DataGrid;Filter;Flat" });
+            this.tabItemSource.Add(new TabControlItem("XML Viewer Control", new XMLViewerControlsUC()) { Stichworte = "xml;viewer" });
 
             this.tabItemSource.Add(new TabControlItem("Dialoge und Funktionen", true));
             this.tabItemSource.Add(new TabControlItem("Dialoge", new FunctionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion" });
