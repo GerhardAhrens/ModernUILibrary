@@ -92,7 +92,7 @@ namespace ModernUI.MVVM.Base
         /// <returns>
         /// True, if command can be executed; false otheriwse.
         /// </returns>
-        public virtual bool CanExecute(TArgs parameter)
+        public virtual bool CanExecute(object parameter)
         {
             if (parameter != null)
             {
@@ -117,7 +117,7 @@ namespace ModernUI.MVVM.Base
         /// The Execute method. Calls the given Execute delegate.
         /// </summary>
         /// <param name="parameter">The Execute parameter value.</param>
-        public virtual void Execute(TArgs parameter)
+        public virtual void Execute(object parameter)
         {
             preActionDelegate?.Invoke();
             executeDelegate?.Invoke((TArgs)parameter);
