@@ -12,8 +12,6 @@
     /// </summary>
     public partial class XMLViewer : UserControl
     {
-        private XmlDocument _xmldocument;
-
         public static readonly DependencyProperty XMLFileProperty =
             DependencyProperty.Register(nameof(XMLFile), typeof(string), typeof(XMLViewer), new PropertyMetadata(LoadXMLChanged));
 
