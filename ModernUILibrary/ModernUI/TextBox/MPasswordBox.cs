@@ -100,7 +100,10 @@
             }
             this.SetEvent();
 
-            this.SetText(this.ConvertToPasswordChar(this.Password.Length));
+            if (this.Password != null)
+            {
+                this.SetText(this.ConvertToPasswordChar(this.Password.Length));
+            }
 
             this.CommandBindings.Add(new System.Windows.Input.CommandBinding(ApplicationCommands.Copy, CommandBinding_Executed, CommandBinding_CanExecute));
 
@@ -228,9 +231,12 @@
         private static void ShowPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MPasswordBox passwordBox = d as MPasswordBox;
-            if (passwordBox != null)
+            if (d != null)
             {
-                passwordBox.SelectionStart = passwordBox.Text.Length + 1;
+                if (passwordBox != null)
+                {
+                    passwordBox.SelectionStart = passwordBox.Text.Length + 1;
+                }
             }
         }
 
