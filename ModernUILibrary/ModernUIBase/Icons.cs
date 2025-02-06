@@ -117,5 +117,19 @@
         {
             return GetPathGeometry(iconString, Colors.Black);
         }
+
+        public static GeometryDrawing PathToGeometryIcon(string pathData, Brush pathColor = null)
+        {
+            if (pathColor == null)
+            {
+                pathColor = Brushes.Orange;
+            }
+
+            Geometry vectorIcon = Geometry.Parse(pathData);
+            GeometryDrawing geometryIcon = new GeometryDrawing();
+            geometryIcon.Brush = pathColor;
+            geometryIcon.Geometry = vectorIcon;
+            return geometryIcon;
+        }
     }
 }

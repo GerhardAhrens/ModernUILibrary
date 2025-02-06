@@ -103,8 +103,11 @@
             this.SetText(this.ConvertToPasswordChar(this.Password.Length));
 
             this.CommandBindings.Add(new System.Windows.Input.CommandBinding(ApplicationCommands.Copy, CommandBinding_Executed, CommandBinding_CanExecute));
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.ContextMenu = this.BuildContextMenu();
         }
-        
+
         public override void OnCornerRadiusChanged(CornerRadius newValue)
         {
             this.IconCornerRadius = new CornerRadius(newValue.TopLeft, 0, 0, newValue.BottomLeft);
@@ -120,6 +123,7 @@
                     this.SetText(this.Password);
                     this.ShowPassword = true;
                 };
+
                 this.PART_SeePassword.Unchecked += (o, e) =>
                 {
                     if (this.Password != null)
@@ -182,7 +186,9 @@
         private void OnTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (!this.mIsHandledTextChanged)
+            {
                 return;
+            }
 
             foreach (TextChange c in e.Changes)
             {
@@ -226,6 +232,53 @@
             {
                 passwordBox.SelectionStart = passwordBox.Text.Length + 1;
             }
+        }
+
+        /// <summary>
+        /// Spezifisches Kontextmenü erstellen
+        /// </summary>
+        /// <returns></returns>
+        private ContextMenu BuildContextMenu()
+        {
+            ContextMenu textBoxContextMenu = new ContextMenu();
+            MenuItem copyMenu = new MenuItem();
+            copyMenu.Header = "Kopiere";
+            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
+            textBoxContextMenu.Items.Add(copyMenu);
+
+            if (this.IsReadOnly == false)
+            {
+                MenuItem pasteMenu = new MenuItem();
+                pasteMenu.Header = "Einfügen";
+                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
+                textBoxContextMenu.Items.Add(pasteMenu);
+
+                MenuItem deleteMenu = new MenuItem();
+                deleteMenu.Header = "Ausschneiden";
+                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
+                textBoxContextMenu.Items.Add(deleteMenu);
+            }
+
+            return textBoxContextMenu;
+        }
+
+        private void OnCopyMenu(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.Password);
+        }
+
+        private void OnPasteMenu(object sender, RoutedEventArgs e)
+        {
+            this.Text = Clipboard.GetText();
+        }
+
+        private void OnDeleteMenu(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.Text);
+            this.Text = string.Empty;
         }
     }
 }
