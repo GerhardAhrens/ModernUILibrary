@@ -21,8 +21,7 @@
 
         public static readonly DependencyProperty DisabledPathColorProperty = DependencyProperty.Register("DisabledPathColor", typeof(Brush), typeof(PathIconButton));
 
-        public static readonly DependencyProperty CornerRadiusProperty = 
-            DependencyProperty.Register("CornerRadius" , typeof(CornerRadius), typeof(PathIconButton));
+        public static readonly DependencyProperty CornerRadiusProperty =  DependencyProperty.Register("CornerRadius" , typeof(CornerRadius), typeof(PathIconButton));
 
         public static readonly DependencyProperty MouseOverBackgroundProperty = DependencyProperty.Register("MouseOverBackground" , typeof(Brush), typeof(PathIconButton));
 

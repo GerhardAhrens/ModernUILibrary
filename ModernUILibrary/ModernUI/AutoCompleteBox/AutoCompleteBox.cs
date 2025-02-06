@@ -19,8 +19,8 @@
 
         #region FilterItemSelectedEvent
 
-        public static readonly RoutedEvent FilterItemSelectedEvent = EventManager.RegisterRoutedEvent("FilterItemSelected",
-            RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(AutoCompleteBox));
+        public static readonly RoutedEvent FilterItemSelectedEvent = 
+            EventManager.RegisterRoutedEvent("FilterItemSelected", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(AutoCompleteBox));
 
         public event RoutedPropertyChangedEventHandler<object> FilterItemSelected
         {

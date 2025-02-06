@@ -37,12 +37,14 @@
             Grid.Row="2"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel x:Name="StackPanelInnen" Orientation="Horizontal">
                 <ModernUI:PathButton
                     Width="70"
                     Height="30"
                     Margin="10,10"
-                    Content="Refresh"
+                    Content="Refresh-A"
+                    GroupName="GruppeA"
+                    IsEnabled="True"
                     PathWidth="12">
                     <ModernUI:PathButton.ToolTip>
                         <ModernUI:MToolTip Content="Test" PlacementEx="TopLeft" />
@@ -54,12 +56,15 @@
                     Height="30"
                     Margin="10,10"
                     Background="#DA4453"
-                    Content="Refresh"
+                    Content="Refresh-B"
                     CornerRadius="3"
+                    GroupName="GruppeA"
+                    IsEnabled="True"
                     MouseOverBackground="#ED5565"
                     PathData="{StaticResource Refresh-Off}"
                     PathWidth="14"
                     PressedBackground="#DA4453" />
+
                 <ModernUI:PathTextButton
                     Margin="10,10"
                     Background="#00DA4453"
@@ -68,6 +73,7 @@
                     Orientation="Vertical"
                     PathData="{StaticResource Refresh-Off}"
                     PathWidth="14" />
+
                 <ModernUI:PathIconButton
                     Width="40"
                     Height="40"
@@ -92,6 +98,7 @@
                     PathWidth="15"
                     PressedBackground="#DA4453"
                     PressedPathColor="White" />
+
                 <ModernUI:PathIconButton
                     Width="50"
                     Height="35"
@@ -221,7 +228,7 @@
                     Content="text"
                     CornerRadius="3"
                     Type="text" />
-                
+
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"
