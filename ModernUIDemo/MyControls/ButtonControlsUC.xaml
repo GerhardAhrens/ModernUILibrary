@@ -326,6 +326,7 @@
                     Background="#F0F4F7"
                     BorderBrush="#A4A7AC"
                     CornerRadius="3"
+                    IsGroupEnabled="true"
                     ItemClick="BtnGroupButtonClick_ItemClick">
                     <ModernUI:ButtonGroupItem Content="Create new file" />
                     <ModernUI:ButtonGroupItem>Upload files</ModernUI:ButtonGroupItem>
@@ -337,6 +338,7 @@
                     Background="#0079FF"
                     BorderBrush="#0C80BA"
                     CornerRadius="3"
+                    IsGroupEnabled="True"
                     UseLayoutRounding="True">
                     <ModernUI:ButtonGroupItem>
                         <Path

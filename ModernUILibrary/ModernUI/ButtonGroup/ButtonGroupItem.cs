@@ -27,8 +27,7 @@
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-        public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ButtonGroupItem));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(ButtonGroupItem));
 
         [Bindable(true), Description("Liest oder setzt, ob der Eintrag der erste in der Liste ist.")]
         public bool IsFirstItem
@@ -37,8 +36,7 @@
             set { SetValue(IsFirstItemProperty, value); }
         }
 
-        public static readonly DependencyProperty IsFirstItemProperty =
-            DependencyProperty.Register("IsFirstItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsFirstItemProperty = DependencyProperty.Register("IsFirstItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
 
         [Bindable(true), Description("Liest oder setzt, ob der Eintrag einer der mittleren in der Liste ist.")]
         public bool IsMiddleItem
@@ -47,8 +45,7 @@
             set { SetValue(IsMiddleItemProperty, value); }
         }
 
-        public static readonly DependencyProperty IsMiddleItemProperty =
-            DependencyProperty.Register("IsMiddleItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsMiddleItemProperty = DependencyProperty.Register("IsMiddleItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
 
         [Bindable(true), Description("Liest oder setzt, ob der Eintrag der letzte in der Liste ist.")]
         public bool IsLastItem
@@ -57,8 +54,7 @@
             set { SetValue(IsLastItemProperty, value); }
         }
 
-        public static readonly DependencyProperty IsLastItemProperty =
-            DependencyProperty.Register("IsLastItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsLastItemProperty = DependencyProperty.Register("IsLastItem", typeof(bool), typeof(ButtonGroupItem), new PropertyMetadata(false));
 
         public override void OnApplyTemplate()
         {
