@@ -195,9 +195,6 @@
             base.OnApplyTemplate();
             this.SelectAll();
 
-            /* Spezifisches Kontextmenü für Control übergeben */
-            this.ContextMenu = this.BuildContextMenu();
-
             /* Rahmen für Control festlegen */
             if (this.SetBorder == true)
             {
@@ -209,6 +206,12 @@
                 this.BorderBrush = Brushes.Transparent;
                 this.BorderThickness = new Thickness(0);
             }
+
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
+
+            /* Spezifisches Kontextmenü für Control übergeben */
+            this.ContextMenu = this.BuildContextMenu();
         }
 
         /// <summary>
@@ -467,6 +470,34 @@
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        private Style SetTriggerFunction()
+        {
+            Style inputControlStyle = new Style();
+
+            /* Trigger für IsMouseOver = True */
+            Trigger triggerIsMouseOver = new Trigger();
+            triggerIsMouseOver.Property = RichTextBox.IsMouseOverProperty;
+            triggerIsMouseOver.Value = true;
+            triggerIsMouseOver.Setters.Add(new Setter() { Property = RichTextBox.BackgroundProperty, Value = Brushes.LightGray });
+            inputControlStyle.Triggers.Add(triggerIsMouseOver);
+
+            /* Trigger für IsFocused = True */
+            Trigger triggerIsFocused = new Trigger();
+            triggerIsFocused.Property = RichTextBox.IsFocusedProperty;
+            triggerIsFocused.Value = true;
+            triggerIsFocused.Setters.Add(new Setter() { Property = RichTextBox.BackgroundProperty, Value = Brushes.LightGray });
+            inputControlStyle.Triggers.Add(triggerIsFocused);
+
+            /* Trigger für IsFocused = True */
+            Trigger triggerIsReadOnly = new Trigger();
+            triggerIsReadOnly.Property = RichTextBox.IsReadOnlyProperty;
+            triggerIsReadOnly.Value = true;
+            triggerIsReadOnly.Setters.Add(new Setter() { Property = RichTextBox.BackgroundProperty, Value = Brushes.LightYellow });
+            inputControlStyle.Triggers.Add(triggerIsReadOnly);
+
+            return inputControlStyle;
         }
 
         /// <summary>
