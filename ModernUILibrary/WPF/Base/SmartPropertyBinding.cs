@@ -58,14 +58,14 @@
             return value == null ? default : (T)value;
         }
 
-        protected T GetPropertyValue<T>([CallerMemberName] string propertyName = "")
+        protected T GetValue<T>([CallerMemberName] string propertyName = "")
         {
             var rightsKey = $"{this.className}.{propertyName}";
 
             return this.GetPropertyValueInternal<T>(propertyName);
         }
 
-        protected void SetPropertyValueUnchecked<T>(T value, [CallerMemberName] string propertyName = "")
+        protected void SetalueUnchecked<T>(T value, [CallerMemberName] string propertyName = "")
         {
             if (this.values.ContainsKey(propertyName) == true)
             {
@@ -77,11 +77,11 @@
             }
         }
 
-        protected void SetPropertyValue<T>(T value, Func<T, string, bool> preAction, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
+        protected void SetValue<T>(T value, Func<T, string, bool> preAction, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
         {
             if (preAction?.Invoke(value, propertyName) == true)
             {
-                this.SetPropertyValue(value, propertyName);
+                this.SetValue(value, propertyName);
             }
 
             if (postAction != null)
@@ -90,16 +90,16 @@
             }
         }
 
-        protected void SetPropertyValue<T>(T value, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
+        protected void SetValue<T>(T value, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
         {
-            this.SetPropertyValue(value, propertyName);
+            this.SetValue(value, propertyName);
             if (postAction != null)
             {
                 postAction?.Invoke(value, propertyName);
             }
         }
 
-        protected void SetPropertyValue<T>(T value, [CallerMemberName] string propertyName = "")
+        protected void SetValue<T>(T value, [CallerMemberName] string propertyName = "")
         {
             bool changed = !object.Equals(value, this.GetPropertyValueInternal<T>(propertyName));
             if (changed == true)
