@@ -144,6 +144,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+                        
                         <TabPanel
                             x:Name="headerPanel"
                             Grid.Row="0"
@@ -175,6 +176,7 @@
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
