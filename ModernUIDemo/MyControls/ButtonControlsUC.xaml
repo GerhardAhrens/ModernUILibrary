@@ -39,16 +39,23 @@
             VerticalAlignment="Center">
             <StackPanel x:Name="StackPanelInnen" Orientation="Horizontal">
                 <ModernUI:PathButton
-                    Width="70"
-                    Height="30"
+                    Width="95"
+                    Height="40"
                     Margin="10,10"
-                    Content="Refresh-A"
                     GroupName="GruppeA"
+                    IsDefault="True"
                     IsEnabled="True"
                     PathWidth="12">
                     <ModernUI:PathButton.ToolTip>
                         <ModernUI:MToolTip Content="Test" PlacementEx="TopLeft" />
                     </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Refresh-A" />
+                            <LineBreak />
+                            <Run Text="(Default)" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
                 </ModernUI:PathButton>
 
                 <ModernUI:PathButton
@@ -105,6 +112,7 @@
                     Margin="10,10"
                     Background="Transparent"
                     CornerRadius="5"
+                    IsDefault="True"
                     MouseOverBackground="Transparent"
                     MouseOverPathColor="Black"
                     NormalPathColor="Black"
@@ -123,6 +131,7 @@
                     Content="FlatButton"
                     CornerRadius="15"
                     Foreground="White"
+                    IsDefault="False"
                     MouseOverBackground="#ED5565"
                     MouseOverBackground1="#ED5565"
                     PressedBackground="#DA4453" />
@@ -133,6 +142,7 @@
                     Margin="10,10"
                     Content="FlatButton, Type=No"
                     CornerRadius="2"
+                    IsDefault="False"
                     Type="No" />
 
                 <ModernUI:FlatButton
@@ -235,8 +245,10 @@
                     Margin="2,0"
                     Content="info"
                     CornerRadius="3"
+                    IsDefault="True"
                     MouseOverBackground1="AliceBlue"
                     Type="info" />
+
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"
@@ -244,6 +256,7 @@
                     Content="error"
                     CornerRadius="3"
                     Type="error" />
+
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"
@@ -251,6 +264,7 @@
                     Content="success"
                     CornerRadius="3"
                     Type="success" />
+
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"
@@ -258,6 +272,7 @@
                     Content="warning"
                     CornerRadius="3"
                     Type="warning" />
+
                 <ModernUI:FlatButton
                     Width="70"
                     Height="28"

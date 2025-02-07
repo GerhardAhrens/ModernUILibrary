@@ -241,7 +241,14 @@ namespace ModernIU.Controls
             dlg.ShowInTaskbar = false;
             dlg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             dlg.WindowState = WindowState.Normal;
-            dlg.Owner = Application.Current.MainWindow;
+
+            try
+            {
+                dlg.Owner = Application.Current.MainWindow;
+            }
+            catch (Exception)
+            {
+            }
 
             EventHandler closeEventHandler = null;
             closeEventHandler = (s, e) =>
@@ -274,7 +281,6 @@ namespace ModernIU.Controls
             }
         }
 
-
         private void ShowDialogInternal(Type type, int countDown, (string InfoText, string CustomText, double FontSize) addText, Action<bool?, object> callBack, Type vmType)
         {
             NotificationWindow dlg = new NotificationWindow();
@@ -282,7 +288,14 @@ namespace ModernIU.Controls
             dlg.ShowInTaskbar = false;
             dlg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             dlg.WindowState = WindowState.Normal;
-            dlg.Owner = Application.Current.MainWindow;
+
+            try
+            {
+                dlg.Owner = Application.Current.MainWindow;
+            }
+            catch (Exception)
+            {
+            }
 
             EventHandler closeEventHandler = null;
             closeEventHandler =  closeEventHandler = (s, e) =>

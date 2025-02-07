@@ -51,19 +51,29 @@
                         <Trigger Property="IsDefaulted" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                         </Trigger>
+
+                        <Trigger Property="IsDefault" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            <Setter TargetName="border" Property="BorderThickness" Value="2,0,0,2" />
+                        </Trigger>
+
                         <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand" />
                             <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter TargetName="path" Property="Fill" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
+                        
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter TargetName="path" Property="Fill" Value="{Binding PressedForeground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
+                        
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Cursor" Value="No" />
                             <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#888" />
                             <Setter TargetName="path" Property="Fill" Value="{Binding DisabledForeground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
+                        
                         <Trigger Property="Orientation" Value="Vertical">
                             <Setter Property="ContentMargin" Value="0,5,0,0" />
                         </Trigger>
