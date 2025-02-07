@@ -107,4 +107,8 @@
     <Folder Include="ModernBaseLibrary\WMI\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.DirectoryServices" Version="9.0.1" />
+  </ItemGroup>
+
 </Project>
