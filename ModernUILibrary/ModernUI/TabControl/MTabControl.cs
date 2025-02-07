@@ -23,13 +23,11 @@
         // Using a DependencyProperty as the backing store for HeaderContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.Register("HeaderContent", typeof(object), typeof(MTabControl));
 
-        #region Constructors
         static MTabControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MTabControl), new FrameworkPropertyMetadata(typeof(MTabControl)));
             MTabControl.TypeProperty = DependencyProperty.Register("Type", typeof(EnumTabControlType), typeof(MTabControl), new PropertyMetadata(EnumTabControlType.Line));
         }
-        #endregion
 
         protected override DependencyObject GetContainerForItemOverride()
         {
