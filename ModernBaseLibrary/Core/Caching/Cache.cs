@@ -11,7 +11,7 @@
 // <summary>Definition of Simple Cache Class</summary>
 //-----------------------------------------------------------------------
 
-namespace ModernTest.ModernBaseLibrary.Core
+namespace ModernBaseLibrary.Core
 {
     using System;
     using System.Collections.Generic;

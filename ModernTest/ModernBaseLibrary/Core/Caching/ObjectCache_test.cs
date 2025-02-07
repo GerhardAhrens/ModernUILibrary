@@ -21,6 +21,8 @@ namespace ModernTest.ModernBaseLibrary.Core
     using System.Linq;
     using System.Threading;
 
+    using global::ModernBaseLibrary.Core;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
