@@ -202,47 +202,5 @@
                 </DataTemplate>
             </ModernUI:MTabControl.ContentTemplate>
         </ModernUI:MTabControl>
-
-        <ModernUI:LeftTabControl
-            x:Name="tabControl4"
-            Height="100"
-            Margin="10"
-            VerticalAlignment="Top"
-            Grid.IsSharedSizeScope="True"
-            TabStripPlacement="Left">
-            <TabControl.Resources>
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentPresenter Content="{TemplateBinding Content}" />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Padding" Value="3" />
-                </Style>
-            </TabControl.Resources>
-
-            <TabItem Width="100">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource ResourceKey=TabHeaderTextBlockStyle}">
-                            <Run Text="Allgemein" />
-                        </TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-
-            <TabItem Width="100">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource ResourceKey=TabHeaderTextBlockStyle}">
-                            <Run Text="Statistik" />
-                        </TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-        </ModernUI:LeftTabControl>
-
     </UniformGrid>
 </UserControl>

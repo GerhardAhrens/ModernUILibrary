@@ -7,6 +7,8 @@
 
     public class LeftTabControl : TabControl
     {
+        public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.Register("HeaderContent", typeof(object), typeof(LeftTabControl));
+
         static LeftTabControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LeftTabControl), new FrameworkPropertyMetadata(typeof(LeftTabControl)));
@@ -19,6 +21,17 @@
             this.Focusable = true;
             this.TabStripPlacement = Dock.Left;
             this.SetValue(Grid.IsSharedSizeScopeProperty, true);
+        }
+
+        public object HeaderContent
+        {
+            get { return (object)GetValue(HeaderContentProperty); }
+            set { SetValue(HeaderContentProperty, value); }
+        }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new TabItem();
         }
     }
 }
