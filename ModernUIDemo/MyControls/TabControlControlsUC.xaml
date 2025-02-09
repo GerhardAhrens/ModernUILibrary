@@ -202,5 +202,11 @@
                 </DataTemplate>
             </ModernUI:MTabControl.ContentTemplate>
         </ModernUI:MTabControl>
+
+        <ModernUI:LeftTabControl>
+            <TabItem Header="H1" />
+            <TabItem Header="H2" />
+        </ModernUI:LeftTabControl>
+
     </UniformGrid>
 </UserControl>
