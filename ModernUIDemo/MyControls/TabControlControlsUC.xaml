@@ -204,8 +204,32 @@
         </ModernUI:MTabControl>
 
         <ModernUI:LeftTabControl>
-            <TabItem Header="H1" />
-            <TabItem Header="H2" />
+            <TabItem Header="H1">
+                <Border>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="TabItem-A" />
+                </Border>
+            </TabItem>
+
+            <TabItem Header="H2">
+                <Border>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="TabItem-B" />
+                </Border>
+            </TabItem>
+
+            <TabItem Header="H3">
+                <Border>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="TabItem-C" />
+                </Border>
+            </TabItem>
         </ModernUI:LeftTabControl>
 
     </UniformGrid>

@@ -8,6 +8,22 @@
     public class MTabControl : TabControl
     {
         public static readonly DependencyProperty TypeProperty;
+
+        public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.Register("HeaderContent", typeof(object), typeof(MTabControl));
+
+        static MTabControl()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MTabControl), new FrameworkPropertyMetadata(typeof(MTabControl)));
+            MTabControl.TypeProperty = DependencyProperty.Register("Type", typeof(EnumTabControlType), typeof(MTabControl), new PropertyMetadata(EnumTabControlType.Line));
+        }
+
+        public MTabControl()
+        {
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.Focusable = true;
+        }
+
         public EnumTabControlType Type
         {
             get { return (EnumTabControlType)GetValue(TypeProperty); }
@@ -18,15 +34,6 @@
         {
             get { return (object)GetValue(HeaderContentProperty); }
             set { SetValue(HeaderContentProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HeaderContent.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HeaderContentProperty = DependencyProperty.Register("HeaderContent", typeof(object), typeof(MTabControl));
-
-        static MTabControl()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(MTabControl), new FrameworkPropertyMetadata(typeof(MTabControl)));
-            MTabControl.TypeProperty = DependencyProperty.Register("Type", typeof(EnumTabControlType), typeof(MTabControl), new PropertyMetadata(EnumTabControlType.Line));
         }
 
         protected override DependencyObject GetContainerForItemOverride()
