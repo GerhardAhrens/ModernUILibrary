@@ -203,7 +203,7 @@
             </ModernUI:MTabControl.ContentTemplate>
         </ModernUI:MTabControl>
 
-        <ModernUI:LeftTabControl>
+        <ModernUI:LeftTabControl SelectionChangedCommand="{Binding Path=CmdAgg[SelectionChangedCommand]}">
             <TabItem Header="H1">
                 <Border>
                     <TextBlock

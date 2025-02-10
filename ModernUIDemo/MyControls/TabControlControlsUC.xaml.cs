@@ -1,10 +1,14 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
+
+    using ModernUI.MVVM.Base;
 
     /// <summary>
     /// Interaktionslogik für TabControlControlsUC.xaml
@@ -17,15 +21,29 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            this.CmdAgg.AddOrSetCommand("SelectionChangedCommand", new RelayCommand(p1 => this.SelectionChangedClick(p1), p2 => true));
 
             list.Add(new TabInfo() { Title = "Windows", Type = 1 });
             list.Add(new TabInfo() { Title = "MacOS", Type = 2 });
             list.Add(new TabInfo() { Title = "Linux", Type = 3 });
             this.tabControl3.ItemsSource = list;
+            this.DataContext = this;
         }
+
+        public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void SelectionChangedClick(object p1)
+        {
+            int index = ((Selector)(((FrameworkElement)p1).Parent)).SelectedIndex;
+            var t = new TextBlock();
+            t.Text = $"My Tab Header-{index}";
+            ((TabItem)p1).Header = t;
+
+            ((TabItem)p1).Content = $"Auswahl {((TextBlock)((TabItem)p1).Header).Text}";
         }
 
         protected class TabInfo
