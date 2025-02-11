@@ -82,6 +82,8 @@ namespace ModernUI.MVVM.Base
 
         public Type BaseType { get; set; }
 
+        public bool IsUCLoaded { get; set; } = false;
+
         public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
 
         public EventAggregator EventAgg { get; } = new EventAggregator();

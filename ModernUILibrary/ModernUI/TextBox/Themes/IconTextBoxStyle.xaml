@@ -77,6 +77,7 @@
                     VerticalAlignment="Center"
                     Data="{TemplateBinding IconPathData}"
                     Fill="{TemplateBinding IconForeground}"
+                    KeyboardNavigation.IsTabStop="False"
                     SnapsToDevicePixels="True"
                     Stretch="Uniform"
                     UseLayoutRounding="True" />
@@ -161,6 +162,7 @@
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding IconBorderThickness}"
                     CornerRadius="{TemplateBinding IconCornerRadius}"
+                    KeyboardNavigation.IsTabStop="False"
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                     UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
                     <Path
