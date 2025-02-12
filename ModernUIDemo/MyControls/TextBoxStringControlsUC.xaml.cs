@@ -2,6 +2,7 @@
 {
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
 
     using ModernIU.Controls;
 
@@ -40,8 +41,16 @@
         {
             IconTextBox si = (IconTextBox)sender;
 
-            var content = ((TextBox)e.OriginalSource).Text;
-            MessageBox.Show($"{si.Name}; {content}");
+            if ((Key)e.OldValue == Key.Enter)
+            {
+                var content = ((TextBox)e.OriginalSource).Text;
+                MessageBox.Show($"Enter: {si.Name}; {content}");
+            }
+            else if ((Key)e.OldValue == Key.Tab)
+            {
+                var content = ((TextBox)e.OriginalSource).Text;
+                MessageBox.Show($"Tab: {si.Name}; {content}");
+            }
         }
     }
 

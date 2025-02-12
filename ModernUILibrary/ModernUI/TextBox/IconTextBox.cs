@@ -81,9 +81,9 @@
             set { SetValue(ReadOnlyColorProperty, value); }
         }
 
-        protected virtual void OnEnterKeyClick(object oldValue, object newValue)
+        protected virtual void OnEnterKeyClick(Key keyValue, object newValue)
         {
-            RoutedPropertyChangedEventArgs<object> arg = new RoutedPropertyChangedEventArgs<object>(oldValue, newValue, EnterKeyClickEvent);
+            RoutedPropertyChangedEventArgs<object> arg = new RoutedPropertyChangedEventArgs<object>(keyValue, newValue, EnterKeyClickEvent);
             this.RaiseEvent(arg);
         }
 
@@ -172,18 +172,11 @@
         {
             if(e.Key == Key.Enter)
             {
-                this.OnEnterKeyClick(null, null);
+                this.OnEnterKeyClick(e.Key, null);
             }
-
-            IconTextBox txt = sender as IconTextBox;
-            if (txt != null)
+            else if (e.Key == Key.Tab)
             {
-                if (string.IsNullOrEmpty(txt.Text) == true)
-                {
-                }
-                else
-                {
-                }
+                this.OnEnterKeyClick(e.Key, null);
             }
         }
 
