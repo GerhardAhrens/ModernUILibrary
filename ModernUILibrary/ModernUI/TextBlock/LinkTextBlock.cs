@@ -109,9 +109,17 @@ namespace ModernIU.Controls
                     if (string.IsNullOrEmpty((string)e.NewValue) == false)
                     {
                         string uriFormat = string.Empty;
-                        if (((string)e.NewValue).StartsWith("http://", StringComparison.OrdinalIgnoreCase) == false || ((string)e.NewValue).StartsWith("https://", StringComparison.OrdinalIgnoreCase) == false)
+                        if (((string)e.NewValue).StartsWith("http://", StringComparison.OrdinalIgnoreCase) == true)
                         {
-                            uriFormat = $"http://{(string)e.NewValue}";
+                            uriFormat = $"{((string)e.NewValue)}";
+                        }
+                        else if (((string)e.NewValue).StartsWith("https://", StringComparison.OrdinalIgnoreCase) == true)
+                        {
+                            uriFormat = $"{((string)e.NewValue)}";
+                        }
+                        else
+                        {
+                            uriFormat = $"https://{((string)e.NewValue)}";
                         }
 
                         Hyperlink hyperLink = new Hyperlink()
@@ -133,9 +141,17 @@ namespace ModernIU.Controls
             if (@this != null)
             {
                 string uriFormat = string.Empty;
-                if (@this.LinkText.Contains("http://") == false)
+                if (@this.LinkText.StartsWith("http://", StringComparison.OrdinalIgnoreCase) == true)
                 {
-                    uriFormat = $"http://{@this.LinkText}";
+                    uriFormat = $"{@this.LinkText}";
+                }
+                else if (@this.LinkText.StartsWith("https://", StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    uriFormat = $"{@this.LinkText}";
+                }
+                else
+                {
+                    uriFormat = $"https://{@this.LinkText}";
                 }
 
                 if (@this.IsExtern == false)

@@ -307,9 +307,9 @@
                     Width="100"
                     HorizontalAlignment="Left"
                     IsExtern="True"
-                    LinkText="www.pta.de"
+                    LinkText="http://www.pta.de"
                     RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
-                    Text="PTA Gmbh" />
+                    Text="PTA GmbH" />
             </StackPanel>
         </StackPanel>
 
