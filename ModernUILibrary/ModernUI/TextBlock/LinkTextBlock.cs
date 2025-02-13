@@ -109,7 +109,7 @@ namespace ModernIU.Controls
                     if (string.IsNullOrEmpty((string)e.NewValue) == false)
                     {
                         string uriFormat = string.Empty;
-                        if (((string)e.NewValue).Contains("http://") == false)
+                        if (((string)e.NewValue).StartsWith("http://", StringComparison.OrdinalIgnoreCase) == false || ((string)e.NewValue).StartsWith("https://", StringComparison.OrdinalIgnoreCase) == false)
                         {
                             uriFormat = $"http://{(string)e.NewValue}";
                         }
