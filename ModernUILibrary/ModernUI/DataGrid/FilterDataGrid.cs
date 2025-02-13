@@ -124,7 +124,7 @@
             get { return (ICommand)GetValue(MouseDoubleClickCommandProperty); }
             set { SetValue(MouseDoubleClickCommandProperty, value); }
         }
-        #endregion Public DependencyICommand
+        #endregion Public DependencyProperty
 
         #region Public Event
 

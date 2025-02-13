@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    d:DesignHeight="450"
+    d:DesignHeight="600"
     d:DesignWidth="900"
     mc:Ignorable="d">
 
@@ -297,6 +297,20 @@
                 <ModernUI:Heading HeaderType="H3" Text="Heading - H3" />
             </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="TextBlock, Link aufrufen" />
+
+            <StackPanel Orientation="Vertical">
+                <ModernUI:LinkTextBlock
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    IsExtern="True"
+                    LinkText="www.pta.de"
+                    RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
+                    Text="PTA Gmbh" />
+            </StackPanel>
         </StackPanel>
 
     </Grid>

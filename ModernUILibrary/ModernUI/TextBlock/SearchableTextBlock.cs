@@ -22,8 +22,7 @@ namespace ModernIU.Controls
             Init();
         }
 
-        public SearchableTextBlock(Inline inline)
-            : base(inline)
+        public SearchableTextBlock(Inline inline) : base(inline)
         {
             Init();
         }

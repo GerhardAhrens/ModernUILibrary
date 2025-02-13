@@ -61,8 +61,8 @@
             this.IsReadOnly = false;
             this.Focusable = true;
 
-            PreviewKeyUp += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyUp);
-            PreviewKeyDown += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyDown);
+            this.PreviewKeyUp += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyUp);
+            this.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyDown);
 
             // need to handle the paste command 
             var binding = new CommandBinding();

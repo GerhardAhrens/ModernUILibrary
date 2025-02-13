@@ -21,8 +21,7 @@
             Animating
         }
 
-        private static readonly PropertyPath s_opacityPropertyPath = new("(0).(1)",
-            TextElement.ForegroundProperty, Brush.OpacityProperty);
+        private static readonly PropertyPath s_opacityPropertyPath = new("(0).(1)", TextElement.ForegroundProperty, Brush.OpacityProperty);
 
         private readonly Random _random = new();
         private readonly Storyboard _storyboard = new();
@@ -33,8 +32,7 @@
         /// </summary>
         static AnimatedTextBlock()
         {
-            TextProperty.OverrideMetadata(typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(CreateRunsOnPropertyChanged));
+            TextProperty.OverrideMetadata(typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(CreateRunsOnPropertyChanged));
         }
         /// <summary>
         ///     Gets or sets the length of the segment.
@@ -50,8 +48,7 @@
         ///     Identifies the <see cref="SegmentLength" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty SegmentLengthProperty =
-            DependencyProperty.Register("SegmentLength", typeof(int), typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(3, CreateRunsOnPropertyChanged));
+            DependencyProperty.Register("SegmentLength", typeof(int), typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(3, CreateRunsOnPropertyChanged));
 
         /// <summary>
         ///     Gets or sets the mode.
@@ -67,8 +64,7 @@
         ///     Identifies the <see cref="Mode" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty ModeProperty =
-            DependencyProperty.Register("Mode", typeof(AnimatedTextMode), typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(AnimatedTextMode.RevealAndHide, ApplyAnimationsOnPropertyChanged));
+            DependencyProperty.Register("Mode", typeof(AnimatedTextMode), typeof(AnimatedTextBlock),  new FrameworkPropertyMetadata(AnimatedTextMode.RevealAndHide, ApplyAnimationsOnPropertyChanged));
 
         /// <summary>
         ///     Gets or sets the order.
@@ -84,8 +80,7 @@
         ///     Identifies the <see cref="Order" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty OrderProperty =
-            DependencyProperty.Register("Order", typeof(AnimatedTextOrder), typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(AnimatedTextOrder.Random, ApplyAnimationsOnPropertyChanged));
+            DependencyProperty.Register("Order", typeof(AnimatedTextOrder), typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(AnimatedTextOrder.Random, ApplyAnimationsOnPropertyChanged));
 
         /// <summary>
         ///     Gets or sets the segment animation duration.
@@ -101,9 +96,7 @@
         ///     Identifies the <see cref="Duration" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty DurationProperty =
-            Timeline.DurationProperty.AddOwner(typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(new Duration(TimeSpan.FromMilliseconds(500)),
-                    ApplyAnimationsOnPropertyChanged));
+            Timeline.DurationProperty.AddOwner(typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(new Duration(TimeSpan.FromMilliseconds(500)), ApplyAnimationsOnPropertyChanged));
 
         /// <summary>
         ///     Gets or sets the delay between segment animations.
@@ -119,8 +112,7 @@
         ///     Identifies the <see cref="Delay" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty DelayProperty =
-            DependencyProperty.Register("Delay", typeof(TimeSpan), typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(TimeSpan.FromMilliseconds(125), ApplyAnimationsOnPropertyChanged));
+            DependencyProperty.Register("Delay", typeof(TimeSpan), typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(TimeSpan.FromMilliseconds(125), ApplyAnimationsOnPropertyChanged));
 
         /// <summary>
         ///     Gets or sets the repeat behavior.
@@ -136,8 +128,7 @@
         ///     Identifies the <see cref="RepeatBehavior" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty RepeatBehaviorProperty =
-            Timeline.RepeatBehaviorProperty.AddOwner(typeof(AnimatedTextBlock),
-                new FrameworkPropertyMetadata(ApplyAnimationsOnPropertyChanged));
+            Timeline.RepeatBehaviorProperty.AddOwner(typeof(AnimatedTextBlock), new FrameworkPropertyMetadata(ApplyAnimationsOnPropertyChanged));
         /// <summary>
         ///     Raises the <see cref="E:System.Windows.FrameworkElement.Initialized" /> event.
         /// </summary>

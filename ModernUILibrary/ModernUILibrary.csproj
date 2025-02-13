@@ -79,7 +79,6 @@
     <Folder Include="ModernUI\RichTextBox\HtmlXamlConversion\" />
     <Folder Include="ModernUI\StepBar\Themes\" />
     <Folder Include="ModernUI\SwitchMenu\Themes\" />
-    <Folder Include="ModernUI\TextBlock\" />
     <Folder Include="ModernUI\NumericUpDown\Themes\" />
     <Folder Include="ModernUI\PopTip\Themes\" />
     <Folder Include="ModernUI\ProgressBar\Themes\" />

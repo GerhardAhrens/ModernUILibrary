@@ -151,7 +151,6 @@
             return result;
         }
 
-
         #region PropertyChanged Implementierung
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
