@@ -1,5 +1,4 @@
-﻿
-namespace ModernIU.Controls
+﻿namespace ModernIU.Controls
 {
     using System.IO;
     using System.Text;

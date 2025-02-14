@@ -10,6 +10,8 @@
         <ResourceDictionary Source="MPasswordBox.xaml" />
         <ResourceDictionary Source="TextBoxCurrency.xaml" />
         <ResourceDictionary Source="SyntaxBox.xaml" />
+        <ResourceDictionary Source="EditableContentControlStyle.xaml" />
+        <ResourceDictionary Source="EditableTextBoxStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

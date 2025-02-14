@@ -16,6 +16,7 @@
 namespace ModernIU.Controls
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
@@ -127,9 +128,20 @@ namespace ModernIU.Controls
                             NavigateUri = new Uri(uriFormat)
                         };
 
-                        WeakEventManager<LinkTextBlock, MouseButtonEventArgs>.AddHandler(@this, "MouseLeftButtonDown", OnMouseLeftButtonDown);
+                        Hyperlink link = new Hyperlink();
+                        link.IsEnabled = true;
+                        link.Inlines.Add(uriFormat);
+                        link.NavigateUri = new Uri(uriFormat);
+                        link.RequestNavigate += (sender, args) =>
+                        {
+                            MouseButtonEventArgs e = new MouseButtonEventArgs(Mouse.PrimaryDevice,0,MouseButton.Left);
+                            OnMouseLeftButtonDown(sender, e);
+                        };
+
                         hyperLink.Inlines.Add(uriFormat);
-                        @this.Inlines.Add(hyperLink);
+                        @this.Inlines.Add(link);
+
+                        WeakEventManager<LinkTextBlock, MouseButtonEventArgs>.AddHandler(@this, "MouseLeftButtonDown", OnMouseLeftButtonDown);
                     }
                 }
             }
@@ -176,10 +188,6 @@ namespace ModernIU.Controls
                     }
                 }
             }
-        }
-
-        private static void OnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
         }
 
         private Style SetTriggerFunction()

@@ -204,6 +204,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Eingabe", true));
             this.tabItemSource.Add(new TabControlItem("TextBox (String) Controls", new TextBoxStringControlsUC()) { Stichworte = "TextBox;String;Text;Icon" });
+            this.tabItemSource.Add(new TabControlItem("TextBox (Design) Controls", new TextBoxDesignControlsUC()) { Stichworte = "TextBox;Text;Icon;Design" });
             this.tabItemSource.Add(new TabControlItem("TextBox (Numeric) Controls", new TextBoxNumericControlsUC()) { Stichworte = "TextBox;Zahl;Numeric" });
             this.tabItemSource.Add(new TabControlItem("NumericUpDown Controls", new NumericUpDownControlsUC()) { Stichworte = "TextBox;Zahl;Numeric" });
             this.tabItemSource.Add(new TabControlItem("TextBox Multiline Controls", new TextBoxMultilineControlsUC()) { Stichworte = "TextBox;String;Text" });
@@ -246,6 +247,7 @@
             this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
             this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
             this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
+            this.tabItemSource.Add(new TabControlItem("Layout ContentFrame", new ContentFrameControlsUC()) { Stichworte = "Anzeige;Layout;Grid;Content;Frame" });
             this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()) { Stichworte = "Anzeige;Layout;Separator" });
             this.tabItemSource.Add(new TabControlItem("Expander Control", new ExpanderControlsUC()) { Stichworte = "Anzeige;Layout;Expander" });
             this.tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });

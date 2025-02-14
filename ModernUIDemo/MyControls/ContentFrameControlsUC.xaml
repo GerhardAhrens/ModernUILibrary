@@ -14,7 +14,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="130" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -29,9 +31,11 @@
                 BorderBrush="Black"
                 BorderThickness="1"
                 KeyboardNavigation.DirectionalNavigation="Contained">
-                <ModernUI:ContentFrame BorderBrush="Green" BorderThickness="0,2,0,0"
+                <ModernUI:ContentFrame
                     Title="TextBox ReadOnly"
                     HorizontalAlignment="Left"
+                    BorderBrush="Green"
+                    BorderThickness="0,2,0,0"
                     ContentFrameColor="LightSalmon">
                     <ModernUI:TextBoxReadOnly
                         Width="100"
@@ -48,10 +52,116 @@
                         TabIndex="13"
                         Text="Test-2" />
                 </ModernUI:ContentFrame>
-
             </ModernUI:ContentElements>
-
         </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <ModernUI:ColumnStackPanel ColumnCount="3">
+                <Rectangle
+                    Height="25"
+                    Margin="2"
+                    ModernUI:ColumnStackPanel.EndColumn="1"
+                    ModernUI:ColumnStackPanel.StartColumn="0"
+                    Fill="Red"
+                    RadiusX="5"
+                    RadiusY="5" />
+
+                <Rectangle
+                    Height="30"
+                    Margin="2"
+                    Fill="Green"
+                    RadiusX="5"
+                    RadiusY="5" />
+
+                <Rectangle
+                    Height="20"
+                    Margin="2"
+                    Fill="Gold"
+                    RadiusX="5"
+                    RadiusY="5" />
+
+                <Rectangle
+                    Height="20"
+                    Margin="2"
+                    ModernUI:ColumnStackPanel.EndColumn="2"
+                    ModernUI:ColumnStackPanel.StartColumn="1"
+                    Fill="Blue"
+                    RadiusX="5"
+                    RadiusY="5" />
+
+                <Rectangle
+                    Height="40"
+                    Margin="2"
+                    ModernUI:ColumnStackPanel.EndColumn="2"
+                    ModernUI:ColumnStackPanel.StartColumn="2"
+                    Fill="DarkCyan"
+                    RadiusX="5"
+                    RadiusY="5" />
+
+                <Rectangle
+                    Height="20"
+                    Margin="2"
+                    ModernUI:ColumnStackPanel.EndColumn="2"
+                    ModernUI:ColumnStackPanel.StartColumn="2"
+                    Fill="Magenta"
+                    RadiusX="5"
+                    RadiusY="5" />
+            </ModernUI:ColumnStackPanel>
+        </StackPanel>
+
+        <ModernUI:WrapPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="0,30,0,0"
+            ItemHeight="50"
+            ItemWidth="150"
+            Orientation="Horizontal">
+
+            <Rectangle
+                Margin="2"
+                Fill="Green"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="Red"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="Yellow"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="Blue"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="Violet"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="Brown"
+                RadiusX="5"
+                RadiusY="5" />
+
+            <Rectangle
+                Margin="2"
+                Fill="SteelBlue"
+                RadiusX="5"
+                RadiusY="5" />
+        </ModernUI:WrapPanel>
 
     </Grid>
 </UserControl>
