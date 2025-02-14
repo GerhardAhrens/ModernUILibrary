@@ -2,12 +2,18 @@
     x:Class="ModernUIDemo.MyControls.ComboBoxControlsUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Converter="clr-namespace:ModernIU.Converters;assembly=ModernUILibrary"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="900"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Converter:UpperToLowerConverter x:Key="UpperToLowerConverter" />
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -109,6 +115,56 @@
                     Background="White">
                     <Run Text="Auswahl:" />
                     <Run Text="{Binding Path=SelectedItem, ElementName=cbComboBoxEx}" />
+                </TextBlock>
+            </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="ComboBox mit Enum" />
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:ComboBoxEnum
+                    x:Name="cbEnum"
+                    Width="200"
+                    Height="25"
+                    AutomationProperties.AutomationId="enumComboBox1"
+                    EnumBinding="{Binding Path=TestEnumProperty}"
+                    NameConverter="{StaticResource ResourceKey=UpperToLowerConverter}"
+                    SelectedIndex="1" />
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=SelectedItem, ElementName=cbEnum}" />
+                    <Run Text="Key:" />
+                    <Run Text="{Binding Path=SelectedIndex, ElementName=cbEnum}" />
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:ComboBoxEnum
+                    x:Name="cbEnum2"
+                    Width="200"
+                    Height="25"
+                    AutomationProperties.AutomationId="enumComboBox2"
+                    EnumBinding="{Binding Path=TestEnumProperty}"
+                    IsReadOnly="True"
+                    NameConverter="{StaticResource ResourceKey=UpperToLowerConverter}"
+                    SelectedIndex="1" />
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=SelectedItem, ElementName=cbEnum2}" />
+                    <Run Text="Key:" />
+                    <Run Text="{Binding Path=SelectedIndex, ElementName=cbEnum2}" />
                 </TextBlock>
             </StackPanel>
         </StackPanel>

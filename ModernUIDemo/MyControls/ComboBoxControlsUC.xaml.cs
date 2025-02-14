@@ -23,7 +23,21 @@
         }
 
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
+
         public XamlProperty<Dictionary<int,string>> MComboBoxSource { get; set; } = XamlProperty.Set<Dictionary<int, string>>();
+
+        private TestEnum1 _TestEnumProperty;
+
+        public TestEnum1 TestEnumProperty
+        {
+            get { return this._TestEnumProperty; }
+            set
+            { 
+                this._TestEnumProperty = value;
+                this.OnPropertyChanged();
+            }
+        }
+
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -41,7 +55,7 @@
 
         #region PropertyChanged Implementierung
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -58,4 +72,15 @@
         }
         #endregion PropertyChanged Implementierung
     }
+
+    public enum TestEnum1
+    {
+        A,
+        B,
+        C,
+        X,
+        Y,
+        Z,
+    }
+
 }
