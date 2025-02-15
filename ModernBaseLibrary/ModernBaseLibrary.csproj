@@ -108,7 +108,6 @@
     <Folder Include="Core\ApplicationHotKeys\" />
     <Folder Include="Core\ArrayCollection\" />
     <Folder Include="Core\Caching\" />
-    <Folder Include="Core\Comparer\" />
     <Folder Include="Core\Cultures\" />
     <Folder Include="Core\Diagnostics\" />
     <Folder Include="Core\Enumeration\" />
