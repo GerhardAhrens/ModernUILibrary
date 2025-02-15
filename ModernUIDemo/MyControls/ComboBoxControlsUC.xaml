@@ -167,6 +167,29 @@
                     <Run Text="{Binding Path=SelectedIndex, ElementName=cbEnum2}" />
                 </TextBlock>
             </StackPanel>
+
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="ComboBox, MultiSelect" />
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ModernUI:MultiSelectComboBox
+                    x:Name="MC"
+                    Width="200"
+                    Height="30"
+                    ItemsSource="{Binding Path=ItemsMC, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItems="{Binding Path=SelectedItemsMC, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock
+                    Width="150"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Run Text="Auswahl:" />
+                    <Run Text="{Binding Path=Text, ElementName=MC}" />
+                </TextBlock>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

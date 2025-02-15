@@ -14,6 +14,9 @@
     [SupportedOSPlatform("windows")]
     public partial class ComboBoxControlsUC : UserControl, INotifyPropertyChanged
     {
+        private Dictionary<string, object> _itemsMC;
+        private Dictionary<string, object> _selectedItemsMC;
+
         public ComboBoxControlsUC()
         {
             this.InitializeComponent();
@@ -32,12 +35,31 @@
         {
             get { return this._TestEnumProperty; }
             set
-            { 
+            {
                 this._TestEnumProperty = value;
                 this.OnPropertyChanged();
             }
         }
 
+        public Dictionary<string, object> ItemsMC
+        {
+            get { return this._itemsMC; }
+            set
+            {
+                this._itemsMC = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public Dictionary<string, object> SelectedItemsMC
+        {
+            get { return this._selectedItemsMC; }
+            set
+            {
+                this._selectedItemsMC = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -51,6 +73,20 @@
             MComboBoxSource.Value = mdataSource;
 
             this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise", "Igel", "Elefant", "Hund", "Pferd", "Pinguin", "Zebra", "2001", "2010", "2024", "2030" };
+
+            Dictionary<string, object> itemsMC = new Dictionary<string, object>();
+            itemsMC.Add("Chennai", "MAS");
+            itemsMC.Add("Trichy", "TPJ");
+            itemsMC.Add("Bangalore", "SBC");
+            itemsMC.Add("Coimbatore", "CBE");
+            this.ItemsMC = itemsMC;
+        }
+        private void Submit()
+        {
+            foreach (KeyValuePair<string, object> s in this.SelectedItemsMC)
+            {
+                MessageBox.Show(s.Key);
+            }
         }
 
         #region PropertyChanged Implementierung

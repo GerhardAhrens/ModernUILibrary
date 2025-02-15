@@ -92,7 +92,6 @@
             RoutedEventArgs newEventArgs = new RoutedEventArgs(NewValueSavedEvent);
             ((TextBox)sender).RaiseEvent(newEventArgs);
             SaveNewValueCommand?.Execute(((TextBox)sender).Text);
-
         }
 
         private void txtBox_KeyDown(object sender, KeyEventArgs e)
