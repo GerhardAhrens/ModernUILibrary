@@ -8,6 +8,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using ModernIU.Base;
+
     /// <summary>
     /// Interaction logic for MultiSelectComboBox.xaml
     /// </summary>
@@ -18,7 +20,19 @@
 
         public MultiSelectComboBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.BorderBrush = ControlBase.BorderBrush;
+            this.BorderThickness = ControlBase.BorderThickness;
+            this.Height = ControlBase.DefaultHeight;
+            this.VerticalAlignment = VerticalAlignment.Center;
+            this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.Padding = new Thickness(0);
+            this.Margin = new Thickness(2);
+            this.MinHeight = 18;
+            this.ClipToBounds = false;
+            this.Focusable = true;
             this._nodeList = new ObservableCollection<MultiSelectNode>();
         }
 
@@ -61,7 +75,9 @@
             get { return (string)GetValue(DefaultTextProperty); }
             set { SetValue(DefaultTextProperty, value); }
         }
+        #endregion
 
+        #region Dependency Properties Icommand
         public static readonly DependencyProperty SelectedItemsCommandProperty =
             DependencyProperty.Register("SelectedItemsCommand", typeof(ICommand), typeof(MultiSelectComboBox), new PropertyMetadata(null));
 
@@ -70,21 +86,26 @@
             get { return (ICommand)GetValue(SelectedItemsCommandProperty); }
             set { SetValue(SelectedItemsCommandProperty, value); }
         }
-
-        #endregion
+        #endregion Dependency Properties Icommand
 
         #region Events
         private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MultiSelectComboBox control = (MultiSelectComboBox)d;
-            control.DisplayInControl();
+            if (control != null)
+            {
+                control.DisplayInControl();
+            }
         }
 
         private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MultiSelectComboBox control = (MultiSelectComboBox)d;
-            control.SelectNodes();
-            control.SetText();
+            if (control != null)
+            {
+                control.SelectNodes();
+                control.SetText();
+            }
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
@@ -131,7 +152,6 @@
         }
         #endregion
 
-
         #region Methods
         private void SelectNodes()
         {
@@ -142,13 +162,6 @@
                 {
                     node.IsSelected = true;
                 }
-            }
-
-            if (this.SelectedItems != null)
-            {
-                RoutedEventArgs newEventArgs = new RoutedEventArgs(SelectedItemsEvent);
-                ((MultiSelectComboBox)this).RaiseEvent(newEventArgs);
-                this.SelectedItemsCommand?.Execute(((MultiSelectComboBox)this).SelectedItems);
             }
         }
 
@@ -163,6 +176,7 @@
             }
             catch (Exception ex)
             {
+                string errorText = ex.Message;
                 throw;
             }
 
@@ -176,6 +190,10 @@
                         this.SelectedItems.Add(node.Title, this.ItemsSource[node.Title]);
                     }
                 }
+            }
+            if (this.SelectedItemsCommand != null && this.SelectedItemsCommand.CanExecute(this.SelectedItems) == true)
+            {
+                this.SelectedItemsCommand.Execute(this.SelectedItems);
             }
         }
 

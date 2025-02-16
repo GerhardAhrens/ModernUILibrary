@@ -23,15 +23,17 @@
         <ComboBox.Template>
             <ControlTemplate TargetType="ComboBox">
                 <Grid>
-
                     <ToggleButton
                         Name="ToggleButton"
                         Grid.Column="2"
+                        Height="{Binding Path=Height, ElementName=MultiSelectCombo}"
                         HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
                         ClickMode="Press"
                         Content="{Binding Path=Text, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                         Focusable="false"
                         IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
                     <Popup
                         Name="Popup"
                         AllowsTransparency="True"

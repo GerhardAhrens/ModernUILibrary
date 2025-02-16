@@ -178,8 +178,10 @@
                     x:Name="MC"
                     Width="200"
                     Height="30"
+                    DefaultText="Auswahl hier ..."
                     ItemsSource="{Binding Path=ItemsMC, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedItems="{Binding Path=SelectedItemsMC, UpdateSourceTrigger=PropertyChanged}" />
+                    SelectedItems="{Binding Path=SelectedItemsMC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedItemsCommand="{Binding Path=CmdAgg[SelectedItemsMCCommand]}" />
 
                 <TextBlock
                     Width="150"
@@ -189,6 +191,11 @@
                     <Run Text="Auswahl:" />
                     <Run Text="{Binding Path=Text, ElementName=MC}" />
                 </TextBlock>
+
+                <Button
+                    x:Name="BtnMCSelected"
+                    Click="BtnMCSelected_Click"
+                    Content="Show Selected Item" />
             </StackPanel>
         </StackPanel>
 

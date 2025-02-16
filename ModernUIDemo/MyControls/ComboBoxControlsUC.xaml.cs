@@ -8,22 +8,27 @@
 
     using ModernIU.WPF.Base;
 
+    using ModernUI.MVVM.Base;
+
     /// <summary>
     /// Interaktionslogik für ComboBoxControlsUC.xaml
     /// </summary>
     [SupportedOSPlatform("windows")]
     public partial class ComboBoxControlsUC : UserControl, INotifyPropertyChanged
     {
-        private Dictionary<string, object> _itemsMC;
-        private Dictionary<string, object> _selectedItemsMC;
+        private Dictionary<string, object> _itemsMC = null;
+        private Dictionary<string, object> _selectedItemsMC = null;
 
         public ComboBoxControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            this.CmdAgg.AddOrSetCommand("SelectedItemsMCCommand", new RelayCommand(p1 => this.SelectedItemsMCHandler(p1), p2 => true));
 
             this.DataContext = this;
         }
+
+        public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
 
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
 
@@ -80,13 +85,10 @@
             itemsMC.Add("Bangalore", "SBC");
             itemsMC.Add("Coimbatore", "CBE");
             this.ItemsMC = itemsMC;
-        }
-        private void Submit()
-        {
-            foreach (KeyValuePair<string, object> s in this.SelectedItemsMC)
-            {
-                MessageBox.Show(s.Key);
-            }
+
+            Dictionary<string, object> setSelectMC = new Dictionary<string, object>();
+            setSelectMC.Add("Chennai", "MAS");
+            this.SelectedItemsMC = setSelectMC;
         }
 
         #region PropertyChanged Implementierung
@@ -107,6 +109,19 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+
+        private void BtnMCSelected_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.SelectedItemsMC != null)
+            {
+                string values = string.Join(';', this.SelectedItemsMC.Select(s => s.Key));
+                MessageBox.Show(values);
+            }
+        }
+
+        private void SelectedItemsMCHandler(object p1)
+        {
+        }
     }
 
     public enum TestEnum1
