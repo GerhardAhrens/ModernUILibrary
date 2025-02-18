@@ -36,7 +36,9 @@
                     HorizontalAlignment="Left"
                     BorderBrush="Green"
                     BorderThickness="0,2,0,0"
-                    ContentFrameColor="LightSalmon">
+                    ContentFrameColor="LightSalmon"
+                    TitleTextAlignment="Left"
+                    TitleWidth="55">
                     <ModernUI:TextBoxReadOnly
                         Width="100"
                         TabIndex="13"
@@ -46,7 +48,9 @@
                 <ModernUI:ContentFrame
                     Title="TextBox ReadOnly"
                     HorizontalAlignment="Left"
-                    ContentFrameColor="LightSalmon">
+                    ContentFrameColor="YellowGreen"
+                    TitleTextAlignment="Right"
+                    TitleWidth="150">
                     <ModernUI:TextBoxReadOnly
                         Width="100"
                         TabIndex="13"

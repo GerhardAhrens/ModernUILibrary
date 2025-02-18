@@ -23,6 +23,12 @@
         public static readonly DependencyProperty TitleMarginProperty =
             DependencyProperty.Register("TitleMargin", typeof(Thickness), typeof(ContentFrame), new UIPropertyMetadata(new Thickness(5, 0, 5, 0)));
 
+        public static readonly DependencyProperty TitleWidthProperty =
+            DependencyProperty.Register("TitleWidth", typeof(double), typeof(ContentFrame), new UIPropertyMetadata(120.0));
+
+        public static readonly DependencyProperty TitleTextAlignmentProperty =
+            DependencyProperty.Register("TitleTextAlignment", typeof(TextAlignment), typeof(ContentFrame), new UIPropertyMetadata(TextAlignment.Left));
+
         public static readonly DependencyProperty ContentMarginProperty =
             DependencyProperty.Register("ContentMargin", typeof(Thickness), typeof(ContentFrame), new UIPropertyMetadata(new Thickness(0, 2, 0, 2)));
 
@@ -84,6 +90,24 @@
         {
             get { return (Thickness)GetValue(TitleMarginProperty); }
             set { this.SetValue(TitleMarginProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the Width of the title.
+        /// </summary>
+        public double TitleWidth
+        {
+            get { return (double)GetValue(TitleWidthProperty); }
+            set { this.SetValue(TitleWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the Width of the title.
+        /// </summary>
+        public TextAlignment TitleTextAlignment
+        {
+            get { return (TextAlignment)GetValue(TitleTextAlignmentProperty); }
+            set { this.SetValue(TitleTextAlignmentProperty, value); }
         }
 
         /// <summary>

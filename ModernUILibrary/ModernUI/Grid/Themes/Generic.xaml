@@ -39,12 +39,20 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter
                                 Grid.Column="0"
+                                Width="{TemplateBinding TitleWidth}"
                                 Margin="{TemplateBinding TitleMargin}"
                                 HorizontalAlignment="{TemplateBinding HorizontalTitleAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalTitleAlignment}"
                                 ContentSource="Title"
                                 TextBlock.FontWeight="{TemplateBinding TitleFontWeight}"
-                                TextBlock.TextAlignment="Left" />
+                                TextBlock.TextAlignment="{TemplateBinding TitleTextAlignment}">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextDecorations" Value="None" />
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
                         </Border>
 
                         <ContentPresenter
