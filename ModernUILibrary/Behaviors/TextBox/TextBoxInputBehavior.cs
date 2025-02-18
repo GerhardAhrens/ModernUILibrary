@@ -1,38 +1,29 @@
+ï»¿//-----------------------------------------------------------------------
+// <copyright file="TextBoxInputBehavior.cs" company="Lifeprojects.de">
+//     Class: TextBoxInputBehavior
+//     Copyright Â© Lifeprojects.de 2020
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>development@lifeprojects.de</email>
+// <date>09.06.2020</date>
+//
+// <summary>Definition of Behavior Class for press Enter to next Control</summary>
+//-----------------------------------------------------------------------
 /*
- * <copyright file="TextBoxInputBehavior.cs" company="Lifeprojects.de">
- *     Class: TextBoxInputBehavior
- *     Copyright © Lifeprojects.de 2022
- * </copyright>
- *
- * <author>Gerhard Ahrens - Lifeprojects.de</author>
- * <email>developer@lifeprojects.de</email>
- * <date>04.12.2022 12:24:59</date>
- * <Project>CurrentProject</Project>
- *
- * <summary>
- * Beschreibung zur Klasse
- * </summary>
- *
- * < Website >
- * https://blindmeis.wordpress.com/2015/01/20/wpf-textbox-input-behavior/
- * </Website>
- *
- *This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by the Free Software Foundation, 
- * either version 3 of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; 
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.You should have received a copy of the GNU General Public License along with this program. 
- * If not, see <http://www.gnu.org/licenses/>.
-*/
+    <TextBox>
+       <i:Interaction.Behaviors>
+          <behavior:TextBoxInputBehavior EscapeClearsText="True" InputMode="DigitInput" />
+       </i:Interaction.Behaviors>
+    </TextBox>
+ */
 
 namespace ModernIU.Behaviors
 {
     using System;
     using System.Globalization;
     using System.Linq;
-    using System.Media;
-    using System.Runtime.Versioning;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
@@ -40,59 +31,41 @@ namespace ModernIU.Behaviors
 
     using Microsoft.Xaml.Behaviors;
 
-    public enum TextBoxInputMode
-    {
-        None,
-        Decimal,
-        Integer,
-        Percent,
-        Letter,
-        LetterOrDigit,
-        Money,
-        Date
-    }
-
-    [SupportedOSPlatform("windows")]
     public class TextBoxInputBehavior : Behavior<TextBox>
     {
-        private const NumberStyles validNumberStyles = NumberStyles.AllowDecimalPoint |
-                                              NumberStyles.AllowThousands |
-                                              NumberStyles.AllowLeadingSign;
+        public static readonly DependencyProperty JustPositivDecimalInputProperty = DependencyProperty.Register("JustPositivDecimalInput", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty DecimalPlaceProperty = DependencyProperty.Register("DecimalPlace", typeof(int), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(2));
+        public static readonly DependencyProperty EscapeClearsTextProperty = DependencyProperty.RegisterAttached("EscapeClearsText", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(false));
 
-        public static readonly DependencyProperty JustPositivDecimalInputProperty =
-            DependencyProperty.Register("JustPositivDecimalInput", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(false));
+        private const NumberStyles ValidNumberStyles = NumberStyles.AllowDecimalPoint |
+                                           NumberStyles.AllowThousands |
+                                           NumberStyles.AllowLeadingSign;
 
-        public static readonly DependencyProperty DecimalPlaceProperty = 
-            DependencyProperty.Register("DecimalPlace", typeof(int), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(2));
+        private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "d.M.yy" };
 
-        public static readonly DependencyProperty EscapeClearsTextProperty = 
-            DependencyProperty.RegisterAttached("EscapeClearsText", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(false));
+        private readonly char decimalSeparator;
+        private readonly char numberGroupSeparator;
+        private readonly CultureInfo cultureInfo = null;
 
-        public static readonly DependencyProperty BeepProperty =
-            DependencyProperty.RegisterAttached("Beep", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(true));
-
-        private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy" };
-
-        private bool changeIntern = false;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextBoxInputBehavior"/> class.
-        /// </summary>
         public TextBoxInputBehavior()
         {
             this.InputMode = TextBoxInputMode.None;
             this.JustPositivDecimalInput = false;
             this.MaxVorkommastellen = null;
+            this.cultureInfo = Thread.CurrentThread.CurrentUICulture;
+            this.decimalSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberDecimalSeparator);
+            this.numberGroupSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberGroupSeparator);
+            this.IsPasting = false;
         }
 
         public TextBoxInputMode InputMode { get; set; }
 
         public ushort? MaxVorkommastellen { get; set; }
 
-
         public bool JustPositivDecimalInput
         {
-            get { return (bool)GetValue(JustPositivDecimalInputProperty); }
-            set { SetValue(JustPositivDecimalInputProperty, value); }
+            get { return (bool)this.GetValue(JustPositivDecimalInputProperty); }
+            set { this.SetValue(JustPositivDecimalInputProperty, value); }
         }
 
         public int DecimalPlace
@@ -107,193 +80,224 @@ namespace ModernIU.Behaviors
             set { this.SetValue(EscapeClearsTextProperty, value); }
         }
 
-        public bool Beep
-        {
-            get { return (bool)this.GetValue(BeepProperty); }
-            set { this.SetValue(BeepProperty, value); }
-        }
+        private bool IsPasting { get; set; }
+
+        private string PastText { get; set; }
 
         protected override void OnAttached()
         {
             base.OnAttached();
-
-            if (InputMode == TextBoxInputMode.Integer || InputMode == TextBoxInputMode.Decimal || InputMode == TextBoxInputMode.Money || InputMode == TextBoxInputMode.Percent)
+            this.AssociatedObject.PreviewTextInput += this.AssociatedObjectPreviewTextInput;
+            this.AssociatedObject.PreviewKeyDown += this.AssociatedObjectPreviewKeyDown;
+            this.AssociatedObject.KeyDown += this.AssociatedObjectKeyDown;
+            this.AssociatedObject.LostFocus += this.AssociatedObjectLostFocus;
+            if (this.InputMode == TextBoxInputMode.Date)
             {
-                AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Right;
+                this.AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Left;
+            }
+            else if (this.InputMode == TextBoxInputMode.CurrencyInput)
+            {
+                this.AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Right;
+            }
+            else if (this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                this.AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Right;
+            }
+            else if (this.InputMode == TextBoxInputMode.DigitInput)
+            {
+                this.AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Right;
             }
             else
             {
-                AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Left;
+                this.AssociatedObject.HorizontalContentAlignment = HorizontalAlignment.Left;
             }
 
-            AssociatedObject.VerticalContentAlignment = VerticalAlignment.Center;
-
-            AssociatedObject.PreviewTextInput += AssociatedObjectPreviewTextInput;
-            AssociatedObject.PreviewKeyDown += AssociatedObjectPreviewKeyDown;
-            AssociatedObject.TextChanged += this.AssociatedObjectTextChanged;
-
-            DataObject.AddPastingHandler(AssociatedObject, Pasting);
+            DataObject.AddPastingHandler(this.AssociatedObject, this.Pasting);
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PreviewTextInput -= AssociatedObjectPreviewTextInput;
-            AssociatedObject.PreviewKeyDown -= AssociatedObjectPreviewKeyDown;
-            AssociatedObject.TextChanged -= this.AssociatedObjectTextChanged;
+            this.AssociatedObject.PreviewTextInput -= this.AssociatedObjectPreviewTextInput;
+            this.AssociatedObject.PreviewKeyDown -= this.AssociatedObjectPreviewKeyDown;
+            this.AssociatedObject.KeyDown -= this.AssociatedObjectKeyDown;
+            this.AssociatedObject.LostFocus -= this.AssociatedObjectLostFocus;
 
-            DataObject.RemovePastingHandler(AssociatedObject, Pasting);
+            DataObject.RemovePastingHandler(this.AssociatedObject, this.Pasting);
+        }
+
+        private void AssociatedObjectKeyDown(object sender, KeyEventArgs e)
+        {
+            /*this.AssociatedObject.Text = Convert.ToDecimal(this.AssociatedObject.Text).ToString("C2");*/
+        }
+
+        private void AssociatedObjectLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (this.InputMode == TextBoxInputMode.CurrencyInput)
+            {
+                if (this.AssociatedObject.Text.Contains(this.decimalSeparator) == false)
+                {
+                    decimal value = Convert.ToDecimal($"{this.AssociatedObject.Text}{this.decimalSeparator}00");
+                    this.AssociatedObject.Text = value.ToString($"N{this.DecimalPlace}");
+                }
+                else
+                {
+                    decimal value = Convert.ToDecimal(this.AssociatedObject.Text.Replace(".",string.Empty));
+                    this.AssociatedObject.Text = value.ToString($"N{this.DecimalPlace}");
+                }
+            }
+            else if (this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                if (string.IsNullOrEmpty(this.AssociatedObject.Text) == true)
+                {
+                    decimal value = Convert.ToDecimal("0");
+                    this.AssociatedObject.Text = value.ToString();
+                }
+                else
+                {
+                    if (this.AssociatedObject.Text.Contains(this.decimalSeparator) == false)
+                    {
+                        decimal value = Convert.ToDecimal(this.AssociatedObject.Text);
+                        if (this.DecimalPlace > 0)
+                        {
+                            this.AssociatedObject.Text = value.ToString($"N{this.DecimalPlace}");
+                        }
+                        else
+                        {
+                            this.AssociatedObject.Text = value.ToString();
+                        }
+                    }
+                    else
+                    {
+                        decimal value = Convert.ToDecimal(this.AssociatedObject.Text.Replace(".", string.Empty));
+                        this.AssociatedObject.Text = value.ToString($"N{this.DecimalPlace}");
+                    }
+                }
+            }
+            else if (this.InputMode == TextBoxInputMode.DigitInput)
+            {
+                if (string.IsNullOrEmpty(this.AssociatedObject.Text) == false)
+                {
+                    int value = Convert.ToInt32(this.AssociatedObject.Text);
+                    this.AssociatedObject.Text = value.ToString();
+                }
+            }
         }
 
         private void Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(string)))
             {
-                var pastedText = (string)e.DataObject.GetData(typeof(string));
+                string pastedText = (string)e.DataObject.GetData(typeof(string));
 
-                if (this.IsValidInput(GetText(pastedText)) == false)
+                string currentText = this.GetText(pastedText);
+                this.IsPasting = true;
+                if (this.IsValidInput(currentText) == false)
                 {
-                    if (this.Beep == true)
-                    {
-                        SystemSounds.Beep.Play();
-                    }
-
+                    System.Media.SystemSounds.Beep.Play();
                     e.CancelCommand();
                 }
+
+                this.IsPasting = false;
             }
             else
             {
-                if (this.Beep == true)
-                {
-                    SystemSounds.Beep.Play();
-                }
-
+                System.Media.SystemSounds.Beep.Play();
                 e.CancelCommand();
-            }
-        }
-
-        private void AssociatedObjectTextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox txt = sender as TextBox;
-            if (txt != null)
-            {
-                string originalSource = ((TextBox)e.Source).Text;
-                if (this.changeIntern == true)
-                {
-                    this.changeIntern = false;
-                    return;
-                }
-
-                if (InputMode == TextBoxInputMode.Date)
-                {
-                    if (string.IsNullOrEmpty(txt.Text) == true)
-                    {
-                        return;
-                    }
-
-                    if (txt.Text.Length > 10)
-                    {
-                        if (this.CheckIsDate(originalSource.Split(' ')[0]).Item1 == true)
-                        {
-                            this.changeIntern = true;
-                            if (this.CheckIsDate(originalSource.Split(' ')[0]).Item2 != null)
-                            {
-                                txt.Text = Convert.ToDateTime(originalSource.Split(' ')[0]).ToShortDateString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (this.CheckIsDate(originalSource).Item1 == true)
-                        {
-                            this.changeIntern = true;
-                            if (this.CheckIsDate(originalSource).Item2 != null)
-                            {
-                                txt.Text = Convert.ToDateTime(originalSource).ToShortDateString();
-                            }
-                        }
-                    }
-                }
             }
         }
 
         private void AssociatedObjectPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape && this.EscapeClearsText == true)
-            {
+            {                
                 this.AssociatedObject.Text = string.Empty;
+            }
+
+            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.V)
+            {
+                this.IsPasting = true;
+                string pastedText = Clipboard.GetText();
+                if (this.IsValidInput(pastedText) == true)
+                {
+                    this.AssociatedObject.Text = this.PastText;
+                    this.IsPasting = false;
+                    this.PastText = string.Empty;
+                }
             }
 
             if (e.Key == Key.Space)
             {
-                if (this.IsValidInput(GetText(" ")) == false)
+                if (!this.IsValidInput(this.GetText(" ")))
                 {
-                    if (this.Beep == true)
-                    {
-                        SystemSounds.Beep.Play();
-                    }
-
+                    System.Media.SystemSounds.Beep.Play();
                     e.Handled = true;
                 }
             }
 
             if (e.Key == Key.Back)
             {
-                //wenn was selektiert wird dann wird nur das gelöscht mit BACK
-                if (AssociatedObject.SelectionLength > 0)
+                /*wenn was selektiert wird dann wird nur das gelÃ¶scht mit BACK*/
+                try
                 {
-                    if (this.IsValidInput(GetText(string.Empty)) == false)
+                    if (this.AssociatedObject?.SelectionLength > 0)
                     {
-                        if (this.Beep == true)
+                        if (this.IsValidInput(this.GetText(string.Empty)) == false)
                         {
-                            SystemSounds.Beep.Play();
+                            System.Media.SystemSounds.Beep.Play();
+                            e.Handled = true;
                         }
+                    }
+                    else if (this.AssociatedObject?.CaretIndex > 0)
+                    {
+                        //selber lÃ¶schen
+                        var txt = this.AssociatedObject.Text.Replace(".",string.Empty);
+                        if (txt.Length != this.AssociatedObject.CaretIndex - 1)
+                        {
+                            string backspace = txt.Remove(this.AssociatedObject.CaretIndex - 1, 1);
 
-                        e.Handled = true;
+                            if (!this.IsValidInput(backspace))
+                            {
+                                System.Media.SystemSounds.Beep.Play();
+                                e.Handled = true;
+                            }
+                        }
+                        else
+                        {
+                            if (!this.IsValidInput(txt))
+                            {
+                                System.Media.SystemSounds.Beep.Play();
+                                e.Handled = true;
+                            }
+                        }
                     }
                 }
-                else if (AssociatedObject.CaretIndex > 0)
+                catch (Exception)
                 {
-                    //selber löschen
-                    var txt = AssociatedObject.Text;
-                    var backspace = txt.Remove(AssociatedObject.CaretIndex - 1, 1);
-
-                    if (this.IsValidInput(backspace) == false)
-                    {
-                        SystemSounds.Beep.Play();
-                        e.Handled = true;
-                    }
+                    throw;
                 }
             }
 
             if (e.Key == Key.Delete)
             {
-                //wenn was selektiert wird dann wird nur das gelöscht mit ENTF
-                if (AssociatedObject.SelectionLength > 0)
+                /*wenn was selektiert wird dann wird nur das gelÃ¶scht mit ENTF*/
+                if (this.AssociatedObject?.SelectionLength > 0)
                 {
-                    if (this.IsValidInput(GetText(string.Empty)) == false)
+                    if (!this.IsValidInput(this.GetText(string.Empty)))
                     {
-                        if (this.Beep == true)
-                        {
-                            SystemSounds.Beep.Play();
-                        }
-
+                        System.Media.SystemSounds.Beep.Play();
                         e.Handled = true;
                     }
                 }
-                else if (AssociatedObject.CaretIndex < AssociatedObject.Text.Length)
+                else if (this.AssociatedObject?.CaretIndex < this.AssociatedObject.Text.Length)
                 {
-                    //selber löschen
-                    var txt = AssociatedObject.Text;
-                    var entf = txt.Remove(AssociatedObject.CaretIndex, 1);
+                    /*selber lÃ¶schen */
+                    var txt = this.AssociatedObject.Text;
+                    var entf = txt.Remove(this.AssociatedObject.CaretIndex, 1);
 
-                    if (this.IsValidInput(entf) == false)
+                    if (!this.IsValidInput(entf))
                     {
-                        if (this.Beep == true)
-                        {
-                            SystemSounds.Beep.Play();
-                        }
-
+                        System.Media.SystemSounds.Beep.Play();
                         e.Handled = true;
                     }
                 }
@@ -302,157 +306,271 @@ namespace ModernIU.Behaviors
 
         private void AssociatedObjectPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (this.IsValidInput(GetText(e.Text)) == false)
+            if (!this.IsValidInput(this.GetText(e.Text)))
             {
-                if (this.Beep == true)
-                {
-                    SystemSounds.Beep.Play();
-                }
-
-                e.Handled = false;
+                System.Media.SystemSounds.Beep.Play();
+                e.Handled = true;
             }
         }
 
         private string GetText(string input)
         {
-            var txt = AssociatedObject;
-
-            int selectionStart = txt.SelectionStart;
-            if (txt.Text.Length < selectionStart)
+            if (string.IsNullOrEmpty(input) == true)
             {
-                selectionStart = txt.Text.Length;
+                return string.Empty;
             }
 
-            int selectionLength = txt.SelectionLength;
-            if (txt.Text.Length < selectionStart + selectionLength)
+            try
             {
-                selectionLength = txt.Text.Length - selectionStart;
+                var txt = this.AssociatedObject;
+
+                int selectionStart = txt.SelectionStart;
+                if (txt.Text.Length < selectionStart)
+                {
+                    selectionStart = txt.Text.Length;
+                }
+
+                int selectionLength = txt.SelectionLength;
+                if (txt.Text.Length < selectionStart + selectionLength)
+                {
+                    selectionLength = txt.Text.Length - selectionStart;
+                }
+
+                var realtext = txt.Text.Remove(selectionStart, selectionLength);
+
+                int caretIndex = txt.CaretIndex;
+                if (realtext.Length < caretIndex)
+                {
+                    caretIndex = realtext.Length;
+                }
+
+                var newtext = realtext.Insert(caretIndex, input);
+
+                return newtext;
             }
-
-            var realtext = txt.Text.Remove(selectionStart, selectionLength);
-
-            int caretIndex = txt.CaretIndex;
-            if (realtext.Length < caretIndex)
+            catch (Exception)
             {
-                caretIndex = realtext.Length;
+                throw;
             }
-
-            var newtext = realtext.Insert(caretIndex, input);
-
-            return newtext;
         }
 
         private bool IsValidInput(string input)
         {
-            char decimalSeparator = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator);
-            char negativeSign = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NegativeSign);
-            char dateSeparator = Convert.ToChar(CultureInfo.CurrentCulture.DateTimeFormat.DateSeparator);
+            if (string.IsNullOrEmpty(input) == true)
+            {
+                return true;
+            }
 
             if (input.Length == 0)
             {
                 return true;
             }
 
-            switch (InputMode)
+            switch (this.InputMode)
             {
                 case TextBoxInputMode.None:
-                    return true;
+                    {
+                        return true;
+                    }
 
-                case TextBoxInputMode.Integer:
-                    return CheckIsDigit(input);
+                case TextBoxInputMode.DigitInput:
+                    {
+                        return this.CheckIsDigit(input);
+                    }
 
-                case TextBoxInputMode.Decimal:
-                    if (CheckIsDecimal(input) == false)
+                case TextBoxInputMode.DecimalInput:
+                    /* wen mehr als ein Komma */
+                    if (input.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 1)
                     {
                         return false;
                     }
 
-                    decimal decimalValue = 0.00M;
-                    bool isDecimalValue = decimal.TryParse(input, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimalValue);
-                    if (isDecimalValue == false || GetDecimalPlaces(decimalValue) > DecimalPlace)
+                    if (input.ToCharArray().Where(x => x == this.numberGroupSeparator).Count() > 0)
                     {
-                        return false;
-                    }
-
-                    return true;
-
-                case TextBoxInputMode.Percent: //99,999 is zulässig und  nur positiv ohne 1000er Trennzeichen
-                    float percent;
-
-                    if (input.Contains(negativeSign))
-                    {
-                        return false;
-                    }
-
-                    //wen mehr als ein Komma
-                    if (input.ToCharArray().Where(x => x == decimalSeparator).Count() > 1)
-                    {
-                        return false;
-                    }
-
-                    bool percentResult = float.TryParse(input, NumberStyles.Float, CultureInfo.CurrentCulture, out percent);
-
-                    if (MaxVorkommastellen.HasValue)
-                    {
-                        var vorkomma = Math.Truncate(percent);
-                        if (vorkomma.ToString(CultureInfo.CurrentCulture).Length > MaxVorkommastellen.Value)
+                        decimal decimalOut;
+                        bool isOk = decimal.TryParse(input, NumberStyles.Any, this.cultureInfo, out decimalOut);
+                        if (isOk == false)
                         {
                             return false;
                         }
                     }
 
-                    return percentResult;
-
-                case TextBoxInputMode.Letter:
-                    if (input.ToCharArray().Any(x => char.IsLetter(x) == false) == true)
+                    if (input.Contains(this.decimalSeparator.ToString()) == true)
                     {
-                        return false;
-                    }
-
-                    return true;
-
-                case TextBoxInputMode.LetterOrDigit:
-                    if (input.ToCharArray().Any(x => char.IsLetterOrDigit(x) == false) == true)
-                    {
-                        return false;
-                    }
-
-                    return true;
-
-                case TextBoxInputMode.Money:
-                    decimal money = 0.00M;
-
-                    bool isMoney = decimal.TryParse(input, NumberStyles.Currency, CultureInfo.CurrentCulture, out money);
-                    if (isMoney == false || GetDecimalPlaces(money) > 2)
-                    {
-                        return false;
-                    }
-
-                    return true;
-
-                case TextBoxInputMode.Date:
-                    {
-                        if (CheckIsDigit(input.Last().ToString()) == false)
+                        if (input.Split(this.decimalSeparator)[1].Length > this.DecimalPlace)
                         {
-                            if (CheckPunctuation(input.Last().ToString()) == false)
+                            if (this.IsPasting == true)
                             {
-                                return false;
+                                string decimalValue = input.Split(this.decimalSeparator)[1];
+                                this.PastText = $"{input.Split(this.decimalSeparator)[0]}{this.decimalSeparator}{decimalValue.Substring(0, this.DecimalPlace)}";
+                                this.IsPasting = false;
                             }
                             else
                             {
-                                if (input.Last() != dateSeparator)
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (input.Contains("-"))
+                    {
+                        if (this.JustPositivDecimalInput)
+                        {
+                            return false;
+                        }
+
+
+                        if (input.IndexOf("-", StringComparison.Ordinal) > 0)
+                        {
+                            return false;
+                        }
+
+                        if (input.ToCharArray().Count(x => x == '-') > 1)
+                        {
+                            return false;
+                        }
+
+                        /*minus einmal am anfang zulÃ¤ssig */
+                        if (input.Length == 1)
+                        {
+                            return true;
+                        }
+                    }
+
+                    decimal decimalValueOut;
+                    var result = decimal.TryParse(input, ValidNumberStyles, CultureInfo.CurrentCulture, out decimalValueOut);
+                    return result;
+
+                case TextBoxInputMode.CurrencyInput:
+                    /* wen mehr als ein Komma */
+                    if (input.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 1)
+                    {
+                        return false;
+                    }
+
+                    if (input.ToCharArray().Where(x => x == this.numberGroupSeparator).Count() > 0)
+                    {
+                        decimal decimalOut;
+                        bool isOk = decimal.TryParse(input, NumberStyles.Float | NumberStyles.AllowThousands, this.cultureInfo, out decimalOut);
+                        if (isOk == false)
+                        {
+                            return false;
+                        }
+                    }
+
+                    if (input.Contains(this.decimalSeparator.ToString()) == true)
+                    {
+                        if (input.Split(this.decimalSeparator)[1].Length > this.DecimalPlace)
+                        {
+                            if (this.IsPasting == true)
+                            {
+                                string decimalValue = input.Split(this.decimalSeparator)[1];
+                                this.PastText = $"{input.Split(this.decimalSeparator)[0]}{this.decimalSeparator}{decimalValue.Substring(0, this.DecimalPlace)}";
+                                this.IsPasting = false;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (input.Contains("-"))
+                    {
+                        if (this.JustPositivDecimalInput)
+                        {
+                            return false;
+                        }
+
+
+                        if (input.IndexOf("-", StringComparison.Ordinal) > 0)
+                        {
+                            return false;
+                        }
+
+                        if (input.ToCharArray().Count(x => x == '-') > 1)
+                        {
+                            return false;
+                        }
+
+                        /*minus einmal am anfang zulÃ¤ssig */
+                        if (input.Length == 1)
+                        {
+                            return true;
+                        }
+                    }
+
+                    decimal currencyValueOut;
+                    var currencyResult = decimal.TryParse(input, ValidNumberStyles, CultureInfo.CurrentCulture, out currencyValueOut);
+                    return currencyResult;
+
+                case TextBoxInputMode.PercentInput: /*99,999 is zulÃ¤ssig und nur positiv ohne 1000er Trennzeichen*/
+                    {
+                        float f;
+
+                        if (input.Contains("-"))
+                        {
+                            return false;
+                        }
+
+                        /*wen mehr als ein Komma */
+                        if (input.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 1)
+                        {
+                            return false;
+                        }
+
+                        if (input.ToCharArray().Where(x => x == this.numberGroupSeparator).Count() > 0)
+                        {
+                            return false;
+                        }
+
+                        if (input.Contains(this.decimalSeparator.ToString()) == true)
+                        {
+                            if (input.Split(this.decimalSeparator)[1].Length > this.DecimalPlace)
+                            {
+                                if (this.IsPasting == true)
+                                {
+                                    string decimalValue = input.Split(this.decimalSeparator)[1];
+                                    this.PastText = $"{input.Split(this.decimalSeparator)[0]}{this.decimalSeparator}{decimalValue.Substring(0, this.DecimalPlace)}";
+                                    this.IsPasting = false;
+                                }
+                                else
                                 {
                                     return false;
                                 }
                             }
                         }
 
-                        return this.CheckIsDate(input, dateSeparator).Item1;
+                        var percentResult = float.TryParse(input, NumberStyles.Float, CultureInfo.CurrentCulture, out f);
+
+                        if (this.MaxVorkommastellen.HasValue)
+                        {
+                            var vorkomma = Math.Truncate(f);
+                            if (vorkomma.ToString(CultureInfo.CurrentCulture).Length > this.MaxVorkommastellen.Value)
+                            {
+                                return false;
+                            }
+                        }
+
+                        return percentResult;
                     }
 
-                default:
-                    throw new ArgumentException("Unknown TextBoxInputMode");
+                case TextBoxInputMode.Letter:
+                    {
+                        return this.CheckIsLetter(input);
+                    }
 
+                case TextBoxInputMode.LetterOrDigit:
+                    {
+                        return this.CheckIsLetterOrDigit(input);
+                    }
+
+                case TextBoxInputMode.Date:
+                    {
+                        return this.CheckIsdate(input);
+                    }
+
+                default: throw new ArgumentException("Unknown TextBoxInputMode");
             }
         }
 
@@ -461,96 +579,26 @@ namespace ModernIU.Behaviors
             return wert.ToCharArray().All(char.IsDigit);
         }
 
-        private bool CheckPunctuation(string wert)
+        private bool CheckIsLetterOrDigit(string wert)
         {
-            return wert.ToCharArray().All(char.IsPunctuation);
+            return wert.ToCharArray().All(char.IsLetterOrDigit);
         }
 
-        private bool CheckIsDecimal(string input)
+        private bool CheckIsLetter(string wert)
         {
-            char decimalSeparator = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator);
-            char negativeSign = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NegativeSign);
-
-            decimal d;
-            //wen mehr als ein Komma
-            if (input.ToCharArray().Where(x => x == decimalSeparator).Count() > 1)
-            {
-                return false;
-            }
-
-            if (input.Contains(negativeSign))
-            {
-                if (JustPositivDecimalInput)
-                {
-                    return false;
-                }
-
-
-                if (input.IndexOf(negativeSign, StringComparison.Ordinal) > 0)
-                {
-                    return false;
-                }
-
-                if (input.ToCharArray().Count(x => x == negativeSign) > 1)
-                {
-                    return false;
-                }
-
-                //minus einmal am anfang zulässig
-                if (input.Length == 1)
-                {
-                    return true;
-                }
-            }
-
-            return decimal.TryParse(input, validNumberStyles, CultureInfo.CurrentCulture, out d);
+            return wert.ToCharArray().All(char.IsLetter);
         }
 
-        private int GetDecimalPlaces(decimal d)
-        {
-            return BitConverter.GetBytes(decimal.GetBits(d)[3])[2];
-        }
-
-        private (bool,DateOnly?) CheckIsDate(string input, char dateSeparator = '.')
+        private bool CheckIsdate(string value)
         {
             bool result = false;
-
-            char negativeSign = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NegativeSign);
-
-            if (input.ToCharArray().Where(x => x == dateSeparator).Count() > 2)
-            {
-                return (false,null);
-            }
-
-            if (input.ToCharArray().Where(x => x == negativeSign).Count() > 0)
-            {
-                return (false, null);
-            }
-
-            /*
-            bool isLengthOk = false;
-            foreach (string dateFormat in DateFormats)
-            {
-                if (dateFormat.Length == input.Length)
-                {
-                    isLengthOk = true;
-                    break;
-                }
-            }
-
-            if (isLengthOk ==  false)
-            {
-                return (true,null);
-            }
-            */
-
-            DateOnly date;
-            if (DateOnly.TryParseExact(input, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
+            DateTime date;
+            if (DateTime.TryParseExact(value, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
             {
                 result = true;
             }
 
-            return (result, date);
+            return result;
         }
     }
 }

@@ -29,6 +29,7 @@
     <Folder Include="Behaviors\CheckBox\" />
     <Folder Include="Behaviors\Hyperlink\" />
     <Folder Include="Behaviors\Graphics\" />
+    <Folder Include="Behaviors\ComboBox\" />
     <Folder Include="Behaviors\TextBox\" />
     <Folder Include="Converters\ConverterBase\" />
     <Folder Include="Converters\Chart\" />
