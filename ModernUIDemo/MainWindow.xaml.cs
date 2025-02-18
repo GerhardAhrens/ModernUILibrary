@@ -365,7 +365,7 @@
             this.tabItemSource.Add(new TabControlItem("Custom Data Type Roman", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Roman.txt" });
 
             this.tabItemSource.Add(new TabControlItem("C# Technik ", true));
-            this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
+            this.tabItemSource.Add(new TabControlItem("Instance Class", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;Instance;new;ctor", SourceFile = "CSharp.CSharp_ArtofGenerics.txt" });
             this.tabItemSource.Add(new TabControlItem("WeakEvent 1", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Generic;WeakEvent", SourceFile = "CSharp.CSharp_WeakEvent.txt" });
             this.tabItemSource.Add(new TabControlItem("WeakEvent 2", new SyntaxBoxControlsUC()) { Stichworte = "C#;WeakEventManager;Event", SourceFile = "CSharp.WeakEventManager.txt" });
             this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });

@@ -287,6 +287,9 @@
     <Compile Update="MyControls\HotKeyControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\AttachedCommandBehaviorUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBoxDesignControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

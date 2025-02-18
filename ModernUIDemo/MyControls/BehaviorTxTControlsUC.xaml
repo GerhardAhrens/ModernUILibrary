@@ -188,7 +188,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <i:Interaction.Behaviors>
-                    <Behavior:TextBoxInputBehavior InputMode="Integer" />
+                    <Behavior:TextBoxInputBehavior InputMode="DigitInput" />
                 </i:Interaction.Behaviors>
             </TextBox>
 
@@ -218,7 +218,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <i:Interaction.Behaviors>
-                    <Behavior:TextBoxInputBehavior DecimalPlace="4" InputMode="Decimal" />
+                    <Behavior:TextBoxInputBehavior DecimalPlace="4" InputMode="DecimalInput" />
                 </i:Interaction.Behaviors>
             </TextBox>
 
@@ -248,7 +248,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <i:Interaction.Behaviors>
-                    <Behavior:TextBoxInputBehavior InputMode="Money" />
+                    <Behavior:TextBoxInputBehavior InputMode="CurrencyInput" />
                 </i:Interaction.Behaviors>
             </TextBox>
 

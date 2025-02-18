@@ -188,6 +188,7 @@
     <Folder Include="Network\SmtpMail\" />
     <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
+    <Folder Include="TextAnalysis\LexicalAnalyzer\" />
     <Folder Include="TextAnalysis\Template\" />
     <Folder Include="TextAnalysis\StringTokenizer\" />
     <Folder Include="WIN32API\MessageBox\" />
