@@ -25,6 +25,8 @@ namespace ModernIU.Converters
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    using ModernBaseLibrary.Extension;
+
     [SupportedOSPlatform("windows")]
     public class RegexReplaceConverter : ConverterSimpleBase, IValueConverter
     {
