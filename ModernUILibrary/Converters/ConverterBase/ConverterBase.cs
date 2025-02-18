@@ -19,7 +19,6 @@ namespace ModernIU.Converters
     using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Markup;
-    using Core;
 
     /// <summary>
     /// WPF Converter Base Class

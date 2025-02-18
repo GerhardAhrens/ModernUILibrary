@@ -105,6 +105,7 @@
     <Folder Include="ModernBaseLibrary\TextAnalysis\HumanText\" />
     <Folder Include="ModernBaseLibrary\ValueObject\" />
     <Folder Include="ModernBaseLibrary\WMI\" />
+    <Folder Include="ModernUILibrary\WPF\Converters\" />
   </ItemGroup>
 
   <ItemGroup>
