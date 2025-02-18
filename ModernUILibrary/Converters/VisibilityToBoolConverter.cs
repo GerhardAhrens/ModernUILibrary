@@ -5,6 +5,7 @@
     using System.Windows;
     using System.Windows.Data;
 
+    [ValueConversion(typeof(Visibility), typeof(bool))]
     public class VisibilityToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

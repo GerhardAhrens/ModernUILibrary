@@ -20,9 +20,9 @@ namespace ModernBaseLibrary.Core
     using System.Diagnostics;
     using System.Globalization;
 
-    internal static class TypeConverters
+    public static class TypeConverters
     {
-        internal static bool CanConvertFrom<T>(Type sourceType)
+        public static bool CanConvertFrom<T>(Type sourceType)
         {
             if (sourceType == null)
             {
@@ -31,7 +31,7 @@ namespace ModernBaseLibrary.Core
             return sourceType == typeof(string) || typeof(T).IsAssignableFrom(sourceType);
         }
 
-        internal static object ConvertFrom<T>(TypeConverter converter, object value)
+        public static object ConvertFrom<T>(TypeConverter converter, object value)
         {
             Debug.Assert(converter != null, "converter should not be null!");
             if (value is T)
@@ -45,7 +45,7 @@ namespace ModernBaseLibrary.Core
             }));
         }
 
-        internal static bool CanConvertTo<T>(Type destinationType)
+        public static bool CanConvertTo<T>(Type destinationType)
         {
             if (destinationType == null)
             {
@@ -54,7 +54,7 @@ namespace ModernBaseLibrary.Core
             return destinationType == typeof(string) || destinationType.IsAssignableFrom(typeof(T));
         }
 
-        internal static object ConvertTo(TypeConverter converter, object value, Type destinationType)
+        public static object ConvertTo(TypeConverter converter, object value, Type destinationType)
         {
             Debug.Assert(converter != null, "converter should not be null!");
             if (destinationType == null)
