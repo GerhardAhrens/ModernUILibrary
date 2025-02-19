@@ -258,7 +258,7 @@
                     Maximum="100"
                     Minimum="0"
                     UpDownOrientation="Horizontal"
-                    Value="{Binding Path=Text, ElementName=txtInputInt, UpdateSourceTrigger=PropertyChanged}" />
+                    Value="{Binding Path=Text, ElementName=txtInputInt, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                 <ModernUI:TextBoxInt
                     x:Name="txtInputInt"
