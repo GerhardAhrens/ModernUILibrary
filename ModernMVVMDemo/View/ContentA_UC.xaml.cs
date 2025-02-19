@@ -1,6 +1,7 @@
 ﻿namespace ModernMVVMDemo.View
 {
     using System;
+    using System.Windows;
     using System.Windows.Controls;
 
     using ModernUI.MVVM.Base;
@@ -13,8 +14,14 @@
         public ContentA_UC() : base(typeof(ContentA_UC))
         {
             this.InitializeComponent();
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Unloaded", this.OnUnloaded);
+
             this.InitCommands();
             this.DataContext = this;
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
         }
 
         public string ClickContentText
