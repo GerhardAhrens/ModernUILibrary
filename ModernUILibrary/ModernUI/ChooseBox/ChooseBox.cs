@@ -214,7 +214,7 @@
                     break;
                 case EnumChooseBoxType.SaveFile:
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.CheckFileExists = true;
+                    saveFileDialog.CheckFileExists = false;
                     saveFileDialog.CheckPathExists = true;
                     saveFileDialog.RestoreDirectory = true;
                     saveFileDialog.CreatePrompt = false;
@@ -249,6 +249,11 @@
                         string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                         string initialDirectory = string.IsNullOrEmpty(this.InitialDirectory) == true ? myDocuments : this.InitialDirectory;
                         saveFileDialog.InitialDirectory = initialDirectory;
+                    }
+
+                    if (string.IsNullOrEmpty(this.Text) == false)
+                    {
+                        saveFileDialog.FileName = this.Text;
                     }
 
                     if (saveFileDialog.ShowDialog() == true)
