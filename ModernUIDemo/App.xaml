@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/ModernUIDemo;component/Resources/Style/Icons.xaml" />
                 <ResourceDictionary Source="/ModernUIDemo;component/Resources/Style/OptionsStyles.xaml" />
+                <ResourceDictionary Source="/ModernUIDemo;component/Resources/Localization/TextString.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernUILibrary;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

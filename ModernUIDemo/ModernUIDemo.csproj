@@ -34,6 +34,7 @@
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
     <Folder Include="MyControls\HotKeys\" />
+    <Folder Include="Resources\Localization\" />
     <Folder Include="Resources\Style\" />
   </ItemGroup>
 
@@ -288,6 +289,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\AttachedCommandBehaviorUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MyControls\LocalizationUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="MyControls\TextBoxDesignControlsUC.xaml.cs">
