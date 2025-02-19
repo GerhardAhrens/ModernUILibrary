@@ -12,6 +12,15 @@
     {
         public DoubleUpDown() : base()
         {
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.HorizontalContentAlignment = HorizontalAlignment.Center;
+            this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.Margin = new Thickness(2);
+            this.MinHeight = 18;
+            this.Height = 23;
+            this.IsReadOnly = false;
+            this.Focusable = true;
             this.Minimum = 0d;
             this.Maximum = 100d;
             this.Value = this.Minimum;

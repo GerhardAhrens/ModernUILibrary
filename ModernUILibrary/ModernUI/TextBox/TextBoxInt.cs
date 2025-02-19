@@ -12,6 +12,7 @@
     {
         public static readonly DependencyProperty IsNegativeProperty = DependencyProperty.Register("IsNegative", typeof(bool), typeof(TextBoxInt), new PropertyMetadata(false));
         public static readonly DependencyProperty NumberProperty = DependencyProperty.Register("Number", typeof(int), typeof(TextBoxInt), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty MaxNumberProperty = DependencyProperty.Register("MaxNumber", typeof(int), typeof(TextBoxInt), new FrameworkPropertyMetadata(1000, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxInt), new PropertyMetadata(true, OnSetBorderChanged));
 
         public TextBoxInt()
@@ -43,6 +44,12 @@
         {
             get { return (int)GetValue(NumberProperty); }
             set { SetValue(NumberProperty, value); }
+        }
+
+        public int MaxNumber
+        {
+            get { return (int)GetValue(MaxNumberProperty); }
+            set { SetValue(MaxNumberProperty, value); }
         }
 
         public bool SetBorder
@@ -103,6 +110,12 @@
                     this.Text = string.Empty;
                     this.Number = 0;
                 }
+            }
+
+            if (this.Number > this.MaxNumber)
+            {
+                this.Number = this.MaxNumber;
+                this.Text = this.MaxNumber.ToString(CultureInfo.CurrentCulture);
             }
         }
 

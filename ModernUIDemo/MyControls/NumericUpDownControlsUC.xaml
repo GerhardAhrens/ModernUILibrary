@@ -255,10 +255,15 @@
                     Width="100"
                     Height="30"
                     Margin="10,0"
-                    Maximum="20"
+                    Maximum="100"
                     Minimum="0"
                     UpDownOrientation="Horizontal"
-                    Value="30" />
+                    Value="{Binding Path=Text, ElementName=txtInputInt, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ModernUI:TextBoxInt
+                    x:Name="txtInputInt"
+                    Width="100"
+                    Text="1" />
             </StackPanel>
 
             <ModernUI:HeaderSeparator

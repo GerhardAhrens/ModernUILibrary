@@ -88,6 +88,7 @@
     <Folder Include="ModernBaseLibrary\Core\Performance\" />
     <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
     <Folder Include="ModernBaseLibrary\Data\ExcelWriter\DemoData\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Enum\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.String\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />
