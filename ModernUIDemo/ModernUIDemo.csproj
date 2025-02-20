@@ -34,6 +34,7 @@
     <Folder Include="MyControls\MessagingControls\MessagingCtrlA\" />
     <Folder Include="MyControls\MessagingControls\MessagingCtrlB\" />
     <Folder Include="MyControls\HotKeys\" />
+    <Folder Include="Language\" />
     <Folder Include="Resources\Localization\" />
     <Folder Include="Resources\Style\" />
   </ItemGroup>

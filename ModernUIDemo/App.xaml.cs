@@ -16,11 +16,6 @@
         public App()
         {
             InitializeCultures();
-
-            /*
-            var aa = new CipherService().Encrypt("Gerhard", "2024202420242024");
-            var bb = new CipherService().Decrypt(aa,"2024202420242024");
-            */
         }
 
         public static string DatePattern { get; private set; }

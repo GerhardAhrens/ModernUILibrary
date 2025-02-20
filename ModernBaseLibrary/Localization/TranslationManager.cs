@@ -75,7 +75,7 @@
             return $"#{key}#";
         }
 
-        public TResult TranslateAS<TResult>(string key, char separator = '|')
+        public TResult TranslateAs<TResult>(string key, char separator = '|')
         {
             string CurrentLanguage = string.Empty;
 

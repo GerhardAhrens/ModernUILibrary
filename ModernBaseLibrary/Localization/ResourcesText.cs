@@ -27,7 +27,8 @@ namespace ModernBaseLibrary.Localization
     [SupportedOSPlatform("windows")]
     public class ResourcesText
     {
-        private const string DICTIONARYNAME = "Resources\\Localization\\TextString.xaml";
+        /* /ModernUIDemo;component/Resources/Localization/TextString.xaml */
+        private const string DICTIONARYNAME = @"Resources\Localization\TextString.xaml";
         private static ResourceDictionary resourceDict = null;
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace ModernBaseLibrary.Localization
         /// </summary>
         static ResourcesText()
         {
-            resourceDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.Equals(DICTIONARYNAME)).FirstOrDefault();
+            resourceDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.EndsWith(DICTIONARYNAME.Replace(@"\","/"))).FirstOrDefault();
         }
 
         public ResourcesText()
@@ -74,6 +75,22 @@ namespace ModernBaseLibrary.Localization
             string value = resourceDict.Cast<DictionaryEntry>().FirstOrDefault(f => f.Key.ToString().ToLower() == key.ToLower()).Value.ToString();
 
             return value;
+        }
+
+        public static void SetResources(string resourceFile)
+        {
+            try
+            {
+                resourceDict = Application.Current.Resources.MergedDictionaries.Where(md => md.Source.OriginalString.EndsWith(resourceFile.Replace(@"\", "/"))).FirstOrDefault();
+                if (resourceDict == null)
+                {
+                    throw new NotSupportedException($"Die Resource Datei '{resourceFile}' konnte nicht in der Resources Liste gefunden werden");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new NotSupportedException($"Die Resource Datei '{resourceFile}' konnte nicht gefunden werden", ex);
+            }
         }
     }
 }
