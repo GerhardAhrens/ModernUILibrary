@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="ModernIU.Controls.TabView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+
+    <Grid>
+        <TabControl
+            Name="MainTabView"
+            SelectionChanged="MainTabView_SelectionChanged"
+            SizeChanged="MainTabView_SizeChanged">
+            <TabControl.InputBindings>
+                <KeyBinding
+                    Key="W"
+                    Command="{Binding CloseShortcutsCommand}"
+                    Modifiers="Ctrl" />
+                <KeyBinding
+                    Key="N"
+                    Command="{Binding AddShortcutsCommand}"
+                    Modifiers="Ctrl" />
+            </TabControl.InputBindings>
+
+            <TabItem
+                Name="AddTab"
+                Margin="2"
+                PreviewMouseDown="AddTab_PreviewMouseDown">
+                <TabItem.Header>
+                    <MUI:GeometryLabel PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z" ToolTip="Neuer Tab" />
+                </TabItem.Header>
+
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ContentControl>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <TextBlock FontSize="20" Text="Drücke " />
+                                    <TextBlock
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Text=" CTRL + N" />
+                                    <TextBlock FontSize="20" Text=" oder " />
+
+                                    <MUI:GeometryLabel PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z" />
+
+                                    <TextBlock FontSize="20" Text=" Für einen neuen Tab" />
+                                </StackPanel>
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <TextBlock FontSize="20" Text="Drücke " />
+                                    <TextBlock
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Text=" CTRL + W" />
+                                    <TextBlock FontSize="20" Text=" oder " />
+
+                                    <MUI:GeometryLabel FontWeight="Medium" PathData="M7.46,11.88L8.88,10.46L11,12.59L13.12,10.46L14.54,11.88L12.41,14L14.54,16.12L13.12,17.54L11,15.41L8.88,17.54L7.46,16.12L9.59,14L7.46,11.88M3,3H21A2,2 0 0,1 23,5V19A2,2 0 0,1 21,21H3A2,2 0 0,1 1,19V5A2,2 0 0,1 3,3M3,5V19H21V9H13V5H3Z" />
+
+                                    <TextBlock FontSize="20" Text=" Einen Tab schließen" />
+                                </StackPanel>
+                            </StackPanel>
+                        </ContentControl>
+                    </TextBlock>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</UserControl>

@@ -22,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Picture\close.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="LibLogo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Picture\close.png" />
   </ItemGroup>
 
   <ItemGroup>
