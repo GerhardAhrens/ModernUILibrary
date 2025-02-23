@@ -10,8 +10,11 @@
 
   <ItemGroup>
     <Compile Remove="ModernBaseLibrary\Enum\**" />
+    <Compile Remove="ModernBaseLibrary\Extensions\System.Enum\**" />
     <EmbeddedResource Remove="ModernBaseLibrary\Enum\**" />
+    <EmbeddedResource Remove="ModernBaseLibrary\Extensions\System.Enum\**" />
     <None Remove="ModernBaseLibrary\Enum\**" />
+    <None Remove="ModernBaseLibrary\Extensions\System.Enum\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,7 +91,7 @@
     <Folder Include="ModernBaseLibrary\Core\Performance\" />
     <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
     <Folder Include="ModernBaseLibrary\Data\ExcelWriter\DemoData\" />
-    <Folder Include="ModernBaseLibrary\Extensions\System.Enum\" />
+    <Folder Include="ModernBaseLibrary\Extensions\System.Data\DemoData\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.String\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />

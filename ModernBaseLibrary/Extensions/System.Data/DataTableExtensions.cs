@@ -933,6 +933,16 @@ namespace ModernBaseLibrary.Extension
             return jsonText;
         }
 
+        public static string JsonToDataTable(this string @this)
+        {
+            if (string.IsNullOrEmpty(@this) == true)
+            {
+                return null;
+            }
+
+            return default;
+        }
+
         #endregion Export/Import Json
 
         public static List<dynamic> ToDynamicObject(this DataTable @this)
