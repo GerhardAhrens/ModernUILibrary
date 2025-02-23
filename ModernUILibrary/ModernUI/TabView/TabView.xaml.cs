@@ -3,34 +3,32 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using ModernBaseLibrary.Core;
 
     using ModernUI.MVVM.Base;
 
     /// <summary>
     /// Interaction logic for TabView.xaml
     /// </summary>
-    [ContentProperty("CustomItems")]
+    [ContentProperty("TabViewItems")]
     public partial class TabView : UserControl
     {
         private delegate Point GetPosition(IInputElement element);
         private int LastTabClicked;
-        private const int PlusWidth = 45; // const indentation from right top for "plus" button
+        private const int PlusWidth = 50; // const indentation from right top for "plus" button
         private const int TabWidthIfOver = 50; // const default width for selected tab when tabs width is too small
         private int DragTabTo; // index of tab that will be replaced when drop happened
 
-        /// <summary>
-        /// ContentProperty which contains tabs that will be added to custom tabcontrol
-        /// Also, allows added tabs directly from XAML where this control used 
-        /// </summary>
-        public ObservableCollection<TabItem> CustomItems
+        public static readonly DependencyProperty CustomItemsProperty =
+            DependencyProperty.Register(nameof(TabViewItems), typeof(ObservableCollection<TabItem>), typeof(TabView), new FrameworkPropertyMetadata(new ObservableCollection<TabItem>(),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(CurrentTabItems_PropertyChanged)));
+
+        public ObservableCollection<TabItem> TabViewItems
         {
             get
             {
@@ -38,10 +36,6 @@
             }
             set { SetValue(CustomItemsProperty, value); }
         }
-
-        public static readonly DependencyProperty CustomItemsProperty =
-            DependencyProperty.Register("CustomItems", typeof(ObservableCollection<TabItem>), typeof(TabView), new FrameworkPropertyMetadata(new ObservableCollection<TabItem>(),
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(CurrentTabItems_PropertyChanged)));
 
         /// <summary>
         /// callback for entire tabs collection
@@ -64,8 +58,8 @@
 
         private void Control_Loaded(object sender, RoutedEventArgs e)
         {
-            CustomItems.CollectionChanged += OnItemCollectionChanged;
-            Refresh();
+            this.TabViewItems.CollectionChanged += OnItemCollectionChanged;
+            this.Refresh();
         }
 
         /// <summary>
@@ -75,7 +69,7 @@
         /// <param name="e"></param>
         private void OnItemCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Refresh();
+            this.Refresh();
         }
 
         /// <summary>
@@ -83,11 +77,11 @@
         /// </summary>
         public void Refresh()
         {
-            foreach (TabItem item in this.CustomItems)
+            foreach (TabItem item in this.TabViewItems)
             {
                 if (!MainTabView.Items.Contains(item))
                 {
-                    AddTabMethod(item as TabItem);
+                    this.AddTabMethod(item as TabItem);
                 }
                 else
                 {
@@ -95,15 +89,15 @@
                 }
             }
 
-            if (this.CustomItems.Count > 0)
+            if (this.TabViewItems.Count > 0)
             {
-                this.CustomItems.Clear();
+                this.TabViewItems.Clear();
             }
         }
 
         private void MainTabView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainTabView_SelectionChangedMethod();
+            this.MainTabView_SelectionChangedMethod();
         }
 
         /// <summary>
@@ -111,7 +105,7 @@
         /// </summary>
         private void MainTabView_SelectionChangedMethod()
         {
-            if (MainTabView.Items.Count <= 1)
+            if (this.MainTabView.Items.Count <= 1)
             {
                 return;
             }
@@ -140,7 +134,7 @@
         /// <param name="TabForAdd"></param>
         private void AddTabMethod(TabItem TabForAdd)
         {
-            TabForAdd = MakeHeaderWithButton(TabForAdd);
+            TabForAdd = this.MakeHeaderWithButton(TabForAdd);
             this.MainTabView.Items.Insert(this.MainTabView.Items.Count - 1, TabForAdd);
             this.LastTabClicked = this.MainTabView.Items.Count - 2;
             this.Dispatcher.BeginInvoke((Action)(() => this.MainTabView.SelectedIndex = LastTabClicked));
@@ -155,18 +149,20 @@
         /// <returns></returns>
         private TabItem MakeHeaderWithButton(TabItem TabForAdd)
         {
-            Grid TabItemHeaderSP = new Grid();
-            TabItemHeaderSP.ColumnDefinitions.Add(new ColumnDefinition());
-            TabItemHeaderSP.ColumnDefinitions.Add(new ColumnDefinition());
-            //TabItemHeaderSP.Orientation = Orientation.Horizontal;
+            Grid tabItemHeaderSP = new Grid();
+            tabItemHeaderSP.ColumnDefinitions.Add(new ColumnDefinition());
+            tabItemHeaderSP.ColumnDefinitions.Add(new ColumnDefinition());
             string TabSign = (TabForAdd != null) ? TabForAdd.Header as string : "Tab auswählen " + (this.MainTabView.Items.Count);
+
             TextBlock textBlock = new TextBlock()
             {
                 Text = TabSign,
             };
 
-            Assembly a = typeof(TabView).Assembly;
-            string assemblyShortName = a.ToString().Split(',')[0];
+            textBlock.HorizontalAlignment = HorizontalAlignment.Left;
+            textBlock.Margin = new Thickness(0, 0, 5, 0);
+
+            string assemblyShortName = typeof(TabView).Assembly.ToString().Split(',')[0];
 
             Grid.SetColumn(textBlock, 0);
             Button close = new Button();
@@ -182,6 +178,7 @@
             };
 
             CloseImg.Width = 10;
+            close.HorizontalAlignment = HorizontalAlignment.Right;
             close.Margin = new Thickness(5, 0, 0, 0);
             close.ToolTip = new ToolTip()
             {
@@ -189,19 +186,20 @@
             };
 
             close.Content = CloseImg;
-            close.Click += AnyTab_MouseClick;
-            TabItemHeaderSP.Children.Add(textBlock);
-            TabItemHeaderSP.Children.Add(close);
+            close.Click += this.AnyTab_MouseClick;
+            tabItemHeaderSP.Children.Add(textBlock);
+            tabItemHeaderSP.Children.Add(close);
 
             TabForAdd = TabForAdd == null ? new TabItem() : TabForAdd;
-            TabForAdd.Header = TabItemHeaderSP;
-            TabForAdd.PreviewMouseDown += AnyTab_PreviewMouseDown;
-            TabForAdd.MouseMove += AnyTab_MouseMove;
+            TabForAdd.HorizontalAlignment = HorizontalAlignment.Left;
+            TabForAdd.Header = tabItemHeaderSP;
+            TabForAdd.PreviewMouseDown += this.AnyTab_PreviewMouseDown;
+            TabForAdd.MouseMove += this.AnyTab_MouseMove;
             var keybinding = new KeyBinding
             {
                 Key = Key.W,
                 Modifiers = ModifierKeys.Control,
-                Command = CloseShortcutsCommand,
+                Command = this.CloseShortcutsCommand,
             };
 
             TabForAdd.InputBindings.Add( keybinding );
@@ -220,7 +218,7 @@
         /// <param name="e"></param>
         private void AnyTab_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            LastTabClicked = MainTabView.Items.IndexOf(sender as TabItem);
+            this.LastTabClicked = this.MainTabView.Items.IndexOf(sender as TabItem);
         }
 
         /// <summary>
@@ -231,27 +229,27 @@
         {
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                DragTabTo = -1;
-                DragTabTo = GetCurrentMark(e.GetPosition);
+                this.DragTabTo = -1;
+                this.DragTabTo = GetCurrentMark(e.GetPosition);
                 Point CurrentCursorPoint = e.GetPosition(MainTabView);
 #if DEBUG
                 //System.Diagnostics.Debug.WriteLine("x: " + CurrentCursorPoint.X + "; y: " + CurrentCursorPoint.Y);
-                System.Diagnostics.Debug.WriteLine("GRAG TO " + DragTabTo);
+                System.Diagnostics.Debug.WriteLine("GRAG TO " + this.DragTabTo);
 #endif
 
                 System.Windows.Input.Mouse.SetCursor(System.Windows.Input.Cursors.SizeAll);
 
 
-                if (DragTabTo != -1 && DragTabTo != LastTabClicked && DragTabTo != MainTabView.Items.Count - 1)
+                if (this.DragTabTo != -1 && this.DragTabTo != this.LastTabClicked && this.DragTabTo != this.MainTabView.Items.Count - 1)
                 {
-                    ReorderTabs();
-                    LastTabClicked = DragTabTo;
-                    MainTabView_SelectionChangedMethod();
+                    this.ReorderTabs();
+                    this.LastTabClicked = DragTabTo;
+                    this.MainTabView_SelectionChangedMethod();
                 }
             }
             else
             {
-                DragTabTo = -1;
+                this.DragTabTo = -1;
             }
         }
 
@@ -303,16 +301,20 @@
         /// <param name="e"></param>
         private void AnyTab_MouseClick(object sender, EventArgs e)
         {
-            CloseTab();
+            this.CloseTab();
         }
         private void CloseTab()
         {
-            if (LastTabClicked == MainTabView.Items.Count - 1) return;
-            MainTabView.Items.RemoveAt(LastTabClicked);
-            LastTabClicked = MainTabView.Items.Count <= 1 ? 0 : MainTabView.Items.Count - 2;
+            if (LastTabClicked == MainTabView.Items.Count - 1)
+            {
+                return;
+            }
+
+            this.MainTabView.Items.RemoveAt(LastTabClicked);
+            this.LastTabClicked = MainTabView.Items.Count <= 1 ? 0 : MainTabView.Items.Count - 2;
             Dispatcher.BeginInvoke((Action)(() => MainTabView.SelectedIndex = LastTabClicked));
-            MainTabView_SelectionChangedMethod();
-            UpdateTabsWidth();
+            this.MainTabView_SelectionChangedMethod();
+            this.UpdateTabsWidth();
             GC.Collect();
         }
 
@@ -323,28 +325,30 @@
         /// <param name="e"></param>
         private void MainTabView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateTabsWidth();
+            this.UpdateTabsWidth();
         }
         private void UpdateTabsWidth()
         {
-            if (this.MainTabView.Items.Count == 1 || this.MainTabView.ActualWidth <= 0) return;
-            double TabWidth = this.MainTabView.ActualWidth / (this.MainTabView.Items.Count - 1) -
-                (PlusWidth / (this.MainTabView.Items.Count - 1));
-
-            while (TabWidth * (this.MainTabView.Items.Count - 1) + PlusWidth + TabWidthIfOver > this.MainTabView.ActualWidth - (PlusWidth / (this.MainTabView.Items.Count - 1)))
+            if (this.MainTabView.Items.Count == 1 || this.MainTabView.ActualWidth <= 0)
             {
-                TabWidth--;
+                return;
+            }
+
+            double tabWidth = this.MainTabView.ActualWidth / (this.MainTabView.Items.Count - 1) - (PlusWidth / (this.MainTabView.Items.Count - 1));
+            while (tabWidth * (this.MainTabView.Items.Count - 1) + PlusWidth + TabWidthIfOver > this.MainTabView.ActualWidth - (PlusWidth / (this.MainTabView.Items.Count - 1)))
+            {
+                tabWidth--;
             }
 
             for (int i = 0; i < this.MainTabView.Items.Count - 1; i++)
             {
-                if (i == this.MainTabView.SelectedIndex && TabWidth < TabWidthIfOver)
+                if (i == this.MainTabView.SelectedIndex && tabWidth < TabWidthIfOver)
                 {
                     (this.MainTabView.Items[i] as TabItem).Width = TabWidthIfOver;
                 }
                 else
                 {
-                    (this.MainTabView.Items[i] as TabItem).Width = TabWidth;
+                    (this.MainTabView.Items[i] as TabItem).Width = tabWidth;
                 }
             }
         }
@@ -352,7 +356,8 @@
         /// <summary>
         /// Command for closing tab by Shortcuts ctrl + w
         /// </summary>
-        RelayCommand closeShortcutsCommand;
+        private RelayCommand closeShortcutsCommand;
+
         public RelayCommand CloseShortcutsCommand
         {
             get
@@ -368,7 +373,8 @@
         /// <summary>
         /// Command for adding tab by Shortcuts ctrl + w
         /// </summary>
-        RelayCommand addShortcutsCommand;
+        private RelayCommand addShortcutsCommand;
+
         public RelayCommand AddShortcutsCommand
         {
             get

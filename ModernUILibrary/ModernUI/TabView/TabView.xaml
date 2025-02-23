@@ -30,7 +30,10 @@
                 Margin="2"
                 PreviewMouseDown="AddTab_PreviewMouseDown">
                 <TabItem.Header>
-                    <MUI:GeometryLabel PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z" ToolTip="Neuer Tab" />
+                    <MUI:GeometryLabel
+                        HorizontalAlignment="Center"
+                        PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z"
+                        ToolTip="Neuer Tab" />
                 </TabItem.Header>
 
                 <Grid>
@@ -48,7 +51,10 @@
                                         Text=" CTRL + N" />
                                     <TextBlock FontSize="20" Text=" oder " />
 
-                                    <MUI:GeometryLabel PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z" />
+                                    <MUI:GeometryLabel
+                                        HorizontalAlignment="Center"
+                                        PathData="M3,3A2,2 0 0,0 1,5V19A2,2 0 0,0 3,21H21A2,2 0 0,0 23,19V5A2,2 0 0,0 21,3H3M3,5H13V9H21V19H3V5M10,10V13H7V15H10V18H12V15H15V13H12V10H10Z"
+                                        ToolTip="Tab löschen" />
 
                                     <TextBlock FontSize="20" Text=" Für einen neuen Tab" />
                                 </StackPanel>
@@ -72,7 +78,6 @@
                     </TextBlock>
                 </Grid>
             </TabItem>
-
         </TabControl>
     </Grid>
 </UserControl>

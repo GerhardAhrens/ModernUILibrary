@@ -20,36 +20,49 @@
         <TextBlock FontSize="14" Text="Beispiel für TabView" />
         <Separator Height="3" Background="Green" />
 
-        <ModernUI:TabView Grid.Row="1" x:Name="CustomTabView" >
-            <ModernUI:TabView.CustomItems>
-                <TabItem Header="111"/>
-                <TabItem Header="123">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <WrapPanel Orientation="Horizontal">
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                        </WrapPanel>
-                        <WrapPanel Grid.Row="1" Orientation="Vertical">
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                            <Button Width="100" Content="Button"/>
-                        </WrapPanel>
-                    </Grid>
-                </TabItem>
-            </ModernUI:TabView.CustomItems>
-        </ModernUI:TabView>
+        <StackPanel Grid.Row="1">
+            <ModernUI:TabView
+                x:Name="CustomTabView"
+                MinHeight="350"
+                VerticalAlignment="Center">
+                <ModernUI:TabView.TabViewItems>
+                    <TabItem Header="111">
+                        <TextBlock Text="TabItem - 111" />
+                    </TabItem>
+                    <TabItem Header="123">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <WrapPanel Orientation="Horizontal">
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                            </WrapPanel>
+                            <WrapPanel Grid.Row="1" Orientation="Vertical">
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                                <Button Width="100" Content="Button" />
+                            </WrapPanel>
+                        </Grid>
+                    </TabItem>
+                </ModernUI:TabView.TabViewItems>
+            </ModernUI:TabView>
+
+            <Button
+                Name="AddTab"
+                Grid.Row="1"
+                Margin="5"
+                Content="Neuer Tab vom Button" />
+        </StackPanel>
 
     </Grid>
 </UserControl>
