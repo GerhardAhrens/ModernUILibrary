@@ -18,6 +18,7 @@ namespace ModernBaseLibrary.Extension
     using System.ComponentModel;
     using System.Data;
     using System.Dynamic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text.Json;
@@ -933,14 +934,57 @@ namespace ModernBaseLibrary.Extension
             return jsonText;
         }
 
-        public static string JsonToDataTable(this string @this)
+        public static bool ToJson(this DataTable @this, string jsonFile)
         {
+            bool result = false;
+            if (@this == null)
+            {
+                return false;
+            }
+
+            IEnumerable<Dictionary<string, object>> data = @this.Rows.OfType<DataRow>()
+                        .Select(row => @this.Columns.OfType<DataColumn>()
+                            .ToDictionary(col => col.ColumnName, c => row[c]));
+
+            if (data == null || data.Count() == 0)
+            {
+                return false;
+            }
+
+            var jsonOptions = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            string jsonText = System.Text.Json.JsonSerializer.Serialize(data, jsonOptions);
+
+            if (string.IsNullOrEmpty(jsonText) == false)
+            {
+                File.WriteAllText(jsonFile, jsonText);
+                if (File.Exists(jsonFile) == true)
+                {
+
+                }
+            }
+
+            return result;
+        }
+
+        public static DataTable JsonToDataTable<T>(this string @this, string tableName = "") where T : class, new()
+        {
+            DataTable result = null;
             if (string.IsNullOrEmpty(@this) == true)
             {
                 return null;
             }
 
-            return default;
+            List<T> listFromJson = (List<T>)System.Text.Json.JsonSerializer.Deserialize<List<T>>(@this);
+            if (listFromJson != null && listFromJson.Count > 0)
+            {
+                result = listFromJson.ToDataTable<T>(tableName);
+            }
+
+            return result;
         }
 
         #endregion Export/Import Json

@@ -27,25 +27,21 @@ namespace ModernTest.ModernBaseLibrary
     using System;
     using System.Data;
     using System.Diagnostics;
-    using System.Dynamic;
     using System.Globalization;
     using System.IO;
     using System.Threading;
+
     using DemoDataGeneratorLib.Base;
 
     using global::ModernBaseLibrary.Extension;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using ModernTest.ModernBaseLibrary.Cryptography;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Summary description for DataTable_Test
     /// </summary>
     [TestClass]
-    public class DataTable_Test : BaseTest
+    public class DataTableJson_Test : BaseTest
     {
         public string TestDirPath => TestContext.TestRunDirectory;
         public string TempDirPath => Path.Combine(TestDirPath, "Temp");
@@ -78,7 +74,7 @@ namespace ModernTest.ModernBaseLibrary
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
             string jsonText = File.ReadAllText(pathFileName);
-            DataTable dt = (DataTable)JsonConvert.DeserializeObject(jsonText, (typeof(DataTable)));
+            var aa = jsonText.JsonToDataTable<UserDemoDaten>(nameof(UserDemoDaten));
         }
 
         private UserDemoDaten ConfigObject(UserDemoDaten demoDaten, int counter)
