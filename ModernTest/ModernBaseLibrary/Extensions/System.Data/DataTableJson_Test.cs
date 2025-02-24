@@ -29,6 +29,9 @@ namespace ModernTest.ModernBaseLibrary
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System.Threading;
 
     using DemoDataGeneratorLib.Base;
@@ -77,6 +80,19 @@ namespace ModernTest.ModernBaseLibrary
             var aa = jsonText.JsonToDataTable<UserDemoDaten>(nameof(UserDemoDaten));
         }
 
+        [TestMethod]
+        public void JsonToDataTableNativ()
+        {
+            DirectoryInfo di = new DirectoryInfo(TempDirPath);
+            string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
+            string jsonText = File.ReadAllText(pathFileName);
+            using (JsonDocument document = JsonDocument.Parse(jsonText))
+            {
+                JsonElement root = document.RootElement;
+                var aa = root[0];
+            }
+        }
+
         private UserDemoDaten ConfigObject(UserDemoDaten demoDaten, int counter)
         {
             var timeStamp = BuildDemoData.SetTimeStamp();
@@ -104,6 +120,100 @@ namespace ModernTest.ModernBaseLibrary
             public string CreateBy { get; set; }
             public DateTime ModifiedOn { get; set; }
             public string ModifiedBy { get; set; }
+        }
+
+        /// <summary>
+        /// https://madhawapolkotuwa.medium.com/mastering-json-serialization-in-c-with-system-text-json-01f4cec0440d
+        /// </summary>
+        private class CustomDateTimeConverter : JsonConverter<DateTime>
+        {
+            public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                return DateTime.ParseExact(reader.GetString(), "yyyy-MM-dd", null);
+            }
+
+            public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(value.ToString("yyyy-MM-dd"));
+            }
+        }
+
+        public class DataTableJsonConverter : JsonConverter<DataTable>
+        {
+            public override DataTable Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var jsonDoc = JsonDocument.ParseValue(ref reader);
+                var rootElement = jsonDoc.RootElement;
+                var dataTable = rootElement.JsonElementToDataTable();
+                return dataTable;
+            }
+
+            public override void Write(Utf8JsonWriter writer, DataTable value, JsonSerializerOptions options)
+            {
+                WriteDataTable(writer, value, options);
+            }
+        }
+
+        public static void WriteDataTable(Utf8JsonWriter jsonWriter, DataTable source, JsonSerializerOptions options)
+        {
+            jsonWriter.WriteStartArray();
+            foreach (DataRow dr in source.Rows)
+            {
+                jsonWriter.WriteStartObject();
+                foreach (DataColumn col in source.Columns)
+                {
+                    var key = col.ColumnName.Trim();
+                    var valueString = dr[col].ToString();
+                    switch (col.DataType.FullName)
+                    {
+                        case "System.Guid":
+                            jsonWriter.WriteString(key, valueString);
+                            break;
+                        case "System.Char":
+                        case "System.String":
+                            jsonWriter.WriteString(key, valueString);
+                            break;
+                        case "System.Boolean":
+                            Boolean.TryParse(valueString, out bool boolValue);
+                            jsonWriter.WriteBoolean(key, boolValue);
+                            break;
+                        case "System.DateTime":
+                            var dateValue = DateTime.Parse(valueString);
+                            jsonWriter.WriteString(key, dateValue);
+                            break;
+                        case "System.TimeSpan":
+                            var timeSpanValue = TimeSpan.Parse(valueString);
+                            jsonWriter.WriteString(key, timeSpanValue.ToString());
+                            break;
+                        case "System.Byte":
+                        case "System.SByte":
+                        case "System.Decimal":
+                        case "System.Double":
+                        case "System.Single":
+                        case "System.Int16":
+                        case "System.Int32":
+                        case "System.Int64":
+                        case "System.UInt16":
+                        case "System.UInt32":
+                        case "System.UInt64":
+                            if (long.TryParse(valueString, out long intValue))
+                            {
+                                jsonWriter.WriteNumber(key, intValue);
+                            }
+                            else
+                            {
+                                double.TryParse(valueString, out double doubleValue);
+                                jsonWriter.WriteNumber(key, doubleValue);
+                            }
+                            break;
+                        default:
+                            jsonWriter.WriteString(key, valueString);
+                            break;
+                    }
+                }
+                jsonWriter.WriteEndObject();
+            }
+            jsonWriter.WriteEndArray();
         }
     }
 }

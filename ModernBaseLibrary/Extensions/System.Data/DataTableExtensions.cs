@@ -987,6 +987,108 @@ namespace ModernBaseLibrary.Extension
             return result;
         }
 
+        public static DataTable JsonElementToDataTable(this JsonElement dataRoot)
+        {
+            var dataTable = new DataTable();
+            var firstPass = true;
+            foreach (var element in dataRoot.EnumerateArray())
+            {
+                if (firstPass)
+                {
+                    foreach (var col in element.EnumerateObject())
+                    {
+                        var colValue = col.Value;
+                        dataTable.Columns.Add(new DataColumn(col.Name, colValue.ValueKind.ValueKindToType(colValue.ToString())));
+                    }
+                    firstPass = false;
+                }
+                var row = dataTable.NewRow();
+                foreach (var col in element.EnumerateObject())
+                {
+                    row[col.Name] = col.Value.JsonElementToTypedValue();
+                }
+                dataTable.Rows.Add(row);
+            }
+            return dataTable;
+        }
+
+        public static Type ValueKindToType(this JsonValueKind valueKind, string value)
+        {
+            switch (valueKind)
+            {
+                case JsonValueKind.String:      // 3
+                    return typeof(System.String);
+                case JsonValueKind.Number:      // 4    
+                    if (Int64.TryParse(value, out var intValue))
+                    {
+                        return typeof(System.Int64);
+                    }
+                    else
+                    {
+                        return typeof(System.Double);
+                    }
+                case JsonValueKind.True:        // 5
+                case JsonValueKind.False:       // 6
+                    return typeof(System.Boolean);
+                case JsonValueKind.Undefined:   // 0
+                    return null;
+                case JsonValueKind.Object:      // 1 
+                    return typeof(System.Object);
+                case JsonValueKind.Array:       // 2
+                    return typeof(System.Array);
+                case JsonValueKind.Null:        // 7
+                    return null;
+                default:
+                    return typeof(System.Object);
+            }
+        }
+
+        public static object JsonElementToTypedValue(this JsonElement jsonElement)
+        {
+            switch (jsonElement.ValueKind)
+            {
+                case JsonValueKind.Object:      // 1  (these need special handling)?
+                case JsonValueKind.Array:       // 2
+                case JsonValueKind.String:      // 3
+                    if (jsonElement.TryGetGuid(out Guid guidValue))
+                    {
+                        return guidValue;
+                    }
+                    else
+                    {
+                        if (jsonElement.TryGetDateTime(out DateTime datetime))
+                        {
+                            // If an offset was provided, use DateTimeOffset.
+                            if (datetime.Kind == DateTimeKind.Local)
+                            {
+                                if (jsonElement.TryGetDateTimeOffset(out DateTimeOffset datetimeOffset))
+                                {
+                                    return datetimeOffset;
+                                }
+                            }
+                            return datetime;
+                        }
+                        return jsonElement.ToString();
+                    }
+                case JsonValueKind.Number:      // 4    
+                    if (jsonElement.TryGetInt64(out long longValue))
+                    {
+                        return longValue;
+                    }
+                    else
+                    {
+                        return jsonElement.GetDouble();
+                    }
+                case JsonValueKind.True:        // 5
+                case JsonValueKind.False:       // 6
+                    return jsonElement.GetBoolean();
+                case JsonValueKind.Undefined:   // 0
+                case JsonValueKind.Null:        // 7
+                    return null;
+                default:
+                    return jsonElement.ToString();
+            }
+        }        
         #endregion Export/Import Json
 
         public static List<dynamic> ToDynamicObject(this DataTable @this)
