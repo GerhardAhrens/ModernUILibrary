@@ -311,7 +311,15 @@
                     RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
                     Text="PTA GmbH" />
             </StackPanel>
-        </StackPanel>
 
+            <ModernUI:HeaderSeparator
+                Height="15"
+                Background="Green"
+                Header="TextBlock, Formatted" />
+
+            <StackPanel Orientation="Vertical">
+                <ModernUI:FormattedTextBlock x:Name="tbFormattedTextBlock" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

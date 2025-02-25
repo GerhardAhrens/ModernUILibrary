@@ -30,7 +30,7 @@ namespace ModernBaseLibrary.Extension
     using System.Linq;
     using ModernBaseLibrary.Core;
 
-    public static class EnumExtensions
+    public static partial class EnumExtensions
     {
         /// <summary>
         /// Die Methode gibt den nummerischen Wert eines Enum-Elementes als Int zurück

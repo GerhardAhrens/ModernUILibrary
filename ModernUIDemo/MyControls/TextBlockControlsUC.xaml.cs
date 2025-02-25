@@ -30,6 +30,7 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.tbFormattedTextBlock.Text = "<b>Test</b>; <u>Hallo</u>; <fs20>Hallo</fs>; <fg=green>Hallo</fg>";
         }
 
         private void OnRequestNavigateHandler(UriEventArgs item)

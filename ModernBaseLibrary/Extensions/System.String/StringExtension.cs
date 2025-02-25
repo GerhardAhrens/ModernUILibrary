@@ -1921,5 +1921,76 @@ namespace ModernBaseLibrary.Extension
         }
 
         #endregion Remove Strings
+
+        // <summary>
+        /// Convert a byte array to a string using Ascii encoding
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToAsciiString(this byte[] bytes)
+        {
+            return bytes == null
+                       ? null
+                       : new ASCIIEncoding().GetString(bytes);
+        }
+
+        /// <summary>
+        /// Convert a byte array to a string using Utf-8 encoding
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToUtf8String(this byte[] bytes)
+        {
+            return bytes == null
+                       ? null
+                       : new UTF8Encoding().GetString(bytes);
+        }
+
+        /// <summary>
+        /// Convert a string to a byte array using Ascii encoding
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static byte[] AsciiToByteArray(this string source)
+        {
+            return string.IsNullOrEmpty(source)
+                       ? new byte[0]
+                       : new ASCIIEncoding().GetBytes(source);
+        }
+
+        /// <summary>
+        /// Convert a string to a byte array using Utf-8 encoding
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static byte[] Utf8ToByteArray(this string source)
+        {
+            return string.IsNullOrEmpty(source)
+                       ? new byte[0]
+                       : new UTF8Encoding().GetBytes(source);
+        }
+
+        /// <summary>
+        /// Does paragraph contain word - search is performed in a case-insensitive manner using the Invariant culture
+        /// </summary>
+        /// <param name="paragraph"></param>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool CaseInsensitiveContains(this string paragraph, string word)
+        {
+            return CaseInsensitiveContains(paragraph, word, CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Does paragraph contain word - search is performed in a case-insensitive manner using the specified culture
+        /// </summary>
+        /// <param name="paragraph"></param>
+        /// <param name="word"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public static bool CaseInsensitiveContains(this string paragraph, string word, CultureInfo culture)
+        {
+            return culture.CompareInfo.IndexOf(paragraph, word, CompareOptions.IgnoreCase) >= 0;
+        }
     }
 }

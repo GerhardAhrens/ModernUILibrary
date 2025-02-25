@@ -143,6 +143,7 @@
     <Folder Include="Data\EnumerableDataReader\" />
     <Folder Include="Data\VCalendar\" />
     <Folder Include="Data\VCard\" />
+    <Folder Include="Extensions\System.Task\" />
     <Folder Include="Extensions\System.Data\" />
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
@@ -172,7 +173,6 @@
     <Folder Include="Extensions\System.Double\" />
     <Folder Include="Extensions\System\" />
     <Folder Include="Extensions\System.Enum\" />
-    <Folder Include="Extensions\System.String\" />
     <Folder Include="Extensions\System.Type\" />
     <Folder Include="Extensions\System.Object\" />
     <Folder Include="Extensions\System.Collections\" />
