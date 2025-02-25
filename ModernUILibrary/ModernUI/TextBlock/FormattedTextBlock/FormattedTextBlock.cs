@@ -95,9 +95,9 @@
         /// </summary>
         /// <param name="textBlock"></param>
         /// <returns></returns>
-        private static Stack<perFormattedTextItem> ParseFormattedText(FormattedTextBlock textBlock)
+        private static Stack<FormattedTextItem> ParseFormattedText(FormattedTextBlock textBlock)
         {
-            var result = new Stack<perFormattedTextItem>();
+            var result = new Stack<FormattedTextItem>();
 
             SplitTextAtFirstTag(result,
                 textBlock.Text,
@@ -142,7 +142,7 @@
         /// <param name="background"></param>
         /// <param name="baselineAlignment"></param>
         /// <returns></returns>
-        private static void SplitTextAtFirstTag(Stack<perFormattedTextItem> itemStack, string text, bool isBold, bool isUnderline, bool isItalic, double fontSize, FontFamily fontFamily, Brush foreground, Brush background, BaselineAlignment baselineAlignment)
+        private static void SplitTextAtFirstTag(Stack<FormattedTextItem> itemStack, string text, bool isBold, bool isUnderline, bool isItalic, double fontSize, FontFamily fontFamily, Brush foreground, Brush background, BaselineAlignment baselineAlignment)
         {
             if (string.IsNullOrEmpty(text))
             {
@@ -152,37 +152,37 @@
             var firstTag = FindFirstTagInText(text);
 
             // If no opening tag is found then add the whole text in the current style.
-            if (firstTag == TagType.None)
+            if (firstTag == FormattedTagType.None)
             {
-                itemStack.Push(new perFormattedTextItem(text, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
+                itemStack.Push(new FormattedTextItem(text, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
                 return;
             }
 
             text.RegexSplitTextIncludingMatch(TagTypeConstants.GetOpeningTag(firstTag), out var textBeforeOpenTag, out var matchedText, out var textAfterOpenTag);
 
             // push the elements onto the stack in reverse order
-            if (firstTag == TagType.LineBreak)
+            if (firstTag == FormattedTagType.LineBreak)
             {
                 SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
-                itemStack.Push(new perFormattedTextItem
+                itemStack.Push(new FormattedTextItem
                 {
                     IsLineBreak = true
                 });
             }
-            else if (firstTag == TagType.LessThan)
+            else if (firstTag == FormattedTagType.LessThan)
             {
                 SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
-                itemStack.Push(new perFormattedTextItem("<", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
+                itemStack.Push(new FormattedTextItem("<", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
             }
-            else if (firstTag == TagType.GreaterThan)
+            else if (firstTag == FormattedTagType.GreaterThan)
             {
                 SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
-                itemStack.Push(new perFormattedTextItem(">", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
+                itemStack.Push(new FormattedTextItem(">", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
             }
-            else if (firstTag == TagType.Slash)
+            else if (firstTag == FormattedTagType.Slash)
             {
                 SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
-                itemStack.Push(new perFormattedTextItem("/", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
+                itemStack.Push(new FormattedTextItem("/", isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
             }
             else
             {
@@ -205,7 +205,7 @@
                     previousOpeningTagCount = openingTagCount;
                 }
 
-                if (firstTag == TagType.Bold)
+                if (firstTag == FormattedTagType.Bold)
                 {
                     if (hasClosingTag)
                     {
@@ -215,7 +215,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, true, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.Italic)
+                else if (firstTag == FormattedTagType.Italic)
                 {
                     if (hasClosingTag)
                     {
@@ -225,7 +225,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, true, fontSize, fontFamily, foreground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.Underline)
+                else if (firstTag == FormattedTagType.Underline)
                 {
                     if (hasClosingTag)
                     {
@@ -235,7 +235,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, true, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.Subscript)
+                else if (firstTag == FormattedTagType.Subscript)
                 {
                     if (hasClosingTag)
                     {
@@ -245,7 +245,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize / 2, fontFamily, foreground, background, BaselineAlignment.Subscript);
                 }
-                else if (firstTag == TagType.SuperScript)
+                else if (firstTag == FormattedTagType.SuperScript)
                 {
                     if (hasClosingTag)
                     {
@@ -257,7 +257,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize / 2, fontFamily, foreground, background, BaselineAlignment.TextTop);
                 }
-                else if (firstTag == TagType.FontSize)
+                else if (firstTag == FormattedTagType.FontSize)
                 {
                     var relativeSize = matchedText.Contains('*');
 
@@ -289,7 +289,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, newFontSize, fontFamily, foreground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.FontFamily)
+                else if (firstTag == FormattedTagType.FontFamily)
                 {
                     FontFamily newFontFamily;
                     var fontFamilyText = matchedText.ToLower()
@@ -317,7 +317,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, newFontFamily, foreground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.Foreground)
+                else if (firstTag == FormattedTagType.Foreground)
                 {
                     Brush newForeground;
                     var foregroundText = matchedText.ToLower().Replace("<", string.Empty)
@@ -347,7 +347,7 @@
                     else
                         SplitTextAtFirstTag(itemStack, textAfterOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, newForeground, background, baselineAlignment);
                 }
-                else if (firstTag == TagType.Background)
+                else if (firstTag == FormattedTagType.Background)
                 {
                     Brush newBackground;
                     var backgroundText = matchedText.ToLower()
@@ -381,7 +381,7 @@
             }
 
             // Any text before the first matched tag must by rule be plain text in the current style
-            itemStack.Push(new perFormattedTextItem(textBeforeOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
+            itemStack.Push(new FormattedTextItem(textBeforeOpenTag, isBold, isUnderline, isItalic, fontSize, fontFamily, foreground, background, baselineAlignment));
         }
 
         /// <summary>
@@ -390,12 +390,12 @@
         /// <param name="input"></param>
         /// <returns></returns>
         // 
-        private static TagType FindFirstTagInText(string input)
+        private static FormattedTagType FindFirstTagInText(string input)
         {
             input = input.ToLower();
 
-            var tagIndexes = EnumExtensions.GetValues<TagType>()
-                .Where(tt => tt != TagType.None)
+            var tagIndexes = EnumExtensions.GetValues<FormattedTagType>()
+                .Where(tt => tt != FormattedTagType.None)
                 .Select(tt => new { TagType = tt, FirstIndex = GetIndexOfOpeningTag(input, tt) })
                 .Where(x => x.FirstIndex >= 0)
                 .OrderBy(x => x.FirstIndex)
@@ -403,7 +403,7 @@
 
             return tagIndexes.Any()
                        ? tagIndexes.First().TagType
-                       : TagType.None;
+                       : FormattedTagType.None;
         }
 
         /// <summary>
@@ -412,7 +412,7 @@
         /// <param name="input"></param>
         /// <param name="tagType"></param>
         /// <returns></returns>
-        private static int GetIndexOfOpeningTag(string input, TagType tagType)
+        private static int GetIndexOfOpeningTag(string input, FormattedTagType tagType)
         {
             var openingTag = TagTypeConstants.GetOpeningTag(tagType);
             return input.RegexSplitTextExcludingMatch(openingTag, out var textBeforeMatch, out _)
@@ -425,7 +425,7 @@
         /// </summary>
         /// <param name="textBlock"></param>
         /// <param name="itemStack"></param>
-        private static void GenerateFormattedText(FormattedTextBlock textBlock, Stack<perFormattedTextItem> itemStack)
+        private static void GenerateFormattedText(FormattedTextBlock textBlock, Stack<FormattedTextItem> itemStack)
         {
             while (itemStack.Any())
             {
@@ -477,18 +477,16 @@
             }
         }
 
-        // ================================================================================
-
         /// <summary>
         /// Data for a run within a formatted text block.
         /// </summary>
-        private class perFormattedTextItem
+        private class FormattedTextItem
         {
-            public perFormattedTextItem()
+            public FormattedTextItem()
             {
             }
 
-            public perFormattedTextItem(string text, bool isBold, bool isUnderline, bool isItalic, double fontSize, FontFamily fontFamily, Brush foreground, Brush background, BaselineAlignment baselineAlignment)
+            public FormattedTextItem(string text, bool isBold, bool isUnderline, bool isItalic, double fontSize, FontFamily fontFamily, Brush foreground, Brush background, BaselineAlignment baselineAlignment)
             {
                 Content = text;
                 IsBold = isBold;
@@ -513,9 +511,7 @@
             public BaselineAlignment BaselineAlignment { get; }
         }
 
-        // ================================================================================
-
-        private enum TagType
+        private enum FormattedTagType
         {
             None,
             Bold,
@@ -533,42 +529,40 @@
             Slash
         }
 
-        // ================================================================================
-
         /// <summary>
         /// The tag definitions for each element of TagType
         /// </summary>
         private static class TagTypeConstants
         {
-            private static readonly Dictionary<TagType, string> OpeningTags;
-            private static readonly Dictionary<TagType, string> ClosingTags;
-            private static readonly Dictionary<TagType, string> Tags;
+            private static readonly Dictionary<FormattedTagType, string> OpeningTags;
+            private static readonly Dictionary<FormattedTagType, string> ClosingTags;
+            private static readonly Dictionary<FormattedTagType, string> Tags;
 
             static TagTypeConstants()
             {
-                OpeningTags = new Dictionary<TagType, string>();
-                ClosingTags = new Dictionary<TagType, string>();
-                Tags = new Dictionary<TagType, string>();
+                OpeningTags = new Dictionary<FormattedTagType, string>();
+                ClosingTags = new Dictionary<FormattedTagType, string>();
+                Tags = new Dictionary<FormattedTagType, string>();
 
-                OpeningTags[TagType.Bold] = "<b>";
-                ClosingTags[TagType.Bold] = "</b>";
+                OpeningTags[FormattedTagType.Bold] = "<b>";
+                ClosingTags[FormattedTagType.Bold] = "</b>";
 
-                OpeningTags[TagType.Italic] = "<i>";
-                ClosingTags[TagType.Italic] = "</i>";
+                OpeningTags[FormattedTagType.Italic] = "<i>";
+                ClosingTags[FormattedTagType.Italic] = "</i>";
 
-                OpeningTags[TagType.Underline] = "<u>";
-                ClosingTags[TagType.Underline] = "</u>";
+                OpeningTags[FormattedTagType.Underline] = "<u>";
+                ClosingTags[FormattedTagType.Underline] = "</u>";
 
-                OpeningTags[TagType.LineBreak] = "<lb>";
-                OpeningTags[TagType.LessThan] = "<lt>";
-                OpeningTags[TagType.GreaterThan] = "<gt>";
-                OpeningTags[TagType.Slash] = "<sl>";
+                OpeningTags[FormattedTagType.LineBreak] = "<lb>";
+                OpeningTags[FormattedTagType.LessThan] = "<lt>";
+                OpeningTags[FormattedTagType.GreaterThan] = "<gt>";
+                OpeningTags[FormattedTagType.Slash] = "<sl>";
 
-                OpeningTags[TagType.Subscript] = "<sub>";
-                ClosingTags[TagType.Subscript] = "</sub>";
+                OpeningTags[FormattedTagType.Subscript] = "<sub>";
+                ClosingTags[FormattedTagType.Subscript] = "</sub>";
 
-                OpeningTags[TagType.SuperScript] = "<sup>";
-                ClosingTags[TagType.SuperScript] = "</sup>";
+                OpeningTags[FormattedTagType.SuperScript] = "<sup>";
+                ClosingTags[FormattedTagType.SuperScript] = "</sup>";
 
                 // regex expression elements :-
                 // Font Size
@@ -625,26 +619,26 @@
                 //
                 // There's no need to worry about cases in the patterns as all regex matches are done case-insensitive.
 
-                OpeningTags[TagType.FontSize] = @"<fs[ =]?(?:[0-9]+|\*[0-9]+(?:\.[0-9]+)?)>";
-                ClosingTags[TagType.FontSize] = @"</fs>";
-                Tags[TagType.FontSize] = "fs";
+                OpeningTags[FormattedTagType.FontSize] = @"<fs[ =]?(?:[0-9]+|\*[0-9]+(?:\.[0-9]+)?)>";
+                ClosingTags[FormattedTagType.FontSize] = @"</fs>";
+                Tags[FormattedTagType.FontSize] = "fs";
 
-                OpeningTags[TagType.FontFamily] = @"<ff[ =]?[a-z\s]+>";
-                ClosingTags[TagType.FontFamily] = @"</ff>";
-                Tags[TagType.FontFamily] = "ff";
+                OpeningTags[FormattedTagType.FontFamily] = @"<ff[ =]?[a-z\s]+>";
+                ClosingTags[FormattedTagType.FontFamily] = @"</ff>";
+                Tags[FormattedTagType.FontFamily] = "ff";
 
-                OpeningTags[TagType.Foreground] = @"<fg[ =]?(?:[#][a-f0-9]{6}|[#][a-f0-9]{8}|[a-z]+)>";
-                ClosingTags[TagType.Foreground] = @"</fg>";
-                Tags[TagType.Foreground] = "fg";
+                OpeningTags[FormattedTagType.Foreground] = @"<fg[ =]?(?:[#][a-f0-9]{6}|[#][a-f0-9]{8}|[a-z]+)>";
+                ClosingTags[FormattedTagType.Foreground] = @"</fg>";
+                Tags[FormattedTagType.Foreground] = "fg";
 
-                OpeningTags[TagType.Background] = @"<bg[ =]?(?:[#][a-f0-9]{6}|[#][a-f0-9]{8}|[a-z]+)>";
-                ClosingTags[TagType.Background] = @"</bg>";
-                Tags[TagType.Background] = "bg";
+                OpeningTags[FormattedTagType.Background] = @"<bg[ =]?(?:[#][a-f0-9]{6}|[#][a-f0-9]{8}|[a-z]+)>";
+                ClosingTags[FormattedTagType.Background] = @"</bg>";
+                Tags[FormattedTagType.Background] = "bg";
             }
 
-            public static string GetOpeningTag(TagType tagType) => OpeningTags.ContainsKey(tagType) ? OpeningTags[tagType] : string.Empty;
-            public static string GetClosingTag(TagType tagType) => ClosingTags.ContainsKey(tagType) ? ClosingTags[tagType] : string.Empty;
-            public static string GetTag(TagType tagType) => Tags.ContainsKey(tagType) ? Tags[tagType] : string.Empty;
+            public static string GetOpeningTag(FormattedTagType tagType) => OpeningTags.ContainsKey(tagType) ? OpeningTags[tagType] : string.Empty;
+            public static string GetClosingTag(FormattedTagType tagType) => ClosingTags.ContainsKey(tagType) ? ClosingTags[tagType] : string.Empty;
+            public static string GetTag(FormattedTagType tagType) => Tags.ContainsKey(tagType) ? Tags[tagType] : string.Empty;
         }
     }
 }
