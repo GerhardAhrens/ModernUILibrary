@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-
-namespace ModernBaseLibrary.Extension
+﻿namespace ModernBaseLibrary.Extension
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+
     public static partial class EnumExtensions
     {
         public static string Description(this Enum value)
@@ -23,7 +23,6 @@ namespace ModernBaseLibrary.Extension
             return result;
         }
 
-        // c# doesn't support where T: Enum - this is the best compromise
         public static IReadOnlyCollection<T> GetValues<T>() where T : struct, IComparable, IFormattable, IConvertible
         {
             var itemType = typeof(T);
