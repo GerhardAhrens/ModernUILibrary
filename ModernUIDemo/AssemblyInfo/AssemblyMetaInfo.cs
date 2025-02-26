@@ -9,30 +9,28 @@
 // <date>03.12.2024 07:49:42</date>
 //
 // <summary>
-// Klasse zur Darstellung von Assembly Meta Informationen
+// Klasse für 
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernUILibrary.AssemblyInfo
+namespace ModernUIDemo.Core
 {
     using System;
+    using System.Globalization;
+    using System.Runtime.Versioning;
 
     using ModernBaseLibrary.Core;
 
+    [SupportedOSPlatform("windows")]
     public class AssemblyMetaInfo : IAssemblyInfo
     {
         public string PacketName => "ModernUI";
         public Version PacketVersion => new Version(1, 0, 2025, 15);
 
-        public string AssemblyName => "ModernUILibrary";
+        public string AssemblyName => $"ModernUIDemo";
 
-        public Version AssemblyVersion => new Version(1, 0, 2025, 15);
+        public Version AssemblyVersion => new Version(1,0,2025,15);
 
-        public string Description => "Bibliothek für UI Controls";
-
-        public override string ToString()
-        {
-            return $"{this.AssemblyName}, {this.AssemblyVersion}";
-        }
+        public string Description => "Demoprogramm für UI Controls und C# Klassen";
     }
 }
