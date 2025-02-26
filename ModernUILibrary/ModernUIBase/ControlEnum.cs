@@ -110,6 +110,8 @@
         Star_Empty,
         Star_Half,
         Star_Full,
+        Left,
+        Right
     }
 
     public enum EnumDatePickerType

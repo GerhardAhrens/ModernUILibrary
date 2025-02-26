@@ -21,21 +21,30 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Data" Value="{StaticResource Info}" />
-        <Setter Property="Width" Value="15" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MUI:Icon}">
+                    <ControlTemplate.Resources>
+                        <MUI:IconSizeConverter x:Key="iconSizeConverter" />
+                    </ControlTemplate.Resources>
+
                     <Path
                         x:Name="path"
-                        Width="{TemplateBinding Width}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                        Width="{TemplateBinding IconSize,
+                                                Converter={StaticResource ResourceKey=iconSizeConverter}}"
+                        Height="{TemplateBinding IconSize,
+                                                 Converter={StaticResource ResourceKey=iconSizeConverter}}"
+                        Margin="0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         Fill="{TemplateBinding Foreground}"
-                        Stretch="Uniform">
+                        Focusable="False"
+                        Stretch="Fill">
                         <Path.Data>
                             <PathGeometry Figures="{Binding Data, RelativeSource={RelativeSource AncestorType=MUI:Icon}}" />
                         </Path.Data>
                     </Path>
+
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Self}}" Value="Info">
                             <Setter Property="Data" Value="{StaticResource ResourceKey=Info}" />
@@ -54,6 +63,12 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Self}}" Value="Star_Full">
                             <Setter Property="Data" Value="{StaticResource Star_Full}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Self}}" Value="Left">
+                            <Setter Property="Data" Value="{StaticResource Left}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Type, RelativeSource={RelativeSource Self}}" Value="Right">
+                            <Setter Property="Data" Value="{StaticResource Right}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -7,6 +7,8 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
+    [TemplatePart(Name = "PART_IconPresenter", Type = typeof(XamlIconHost))]
+    [TemplatePart(Name = "PART_CaptionTextBlock", Type = typeof(XamlIconHost))]
     public class XamlIconHost : Control
     {
         static XamlIconHost()
@@ -85,6 +87,13 @@
             get => (Brush) GetValue(DisabledHighlightProperty);
             set => SetValue(DisabledHighlightProperty, value);
         }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            var aa  = this.GetTemplateChild("PART_IconPresenter") as FrameworkElement;
+        }
     }
 
     public enum CaptionPosition
@@ -98,19 +107,20 @@
 
     public enum IconSize
     {
+        Default,
         ExtraSmall,
         Small,
         Medium,
         Large,
         ExtraLarge,
-        ExtraExtraLarge
+        BigLarge
     }
 
     public class XamlIconSizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            const int defaultSize = 40;
+            const int defaultSize = 30;
 
             if (!(value is IconSize))
             {
@@ -129,7 +139,7 @@
                     return defaultSize * 3 / 2;
                 case IconSize.ExtraLarge:
                     return defaultSize * 2;
-                case IconSize.ExtraExtraLarge:
+                case IconSize.BigLarge:
                     return defaultSize * 5 / 2;
                 default:
                     return defaultSize;
