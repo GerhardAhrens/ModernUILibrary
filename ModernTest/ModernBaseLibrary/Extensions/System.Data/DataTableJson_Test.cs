@@ -25,6 +25,7 @@
 namespace ModernTest.ModernBaseLibrary
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Globalization;
@@ -58,26 +59,34 @@ namespace ModernTest.ModernBaseLibrary
         }
 
         [TestMethod]
-        public void DataTableToJson()
+        public void DataTable_ToJson()
         {
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
 
-            DataTable usersDt = BuildDemoData<UserDemoDaten>.CreateForDataTable<UserDemoDaten>(ConfigObject, 1);
-            if (usersDt.Rows.Count > 0)
+            List<UserDemoDaten> usersDt = BuildDemoData<UserDemoDaten>.CreateForList<UserDemoDaten>(ConfigObject, 1);
+            if (usersDt.Count > 0)
             {
-                string jsonText = usersDt.ToJson();
-                File.WriteAllText(pathFileName, jsonText);
+                usersDt.ToJson<UserDemoDaten>(pathFileName);
             }
         }
 
         [TestMethod]
-        public void JsonToDataTable()
+        public void Json_ToDataTable()
         {
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
             string jsonText = File.ReadAllText(pathFileName);
-            var aa = jsonText.JsonToDataTable<UserDemoDaten>(nameof(UserDemoDaten));
+            var aa = jsonText.JsonToList<UserDemoDaten>();
+        }
+
+        [TestMethod]
+        public void Json_ToList()
+        {
+            DirectoryInfo di = new DirectoryInfo(TempDirPath);
+            string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
+            string jsonText = File.ReadAllText(pathFileName);
+            var aa = jsonText.JsonToList<UserDemoDaten>();
         }
 
         [TestMethod]
@@ -86,10 +95,11 @@ namespace ModernTest.ModernBaseLibrary
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Extensions\\System.Data\\DemoData\\DataTabelToJson_A.json");
             string jsonText = File.ReadAllText(pathFileName);
+
             using (JsonDocument document = JsonDocument.Parse(jsonText))
             {
                 JsonElement root = document.RootElement;
-                var aa = root[0];
+                var aa = root.JsonElementToDataTable();
             }
         }
 
@@ -99,7 +109,7 @@ namespace ModernTest.ModernBaseLibrary
             demoDaten.UserName = BuildDemoData.Username();
             demoDaten.Betrag = BuildDemoData.CurrencyValue(1_000, 10_000);
             demoDaten.IsDeveloper = BuildDemoData.Boolean();
-            demoDaten.City = BuildDemoData.City();
+            demoDaten.City = null;
             demoDaten.CreateOn = timeStamp.CreateOn;
             demoDaten.CreateBy = timeStamp.CreateBy;
             demoDaten.ModifiedOn = timeStamp.ModifiedOn;

@@ -1,12 +1,12 @@
 [
   {
-    "UserName": "RWMF2948",
-    "IsDeveloper": true,
-    "Betrag": 4585.56,
-    "City": "Wesseling",
-    "CreateOn": "2025-02-14T12:34:21.3290979",
+    "UserName": "UHEQ3800",
+    "IsDeveloper": false,
+    "Betrag": 2596.35,
+    "City": null,
+    "CreateOn": "2025-02-19T13:48:43.836348+01:00",
     "CreateBy": "PTA\\ahrens",
-    "ModifiedOn": "2025-02-24T08:10:21.3290867",
+    "ModifiedOn": "2025-02-26T14:30:43.8363344+01:00",
     "ModifiedBy": "PTA\\ahrens"
   }
 ]
