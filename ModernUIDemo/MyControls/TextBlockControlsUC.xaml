@@ -318,7 +318,16 @@
                 Header="TextBlock, Formatted" />
 
             <StackPanel Orientation="Vertical">
-                <ModernUI:FormattedTextBlock x:Name="tbFormattedTextBlock" />
+                <ModernUI:BlinkingBorder
+                    BlinkingBorderBrush="Red"
+                    BorderThickness="2"
+                    DefaultBorderBrush="Black"
+                    IsBlinking="True">
+                    <ModernUI:FormattedTextBlock
+                        x:Name="tbFormattedTextBlock"
+                        Margin="10"
+                        Text="Demo-Text" />
+                </ModernUI:BlinkingBorder>
             </StackPanel>
         </StackPanel>
     </Grid>
