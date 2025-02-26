@@ -15,7 +15,7 @@
         }
 
         public static readonly DependencyProperty XamlIconProperty =
-            DependencyProperty.Register(nameof(XamlIcon), typeof(FrameworkElement), typeof(XamlIconHost), new PropertyMetadata(null));
+            DependencyProperty.Register("XamlIcon", typeof(FrameworkElement), typeof(XamlIconHost), new PropertyMetadata(null));
 
         public FrameworkElement XamlIcon
         {
