@@ -79,4 +79,15 @@
             throw new NotImplementedException();
         }
     }
+
+    public enum IconSize
+    {
+        Default,
+        ExtraSmall,
+        Small,
+        Medium,
+        Large,
+        ExtraLarge,
+        BigLarge
+    }
 }

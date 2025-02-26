@@ -148,7 +148,6 @@
     <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />
-    <Folder Include="Extensions\System.Text\" />
     <Folder Include="Extensions\System.Short\" />
     <Folder Include="Extensions\System.Management\" />
     <Folder Include="Extensions\System.Long\" />

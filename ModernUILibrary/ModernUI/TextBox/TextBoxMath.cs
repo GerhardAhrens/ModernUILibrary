@@ -214,7 +214,7 @@ namespace ModernIU.Controls
             ContextMenu textBoxContextMenu = new ContextMenu();
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Kopiere";
-            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
             textBoxContextMenu.Items.Add(copyMenu);
 
@@ -222,13 +222,13 @@ namespace ModernIU.Controls
             {
                 MenuItem pasteMenu = new MenuItem();
                 pasteMenu.Header = "Einfügen";
-                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
                 textBoxContextMenu.Items.Add(pasteMenu);
 
                 MenuItem deleteMenu = new MenuItem();
                 deleteMenu.Header = "Ausschneiden";
-                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                deleteMenu.Icon = Icons.GetPathGeometry(Icons.IconDelete);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
                 textBoxContextMenu.Items.Add(deleteMenu);
             }
@@ -278,32 +278,32 @@ namespace ModernIU.Controls
                 if (text == "+")
                 {
                     operation = EOperation.Add;
-                    miOperand.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconAdd);
+                    miOperand.Icon = Icons.GetPathGeometry(Icons.IconAdd);
                 }
                 else if (text == "-")
                 {
                     operation = EOperation.Subtract;
-                    miOperand.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconMinus);
+                    miOperand.Icon = Icons.GetPathGeometry(Icons.IconMinus);
                 }
                 else if (text == "*")
                 {
                     operation = EOperation.Multiply;
-                    miOperand.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconMult);
+                    miOperand.Icon = Icons.GetPathGeometry(Icons.IconMult);
                 }
                 else if (text == "/")
                 {
                     operation = EOperation.Divide;
-                    miOperand.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDiv);
+                    miOperand.Icon = Icons.GetPathGeometry(Icons.IconDiv);
                 }
                 else if (text == "%")
                 {
                     operation = EOperation.Percent;
-                    miOperand.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPercent);
+                    miOperand.Icon = Icons.GetPathGeometry(Icons.IconPercent);
                 }
 
                 miResult = new MenuItem();
                 miResult.Header = string.Empty;
-                miResult.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconEquals);
+                miResult.Icon = Icons.GetPathGeometry(Icons.IconEquals);
                 miResult.FontSize = 18;
                 miResult.FontWeight = FontWeights.Medium;
                 miResult.IsEnabled = false;

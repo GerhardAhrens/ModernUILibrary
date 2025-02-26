@@ -176,7 +176,7 @@ namespace ModernIU.Controls
             ContextMenu textBoxContextMenu = new ContextMenu();
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Kopiere";
-            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
             textBoxContextMenu.Items.Add(copyMenu);
 

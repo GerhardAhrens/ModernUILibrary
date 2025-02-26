@@ -4,9 +4,8 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="XamlIconHost.xaml" />
         <ResourceDictionary Source="XamlPathIcon.xaml" />
-        <ResourceDictionary Source="XamlIconHostStyle.xaml" />
+        <ResourceDictionary Source="Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

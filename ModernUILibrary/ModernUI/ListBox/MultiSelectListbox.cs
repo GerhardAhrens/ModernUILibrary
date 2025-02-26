@@ -232,25 +232,25 @@ namespace ModernIU.Controls
 
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Alle Kopieren";
-            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopy);
             textBoxContextMenu.Items.Add(copyMenu);
 
             MenuItem allCheckMenu = new MenuItem();
             allCheckMenu.Header = "Alle markieren";
-            allCheckMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCheckAll);
+            allCheckMenu.Icon = Icons.GetPathGeometry(Icons.IconCheckAll);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(allCheckMenu, "Click", this.OnCheckAll);
             textBoxContextMenu.Items.Add(allCheckMenu);
 
             MenuItem copyCheckMenu = new MenuItem();
             copyCheckMenu.Header = "Markierte Kopieren";
-            copyCheckMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyCheckMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyCheckMenu, "Click", this.OnCheckCopy);
             textBoxContextMenu.Items.Add(copyCheckMenu);
 
             MenuItem unCheckMenu = new MenuItem();
             unCheckMenu.Header = "Keine markieren";
-            unCheckMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconUnCheck);
+            unCheckMenu.Icon = Icons.GetPathGeometry(Icons.IconUnCheck);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(unCheckMenu, "Click", this.OnUnCheck);
             textBoxContextMenu.Items.Add(unCheckMenu);
 

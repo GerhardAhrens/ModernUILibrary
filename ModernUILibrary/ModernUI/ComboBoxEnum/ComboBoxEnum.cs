@@ -487,7 +487,7 @@
             ContextMenu textBoxContextMenu = new ContextMenu();
             MenuItem copyMenu = new MenuItem();
             copyMenu.Header = "Kopiere";
-            copyMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconCopy);
+            copyMenu.Icon = Icons.GetPathGeometry(Icons.IconCopy);
             WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(copyMenu, "Click", this.OnCopyMenu);
             textBoxContextMenu.Items.Add(copyMenu);
 
@@ -495,13 +495,13 @@
             {
                 MenuItem pasteMenu = new MenuItem();
                 pasteMenu.Header = "Einfügen";
-                pasteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconPaste);
+                pasteMenu.Icon = Icons.GetPathGeometry(Icons.IconPaste);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(pasteMenu, "Click", this.OnPasteMenu);
                 textBoxContextMenu.Items.Add(pasteMenu);
 
                 MenuItem deleteMenu = new MenuItem();
                 deleteMenu.Header = "Ausschneiden";
-                deleteMenu.Icon = IconsDevs.GetPathGeometry(IconsDevs.IconDelete);
+                deleteMenu.Icon = Icons.GetPathGeometry(Icons.IconDelete);
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
                 textBoxContextMenu.Items.Add(deleteMenu);
             }
