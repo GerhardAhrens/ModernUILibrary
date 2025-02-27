@@ -92,7 +92,6 @@
                                 <ModernUI:GridViewColumnHeaderEx
                                     Height="30"
                                     HorizontalContentAlignment="Left"
-                                    Background="Azure"
                                     Content="Name" />
                             </GridViewColumn>
 
