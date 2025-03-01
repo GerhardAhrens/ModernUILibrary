@@ -31,6 +31,7 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/DataGrid/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListTextBox/Themes/ListTextBoxDataGrid.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListTextBox/Themes/ListTextBoxStyle.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Label/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/ListBox/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Loading/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Markdown/Themes/Generic.xaml" />

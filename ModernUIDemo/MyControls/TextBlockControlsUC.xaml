@@ -310,6 +310,12 @@
                     LinkText="http://www.pta.de"
                     RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
                     Text="PTA GmbH" />
+
+                <ModernUI:LinkLabel
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    Content="Link Label"
+                    d:LayoutOverrides="Width, Height" />
             </StackPanel>
 
             <ModernUI:HeaderSeparator
