@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <time start="2025-03-01T18:46:10" end="2025-03-02T04:46:10" />
+  <size width="800" height="600" />
+  <user Username="gerha">
+    <LastAccess>2025-03-01T18:46:10</LastAccess>
+    <DomainName>GERHARD-G6</DomainName>
+  </user>
+  <Application>
+    <Name>ModernTest</Name>
+    <Path>D:\_GitHub\ModernUI\ModernTest\bin\Debug\net8.0-windows</Path>
+  </Application>
+</configuration>

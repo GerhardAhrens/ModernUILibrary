@@ -124,6 +124,7 @@
     <Folder Include="Core\Mathematic\" />
     <Folder Include="Core\Media\" />
     <Folder Include="Core\FormatTo\" />
+    <Folder Include="Core\Encoding\" />
     <Folder Include="Core\Weak\" />
     <Folder Include="Core\TypConverter\" />
     <Folder Include="Core\SystemMetrics\" />

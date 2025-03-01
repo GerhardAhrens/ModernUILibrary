@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernBaseLibrary\Core\Cryptography\DemoData\binary12K.png" />
+    <None Remove="ModernBaseLibrary\Core\Cryptography\DemoData\binary1M.bin" />
     <None Remove="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbf" />
     <None Remove="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbt" />
     <None Remove="ModernBaseLibrary\Data\DBase\DemoData\POST986.dbf" />
@@ -32,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ModernBaseLibrary\Core\Cryptography\DemoData\binary12K.png" />
+    <Content Include="ModernBaseLibrary\Core\Cryptography\DemoData\binary1M.bin" />
     <Content Include="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbf" />
     <Content Include="ModernBaseLibrary\Data\DBase\DemoData\dbase_83.dbt" />
     <Content Include="ModernBaseLibrary\Data\DBase\DemoData\POST986.dbf" />
@@ -90,6 +94,7 @@
     <Folder Include="ModernBaseLibrary\Core\TypConverter\" />
     <Folder Include="ModernBaseLibrary\Core\Performance\" />
     <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
+    <Folder Include="ModernBaseLibrary\Data\DynamicXml\DemoData\" />
     <Folder Include="ModernBaseLibrary\Data\ExcelWriter\DemoData\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Data\DemoData\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />

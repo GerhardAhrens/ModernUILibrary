@@ -9,7 +9,7 @@
 // <date>03.09.2019</date>
 //
 // <summary>
-//  Mit dieser Klasse kann ein CRC32 Hash Alogorithmus erstellet werden
+//  Mit dieser Klasse kann ein CRC32 Hash Alogorithmus erstellt werden
 // </summary>
 //-----------------------------------------------------------------------
 

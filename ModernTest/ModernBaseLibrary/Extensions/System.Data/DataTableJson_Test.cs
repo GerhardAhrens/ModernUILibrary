@@ -99,7 +99,7 @@ namespace ModernTest.ModernBaseLibrary
             using (JsonDocument document = JsonDocument.Parse(jsonText))
             {
                 JsonElement root = document.RootElement;
-                var aa = root.JsonElementToDataTable();
+                //var aa = root.JsonElementToDataTable();
             }
         }
 
@@ -154,8 +154,8 @@ namespace ModernTest.ModernBaseLibrary
             {
                 using var jsonDoc = JsonDocument.ParseValue(ref reader);
                 var rootElement = jsonDoc.RootElement;
-                var dataTable = rootElement.JsonElementToDataTable();
-                return dataTable;
+                //var dataTable = rootElement.JsonElementToDataTable();
+                return default;
             }
 
             public override void Write(Utf8JsonWriter writer, DataTable value, JsonSerializerOptions options)
