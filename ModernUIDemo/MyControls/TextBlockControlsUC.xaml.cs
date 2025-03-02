@@ -6,6 +6,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Navigation;
 
     using ModernIU.Controls;
     using ModernIU.Controls.Chart;
@@ -36,6 +37,16 @@
         private void OnRequestNavigateHandler(UriEventArgs item)
         {
             MessageBox.Show(item.TextNavigate, "URL anueigen");
+        }
+
+        private void LinkLabel_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            MessageBox.Show($"Navigating: {e.Uri.AbsoluteUri}");
+        }
+
+        private void LinkLabel_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Clicking");
         }
 
         #region PropertyChanged Implementierung

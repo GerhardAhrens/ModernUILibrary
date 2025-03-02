@@ -312,9 +312,32 @@
                     Text="PTA GmbH" />
 
                 <ModernUI:LinkLabel
-                    Width="100"
+                    Width="220"
                     HorizontalAlignment="Left"
-                    Content="Link Label"
+                    Content="Link Label - Navigate"
+                    FontSize="22"
+                    RequestNavigate="LinkLabel_RequestNavigate"
+                    Url="https://pta.de"
+                    d:LayoutOverrides="Width, Height" />
+
+                <ModernUI:LinkLabel
+                    Width="230"
+                    HorizontalAlignment="Left"
+                    Click="LinkLabel_Click"
+                    Content="Link Label - Click"
+                    FontSize="22"
+                    LinkLabelBehavior="HoverUnderline"
+                    d:LayoutOverrides="Width, Height" />
+
+                <ModernUI:LinkLabel
+                    Width="230"
+                    HorizontalAlignment="Left"
+                    Click="LinkLabel_Click"
+                    Content="Link Label - Click"
+                    FontSize="22"
+                    Foreground="#FF847901"
+                    HoverForeground="#FF06C8F2"
+                    LinkLabelBehavior="NeverUnderline"
                     d:LayoutOverrides="Width, Height" />
             </StackPanel>
 
