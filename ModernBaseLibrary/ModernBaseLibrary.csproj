@@ -192,6 +192,7 @@
     <Folder Include="TextAnalysis\LexicalAnalyzer\" />
     <Folder Include="TextAnalysis\Template\" />
     <Folder Include="TextAnalysis\StringTokenizer\" />
+    <Folder Include="ValueTypes\Implementation\" />
     <Folder Include="WIN32API\MessageBox\" />
     <Folder Include="WMI\WMIClass\" />
   </ItemGroup>
