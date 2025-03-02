@@ -115,6 +115,7 @@
     <Folder Include="ModernBaseLibrary\ValueObject\" />
     <Folder Include="ModernBaseLibrary\ValueTypes\Finance\" />
     <Folder Include="ModernBaseLibrary\ValueTypes\Geometry\" />
+    <Folder Include="ModernBaseLibrary\ValueTypes\Records\" />
     <Folder Include="ModernBaseLibrary\ValueTypes\Nullables\" />
     <Folder Include="ModernBaseLibrary\WMI\" />
     <Folder Include="ModernUILibrary\WPF\Converters\" />
