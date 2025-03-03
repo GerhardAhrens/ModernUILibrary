@@ -7,8 +7,8 @@
     public class Contact : Value
     {
         public string Name { get; }
-        public Address? Address { get; }
-        public Contact(string name, Address? address)
+        public Address Address { get; }
+        public Contact(string name, Address address)
         {
             Name = name;
             Address = address;

@@ -183,6 +183,7 @@
     <Folder Include="FluentAPI\Type\" />
     <Folder Include="Graphics\Barcode\LinearBarcode\" />
     <Folder Include="Graphics\Barcode\QRBarcode\Create\" />
+    <Folder Include="Graphics\PictureInfo\" />
     <Folder Include="Graphics\SvgToXaml\" />
     <Folder Include="CustomDataTypes\" />
     <Folder Include="Network\SmtpMail\" />

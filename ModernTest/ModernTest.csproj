@@ -107,9 +107,9 @@
     <Folder Include="ModernBaseLibrary\FluentAPI\API\" />
     <Folder Include="ModernBaseLibrary\FluentAPI\Type\" />
     <Folder Include="ModernBaseLibrary\CustomDataTypes\" />
+    <Folder Include="ModernBaseLibrary\Graphics\PictureInfo\DemoData\" />
     <Folder Include="ModernBaseLibrary\Network\" />
     <Folder Include="ModernBaseLibrary\Exception\" />
-    <Folder Include="ModernBaseLibrary\Graphics\" />
     <Folder Include="ModernBaseLibrary\Reflection\" />
     <Folder Include="ModernBaseLibrary\TextAnalysis\HumanText\" />
     <Folder Include="ModernBaseLibrary\ValueObject\" />

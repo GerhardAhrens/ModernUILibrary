@@ -4,8 +4,8 @@
 
     public sealed class ValueString : ValueBase
     {
-        public string? Content { get; }
-        public ValueString(string? content) => Content = content;
+        public string Content { get; }
+        public ValueString(string content) => Content = content;
 
         public override bool Equals([AllowNull] ValueBase other)
         {
