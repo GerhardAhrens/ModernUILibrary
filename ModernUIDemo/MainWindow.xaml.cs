@@ -244,6 +244,7 @@
             this.tabItemSource.Add(new TabControlItem("Dashboard Controls", new DashboardControlsUC()) { Stichworte = "Anzeige" });
             this.tabItemSource.Add(new TabControlItem("Accordion Controls", new AccordionControlsUC()) { Stichworte = "Anzeige;Accordion" });
             this.tabItemSource.Add(new TabControlItem("Lokalisierung Manager", new LocalizationUC()) { Stichworte = "Anzeige;Localization;Lokalisierung;Mehrsprachig" });
+            this.tabItemSource.Add(new TabControlItem("PunchCard Control", new PunchCardControlsUC()) { Stichworte = "Anzeige;PunchCard;Lochkarte" });
 
             this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
             this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });

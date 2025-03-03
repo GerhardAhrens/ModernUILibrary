@@ -85,6 +85,7 @@
     <Folder Include="ModernUI\Image\" />
     <Folder Include="ModernUI\Cryptography\" />
     <Folder Include="ModernUI\ComboBoxEnum\" />
+    <Folder Include="ModernUI\PunchCard\" />
     <Folder Include="ModernUI\TextBox\EditableTextBox\" />
     <Folder Include="ModernUI\WrapPanel\" />
     <Folder Include="ModernUI\Scrollbar\" />

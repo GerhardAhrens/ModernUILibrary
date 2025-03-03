@@ -298,6 +298,9 @@
     <Compile Update="MyControls\TabViewControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\PunchCardControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBoxDesignControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
