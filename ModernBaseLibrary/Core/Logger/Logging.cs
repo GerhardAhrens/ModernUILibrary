@@ -22,7 +22,7 @@ namespace ModernBaseLibrary.Core.Logger
     /// <summary>
     /// A Logging class. You can get logger by this class.
     /// </summary>
-    [DebuggerStepThrough()]
+    //[DebuggerStepThrough()]
     public sealed class Logging
     {
         public bool DebugMode { get; set; }

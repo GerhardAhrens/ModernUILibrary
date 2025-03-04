@@ -26,7 +26,7 @@ namespace ModernBaseLibrary.Core.Logger
     /// <summary>
     /// A thread safe basic logger.
     /// </summary>
-    [DebuggerStepThrough()]
+    //[DebuggerStepThrough()]
     public sealed class Logger : ILogger
     {
         private string loggerName;
@@ -57,6 +57,14 @@ namespace ModernBaseLibrary.Core.Logger
             get
             {
                 return this.loggerName;
+            }
+        }
+
+        public int CountHandler
+        {
+            get
+            {
+                return this.handlerList.Count;
             }
         }
 

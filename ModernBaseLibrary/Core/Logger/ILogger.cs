@@ -24,6 +24,8 @@ namespace ModernBaseLibrary.Core.Logger
         /// </summary>
         string Name { get; }
 
+        int CountHandler { get; }
+
         void SetLevel(LogLevel level);
 
         void AddHandler(IHandler handler);

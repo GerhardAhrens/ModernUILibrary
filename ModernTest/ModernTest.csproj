@@ -91,6 +91,7 @@
     <Folder Include="ModernBaseLibrary\Core\Dump\" />
     <Folder Include="ModernBaseLibrary\Core\LINQ\" />
     <Folder Include="ModernBaseLibrary\Core\FormatTo\" />
+    <Folder Include="ModernBaseLibrary\Core\Logger\DemoData\" />
     <Folder Include="ModernBaseLibrary\Core\TypConverter\" />
     <Folder Include="ModernBaseLibrary\Core\Performance\" />
     <Folder Include="ModernBaseLibrary\Core\ObjectMapping\" />
@@ -123,6 +124,12 @@
 
   <ItemGroup>
     <PackageReference Include="System.DirectoryServices" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ModernBaseLibrary\Core\Logger\LoggingSmartFileOut_Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
