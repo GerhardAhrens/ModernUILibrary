@@ -125,6 +125,7 @@
     <Folder Include="Core\Media\" />
     <Folder Include="Core\FormatTo\" />
     <Folder Include="Core\Encoding\" />
+    <Folder Include="Core\Logger\" />
     <Folder Include="Core\Weak\" />
     <Folder Include="Core\TypConverter\" />
     <Folder Include="Core\SystemMetrics\" />
