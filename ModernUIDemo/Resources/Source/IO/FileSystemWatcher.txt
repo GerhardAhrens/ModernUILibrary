@@ -1,0 +1,96 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Lifeprojects.de">
+//     Class: Program
+//     Copyright © Lifeprojects.de 2023
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>09.06.2023 07:46:00</date>
+//
+// <summary>
+// Konsolen Applikation mit Menü
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace Console.FileSystemWatcher
+{
+    using System;
+    using System.Windows;
+
+    using EasyPrototypingNET.IO;
+
+    public class Program
+    {
+        private static BufferedFileSystemWatcher bfsw = null;
+        private static string path = @"c:\_DownLoads\";
+
+        private static void Main(string[] args)
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. Überwachen von Änderungen im Verzeichnis");
+                Console.WriteLine("2. Überwachen von neuen Dateien");
+                Console.WriteLine("X. Beenden");
+
+                Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
+                ConsoleKey key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        MenuPoint1();
+                    }
+                    else if (key == ConsoleKey.D2)
+                    {
+                        MenuPoint2();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void MenuPoint1()
+        {
+            Console.Clear();
+
+            bfsw = new BufferedFileSystemWatcher(path);
+            WeakEventManager<BufferedFileSystemWatcher, FileSystemEventArgs>.AddHandler(bfsw, "Changed", OnChanged);
+            bfsw.BufferedChangeTypes = BufferedChangeTypes.Changed;
+            bfsw.EnableRaisingEvents = true;
+
+            ConsoleHelper.Wait($"Warten auf Änderungen im Verzeichnis: {path}");
+        }
+
+        private static void MenuPoint2()
+        {
+            Console.Clear();
+
+            bfsw = new BufferedFileSystemWatcher(path);
+            WeakEventManager<BufferedFileSystemWatcher, FileSystemEventArgs>.AddHandler(bfsw, "Created", OnCreate);
+            bfsw.BufferedChangeTypes = BufferedChangeTypes.Created;
+            bfsw.EnableRaisingEvents = true;
+
+            ConsoleHelper.Wait($"Warten auf Änderungen im Verzeichnis: {path}");
+        }
+
+        private static void OnChanged(object sender, FileSystemEventArgs e)
+        {
+            var file = e.Name;
+            var changeType = e.ChangeType;
+            Console.WriteLine($"Datei '{file}' wurde geändert (ChangeType: {changeType})");
+        }
+
+        private static void OnCreate(object sender, FileSystemEventArgs e)
+        {
+            var file = e.Name;
+            var changeType = e.ChangeType;
+            Console.WriteLine($"Datei hinzugefügt '{file}' Type: {changeType})");
+        }
+    }
+}

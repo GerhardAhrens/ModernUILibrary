@@ -15,8 +15,7 @@
             do
             {
                 Console.Clear();
-                Console.WriteLine("1. Menüpunkt 1");
-                Console.WriteLine("2. Menüpunkt 2");
+                Console.WriteLine("1. Demo");
                 Console.WriteLine("X. Beenden");
 
                 Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
@@ -31,10 +30,6 @@
                     {
                         MenuPoint1();
                     }
-                    else if (key == ConsoleKey.D2)
-                    {
-                        MenuPoint2();
-                    }
                 }
             }
             while (true);
@@ -46,13 +41,6 @@
 
             ResultInfo<string> result = DemoBuilder.Build<string>().ToUpper();
 
-            ConsoleHelper.Wait();
-        }
-
-        private static void MenuPoint2()
-        {
-            Console.Clear();
-            Console.WriteLine("Menüpunkt 2, eine Taste drücken für zurück!");
             ConsoleHelper.Wait();
         }
     }

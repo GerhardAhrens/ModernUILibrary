@@ -9,12 +9,9 @@
     /// </summary>
     public class SyntaxBox : DependencyObject
     {
-        static ControlTemplate 
-            _syntaxTemplate, 
-            _defaultTemplate;
+        static ControlTemplate _syntaxTemplate, _defaultTemplate;
 
         #region Constructors
-        // ...................................................................
         /// <summary>
         /// Static initializer for the <see cref="SyntaxBox"/> class.
         /// Reads the resource dictionary and extracts the control templates.
@@ -27,13 +24,11 @@
             _syntaxTemplate = (ControlTemplate)myDictionary["SyntaxTextBoxTemplate"];
             _defaultTemplate = (ControlTemplate)myDictionary["DefaultTextBoxTemplate"];
         }
-        // ...................................................................
         #endregion
 
         #region Attached properties
 
         #region Enabled
-        // ...................................................................
         /// <summary>
         /// Enables/disables syntax highlighting on any textbox
         /// </summary>
@@ -86,11 +81,9 @@
                 target.Foreground = (System.Windows.Media.Brush)target.GetValue(OriginalForegroundProperty);
             }
         }
-        // ...................................................................
         #endregion
 
         #region ShowLineNumbers
-        // ...................................................................
         /// <summary>
         /// Shows/hides the line numbers part.
         /// </summary>
@@ -119,11 +112,9 @@
         {
             return (bool)target.GetValue(ShowLineNumbersProperty);
         }
-        // ...................................................................
         #endregion
 
         #region LineNumbersBackground
-        // ...................................................................
         /// <summary>
         /// The background brush of the line numbers part.
         /// </summary>
@@ -142,11 +133,9 @@
         {
             return (System.Windows.Media.Brush)target.GetValue(LineNumbersBackgroundProperty);
         }
-        // ...................................................................
         #endregion
 
         #region LineNumbersForeground
-        // ...................................................................
         /// <summary>
         /// The foreground brush of the line numbers part.
         /// </summary>
@@ -165,29 +154,27 @@
         {
             return (System.Windows.Media.Brush)target.GetValue(LineNumbersForegroundProperty);
         }
-        // ...................................................................
         #endregion
 
         #region OriginalForeground
-        // ...................................................................
         public static readonly DependencyProperty OriginalForegroundProperty = DependencyProperty.RegisterAttached(
             "OriginalForeground",
             typeof(System.Windows.Media.Brush),
             typeof(SyntaxBox),
             new FrameworkPropertyMetadata(System.Windows.Media.Brushes.Black));
+
         public static void OriginalForeground(TextBox target, System.Windows.Media.Brush value)
         {
             target.SetValue(OriginalForegroundProperty, value);
         }
+
         public static System.Windows.Media.Brush OriginalForeground(TextBox target)
         {
             return (System.Windows.Media.Brush)target.GetValue(OriginalForegroundProperty);
         }
-        // ...................................................................
         #endregion
 
         #region SyntaxDriver
-        // ...................................................................
         public static readonly DependencyProperty SyntaxDriverProperty = DependencyProperty.RegisterAttached(
             "SyntaxDriver",
             typeof(ISyntaxDriver),
@@ -203,7 +190,7 @@
         {
             return (ISyntaxDriver)target.GetValue(SyntaxDriverProperty);
         }
-        // ...................................................................
+
         static readonly DependencyProperty SyntaxDriversProperty = DependencyProperty.RegisterAttached(
             // Name not matching the getter forces the actual getter top be used
             // and not optimized away.
@@ -220,11 +207,9 @@
             }
             return (collection);
         }
-        // ...................................................................
         #endregion
 
         #region ExpandTabs
-        // ...................................................................
         /// <summary>
         /// Enables/disables syntax highlighting tab to space expansion
         /// </summary>
@@ -235,6 +220,7 @@
             new FrameworkPropertyMetadata(
                 true,
                 FrameworkPropertyMetadataOptions.None));
+
         /// <summary>
         /// ExpandTabs property set accessor
         /// </summary>
@@ -253,11 +239,9 @@
         {
             return (bool)target.GetValue(ExpandTabsProperty);
         }
-        // ...................................................................
         #endregion
 
         #region AutoIndent
-        // ...................................................................
         /// <summary>
         /// Enables/disables auto-indentation.
         /// </summary>
@@ -286,11 +270,9 @@
         {
             return (bool)target.GetValue(AutoIndentProperty);
         }
-        // ...................................................................
         #endregion
 
         #region IndentCount
-        // ...................................................................
         /// <summary>
         /// Gets the number of space characters to indent on Tab expansion.
         /// </summary>
@@ -319,10 +301,8 @@
         {
             return (int)target.GetValue(IndentCountProperty);
         }
-        // ...................................................................
         #endregion
 
         #endregion
-
     }
 }

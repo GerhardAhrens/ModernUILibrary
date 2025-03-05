@@ -51,6 +51,14 @@
             this.TxtSyntaxBox.SetValue(SyntaxBox.EnabledProperty, !value);
         }
 
+        private void ClickSelectAll(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.SelectAll(); }
+        private void ClickPaste(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Paste(); }
+        private void ClickCopy(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Copy(); }
+        private void ClickCut(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Cut(); }
+        private void ClickClear(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Clear(); }
+        private void ClickUndo(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Undo(); }
+        private void ClickRedo(Object sender, RoutedEventArgs args) { this.TxtSyntaxBox.Redo(); }
+
         private static int FindLineStart(TextLine Line)
         {
             for (int i = 0; i < Line.Text.Length; i++)

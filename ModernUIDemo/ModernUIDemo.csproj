@@ -97,7 +97,10 @@
     <EmbeddedResource Include="Resources\Source\Data\CSharp_DataTable.txt" />
     <EmbeddedResource Include="Resources\Source\Environment\EnvironmentVariable.txt" />
     <EmbeddedResource Include="Resources\Source\ExpressionEvaluator\Core_ExpressionEvaluator.txt" />
+    <EmbeddedResource Include="Resources\Source\Game\Fireworks.txt" />
     <EmbeddedResource Include="Resources\Source\GUI\IValidatableObject.txt" />
+    <EmbeddedResource Include="Resources\Source\IO\FileCryptography.txt" />
+    <EmbeddedResource Include="Resources\Source\IO\FileSystemWatcher.txt" />
     <EmbeddedResource Include="Resources\Source\IO\File_TarFile.txt" />
     <EmbeddedResource Include="Resources\Source\Media\Media_PlayWAV_Sound.txt" />
     <EmbeddedResource Include="Resources\Source\Network\CSharp_Network_Ping.txt" />

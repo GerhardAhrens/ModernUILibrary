@@ -379,7 +379,7 @@
             this.tabItemSource.Add(new TabControlItem("Compare Objects", new SyntaxBoxControlsUC()) { Stichworte = "C#;Compare", SourceFile = "Object.CSharp_CompareObjects.txt" });
             this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
             this.tabItemSource.Add(new TabControlItem("StringBasedEnums", new SyntaxBoxControlsUC()) { Stichworte = "C#;Enum", SourceFile = "CSharp.CSharp_StringBasedEnums.txt" });
-            this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension:static", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
+            this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension:static;result", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
             this.tabItemSource.Add(new TabControlItem("DataAnnotations CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;DataAnnotations;Validierung;12", SourceFile = "CSharp.CSharp_CS12DataAnnotations.txt" });
             this.tabItemSource.Add(new TabControlItem("EnvironmentVariable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Environment;Variable", SourceFile = "Environment.EnvironmentVariable.txt" });
             this.tabItemSource.Add(new TabControlItem("PatternMatching CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;PatternMatching;12", SourceFile = "CSharp.CSharp_CS12PatternMatching.txt" });
@@ -389,6 +389,8 @@
 
             this.tabItemSource.Add(new TabControlItem("IO ", true));
             this.tabItemSource.Add(new TabControlItem("TarFile", new SyntaxBoxControlsUC()) { Stichworte = "C#;File;Compressed", SourceFile = "IO.File_TarFile.txt" });
+            this.tabItemSource.Add(new TabControlItem("Cryptography", new SyntaxBoxControlsUC()) { Stichworte = "C#;File;Cryptography;verschlüsseln", SourceFile = "IO.FileCryptography.txt" });
+            this.tabItemSource.Add(new TabControlItem("FileSystemWatcher", new SyntaxBoxControlsUC()) { Stichworte = "C#;File;System;Watcher;überwachung", SourceFile = "IO.FileCryptography.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Data ", true));
             this.tabItemSource.Add(new TabControlItem("DataTable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_DataTable.txt" });
