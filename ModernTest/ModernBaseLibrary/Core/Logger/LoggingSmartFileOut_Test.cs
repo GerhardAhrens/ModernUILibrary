@@ -81,10 +81,22 @@ namespace ModernTest.ModernBaseLibrary.Core
             var handler = new SmartFileOutHandler(pathFileName);
             logger.AddHandler(handler);
             Assert.IsTrue(logger.CountHandler == 1);
-            logger.SetLevel(LogLevel.INFO);
-            logger.Info($"TestMsg-Info");
-            logger.Flush();
+        }
 
+        [TestMethod]
+        public void LogLevelAllAndFlush_Test()
+        {
+            var loggerName = "TestConsoleOutHandler";
+            var logger = Logging.Instance.GetLogger(loggerName);
+            var handler = new SmartFileOutHandler(pathFileName);
+            logger.AddHandler(handler);
+            Assert.IsTrue(logger.CountHandler == 1);
+            logger.SetLevel(LogLevel.DEBUG);
+            PushLogMsg(logger);
+            SecondPushLogMsg(logger);
+            Assert.AreEqual(handler.GetRecordList().Count, 10);
+            logger.Flush();
+            Assert.AreEqual(handler.GetRecordList().Count, 0);
         }
 
         [DataRow("", "")]
@@ -103,6 +115,24 @@ namespace ModernTest.ModernBaseLibrary.Core
             {
                 Assert.IsTrue(ex.GetType() == typeof(Exception));
             }
+        }
+
+        private void PushLogMsg(ILogger logger)
+        {
+            logger.Debug("Debug Msg");
+            logger.Info("Info Msg");
+            logger.Warning("Warning Msg");
+            logger.Error("Error Msg");
+            logger.Critical("Critical MSg");
+        }
+
+        private void SecondPushLogMsg(ILogger logger)
+        {
+            logger.Debug("Debug Msg");
+            logger.Info("Info Msg");
+            logger.Warning("Warning Msg");
+            logger.Error("Error Msg");
+            logger.Critical("Critical MSg");
         }
     }
 
@@ -138,13 +168,28 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
+        public override void Flush()
+        {
+            if (this.logContent != null)
+            {
+                foreach (Record record in this.logContent)
+                {
+                    this.WriteFileHeader(record);
+                    this.WriteToFile(record);
+                }
+
+                this.logContent.Clear();
+            }
+        }
+
+        /*
         public override async void Flush()
         {
             await Task.Factory.StartNew(() =>
             {
-                if (logContent != null)
+                if (this.logContent != null)
                 {
-                    foreach (Record record in logContent)
+                    foreach (Record record in this.logContent)
                     {
                         this.WriteFileHeader(record);
                         this.WriteToFile(record);
@@ -153,6 +198,12 @@ namespace ModernTest.ModernBaseLibrary.Core
                     this.logContent.Clear();
                 }
             });
+        }
+        */
+
+        public HashSet<Record> GetRecordList()
+        {
+            return this.logContent;
         }
 
         private void WriteFileHeader(Record record)
@@ -165,7 +216,7 @@ namespace ModernTest.ModernBaseLibrary.Core
                 {
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine("#####-Start-#####--------------------------------------------------------");
-                    sb.AppendLine($"PCName / User   : {Environment.MachineName} / {Environment.UserName}");
+                    sb.AppendLine($"PCName / User   : {Environment.MachineName} - {Environment.UserDomainName}/{Environment.UserName}");
                     sb.AppendLine($"Log Filename: {fullFilename}");
                     sb.AppendLine("-------------------------------------------------------------------------");
                     streamWriter.WriteLine(sb.ToString());
@@ -184,12 +235,20 @@ namespace ModernTest.ModernBaseLibrary.Core
                     var time = record.EntryDateTime.ToString("HH:mm:ss.fff");
                     if (record.Level == LogLevel.ERROR)
                     {
-                        var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}-{record.Message}\t{record.Exception.Message.Replace($"\r", string.Empty).Replace($"\n", string.Empty)}";
-                        streamWriter.WriteLine(line);
+                        if (record.Exception != null)
+                        {
+                            var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}-{record.Message}\t{record.Exception.Message.Replace($"\r", string.Empty).Replace($"\n", string.Empty)}";
+                            streamWriter.WriteLine(line);
+                        }
+                        else
+                        {
+                            var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}|{record.FunctionName}|{record.Message}";
+                            streamWriter.WriteLine(line);
+                        }
                     }
                     else
                     {
-                        var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}-{record.Message}";
+                        var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}|{record.FunctionName}|{record.Message}";
                         streamWriter.WriteLine(line);
                     }
                 }

@@ -119,6 +119,19 @@ namespace ModernTest.ModernBaseLibrary.Core
         }
 
         [TestMethod]
+        public void LogLevelAllAndFlush_Test()
+        {
+            var logger = CreateTestLogger("TestLogLevelAll");
+            var handler = new SimpleOutHandler();
+            logger.AddHandler(handler);
+            logger.SetLevel(LogLevel.DEBUG);
+            PushLogMsg(logger);
+            Assert.AreEqual(handler.GetRecordList().Count, 5);
+            logger.Flush();
+            Assert.AreEqual(handler.GetRecordList().Count, 0);
+        }
+
+        [TestMethod]
         public void TestRecordMethodName()
         {
             var logger = CreateTestLogger("TestRecordMethodName");
@@ -208,13 +221,13 @@ namespace ModernTest.ModernBaseLibrary.Core
                 var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}-{record.Message}";
                 System.Diagnostics.Trace.WriteLine(line);
             }
+
+            this.recordList.Clear();
         }
 
         public List<Record> GetRecordList()
         {
             return this.recordList;
         }
-
-
     }
 }
