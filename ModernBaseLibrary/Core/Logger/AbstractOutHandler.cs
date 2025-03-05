@@ -48,6 +48,8 @@ namespace ModernBaseLibrary.Core.Logger
 
         public Record Record { get; private set; }
 
+        public virtual string LogFileName { get; set; } = string.Empty;
+
         /// <summary>
         /// Push log record to handler.
         /// </summary>
@@ -96,7 +98,10 @@ namespace ModernBaseLibrary.Core.Logger
         public virtual string DefaultLogFilename(Record record)
         {
             string date = DateTime.Now.ToString("yyyyMMdd");
-            return string.Format(string.IsNullOrEmpty(record.LoggerName) ? $"{date}.log" : $"{date}_{record.LoggerName}.log");
+
+            this.LogFileName = string.Format(string.IsNullOrEmpty(record.LoggerName) ? $"{date}.log" : $"{date}_{record.LoggerName}.log");
+
+            return this.LogFileName;
         }
 
         public virtual void ClearLogfiles()

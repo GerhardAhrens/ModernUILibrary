@@ -127,6 +127,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ModernBaseLibrary\Core\Logger\LoggingComplex_Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ModernBaseLibrary\Core\Logger\LoggingSmartFileOut_Test.cs">
       <SubType>Code</SubType>
     </Compile>

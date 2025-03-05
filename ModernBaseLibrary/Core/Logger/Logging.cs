@@ -34,6 +34,7 @@ namespace ModernBaseLibrary.Core.Logger
         private Logging()
         {
             this.loggerDictionary = new Dictionary<string, ILogger>();
+            this.DebugMode = Debugger.IsAttached;
         }
 
         /// <summary>
@@ -106,8 +107,7 @@ namespace ModernBaseLibrary.Core.Logger
 
         private string FormateDebugMessage(string message)
         {
-            string formatedMessage = $"[Logger] {DateTime.Now.ToString()} -- {message}";
-            return formatedMessage;
+            return $"[Logger] {DateTime.Now.ToString()} -- {message}";
         }
 
     }

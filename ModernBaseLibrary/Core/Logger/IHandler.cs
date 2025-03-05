@@ -23,5 +23,7 @@ namespace ModernBaseLibrary.Core.Logger
         void Flush();
 
         string DefaultLogFilename(Record record);
+
+        string LogFileName { get; set; }
     }
 }
