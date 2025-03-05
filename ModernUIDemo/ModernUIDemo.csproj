@@ -76,10 +76,12 @@
     <EmbeddedResource Include="Resources\Source\Console\Console_Table.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
+    <EmbeddedResource Include="Resources\Source\CoreBase\Microsoft.Extensions.Configuration.txt" />
     <EmbeddedResource Include="Resources\Source\CoreBase\CoreBase_SmartSettings.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_ArtofGenerics.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CDT_Roman.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CDT_Currency.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CS12PatternMatching.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_DynamicObject2Json.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CDT_Birthday.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_Override_Methode.txt" />
@@ -87,6 +89,7 @@
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_IsCollection.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StringBasedEnums.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StaticClassWithExtension.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CS12DataAnnotations.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_WeakEvent.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\WeakEventManager.txt" />
     <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTableDemo.txt" />

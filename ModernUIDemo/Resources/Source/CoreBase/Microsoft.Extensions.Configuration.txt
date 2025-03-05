@@ -1,0 +1,22 @@
+﻿namespace Console.AppConfig
+{
+    using System;
+
+    using Microsoft.Extensions.Configuration;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            IConfiguration config = builder.Build();
+
+            Console.WriteLine(config.GetValue<int>("StarterCountValue"));
+
+            Console.ReadLine();
+        }
+    }
+}

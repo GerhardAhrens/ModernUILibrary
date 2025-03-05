@@ -1,0 +1,274 @@
+﻿namespace Console.CS12DataAnnotations
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. Standard Validation Attribute");
+                Console.WriteLine("2. Custom Validation Attribute");
+                Console.WriteLine("X. Beenden");
+
+                Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
+                ConsoleKey key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        MenuPoint1();
+                    }
+                    else if (key == ConsoleKey.D2)
+                    {
+                        MenuPoint2();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void MenuPoint1()
+        {
+            Console.Clear();
+
+            PersonDefault person = new()
+            {
+                Vorname = "Gerhard",
+                Name = "Ahrens",
+                Titel = "",
+                Anrede = "Herr",
+                Alter = 63,
+                Password = "hallo",
+                PasswordConfirmation = "hallo",
+            };
+
+            var ctx = new ValidationContext(person);
+            var results = new List<ValidationResult>();
+
+            if (Validator.TryValidateObject(person, ctx, results, true) == false)
+            {
+                foreach (ValidationResult validationResult in results)
+                {
+                    Console.WriteLine($"Fehler: {validationResult.MemberNames.FirstOrDefault()}, {validationResult.ErrorMessage}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kein Fehler gefunden");
+            }
+
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+
+        private static void MenuPoint2()
+        {
+            Console.Clear();
+            PersonCustom person = new()
+            {
+                EntryDate = new DateTime(2024, 2, 13),
+                EMail = "gerhard@test.de",
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today.AddDays(1),
+            };
+
+            var ctx = new ValidationContext(person);
+            var results = new List<ValidationResult>();
+
+            if (Validator.TryValidateObject(person, ctx, results, true) == false)
+            {
+                foreach (ValidationResult validationResult in results)
+                {
+                    Console.WriteLine($"Fehler: {validationResult.MemberNames.FirstOrDefault()}, {validationResult.ErrorMessage}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kein Fehler gefunden");
+            }
+
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+    }
+
+    public class PersonDefault
+    {
+        [DeniedValues("", "Dr.", "Prof. Dr.",ErrorMessage = "Die Eingaben darf nicht mit den festgelegten Werten übereinstimmen.")]
+        [AllowedValues("", "Herr", "Frau", ErrorMessage = "Die Eingaben entspricht keinem der erlaubten Werte.")]
+        public string Anrede { get; set; }
+
+        [AllowedValues("", "Dr.", "Prof. Dr.",ErrorMessage = "Die Eingaben entspricht keinem der erlaubten Werte.")]
+        public string Titel { get; set; }
+
+        [Length(2, 50, ErrorMessage = "Das Feld '{0}' muß mit mindestens {1} bis {2} Zeichen eingegeben werden")]
+        public string Vorname { get; set; }
+
+        [Length(2, 50, ErrorMessage = "Das Feld '{0}' muß mit mindestens {1} bis {2} Zeichen eingegeben werden")]
+        [Required(ErrorMessage = "Das Feld '{0}' muß eingegeben werden")]
+        public string Name { get; set; }
+
+        [Range(10, 120, MinimumIsExclusive = false,MaximumIsExclusive = true, ErrorMessage ="Das Alter muß zwischen {1} und {2} liegen.")]
+        public int Alter { get; set; }
+
+        [Required(ErrorMessage = "Das Passwort muß eingegeben werden")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Das zweite Passwort muß eingegeben werden")]
+        [Compare(nameof(Password), ErrorMessage = "Die Felder 'Passwort' und 'zweites Passwort' müssen gleich sein")]
+        public string PasswordConfirmation { get; set; }
+    }
+
+    public class PersonCustom
+    {
+        [DayOfWeek(DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, ErrorMessage = "Der {0} ist nicht gültig")]
+        public DateTime EntryDate { get; set; }
+
+        [Required(ErrorMessage = "Das Feld {0} darf nicht leer sein")]
+        [EmailAddress(ErrorMessage = "Die EMail Adresse ist ungültig")]
+        public string EMail { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        [DateGreaterThanAttribute(nameof(StartDate), ErrorMessage = "Das End-Datum muß nach dem Start-Datum liegen.")]
+        public DateTime EndDate { get; set; }
+    }
+
+    #region Custom Validation Attribute
+    public class DayOfWeekAttribute : ValidationAttribute
+    {
+        private DayOfWeek[] NotValidDays;
+        private bool ThrowExcepcion;
+
+        public DayOfWeekAttribute(params DayOfWeek[] notValidDays)
+        {
+            this.ThrowExcepcion = false;
+            this.NotValidDays = notValidDays;
+        }
+
+        public DayOfWeekAttribute(bool throwExcepcion, params DayOfWeek[] notValidDays)
+        {
+            this.ThrowExcepcion = throwExcepcion;
+            this.NotValidDays = notValidDays;
+        }
+
+        public override bool IsValid(object value)
+        {
+            DateTime date;
+
+            if (DateTime.TryParse(value.ToString(), out date) == false)
+            {
+                if (this.ThrowExcepcion)
+                {
+                    throw new ArgumentException("The ControlDateTimeAttribute, only validate DateTime Types.");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return this.NotValidDays.Contains(date.DayOfWeek);
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    public class EmailAddressAttribute : ValidationAttribute
+    {
+        private bool ThrowExcepcion;
+        string MailAdress = string.Empty;
+
+        public EmailAddressAttribute(params string[] mailAdress)
+        {
+            this.ThrowExcepcion = false;
+            this.MailAdress = mailAdress.FirstOrDefault();
+        }
+
+        public EmailAddressAttribute(bool throwExcepcion, params string[] mailAdress)
+        {
+            this.ThrowExcepcion = throwExcepcion;
+            this.MailAdress = mailAdress.FirstOrDefault();
+        }
+
+        public override bool IsValid(object value)
+        {
+            if (value is not string)
+            {
+                if (ThrowExcepcion)
+                {
+                    throw new ArgumentException("The EMailAttribute, only validate String Types.");
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(value.ToString()) == true)
+                {
+                    return false;
+                }
+            }
+
+            return this.IsValidAddress(value.ToString());
+        }
+
+        private bool IsValidAddress(string value)
+        {
+            bool result = true;
+
+            if (string.IsNullOrEmpty(value) == true)
+            {
+                result = false;
+            }
+            else
+            {
+                Regex _pattern = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.Compiled);
+                result = _pattern.IsMatch(value);
+            }
+
+            return result;
+        }
+    }
+
+    public class DateGreaterThanAttribute : ValidationAttribute
+    {
+        private readonly string comparisonProperty;
+
+        // Set the name of the property to compare
+        public DateGreaterThanAttribute(string comparisonProperty)
+        {
+            this.comparisonProperty = comparisonProperty;
+        }
+
+        // Validate the date comparison
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var currentValue = (DateTime)value;
+
+            var comparisonValue = (DateTime)validationContext.ObjectType.GetProperty(comparisonProperty).GetValue(validationContext.ObjectInstance);
+
+            if (currentValue < comparisonValue)
+            {
+                if (string.IsNullOrEmpty(this.ErrorMessage) == true)
+                {
+                    return new ValidationResult(this.ErrorMessage = "End date must be later than start date");
+                }
+                else
+                {
+                    return new ValidationResult(this.ErrorMessage);
+                }
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+    #endregion Custom Validation Attribute
+}

@@ -362,6 +362,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
+            this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;Settings;Configuration", SourceFile = "CoreBase.Microsoft.Extensions.Configuration.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Custom Data Type ", true));
             this.tabItemSource.Add(new TabControlItem("Custom Data Type Birthday", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Birthday.txt" });
@@ -378,8 +379,10 @@
             this.tabItemSource.Add(new TabControlItem("Compare Objects", new SyntaxBoxControlsUC()) { Stichworte = "C#;Compare", SourceFile = "Object.CSharp_CompareObjects.txt" });
             this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
             this.tabItemSource.Add(new TabControlItem("StringBasedEnums", new SyntaxBoxControlsUC()) { Stichworte = "C#;Enum", SourceFile = "CSharp.CSharp_StringBasedEnums.txt" });
-            this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
+            this.tabItemSource.Add(new TabControlItem("StaticClassWithExtension", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;Extension:static", SourceFile = "CSharp.CSharp_StaticClassWithExtension.txt" });
+            this.tabItemSource.Add(new TabControlItem("DataAnnotations CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;DataAnnotations;Validierung;12", SourceFile = "CSharp.CSharp_CS12DataAnnotations.txt" });
             this.tabItemSource.Add(new TabControlItem("EnvironmentVariable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Environment;Variable", SourceFile = "Environment.EnvironmentVariable.txt" });
+            this.tabItemSource.Add(new TabControlItem("PatternMatching CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;PatternMatching;12", SourceFile = "CSharp.CSharp_CS12PatternMatching.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Network ", true));
             this.tabItemSource.Add(new TabControlItem("Network-Ping", new SyntaxBoxControlsUC()) { Stichworte = "C#;Network;Ping", SourceFile = "Network.CSharp_Network_Ping.txt" });

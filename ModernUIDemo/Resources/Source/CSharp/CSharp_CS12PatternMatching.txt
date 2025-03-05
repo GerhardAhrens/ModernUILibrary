@@ -1,0 +1,264 @@
+﻿namespace Console.CS12PatternMatching
+{
+    using System;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. Switch, vor C# 7 ");
+                Console.WriteLine("2. Pattern Matching mit C# 7");
+                Console.WriteLine("3. Pattern Matching mit C# 9");
+                Console.WriteLine("4. Mixed Pattern Matching mit C# 9");
+                Console.WriteLine("X. Beenden");
+
+                Console.WriteLine("Wählen Sie einen Menüpunkt oder 'x' für beenden");
+                ConsoleKey key = Console.ReadKey(true).Key;
+                if (key == ConsoleKey.X)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    if (key == ConsoleKey.D1)
+                    {
+                        MenuPoint1();
+                    }
+                    else if (key == ConsoleKey.D2)
+                    {
+                        MenuPoint2();
+                    }
+                    else if (key == ConsoleKey.D3)
+                    {
+                        MenuPoint3();
+                    }
+                    else if (key == ConsoleKey.D4)
+                    {
+                        MenuPoint4();
+                    }
+                }
+            }
+            while (true);
+        }
+
+        private static void MenuPoint1()
+        {
+            Console.Clear();
+
+            Developer developer = new Developer { FirstName = "Gerhard" };
+
+            string result = string.Empty;
+
+            switch (developer.FirstName)
+            {
+                case "Gerhard":
+                    result = "Writing code";
+                    break;
+                case "Charlie":
+                    result = "Writing this blog post";
+                    break;
+                default:
+                    result = "Watching TV";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis Switch : {result}");
+            Console.WriteLine(string.Empty);
+
+            switch (developer.GetType().Name)
+            {
+                case "Developer": // That's actually the so-called constant pattern
+                    result = "Write code";
+                    break;
+                case "Manager":
+                    result = "Create meetings";
+                    break;
+                default:
+                    result = "Listen to music";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Switch GetType() : {result}");
+            Console.WriteLine(string.Empty);
+
+            switch (developer.GetType().Name)
+            {
+                case nameof(Developer):
+                    result = "Write code";
+                    break;
+                case nameof(Manager):
+                    result = "Create meetings";
+                    break;
+                default:
+                    result = "Listen to music";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Switch GetType()/nameof() : {result}");
+            Console.WriteLine(string.Empty);
+
+            switch (developer.GetType().Name)
+            {
+                case nameof(Developer):
+                    var dev = (Developer)developer;
+                    result = $"{dev.FirstName} writes code";
+                    break;
+                case nameof(Manager):
+                    result = "Create meetings";
+                    break;
+                default:
+                    result = "Listen to music";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Switch Variante GetType()/nameof() : {result}");
+            Console.WriteLine(string.Empty);
+
+            Console.WriteLine(string.Empty);
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+
+        private static void MenuPoint2()
+        {
+            Console.Clear();
+
+            object developer = new Developer { FirstName = "Gerhard", YearOfBirth = 1960 };
+
+            string result = string.Empty;
+
+            switch (developer) // Since C# 7.0, any type is supported here
+            {
+                case Developer dev: // Type pattern with discard (_)
+                    result = $"{dev.FirstName} writes code"; 
+                    break;
+                case Manager _:
+                    result = "Create meetings";
+                    break;
+                case null: // The null pattern
+                    result = "Look into the void";
+                    break;
+                default:
+                    result = "Listen to music";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Pattern Matching : {result}");
+            Console.WriteLine(string.Empty);
+
+            switch (developer)
+            {
+                case Developer dev when dev.YearOfBirth >= 1960 && dev.YearOfBirth <= 1969:
+                    result = $"{dev.FirstName} listens to heavy metal while coding";
+                    break;
+                case Manager _:
+                    result = "Create meetings";
+                    break;
+                case null: // The null pattern
+                    result = "Look into the void";
+                    break;
+                default:
+                    result = "Listen to music";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Pattern Matching When : {result}");
+            Console.WriteLine(string.Empty);
+
+            switch (developer)
+            {
+                case Developer dev when dev.YearOfBirth >= 1960 && dev.YearOfBirth <= 1969:
+                    // 1. This case is taken for the defined Developer object
+                    result = $"{dev.FirstName} listens to heavy metal while coding, YearOfBirth : {dev.YearOfBirth}";
+                    break;
+                case Developer dev:
+                    // 2. This case matches too, but it's defined after the first one that matches
+                    result = $"{dev.FirstName} writes code";
+                    break;
+                case Person _:
+                    // 3. This case matches too for a Developer, as Person is a base class
+                    result = "Eat and sleep";
+                    break;
+                default:
+                    result = "Do what objects do";
+                    break;
+            }
+
+            Console.WriteLine($"Ergebnis: Pattern Matching When : {result}");
+            Console.WriteLine(string.Empty);
+
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+
+        private static void MenuPoint3()
+        {
+            Console.Clear();
+
+            object developer = new Developer { FirstName = "Gerhard", YearOfBirth = 1960 };
+
+            string result = developer switch
+            {
+                Developer dev when dev.YearOfBirth >= 1960 && dev.YearOfBirth <= 1969
+                  => $"{dev.FirstName} listens to metal, YearOfBirth : {dev.YearOfBirth}",
+                _ => "Dance like no one is watching"
+            };
+
+            Console.WriteLine($"Ergebnis: Pattern Matching When : {result}");
+            Console.WriteLine(string.Empty);
+
+            result = developer switch
+            {
+                Developer { YearOfBirth: >= 1960 and <= 1969 and not 1964 } dev
+                  => $"{dev.FirstName} listens to heavy metal while coding, YearOfBirth : {dev.YearOfBirth}",
+                Developer dev => $"{dev.FirstName} writes code",
+                Manager _ => "Create meetings",
+                _ => "Do what objects do",
+            };
+
+            Console.WriteLine($"Ergebnis: Pattern Matching When : {result}");
+            Console.WriteLine(string.Empty);
+
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+
+        private static void MenuPoint4()
+        {
+            Console.Clear();
+
+            int yearOfBirth = 1960;
+            string result = yearOfBirth switch
+            {
+                1964 => $"Read George Orwell's book ({yearOfBirth})", // Constant pattern
+                >= 1960 and <= 1969 => $"Listen to heavy metal ({yearOfBirth})", // Combined relational patterns
+                > 1969 => $"Write emails like everyone is watching ({yearOfBirth})", // Relational pattern
+                _ => $"Dance like no one is watching ({yearOfBirth})", // <- This comma here is optional
+            };
+
+            Console.WriteLine($"Ergebnis: Mixed Pattern Matching : {result}");
+            Console.WriteLine(string.Empty);
+
+            Console.WriteLine("eine Taste drücken für zurück!");
+            Console.ReadKey();
+        }
+    }
+
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public int YearOfBirth { get; set; }
+    }
+
+    public class Developer : Person
+    {
+        public Manager Manager { get; set; }
+    }
+
+    public class Manager : Person
+    {
+    }
+}
