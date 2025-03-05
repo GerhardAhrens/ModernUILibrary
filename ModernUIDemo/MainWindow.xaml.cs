@@ -395,6 +395,9 @@
             this.tabItemSource.Add(new TabControlItem("Custom DataTable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_CustomDataTable.txt" });
             this.tabItemSource.Add(new TabControlItem("Custom DataTable Demo", new SyntaxBoxControlsUC()) { Stichworte = "C#;Data;DataTable", SourceFile = "Data.CSharp_CustomDataTableDemo.txt" });
 
+            this.tabItemSource.Add(new TabControlItem("GUI ", true));
+            this.tabItemSource.Add(new TabControlItem("IValidatable Object", new SyntaxBoxControlsUC()) { Stichworte = "C#;GUI;IValidatable;Input;validierung", SourceFile = "GUI.IValidatableObject.txt" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
