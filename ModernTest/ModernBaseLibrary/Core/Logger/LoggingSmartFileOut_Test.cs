@@ -32,6 +32,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     using System.Threading;
     using System.Threading.Tasks;
 
+    using global::ModernBaseLibrary.Collection;
     using global::ModernBaseLibrary.Core.Logger;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -139,7 +140,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     public class SmartFileOutHandler : AbstractOutHandler
     {
         private string logPath = string.Empty;
-        private HashSet<Record> logContent = null;
+        private ConcurrentHashSet<Record> logContent = null;
 
         public SmartFileOutHandler(string logPath = "")
         {
@@ -152,7 +153,7 @@ namespace ModernTest.ModernBaseLibrary.Core
                 this.logPath = this.DefaultLogPath();
             }
 
-            this.logContent = new HashSet<Record>();
+            this.logContent = new ConcurrentHashSet<Record>();
 
             if (this.MaxFiles > 0)
             {
@@ -185,23 +186,35 @@ namespace ModernTest.ModernBaseLibrary.Core
         /*
         public override async void Flush()
         {
-            await Task.Factory.StartNew(() =>
+            if (this.logContent != null)
             {
-                if (this.logContent != null)
+                Task<bool> task = Task.Run(() =>
                 {
-                    foreach (Record record in this.logContent)
+                    try
                     {
-                        this.WriteFileHeader(record);
-                        this.WriteToFile(record);
-                    }
+                        foreach (Record record in this.logContent)
+                        {
+                            this.WriteFileHeader(record);
+                            this.WriteToFile(record);
+                        }
 
-                    this.logContent.Clear();
-                }
-            });
+                        this.logContent.Clear();
+
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorText = ex.Message;
+                        throw;
+                    }
+                });
+
+                bool result = await task;
+            }
         }
         */
 
-        public HashSet<Record> GetRecordList()
+        public ConcurrentHashSet<Record> GetRecordList()
         {
             return this.logContent;
         }

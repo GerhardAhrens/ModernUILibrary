@@ -170,9 +170,11 @@ namespace ModernBaseLibrary.Collection
             : this(comparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException(nameof(collection));
+            }
 
-            InitializeFromCollection(collection);
+            this.InitializeFromCollection(collection);
         }
 
         /// <summary>
@@ -187,11 +189,16 @@ namespace ModernBaseLibrary.Collection
             : this(concurrencyLevel, DEFAULT_CAPACITY, false, comparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException(nameof(collection));
-            if (comparer == null)
-                throw new ArgumentNullException(nameof(comparer));
+            }
 
-            InitializeFromCollection(collection);
+            if (comparer == null)
+            {
+                throw new ArgumentNullException(nameof(comparer));
+            }
+
+            this.InitializeFromCollection(collection);
         }
 
         /// <summary>
