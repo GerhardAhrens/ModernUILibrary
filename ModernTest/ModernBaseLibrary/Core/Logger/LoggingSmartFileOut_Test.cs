@@ -85,7 +85,7 @@ namespace ModernTest.ModernBaseLibrary.Core
         }
 
         [TestMethod]
-        public void LogLevelAllAndFlush_Test()
+        public async Task LogLevelAllAndFlush_Test()
         {
             var loggerName = "TestConsoleOutHandler";
             var logger = Logging.Instance.GetLogger(loggerName);
@@ -96,7 +96,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             PushLogMsg(logger);
             SecondPushLogMsg(logger);
             Assert.AreEqual(handler.GetRecordList().Count, 10);
-            logger.Flush();
+            await logger.FlushAsync();
             Assert.AreEqual(handler.GetRecordList().Count, 0);
         }
 
@@ -183,8 +183,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        /*
-        public override async void Flush()
+        public override async Task FlushAsync()
         {
             if (this.logContent != null)
             {
@@ -212,7 +211,6 @@ namespace ModernTest.ModernBaseLibrary.Core
                 bool result = await task;
             }
         }
-        */
 
         public ConcurrentHashSet<Record> GetRecordList()
         {

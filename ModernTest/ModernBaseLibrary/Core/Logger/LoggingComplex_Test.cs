@@ -113,6 +113,51 @@ namespace ModernTest.ModernBaseLibrary.Core
             Assert.IsTrue(File.Exists(logFile));
         }
 
+        [TestMethod]
+        public async Task LoggerFull_Async_Test()
+        {
+            LogFileOutHandler handler = new LogFileOutHandler(pathFileName);
+            logger.AddHandler(handler);
+            logger.SetLevel(LogLevel.INFO);
+
+            new TestLoggerClass().TestMethode();
+            TestDemoLoggerClass.TestMethode();
+
+            int maxStep = 100;
+            for (int i = 0; i < maxStep; i++)
+            {
+                System.Diagnostics.Trace.WriteLine($"Step: {i}");
+                logger.Info($"TestMsg-Info-{i}");
+                logger.Warning($"Test Meldung für Warnung-{i}");
+
+                try
+                {
+                    List<string> source = null;
+                    int count = source.Count;
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, $"Test Meldung für Error-{i}");
+                }
+
+                try
+                {
+                    string text = "Gerhard";
+                    string part = text.Substring(20, 10);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, $"Test Meldung für Error-{i}");
+                }
+            }
+
+            Assert.AreEqual(handler.GetRecordList().Count, (maxStep * 4) + 2);
+            await logger.FlushAsync();
+            Assert.AreEqual(handler.GetRecordList().Count, 0);
+            string logFile = handler.LogFileName;
+            Assert.IsTrue(File.Exists(logFile));
+        }
+
 
         [DataRow("", "")]
         [TestMethod]
@@ -195,8 +240,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        /*
-        public override async void Flush()
+        public override async Task FlushAsync()
         {
             await Task.Factory.StartNew(() =>
             {
@@ -212,7 +256,6 @@ namespace ModernTest.ModernBaseLibrary.Core
                 }
             });
         }
-        */
 
         public HashSet<Record> GetRecordList()
         {

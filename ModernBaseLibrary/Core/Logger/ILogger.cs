@@ -55,5 +55,7 @@ namespace ModernBaseLibrary.Core.Logger
         void WriteLog(LogLevel level, string message,Exception e);
 
         void Flush();
+
+        Task FlushAsync();
     }
 }

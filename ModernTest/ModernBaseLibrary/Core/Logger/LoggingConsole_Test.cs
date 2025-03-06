@@ -29,6 +29,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     using System.Globalization;
     using System.IO;
     using System.Threading;
+    using System.Threading.Tasks;
 
     using global::ModernBaseLibrary.Core.Logger;
 

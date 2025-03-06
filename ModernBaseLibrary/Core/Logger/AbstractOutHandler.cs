@@ -59,8 +59,15 @@ namespace ModernBaseLibrary.Core.Logger
         /// <summary>
         /// The method let handler to flush.
         /// </summary>
-        public abstract void Flush();
-        
+        public virtual Task FlushAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public virtual void Flush()
+        {
+        }
+
         /// <summary>
         /// Formatter srtter.
         /// </summary>

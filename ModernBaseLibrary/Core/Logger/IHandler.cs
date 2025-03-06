@@ -20,6 +20,8 @@ namespace ModernBaseLibrary.Core.Logger
     {
         void Push(Record record);
 
+        Task FlushAsync();
+
         void Flush();
 
         string DefaultLogFilename(Record record);

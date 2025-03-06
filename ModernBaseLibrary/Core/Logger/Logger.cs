@@ -260,6 +260,16 @@ namespace ModernBaseLibrary.Core.Logger
             }
         }
 
+        public Task FlushAsync()
+        {
+            foreach (IHandler handler in this.handlerList)
+            {
+                handler.Flush();
+            }
+
+            return Task.CompletedTask;
+        }
+
         private void Init(string loggerName, LogLevel logLevel)
         {
             lock (this.syncObj)

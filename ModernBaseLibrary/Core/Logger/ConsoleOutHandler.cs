@@ -27,6 +27,11 @@ namespace ModernBaseLibrary.Core.Logger
             Console.Write(formatedMsg);
         }
 
+        public override Task FlushAsync()
+        {
+            return Task.CompletedTask;
+        }
+
         public override void Flush()
         {
         }
