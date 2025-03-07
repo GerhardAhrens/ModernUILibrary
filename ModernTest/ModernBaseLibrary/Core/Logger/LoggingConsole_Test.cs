@@ -29,6 +29,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     using System.Globalization;
     using System.IO;
     using System.Threading;
+    using System.Threading.Tasks;
 
     using global::ModernBaseLibrary.Core.Logger;
 
@@ -200,14 +201,14 @@ namespace ModernTest.ModernBaseLibrary.Core
 
     public class SimpleOutHandler : AbstractOutHandler
     {
-        private List<Record> recordList;
+        private List<LogRecord> recordList;
 
         public SimpleOutHandler()
         {
-            this.recordList = new List<Record>();
+            this.recordList = new List<LogRecord>();
         }
 
-        public override void Push(Record record)
+        public override void Push(LogRecord record)
         {
             System.Diagnostics.Trace.WriteLine(record.FunctionName);
             recordList.Add(record);
@@ -215,7 +216,7 @@ namespace ModernTest.ModernBaseLibrary.Core
 
         public override void Flush()
         {
-            foreach (Record record in this.recordList)
+            foreach (LogRecord record in this.recordList)
             {
                 var time = record.EntryDateTime.ToString("HH:mm:ss.fff");
                 var line = $"{time}-{record.Level.ToString().PadRight(10)}-{record.LineNumber.ToString().PadLeft(5)}-{record.Message}";
@@ -225,7 +226,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             this.recordList.Clear();
         }
 
-        public List<Record> GetRecordList()
+        public List<LogRecord> GetRecordList()
         {
             return this.recordList;
         }

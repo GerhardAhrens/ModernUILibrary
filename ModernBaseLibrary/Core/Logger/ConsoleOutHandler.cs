@@ -21,10 +21,15 @@ namespace ModernBaseLibrary.Core.Logger
 
     public class ConsoleOutHandler : AbstractOutHandler
     {
-        public override void Push(Record record)
+        public override void Push(LogRecord record)
         {
             string formatedMsg = this.formatter.FormatMessage(record);
             Console.Write(formatedMsg);
+        }
+
+        public override Task FlushAsync()
+        {
+            return Task.CompletedTask;
         }
 
         public override void Flush()

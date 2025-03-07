@@ -362,7 +362,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
-            this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;Settings;Configuration", SourceFile = "CoreBase.Microsoft.Extensions.Configuration.txt" });
+            this.tabItemSource.Add(new TabControlItem("Extensions Configuration", new SyntaxBoxControlsUC()) { Stichworte = "Application;Settings;Configuration", SourceFile = "CoreBase.Microsoft.Extensions.Configuration.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Custom Data Type ", true));
             this.tabItemSource.Add(new TabControlItem("Custom Data Type Birthday", new SyntaxBoxControlsUC()) { Stichworte = "C#;Custom Data Type;cdt", SourceFile = "CSharp.CSharp_CDT_Birthday.txt" });

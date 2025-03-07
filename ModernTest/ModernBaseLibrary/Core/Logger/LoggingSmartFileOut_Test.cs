@@ -32,6 +32,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     using System.Threading;
     using System.Threading.Tasks;
 
+    using global::ModernBaseLibrary.Collection;
     using global::ModernBaseLibrary.Core.Logger;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -84,7 +85,7 @@ namespace ModernTest.ModernBaseLibrary.Core
         }
 
         [TestMethod]
-        public void LogLevelAllAndFlush_Test()
+        public async Task LogLevelAllAndFlush_Test()
         {
             var loggerName = "TestConsoleOutHandler";
             var logger = Logging.Instance.GetLogger(loggerName);
@@ -95,7 +96,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             PushLogMsg(logger);
             SecondPushLogMsg(logger);
             Assert.AreEqual(handler.GetRecordList().Count, 10);
-            logger.Flush();
+            await logger.FlushAsync();
             Assert.AreEqual(handler.GetRecordList().Count, 0);
         }
 
@@ -139,7 +140,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     public class SmartFileOutHandler : AbstractOutHandler
     {
         private string logPath = string.Empty;
-        private HashSet<Record> logContent = null;
+        private ConcurrentHashSet<LogRecord> logContent = null;
 
         public SmartFileOutHandler(string logPath = "")
         {
@@ -152,7 +153,7 @@ namespace ModernTest.ModernBaseLibrary.Core
                 this.logPath = this.DefaultLogPath();
             }
 
-            this.logContent = new HashSet<Record>();
+            this.logContent = new ConcurrentHashSet<LogRecord>();
 
             if (this.MaxFiles > 0)
             {
@@ -160,7 +161,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        public override void Push(Record record)
+        public override void Push(LogRecord record)
         {
             if (logContent != null)
             {
@@ -172,7 +173,7 @@ namespace ModernTest.ModernBaseLibrary.Core
         {
             if (this.logContent != null)
             {
-                foreach (Record record in this.logContent)
+                foreach (LogRecord record in this.logContent)
                 {
                     this.WriteFileHeader(record);
                     this.WriteToFile(record);
@@ -182,31 +183,41 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        /*
-        public override async void Flush()
+        public override async Task FlushAsync()
         {
-            await Task.Factory.StartNew(() =>
+            if (this.logContent != null)
             {
-                if (this.logContent != null)
+                Task<bool> task = Task.Run(() =>
                 {
-                    foreach (Record record in this.logContent)
+                    try
                     {
-                        this.WriteFileHeader(record);
-                        this.WriteToFile(record);
+                        foreach (LogRecord record in this.logContent)
+                        {
+                            this.WriteFileHeader(record);
+                            this.WriteToFile(record);
+                        }
+
+                        this.logContent.Clear();
+
+                        return true;
                     }
+                    catch (Exception ex)
+                    {
+                        string errorText = ex.Message;
+                        throw;
+                    }
+                });
 
-                    this.logContent.Clear();
-                }
-            });
+                bool result = await task;
+            }
         }
-        */
 
-        public HashSet<Record> GetRecordList()
+        public ConcurrentHashSet<LogRecord> GetRecordList()
         {
             return this.logContent;
         }
 
-        private void WriteFileHeader(Record record)
+        private void WriteFileHeader(LogRecord record)
         {
             string fullFilename = Path.Combine(this.logPath, this.DefaultLogFilename(record));
 
@@ -224,7 +235,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        private void WriteToFile(Record record)
+        private void WriteToFile(LogRecord record)
         {
             string fullFilename = Path.Combine(this.logPath, this.DefaultLogFilename(record));
 

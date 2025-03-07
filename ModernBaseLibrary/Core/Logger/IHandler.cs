@@ -18,11 +18,13 @@ namespace ModernBaseLibrary.Core.Logger
     /// </summary>
     public interface IHandler
     {
-        void Push(Record record);
+        void Push(LogRecord record);
+
+        Task FlushAsync();
 
         void Flush();
 
-        string DefaultLogFilename(Record record);
+        string DefaultLogFilename(LogRecord record);
 
         string LogFileName { get; set; }
     }
