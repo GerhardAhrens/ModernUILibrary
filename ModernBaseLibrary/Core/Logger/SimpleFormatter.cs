@@ -22,7 +22,7 @@ namespace ModernBaseLibrary.Core.Logger
     [DebuggerStepThrough()]
     public sealed class SimpleFormatter : IFormatter
     {
-        public string FormatMessage(Record record)
+        public string FormatMessage(LogRecord record)
         {
             string formatedMsg = string.Format("===============================\n[{0}] [{1}]:\n==============================={2}",DateTime.Now.ToString(),record.Message);
             if (record.Exception != null)

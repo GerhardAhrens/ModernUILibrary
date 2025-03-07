@@ -26,7 +26,7 @@ namespace ModernBaseLibrary.Core.Logger
     /// Abstract Handler implement IHandler.
     /// It has one formatter to format record imformation.
     /// </summary>
-    [DebuggerStepThrough()]
+    //[DebuggerStepThrough()]
     public abstract class AbstractOutHandler : IHandler
     {
         /// <summary>
@@ -44,17 +44,21 @@ namespace ModernBaseLibrary.Core.Logger
 
         public virtual int MaxFiles { get; set; } = 5;
 
-        public virtual string LogFilePattern { get; set; } = "*.log";
+        public virtual string LogFilePattern { get; set; } = string.Empty;
 
-        public Record Record { get; private set; }
+        public LogRecord Record { get; private set; }
 
         public virtual string LogFileName { get; set; } = string.Empty;
+
+        public virtual string ArchivePath { get; set; } = string.Empty;
+
+        public bool IsArchiveData { get; set; } = false;
 
         /// <summary>
         /// Push log record to handler.
         /// </summary>
         /// <param name="record"></param>
-        public abstract void Push(Record record);
+        public abstract void Push(LogRecord record);
 
         /// <summary>
         /// The method let handler to flush.
@@ -79,18 +83,34 @@ namespace ModernBaseLibrary.Core.Logger
 
         public virtual string DefaultLogPath()
         {
-            string settingsPath = string.Empty;
+            string logPath = string.Empty;
 
             string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            settingsPath = $"{rootPath}\\{this.ApplicationName()}\\Log";
+            logPath = $"{rootPath}\\{this.ApplicationName()}\\Log";
 
-            if (string.IsNullOrEmpty(settingsPath) == false)
+            if (string.IsNullOrEmpty(logPath) == false)
             {
                 try
                 {
-                    if (Directory.Exists(settingsPath) == false)
+                    if (Directory.Exists(logPath) == false)
                     {
-                        Directory.CreateDirectory(settingsPath);
+                        Directory.CreateDirectory(logPath);
+                        if (this.IsArchiveData == true)
+                        {
+                            this.ArchivePath = Path.Combine(logPath, "Archive");
+                            Directory.CreateDirectory(this.ArchivePath);
+                        }
+                    }
+                    else
+                    {
+                        if (this.IsArchiveData == true)
+                        {
+                            this.ArchivePath = Path.Combine(logPath, "Archive");
+                            if (Directory.Exists(this.ArchivePath) == false)
+                            {
+                                Directory.CreateDirectory(this.ArchivePath);
+                            }
+                        }
                     }
                 }
                 catch (Exception)
@@ -99,39 +119,74 @@ namespace ModernBaseLibrary.Core.Logger
                 }
             }
 
-            return settingsPath;
+            return logPath;
         }
 
-        public virtual string DefaultLogFilename(Record record)
+        public virtual string DefaultLogFilename(LogRecord record)
         {
-            string date = DateTime.Now.ToString("yyyyMMdd");
-
-            this.LogFileName = string.Format(string.IsNullOrEmpty(record.LoggerName) ? $"{date}.log" : $"{date}_{record.LoggerName}.log");
+            if (string.IsNullOrEmpty(this.LogFilePattern) == true)
+            {
+                string date = DateTime.Now.ToString("yyyyMMdd");
+                this.LogFileName = string.Format(string.IsNullOrEmpty(record.LoggerName) ? $"{date}.log" : $"{date}_{record.LoggerName}.log");
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(this.LogFilePattern) == false || this.LogFilePattern.StartsWith("*.") == true)
+                {
+                    string date = DateTime.Now.ToString("yyyyMMdd");
+                    this.LogFileName = string.Format(string.IsNullOrEmpty(record.LoggerName) ? $"{date}.log" : $"{date}_{record.LoggerName}.log");
+                }
+                else
+                {
+                    this.LogFileName = this.LogFilePattern;
+                }
+            }
 
             return this.LogFileName;
         }
 
-        public virtual void ClearLogfiles()
+        public virtual void ClearLogfiles(string logPath = "")
         {
-            DirectoryInfo dir = new DirectoryInfo(this.DefaultLogPath());
+            DirectoryInfo dir = null;
+
+            if (string.IsNullOrEmpty(logPath) == true)
+            {
+                dir = new DirectoryInfo(this.DefaultLogPath());
+            }
+            else
+            {
+                dir = new DirectoryInfo(logPath);
+            }
+
             IEnumerable<string> fileList = dir.EnumerateFiles(this.LogFilePattern, SearchOption.AllDirectories)
-                .OrderByDescending(p => p.Name)
-                .Select(p => p.FullName)
-                .Skip(this.MaxFiles).ToList();
+                    .OrderByDescending(p => p.Name)
+                    .Select(p => p.FullName)
+                    .Skip(this.MaxFiles).ToList();
 
             foreach (string file in fileList)
             {
-                File.Delete(file);
+                if (this.IsArchiveData == false)
+                {
+                    File.Delete(file);
+                }
+                else 
+                {
+                    this.MoveToArchive(Path.GetDirectoryName(file), this.ArchivePath, Path.GetFileName(file));
+                }
             }
         }
 
-        public string ApplicationName()
+        private string ApplicationName()
         {
             string result = string.Empty;
 
             Assembly assm = Assembly.GetEntryAssembly();
             result = assm.GetName().Name;
             return result;
+        }
+
+        private void MoveToArchive(string suorcePath, string targetPath, string fileName)
+        {
         }
     }
 }

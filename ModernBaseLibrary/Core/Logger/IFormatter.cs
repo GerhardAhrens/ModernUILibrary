@@ -23,6 +23,6 @@ namespace ModernBaseLibrary.Core.Logger
         /// </summary>
         /// <param name="record"></param>
         /// <returns>Formated message</returns>
-        string FormatMessage(Record record);
+        string FormatMessage(LogRecord record);
     }
 }

@@ -24,9 +24,9 @@ namespace ModernBaseLibrary.Core.Logger
     /// </summary>
     [DebuggerDisplay("LoggerName={this.LoggerName};DateTime={this.EntryDateTime};Level={this.Level};Message={this.Message}")]
     [DebuggerStepThrough()]
-    public sealed class Record
+    public sealed class LogRecord
     {
-        public Record(string loggerName, LogLevel logLevel, StackTrace stacktrace, string msg, string func, StackFrame callerStackFrame, Exception e)
+        public LogRecord(string loggerName, LogLevel logLevel, StackTrace stacktrace, string msg, string func, StackFrame callerStackFrame, Exception e)
         {
             this.LoggerName = loggerName;
             this.EntryDateTime = DateTime.Now;

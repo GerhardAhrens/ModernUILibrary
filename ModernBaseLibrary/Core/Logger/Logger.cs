@@ -291,7 +291,7 @@ namespace ModernBaseLibrary.Core.Logger
             StackFrame callerStackFrame = stack.GetFrame(2);
             MethodBase methodInfo = new StackTrace().GetFrame(2).GetMethod();
             string className = methodInfo.ReflectedType.Name;
-            Record record = new Record(this.loggerName, level, stack, message, $"{className}.{methodInfo.Name}", callerStackFrame,e);
+            LogRecord record = new LogRecord(this.loggerName, level, stack, message, $"{className}.{methodInfo.Name}", callerStackFrame,e);
 
             foreach (IHandler handler in this.handlerList)
             {

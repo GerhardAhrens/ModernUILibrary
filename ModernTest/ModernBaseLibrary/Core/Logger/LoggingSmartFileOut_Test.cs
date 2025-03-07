@@ -140,7 +140,7 @@ namespace ModernTest.ModernBaseLibrary.Core
     public class SmartFileOutHandler : AbstractOutHandler
     {
         private string logPath = string.Empty;
-        private ConcurrentHashSet<Record> logContent = null;
+        private ConcurrentHashSet<LogRecord> logContent = null;
 
         public SmartFileOutHandler(string logPath = "")
         {
@@ -153,7 +153,7 @@ namespace ModernTest.ModernBaseLibrary.Core
                 this.logPath = this.DefaultLogPath();
             }
 
-            this.logContent = new ConcurrentHashSet<Record>();
+            this.logContent = new ConcurrentHashSet<LogRecord>();
 
             if (this.MaxFiles > 0)
             {
@@ -161,7 +161,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        public override void Push(Record record)
+        public override void Push(LogRecord record)
         {
             if (logContent != null)
             {
@@ -173,7 +173,7 @@ namespace ModernTest.ModernBaseLibrary.Core
         {
             if (this.logContent != null)
             {
-                foreach (Record record in this.logContent)
+                foreach (LogRecord record in this.logContent)
                 {
                     this.WriteFileHeader(record);
                     this.WriteToFile(record);
@@ -191,7 +191,7 @@ namespace ModernTest.ModernBaseLibrary.Core
                 {
                     try
                     {
-                        foreach (Record record in this.logContent)
+                        foreach (LogRecord record in this.logContent)
                         {
                             this.WriteFileHeader(record);
                             this.WriteToFile(record);
@@ -212,12 +212,12 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        public ConcurrentHashSet<Record> GetRecordList()
+        public ConcurrentHashSet<LogRecord> GetRecordList()
         {
             return this.logContent;
         }
 
-        private void WriteFileHeader(Record record)
+        private void WriteFileHeader(LogRecord record)
         {
             string fullFilename = Path.Combine(this.logPath, this.DefaultLogFilename(record));
 
@@ -235,7 +235,7 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
         }
 
-        private void WriteToFile(Record record)
+        private void WriteToFile(LogRecord record)
         {
             string fullFilename = Path.Combine(this.logPath, this.DefaultLogFilename(record));
 
