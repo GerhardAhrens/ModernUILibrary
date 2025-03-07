@@ -23,6 +23,8 @@
     <None Remove="Images\img4.png" />
     <None Remove="Images\img5.png" />
     <None Remove="Resources\BuildDate.txt" />
+    <None Remove="Resources\HelpHtml\HelpServiceWindow.html" />
+    <None Remove="Resources\HelpHtml\Styles.css" />
     <None Remove="Resources\MDText\DemoText.md" />
     <None Remove="Resources\MDText\sampleimage.jpg" />
     <None Remove="Resources\Picture\app.ico" />
@@ -51,6 +53,8 @@
 
   <ItemGroup>
     <Content Include="AppLogo.ico" />
+    <Content Include="Resources\HelpHtml\HelpServiceWindow.html" />
+    <Content Include="Resources\HelpHtml\Styles.css" />
     <Content Include="Resources\Picture\app.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

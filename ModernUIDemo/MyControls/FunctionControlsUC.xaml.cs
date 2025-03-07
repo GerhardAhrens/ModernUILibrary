@@ -1,7 +1,10 @@
 ﻿namespace ModernUIDemo.MyControls
 {
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Security.Policy;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -13,11 +16,37 @@
     /// </summary>
     public partial class FunctionControlsUC : UserControl, INotifyPropertyChanged
     {
+        private HelpWindow _HelpWindow;
+
         public FunctionControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            this.Unloaded += this.FunctionControlsUC_Unloaded;
             this.DataContext = this;
+        }
+
+        private void FunctionControlsUC_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (this._HelpWindow == null)
+            {
+                return;
+            }
+
+            this._HelpWindow.ForceClose();
+        }
+
+        private HelpWindow HelpWin
+        {
+            get
+            {
+                if (this._HelpWindow == null)
+                {
+                    this._HelpWindow = new HelpWindow();
+                }
+
+                return this._HelpWindow;
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -53,6 +82,25 @@
                     MessageBoxResult msg = MMessageBox.Show($"Gewähltes Passwort: {result.Result}", EnumPromptType.Info);
                 }
             }
+        }
+
+        private void BtnHelpService_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.HelpWin.IsLoaded == false)
+            {
+                this.HelpWin.Show();
+            }
+
+            string title = string.Empty;
+            string url = string.Empty;
+
+            title = "Hilfe zum Demoprogramm";
+            string helpText = "HelpServiceWindow.html";
+
+            url = $"/Resources/HelpHtml/{helpText}";
+
+            this.HelpWin.Navigate(title, "");
+
         }
     }
 }

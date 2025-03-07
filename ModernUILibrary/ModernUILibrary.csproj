@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernUI\HelpService\2024065828.ico" />
+    <None Remove="Resources\Picture\2024065828.ico" />
     <None Remove="Resources\Picture\close.png" />
   </ItemGroup>
 
@@ -30,6 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ModernUI\HelpService\2024065828.ico" />
+    <Resource Include="Resources\Picture\2024065828.ico" />
     <Resource Include="Resources\Picture\close.png" />
   </ItemGroup>
 

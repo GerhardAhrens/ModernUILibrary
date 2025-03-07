@@ -32,6 +32,11 @@
                 Click="BtnPasswordgenerator_Click"
                 Content="Passwordgenerator" />
 
+            <ModernUI:FlatButton Margin="0,20,0,0"
+                x:Name="BtnHelpService"
+                Height="40"
+                Click="BtnHelpService_Click"
+                Content="Hilfe aufrufen" />
         </StackPanel>
 
     </Grid>
