@@ -11,8 +11,6 @@
 
     using ModernIU.Base;
 
-    using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
     /// <summary>
     /// Interaktionslogik für PasswordGeneratorView.xaml
     /// </summary>

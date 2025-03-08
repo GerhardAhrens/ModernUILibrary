@@ -53,8 +53,7 @@
 
   <ItemGroup>
     <Content Include="AppLogo.ico" />
-    <Content Include="Resources\HelpHtml\HelpServiceWindow.html" />
-    <Content Include="Resources\HelpHtml\Styles.css" />
+    <EmbeddedResource Include="Resources\HelpHtml\HelpServiceWindow.html" />
     <Content Include="Resources\Picture\app.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

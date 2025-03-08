@@ -88,6 +88,7 @@
         {
             if (this.HelpWin.IsLoaded == false)
             {
+                this.HelpWin.Activate();
                 this.HelpWin.Show();
             }
 
@@ -97,9 +98,9 @@
             title = "Hilfe zum Demoprogramm";
             string helpText = "HelpServiceWindow.html";
 
-            url = $"/Resources/HelpHtml/{helpText}";
+            url = $"Resources.HelpHtml.{helpText}";
 
-            this.HelpWin.Navigate(title, "");
+            this.HelpWin.Navigate(title, url);
 
         }
     }
