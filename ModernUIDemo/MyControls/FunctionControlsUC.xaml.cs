@@ -16,37 +16,11 @@
     /// </summary>
     public partial class FunctionControlsUC : UserControl, INotifyPropertyChanged
     {
-        private HelpWindow _HelpWindow;
-
         public FunctionControlsUC()
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-            this.Unloaded += this.FunctionControlsUC_Unloaded;
             this.DataContext = this;
-        }
-
-        private void FunctionControlsUC_Unloaded(object sender, RoutedEventArgs e)
-        {
-            if (this._HelpWindow == null)
-            {
-                return;
-            }
-
-            this._HelpWindow.ForceClose();
-        }
-
-        private HelpWindow HelpWin
-        {
-            get
-            {
-                if (this._HelpWindow == null)
-                {
-                    this._HelpWindow = new HelpWindow();
-                }
-
-                return this._HelpWindow;
-            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -86,12 +60,6 @@
 
         private void BtnHelpService_Click(object sender, RoutedEventArgs e)
         {
-            if (this.HelpWin.IsLoaded == false)
-            {
-                this.HelpWin.Activate();
-                this.HelpWin.Show();
-            }
-
             string title = string.Empty;
             string url = string.Empty;
 
@@ -100,7 +68,7 @@
 
             url = $"Resources.HelpHtml.{helpText}";
 
-            this.HelpWin.Navigate(title, url);
+            HelpWindowView.Execute(title, url);
 
         }
     }
