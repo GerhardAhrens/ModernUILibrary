@@ -61,5 +61,53 @@ namespace ModernBaseLibrary.Extension
         {
             return Convert.FromBase64String(s);
         }
+
+        /// <summary>
+        /// Convert a byte array to a string using Ascii encoding
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToAsciiString(this byte[] bytes)
+        {
+            return bytes == null
+                       ? null
+                       : new ASCIIEncoding().GetString(bytes);
+        }
+
+        /// <summary>
+        /// Convert a byte array to a string using Utf-8 encoding
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToUtf8String(this byte[] bytes)
+        {
+            return bytes == null
+                       ? null
+                       : new UTF8Encoding().GetString(bytes);
+        }
+
+        /// <summary>
+        /// Convert a string to a byte array using Ascii encoding
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static byte[] AsciiToByteArray(this string source)
+        {
+            return string.IsNullOrEmpty(source)
+                       ? new byte[0]
+                       : new ASCIIEncoding().GetBytes(source);
+        }
+
+        /// <summary>
+        /// Convert a string to a byte array using Utf-8 encoding
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static byte[] Utf8ToByteArray(this string source)
+        {
+            return string.IsNullOrEmpty(source)
+                       ? new byte[0]
+                       : new UTF8Encoding().GetBytes(source);
+        }
     }
 }

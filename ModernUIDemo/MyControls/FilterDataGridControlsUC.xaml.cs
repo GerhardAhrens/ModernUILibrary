@@ -72,7 +72,7 @@
         private void FillData()
         {
             this.Search = string.Empty;
-            IEnumerable<Employe> employe = BuildDemoData<Employe>.CreateForList<Employe>(ConfigObject, 10_000);
+            IEnumerable<Employe> employe = BuildDemoData<Employe>.CreateForList<Employe>(ConfigObject, 1_000);
             this.Employes = new ObservableCollection<Employe>(employe.AsParallel().OrderBy(o => o.LastName));
 
             this.FilteredList = new ObservableCollection<Employe>(this.Employes);

@@ -158,6 +158,11 @@
                         Header="Start Datum"
                         IsColumnFiltered="True" />
 
+                    <ModernUI:DataGridDateColumn
+                        Binding="{Binding Path=StartDate, StringFormat=\{0:dd/MM/yyyy\}}"
+                        Header="Start Datum"
+                        IsColumnFiltered="True" />
+
                 </ModernUI:FilterDataGrid.Columns>
             </ModernUI:FilterDataGrid>
 

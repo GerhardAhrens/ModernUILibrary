@@ -30,6 +30,11 @@ namespace ModernBaseLibrary.Extension
     [SupportedOSPlatform("windows")]
     public static class DateTimeExtensions
     {
+        /// <summary>
+        /// The minimum date value
+        /// </summary>
+        public static DateTime MinDateValue = new DateTime(1900, 1, 1, 0, 0, 0, 0, CultureInfo.InvariantCulture.Calendar, DateTimeKind.Utc);
+
         static readonly DateTime Date1970 = new DateTime(1970, 1, 1);
 
         /// <summary>
@@ -1011,6 +1016,108 @@ namespace ModernBaseLibrary.Extension
         public static int TimeToInt(this DateTime dt)
         {
             return 10000000 * dt.Hour + 100000 * dt.Minute + 1000 * dt.Second + dt.Millisecond;
+        }
+
+        /// <summary>
+        /// Converts a fractional hour value like 1.25 to 1:15 hours:minutes format
+        /// </summary>
+        /// <param name="hours">The hours.</param>
+        /// <param name="format">The format.</param>
+        /// <returns>System.String.</returns>
+        public static string FractionalHoursToString(this decimal hours, string format)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                format = "{0}:{1}";
+            }
+
+            var tspan = TimeSpan.FromHours((double)hours);
+
+            // Account for rounding error
+            var minutes = tspan.Minutes;
+            if (tspan.Seconds > 29)
+            {
+                minutes++;
+            }
+
+            return string.Format(format, tspan.Hours + tspan.Days * 24, minutes);
+        }
+
+        /// <summary>
+        ///  Converts a fractional hour value like 1.25 to 1:15 hours:minutes format
+        /// </summary>
+        /// <param name="hours">The hours.</param>
+        /// <returns>System.String.</returns>
+        public static string FractionalHoursToString(this decimal hours)
+        {
+            return FractionalHoursToString(hours, null);
+        }
+
+        /// <summary>
+        /// Friendlies the date string.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="showTime">if set to <c>true</c> [show time].</param>
+        /// <returns>System.String.</returns>
+        public static string FriendlyDateString(this DateTime date, bool showTime)
+        {
+            if (date < MinDateValue)
+                return string.Empty;
+
+            string formattedDate;
+            if (date.Date == DateTime.Today)
+            {
+                formattedDate = " Heute";
+            }
+            else if (date.Date == DateTime.Today.AddDays(-1))
+            {
+                formattedDate = " Gestern";
+            }
+            else if (date.Date > DateTime.Today.AddDays(-6))
+            {
+                formattedDate = date.ToString("dddd");
+            }
+            else
+            {
+                formattedDate = date.ToString("dd.MM.yyyy");
+            }
+
+            if (showTime)
+            {
+                formattedDate += $" @ {date.ToString("t").ToLower().Replace(" ", "")}";
+            }
+
+            return formattedDate;
+        }
+
+        /// <summary>
+        /// Friendlies the elapsed time string.
+        /// </summary>
+        /// <param name="milliSeconds">The milli seconds.</param>
+        /// <returns>System.String.</returns>
+        public static string FriendlyElapsedTimeString(this int milliSeconds)
+        {
+            if (milliSeconds < 0)
+            {
+                return string.Empty;
+            }
+
+            if (milliSeconds < 60000)
+            {
+                return "gerade jetzt";
+            }
+
+            return milliSeconds < 3600000 ? $"{milliSeconds / 60000}m vor" : $"{milliSeconds / 3600000}h vor";
+        }
+
+        /// <summary>
+        /// Friendlies the elapsed time string.
+        /// </summary>
+        /// <param name="elapsed">The elapsed.</param>
+        /// <returns>System.String.</returns>
+        public static string FriendlyElapsedTimeString(this TimeSpan elapsed)
+        {
+            return FriendlyElapsedTimeString((int)elapsed.TotalMilliseconds);
         }
 
         #region Helper Methodes

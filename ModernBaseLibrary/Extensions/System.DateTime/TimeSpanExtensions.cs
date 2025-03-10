@@ -4,7 +4,6 @@
 
     public static class TimeSpanExtensions
     {
-
         public static string ToReadableString(this TimeSpan timeSpan, TimeUnit accuracy = TimeUnit.Second)
         {
             string readableString = "";
