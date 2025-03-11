@@ -190,6 +190,7 @@
     <Folder Include="CustomDataTypes\" />
     <Folder Include="Network\SmtpMail\" />
     <Folder Include="Localization\" />
+    <Folder Include="Network\VMDetector\Win32\" />
     <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
     <Folder Include="TextAnalysis\LexicalAnalyzer\" />
@@ -201,10 +202,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="9.0.2" />
-    <PackageReference Include="System.DirectoryServices" Version="9.0.2" />
-    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.2" />
-    <PackageReference Include="System.Management" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="9.0.3" />
+    <PackageReference Include="System.DirectoryServices" Version="9.0.3" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.3" />
+    <PackageReference Include="System.Management" Version="9.0.3" />
   </ItemGroup>
 
 </Project>
