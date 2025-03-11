@@ -7,7 +7,7 @@
     using System.Text.Json;
     using System.Web;
 
-    abstract class BaseWin32Entity
+    public abstract class BaseWin32Entity
     {
         public Dictionary<string, object> Properties { get; set; }
         public string Caption { get; protected set; }
@@ -29,19 +29,29 @@
             this.Description = ParseValue<string>(obj, "Description");
 
             if (!string.IsNullOrEmpty(this.Caption))
+            {
                 this.Caption = this.Caption.ToLower();
+            }
 
             if (!string.IsNullOrEmpty(this.Name))
+            {
                 this.Name = this.Name.ToLower();
+            }
 
             if (!string.IsNullOrEmpty(this.Manufacturer))
+            {
                 this.Manufacturer = this.Manufacturer.ToLower();
+            }
 
             if (!string.IsNullOrEmpty(this.Model))
+            {
                 this.Model = this.Model.ToLower();
+            }
 
             if (!string.IsNullOrEmpty(this.Description))
+            {
                 this.Description = this.Description.ToLower();
+            }
         }
 
         public override string ToString()
@@ -63,7 +73,7 @@
             return sb.ToString();
         }
 
-        object GetValue(object value)
+        public object GetValue(object value)
         {
             var valueIsArray = false;
 

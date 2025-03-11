@@ -190,6 +190,7 @@
     <Folder Include="CustomDataTypes\" />
     <Folder Include="Network\SmtpMail\" />
     <Folder Include="Localization\" />
+    <Folder Include="Network\VMDetector\Environments\" />
     <Folder Include="Network\VMDetector\Win32\" />
     <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
@@ -206,6 +207,7 @@
     <PackageReference Include="System.DirectoryServices" Version="9.0.3" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.3" />
     <PackageReference Include="System.Management" Version="9.0.3" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.3" />
   </ItemGroup>
 
 </Project>
