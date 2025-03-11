@@ -80,9 +80,9 @@
     <Folder Include="ModernBaseLibrary\Console\CommandLine\" />
     <Folder Include="ModernBaseLibrary\Console\DebugTextWriter\" />
     <Folder Include="ModernBaseLibrary\CoreBase\SmartSetting\DemoSettingsClass\" />
-    <Folder Include="ModernBaseLibrary\Core\Collection\" />
     <Folder Include="AssertHelper\" />
     <Folder Include="ModernBaseLibrary\Core\ArrayCollection\" />
+    <Folder Include="ModernBaseLibrary\Core\Collection\DataCollectionModel\" />
     <Folder Include="ModernBaseLibrary\Core\Comparer\" />
     <Folder Include="ModernBaseLibrary\Core\Converter\" />
     <Folder Include="ModernBaseLibrary\Core\Enumeration\" />
