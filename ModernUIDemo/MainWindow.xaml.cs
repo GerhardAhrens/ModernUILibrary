@@ -375,7 +375,8 @@
             this.tabItemSource.Add(new TabControlItem("WeakEvent 2", new SyntaxBoxControlsUC()) { Stichworte = "C#;WeakEventManager;Event", SourceFile = "CSharp.WeakEventManager.txt" });
             this.tabItemSource.Add(new TabControlItem("DynamicObject2Json", new SyntaxBoxControlsUC()) { Stichworte = "C#;Class;ExpandoObject;json", SourceFile = "CSharp.CSharp_DynamicObject2Json.txt" });
             this.tabItemSource.Add(new TabControlItem("Override Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Override Methode", SourceFile = "CSharp.CSharp_Override_Methode.txt" });
-            this.tabItemSource.Add(new TabControlItem("Callback Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Callback Methode", SourceFile = "CSharp.CSharp_Callback_Function.txt" });
+            this.tabItemSource.Add(new TabControlItem("Callback Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Callback; Event;Delegate", SourceFile = "CSharp.CSharp_Callback_EventDelegate.txt" });
+            this.tabItemSource.Add(new TabControlItem("Callback Methode", new SyntaxBoxControlsUC()) { Stichworte = "C#;Callback; Func;Action", SourceFile = "CSharp.CSharp_Callback_EventDelegate.txt" });
             this.tabItemSource.Add(new TabControlItem("Compare Objects", new SyntaxBoxControlsUC()) { Stichworte = "C#;Compare", SourceFile = "Object.CSharp_CompareObjects.txt" });
             this.tabItemSource.Add(new TabControlItem("IsCollection", new SyntaxBoxControlsUC()) { Stichworte = "C#;IsCollection", SourceFile = "CSharp.CSharp_IsCollection.txt" });
             this.tabItemSource.Add(new TabControlItem("StringBasedEnums", new SyntaxBoxControlsUC()) { Stichworte = "C#;Enum", SourceFile = "CSharp.CSharp_StringBasedEnums.txt" });

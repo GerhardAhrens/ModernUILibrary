@@ -1,0 +1,37 @@
+﻿internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Example 1: Using Func delegate
+        int result = Calculate(5, AddFive);
+        Console.WriteLine($"Result: {result}");   // OutPut : Result:10
+
+        //Example 2 : Using Action delegate
+        ProccessNumbers(new int[] { 1,2,3},PrintNumber);
+
+        Console.WriteLine("Done");
+    }
+
+    private static int AddFive(int num)
+    {
+        return num + 5;
+    }
+
+    private static void PrintNumber(int num)
+    {
+        Console.WriteLine($"Proccessing Number: {num}");
+    }
+
+    private static int Calculate(int value, Func<int, int> callback)
+    {
+        return callback(value);
+    }
+
+    private static void ProccessNumbers(int[] numbers, Action<int> callback)
+    {
+        foreach (var number in numbers)
+        {
+            callback(number);
+        }
+    }
+}
