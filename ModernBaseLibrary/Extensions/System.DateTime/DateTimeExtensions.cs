@@ -33,9 +33,52 @@ namespace ModernBaseLibrary.Extension
         /// <summary>
         /// The minimum date value
         /// </summary>
-        public static DateTime MinDateValue = new DateTime(1900, 1, 1, 0, 0, 0, 0, CultureInfo.InvariantCulture.Calendar, DateTimeKind.Utc);
+        public static readonly DateTime MinDateValue = new DateTime(1900, 1, 1, 0, 0, 0, 0, CultureInfo.InvariantCulture.Calendar, DateTimeKind.Utc);
+        public static readonly DateTime Date1970 = new DateTime(1970, 1, 1);
+        private static readonly DateTime MinDate = new DateTime(1900, 1, 1);
+        private static readonly DateTime MaxDate = new DateTime(2100, 12, 31, 23, 59, 59, 999);
 
-        static readonly DateTime Date1970 = new DateTime(1970, 1, 1);
+        /// <summary>
+        /// Prüft, ob ein Datum zwischen Min und Max liegen
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static bool IsValid(this DateTime target)
+        {
+            return (target >= MinDate) && (target <= MaxDate);
+        }
+
+        /// <summary>
+        /// Prüft, ob ein Datum in der Zukunft liegt
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsInFuture(this DateTime source)
+        {
+            return DateTime.Compare(source, DateTime.Now) > 0;
+        }
+
+        /// <summary>
+        /// Prüft ob ein Datum älter als ... ist.
+        /// </summary>
+        /// <param name="t1"></param>
+        /// <param name="t2"></param>
+        /// <returns></returns>
+        public static bool IsOlderThan(this DateTime t1, DateTime t2)
+        {
+            return t1 < t2;
+        }
+
+        /// <summary>
+        /// Prüft, ob ein Datum später las ... ist.
+        /// </summary>
+        /// <param name="t1"></param>
+        /// <param name="t2"></param>
+        /// <returns></returns>
+        public static bool IsLaterThan(this DateTime t1, DateTime t2)
+        {
+            return t1 > t2;
+        }
 
         /// <summary>
         /// Gib die Differnez zwischen Start- und Enddatum unter Berücksichtigung des übergebenen pattern zurück

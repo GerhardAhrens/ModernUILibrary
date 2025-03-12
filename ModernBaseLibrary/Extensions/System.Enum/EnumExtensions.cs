@@ -29,6 +29,7 @@ namespace ModernBaseLibrary.Extension
     using System.Collections.Generic;
     using System.Linq;
     using ModernBaseLibrary.Core;
+    using System.Collections;
 
     public static partial class EnumExtensions
     {
@@ -180,22 +181,6 @@ namespace ModernBaseLibrary.Extension
             }
 
             return defaultEnum;
-        }
-
-        /// <summary>
-        /// Konvertiert ein enum zu einem Dictionary<int,string>()
-        /// </summary>
-        /// <param name="this"></param>
-        /// <returns></returns>
-        public static Dictionary<int, string> ToDictionary<TEnum>(this TEnum @this) where TEnum : struct
-        {
-            if (typeof(TEnum).IsEnum == false)
-            {
-                throw new ArgumentException("Type must be an enumeration");
-            }
-
-            var type = typeof(TEnum);
-            return Enum.GetValues(type).Cast<int>().ToDictionary(e => e, e => Enum.GetName(type, e));
         }
 
         public static TEnum GetAttributeOfType<TEnum>(this Enum @this) where TEnum : Attribute
@@ -515,6 +500,39 @@ namespace ModernBaseLibrary.Extension
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Konvertiert ein enum zu einem Dictionary<int,string>()
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns></returns>
+        public static Dictionary<int, string> ToDictionary<TEnum>(this TEnum @this) where TEnum : struct
+        {
+            if (typeof(TEnum).IsEnum == false)
+            {
+                throw new ArgumentException("Type must be an enumeration");
+            }
+
+            var type = typeof(TEnum);
+            return Enum.GetValues(type).Cast<int>().ToDictionary(e => e, e => Enum.GetName(type, e));
+        }
+
+        /// <summary>
+        /// Gib ein Enum als Dictionary zurüxk
+        /// </summary>
+        /// <typeparam name="TEnumValueType"></typeparam>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static IDictionary ToDictionary<TEnumValueType>(this Enum @this)
+        {
+            if (typeof(TEnumValueType).FullName != Enum.GetUnderlyingType(@this.GetType()).FullName)
+            {
+                throw new ArgumentException("Invalid type specified.");
+            }
+
+            return Enum.GetValues(@this.GetType()).Cast<object>().ToDictionary(key => Enum.GetName(e.GetType(), key),value => (TEnumValueType)value);
         }
     }
 }

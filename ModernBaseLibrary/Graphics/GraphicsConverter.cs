@@ -121,6 +121,39 @@ namespace ModernBaseLibrary.Graphics
             return bytes;
         }
 
+        public static BitmapImage ConvertSourceToImage(BitmapSource source, string extension)
+        {
+            BitmapEncoder encoder;
+            string lowerExtension = extension.ToLower();
+            if (lowerExtension.Contains("jpeg") || lowerExtension.Contains("jpg"))
+            {
+                encoder = new JpegBitmapEncoder();
+            }
+            else if (lowerExtension.Contains("png"))
+            {
+                encoder = new PngBitmapEncoder();
+            }
+            else
+            {
+                return null;
+            }
+
+            MemoryStream memoryStream = new MemoryStream();
+            BitmapImage bImg = new BitmapImage();
+
+            encoder.Frames.Add(BitmapFrame.Create(source));
+            encoder.Save(memoryStream);
+
+            memoryStream.Position = 0;
+            bImg.BeginInit();
+            bImg.StreamSource = new MemoryStream(memoryStream.ToArray());
+            bImg.EndInit();
+            bImg.Freeze();
+            //memoryStream.Close();
+            return bImg;
+        }
+
+
         public static byte[] FileExtensionIcon(string fileName, Assembly assembly = null)
         {
             byte[] result = null;

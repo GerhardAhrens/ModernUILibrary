@@ -20,6 +20,28 @@ namespace ModernBaseLibrary.Extension
     public static class BooleanExtension
     {
         /// <summary>
+        /// Verknüpfen von zwei Boolean Werte
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <returns></returns>
+        public static bool And(this bool b1, bool b2)
+        {
+            return b1 && b2;
+        }
+
+        /// <summary>
+        /// Auswertung zwei Boolean Werte mit Or
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <returns></returns>
+        public static bool Or(this bool b1, bool b2)
+        {
+            return b1 || b2;
+        }
+
+        /// <summary>
         /// Konvertiert den Wert dieser Instanz in seine äquivalente String-Darstellung
         /// <br>Sprachabhängig in Deutsch oder englisch (entweder "Ja/Yes" oder "Nein/No").</br>
         /// </summary>

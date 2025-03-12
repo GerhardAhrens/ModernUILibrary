@@ -528,5 +528,29 @@ namespace ModernBaseLibrary.Graphics
             }
             return resizedImage;
         }
+
+        public static void SaveImage(BitmapSource source, string fileName)
+        {
+            BitmapEncoder encoder;
+            string lowerExtension = Path.GetExtension(fileName).ToLower();
+            if (lowerExtension.Contains("jpeg") || lowerExtension.Contains("jpg"))
+            {
+                encoder = new JpegBitmapEncoder();
+            }
+            else if (lowerExtension.Contains("png"))
+            {
+                encoder = new PngBitmapEncoder();
+            }
+            else
+            {
+                return;
+            }
+
+            encoder.Frames.Add(BitmapFrame.Create(source));
+            using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                encoder.Save(fileStream);
+            }
+        }
     }
 }

@@ -253,10 +253,10 @@ namespace ModernBaseLibrary.Extension
         /// <param name="???"></param>
         /// <param name="toNearestMultipleOf"></param>
         /// <returns></returns>
-        public static int RoundUp(this int round, int toNearestMultipleOf)
-            => round % toNearestMultipleOf == 0
-                ? round
-                : (toNearestMultipleOf - round % toNearestMultipleOf) + round;
+        public static int RoundUp(this int @this, int toNearestMultipleOf)
+            => @this % toNearestMultipleOf == 0
+                ? @this
+                : (toNearestMultipleOf - @this % toNearestMultipleOf) + @this;
 
         /// <summary>
         /// Rounds the value down to the nearest multiple of toNearest. For example:
@@ -266,7 +266,114 @@ namespace ModernBaseLibrary.Extension
         /// <param name="???"></param>
         /// <param name="toNearestMultipleOf"></param>
         /// <returns></returns>
-        public static int RoundDown(this int incoming, int toNearestMultipleOf)
-            => incoming - incoming % toNearestMultipleOf;
+        public static int RoundDown(this int @this, int toNearestMultipleOf)  => @this - @this % toNearestMultipleOf;
+
+        public static TimeSpan Millisecond(this int @this)
+        {
+            if (@this != 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return TimeSpan.FromMilliseconds(1);
+        }
+
+        public static TimeSpan Milliseconds(this int @this)
+        {
+            return TimeSpan.FromMilliseconds(@this);
+        }
+
+        public static TimeSpan Second(this int @this)
+        {
+            if (@this != 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return TimeSpan.FromSeconds(1);
+        }
+
+        public static TimeSpan Seconds(this int @this)
+        {
+            return TimeSpan.FromSeconds(@this);
+        }
+
+        public static TimeSpan Minute(this int @this)
+        {
+            if (@this != 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return TimeSpan.FromMinutes(1);
+        }
+
+        public static TimeSpan Minutes(this int @this)
+        {
+            return TimeSpan.FromMinutes(@this);
+        }
+
+        public static TimeSpan Hour(this int @this)
+        {
+            if (@this != 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return TimeSpan.FromHours(1);
+        }
+
+        public static TimeSpan Hours(this int @this)
+        {
+            return TimeSpan.FromHours(@this);
+        }
+
+        public static TimeSpan Day(this int @this)
+        {
+            if (@this != 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return TimeSpan.FromDays(@this);
+        }
+
+        public static TimeSpan Days(this int @this)
+        {
+            return TimeSpan.FromDays(@this);
+        }
+
+        /// <remarks>
+        /// See http://en.wikipedia.org/wiki/Leap_year for avg days in yr.
+        /// </remarks>
+        public static TimeSpan Years(this int @this)
+        {
+            return TimeSpan.FromDays(@this * 365.2425d);
+        }
+
+        public static bool IsBetween(this int @this, int lowerBound, int upperBound)
+        {
+            return (@this > lowerBound) && (@this < upperBound);
+        }
+
+        public static bool IsBetweenInclusive(this int @this, int lowerBound, int upperBound)
+        {
+            return (@this >= lowerBound) && (@this <= upperBound);
+        }
+
+        public static bool IsGreaterThan(this int @this, int bound)
+        {
+            return @this > bound;
+        }
+
+        public static bool IsPositive(this int @this)
+        {
+            return @this >= 0;
+        }
+
+        public static bool IsLessThan(this int @this, int bound)
+        {
+            return @this < bound;
+        }
     }
 }
