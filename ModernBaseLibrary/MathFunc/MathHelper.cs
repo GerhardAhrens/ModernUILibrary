@@ -1,4 +1,4 @@
-﻿namespace ModernBaseLibrary.Math
+﻿namespace ModernBaseLibrary.MathFunc
 {
     using System;
     using System.Collections.Generic;

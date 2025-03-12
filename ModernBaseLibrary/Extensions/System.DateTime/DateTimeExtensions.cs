@@ -281,8 +281,8 @@ namespace ModernBaseLibrary.Extension
 
             if (numberOfDaysInSameMonthNextYear < @this.Day)
             {
-                var differenceInDays = @this.Day - numberOfDaysInSameMonthNextYear;
-                var dateTime = new DateTime(nextYear, @this.Month, numberOfDaysInSameMonthNextYear, @this.Hour, @this.Minute, @this.Second, @this.Millisecond);
+                int differenceInDays = @this.Day - numberOfDaysInSameMonthNextYear;
+                DateTime dateTime = new DateTime(nextYear, @this.Month, numberOfDaysInSameMonthNextYear, @this.Hour, @this.Minute, @this.Second, @this.Millisecond);
                 return dateTime + differenceInDays.Days();
             }
 

@@ -338,11 +338,6 @@ namespace ModernBaseLibrary.Extension
             return TimeSpan.FromDays(@this);
         }
 
-        public static TimeSpan Days(this int @this)
-        {
-            return TimeSpan.FromDays(@this);
-        }
-
         /// <remarks>
         /// See http://en.wikipedia.org/wiki/Leap_year for avg days in yr.
         /// </remarks>

@@ -532,7 +532,7 @@ namespace ModernBaseLibrary.Extension
                 throw new ArgumentException("Invalid type specified.");
             }
 
-            return Enum.GetValues(@this.GetType()).Cast<object>().ToDictionary(key => Enum.GetName(e.GetType(), key),value => (TEnumValueType)value);
+            return Enum.GetValues(@this.GetType()).Cast<object>().ToDictionary(key => Enum.GetName(@this.GetType(), key),value => (TEnumValueType)value);
         }
     }
 }

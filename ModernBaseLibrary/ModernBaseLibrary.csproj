@@ -241,7 +241,7 @@
     <Folder Include="Localization\" />
     <Folder Include="Network\VMDetector\Environments\" />
     <Folder Include="Network\VMDetector\Win32\" />
-    <Folder Include="Math\" />
+    <Folder Include="MathFunc\" />
     <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
     <Folder Include="TextAnalysis\LexicalAnalyzer\" />
