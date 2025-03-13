@@ -45,6 +45,7 @@ namespace ModernBaseLibrary.CoreBase.Reflection
             {
                 if (AppDomain.CurrentDomain != null)
                 {
+                    
                     loadedAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(w => w.FullName.Contains(rootAssemplyName) == true);
                     if (loadedAssembly != null)
                     {
