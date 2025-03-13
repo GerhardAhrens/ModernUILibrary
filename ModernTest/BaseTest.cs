@@ -15,6 +15,7 @@
     public static class AssemblyHelper
     {
         public static Func<Assembly> GetEntryAssembly = () => Assembly.GetEntryAssembly();
+        public static Func<Assembly> GetRemoteAssembly = () => Assembly.GetExecutingAssembly();
     }
 
     [TestClass]

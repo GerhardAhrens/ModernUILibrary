@@ -1,6 +1,6 @@
 /*
- * <copyright file="ToolsGraphic_Test.cs" company="Lifeprojects.de">
- *     Class: ToolsGraphic_Test
+ * <copyright file="GraphicsHelper_Test.cs" company="Lifeprojects.de">
+ *     Class: GraphicsHelper_Test
  *     Copyright © Lifeprojects.de 2022
  * </copyright>
  *
@@ -35,7 +35,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class ToolsGraphic_Test : BaseTest
+    public class GraphicsHelper_Test : BaseTest
     {
         [TestInitialize]
         public void Initialize()
@@ -46,9 +46,9 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToolsGraphic_Test"/> class.
+        /// Initializes a new instance of the <see cref="GraphicsHelper_Test"/> class.
         /// </summary>
-        public ToolsGraphic_Test()
+        public GraphicsHelper_Test()
         {
         }
 
@@ -57,7 +57,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         {
             string imagePath = $"{this.GetAssemblyPath.FullName}\\TestImage.jpg";
             System.Drawing.Color color = System.Drawing.Color.FromName("Red");
-            ToolsGraphic.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial", 18), color, 200, imagePath, ImageFormat.Jpeg);
+            GraphicsHelper.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial", 18), color, 200, imagePath, ImageFormat.Jpeg);
 
             Assert.IsTrue(File.Exists(imagePath));
         }
@@ -67,7 +67,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         {
             string imagePath = $"{this.GetAssemblyPath.FullName}\\TestImage.gif";
             System.Drawing.Color color = System.Drawing.Color.FromName("Red");
-            ToolsGraphic.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial", 18), color, 200, imagePath, ImageFormat.Gif);
+            GraphicsHelper.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial", 18), color, 200, imagePath, ImageFormat.Gif);
 
             Assert.IsTrue(File.Exists(imagePath));
         }
@@ -77,7 +77,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         {
             string imagePath = $"{this.GetAssemblyPath.FullName}\\TestImage.png";
             System.Drawing.Color color = System.Drawing.Color.FromName("Red");
-            ToolsGraphic.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial",18), color, 200, imagePath);
+            GraphicsHelper.CreateImageFromText("Hallo Test", new System.Drawing.Font("Arial",18), color, 200, imagePath);
 
             Assert.IsTrue(File.Exists(imagePath));
         }
@@ -86,7 +86,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         public void CreateImageFromTextAsPNGMinimal()
         {
             string imagePath = $"{this.GetAssemblyPath.FullName}\\TestImage.png";
-            ToolsGraphic.CreateImageFromText("Hallo Test", 18, 200, imagePath);
+            GraphicsHelper.CreateImageFromText("Hallo Test", 18, 200, imagePath);
 
             Assert.IsTrue(File.Exists(imagePath));
         }

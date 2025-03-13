@@ -27,23 +27,23 @@ namespace ModernBaseLibrary.Graphics
     using System.Windows.Media.Imaging;
 
     [SupportedOSPlatform("windows")]
-    public class ToolsGraphic
+    public class GraphicsHelper
     {
         private static readonly object _Lock = new object();
-        private static ToolsGraphic instance;
+        private static GraphicsHelper instance;
 
 
         /// <summary>
         /// Die Methode gibt eine Instanz der Klasse ToolsGraphic zurück.
         /// </summary>
         /// <returns></returns>
-        public static ToolsGraphic Instance()
+        public static GraphicsHelper Instance()
         {
             lock (_Lock)
             {
                 if (instance == null)
                 {
-                    instance = new ToolsGraphic();
+                    instance = new GraphicsHelper();
                 }
             }
 
