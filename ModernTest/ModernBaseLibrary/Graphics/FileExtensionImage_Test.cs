@@ -18,10 +18,14 @@ namespace ModernTest.ModernBaseLibrary.Graphics
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
     using System.Threading;
+    using System.Windows;
     using System.Windows.Media.Imaging;
 
+    using global::ModernBaseLibrary.Core;
+    using global::ModernBaseLibrary.CoreBase.Reflection;
     using global::ModernBaseLibrary.Extension;
     using global::ModernBaseLibrary.Graphics;
 
@@ -48,9 +52,10 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         [TestMethod]
         public void GetFileExtensionIconFromResources()
         {
-            Assembly assm = Assembly.GetCallingAssembly();
-            List<string> resourceNames = assm.GetResourceNames();
-            byte[] extensionIcon = FileExtensionImage.Get(resourceNames[7]);
+            Assembly loadedAssemblies = RootAssemblyHelper.RootAssembly;
+
+            List<string> resourceNames = loadedAssemblies.GetResourceNames();
+            byte[] extensionIcon = FileExtensionImage.Get(resourceNames[7], loadedAssemblies);
             BitmapSource bmp = GraphicsConverter.ByteArrayToBitmapSource(extensionIcon);
             Assert.IsTrue(bmp.Height > 339.4 && bmp.Width > 339.4);
         }

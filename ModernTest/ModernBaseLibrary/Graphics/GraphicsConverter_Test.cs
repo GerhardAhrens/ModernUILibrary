@@ -31,6 +31,7 @@ namespace ModernTest.ModernBaseLibrary.Graphics
     using System.Threading;
     using System.Windows.Media.Imaging;
 
+    using global::ModernBaseLibrary.CoreBase.Reflection;
     using global::ModernBaseLibrary.Extension;
     using global::ModernBaseLibrary.Graphics;
 
@@ -57,10 +58,10 @@ namespace ModernTest.ModernBaseLibrary.Graphics
         [TestMethod]
         public void ConvertByteArrayToBitmapSource()
         {
-            Assembly assm = Assembly.GetCallingAssembly();
-            List<string> resourceNames = assm.GetResourceNames();
+            Assembly loadedAssemblies = RootAssemblyHelper.RootAssembly;
+            List<string> resourceNames = loadedAssemblies.GetResourceNames();
             string imageByName = resourceNames.Find(x => x.Contains("ExtensionBin") == true);
-            byte[] extensionIcon = FileExtensionImage.Get(imageByName);
+            byte[] extensionIcon = FileExtensionImage.Get(imageByName, loadedAssemblies);
 
             BitmapSource bmp = GraphicsConverter.ByteArrayToBitmapSource(extensionIcon);
             Assert.IsTrue(bmp.Height > 339.4 && bmp.Width > 339.4);
