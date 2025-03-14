@@ -88,6 +88,8 @@ namespace ModernUI.MVVM.Base
 
         public EventAggregator EventAgg { get; } = new EventAggregator();
 
+        public int DisplayRowCount { get; set; }
+
         public virtual void InitCommands() { }
 
         #region Get/Set Implementierung

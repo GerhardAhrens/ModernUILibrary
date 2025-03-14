@@ -55,6 +55,7 @@ Hier ein paar Beispiele:
 # Modern Base Library for NET
 
 Klassen für vielfältigen Funktionen
+<img src="./ModernUIShowCS.png" style="width:700px;"/>
 
 ## Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>
