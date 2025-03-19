@@ -901,7 +901,7 @@ namespace ModernBaseLibrary.ExcelWriter
             /// <summary>
             /// Default Color (foreground or background)
             /// </summary>
-            public static readonly string DEFAULT_COLOR = "FF000000";
+            public static readonly string DEFAULT_COLOR = "FFFFFFFF";
 
             /// <summary>
             /// Default index color
