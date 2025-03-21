@@ -5,6 +5,7 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -562,32 +563,44 @@
             </Canvas>
         </Viewbox>
         <!--#endregion Xaml Icon 22px-->
+
+        <sys:Double x:Key="ScaleXY">1.0</sys:Double>
+
     </UserControl.Resources>
 
-    <AdornerDecorator>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="Scalefactor" ScaleX="{StaticResource ResourceKey=ScaleXY}" ScaleY="{StaticResource ResourceKey=ScaleXY}" />
+    </UserControl.LayoutTransform>
 
-            <TextBlock
-                Grid.ColumnSpan="2"
-                FontSize="14"
-                Text="Beispiel für die Verwendung von PathGeometry Icon" />
-            <Separator
-                Grid.ColumnSpan="2"
-                Height="3"
-                Background="Green" />
+    <Grid VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <TextBlock
+            Grid.ColumnSpan="2"
+            FontSize="14"
+            Text="Beispiel für die Verwendung von PathGeometry Icon" />
+        <Separator
+            Grid.ColumnSpan="2"
+            Height="3"
+            Background="Green" />
+
+        <ScrollViewer
+            Grid.Row="1"
+            VerticalAlignment="Center"
+            HorizontalScrollBarVisibility="Hidden"
+            PreviewMouseWheel="OnPreviewMouseWheel"
+            VerticalScrollBarVisibility="Hidden">
             <StackPanel
-                Grid.Row="1"
                 Grid.ColumnSpan="2"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                OverridesDefaultStyle="False">
 
                 <ModernUI:HeaderSeparator
                     Height="15"
@@ -671,6 +684,6 @@
                         Content="{StaticResource ResourceKey=IconCalendar32}" />
                 </StackPanel>
             </StackPanel>
-        </Grid>
-    </AdornerDecorator>
+        </ScrollViewer>
+    </Grid>
 </UserControl>

@@ -5,6 +5,7 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="600"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -17,7 +18,13 @@
         <SolidColorBrush x:Key="Message.Success">#00CC66</SolidColorBrush>
         <SolidColorBrush x:Key="Message.Warning">#FF9900</SolidColorBrush>
         <SolidColorBrush x:Key="Message.Error">#FF6600</SolidColorBrush>
+
+        <sys:Double x:Key="ScaleXY">1.0</sys:Double>
     </UserControl.Resources>
+
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="Scalefactor" ScaleX="{StaticResource ResourceKey=ScaleXY}" ScaleY="{StaticResource ResourceKey=ScaleXY}" />
+    </UserControl.LayoutTransform>
 
     <ModernUI:MScrollViewer Padding="0,0,20,0">
         <Grid>
