@@ -307,6 +307,9 @@
             this.tabItemSource.Add(new TabControlItem($"C#, Methoden/Funktionen", true));
             this.tabItemSource.Add(new TabControlItem("Factory/Handler", new FactoryControlsUC()) { Stichworte = "C#;Pattern" });
 
+            this.tabItemSource.Add(new TabControlItem($"C#, Cryptography", true));
+            this.tabItemSource.Add(new TabControlItem("Grafische Verschlüsselung", new CryptographyControlsUC()) { Stichworte = "Cryptography; Grafik;Stegenograpy" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>

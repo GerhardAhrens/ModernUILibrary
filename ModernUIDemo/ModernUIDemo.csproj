@@ -316,6 +316,9 @@
     <Compile Update="MyControls\RangePanelControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\CryptographyControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TextBoxDesignControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
