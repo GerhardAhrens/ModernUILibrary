@@ -373,7 +373,7 @@
             using (ExcelWriter workbook = new ExcelWriter(pathFileName, "Sheet1"))
             {
                 Style style = new Style();                                                            // Create a new style
-                style.Append(Style.BasicStyles.ColorizedBackground("FF0000"));                        // Append a visible style component
+                style.Append(Style.BasicStyles.ColorizedBackground("FFFFFF"));                        // Append a visible style component
 
                 workbook.CurrentWorksheet.AddCell("Test", "C3", Style.BasicStyles.Bold);                    // Define a cell with a style (will be replaced)
                 workbook.CurrentWorksheet.SetStyle("A1", style);                                                              // Set style based on a string address
