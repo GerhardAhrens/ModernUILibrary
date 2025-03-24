@@ -109,6 +109,7 @@
     <Folder Include="ModernBaseLibrary\FluentAPI\Type\" />
     <Folder Include="ModernBaseLibrary\CustomDataTypes\" />
     <Folder Include="ModernBaseLibrary\Graphics\PictureInfo\DemoData\" />
+    <Folder Include="ModernBaseLibrary\Graphics\QRCode\DemoData\" />
     <Folder Include="ModernBaseLibrary\Network\" />
     <Folder Include="ModernBaseLibrary\Exception\" />
     <Folder Include="ModernBaseLibrary\Reflection\" />

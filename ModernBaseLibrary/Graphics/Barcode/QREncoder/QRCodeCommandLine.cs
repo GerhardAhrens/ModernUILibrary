@@ -15,7 +15,6 @@
     //	return 1;
     //	}
 
-
     /// <summary>
     /// Command line class
     /// </summary>

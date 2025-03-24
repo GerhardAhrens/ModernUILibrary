@@ -21,7 +21,10 @@
             set
             {
                 if (value < 1 || value > 100)
+                {
                     throw new ArgumentException("Module size error. Default is 2.");
+                }
+
                 _ModuleSize = value;
                 return;
             }

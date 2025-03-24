@@ -18,12 +18,12 @@
     ///     Test to find out if BmpPwd works
     /// </summary>
     [TestClass]
-    public class Steganographie_Test : BaseTest
+    public class SteganographieV1_Test : BaseTest
     {
         private string TestDirPath => TestContext.TestRunDirectory;
         private string TempDirPath => Path.Combine(TestDirPath, "Temp");
-        private const string Key = "Passwort.2025";
-        private const string Text = "Das ist ein Text der in einem Bitmap verschüsselt ist.12345678901";
+        private const string KEY = "Passwort.2025";
+        private const string TEXT = "Das ist ein Text der in einem Bitmap verschüsselt ist.12345678901";
 
         [TestInitialize]
         public void SetUp()
@@ -40,10 +40,6 @@
         [TestCleanup]
         public void Clean()
         {
-            if (Directory.Exists(TempDirPath) == true)
-            {
-                Directory.Delete(TempDirPath, true);
-            }
         }
 
         [TestMethod]
@@ -51,7 +47,7 @@
         {
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Core\\Cryptography\\DemoData\\StegoCircularImage.png");
-            Image encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
+            Image encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
 
             using (var memory = new MemoryStream())
             {
@@ -69,7 +65,8 @@
 
             Assert.IsTrue(File.Exists(pathFileName));
 
-            string decrypted = string.Empty;
+            string decryptedText = string.Empty;
+
             if (File.Exists(pathFileName) == true)
             {
                 var bytesIn = File.ReadAllBytes(pathFileName);
@@ -87,12 +84,12 @@
                         enc.Save(outStream);
                         Bitmap bitmap = new Bitmap(outStream);
 
-                        decrypted = ImagePassword.Decrypt(Key, bitmap, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
+                        decryptedText = ImagePassword.Decrypt(KEY, bitmap, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
                     }
                 }
             }
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decryptedText);
         }
 
         [TestMethod]
@@ -100,7 +97,7 @@
         {
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Core\\Cryptography\\DemoData\\StegoLineImage.png");
-            Image encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
+            Image encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
 
             using (var memory = new MemoryStream())
             {
@@ -136,12 +133,12 @@
                         enc.Save(outStream);
                         Bitmap bitmap = new Bitmap(outStream);
 
-                        decrypted = ImagePassword.Decrypt(Key, bitmap, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
+                        decrypted = ImagePassword.Decrypt(KEY, bitmap, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
                     }
                 }
             }
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
 
         [TestMethod]
@@ -149,7 +146,7 @@
         {
             DirectoryInfo di = new DirectoryInfo(TempDirPath);
             string pathFileName = Path.GetFullPath($"{di.Parent.Parent.Parent}\\ModernTest\\ModernBaseLibrary\\Core\\Cryptography\\DemoData\\StegoSquareImage.png");
-            Image encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
+            Image encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
 
             using (var memory = new MemoryStream())
             {
@@ -185,12 +182,12 @@
                         enc.Save(outStream);
                         Bitmap bitmap = new Bitmap(outStream);
 
-                        decrypted = ImagePassword.Decrypt(Key, bitmap, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
+                        decrypted = ImagePassword.Decrypt(KEY, bitmap, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
                     }
                 }
             }
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
 
         private ImageSource ByteToImage(byte[] imageData)
@@ -210,28 +207,28 @@
         [TestMethod]
         public void TestBmpPwdLine()
         {
-            Image encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
-            string decrypted = ImagePassword.Decrypt(Key, encrypted, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
+            Image encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
+            string decrypted = ImagePassword.Decrypt(KEY, encrypted, new Cipher(), DrawingScheme.Line, ColorScheme.Rainbow);
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
 
         [TestMethod]
         public void TestBmpPwdCircle()
         {
-            var encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
-            string decrypted = ImagePassword.Decrypt(Key, encrypted, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
+            var encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
+            string decrypted = ImagePassword.Decrypt(KEY, encrypted, new Cipher(), DrawingScheme.Circular, ColorScheme.Rainbow);
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
 
         [TestMethod]
         public void TestBmpPwdSquare()
         {
-            var encrypted = ImagePassword.Encrypt(Key, Text, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
-            string decrypted = ImagePassword.Decrypt(Key, encrypted, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
+            var encrypted = ImagePassword.Encrypt(KEY, TEXT, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
+            string decrypted = ImagePassword.Decrypt(KEY, encrypted, new Cipher(), DrawingScheme.Square, ColorScheme.Rainbow);
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
 
 
@@ -239,10 +236,10 @@
         public void TestNormalEncryption()
         {
             var cipher = new Cipher();
-            string encrypted = cipher.Encrypt(Key, Text);
-            string decrypted = cipher.Decrypt(Key, encrypted);
+            string encrypted = cipher.Encrypt(KEY, TEXT);
+            string decrypted = cipher.Decrypt(KEY, encrypted);
 
-            Assert.AreEqual(Text, decrypted);
+            Assert.AreEqual(TEXT, decrypted);
         }
     }
 }

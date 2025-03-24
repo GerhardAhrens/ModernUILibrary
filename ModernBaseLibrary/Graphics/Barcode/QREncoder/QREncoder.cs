@@ -2,122 +2,12 @@
 {
     using System.Text;
 
-    /// <summary>
-    /// QR Code error correction code enumeration
-    /// </summary>
-    public enum ErrorCorrection
-    {
-        /// <summary>
-        /// Low (01)
-        /// </summary>
-        L,
-
-        /// <summary>
-        /// Medium (00)
-        /// </summary>
-        M,
-
-        /// <summary>
-        /// Medium-high (11)
-        /// </summary>
-        Q,
-
-        /// <summary>
-        /// High (10)
-        /// </summary>
-        H,
-    }
-
-    /// <summary>
-    /// QR Code encoding modes
-    /// </summary>
-    enum EncodingMode
-    {
-        /// <summary>
-        /// Terminator
-        /// </summary>
-        Terminator,
-
-        /// <summary>
-        /// Numeric
-        /// </summary>
-        Numeric,
-
-        /// <summary>
-        /// Alpha numeric
-        /// </summary>
-        AlphaNumeric,
-
-        /// <summary>
-        /// Append
-        /// </summary>
-        Append,
-
-        /// <summary>
-        /// byte encoding
-        /// </summary>
-        Byte,
-
-        /// <summary>
-        /// FNC1 first
-        /// </summary>
-        FNC1First,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown6,
-
-        /// <summary>
-        /// ECI Assignment Value
-        /// </summary>
-        ECI,
-
-        /// <summary>
-        /// Kanji encoding (not implemented by this software)
-        /// </summary>
-        Kanji,
-
-        /// <summary>
-        /// FNC1 second
-        /// </summary>
-        FNC1Second,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown10,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown11,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown12,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown13,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown14,
-
-        /// <summary>
-        /// Unknown encoding constant
-        /// </summary>
-        Unknown15,
-    }
+    using ModernBaseLibrary.Core;
 
     /// <summary>
     /// QR Code Encoder class
     /// </summary>
-    public class QREncoder
+    public class QREncoder : DisposableCoreBase
     {
         /// <summary>
         /// Version number
