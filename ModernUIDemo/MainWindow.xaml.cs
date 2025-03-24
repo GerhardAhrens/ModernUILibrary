@@ -228,7 +228,7 @@
 
             this.tabItemSource.Add(new TabControlItem("Grafik", true));
             this.tabItemSource.Add(new TabControlItem("Lesen SVG", new GraphicsControlsUC()) { Stichworte = "Grafik;SVG" });
-            this.tabItemSource.Add(new TabControlItem("Erstelle QRCode/Barcode", new BarcodeControlsUC()) { Stichworte = "Grafik;QRCode" });
+            this.tabItemSource.Add(new TabControlItem("Erstelle QRCode/Barcode", new BarcodeControlsUC()) { Stichworte = "Grafik;QRCode;Barcode;strichcode" });
             this.tabItemSource.Add(new TabControlItem("Image GIF", new ImageGIFControlsUC()) { Stichworte = "Image;Gif;Grafik" });
             this.tabItemSource.Add(new TabControlItem("Chart Controls", new ChartControlsUC()) { Stichworte = "Image;Grafik;Chart" });
 
