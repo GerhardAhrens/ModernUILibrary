@@ -1,0 +1,39 @@
+﻿namespace StaticAbstractTesting
+{
+    using System;
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            UseStaticClassMethod<MyClassA>();
+            UseStaticClassMethod<MyClassB>();
+        }
+
+        public static void UseStaticClassMethod<T>() where T : ISomeAbstractInterface
+        {
+            Console.WriteLine($"{typeof(T).Name}.CallMe() result: {T.CallMe()}");
+        }
+    }
+
+    public interface ISomeAbstractInterface
+    {
+        public abstract static string CallMe();
+    }
+
+    public class MyClassA : ISomeAbstractInterface
+    {
+        static string ISomeAbstractInterface.CallMe()
+        {
+            return "You called ClassA";
+        }
+    }
+
+    public class MyClassB : ISomeAbstractInterface
+    {
+        static string ISomeAbstractInterface.CallMe()
+        {
+            return "You called ClassB";
+        }
+    }
+}

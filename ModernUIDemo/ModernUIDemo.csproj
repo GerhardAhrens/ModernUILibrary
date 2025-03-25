@@ -96,6 +96,7 @@
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_StaticClassWithExtension.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_CS12DataAnnotations.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_WeakEvent.txt" />
+    <EmbeddedResource Include="Resources\Source\CSharp\InterfaceStaticAbstractClass.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\WeakEventManager.txt" />
     <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTableDemo.txt" />
     <EmbeddedResource Include="Resources\Source\Data\CSharp_CustomDataTable.txt" />

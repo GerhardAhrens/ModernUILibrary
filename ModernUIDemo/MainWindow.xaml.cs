@@ -387,6 +387,7 @@
             this.tabItemSource.Add(new TabControlItem("DataAnnotations CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;DataAnnotations;Validierung;12", SourceFile = "CSharp.CSharp_CS12DataAnnotations.txt" });
             this.tabItemSource.Add(new TabControlItem("EnvironmentVariable", new SyntaxBoxControlsUC()) { Stichworte = "C#;Environment;Variable", SourceFile = "Environment.EnvironmentVariable.txt" });
             this.tabItemSource.Add(new TabControlItem("PatternMatching CS12", new SyntaxBoxControlsUC()) { Stichworte = "C#;PatternMatching;12", SourceFile = "CSharp.CSharp_CS12PatternMatching.txt" });
+            this.tabItemSource.Add(new TabControlItem("Static Abstract Interface", new SyntaxBoxControlsUC()) { Stichworte = "C#;interface;static:abstract", SourceFile = "CSharp.InterfaceStaticAbstractClass.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Network ", true));
             this.tabItemSource.Add(new TabControlItem("Network-Ping", new SyntaxBoxControlsUC()) { Stichworte = "C#;Network;Ping", SourceFile = "Network.CSharp_Network_Ping.txt" });
