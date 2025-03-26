@@ -1,0 +1,64 @@
+﻿/*
+Laut Wikipedia ist eine narzisstische Zahl (auch bekannt als Pluperfect Digital Invariante (PPDI), 
+Armstrong-Zahl (nach Michael F. Armstrong) oder Plus-Perfect-Zahl) in einer gegebenen Zahlenbasis b eine Zahl, die der Summe ihrer 
+eigenen Ziffern entspricht, die jeweils zur Potenz der Ziffernzahl erhoben werden".
+
+In einfachen Worten: „Eine Armstrong-Zahl (auch narzisstische Zahl genannt) ist eine Zahl, die gleich der Summe ihrer eigenen 
+Ziffern ist, die jeweils mit der Anzahl der Ziffern potenziert werden“.
+
+Beispiel
+Input: 153 -> Armstrong Number
+
+Explanation: 153 = (1*1*1)+(5*5*5)+(3*3*3)
+
+Wie?
+(1*1*1) = 1
+(5*5*5) = 125
+(3*3*3) = 27
+Result = 1 + 125 + 27 = 153
+*/
+
+internal class FindingArmstrongNumberBetweenRangesOfNumbersInCSharp
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the Start Number: ");
+        int StartNumber = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the End Number: ");
+        int EndNumber = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"The Armstrong Numbers between {StartNumber} and {EndNumber} are : ");
+
+        for (int i = StartNumber; i <= EndNumber; i++)
+        {
+            if (IsArmstrongNumber(i))
+                Console.Write(i + ", ");
+        }
+
+        Console.ReadLine();
+    }
+
+    static bool IsArmstrongNumber(int number)
+    {
+        int result = 0, remainder = 0;
+        int temporaryNumber = number;
+        int length = number.ToString().Length;
+
+        while (number != 0)
+        {
+            remainder = number % 10;
+            number = number / 10;
+            result += (int)Math.Pow(remainder, length);
+        }
+
+        if (result == temporaryNumber)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}

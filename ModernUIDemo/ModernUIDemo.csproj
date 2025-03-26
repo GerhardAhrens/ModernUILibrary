@@ -76,6 +76,7 @@
     <EmbeddedResource Include="Resources\MDText\DemoText.md" />
     <EmbeddedResource Include="Resources\MDText\sampleimage.jpg" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
+    <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_AmstrongNumber.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Table.txt" />
     <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />

@@ -2,7 +2,9 @@
 {
     using System.ComponentModel;
     using System.Data;
+    using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Security.Cryptography;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
@@ -26,11 +28,33 @@
         public MainWindow()
         {
             this.InitializeComponent();
-
+            this.DeCryptEnCrypt();
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             WeakEventManager<Window, EventArgs>.AddHandler(this, "Closed", this.OnWindowClosed);
             WeakEventManager<PathButton, EventArgs>.AddHandler(this.BtnAbout, "Click", this.OnBtnAboutClick);
             this.DataContext = this;
+        }
+
+        private void DeCryptEnCrypt()
+        {
+            string original = "Sensitive user information";
+
+            // Generate a random key and IV
+            using (Aes aesAlg = Aes.Create())
+            {
+                byte[] key = aesAlg.Key;
+                byte[] iv = aesAlg.IV;
+
+                AesEncryption aesEncryption = new AesEncryption(key, iv);
+
+                // Encrypt the data
+                string encrypted = aesEncryption.Encrypt(original);
+                Console.WriteLine($"Encrypted data: {encrypted}");
+
+                // Decrypt the data
+                string decrypted = aesEncryption.Decrypt(encrypted);
+                Console.WriteLine($"Decrypted data: {decrypted}");
+            }
         }
 
         #region Properties
@@ -351,6 +375,7 @@
             this.tabItemSource.Add(new TabControlItem("Algorithm ", true));
             this.tabItemSource.Add(new TabControlItem("Palindrome", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Palindrome", SourceFile = "Algorithm.Algorithm_Palindrome.txt" });
             this.tabItemSource.Add(new TabControlItem("Permutationen", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Permutationen", SourceFile = "Algorithm.Algorithm_Heaps.txt" });
+            this.tabItemSource.Add(new TabControlItem("Armstrong Number", new SyntaxBoxControlsUC()) { Stichworte = "Algorithm;Armstrong;Number", SourceFile = "Algorithm.Algorithm_AmstrongNumber.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Core ", true));
             this.tabItemSource.Add(new TabControlItem("ExpressionEvaluator", new SyntaxBoxControlsUC()) { Stichworte = "Expression;Evaluator", SourceFile = "ExpressionEvaluator.Core_ExpressionEvaluator.txt" });
@@ -470,5 +495,63 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+    }
+
+    public class AesEncryption
+    {
+        private readonly byte[] key;
+        private readonly byte[] iv;
+
+        public AesEncryption(byte[] key, byte[] iv)
+        {
+            this.key = key;
+            this.iv = iv;
+        }
+
+        public string Encrypt(string plainText)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            swEncrypt.Write(plainText);
+                        }
+                    }
+
+                    return Convert.ToBase64String(msEncrypt.ToArray());
+                }
+            }
+        }
+
+        public string Decrypt(string cipherText)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText)))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+                            return srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
