@@ -35,6 +35,7 @@ namespace ModernUI.MVVM.Base
     using System.Windows.Controls;
 
     using ModernBaseLibrary.Core;
+    using static System.Runtime.InteropServices.JavaScript.JSType;
 
     [DebuggerStepThrough]
     [Serializable]
@@ -47,6 +48,9 @@ namespace ModernUI.MVVM.Base
         private readonly ConcurrentDictionary<string, object> values = new ConcurrentDictionary<string, object>();
         private bool isPropertyChanged = false;
         private int rowPosition = 0;
+        private Dictionary<string, string> errors = new Dictionary<string, string>();
+        protected bool HasErrors => this.errors.Any();
+        public string Error => string.Join(", ", errors.Values);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserControlBase"/> class.
@@ -64,6 +68,14 @@ namespace ModernUI.MVVM.Base
             this.className = this.GetType().Name;
             this.FontFamily = new System.Windows.Media.FontFamily("Tahoma");
             this.FontWeight = FontWeights.Normal;
+        }
+
+        public Dictionary<string, string> ErrorList
+        {
+            get
+            {
+                return this.errors;
+            }
         }
 
         public dynamic ViewState
@@ -112,6 +124,27 @@ namespace ModernUI.MVVM.Base
         {
             this.IsPropertyChanged = isPropertyChanged;
         }
+
+        #region Validation
+        protected Result<string> DoValidation(Func<Result<string>> validationFunc, string propName)
+        {
+            Result<string> result = validationFunc.Invoke();
+
+            if (errors.ContainsKey(propName) == true)
+            {
+                errors.Remove(propName);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(result.SuccessMessage) == false)
+                {
+                    errors[propName] = result.SuccessMessage;
+                }
+            }
+
+            return result;
+        }
+        #endregion Validation
 
         #region Get/Set Implementierung
         private T GetPropertyValueInternal<T>(string propertyName)

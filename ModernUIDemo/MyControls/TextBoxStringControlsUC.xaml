@@ -54,9 +54,9 @@
                 <ModernUI:TitleTextBox
                     x:Name="txtA"
                     Title="Vorname:"
-                    TitleForeground="DarkBlue"
                     Width="240"
-                    CanClearText="True" />
+                    CanClearText="True"
+                    TitleForeground="DarkBlue" />
 
                 <ModernUI:TitleTextBox
                     Title="Nachname:"
@@ -179,7 +179,9 @@
                     Width="150"
                     IconBackground="AliceBlue"
                     IconForeground="Gray"
-                    IsShowIcon="True" />
+                    IsCanSeePassword="True"
+                    IsShowIcon="True"
+                    Password="{Binding .}" />
 
                 <ModernUI:MPasswordBox
                     x:Name="passwordBox1"
@@ -266,13 +268,13 @@
                     AcceptsTab="False"
                     BorderBrush="Green"
                     BorderThickness="1"
+                    CounterFontSize="14"
+                    CounterText="Rest:"
                     DefaultNotificationStyleName="defaultTextBlockStyle"
                     IsReadOnly="False"
                     MaxCharactersAllowed="50"
                     NotificationStyleName="textblockStyle"
-                    NotifyLimit="40"
-                    CounterFontSize="14"
-                    CounterText="Rest:" />
+                    NotifyLimit="40" />
 
                 <TextBlock
                     Width="300"

@@ -212,6 +212,10 @@
 
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(this.Password) == false)
+            {
+                Clipboard.SetText(this.Password);
+            }
         }
 
         private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
