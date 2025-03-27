@@ -49,6 +49,7 @@ namespace ModernUI.MVVM.Base
         private readonly string className;
         private readonly ConcurrentDictionary<string, object> values = new ConcurrentDictionary<string, object>();
         private bool _IsPropertyChanged = false;
+        private int _RowPosition = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowBase"/> class.
@@ -88,6 +89,16 @@ namespace ModernUI.MVVM.Base
             }
         }
 
+        public int RowPosition
+        {
+            get { return this._RowPosition; }
+            set
+            {
+                this._RowPosition = value;
+                this.SetProperty(ref _RowPosition, value);
+            }
+        }
+
         public Type BaseType { get; set; }
 
         public ICommandAggregator CmdAgg { get; } = new CommandAggregator();
@@ -98,8 +109,11 @@ namespace ModernUI.MVVM.Base
 
         public virtual void InitCommands() { }
 
-        public virtual void OnViewIsClosing(CancelEventArgs eventArgs)
+        public virtual void OnViewIsClosing(CancelEventArgs eventArgs) { }
+
+        public virtual void ChangedContent(bool isPropertyChanged = false)
         {
+            this.IsPropertyChanged = isPropertyChanged;
         }
 
         #region Get/Set Implementierung

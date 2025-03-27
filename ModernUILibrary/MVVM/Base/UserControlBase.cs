@@ -26,12 +26,13 @@ namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Windows.Controls;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Dynamic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
+    using System.Windows;
+    using System.Windows.Controls;
 
     using ModernBaseLibrary.Core;
 
@@ -44,7 +45,8 @@ namespace ModernUI.MVVM.Base
         private ExpandoObject viewState = new ExpandoObject();
         private readonly string className;
         private readonly ConcurrentDictionary<string, object> values = new ConcurrentDictionary<string, object>();
-        private bool _IsPropertyChanged = false;
+        private bool isPropertyChanged = false;
+        private int rowPosition = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserControlBase"/> class.
@@ -52,12 +54,16 @@ namespace ModernUI.MVVM.Base
         public UserControlBase()
         {
             this.className = this.GetType().Name;
+            this.FontFamily = new System.Windows.Media.FontFamily("Tahoma");
+            this.FontWeight = FontWeights.Normal;
         }
 
         public UserControlBase(Type inheritsType)
         {
             this.BaseType = inheritsType;
             this.className = this.GetType().Name;
+            this.FontFamily = new System.Windows.Media.FontFamily("Tahoma");
+            this.FontWeight = FontWeights.Normal;
         }
 
         public dynamic ViewState
@@ -72,11 +78,21 @@ namespace ModernUI.MVVM.Base
 
         public bool IsPropertyChanged
         {
-            get { return this._IsPropertyChanged; }
+            get { return this.isPropertyChanged; }
             set
             {
-                this._IsPropertyChanged = value;
-                this.SetProperty(ref _IsPropertyChanged, value);
+                this.isPropertyChanged = value;
+                this.SetProperty(ref isPropertyChanged, value);
+            }
+        }
+
+        public int RowPosition
+        {
+            get { return this.rowPosition; }
+            set
+            {
+                this.rowPosition = value;
+                this.SetProperty(ref rowPosition, value);
             }
         }
 
@@ -91,6 +107,11 @@ namespace ModernUI.MVVM.Base
         public int DisplayRowCount { get; set; }
 
         public virtual void InitCommands() { }
+
+        public virtual void ChangedContent(bool isPropertyChanged = false)
+        {
+            this.IsPropertyChanged = isPropertyChanged;
+        }
 
         #region Get/Set Implementierung
         private T GetPropertyValueInternal<T>(string propertyName)
