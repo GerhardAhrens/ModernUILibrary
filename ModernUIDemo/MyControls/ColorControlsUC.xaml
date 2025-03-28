@@ -11,14 +11,6 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="Dialog.Primary.Normal">#3399ff</SolidColorBrush>
-        <SolidColorBrush x:Key="Dialog.Primary.Light">#5CADFF</SolidColorBrush>
-        <SolidColorBrush x:Key="Dialog.Primary.Dark">#3091f2</SolidColorBrush>
-        <SolidColorBrush x:Key="Message.Info">#3399ff</SolidColorBrush>
-        <SolidColorBrush x:Key="Message.Success">#00CC66</SolidColorBrush>
-        <SolidColorBrush x:Key="Message.Warning">#FF9900</SolidColorBrush>
-        <SolidColorBrush x:Key="Message.Error">#FF6600</SolidColorBrush>
-
         <sys:Double x:Key="ScaleXY">1.0</sys:Double>
     </UserControl.Resources>
 

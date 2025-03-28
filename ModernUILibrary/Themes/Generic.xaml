@@ -1,5 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <SolidColorBrush x:Key="Dialog.Primary.Normal">#3399ff</SolidColorBrush>
+    <SolidColorBrush x:Key="Dialog.Primary.Light">#5CADFF</SolidColorBrush>
+    <SolidColorBrush x:Key="Dialog.Primary.Dark">#3091f2</SolidColorBrush>
+    <SolidColorBrush x:Key="Message.Info">#3399ff</SolidColorBrush>
+    <SolidColorBrush x:Key="Message.Success">#00CC66</SolidColorBrush>
+    <SolidColorBrush x:Key="Message.Warning">#FF9900</SolidColorBrush>
+    <SolidColorBrush x:Key="Message.Error">#FF6600</SolidColorBrush>
+    <SolidColorBrush x:Key="Image.Title">#FF6600</SolidColorBrush>
+    <SolidColorBrush x:Key="Maintext.Content">#464C5B</SolidColorBrush>
+    <SolidColorBrush x:Key="Symbol.Background">#9EA7B4</SolidColorBrush>
+    <SolidColorBrush x:Key="Control.Disabled">#C3CBD6</SolidColorBrush>
+    <SolidColorBrush x:Key="Border.Color">#D7DDE4</SolidColorBrush>
+    <SolidColorBrush x:Key="Splitter.Color">#E3E8EE</SolidColorBrush>
+    <SolidColorBrush x:Key="Background.Color">#F5F7F9</SolidColorBrush>
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Alert/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/Accordion/Themes/Generic.xaml" />

@@ -29,11 +29,13 @@ namespace ModernUI.MVVM.Base
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Dynamic;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernBaseLibrary.Collection;
     using ModernBaseLibrary.Core;
     using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -51,6 +53,7 @@ namespace ModernUI.MVVM.Base
         private Dictionary<string, string> errors = new Dictionary<string, string>();
         protected bool HasErrors => this.errors.Any();
         public string Error => string.Join(", ", errors.Values);
+        public Dictionary<string, Func<Result<string>>> ValidationRules = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserControlBase"/> class.
@@ -60,6 +63,7 @@ namespace ModernUI.MVVM.Base
             this.className = this.GetType().Name;
             this.FontFamily = new System.Windows.Media.FontFamily("Tahoma");
             this.FontWeight = FontWeights.Normal;
+            this.ValidationRules = new Dictionary<string, Func<Result<string>>>();
         }
 
         public UserControlBase(Type inheritsType)
@@ -68,14 +72,7 @@ namespace ModernUI.MVVM.Base
             this.className = this.GetType().Name;
             this.FontFamily = new System.Windows.Media.FontFamily("Tahoma");
             this.FontWeight = FontWeights.Normal;
-        }
-
-        public Dictionary<string, string> ErrorList
-        {
-            get
-            {
-                return this.errors;
-            }
+            this.ValidationRules = new Dictionary<string, Func<Result<string>>>();
         }
 
         public dynamic ViewState
@@ -126,6 +123,16 @@ namespace ModernUI.MVVM.Base
         }
 
         #region Validation
+
+        public HashSet<string> GetProperties(UserControl userControl)
+        {
+            HashSet<string> propertyNames = new HashSet<string>();
+
+            propertyNames = userControl.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Select(s => s.Name).ToHashSet();
+
+            return propertyNames;
+        }
+
         protected Result<string> DoValidation(Func<Result<string>> validationFunc, string propName)
         {
             Result<string> result = validationFunc.Invoke();
