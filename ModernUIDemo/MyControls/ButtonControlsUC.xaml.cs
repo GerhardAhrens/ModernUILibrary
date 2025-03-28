@@ -75,5 +75,16 @@
                 MessageBox.Show($"{si.Name}; {column}");
             }
         }
+
+        private void BtnIconGroupButtonClick_ItemClick(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            ButtonGroup si = (ButtonGroup)sender;
+            var content = ((ContentControl)e.NewValue).Content;
+            if ((((ContentControl)e.NewValue).Content).GetType() == typeof(System.Windows.Shapes.Path))
+            {
+                string ucName = ((ContentControl)e.NewValue).Name;
+                MessageBox.Show($"{ucName}");
+            }
+        }
     }
 }
