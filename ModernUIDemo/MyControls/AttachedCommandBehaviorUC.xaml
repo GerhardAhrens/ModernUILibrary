@@ -2,6 +2,7 @@
     x:Class="ModernUIDemo.MyControls.AttachedCommandBehaviorUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernMVVM="clr-namespace:ModernUI.MVVM;assembly=ModernUILibrary"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -18,13 +19,26 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <TextBlock FontSize="14" Text="Beispiel für CommandBehavior" />
         <Separator Height="3" Background="Green" />
 
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <TextBlock Text="CommandBehavior Demo / Test" />
 
+            <Border
+                x:Name="border"
+                Width="350"
+                Height="35"
+                Margin="0,0,10,0"
+                ModernMVVM:CommandBehavior.Command="{Binding Path=MouseDownCommand}"
+                ModernMVVM:CommandBehavior.CommandParameter="Parameter vom Event 'MouseDown' an Command"
+                ModernMVVM:CommandBehavior.Event="MouseDown"
+                Background="Yellow"
+                CornerRadius="2" />
+
+        </StackPanel>
     </Grid>
 </UserControl>

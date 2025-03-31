@@ -1,15 +1,25 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
+
+    using ModernIU.Base;
+
+    using ModernUI.MVVM;
 
     /// <summary>
     /// Interaktionslogik für AttachedCommandBehaviorUC.xaml
     /// </summary>
     public partial class AttachedCommandBehaviorUC : UserControl, INotifyPropertyChanged
     {
+        public ICommand MouseDownCommand => new UIButtonCommand(this.MouseDownCommandHandler);
+
+        public CommandBehaviorCollection behaviorCollection = new CommandBehaviorCollection();
+
         public AttachedCommandBehaviorUC()
         {
             this.InitializeComponent();
@@ -20,6 +30,12 @@
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
         }
+
+        private void MouseDownCommandHandler(object obj)
+        {
+            MessageBox.Show(obj.ToString());
+        }
+
 
         #region PropertyChanged Implementierung
         public event PropertyChangedEventHandler PropertyChanged;

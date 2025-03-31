@@ -16,8 +16,7 @@
             = DependencyProperty.RegisterAttachedReadOnly("BehaviorsInternal", typeof(BehaviorBindingCollection), typeof(CommandBehaviorCollection),
                 new FrameworkPropertyMetadata((BehaviorBindingCollection)null));
 
-        public static readonly DependencyProperty BehaviorsProperty
-            = BehaviorsPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty BehaviorsProperty = BehaviorsPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets the Behaviors property.  
@@ -26,7 +25,9 @@
         public static BehaviorBindingCollection GetBehaviors(DependencyObject d)
         {
             if (d == null)
+            {
                 throw new InvalidOperationException("The dependency object trying to attach to is set to null");
+            }
 
             BehaviorBindingCollection collection = d.GetValue(CommandBehaviorCollection.BehaviorsProperty) as BehaviorBindingCollection;
             if (collection == null)

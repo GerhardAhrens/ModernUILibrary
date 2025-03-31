@@ -334,6 +334,9 @@
             this.tabItemSource.Add(new TabControlItem($"C#, Cryptography", true));
             this.tabItemSource.Add(new TabControlItem("Grafische Verschlüsselung", new CryptographyControlsUC()) { Stichworte = "Cryptography; Grafik;Stegenograpy" });
 
+            this.tabItemSource.Add(new TabControlItem($"C#, MVVM", true));
+            this.tabItemSource.Add(new TabControlItem("CommandBehavior", new AttachedCommandBehaviorUC()) { Stichworte = "MVVM; ViewModel; Commmand Binding;Event Binding" });
+
             this.ListBoxSource = CollectionViewSource.GetDefaultView(this.tabItemSource);
 
             this.ListBoxSource.Filter = item =>
