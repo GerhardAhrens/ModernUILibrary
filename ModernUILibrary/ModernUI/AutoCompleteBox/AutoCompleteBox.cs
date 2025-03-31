@@ -190,6 +190,18 @@
 
         #region Constructors
 
+        public AutoCompleteBox()
+        {
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.Margin = ControlBase.DefaultMargin;
+            this.Height = ControlBase.DefaultHeight;
+            this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.IsReadOnly = false;
+            this.Focusable = true;
+        }
+
         static AutoCompleteBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteBox), new FrameworkPropertyMetadata(typeof(AutoCompleteBox)));

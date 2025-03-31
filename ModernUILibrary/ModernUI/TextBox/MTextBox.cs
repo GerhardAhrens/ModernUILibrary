@@ -53,8 +53,8 @@
 
         public bool MultiRow
         {
-            get { return (bool)GetValue(WatermarkProperty); }
-            set { SetValue(WatermarkProperty, value); }
+            get { return (bool)GetValue(MultiRowProperty); }
+            set { SetValue(MultiRowProperty, value); }
         }
 
         public bool SetBorder
