@@ -99,7 +99,6 @@
     <Folder Include="ModernBaseLibrary\Data\ExcelWriter\DemoData\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Data\DemoData\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.LINQ\" />
-    <Folder Include="ModernBaseLibrary\Extensions\System.String\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Object\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Dynamic\" />

@@ -71,18 +71,18 @@ namespace System
             return lines;
         }
 
-        public static List<string> SplitRegex(this string value, string regex, RegexOptions options)
+        public static List<string> SplitRegex(this string @this, string regex, RegexOptions options)
         {
             var parts = new List<string>();
             int pos = 0;
-            foreach (Match match in Regex.Matches(value, regex, options))
+            foreach (Match match in Regex.Matches(@this, regex, options))
             {
-                parts.Add(value.Substring(pos, match.Index - pos));
+                parts.Add(@this.Substring(pos, match.Index - pos));
                 parts.Add(match.Value);
                 pos = match.Index + match.Length;
             }
 
-            parts.Add(value.Substring(pos));
+            parts.Add(@this.Substring(pos));
             return parts;
         }
     }
