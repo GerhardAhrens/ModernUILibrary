@@ -12,10 +12,12 @@ Die Funktionalität in zwei Bibliotheken
 - ModernBaseLibrary
 
 aufgeteilt. Zusätzlich gibt es noch
-- Modern IU Demo<br> 
+- **Modern IU Demo**<br> 
   Hier werden die meisten vorhanden UI Elemente in verschiedenen Kategorien dargestellt
-- Modern Test
+- **Modern Test**
   Für viele Klassen und Funktionen sind Tests erstellt um die Funktionsweis zu dokumentieren.
+- **ModernInsideVM**
+  Beispielprogramnm zu einer MVVM Variant
 
 Desweiteren wird über die beiden Bibliotheken ein Entwicklungsframework zur einfachen Erstellung von Applikationen mit WPF und dem MVVM Pattern zur Verfügung gestellt.
 Hier wird aber nicht der klassische Ansatz des MVVM Pattern verfolgt, sondern ein Ansatz den ich **Inside MVVM** nenne.
@@ -57,7 +59,31 @@ Hier ein paar Beispiele:
 Klassen für vielfältigen Funktionen
 <img src="./ModernUIShowCS.png" style="width:700px;"/>
 
-## Release Notes
+# ModernInsideVM
+
+Unter dem Begriff **InsideVM** wird eine Framework zur Entwicklung von MVVM basierte WPF Desktop Anwendungen zur Verfügung gestellt.
+- Basis-Klassen
+- Property Bindung
+- Command Binding (über eine Command Aggregator)
+- Abbildung einer Class-To-Class Kommunikation (über einen Event Aggregator)
+- Validierung von Eingaben
+
+Dieser Ansatz spart zum einen die ViewModel-Klasse, ermöglicht den direkten Zugriff auf alle Controls, um aufwendige technische Funktionen zu ermöglichen. Zeitaufwendige Programmierung zur umsetzten können auf diese Art reduziert werden.</br>
+
+Nachteil dieser Lösung ist, komplexere Arten von Unit-Test können nicht so einfach umgesetzt werden.
+
+## Basisklassen
+
+## Property Bindung
+
+## Command Binding
+
+## Class-To-Class Kommunikation
+
+## Validierung
+
+
+# Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>
 - Aufbau der Bibliothek mit UI Controls
 - Demo Programm um die Verwendung der UI Controls darzustellen
