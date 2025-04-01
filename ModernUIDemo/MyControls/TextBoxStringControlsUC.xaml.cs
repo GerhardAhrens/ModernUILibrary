@@ -31,10 +31,11 @@
             list.Add(new Student() { ID = 3, Name = "gahrens@contractors.com" });
             list.Add(new Student() { ID = 4, Name = "charlie@lifeprojects.de" });
             list.Add(new Student() { ID = 5, Name = "buddy@ranche.com" });
+            list.Add(new Student() { ID = 6, Name = "ahrens" });
 
             this.AutoCompleteBox.ItemsSource = list;
             this.AutoCompleteBox.DisplayMemberPath = "Name";
-
+            this.AutoCompleteBox.Text = "ahrens";
         }
 
         private void IconTextBox_EnterKeyClick(object sender, RoutedPropertyChangedEventArgs<object> e)
