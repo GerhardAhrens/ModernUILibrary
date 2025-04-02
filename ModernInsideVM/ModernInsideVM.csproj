@@ -3,14 +3,28 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Picture\AppLogo.ico" />
+    <None Remove="Views\AppLogo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Picture\AppLogo.ico" />
+    <Resource Include="Views\AppLogo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
     <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\ContentControls\" />
   </ItemGroup>
 
 </Project>

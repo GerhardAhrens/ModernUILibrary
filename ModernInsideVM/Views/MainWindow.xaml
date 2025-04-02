@@ -1,0 +1,39 @@
+﻿<winbase:WindowBase
+    x:Class="ModernInsideVM.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:ModernWPF="clr-namespace:ModernIU.WPF.Base;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernInsideVM"
+    xmlns:localStatic="clr-namespace:ModernInsideVM.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    winbase:DialogClosing.IsClosing="True"
+    Icon="/Views/AppLogo.ico"
+    mc:Ignorable="d">
+    <ModernUI:SimpleGrid Columns="*" Rows="*,40">
+        <!--#region Contentbereich-->
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            BorderBrush="Black"
+            BorderThickness="0,1,0,1">
+            <ContentControl
+                x:Name="mainContent"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="LightGray"
+                Content="{Binding Path=WorkContent, UpdateSourceTrigger=PropertyChanged}"
+                KeyboardNavigation.IsTabStop="False"
+                KeyboardNavigation.TabNavigation="None"
+                ScrollViewer.CanContentScroll="True"
+                VirtualizingPanel.IsVirtualizing="True"
+                Visibility="Visible" />
+        </Border>
+        <!--#endregion Contentbereich-->
+    </ModernUI:SimpleGrid>
+</winbase:WindowBase>
