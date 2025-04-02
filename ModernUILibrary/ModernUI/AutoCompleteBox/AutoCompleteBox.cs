@@ -17,6 +17,27 @@
         private bool mIsEnterKeyDown;
         private ListBox PART_ListBox;
 
+        #region Constructors
+        public AutoCompleteBox()
+        {
+            this.FontSize = ControlBase.FontSize;
+            this.FontFamily = ControlBase.FontFamily;
+            this.Margin = ControlBase.DefaultMargin;
+            this.Height = ControlBase.DefaultHeight;
+            this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.IsReadOnly = false;
+            this.Focusable = true;
+            this.IsDropDownOpen = false;
+        }
+
+        static AutoCompleteBox()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteBox), new FrameworkPropertyMetadata(typeof(AutoCompleteBox)));
+        }
+
+        #endregion
+
         #region FilterItemSelectedEvent
 
         public static readonly RoutedEvent FilterItemSelectedEvent = 
@@ -188,27 +209,6 @@
         #endregion
         #endregion
 
-        #region Constructors
-
-        public AutoCompleteBox()
-        {
-            this.FontSize = ControlBase.FontSize;
-            this.FontFamily = ControlBase.FontFamily;
-            this.Margin = ControlBase.DefaultMargin;
-            this.Height = ControlBase.DefaultHeight;
-            this.HorizontalContentAlignment = HorizontalAlignment.Left;
-            this.VerticalContentAlignment = VerticalAlignment.Center;
-            this.IsReadOnly = false;
-            this.Focusable = true;
-        }
-
-        static AutoCompleteBox()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteBox), new FrameworkPropertyMetadata(typeof(AutoCompleteBox)));
-        }
-
-        #endregion
-
         #region Override
 
         public override void OnApplyTemplate()
@@ -223,6 +223,7 @@
 
             this.TextChanged += AutoCompleteBox_TextChanged;
             this.PreviewKeyDown += AutoCompleteBox_PreviewKeyDown;
+            this.IsDropDownOpen = false;
         }
 
         private void ItemSelected(object sender, RoutedEventArgs e)
@@ -266,11 +267,13 @@
                     int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
                     if(count > 0)
                     {
+                        this.SelectedIndex = 0;
                         this.IsDropDownOpen = true;
                     }
                 }
                 else
                 {
+                    this.SelectedIndex = -1;
                     this.mIsEnterKeyDown = true;
                     var item = this.SelectedItem;
                     this.IsDropDownOpen = false;
@@ -283,13 +286,13 @@
 
         private void AutoCompleteBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (this.mIsEnterKeyDown)
+            if (this.mIsEnterKeyDown == true)
             {
                 this.mIsEnterKeyDown = false;
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(this.Text))
+            if (string.IsNullOrWhiteSpace(this.Text) == true)
             {
                 this.IsDropDownOpen = false;
                 return;
@@ -322,8 +325,17 @@
             int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
             if (count > 0)
             {
-                this.SelectedIndex = 0;
-                this.IsDropDownOpen = true;
+                TextChange changes = e.Changes.Last();
+                if (changes.AddedLength.Equals(this.Text.Length) == false)
+                {
+                    this.SelectedIndex = 0;
+                    this.IsDropDownOpen = true;
+                }
+                else
+                {
+                    this.SelectedIndex = -1;
+                    this.IsDropDownOpen = false;
+                }
             }
             else
             {
