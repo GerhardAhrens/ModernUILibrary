@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\Style\" />
     <Folder Include="Views\ContentControls\" />
   </ItemGroup>
 

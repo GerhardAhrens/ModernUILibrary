@@ -7,6 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!--  Lokale Styles  -->
+                <ResourceDictionary Source="Resources\Style\XamlIcon.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ModernUILibrary;component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -35,5 +35,60 @@
                 Visibility="Visible" />
         </Border>
         <!--#endregion Contentbereich-->
+
+        <!--#region Statuszeile-->
+        <StatusBar
+            Grid.Row="2"
+            Height="Auto"
+            Background="Transparent"
+            DataContext="StatusMain"
+            FontSize="13">
+            <StatusBarItem DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarUser}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CurrentUser, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarCalendar}" />
+                    <TextBlock
+                        x:Name="dtStatusBarDate"
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CurrentDate, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <Separator Background="Black" />
+
+            <StatusBarItem DockPanel.Dock="Left" ToolTip="{Binding Path=DatabaseInfoTooltip, Source={x:Static localStatic:StatusbarMain.Statusbar}}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarDatabase}" />
+
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=DatabaseInfo, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <Separator Background="Black" />
+
+            <StatusBarItem DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarNotification}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=Notification, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <!--#endregion Statuszeile-->
     </ModernUI:SimpleGrid>
 </winbase:WindowBase>
