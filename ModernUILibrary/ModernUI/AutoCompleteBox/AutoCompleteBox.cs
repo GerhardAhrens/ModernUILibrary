@@ -9,6 +9,8 @@
     using System.Windows.Controls;
     using System.Windows.Data;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernIU.Base;
 
     public class AutoCompleteBox : MTextBoxBase
@@ -241,7 +243,7 @@
         #region private function
         private void SelectDropDownBoxItem(bool isKeyUp)
         {
-            int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
+            int count = ((System.Windows.Data.ListCollectionView)this.collectionView).Count;
             if (isKeyUp == true)
             {
                 this.SelectedIndex = (this.SelectedIndex - 1) < 0 ? 0 : (this.SelectedIndex - 1);
@@ -264,7 +266,7 @@
             {
                 if (!this.IsDropDownOpen) 
                 {
-                    int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
+                    int count = ((System.Windows.Data.ListCollectionView)this.collectionView).Count;
                     if(count > 0)
                     {
                         this.SelectedIndex = 0;
@@ -298,16 +300,22 @@
                 return;
             }
 
-            if(collectionView == null)
+            if(this.collectionView == null)
             {
-                collectionView = CollectionViewSource.GetDefaultView(this.ItemsSource);
+                this.collectionView = CollectionViewSource.GetDefaultView(this.ItemsSource);
+            }
+
+            if (this.collectionView == null)
+            {
+                this.SelectedIndex = -1;
+                this.IsDropDownOpen = false;
             }
 
             Task.Factory.StartNew(() =>
             {
                 this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(()=> 
                 {
-                    collectionView.Filter = (o) =>
+                    this.collectionView.Filter = (o) =>
                     {
                         if (string.IsNullOrEmpty(this.DisplayMemberPath) && (this.FilterMemberSource.Count == 0 || this.FilterMemberSource == null))
                         {
@@ -322,9 +330,9 @@
                 }));
             });
 
-            if (collectionView != null)
+            if (this.collectionView != null)
             {
-                int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
+                int count = ((System.Windows.Data.ListCollectionView)this.collectionView).Count;
                 if (count > 0)
                 {
                     TextChange changes = e.Changes.Last();
