@@ -201,7 +201,6 @@
     <Folder Include="Extensions\System.Exception\" />
     <Folder Include="Extensions\System.Task\" />
     <Folder Include="Extensions\System.Data\" />
-    <Folder Include="Extensions\System.LINQ\" />
     <Folder Include="Extensions\System.Windows\" />
     <Folder Include="Extensions\System.Threading\" />
     <Folder Include="Extensions\System.Short\" />

@@ -27,6 +27,7 @@ namespace ModernBaseLibrary.Extension
     using System.ComponentModel;
     using System.Data;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Windows.Data;
 
@@ -128,6 +129,83 @@ namespace ModernBaseLibrary.Extension
             }
 
             return default;
+        }
+
+        public static DataTable ToDataTable<TSource>(this ICollectionView @this, Func<TSource, bool> action) where TSource : class
+        {
+            DataTable dt = new DataTable(typeof(TSource).Name);
+            PropertyInfo[] props = typeof(TSource).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            if (props != null)
+            {
+                foreach (var prop in props)
+                {
+                    dt.Columns.Add(prop.Name, prop.PropertyType);
+                }
+
+                foreach (TSource item in @this.OfType<TSource>().Where(action))
+                {
+                    var values = new object[props.Length];
+                    for (var i = 0; i < props.Length; i++)
+                    {
+                        values[i] = props[i].GetValue(item, null);
+                    }
+
+                    dt.Rows.Add(values);
+                }
+            }
+
+            return dt;
+        }
+
+        public static DataTable ToDataTable<TSource>(this ICollectionView @this, Func<TSource, bool> actionWhere, Func<TSource, object> actionOrder) where TSource : class
+        {
+            DataTable dt = new DataTable(typeof(TSource).Name);
+            PropertyInfo[] props = typeof(TSource).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            if (props != null)
+            {
+                foreach (var prop in props)
+                {
+                    dt.Columns.Add(prop.Name, prop.PropertyType);
+                }
+
+                foreach (TSource item in @this.OfType<TSource>().Where(actionWhere).OrderBy(actionOrder))
+                {
+                    var values = new object[props.Length];
+                    for (var i = 0; i < props.Length; i++)
+                    {
+                        values[i] = props[i].GetValue(item, null);
+                    }
+
+                    dt.Rows.Add(values);
+                }
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="this"></param>
+        /// <param name="action"></param>
+        /// <returns>IQueryable</returns>
+        /// <example>
+        /// var query = overviewSource.AsQueryable<PasswordPin>().ToWhere(x => x.AccessTyp == AccessTyp.License).ToList();
+        /// </example>
+        public static IQueryable<TSource> ToWhere<TSource>(this IQueryable<TSource> @this, Expression<Func<TSource, bool>> action) where TSource : class
+        {
+            var expression = Expression.Equal(Expression.Condition(action.Body, Expression.Constant(false), Expression.Constant(true), typeof(bool)), Expression.Constant(false));
+
+            var methodCallExpression = Expression.Call(typeof(Queryable),
+                "where",
+                new Type[] { @this.ElementType },
+                @this.Expression,
+                Expression.Lambda<Func<TSource, bool>>(expression, action.Parameters));
+
+            return @this.Provider.CreateQuery<TSource>(methodCallExpression);
         }
     }
 }
