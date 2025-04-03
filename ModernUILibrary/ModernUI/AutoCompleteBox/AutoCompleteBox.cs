@@ -322,14 +322,22 @@
                 }));
             });
 
-            int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
-            if (count > 0)
+            if (collectionView != null)
             {
-                TextChange changes = e.Changes.Last();
-                if (changes.AddedLength.Equals(this.Text.Length) == false)
+                int count = ((System.Windows.Data.ListCollectionView)collectionView).Count;
+                if (count > 0)
                 {
-                    this.SelectedIndex = 0;
-                    this.IsDropDownOpen = true;
+                    TextChange changes = e.Changes.Last();
+                    if (changes.AddedLength.Equals(this.Text.Length) == false)
+                    {
+                        this.SelectedIndex = 0;
+                        this.IsDropDownOpen = true;
+                    }
+                    else
+                    {
+                        this.SelectedIndex = -1;
+                        this.IsDropDownOpen = false;
+                    }
                 }
                 else
                 {
@@ -339,10 +347,11 @@
             }
             else
             {
+                this.SelectedIndex = -1;
                 this.IsDropDownOpen = false;
             }
         }
-        
+
         #endregion
     }
 
