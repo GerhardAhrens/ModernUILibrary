@@ -296,6 +296,7 @@
 
             if (string.IsNullOrWhiteSpace(this.Text) == true)
             {
+                this.SelectedIndex = -1;
                 this.IsDropDownOpen = false;
                 return;
             }
@@ -309,6 +310,7 @@
             {
                 this.SelectedIndex = -1;
                 this.IsDropDownOpen = false;
+                return;
             }
 
             Task.Factory.StartNew(() =>
