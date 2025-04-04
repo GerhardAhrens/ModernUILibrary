@@ -37,7 +37,7 @@
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
                         <Border
                             x:Name="bd"
-                            Height="28"
+                            Height="Auto"
                             Margin="0"
                             Padding="{TemplateBinding Padding}"
                             Background="Transparent"
@@ -45,7 +45,7 @@
                             BorderThickness="0,0,0,1"
                             SnapsToDevicePixels="True"
                             UseLayoutRounding="True">
-                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            <GridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
@@ -161,7 +161,7 @@
                                 BorderBrush="{StaticResource GridViewColumnHeaderDarkBackground}"
                                 BorderThickness="0,0,0,1"
                                 DockPanel.Dock="Bottom" />
-                            
+
                             <!--  GridViewColumnHeader Content  -->
                             <Border
                                 Padding="{TemplateBinding Padding}"
@@ -177,7 +177,7 @@
                             <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource GridViewColumnHeaderGripper}" />
                         </Canvas>
                     </Grid>
-                    
+
                     <!--<ControlTemplate Triggers Start>-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
@@ -188,7 +188,7 @@
                             <Setter TargetName="PART_HeaderGripper" Property="Background" Value="Transparent" />
                             <Setter Property="Background" Value="{StaticResource GridViewColumnHeaderHoverBackground}" />
                         </Trigger>
-                        
+
                         <!--<SnippetIsPressed>-->
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="HighlightBorder" Property="Visibility" Value="Hidden" />
@@ -197,7 +197,7 @@
                             <Setter Property="Foreground" Value="Black" />
                             <Setter Property="FontWeight" Value="Bold" />
                         </Trigger>
-                        
+
                         <Trigger Property="Height" Value="Auto">
                             <Setter Property="MinHeight" Value="20" />
                         </Trigger>
@@ -207,7 +207,7 @@
                         <Trigger Property="Role" Value="Padding">
                             <Setter TargetName="PART_HeaderGripper" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        
+
                         <!--<Floating>-->
                         <Trigger Property="Role" Value="Floating">
                             <Setter TargetName="PART_HeaderGripper" Property="Visibility" Value="Collapsed" />
@@ -258,7 +258,7 @@
                             <Thumb x:Name="PART_HeaderGripper" Style="{StaticResource GridViewColumnHeaderGripper}" />
                         </Canvas>
                     </Grid>
-                    
+
                     <!--<ControlTemplate Triggers Start>-->
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">

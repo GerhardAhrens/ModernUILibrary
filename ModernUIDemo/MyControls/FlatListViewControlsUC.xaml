@@ -90,8 +90,8 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Path
-                                            Width="14"
-                                            Height="14"
+                                            Width="32"
+                                            Height="32"
                                             Data="{Binding Path=Symbol}"
                                             Fill="Green"
                                             Stretch="Fill" />
@@ -109,7 +109,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Viewbox>
+                                        <Viewbox Width="32" Height="32">
                                             <Canvas 
                                                 Width="256"
                                                 Height="256"
@@ -134,7 +134,7 @@
                                 </GridViewColumnHeader>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Viewbox>
+                                        <Viewbox Width="32" Height="32">
                                             <Canvas Width="24" Height="24">
                                                 <Path
                                                     Width="22"
