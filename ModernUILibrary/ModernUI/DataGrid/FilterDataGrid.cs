@@ -141,7 +141,7 @@
         private bool search;
 
         private TimeSpan elased;
-
+        private DateTime loadItemsStart;
         private double minHeight;
         private double minWidth;
         private double sizableContentHeight;
@@ -184,9 +184,7 @@
             set
             {
                 elased = value;
-
-                //Debug.WriteLine("OnPropertyChanged");
-                OnPropertyChanged();
+                this.OnPropertyChanged();
             }
         }
 
@@ -244,6 +242,8 @@
         /// <param name="e"></param>
         protected override void OnInitialized(EventArgs e)
         {
+            this.loadItemsStart = DateTime.Now;
+            this.ElapsedTime = new TimeSpan(0, 0, 0);
             base.OnInitialized(e);
 
             try
@@ -298,7 +298,8 @@
         /// <param name="e"></param>
         protected override void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
         {
-            Debug.WriteLineIf(DebugMode, "OnAutoGeneratingColumn");
+            this.loadItemsStart = DateTime.Now;
+            this.ElapsedTime = new TimeSpan(0, 0, 0);
             base.OnAutoGeneratingColumn(e);
 
             try
@@ -337,13 +338,10 @@
 
             try
             {
-                DateTime start = DateTime.Now;
-                this.ElapsedTime = new TimeSpan(0, 0, 0);
-
                 // remove the filter set and reset the column
                 if (this.GlobalFilterList.Count > 0)
                 {
-                    criteria.Clear(); // clear filter
+                    criteria.Clear();
                 }
 
                 foreach (DataGridFilterCommon filter in this.GlobalFilterList)
@@ -380,15 +378,14 @@
 
                 this.GlobalFilterList = new List<DataGridFilterCommon>();
                 this.ItemsSourceCount = Items.Count;
-                this.OnPropertyChanged("ItemsSourceCount");
+                this.OnPropertyChanged();
 
-                // if there is no item in ItemsSource, the Cast fails and an error occurs
                 if (this.ItemsSourceCount > 0)
                 {
                     this.collectionType = ItemsSource?.Cast<object>().First().GetType();
                 }
 
-                this.ElapsedTime = DateTime.Now - start;
+                this.ElapsedTime = DateTime.Now - this.loadItemsStart;
             }
             catch (Exception ex)
             {
