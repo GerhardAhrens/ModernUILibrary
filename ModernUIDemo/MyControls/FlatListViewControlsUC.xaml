@@ -12,6 +12,18 @@
 
     <UserControl.Resources>
         <Converter:RowNumberConverter x:Key="rowNumberConverter" />
+
+        <Viewbox x:Key="ViewBoxA">
+            <Canvas
+                Width="256"
+                Height="256"
+                Background="Transparent">
+                <Canvas>
+                    <Path Data="F1M120.578,100.353C120.578,100.353 100.573,144.788 86.587,144.788 72.601,144.788 52.595,100.353 52.595,100.353 21.672,107.24 0,124.458 0,152.792L0,216.682 173.172,216.682 173.172,152.792C173.172,124.458,151.502,107.241,120.578,100.353z" Fill="#FF1388B1" />
+                    <Path Data="F1M123.225,44.475C123.225,69.038 106.82,88.949 86.585,88.949 66.352,88.949 49.948,69.038 49.948,44.475 49.948,19.912 66.352,0 86.585,0 106.82,0 123.225,19.912 123.225,44.475z" Fill="#FFF0BF7C" />
+                </Canvas>
+            </Canvas>
+        </Viewbox>
     </UserControl.Resources>
 
     <Grid>
@@ -98,7 +110,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <Viewbox>
-                                            <Canvas
+                                            <Canvas 
                                                 Width="256"
                                                 Height="256"
                                                 Background="Transparent">
