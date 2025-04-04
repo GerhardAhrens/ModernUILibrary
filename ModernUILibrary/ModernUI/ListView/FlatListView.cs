@@ -64,9 +64,15 @@
 
         public FlatListView()
         {
+            WeakEventManager<FlatListView, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            WeakEventManager<FlatListView, RoutedEventArgs>.AddHandler(this, "MouseDoubleClick", this.OnMouseDoubleClick);
+            WeakEventManager<FlatListView, KeyEventArgs>.AddHandler(this, "KeyDown", this.OnKeyDown);
+            WeakEventManager<FlatListView, SelectionChangedEventArgs>.AddHandler(this, "SelectionChanged", this.OnSelectionChanged);
+            /*
             this.Loaded += this.OnLoaded;
             this.MouseDoubleClick += this.OnMouseDoubleClick;
             this.KeyDown += this.OnKeyDown;
+            */
             this.SelectionChanged += this.OnSelectionChanged;
             this.SetValue(KeyboardNavigation.IsTabStopProperty, false);
             this.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, false);
@@ -76,10 +82,16 @@
 
         ~FlatListView()
         {
+            WeakEventManager<FlatListView, RoutedEventArgs>.RemoveHandler(this, "Loaded", this.OnLoaded);
+            WeakEventManager<FlatListView, RoutedEventArgs>.RemoveHandler(this, "MouseDoubleClick", this.OnMouseDoubleClick);
+            WeakEventManager<FlatListView, KeyEventArgs>.RemoveHandler(this, "KeyDown", this.OnKeyDown);
+            WeakEventManager<FlatListView, SelectionChangedEventArgs>.RemoveHandler(this, "SelectionChanged", this.OnSelectionChanged);
+            /*
             this.Loaded -= this.OnLoaded;
             this.MouseDoubleClick -= this.OnMouseDoubleClick;
             this.KeyDown -= this.OnKeyDown;
             this.SelectionChanged -= this.OnSelectionChanged;
+            */
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
