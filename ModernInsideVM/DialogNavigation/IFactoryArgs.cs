@@ -13,10 +13,13 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernInsideVM.DialogNavigation
+namespace ModernInsideVM.Core
 {
+    using ModernInsideVM.Core;
+
     public interface IFactoryArgs
     {
+        public CommandButtons MenuButton { get; set; }
         public string Sender { get; set; }
 
         public Guid EntityId { get; set; }

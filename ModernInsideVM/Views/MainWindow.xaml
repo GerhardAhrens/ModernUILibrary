@@ -9,19 +9,21 @@
     xmlns:localStatic="clr-namespace:ModernInsideVM.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
-    Title="MainWindow"
+    Title="{Binding Path=DialogDescription, UpdateSourceTrigger=PropertyChanged, FallbackValue=~Title}"
     Width="800"
-    Height="450"
+    Height="600"
     winbase:DialogClosing.IsClosing="True"
     Icon="/Views/AppLogo.ico"
     mc:Ignorable="d">
-    <ModernUI:SimpleGrid Columns="*" Rows="*,40">
+    <ModernUI:SimpleGrid Columns="*" Rows="*,Auto">
         <!--#region Contentbereich-->
         <Border
-            Grid.Row="1"
+            Grid.Row="0"
             Grid.Column="0"
+            VerticalAlignment="Stretch"
+            Background="White"
             BorderBrush="Black"
-            BorderThickness="0,1,0,1">
+            BorderThickness="0,2,0,2">
             <ContentControl
                 x:Name="mainContent"
                 HorizontalAlignment="Stretch"
@@ -38,7 +40,7 @@
 
         <!--#region Statuszeile-->
         <StatusBar
-            Grid.Row="2"
+            Grid.Row="1"
             Height="Auto"
             Background="Transparent"
             DataContext="StatusMain"
@@ -58,7 +60,7 @@
                     <Label Content="{StaticResource ResourceKey=IconStatusbarCalendar}" />
                     <TextBlock
                         x:Name="dtStatusBarDate"
-                        Margin="5,0,0,0"
+                        Margin="5,0,10,0"
                         VerticalAlignment="Center"
                         Text="{Binding Path=CurrentDate, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
                 </StackPanel>

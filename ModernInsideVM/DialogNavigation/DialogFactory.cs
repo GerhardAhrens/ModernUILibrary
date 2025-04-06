@@ -9,7 +9,6 @@
 
     using ModernUI.MVVM.Base;
 
-    using ModernInsideVM.DialogNavigation;
     using ModernInsideVM.Views.ContentControls;
 
     public class DialogFactory : IDialogFactory
@@ -21,7 +20,7 @@
             RegisterControls();
         }
 
-        public static FactoryResult Get(FunctionButtons mainButton)
+        public static FactoryResult Get(CommandButtons mainButton)
         {
             FactoryResult resultContent = null;
             using (LoadingWaitCursor wc = new LoadingWaitCursor())
@@ -46,7 +45,7 @@
             return resultContent;
         }
 
-        public static FactoryResult Get(FunctionButtons mainButton, IFactoryArgs changeViewArgs)
+        public static FactoryResult Get(CommandButtons mainButton, IFactoryArgs changeViewArgs)
         {
             FactoryResult resultContent = null;
             using (LoadingWaitCursor wc = new LoadingWaitCursor())
@@ -82,7 +81,7 @@
                 if (Views == null)
                 {
                     Views = new Dictionary<Enum, Type>();
-                    Views.Add(FunctionButtons.Home, typeof(HomeUC));
+                    Views.Add(CommandButtons.Home, typeof(HomeUC));
                 }
             }
             catch (Exception ex)

@@ -2,10 +2,11 @@
 {
     using System.Windows;
     using System.Windows.Controls;
-
-    using ModernUI.MVVM.Base;
+    using System.Windows.Input;
 
     using ModernInsideVM.Core;
+
+    using ModernUI.MVVM.Base;
 
     /// <summary>
     /// Interaktionslogik für HomeUC.xaml
@@ -16,21 +17,27 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            this.InitCommands();
             this.DataContext = this;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focus();
+            Keyboard.Focus(this);
             this.IsUCLoaded = true;
         }
+        public override void InitCommands()
+        {
+            this.CmdAgg.AddOrSetCommand("CloseAppCommand", new RelayCommand(this.CloseAppHandler));
+        }
 
-        private void LogoffHandler(object p1)
+        private void CloseAppHandler(object p1)
         {
             base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
             {
                 Sender = this.GetType().Name,
-                MenuButton = FunctionButtons.None,
+                MenuButton = CommandButtons.CloseApp,
             });
         }
     }

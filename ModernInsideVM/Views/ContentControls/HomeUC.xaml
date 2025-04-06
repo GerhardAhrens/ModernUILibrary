@@ -13,17 +13,17 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ModernWPF:CommandKeyReference x:Key="LogoffCmdKey" Command="{Binding Path=CmdAgg[LogoffCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="CloseAppCmdKey" Command="{Binding Path=CmdAgg[CloseAppCommand]}" />
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding
-            Key="L"
-            Command="{StaticResource ResourceKey=LogoffCmdKey}"
-            Modifiers="Ctrl" />
+            Key="F4"
+            Command="{StaticResource ResourceKey=CloseAppCmdKey}"
+            Modifiers="Alt" />
     </UserControl.InputBindings>
 
-    <ModernUI:SimpleGrid Columns="*" Rows="30,*,30">
+    <ModernUI:SimpleGrid Columns="*" Rows="30,Auto,*">
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
@@ -33,11 +33,30 @@
 
             <TextBlock
                 x:Name="TbTitelUC"
-                Margin="5,0,0,0"
+                Margin="10,0,0,0"
                 VerticalAlignment="Center"
                 FontSize="14"
                 FontWeight="Bold"
                 Text="TbTitelUC" />
         </StackPanel>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="0"
+            BorderBrush="Black"
+            BorderThickness="0,1,0,1">
+            <ModernUI:FlatButton
+                Width="150"
+                Height="30"
+                HorizontalAlignment="Left"
+                Command="{Binding Path=CmdAgg[CloseAppCommand]}">
+                <ModernUI:FlatButton.Content>
+                    <TextBlock>
+                        <Run Text="Beenden" />
+                    </TextBlock>
+                </ModernUI:FlatButton.Content>
+            </ModernUI:FlatButton>
+
+        </Border>
     </ModernUI:SimpleGrid>
 </base:UserControlBase>

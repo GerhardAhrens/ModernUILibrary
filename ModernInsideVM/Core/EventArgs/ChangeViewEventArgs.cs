@@ -4,15 +4,14 @@
 
     using ModernBaseLibrary.Core;
 
-    using ModernInsideVM.DialogNavigation;
-
     public class ChangeViewEventArgs : EventArgs, IEventAggregatorArgs, IFactoryArgs
     {
         public string Sender { get; set; }
-        public string Description { get; set; }
-        public FunctionButtons MenuButton { get; set; }
-        public string LoginHash { get; set; }
 
+        public string Description { get; set; }
+
+        public CommandButtons MenuButton { get; set; }
+        
         /// <summary>
         /// Id des Entity Objektes
         /// </summary>
@@ -27,11 +26,11 @@
         /// <summary>
         /// Wechsel von Dialog
         /// </summary>
-        public FunctionButtons FromPage { get; set; }
+        public CommandButtons FromPage { get; set; }
 
         /// <summary>
         /// Wechsel zu Dialog
         /// </summary>
-        public FunctionButtons TargetPage { get; set; }
+        public CommandButtons TargetPage { get; set; }
     }
 }

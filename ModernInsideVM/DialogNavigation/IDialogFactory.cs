@@ -13,14 +13,12 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernInsideVM.DialogNavigation
+namespace ModernInsideVM.Core
 {
-    using ModernInsideVM.Core;
-
     public interface IDialogFactory
     {
-        public abstract static FactoryResult Get(FunctionButtons mainButton);
+        public abstract static FactoryResult Get(CommandButtons mainButton);
 
-        public abstract static FactoryResult Get(FunctionButtons mainButton, IFactoryArgs changeViewArgs);
+        public abstract static FactoryResult Get(CommandButtons mainButton, IFactoryArgs changeViewArgs);
     }
 }
