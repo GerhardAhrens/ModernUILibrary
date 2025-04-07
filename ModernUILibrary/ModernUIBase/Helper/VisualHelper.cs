@@ -7,6 +7,24 @@ namespace ModernIU.Base
 
     public class VisualHelper
     {
+        /// <summary>
+        /// Finds a Child of a given item in the visual tree. 
+        /// </summary>
+        /// <param name="parent">A direct parent of the queried item.</param>
+        /// <typeparam name="T">The type of the queried item.</typeparam>
+        /// <param name="childName">x:Name or Name of child. </param>
+        /// <returns>The first parent item that matches the submitted type parameter or null if not found</returns> 
+        public static T FindByName<T>(DependencyObject userControl, string controlName) where T : DependencyObject
+        {
+            T foundChild = null;
+            if (userControl != null)
+            {
+                foundChild = ((System.Windows.Controls.UserControl)userControl).FindName(controlName) as T;
+            }
+
+            return (T)foundChild;
+        }
+
         public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)

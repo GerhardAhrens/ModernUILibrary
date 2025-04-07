@@ -10,8 +10,10 @@ namespace ModernInsideVM.Core
         Home = 1,
         [Description("Dialog A - Als Übersicht")]
         DialogA = 2,
-        [Description("Dialog B - Mit übergebener Guid")]
+        [Description("Dialog B - Mit übergebener Guid (Detail)")]
         DialogB = 3,
+        [Description("Dialog C - Mit Eingabe Validierung")]
+        DialogC = 4,
         [Description("Anwendung beenden")]
         CloseApp = 100,
     }

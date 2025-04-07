@@ -84,6 +84,7 @@
                     Views.Add(CommandButtons.Home, typeof(HomeUC));
                     Views.Add(CommandButtons.DialogA, typeof(DialogA));
                     Views.Add(CommandButtons.DialogB, typeof(DialogB));
+                    Views.Add(CommandButtons.DialogC, typeof(DialogC));
                 }
             }
             catch (Exception ex)

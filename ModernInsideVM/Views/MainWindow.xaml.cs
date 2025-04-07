@@ -12,6 +12,9 @@
     using ModernInsideVM.Core;
     using ModernInsideVM.Views.ContentControls;
 
+    using ModernIU.Base;
+    using ModernIU.Controls;
+
     using ModernUI.MVVM.Base;
 
     /// <summary>
@@ -20,6 +23,7 @@
     public partial class MainWindow : WindowBase, IDialogClosing
     {
         private const string DateFormat = "dd.MM.yyyy HH:mm";
+        private INotificationService notificationService = new NotificationService();
         private DispatcherTimer statusBarDate = null;
 
         public MainWindow()
@@ -35,6 +39,9 @@
             this.Focus();
             this.InitTimer();
             Keyboard.Focus(this);
+
+            NotificationService.RegisterDialog<QuestionYesNo>();
+            NotificationService.RegisterDialog<MessageOk>();
 
             this.DialogDescription = "ModernInsideVM";
             base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
@@ -64,15 +71,22 @@
 
         public override void OnViewIsClosing(CancelEventArgs e)
         {
-            Window window = Application.Current.MainWindow;
-            if (window != null)
+            NotificationBoxButton result = this.notificationService.ApplicationExit();
+            if (result == NotificationBoxButton.Yes)
             {
-                e.Cancel = false;
-                this.statusBarDate.Stop();
-                Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-                Application.Current.Shutdown();
+                Window window = Application.Current.MainWindow;
+                if (window != null)
+                {
+                    e.Cancel = false;
+                    this.statusBarDate.Stop();
+                    Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                    Application.Current.Shutdown();
+                }
             }
-
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ChangeControl(ChangeViewEventArgs e)
@@ -95,7 +109,7 @@
                     this.WorkContent.VerticalAlignment = VerticalAlignment.Stretch;
                     this.WorkContent.Focusable = true;
 
-                    TextBlock textBlock = UIHelper.FindByName<TextBlock>(this.WorkContent, "TbTitelUC");
+                    TextBlock textBlock = VisualHelper.FindByName<TextBlock>(this.WorkContent, "TbTitelUC");
                     if (textBlock != null)
                     {
                         textBlock.Text = titelUC;

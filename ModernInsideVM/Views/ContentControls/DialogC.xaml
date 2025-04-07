@@ -1,0 +1,147 @@
+﻿<base:UserControlBase
+    x:Class="ModernInsideVM.Views.ContentControls.DialogC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernConverter="clr-namespace:ModernIU.Converters;assembly=ModernUILibrary"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:ModernWPF="clr-namespace:ModernIU.WPF.Base;assembly=ModernUILibrary"
+    xmlns:base="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernInsideVM.Views.ContentControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <!--  Allgemeine UserControl Resources  -->
+        <ModernConverter:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
+
+        <sys:Double x:Key="TextBoxWidth">500</sys:Double>
+        <sys:Double x:Key="ScaleXY">1.0</sys:Double>
+    </UserControl.Resources>
+
+    <UserControl.InputBindings>
+        <KeyBinding
+            Key="F4"
+            Command="{Binding Path=CmdAgg[DialogBackCommand]}"
+            Modifiers="Ctrl" />
+    </UserControl.InputBindings>
+
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="Scalefactor" ScaleX="{StaticResource ResourceKey=ScaleXY}" ScaleY="{StaticResource ResourceKey=ScaleXY}" />
+    </UserControl.LayoutTransform>
+
+    <ModernUI:SimpleGrid Columns="*" Rows="30,Auto,Auto,*">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Height="Auto"
+            Background="LightBlue"
+            Orientation="Horizontal">
+
+            <TextBlock
+                x:Name="TbTitelUC"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="14"
+                FontWeight="Bold"
+                Text="TbTitelUC" />
+        </StackPanel>
+
+        <!--#region Validation Notification Panel-->
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            MaxHeight="60"
+            Background="Red"
+            Focusable="False"
+            VerticalScrollBarVisibility="Auto"
+            Visibility="{Binding Path=ValidationErrors.Count, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}">
+            <ListBox
+                Height="Auto"
+                Background="Transparent"
+                DisplayMemberPath="Value"
+                Focusable="False"
+                FontWeight="Bold"
+                Foreground="White"
+                IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Path=ValidationErrors, UpdateSourceTrigger=PropertyChanged}"
+                SelectedIndex="-1"
+                SelectedValue="{Binding Path=ValidationErrorsSelected, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="Key" />
+        </ScrollViewer>
+        <!--#endregion Validation Notification Panel-->
+
+        <ScrollViewer
+            Grid.Row="2"
+            VerticalAlignment="Top"
+            HorizontalScrollBarVisibility="Hidden"
+            PreviewMouseWheel="OnPreviewMouseWheel"
+            VerticalScrollBarVisibility="Hidden">
+            <ModernUI:SimpleGrid
+                Grid.Row="1"
+                Margin="5,5,0,0"
+                Columns="*"
+                Rows="Auto,Auto,Auto,Auto,Auto, Auto,Auto">
+                <Border
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="0,1,0,1">
+                    <StackPanel Orientation="Horizontal">
+                        <ModernUI:FlatButton
+                            Width="100"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            Command="{Binding Path=CmdAgg[DialogBackCommand]}">
+                            <ModernUI:FlatButton.Content>
+                                <TextBlock>
+                                    <Run Text="Zurück" />
+                                </TextBlock>
+                            </ModernUI:FlatButton.Content>
+                        </ModernUI:FlatButton>
+
+                        <ModernUI:FlatButton
+                            Width="100"
+                            Height="30"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            Command="{Binding Path=CmdAgg[SaveCommand]}">
+                            <ModernUI:FlatButton.Content>
+                                <TextBlock>
+                                    <Run Text="Speichern" />
+                                </TextBlock>
+                            </ModernUI:FlatButton.Content>
+                        </ModernUI:FlatButton>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock
+                    Grid.Row="3"
+                    FontSize="14"
+                    Text="Id:">
+                    <Run Foreground="Blue" Text="{Binding Path=Id}" />
+                </TextBlock>
+
+                <ModernUI:TitleTextBox
+                    x:Name="TxtTitel"
+                    Grid.Row="4"
+                    Width="{StaticResource ResourceKey=TextBoxWidth}"
+                    HorizontalAlignment="Left"
+                    Text="{Binding Path=Titel, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ModernUI:TitleTextBox
+                    x:Name="TxtDescription"
+                    Title="Beschreibung:"
+                    Grid.Row="5"
+                    Width="{StaticResource ResourceKey=TextBoxWidth}"
+                    HorizontalAlignment="Left"
+                    Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
+            </ModernUI:SimpleGrid>
+        </ScrollViewer>
+
+    </ModernUI:SimpleGrid>
+</base:UserControlBase>

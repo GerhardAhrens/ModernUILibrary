@@ -70,6 +70,19 @@
                         </TextBlock>
                     </ModernUI:FlatButton.Content>
                 </ModernUI:FlatButton>
+
+                <ModernUI:FlatButton
+                    Width="100"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Path=CmdAgg[DialogCCommand]}">
+                    <ModernUI:FlatButton.Content>
+                        <TextBlock>
+                            <Run Text="Dialog C" />
+                        </TextBlock>
+                    </ModernUI:FlatButton.Content>
+                </ModernUI:FlatButton>
             </StackPanel>
         </Border>
     </ModernUI:SimpleGrid>
