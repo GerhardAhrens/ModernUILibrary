@@ -1,19 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="WaitCursor.cs" company="PTA GmbH">
-//     Class: WaitCursor
-//     Copyright © Gerhard Ahrens, 2017
-// </copyright>
-//
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
-// <date>25.07.2017</date>
-//
-// <summary>
-// Class with WaitCursor Definition
-// </summary>
-//-----------------------------------------------------------------------
-
-namespace ModernInsideVM.Core
+﻿namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Windows.Input;

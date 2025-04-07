@@ -7,9 +7,9 @@
 
     using ModernBaseLibrary.Extension;
 
-    using ModernUI.MVVM.Base;
-
     using ModernInsideVM.Views.ContentControls;
+
+    using ModernUI.MVVM.Base;
 
     public class DialogFactory : IDialogFactory
     {

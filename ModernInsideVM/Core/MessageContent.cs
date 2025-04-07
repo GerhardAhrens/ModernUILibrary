@@ -42,7 +42,7 @@ namespace ModernInsideVM.Core
             return questionResult;
         }
 
-        public static NotificationBoxButton FeaturesNotFound2(this INotificationService @this, string featuresText = "")
+        public static NotificationBoxButton FeaturesNotFound(this INotificationService @this, string featuresText = "")
         {
             (string InfoText, string CustomText, double FontSize) msgText = ("Funktion nicht gefunden", $"Die gewünschte Funktion '{featuresText}' steht nicht zur Verfügung\nBei Bedarf kontaktieren Sie den Verantwortlichen der Applikation.",18);
             Tuple<NotificationBoxButton, object> resultOK = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.Ok, null);

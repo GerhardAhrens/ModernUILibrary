@@ -4,6 +4,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernInsideVM.Core;
 
     using ModernUI.MVVM.Base;
@@ -22,6 +24,11 @@
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
 
             this.Id = this.CtorArgs.EntityId.ToString();
+            if (this.Id.IsGuidEmpty() == true)
+            {
+                this.Id = Guid.NewGuid().ToString();
+            }
+
             this.RowPos = this.CtorArgs.RowPosition;
             this.IsRefresh = this.CtorArgs.IsRefresh;
 
@@ -79,7 +86,7 @@
                 Sender = this.GetType().Name,
                 MenuButton = CommandButtons.DialogB,
                 FromPage = CommandButtons.DialogA,
-                EntityId = Guid.NewGuid(),
+                EntityId = this.Id.ToGuid(),
                 IsNew = false,
                 RowPosition = 1,
                 IsRefresh = false,

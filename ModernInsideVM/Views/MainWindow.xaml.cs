@@ -29,9 +29,31 @@
         public MainWindow()
         {
             this.InitializeComponent();
+            this.InitCommands();
             this.InitTimer();
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
             this.DataContext = this;
+        }
+
+        #region Properties
+        public string DialogDescription
+        {
+            get => base.GetValue<string>();
+            set => base.SetValue(value);
+        }
+
+        public UserControl WorkContent
+        {
+            get { return base.GetValue<UserControl>(); }
+            set { base.SetValue(value); }
+        }
+
+        private CommandButtons CurrentUCName { get; set; }
+        #endregion Properties
+
+        public override void InitCommands()
+        {
+            base.CmdAgg.AddOrSetCommand("HelpCommand", new RelayCommand(p1 => this.HelpHandler(p1), p2 => true));
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -53,21 +75,10 @@
             StatusbarMain.Statusbar.SetDatabaeInfo();
         }
 
-        #region Properties
-        public string DialogDescription
+        private void HelpHandler(object commandArgs)
         {
-            get => base.GetValue<string>();
-            set => base.SetValue(value);
+            this.notificationService.FeaturesNotFound(commandArgs.ToString());
         }
-
-        public UserControl WorkContent
-        {
-            get { return base.GetValue<UserControl>(); }
-            set { base.SetValue(value); }
-        }
-
-        private CommandButtons CurrentUCName { get; set; }
-        #endregion Properties
 
         public override void OnViewIsClosing(CancelEventArgs e)
         {

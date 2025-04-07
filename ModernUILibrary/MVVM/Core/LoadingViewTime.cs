@@ -1,19 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="ObjectRuntime.cs" company="PTA GmbH">
-//     Class: ObjectRuntime
-//     Copyright © PTA GmbH 2020
-// </copyright>
-//
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
-// <date>17.11.2020</date>
-//
-// <summary>
-// Die Klasse stellt ein Stopwatch Objekt zur Verfügung
-// </summary>
-//-----------------------------------------------------------------------
-
-namespace ModernInsideVM.Core
+﻿namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Diagnostics;

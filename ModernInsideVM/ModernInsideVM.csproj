@@ -10,12 +10,10 @@
 
   <ItemGroup>
     <None Remove="Resources\Picture\AppLogo.ico" />
-    <None Remove="Views\AppLogo.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Picture\AppLogo.ico" />
-    <Resource Include="Views\AppLogo.ico" />
   </ItemGroup>
 
   <ItemGroup>

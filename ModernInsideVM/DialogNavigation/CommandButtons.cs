@@ -16,5 +16,7 @@ namespace ModernInsideVM.Core
         DialogC = 4,
         [Description("Anwendung beenden")]
         CloseApp = 100,
+        [Description("Hilfe")]
+        Help = 101,
     }
 }

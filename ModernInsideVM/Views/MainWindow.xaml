@@ -13,8 +13,23 @@
     Width="800"
     Height="600"
     winbase:DialogClosing.IsClosing="True"
-    Icon="/Views/AppLogo.ico"
+    Icon="/Resources/Picture/AppLogo.ico"
     mc:Ignorable="d">
+
+    <ModernUI:MWindow.MoreOnTitle>
+        <StackPanel
+            Margin="0,0,5,0"
+            HorizontalAlignment="Left"
+            KeyboardNavigation.IsTabStop="False"
+            Orientation="Horizontal">
+            <ModernUI:GeometryButton
+                Command="{Binding Path=CmdAgg[HelpCommand]}"
+                CommandParameter="{x:Static localStatic:CommandButtons.Help}"
+                PathData="{StaticResource ResourceKey=IconHelp}" Height="30" />
+
+        </StackPanel>
+    </ModernUI:MWindow.MoreOnTitle>
+
     <ModernUI:SimpleGrid Columns="*" Rows="*,Auto">
         <!--#region Contentbereich-->
         <Border
