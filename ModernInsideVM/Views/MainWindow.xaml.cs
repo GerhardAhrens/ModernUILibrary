@@ -80,6 +80,7 @@
             if (e.MenuButton == CommandButtons.CloseApp)
             {
                 this.Close();
+                return;
             }
 
             FactoryResult view = DialogFactory.Get(e.MenuButton, e);
@@ -102,6 +103,10 @@
 
                     StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms");
                 }
+            }
+            else
+            {
+                throw new NotSupportedException($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann nicht gefunden werden.");
             }
         }
 

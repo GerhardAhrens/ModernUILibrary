@@ -1,5 +1,5 @@
 ﻿<base:UserControlBase
-    x:Class="ModernInsideVM.Views.ContentControls.HomeUC"
+    x:Class="ModernInsideVM.Views.ContentControls.DialogB"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
@@ -13,14 +13,14 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ModernWPF:CommandKeyReference x:Key="CloseAppCmdKey" Command="{Binding Path=CmdAgg[CloseAppCommand]}" />
+        <!--  Allgemeine Resources  -->
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding
             Key="F4"
-            Command="{StaticResource ResourceKey=CloseAppCmdKey}"
-            Modifiers="Alt" />
+            Command="{Binding Path=CmdAgg[DialogBackCommand]}"
+            Modifiers="Ctrl" />
     </UserControl.InputBindings>
 
     <ModernUI:SimpleGrid Columns="*" Rows="30,Auto,*">
@@ -50,27 +50,22 @@
                     Width="100"
                     Height="30"
                     HorizontalAlignment="Left"
-                    Command="{Binding Path=CmdAgg[CloseAppCommand]}">
+                    Command="{Binding Path=CmdAgg[DialogBackCommand]}">
                     <ModernUI:FlatButton.Content>
                         <TextBlock>
-                            <Run Text="Beenden" />
-                        </TextBlock>
-                    </ModernUI:FlatButton.Content>
-                </ModernUI:FlatButton>
-
-                <ModernUI:FlatButton
-                    Width="100"
-                    Height="30"
-                    Margin="5,0,0,0"
-                    HorizontalAlignment="Left"
-                    Command="{Binding Path=CmdAgg[DialogACommand]}">
-                    <ModernUI:FlatButton.Content>
-                        <TextBlock>
-                            <Run Text="Dialog A" />
+                            <Run Text="Zurück" />
                         </TextBlock>
                     </ModernUI:FlatButton.Content>
                 </ModernUI:FlatButton>
             </StackPanel>
         </Border>
+
+        <TextBlock
+            Grid.Row="2"
+            FontSize="14"
+            Text="Id:">
+            <Run Foreground="Blue" Text="{Binding Path=Id}" />
+        </TextBlock>
+
     </ModernUI:SimpleGrid>
 </base:UserControlBase>

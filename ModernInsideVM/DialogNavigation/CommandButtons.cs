@@ -6,11 +6,11 @@ namespace ModernInsideVM.Core
     {
         [Description("Keine Auswahl")]
         None = 0,
-        [Description("Home Dialog ohne Funktion")]
+        [Description("Home Dialog mit Steuerung Main Menü")]
         Home = 1,
-        [Description("Dialog A")]
+        [Description("Dialog A - Als Übersicht")]
         DialogA = 2,
-        [Description("Dialog B")]
+        [Description("Dialog B - Mit übergebener Guid")]
         DialogB = 3,
         [Description("Anwendung beenden")]
         CloseApp = 100,

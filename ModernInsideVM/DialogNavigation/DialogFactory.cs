@@ -82,6 +82,8 @@
                 {
                     Views = new Dictionary<Enum, Type>();
                     Views.Add(CommandButtons.Home, typeof(HomeUC));
+                    Views.Add(CommandButtons.DialogA, typeof(DialogA));
+                    Views.Add(CommandButtons.DialogB, typeof(DialogB));
                 }
             }
             catch (Exception ex)

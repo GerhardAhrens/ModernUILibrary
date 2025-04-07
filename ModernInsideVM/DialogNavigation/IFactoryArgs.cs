@@ -26,6 +26,8 @@ namespace ModernInsideVM.Core
 
         public bool IsNew { get; set; }
 
+        public bool IsRefresh { get; set; }
+
         public int RowPosition { get; set; }
     }
 }
