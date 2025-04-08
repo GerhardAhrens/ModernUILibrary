@@ -5,6 +5,7 @@
     xmlns:Converter="clr-namespace:ModernIU.Converters;assembly=ModernUILibrary"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localConverters="clr-namespace:ModernUIDemo.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="900"
@@ -12,8 +13,13 @@
 
     <UserControl.Resources>
         <Converter:RowNumberConverter x:Key="rowNumberConverter" />
+        <localConverters:ViewBoxConverter x:Key="ViewBoxConverter" />
+        <localConverters:DrawingImageConverter x:Key="DrawingImageConverter" />
 
-        <Viewbox x:Key="ViewBoxA">
+        <Viewbox
+            x:Key="ViewBoxA"
+            x:Shared="False"
+            Stretch="Fill">
             <Canvas
                 Width="256"
                 Height="256"
@@ -104,31 +110,6 @@
                                     <TextBlock
                                         Grid.Row="0"
                                         Grid.Column="0"
-                                        Text="Viewbox farbig"
-                                        TextWrapping="Wrap" />
-                                </GridViewColumnHeader>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Viewbox Width="32" Height="32">
-                                            <Canvas 
-                                                Width="256"
-                                                Height="256"
-                                                Background="Transparent">
-                                                <Canvas>
-                                                    <Path Data="F1M120.578,100.353C120.578,100.353 100.573,144.788 86.587,144.788 72.601,144.788 52.595,100.353 52.595,100.353 21.672,107.24 0,124.458 0,152.792L0,216.682 173.172,216.682 173.172,152.792C173.172,124.458,151.502,107.241,120.578,100.353z" Fill="#FF1388B1" />
-                                                    <Path Data="F1M123.225,44.475C123.225,69.038 106.82,88.949 86.585,88.949 66.352,88.949 49.948,69.038 49.948,44.475 49.948,19.912 66.352,0 86.585,0 106.82,0 123.225,19.912 123.225,44.475z" Fill="#FFF0BF7C" />
-                                                </Canvas>
-                                            </Canvas>
-                                        </Viewbox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="80">
-                                <GridViewColumnHeader Height="40">
-                                    <TextBlock
-                                        Grid.Row="0"
-                                        Grid.Column="0"
                                         Text="Viewbox monochrom"
                                         TextWrapping="Wrap" />
                                 </GridViewColumnHeader>
@@ -146,6 +127,78 @@
                                                     Stretch="Fill" />
                                             </Canvas>
                                         </Viewbox>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="60">
+                                <GridViewColumnHeader Height="40">
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="Viewbox farbig"
+                                        TextWrapping="Wrap" />
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label
+                                            Width="32"
+                                            Height="32"
+                                            Content="{StaticResource ResourceKey=ViewBoxA}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="80">
+                                <GridViewColumnHeader Height="40">
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="Viewbox Converter"
+                                        TextWrapping="Wrap" />
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label
+                                            Width="32"
+                                            Height="32"
+                                            Content="{Binding Path=Id, Converter={StaticResource ResourceKey=ViewBoxConverter}}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="80">
+                                <GridViewColumnHeader Height="40">
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="DrawingImage 16px"
+                                        TextWrapping="Wrap" />
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image
+                                            Width="16"
+                                            Height="16"
+                                            Source="{Binding Path=Id, Converter={StaticResource ResourceKey=DrawingImageConverter}}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="80">
+                                <GridViewColumnHeader Height="40">
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="DrawingImage 32px"
+                                        TextWrapping="Wrap" />
+                                </GridViewColumnHeader>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image
+                                            Width="32"
+                                            Height="32"
+                                            Source="{Binding Path=Id, Converter={StaticResource ResourceKey=DrawingImageConverter}}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
