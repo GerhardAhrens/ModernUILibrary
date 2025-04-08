@@ -59,7 +59,7 @@ Hier ein paar Beispiele:
 Klassen für vielfältigen Funktionen
 <img src="./ModernUIShowCS.png" style="width:700px;"/>
 
-# ModernInsideVM
+# Modern *InsideVM*
 
 Unter dem Begriff **InsideVM** wird eine Framework zur Entwicklung von MVVM basierte WPF Desktop Anwendungen zur Verfügung gestellt.
 - Basis-Klassen
@@ -68,20 +68,72 @@ Unter dem Begriff **InsideVM** wird eine Framework zur Entwicklung von MVVM basi
 - Abbildung einer Class-To-Class Kommunikation (über einen Event Aggregator)
 - Validierung von Eingaben
 
-Dieser Ansatz spart zum einen die ViewModel-Klasse, ermöglicht den direkten Zugriff auf alle Controls, um aufwendige technische Funktionen zu ermöglichen. Zeitaufwendige Programmierung zur umsetzten können auf diese Art reduziert werden.</br>
+Dieser Ansatz spart zum einen die ViewModel-Klasse, ermöglicht aber den direkten Zugriff auf alle Controls, um aufwendige technische Funktionen zu ermöglichen. Zeitaufwendige Programmierung zur umsetzten können auf diese Art reduziert werden.</br>
+Mit dem Ansatz von *InsideVM* wird versucht die möglichkeiten von *Code Behind* und einem *klassischen ViewModel* auf einfache Weise zusammen zu bringen.\
+Die Vorteile dieser Lösungen zeigt sich bei der Entwicklung von [Monotithischen](https://www.computerweekly.com/de/definition/Monolithische-Architektur) bzw. [Modulitischen](https://entwickler.de/software-architektur/aus-monolith-wird-modulith) Anwendungen bei denen der Focus auf eine schnelle und einfache Entwicklung steht.</br>
 
+Anwendungen werden auf Basis eine *Single Page Architektur* entwickelt. Es gibt ein Hauptwindow, in dem alle weitere Dialoge als UserControl abgebildet geladen werden. Die Steuerung zwischen den UserControls erfolgt über eine Class-To-Class Kommunikation die im *InsindeVM Framework* als EventAggregator abgebildet ist.\
 Nachteil dieser Lösung ist, komplexere Arten von Unit-Test können nicht so einfach umgesetzt werden.
 
+**Beispiel Hauptmenü**
+<img src="./InsideVM_A.png" style="width:700px;"/>
+
 ## Basisklassen
+*Window* und *UserControl* leiten jeweils von einer Basis Klasse ab, die weitere Funktionalitäten wie:
+- Property Binding
+- Validierung
+- ViewState
+- usw.
+zur Verfügung stellt.
+```csharp
+public partial class MainWindow : WindowBase, IDialogClosing
+{
+}
+/* oder */
+public partial class DialogC : UserControlBase
+{
+}
+```
 
 ## Property Bindung
+Diese Schreibweise für ein Get/Set Property spart zum einen die Membervariable zum anderen ist es auch möglich eine After-Action-Methode anzugeben.
+```csharp
+public string DialogDescription
+{
+    get => base.GetValue<string>();
+    set => base.SetValue(value);
+}
+/* oder */
+public string Description
+{
+    get => base.GetValue<string>();
+    set => base.SetValue(value,this.CheckContent);
+}
+```
 
 ## Command Binding
 
 ## Class-To-Class Kommunikation
 
 ## Validierung
+Die Validierung von Eingabe erfolgt über eine einfache Fluent API
 
+```csharp
+private void RegisterValidations()
+{
+    this.ValidationRules.Add(nameof(this.Titel), () =>
+    {
+        return InputValidation<DialogC>.This(this).NotEmpty(x => x.Titel, "Titel");
+    });
+
+    this.ValidationRules.Add(nameof(this.Description), () =>
+    {
+        return InputValidation<DialogC>.This(this).NotEmpty(x => x.Description, "Beschreibung");
+    });
+}
+```
+
+<img src="./InsideVM_B.png" style="width:700px;"/>
 
 # Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>
@@ -91,3 +143,7 @@ Nachteil dieser Lösung ist, komplexere Arten von Unit-Test können nicht so einfa
 ![Version](https://img.shields.io/badge/Version-1.0.2025.10-yellow.svg)
 - Aufbau der Modern Base Library
 - Erweiterung des Demoprogramm um C# Source in einem eigenen einfachen Editor darzustellen
+
+![Version](https://img.shields.io/badge/Version-1.0.2025.15-yellow.svg)
+- Demo-Applikation zum InsideVM Framework
+- Weitere Korrekturen in der Base- und UI Library

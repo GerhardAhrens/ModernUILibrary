@@ -16,8 +16,13 @@
 namespace ModernIU.MVVM.Base
 {
     using System;
+    using System.Diagnostics;
     using System.Linq.Expressions;
+    using System.Runtime.Versioning;
 
+    [DebuggerStepThrough]
+    [Serializable]
+    [SupportedOSPlatform("windows")]
     internal static class PropertyName
     {
         public static string For<T>(Expression<Func<T, object>> expression)

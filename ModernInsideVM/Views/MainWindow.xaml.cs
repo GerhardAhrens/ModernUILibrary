@@ -32,6 +32,7 @@
             this.InitCommands();
             this.InitTimer();
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+
             this.DataContext = this;
         }
 

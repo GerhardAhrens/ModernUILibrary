@@ -15,10 +15,14 @@ namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.Versioning;
 
-
+    [DebuggerStepThrough]
+    [Serializable]
+    [SupportedOSPlatform("windows")]
     public abstract class EnumTypBase : IComparable, IEnumExtended
     {
         protected EnumTypBase(int key, string name, string description = null)

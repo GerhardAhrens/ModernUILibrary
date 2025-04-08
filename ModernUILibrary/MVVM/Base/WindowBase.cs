@@ -34,7 +34,6 @@ namespace ModernUI.MVVM.Base
     using System.Windows;
     using System.Windows.Media;
 
-    using Microsoft.Xaml.Behaviors;
     using ModernBaseLibrary.Core;
 
     using ModernIU.Controls;
@@ -51,8 +50,8 @@ namespace ModernUI.MVVM.Base
         private bool _IsPropertyChanged = false;
         private int _RowPosition = 0;
         private Dictionary<string, string> errors = new Dictionary<string, string>();
-        protected bool HasErrors => this.errors.Any();
-        public string Error => string.Join(", ", errors.Values);
+
+        public Dictionary<string, Func<Result<string>>> ValidationRules = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowBase"/> class.
@@ -62,6 +61,7 @@ namespace ModernUI.MVVM.Base
             this.FontFamily = new FontFamily("Tahoma");
             this.FontWeight = FontWeights.Medium;
             this.className = this.GetType().Name;
+            this.ValidationRules = new Dictionary<string, Func<Result<string>>>();
         }
 
         public WindowBase(Type inheritsType)
@@ -70,16 +70,10 @@ namespace ModernUI.MVVM.Base
             this.FontFamily = new FontFamily("Tahoma");
             this.FontWeight = FontWeights.Medium;
             this.className = this.GetType().Name;
+            this.ValidationRules = new Dictionary<string, Func<Result<string>>>();
         }
 
-        public Dictionary<string, string> ErrorList
-        {
-            get
-            {
-                return this.errors;
-            }
-        }
-
+        #region Properties
         public dynamic ViewState
         {
             get { return this.viewState; }
@@ -117,6 +111,7 @@ namespace ModernUI.MVVM.Base
         public EventAggregator EventAgg { get; } = new EventAggregator();
 
         public int DisplayRowCount { get; set; }
+        #endregion Properties
 
         public virtual void InitCommands() { }
 

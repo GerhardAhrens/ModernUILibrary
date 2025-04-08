@@ -25,9 +25,13 @@
 namespace ModernUI.MVVM.Base
 {
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Runtime.Versioning;
     using System.Windows;
 
-
+    [DebuggerStepThrough]
+    [Serializable]
+    [SupportedOSPlatform("windows")]
     public sealed class DialogClosing
     {
         public static readonly DependencyProperty IsClosingProperty =

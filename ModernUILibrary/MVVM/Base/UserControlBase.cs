@@ -51,8 +51,7 @@ namespace ModernUI.MVVM.Base
         private bool isPropertyChanged = false;
         private int rowPosition = 0;
         private Dictionary<string, string> errors = new Dictionary<string, string>();
-        protected bool HasErrors => this.errors.Any();
-        public string Error => string.Join(", ", errors.Values);
+
         public Dictionary<string, Func<Result<string>>> ValidationRules = null;
 
         /// <summary>
@@ -75,6 +74,7 @@ namespace ModernUI.MVVM.Base
             this.ValidationRules = new Dictionary<string, Func<Result<string>>>();
         }
 
+        #region Properties
         public dynamic ViewState
         {
             get { return this.viewState; }
@@ -114,6 +114,7 @@ namespace ModernUI.MVVM.Base
         public EventAggregator EventAgg { get; } = new EventAggregator();
 
         public int DisplayRowCount { get; set; }
+        #endregion Properties
 
         public virtual void InitCommands() { }
 
