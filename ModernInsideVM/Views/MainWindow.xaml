@@ -13,20 +13,30 @@
     Width="800"
     Height="600"
     winbase:DialogClosing.IsClosing="True"
-    Icon="/Resources/Picture/AppLogo.ico"
+    Icon="/Views/AppLogo.ico"
+    ShowInTaskbar="True"
+    TitleFontSize="18"
     mc:Ignorable="d">
+
+    <!--<Window.Icon>
+        <DrawingImage>
+            <DrawingImage.Drawing>
+                <GeometryDrawing Geometry="{StaticResource ResourceKey=IconStatusbarCalendar}" />
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </Window.Icon>-->
 
     <ModernUI:MWindow.MoreOnTitle>
         <StackPanel
             Margin="0,0,5,0"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             KeyboardNavigation.IsTabStop="False"
             Orientation="Horizontal">
             <ModernUI:GeometryButton
+                Height="30"
                 Command="{Binding Path=CmdAgg[HelpCommand]}"
                 CommandParameter="{x:Static localStatic:CommandButtons.Help}"
-                PathData="{StaticResource ResourceKey=IconHelp}" Height="30" />
-
+                PathData="{StaticResource ResourceKey=IconHelp}" />
         </StackPanel>
     </ModernUI:MWindow.MoreOnTitle>
 

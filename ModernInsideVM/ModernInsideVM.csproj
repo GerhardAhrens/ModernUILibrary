@@ -6,14 +6,23 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Picture\AppLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Picture\AppLogo.ico" />
+    <None Remove="Views\AppLogo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Picture\AppLogo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Picture\AppLogo.ico" />
+    <Resource Include="Views\AppLogo.ico" />
   </ItemGroup>
 
   <ItemGroup>
