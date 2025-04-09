@@ -66,7 +66,7 @@
             NotificationService.RegisterDialog<QuestionYesNo>();
             NotificationService.RegisterDialog<MessageOk>();
 
-            this.DialogDescription = "ModernInsideVM";
+            this.DialogDescription = "Modern InsideVM - Demo";
             base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
 
             ChangeViewEventArgs arg = new ChangeViewEventArgs();
@@ -78,7 +78,23 @@
 
         private void HelpHandler(object commandArgs)
         {
-            this.notificationService.FeaturesNotFound(commandArgs.ToString());
+            IEnumerable<IAssemblyInfo> metaInfo = null;
+            using (AssemblyMetaService ams = new AssemblyMetaService())
+            {
+                metaInfo = ams.GetMetaInfo();
+            }
+
+            List<string> assemblyList = new List<string>();
+            foreach (IAssemblyInfo assembly in metaInfo)
+            {
+                assemblyList.Add($"{assembly.AssemblyName}; {assembly.AssemblyVersion}");
+            }
+
+            string headLineText = "Versionen zur Modern InsideVM.";
+
+            NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, assemblyList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
+
+            //this.notificationService.FeaturesNotFound(commandArgs.ToString());
         }
 
         public override void OnViewIsClosing(CancelEventArgs e)

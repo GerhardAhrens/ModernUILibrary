@@ -47,7 +47,7 @@
         }
         
         public static readonly DependencyProperty TitleFontSizeProperty =
-            DependencyProperty.Register("TitleFontSize", typeof(double), typeof(MWindow), new PropertyMetadata(12d));
+            DependencyProperty.Register("TitleFontSize", typeof(double), typeof(MWindow), new PropertyMetadata(14d));
 
         #endregion
 
@@ -60,9 +60,35 @@
         }
         
         public static readonly DependencyProperty TitleFontFamilyProperty =
-            DependencyProperty.Register("TitleFontFamily", typeof(FontFamily), typeof(MWindow));
+            DependencyProperty.Register("TitleFontFamily", typeof(FontFamily), typeof(MWindow), new PropertyMetadata(new FontFamily("Segoe UI")));
 
         #endregion
+
+        #region TitleIcon
+
+        public DrawingImage TitleIcon
+        {
+            get { return (DrawingImage)GetValue(TitleIconProperty); }
+            set { SetValue(TitleIconProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleIconProperty =
+            DependencyProperty.Register("TitleIcon", typeof(DrawingImage), typeof(MWindow));
+
+        #endregion TitleIcon
+
+        #region TitleIconSize
+
+        public double TitleIconSize
+        {
+            get { return (double)GetValue(TitleIconSizeProperty); }
+            set { SetValue(TitleIconSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleIconSizeProperty =
+            DependencyProperty.Register("TitleIconSize", typeof(double), typeof(MWindow), new PropertyMetadata(24d));
+
+        #endregion TitleIcon
 
         #region MaximizeBox
 

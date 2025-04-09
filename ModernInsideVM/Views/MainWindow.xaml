@@ -13,18 +13,10 @@
     Width="800"
     Height="600"
     winbase:DialogClosing.IsClosing="True"
-    Icon="/Views/AppLogo.ico"
     ShowInTaskbar="True"
     TitleFontSize="18"
+    TitleIcon="{StaticResource ResourceKey=AppWindowIcon}"
     mc:Ignorable="d">
-
-    <!--<Window.Icon>
-        <DrawingImage>
-            <DrawingImage.Drawing>
-                <GeometryDrawing Geometry="{StaticResource ResourceKey=IconStatusbarCalendar}" />
-            </DrawingImage.Drawing>
-        </DrawingImage>
-    </Window.Icon>-->
 
     <ModernUI:MWindow.MoreOnTitle>
         <StackPanel

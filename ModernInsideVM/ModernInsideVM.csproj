@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Picture\AppLogo.ico">
+    <Content Include="Resources\Picture\AppLogo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +33,12 @@
   <ItemGroup>
     <Folder Include="Resources\Style\" />
     <Folder Include="Views\NotificationContent\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AssemblyInfo\AssemblyMetaInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

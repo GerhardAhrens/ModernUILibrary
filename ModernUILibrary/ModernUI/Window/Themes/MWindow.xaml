@@ -187,11 +187,11 @@
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Orientation="Horizontal">
                                         <Image
-                                            Width="24"
-                                            Height="24"
+                                            Width="{TemplateBinding TitleIconSize}"
+                                            Height="{TemplateBinding TitleIconSize}"
                                             Margin="10,0,0,0"
                                             VerticalAlignment="Center"
-                                            Source="{TemplateBinding Icon}" />
+                                            Source="{TemplateBinding TitleIcon}" />
 
                                         <TextBlock
                                             Margin="10,0,10,0"
