@@ -8,12 +8,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ModernInsideVM.Views.ContentControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
     <UserControl.Resources>
         <ModernWPF:CommandKeyReference x:Key="CloseAppCmdKey" Command="{Binding Path=CmdAgg[CloseAppCommand]}" />
+
+        <sys:Double x:Key="ScaleXY">1.0</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
@@ -23,11 +26,19 @@
             Modifiers="Alt" />
     </UserControl.InputBindings>
 
-    <ModernUI:SimpleGrid Columns="*" Rows="30,Auto,*">
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="Scalefactor" ScaleX="{StaticResource ResourceKey=ScaleXY}" ScaleY="{StaticResource ResourceKey=ScaleXY}" />
+    </UserControl.LayoutTransform>
+
+    <ModernUI:SimpleGrid
+        x:Name="rootGrid"
+        Columns="*"
+        Rows="30,Auto,*">
         <StackPanel
             Grid.Row="0"
             Grid.Column="0"
             Height="Auto"
+            HorizontalAlignment="Stretch"
             Background="LightBlue"
             Orientation="Horizontal">
 
@@ -43,6 +54,7 @@
         <Border
             Grid.Row="1"
             Grid.Column="0"
+            HorizontalAlignment="Stretch"
             BorderBrush="Black"
             BorderThickness="0,1,0,1">
             <StackPanel Orientation="Horizontal">

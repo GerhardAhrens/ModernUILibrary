@@ -1,10 +1,12 @@
 ﻿namespace ModernInsideVM.Views.ContentControls
 {
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
 
     using ModernInsideVM.Core;
+
     using ModernIU.Controls;
 
     using ModernUI.MVVM.Base;
@@ -18,6 +20,7 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            WeakEventManager<UserControl, MouseWheelEventArgs>.AddHandler(this, "PreviewMouseWheel", this.OnPreviewMouseWheel);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -65,6 +68,30 @@
                 RowPosition = 1,
                 IsRefresh = false,
             });
+        }
+
+        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) == true)
+            {
+                if (e.Delta > 0)
+                {
+                    if (this.Scalefactor.ScaleX <= 2.0)
+                    {
+                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX + 0.25;
+                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY + 0.25;
+                    }
+                }
+
+                if (e.Delta < 0)
+                {
+                    if (this.Scalefactor.ScaleX > 1.0)
+                    {
+                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX - 0.25;
+                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY - 0.25;
+                    }
+                }
+            }
         }
     }
 }
