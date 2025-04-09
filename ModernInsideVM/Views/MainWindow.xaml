@@ -29,6 +29,12 @@
                 Command="{Binding Path=CmdAgg[HelpCommand]}"
                 CommandParameter="{x:Static localStatic:CommandButtons.Help}"
                 PathData="{StaticResource ResourceKey=IconHelp}" />
+
+            <ModernUI:GeometryButton
+                Height="30"
+                Command="{Binding Path=CmdAgg[AppAboutCommand]}"
+                CommandParameter="{x:Static localStatic:CommandButtons.AppAbout}"
+                PathData="{StaticResource ResourceKey=IconAbout}" />
         </StackPanel>
     </ModernUI:MWindow.MoreOnTitle>
 

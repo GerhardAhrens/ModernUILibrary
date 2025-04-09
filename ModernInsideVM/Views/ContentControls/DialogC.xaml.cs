@@ -79,6 +79,12 @@
         {
             this.Focus();
             Keyboard.Focus(this);
+
+            WeakEventManager<TitleTextBox, KeyEventArgs>.AddHandler(this.TxtTitel, "KeyDown", this.OnKeyDown);
+            WeakEventManager<TitleTextBox, KeyEventArgs>.AddHandler(this.TxtDescription, "KeyDown", this.OnKeyDown);
+
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.TxtTitel.Focus(); }));
+
             this.RegisterValidations();
             this.LoadDataHandler();
             this.IsUCLoaded = true;
@@ -223,6 +229,23 @@
                         this.TxtDescription.Focus();
                         this.TxtDescription.Background = Brushes.Coral;
                     }));
+                }
+            }
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            TitleTextBox tb = sender as TitleTextBox;
+            if (tb != null)
+            {
+                if (tb.Name == this.TxtTitel.Name && e.Key == Key.Tab)
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.TxtDescription.Focus(); }));
+                }
+
+                if (tb.Name == this.TxtDescription.Name && e.Key == Key.Tab)
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.TxtTitel.Focus(); }));
                 }
             }
         }
