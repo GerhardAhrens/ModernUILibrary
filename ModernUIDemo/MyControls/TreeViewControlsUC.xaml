@@ -4,27 +4,89 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="900"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel für ein editierbares TreeView..." />
+        <TextBlock FontSize="14" Text="Beispiel für ein rekursives TreeView..." />
         <Separator Height="3" Background="Green" />
 
-        <StackPanel
+        <TreeView
+            x:Name="TreeApp"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Width="400"
+            HorizontalAlignment="Left"
+            ItemsSource="{Binding Path=TreeSource, UpdateSourceTrigger=PropertyChanged}"
+            VirtualizingStackPanel.IsVirtualizing="True"
+            VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Alle Erweitern" />
+                    <MenuItem Header="Alle Zuklappen" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=DataContext.SelectedTreeItemChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeView}}}" CommandParameter="{Binding ElementName=TreeApp, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <TreeView.ItemContainerStyle>
+                <!--
+                    This Style binds a TreeViewItem to a PersonViewModel.
+                -->
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <EventSetter Event="MouseDoubleClick" Handler="OnItemMouseDoubleClick" />
+                    <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView.ItemContainerStyle>
+
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildTreeItem, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Aufklappen" />
+                                <MenuItem Header="Zuklappen" />
+                                <MenuItem Header="Hinzufügen" />
+                                <MenuItem Header="Löschen" />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
+                        <TextBlock Foreground="Red" Text="{Binding Path=NodeSymbol}" />
+                        <TextBlock Margin="5,0,0,0" Text="{Binding Path=NodeName}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <TextBlock
             Grid.Row="1"
-            Grid.Column="0"
-            Orientation="Vertical" />
+            Grid.Column="1"
+            FontSize="14"
+            FontWeight="Medium"
+            Text="{Binding Path=SelectedTreeItem, FallbackValue=~SelectedTreeItem, StringFormat={}Nodename:{0}}" />
 
     </Grid>
 </UserControl>
