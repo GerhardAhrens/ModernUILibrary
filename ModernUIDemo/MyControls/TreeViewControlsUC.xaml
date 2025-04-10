@@ -68,9 +68,21 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Aufklappen" />
-                                <MenuItem Header="Zuklappen" />
-                                <MenuItem Header="Hinzufügen" />
+                                <MenuItem
+                                    Command="{Binding Path=DataContext.ExpandTreeItemCommand, Source={x:Reference TreeApp}}"
+                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                    Header="Erweitern" />
+
+                                <MenuItem
+                                    Command="{Binding Path=DataContext.CloseTreeItemCommand, Source={x:Reference TreeApp}}"
+                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                    Header="Zuklappen" />
+
+                                <MenuItem
+                                    Command="{Binding Path=DataContext.InsertTreeItemCommand, Source={x:Reference TreeApp}}"
+                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                    Header="Hinzufügen" />
+                                
                                 <MenuItem Header="Löschen" />
                             </ContextMenu>
                         </StackPanel.ContextMenu>

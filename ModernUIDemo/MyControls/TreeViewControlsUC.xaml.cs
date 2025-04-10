@@ -8,6 +8,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Xml.Linq;
+    using ModernBaseLibrary.Extension;
 
     using ModernUI.MVVM.Base;
 
@@ -19,6 +20,9 @@
         private ObservableCollection<TreeViewItem> treeSource;
         private string selectedTreeItem = string.Empty;
         public ICommand SelectedTreeItemChanged => new RelayCommand(this.SelectedTreeItemChangedHandler);
+        public ICommand CloseTreeItemCommand => new RelayCommand(this.CloseTreeItemHandler);
+        public ICommand ExpandTreeItemCommand => new RelayCommand(this.ExpandTreeItemHandler);
+        public ICommand InsertTreeItemCommand => new RelayCommand(this.InsertTreeItemHandler);
 
         public TreeViewControlsUC()
         {
@@ -50,36 +54,36 @@
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             TreeViewItem tr1 = new TreeViewItem("Root");
-            treeSource.Add(tr1);
+            this.TreeSource.Add(tr1);
 
             TreeViewItem level1 = new TreeViewItem("Level-1");
-            level1.Add(new TreeViewItem("Level-1-1"));
-            level1.Add(new TreeViewItem("Level-1-2"));
-            treeSource.Add(level1);
+            level1.Add(new TreeViewItem("Level-1-1"),2);
+            level1.Add(new TreeViewItem("Level-1-2"), 2);
+            this.TreeSource.Add(level1);
 
             TreeViewItem level2 = new TreeViewItem("Level-2");
-            level2.Add(new TreeViewItem("Level-2-1"));
-            level2.Add(new TreeViewItem("Level-2-2"));
-            level2.Add(new TreeViewItem("Level-2-3"));
-            treeSource.Add(level2);
+            level2.Add(new TreeViewItem("Level-2-1"), 2);
+            level2.Add(new TreeViewItem("Level-2-2"), 2);
+            level2.Add(new TreeViewItem("Level-2-3"), 2);
+            this.TreeSource.Add(level2);
 
             TreeViewItem level3 = new TreeViewItem("Level-3");
-            level3.Add(new TreeViewItem("Level-3-1"));
+            level3.Add(new TreeViewItem("Level-3-1"), 2);
             Guid l3 = level3.ChildTreeItem.LastOrDefault().NodeKey;
-            level3.Add(l3, new TreeViewItem("Level-3-1-1"));
-            level3.Add(l3, new TreeViewItem("Level-3-1-2"));
+            level3.Add(l3, new TreeViewItem("Level-3-1-1"),3);
+            level3.Add(l3, new TreeViewItem("Level-3-1-2"), 3);
             Guid l33 = level3.ChildTreeItem.LastOrDefault().ChildTreeItem.LastOrDefault().NodeKey;
-            level3.Add(l33, new TreeViewItem("Level-3-1-3-1"));
-            level3.Add(l3, new TreeViewItem("Level-3-1-3"));
-            level3.Add(new TreeViewItem("Level-3-2"));
+            level3.Add(l33, new TreeViewItem("Level-3-1-2-1"),4);
+            level3.Add(l3, new TreeViewItem("Level-3-1-3"), 3);
+            level3.Add(new TreeViewItem("Level-3-2"), 2);
 
-            treeSource.Add(level3);
+            this.TreeSource.Add(level3);
 
         }
 
         private void SelectedTreeItemChangedHandler(object obj)
         {
-            this.SelectedTreeItem = $"NodeName: {((TreeViewItem)obj).NodeName}";
+            this.SelectedTreeItem = $"NodeName: {((TreeViewItem)obj).NodeName}; Level: {((TreeViewItem)obj).Level}";
         }
 
         private void OnItemMouseDoubleClick(object sender, MouseButtonEventArgs args)
@@ -95,6 +99,41 @@
 
                         args.Handled = true;
                     }
+                }
+            }
+        }
+
+        private void CloseTreeItemHandler(object obj)
+        {
+            if (obj != null && obj is TreeViewItem treeItem)
+            {
+                treeItem.IsExpanded = false ;
+            }
+        }
+
+        private void ExpandTreeItemHandler(object obj)
+        {
+            if (obj != null && obj is TreeViewItem treeItem)
+            {
+                treeItem.IsExpanded = true;
+            }
+        }
+
+        private void InsertTreeItemHandler(object obj)
+        {
+            if (obj != null && obj is TreeViewItem treeItem)
+            {
+                if (treeItem.NodeName.ToLower() == "root")
+                {
+                    int num = this.TreeSource.Count<TreeViewItem>(c => c.Level == treeItem.Level) + 1;
+                    TreeViewItem tr = new TreeViewItem($"Level-{num}");
+                    this.TreeSource.Add(tr);
+                }
+                else if (treeItem.NodeName.ToLower() != "root")
+                {
+                    int num = treeItem.ChildTreeItem.Count<TreeViewItem>(c => c.Level == treeItem.Level) + 1;
+                    treeItem.Add(new TreeViewItem("Level-1-1"), 2);
+                    this.TreeSource.Add(treeItem);
                 }
             }
         }
@@ -119,7 +158,7 @@
         #endregion PropertyChanged Implementierung
     }
 
-    [DebuggerDisplay("Key={this.NodeKey};Name={this.NodeName}")]
+    [DebuggerDisplay("Key={this.NodeKey};Name={this.NodeName};Level={this.Level}")]
     public class TreeViewItem : INotifyPropertyChanged
     {
         private bool isSelected;
@@ -128,19 +167,22 @@
         private Guid nodeKey = Guid.Empty;
 
 
-        public TreeViewItem(string description)
+        public TreeViewItem(string description, int level = 1)
         {
             this.IsExpanded = true;
             this.IsSelected = false;
 
             this.NodeKey = Guid.NewGuid();
             this.NodeName = description;
+            this.Level = level;
         }
 
         public int Count
         {
             get { return childTreeItem.Count; }
         }
+
+        public int Level { get; private set; } = 0;
 
         public Guid NodeKey
         {
@@ -186,18 +228,24 @@
             }
         }
 
-        public void Add(TreeViewItem childItem)
+        public void Add(TreeViewItem childItem, int level = -1)
         {
+            if (level > 0)
+            {
+                childItem.Level = level;
+            }
+
             this.ChildTreeItem.Add(childItem);
         }
 
-        public void Add(Guid childItem, TreeViewItem childItemNext)
+        public void Add(Guid childItem, TreeViewItem childItemNext, int level)
         {
             if (this.ChildTreeItem.Any() == true)
             {
                 TreeViewItem node = this.Find(this.ChildTreeItem.LastOrDefault(), childItem);
                 if (node != null)
                 {
+                    childItemNext.Level = level;
                     node.Add(childItemNext);
                 }
             }
