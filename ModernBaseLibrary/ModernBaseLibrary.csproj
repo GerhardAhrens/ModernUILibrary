@@ -230,7 +230,6 @@
     <Folder Include="Extensions\System.Enum\" />
     <Folder Include="Extensions\System.Type\" />
     <Folder Include="Extensions\System.Object\" />
-    <Folder Include="Extensions\System.Collections\" />
     <Folder Include="Extensions\System.SecureString\" />
     <Folder Include="Exception\" />
     <Folder Include="FluentAPI\API\" />
