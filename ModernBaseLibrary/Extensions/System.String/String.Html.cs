@@ -24,7 +24,18 @@ namespace ModernBaseLibrary.Extension
 
         static StringExtension()
         {
-            umlauteMap = new Dictionary<char, string>() { { 'Ä', "&Auml;" }, { 'Ö', "&Ouml;" }, { 'Ü', "&Uuml;" }, { 'ä', "&auml;" }, { 'ö', "&ouml;" }, { 'ü', "&uuml;" }, { 'ß', "&szlig;" } };
+            umlauteMap = new Dictionary<char, string>() {
+                { 'Ä', "&Auml;" }, 
+                { 'Ö', "&Ouml;" }, 
+                { 'Ü', "&Uuml;" }, 
+                { 'ä', "&auml;" }, 
+                { 'ö', "&ouml;" }, 
+                { 'ü', "&uuml;" }, 
+                { 'ß', "&szlig;" },
+                { '<', "&lt;" },
+                { '>', "&gt;" },
+                { '\"', "&quot;" }
+            };
         }
 
         public static bool IsHtmlTag(this string text, string tag)

@@ -289,6 +289,7 @@
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
             this.tabItemSource.Add(new TabControlItem("FilterDataGrid Control", new FilterDataGridControlsUC()) { Stichworte = "DataGrid;Filter;Flat" });
             this.tabItemSource.Add(new TabControlItem("XML Viewer Control", new XMLViewerControlsUC()) { Stichworte = "xml;viewer" });
+            this.tabItemSource.Add(new TabControlItem("TreeView Control", new TreeViewControlsUC()) { Stichworte = "treeview" });
 
             this.tabItemSource.Add(new TabControlItem("Dialoge und Funktionen", true));
             this.tabItemSource.Add(new TabControlItem("Dialoge", new FunctionControlsUC()) { Stichworte = "Dialog;View;Function;Funktion" });

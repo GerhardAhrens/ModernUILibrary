@@ -34,55 +34,67 @@ namespace ModernBaseLibrary.Extension
     public static partial class EnumExtensions
     {
         /// <summary>
+        ///   Return a list of item in Enumeration
+        /// </summary>
+        public static List<Enum> ToList(this Enum @this)
+        {
+            return
+                @this.GetType()
+                    .GetFields(BindingFlags.Static | BindingFlags.Public)
+                    .Select(fieldInfo => (Enum)fieldInfo.GetValue(@this))
+                    .ToList();
+        }
+
+        /// <summary>
         /// Die Methode gibt den nummerischen Wert eines Enum-Elementes als Int zurück
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
-        /// <param name="soure"></param>
+        /// <param name="this"></param>
         /// <returns></returns>
-        public static int ToInt<TEnum>(this TEnum soure) where TEnum : struct, Enum
+        public static int ToInt<TEnum>(this TEnum @this) where TEnum : struct, Enum
         {
             if (typeof(TEnum).IsEnum == false)
             {
                 throw new ArgumentException("TEnum must be an enumerated type");
             }
 
-            return (int)(IConvertible)soure;
+            return (int)(IConvertible)@this;
         }
 
         /// <summary>
         /// Die Methode gibt den nummerischen Wert eines Enum-Elementes als String zurück
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="soure"></param>
+        /// <param name="this"></param>
         /// <returns></returns>
-        public static string ToValueAsString<TEnum>(this TEnum soure) where TEnum : struct, Enum
+        public static string ToValueAsString<TEnum>(this TEnum @this) where TEnum : struct, Enum
         {
             if (typeof(TEnum).IsEnum == false)
             {
                 throw new ArgumentException("T must be an enumerated type");
             }
 
-            return ((int)(IConvertible)soure).ToString();
+            return ((int)(IConvertible)@this).ToString();
         }
 
-        public static string ToUpperString<TEnum>(this TEnum soure) where TEnum : struct, Enum
+        public static string ToUpperString<TEnum>(this TEnum @this) where TEnum : struct, Enum
         {
             if (typeof(TEnum).IsEnum == false)
             {
                 throw new ArgumentException("T must be an enumerated type");
             }
 
-            return soure.ToString().ToUpper();
+            return @this.ToString().ToUpper();
         }
 
-        public static string ToLowerString<TEnum>(this TEnum soure) where TEnum : struct, Enum
+        public static string ToLowerString<TEnum>(this TEnum @this) where TEnum : struct, Enum
         {
             if (typeof(TEnum).IsEnum == false)
             {
                 throw new ArgumentException("T must be an enumerated type");
             }
 
-            return soure.ToString().ToLower();
+            return @this.ToString().ToLower();
         }
 
         /// <summary>

@@ -264,16 +264,6 @@ namespace ModernBaseLibrary.Extension
             return @this;
         }
 
-        public static DateTime EndOfDay(this DateTime @this)
-        {
-            return new DateTime(@this.Year, @this.Month, @this.Day, 23, 59, 59, 999);
-        }
-
-        public static DateTime BeginningOfDay(this DateTime @this)
-        {
-            return new DateTime(@this.Year, @this.Month, @this.Day, 0, 0, 0, 0);
-        }
-
         public static DateTime NextYear(this DateTime @this)
         {
             var nextYear = @this.Year + 1;
@@ -1161,6 +1151,58 @@ namespace ModernBaseLibrary.Extension
         public static string FriendlyElapsedTimeString(this TimeSpan elapsed)
         {
             return FriendlyElapsedTimeString((int)elapsed.TotalMilliseconds);
+        }
+
+        // <summary>
+        /// Dates the time from date and time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="time">The time.</param>
+        /// <returns>DateTime.</returns>
+        public static DateTime DateTimeFromDateAndTime(this string date, string time)
+        {
+            return DateTime.Parse($"{date} {time}");
+        }
+
+        /// <summary>
+        /// Dates the time from date and time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="time">The time.</param>
+        /// <returns>DateTime.</returns>
+        public static DateTime DateTimeFromDateAndTime(this DateTime date, string time)
+        {
+            return DateTime.Parse($"{date.ToShortDateString()} {time}");
+        }
+
+        public static DateTime EndOfDay(this DateTime @this)
+        {
+            return new DateTime(@this.Year, @this.Month, @this.Day, 23, 59, 59, 999);
+        }
+
+        /// <summary>
+        /// Ends the of month.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>DateTime.</returns>
+        public static DateTime EndOfMonth(this DateTime obj)
+        {
+            return new DateTime(obj.Year, obj.Month, DateTime.DaysInMonth(obj.Year, obj.Month), 23, 59, 59, 999);
+        }
+
+        public static DateTime BeginningOfDay(this DateTime @this)
+        {
+            return new DateTime(@this.Year, @this.Month, @this.Day, 0, 0, 0, 0);
+        }
+
+        /// <summary>
+        /// Beginnings the of month.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>DateTime.</returns>
+        public static DateTime BeginningOfMonth(this DateTime obj)
+        {
+            return new DateTime(obj.Year, obj.Month, 1, 0, 0, 0, 0);
         }
 
         #region Helper Methodes

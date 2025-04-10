@@ -1944,5 +1944,112 @@ namespace ModernBaseLibrary.Extension
         {
             return culture.CompareInfo.IndexOf(paragraph, word, CompareOptions.IgnoreCase) >= 0;
         }
+
+        /// <summary>
+        /// Return all possible permutation for string
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
+        public static IEnumerable<string> GetPermutations(this string text)
+        {
+            return GetPermutations(string.Empty, text);
+        }
+
+        /// <summary>
+        /// Return all possible permutation for string start at specific character
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="start">The start.</param>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
+        public static IEnumerable<string> GetPermutations(this string text, string start)
+        {
+            if (text.Length <= 1)
+                yield return start + text;
+            else
+            {
+                for (var i = 0; i < text.Length; i++)
+                {
+                    text = text[i] + text.Substring(0, i) + text.Substring(i + 1);
+                    foreach (var s in GetPermutations(start + text[0], text.Substring(1)))
+                    {
+                        yield return s;
+                    }
+                }
+            }
+        }
+
+        // <summary>
+        /// Parses an string into an decimal. If the value can't be parsed
+        /// a default value is returned instead
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="numberFormat">The number format.</param>
+        /// <returns>System.Decimal.</returns>
+        public static decimal ParseDecimal(this string @this, decimal defaultValue, IFormatProvider numberFormat)
+        {
+            decimal val;
+            if (!decimal.TryParse(@this, NumberStyles.Any, numberFormat, out val))
+            {
+                return defaultValue;
+            }
+            return val;
+        }
+
+        /// <summary>
+        /// Parses the hexadecimal character.
+        /// </summary>
+        /// <param name="c">The c.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Invalid Hex String{c}</exception>
+        public static int ParseHexChar(this char @this)
+        {
+            if ((@this >= '0') && (@this <= '9'))
+            {
+                return @this - '0';
+            }
+
+            if ((@this >= 'A') && (@this <= 'F'))
+            {
+                return @this - 'A' + 10;
+            }
+
+            if ((@this >= 'a') && (@this <= 'f'))
+            {
+                return @this - 'a' + 10;
+            }
+
+            throw new ArgumentException($"Invalid Hex String{@this}");
+        }
+
+        /// <summary>
+        /// Parses an string into an integer. If the value can't be parsed
+        /// a default value is returned instead
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <param name="numberFormat">The number format.</param>
+        /// <returns>System.Int32.</returns>
+        public static int ParseInt(this string input, int defaultValue, IFormatProvider numberFormat)
+        {
+            int val;
+            if (!int.TryParse(input, NumberStyles.Any, numberFormat, out val))
+            {
+                return defaultValue;
+            }
+            return val;
+        }
+
+        /// <summary>
+        /// Parses an string into an integer. If the value can't be parsed
+        /// a default value is returned instead
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Int32.</returns>
+        public static int ParseInt(this string input, int defaultValue)
+        {
+            return ParseInt(input, defaultValue, CultureInfo.CurrentCulture.NumberFormat);
+        }
     }
 }

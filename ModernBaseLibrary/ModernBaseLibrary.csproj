@@ -198,6 +198,8 @@
     <Folder Include="Data\EnumerableDataReader\" />
     <Folder Include="Data\VCalendar\" />
     <Folder Include="Data\VCard\" />
+    <Folder Include="Extensions\System.Net.Http\" />
+    <Folder Include="Extensions\System.Security.Claims\" />
     <Folder Include="Extensions\System.Exception\" />
     <Folder Include="Extensions\System.Task\" />
     <Folder Include="Extensions\System.Data\" />

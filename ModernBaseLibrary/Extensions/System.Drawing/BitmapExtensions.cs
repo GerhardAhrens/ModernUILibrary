@@ -239,6 +239,7 @@
                 image.Save(memoryStream, Equals(format, ImageFormat.MemoryBmp) ? ImageFormat.Bmp : format);
                 array = memoryStream.ToArray();
             }
+
             return array;
         }
     }
