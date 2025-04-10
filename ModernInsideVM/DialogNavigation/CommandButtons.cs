@@ -18,5 +18,7 @@ namespace ModernInsideVM.Core
         CloseApp = 100,
         [Description("Hilfe")]
         Help = 101,
+        [Description("Über ...")]
+        AppAbout = 102,
     }
 }

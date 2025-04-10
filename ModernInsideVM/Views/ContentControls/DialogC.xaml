@@ -131,6 +131,8 @@
                     Grid.Row="4"
                     Width="{StaticResource ResourceKey=TextBoxWidth}"
                     HorizontalAlignment="Left"
+                    KeyboardNavigation.IsTabStop="True"
+                    KeyboardNavigation.TabIndex="10"
                     Text="{Binding Path=Titel, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ModernUI:TitleTextBox
@@ -139,6 +141,8 @@
                     Grid.Row="5"
                     Width="{StaticResource ResourceKey=TextBoxWidth}"
                     HorizontalAlignment="Left"
+                    KeyboardNavigation.IsTabStop="True"
+                    KeyboardNavigation.TabIndex="11"
                     Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
             </ModernUI:SimpleGrid>
         </ScrollViewer>

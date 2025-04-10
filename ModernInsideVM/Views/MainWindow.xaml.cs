@@ -55,6 +55,7 @@
         public override void InitCommands()
         {
             base.CmdAgg.AddOrSetCommand("HelpCommand", new RelayCommand(p1 => this.HelpHandler(p1), p2 => true));
+            base.CmdAgg.AddOrSetCommand("AppAboutCommand", new RelayCommand(p1 => this.AppAboutHandler(p1), p2 => true));
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -78,6 +79,11 @@
 
         private void HelpHandler(object commandArgs)
         {
+            this.notificationService.FeaturesNotFound($"{this.CurrentUCName}-{commandArgs.ToString()}");
+        }
+
+        private void AppAboutHandler(object commandArgs)
+        {
             IEnumerable<IAssemblyInfo> metaInfo = null;
             using (AssemblyMetaService ams = new AssemblyMetaService())
             {
@@ -93,8 +99,6 @@
             string headLineText = "Versionen zur Modern InsideVM.";
 
             NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, assemblyList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
-
-            //this.notificationService.FeaturesNotFound(commandArgs.ToString());
         }
 
         public override void OnViewIsClosing(CancelEventArgs e)
