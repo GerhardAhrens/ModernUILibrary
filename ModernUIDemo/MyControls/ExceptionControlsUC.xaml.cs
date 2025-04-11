@@ -5,6 +5,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using ModernIU.Controls;
+
     /// <summary>
     /// Interaktionslogik für ExceptionControlsUC.xaml
     /// </summary>
@@ -39,5 +41,18 @@
             return true;
         }
         #endregion PropertyChanged Implementierung
+
+        private void btnExceptionA_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                List<string> errors = null;
+                errors.Clear();
+            }
+            catch (Exception ex)
+            {
+                ExceptionView.Show(ex);
+            }
+        }
     }
 }

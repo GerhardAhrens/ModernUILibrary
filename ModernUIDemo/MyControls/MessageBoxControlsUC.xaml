@@ -47,6 +47,7 @@
                 Content="Info"
                 CornerRadius="3"
                 Type="info" />
+            
             <MUI:FlatButton
                 Width="70"
                 Height="28"
@@ -55,6 +56,7 @@
                 Content="Error"
                 CornerRadius="3"
                 Type="error" />
+            
             <MUI:FlatButton
                 Width="70"
                 Height="28"
@@ -63,6 +65,7 @@
                 Content="Success"
                 CornerRadius="3"
                 Type="success" />
+            
             <MUI:FlatButton
                 Width="70"
                 Height="28"

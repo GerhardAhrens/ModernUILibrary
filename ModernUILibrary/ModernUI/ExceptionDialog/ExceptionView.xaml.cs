@@ -79,7 +79,7 @@ namespace ModernIU.Controls
                 TreeView.Background = DefaultPaneBrush;
             }
 
-            docViewer.Background = TreeView.Background;
+            this.docViewer.Background = TreeView.Background;
 
             this._small = TreeView.FontSize;
             this._med = this._small * 1.1;
@@ -89,7 +89,7 @@ namespace ModernIU.Controls
 
             if (string.IsNullOrEmpty(headerMessage) == true)
             {
-                headerMessage = "Error found in appliaction!";
+                headerMessage = "Sorry, das in der Anwendung ein Fehler aufgetreten ist!";
             }
 
             this.BuildTree(e, headerMessage);
@@ -272,12 +272,12 @@ namespace ModernIU.Controls
             this.internalMessage = e.Message;
             this.internalException = e;
 
-            var inlines = new List<Inline>();
+            List<Inline> inlines = new List<Inline>();
             var firstItem = new TreeViewItem();
-            firstItem.Header = "All Messages";
+            firstItem.Header = "Alle Meldungen";
             TreeView.Items.Add(firstItem);
 
-            var inline = new Bold(new Run(summaryMessage));
+            Bold inline = new Bold(new Run(summaryMessage));
             inline.FontSize = this._large;
             inlines.Add(inline);
 
@@ -412,12 +412,12 @@ namespace ModernIU.Controls
                 doc.FontSize = this._small;
                 doc.FontFamily = TreeView.FontFamily;
                 doc.TextAlignment = TextAlignment.Left;
-                doc.Background = docViewer.Background;
+                doc.Background = this.docViewer.Background;
 
                 var para = new Paragraph();
                 para.Inlines.AddRange(inlines);
                 doc.Blocks.Add(para);
-                docViewer.Document = doc;
+                this.docViewer.Document = doc;
             }
         }
 

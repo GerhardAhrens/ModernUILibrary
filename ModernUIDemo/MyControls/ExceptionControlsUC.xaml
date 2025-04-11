@@ -18,13 +18,24 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="14" Text="Beispiel zur darstellung eines Exception Dialog..." />
+        <TextBlock FontSize="14" Text="Beispiel zur Darstellung eines Exception Dialog..." />
         <Separator Height="3" Background="Green" />
 
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Vertical" />
+            Orientation="Vertical">
+            <ModernUI:FlatButton
+                x:Name="btnExceptionA"
+                Width="70"
+                Height="28"
+                Margin="3,0"
+                Click="btnExceptionA_Click"
+                Content="Exception"
+                CornerRadius="3"
+                Type="info" />
+
+        </StackPanel>
 
     </Grid>
 </UserControl>

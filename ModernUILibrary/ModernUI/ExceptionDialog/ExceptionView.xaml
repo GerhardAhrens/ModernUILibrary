@@ -7,7 +7,6 @@
     Height="400"
     MinWidth="400"
     MinHeight="200"
-    Icon="/ModernUILibrary;component/ModernUI/ExceptionDialog/LibLogo.ico"
     Loaded="Window_Loaded"
     SizeChanged="ExpressionViewerWindow_SizeChanged">
     <Grid Name="mainGrid">
@@ -35,6 +34,7 @@
             Width="5"
             Margin="0,5,0,5"
             ResizeBehavior="CurrentAndNext" />
+
         <Border
             Grid.Column="1"
             Margin="0,5,5,5"
@@ -42,9 +42,11 @@
             BorderThickness="{Binding ElementName=TreeView, Path=BorderThickness}">
             <FlowDocumentScrollViewer
                 Name="docViewer"
+                FontFamily="Segoe UI"
                 HorizontalScrollBarVisibility="Auto"
                 VerticalScrollBarVisibility="Auto" />
         </Border>
+
         <Grid
             Grid.Row="1"
             Grid.ColumnSpan="2"
@@ -55,6 +57,7 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+
             <Button
                 Name="btnCopy"
                 Grid.Column="1"

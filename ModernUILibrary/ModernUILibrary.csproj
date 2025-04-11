@@ -22,12 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ModernUI\ExceptionDialog\LibLogo.ico" />
     <None Remove="Resources\Picture\2024065828.ico" />
     <None Remove="Resources\Picture\close.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="LibLogo.ico" />
+    <Content Include="ModernUI\ExceptionDialog\LibLogo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
