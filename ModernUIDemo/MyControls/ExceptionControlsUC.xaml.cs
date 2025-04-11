@@ -54,5 +54,40 @@
                 ExceptionView.Show(ex);
             }
         }
+
+        private void btnExceptionB_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ExceptionTest et = new ExceptionTest();
+                et.MethodeA();
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("Handler", "btnExceptionB_Click");
+                ExceptionView.Show(ex);
+            }
+        }
+    }
+
+    public class ExceptionTest
+    {
+        private List<string> errors = null;
+
+        public ExceptionTest() { }
+
+        public void MethodeA()
+        {
+            try
+            {
+                errors.Clear();
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add("Methode", "MethodeA");
+                string errorText = ex.Message;
+                throw;
+            }
+        }
     }
 }

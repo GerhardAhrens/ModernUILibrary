@@ -27,14 +27,25 @@
             Orientation="Vertical">
             <ModernUI:FlatButton
                 x:Name="btnExceptionA"
-                Width="70"
+                Width="170"
                 Height="28"
                 Margin="3,0"
                 Click="btnExceptionA_Click"
-                Content="Exception"
+                Content="Exception Variante A"
                 CornerRadius="3"
                 Type="info" />
 
+            <Label Height="10" />
+
+            <ModernUI:FlatButton
+                x:Name="btnExceptionB"
+                Width="170"
+                Height="28"
+                Margin="3,0"
+                Click="btnExceptionB_Click"
+                Content="Exception Variante B"
+                CornerRadius="3"
+                Type="info" />
         </StackPanel>
 
     </Grid>
