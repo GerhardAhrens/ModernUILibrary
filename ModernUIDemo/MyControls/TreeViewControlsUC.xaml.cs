@@ -7,6 +7,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Media;
     using System.Xml.Linq;
     using ModernBaseLibrary.Extension;
 
@@ -20,9 +21,12 @@
         private ObservableCollection<TreeViewItem> treeSource;
         private string selectedTreeItem = string.Empty;
         public ICommand SelectedTreeItemChanged => new RelayCommand(this.SelectedTreeItemChangedHandler);
+        public ICommand CloseTreeItemAllCommand => new RelayCommand(this.CloseTreeItemAllHandler);
         public ICommand CloseTreeItemCommand => new RelayCommand(this.CloseTreeItemHandler);
+        public ICommand ExpandTreeItemAllCommand => new RelayCommand(this.ExpandTreeItemAllHandler);
         public ICommand ExpandTreeItemCommand => new RelayCommand(this.ExpandTreeItemHandler);
         public ICommand InsertTreeItemCommand => new RelayCommand(this.InsertTreeItemHandler);
+        public ICommand RemoveTreeItemCommand => new RelayCommand(this.RemoveTreeItemHandler);
 
         public TreeViewControlsUC()
         {
@@ -53,6 +57,7 @@
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.TreeSource.Clear();
             TreeViewItem tr1 = new TreeViewItem("Root");
             this.TreeSource.Add(tr1);
 
@@ -63,7 +68,7 @@
 
             TreeViewItem level2 = new TreeViewItem("Level-2");
             level2.Add(new TreeViewItem("Level-2-1"), 2);
-            level2.Add(new TreeViewItem("Level-2-2"), 2);
+            level2.Add(new TreeViewItem("Level-2-2",isEnabled:false), 2);
             level2.Add(new TreeViewItem("Level-2-3"), 2);
             this.TreeSource.Add(level2);
 
@@ -76,14 +81,19 @@
             level3.Add(l33, new TreeViewItem("Level-3-1-2-1"),4);
             level3.Add(l3, new TreeViewItem("Level-3-1-3"), 3);
             level3.Add(new TreeViewItem("Level-3-2"), 2);
-
             this.TreeSource.Add(level3);
 
         }
 
         private void SelectedTreeItemChangedHandler(object obj)
         {
-            this.SelectedTreeItem = $"NodeName: {((TreeViewItem)obj).NodeName}; Level: {((TreeViewItem)obj).Level}";
+            if (obj != null)
+            {
+                if (((TreeViewItem)obj).IsEnabled == true)
+                {
+                    this.SelectedTreeItem = $"NodeName: {((TreeViewItem)obj).NodeName}; Level: {((TreeViewItem)obj).Level}";
+                }
+            }
         }
 
         private void OnItemMouseDoubleClick(object sender, MouseButtonEventArgs args)
@@ -103,11 +113,33 @@
             }
         }
 
+        private void CloseTreeItemAllHandler(object obj)
+        {
+            if (this.TreeSource != null)
+            {
+                foreach (TreeViewItem treeItem in this.TreeSource.Where(w => w.Level == 1))
+                {
+                    treeItem.IsExpanded = false;
+                }
+            }
+        }
+
         private void CloseTreeItemHandler(object obj)
         {
             if (obj != null && obj is TreeViewItem treeItem)
             {
                 treeItem.IsExpanded = false ;
+            }
+        }
+
+        private void ExpandTreeItemAllHandler(object obj)
+        {
+            if (this.TreeSource != null)
+            {
+                foreach (TreeViewItem treeItem in this.TreeSource)
+                {
+                    treeItem.IsExpanded = true;
+                }
             }
         }
 
@@ -125,16 +157,32 @@
             {
                 if (treeItem.NodeName.ToLower() == "root")
                 {
-                    int num = this.TreeSource.Count<TreeViewItem>(c => c.Level == treeItem.Level) + 1;
+                    int num = this.TreeSource.Count<TreeViewItem>(c => c.Level == treeItem.Level);
                     TreeViewItem tr = new TreeViewItem($"Level-{num}");
                     this.TreeSource.Add(tr);
                 }
                 else if (treeItem.NodeName.ToLower() != "root")
                 {
-                    int num = treeItem.ChildTreeItem.Count<TreeViewItem>(c => c.Level == treeItem.Level) + 1;
-                    treeItem.Add(new TreeViewItem("Level-1-1"), 2);
-                    this.TreeSource.Add(treeItem);
+                    int treeItemLevel = treeItem.Level;
+                    int num = treeItem.ChildTreeItem.Count<TreeViewItem>() + 1;
+                    if (treeItem.ChildTreeItem.Count > 0)
+                    {
+                        int level = treeItem.ChildTreeItem.LastOrDefault().Level;
+                        treeItem.Add(new TreeViewItem($"{treeItem.NodeName}-{num}"), level);
+                    }
+                    else
+                    {
+                        treeItem.Add(new TreeViewItem($"{treeItem.NodeName}-{num}"), treeItemLevel+1);
+                    }
                 }
+            }
+        }
+
+        private void RemoveTreeItemHandler(object obj)
+        {
+            if (obj != null && obj is TreeViewItem treeItem)
+            {
+
             }
         }
 
@@ -163,11 +211,12 @@
     {
         private bool isSelected;
         private bool isExpanded;
+        private bool isEnabled = true;
         private ObservableCollection<TreeViewItem> childTreeItem;
         private Guid nodeKey = Guid.Empty;
 
 
-        public TreeViewItem(string description, int level = 1)
+        public TreeViewItem(string description, int level = 1, bool isEnabled = true)
         {
             this.IsExpanded = true;
             this.IsSelected = false;
@@ -175,6 +224,13 @@
             this.NodeKey = Guid.NewGuid();
             this.NodeName = description;
             this.Level = level;
+            this.isEnabled = isEnabled;
+
+            this.NodeForeground = Brushes.Black;
+            if (isEnabled == false)
+            {
+                this.NodeForeground = Brushes.LightGray;
+            }
         }
 
         public int Count
@@ -197,6 +253,10 @@
 
         public string NodeSymbol { get; set; } = "[/]";
 
+        public Brush NodeForeground { get; set; }
+
+        public Brush NodeBackground { get; set; }
+
         public ObservableCollection<TreeViewItem> ChildTreeItem
         {
             get 
@@ -207,6 +267,20 @@
                 }
 
                 return childTreeItem; 
+            }
+        }
+
+        public bool IsEnabled
+        {
+            get { return this.isEnabled; }
+            set
+            {
+                SetField(ref this.isEnabled, value);
+                if (value == false)
+                {
+                    this.NodeForeground = Brushes.LightGray;
+                    _ = Find(this, value);
+                }
             }
         }
 
@@ -236,6 +310,8 @@
             }
 
             this.ChildTreeItem.Add(childItem);
+            this.IsExpanded = true;
+            this.IsSelected = false;
         }
 
         public void Add(Guid childItem, TreeViewItem childItemNext, int level)
@@ -248,6 +324,9 @@
                     childItemNext.Level = level;
                     node.Add(childItemNext);
                 }
+
+                this.IsExpanded = true;
+                this.IsSelected = false;
             }
         }
 
@@ -275,14 +354,27 @@
             return null;
         }
 
-        private void SetExpandAll()
+        private TreeViewItem Find(TreeViewItem node, bool isEnabled)
         {
-            this.IsExpanded = true;
-        }
+            if (node == null)
+            {
+                return null;
+            }
 
-        private void SetCloseAll(bool expand)
-        {
-            this.IsExpanded = expand;
+            foreach (TreeViewItem child in node.ChildTreeItem)
+            {
+                child.isEnabled = isEnabled;
+                child.NodeForeground = Brushes.LightGray;
+                TreeViewItem found = Find(child, isEnabled);
+                if (found != null)
+                {
+                    found.isEnabled = isEnabled;
+                    found.NodeForeground = Brushes.LightGray;
+                    return found;
+                }
+            }
+
+            return null;
         }
 
         public override string ToString()

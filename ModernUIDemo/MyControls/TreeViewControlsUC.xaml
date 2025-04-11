@@ -33,10 +33,24 @@
             ItemsSource="{Binding Path=TreeSource, UpdateSourceTrigger=PropertyChanged}"
             VirtualizingStackPanel.IsVirtualizing="True"
             VirtualizingStackPanel.VirtualizationMode="Recycling">
+
+            <TreeView.Resources>
+                <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFD9F4FF" />
+                    <GradientStop Offset="1" Color="#FF9BDDFB" />
+                </LinearGradientBrush>
+                <LinearGradientBrush x:Key="{x:Static SystemColors.ControlBrushKey}" StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#FFEEEDED" />
+                    <GradientStop Offset="1" Color="#FFDDDDDD" />
+                </LinearGradientBrush>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black" />
+            </TreeView.Resources>
+
             <TreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Alle Erweitern" />
-                    <MenuItem Header="Alle Zuklappen" />
+                    <MenuItem Command="{Binding Path=DataContext.ExpandTreeItemAllCommand}" Header="Alle Erweitern" />
+                    <MenuItem Command="{Binding Path=DataContext.CloseTreeItemAllCommand}" Header="Alle Zuklappen" />
                 </ContextMenu>
             </TreeView.ContextMenu>
 
@@ -51,44 +65,76 @@
                     This Style binds a TreeViewItem to a PersonViewModel.
                 -->
                 <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="BorderThickness" Value="1.5" />
                     <EventSetter Event="MouseDoubleClick" Handler="OnItemMouseDoubleClick" />
                     <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />
                     <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+                    <Setter Property="IsEnabled" Value="{Binding Path=IsEnabled, Mode=TwoWay}" />
                     <Setter Property="FontWeight" Value="Normal" />
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="BorderBrush" Value="#adc6e5" />
                         </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="FontWeight" Value="Medium" />
+                            <Setter Property="Foreground" Value="LightGray" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsSelectionActive" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                        </MultiTrigger>
                     </Style.Triggers>
+
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2" />
+                        </Style>
+                    </Style.Resources>
                 </Style>
             </TreeView.ItemContainerStyle>
 
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildTreeItem, UpdateSourceTrigger=PropertyChanged}">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem
-                                    Command="{Binding Path=DataContext.ExpandTreeItemCommand, Source={x:Reference TreeApp}}"
-                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
-                                    Header="Erweitern" />
+                    <Border BorderBrush="Black" BorderThickness="1,0,0,0">
+                        <StackPanel Margin="3,0,0,0" Orientation="Horizontal">
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem
+                                        Command="{Binding Path=DataContext.ExpandTreeItemCommand, Source={x:Reference TreeApp}}"
+                                        CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                        Header="Erweitern" />
 
-                                <MenuItem
-                                    Command="{Binding Path=DataContext.CloseTreeItemCommand, Source={x:Reference TreeApp}}"
-                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
-                                    Header="Zuklappen" />
+                                    <MenuItem
+                                        Command="{Binding Path=DataContext.CloseTreeItemCommand, Source={x:Reference TreeApp}}"
+                                        CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                        Header="Zuklappen" />
 
-                                <MenuItem
-                                    Command="{Binding Path=DataContext.InsertTreeItemCommand, Source={x:Reference TreeApp}}"
-                                    CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
-                                    Header="Hinzufügen" />
-                                
-                                <MenuItem Header="Löschen" />
-                            </ContextMenu>
-                        </StackPanel.ContextMenu>
-                        <TextBlock Foreground="Red" Text="{Binding Path=NodeSymbol}" />
-                        <TextBlock Margin="5,0,0,0" Text="{Binding Path=NodeName}" />
-                    </StackPanel>
+                                    <MenuItem
+                                        Command="{Binding Path=DataContext.InsertTreeItemCommand, Source={x:Reference TreeApp}}"
+                                        CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                        Header="Hinzufügen" />
+
+                                    <MenuItem
+                                        Command="{Binding Path=DataContext.RemoveTreeItemCommand, Source={x:Reference TreeApp}}"
+                                        CommandParameter="{Binding Path=SelectedItem, Source={x:Reference TreeApp}}"
+                                        Header="Löschen" />
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
+
+                            <TextBlock Foreground="Red" Text="{Binding Path=NodeSymbol}" />
+
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Foreground="{Binding Path=NodeForeground}"
+                                Text="{Binding Path=NodeName}" />
+                        </StackPanel>
+                    </Border>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
