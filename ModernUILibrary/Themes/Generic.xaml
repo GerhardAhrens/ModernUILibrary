@@ -80,5 +80,6 @@
         <ResourceDictionary Source="/ModernUILibrary;component/ModernUI/XamlIcon/Themes/Generic.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Themes/Primitives/NumberBoxStyle.xaml" />
         <ResourceDictionary Source="/ModernUILibrary;component/Resources/MenuItemStyle.xaml" />
+        <ResourceDictionary Source="/ModernUILibrary;component/Resources/DrawingImageIcons.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

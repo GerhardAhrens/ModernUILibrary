@@ -29,9 +29,9 @@
 
   <ItemGroup>
     <Content Include="LibLogo.ico" />
-    <Content Include="ModernUI\ExceptionDialog\LibLogo.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="ModernUI\ExceptionDialog\LibLogo.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

@@ -28,6 +28,7 @@
         <TreeView
             Name="TreeView"
             Margin="5"
+            FontFamily="Segoe UI"
             SelectedItemChanged="TreeView_SelectedItemChanged" />
         <GridSplitter
             Grid.RowSpan="1"
@@ -44,7 +45,12 @@
                 Name="docViewer"
                 FontFamily="Segoe UI"
                 HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto" />
+                IsToolBarVisible="True"
+                MaxZoom="150"
+                MinZoom="100"
+                VerticalScrollBarVisibility="Auto"
+                Zoom="100"
+                ZoomIncrement="20" />
         </Border>
 
         <Grid

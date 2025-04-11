@@ -202,7 +202,7 @@ namespace ModernIU.Base
         {
             try
             {
-                assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                assemblyName = Assembly.GetCallingAssembly().GetName().Name;
 
                 resourceDictionary = new ResourceDictionary();
                 resourceDictionary.Source = new Uri($"{assemblyName};component/{resName}", UriKind.RelativeOrAbsolute);

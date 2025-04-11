@@ -30,8 +30,11 @@ namespace ModernIU.Controls
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     using ModernBaseLibrary.Core;
+
+    using ModernIU.Base;
 
     /// <summary>
     /// A WPF window for viewing Exceptions and inner Exceptions, including all their properties.
@@ -414,7 +417,17 @@ namespace ModernIU.Controls
                 doc.TextAlignment = TextAlignment.Left;
                 doc.Background = this.docViewer.Background;
 
-                var para = new Paragraph();
+                Paragraph para = new Paragraph();
+                DrawingImage drawImage = ResourceReader.Instance.ReadAs<DrawingImage>("big-data-compute-filled-small", "Resources/DrawingImageIcons.xaml");
+                if (drawImage != null)
+                {
+                    Image image = new Image();
+                    image.Width = 32;
+                    image.Height = 32;
+                    image.Source = drawImage;
+                    para.Inlines.Add(image);
+                }
+
                 para.Inlines.AddRange(inlines);
                 doc.Blocks.Add(para);
                 this.docViewer.Document = doc;
