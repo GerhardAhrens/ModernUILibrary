@@ -104,13 +104,13 @@ namespace ModernIU.Base
             return result;
         }
 
-        public T ReadAs<T>(string resourceName, string resourceDict)
+        public T ReadAs<T>(string resourceName, string resourceDict, Assembly assembly = null)
         {
             T result = default(T);
 
             try
             {
-                ResourceDictionary resourceDictionary = ReadEx(resourceDict);
+                ResourceDictionary resourceDictionary = ReadEx(resourceDict, assembly);
                 if (resourceDictionary != null)
                 {
                     if (resourceDictionary.Contains(resourceName) == true)
@@ -198,15 +198,21 @@ namespace ModernIU.Base
             return resourceDictionary;
         }
 
-        private ResourceDictionary ReadEx(string resName)
+        private ResourceDictionary ReadEx(string resName, Assembly assembly = null)
         {
             try
             {
-                assemblyName = Assembly.GetCallingAssembly().GetName().Name;
+                if (assembly != null)
+                {
+                    assemblyName = assembly.GetName().Name;
+                }
+                else
+                {
+                    assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                }
 
                 resourceDictionary = new ResourceDictionary();
                 resourceDictionary.Source = new Uri($"{assemblyName};component/{resName}", UriKind.RelativeOrAbsolute);
-
                 this.Count = resourceDictionary.Count;
                 this.ResourceName = resName;
             }

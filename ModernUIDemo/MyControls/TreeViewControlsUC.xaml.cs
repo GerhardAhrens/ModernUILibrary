@@ -182,7 +182,7 @@
         {
             if (obj != null && obj is TreeViewItem treeItem)
             {
-
+                TreeViewItem node = treeItem.Find(treeItem.ChildTreeItem.LastOrDefault());
             }
         }
 
@@ -328,6 +328,25 @@
                 this.IsExpanded = true;
                 this.IsSelected = false;
             }
+        }
+
+        public TreeViewItem Find(TreeViewItem node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+
+            foreach (TreeViewItem child in node.ChildTreeItem)
+            {
+                TreeViewItem found = Find(child);
+                if (found != null)
+                {
+                    return found;
+                }
+            }
+
+            return null;
         }
 
         private TreeViewItem Find(TreeViewItem node, Guid key)

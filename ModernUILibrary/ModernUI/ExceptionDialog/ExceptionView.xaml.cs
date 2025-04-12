@@ -30,9 +30,6 @@ namespace ModernIU.Controls
     using System.Windows.Documents;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-
-    using ModernBaseLibrary.Core;
 
     using ModernIU.Base;
 
@@ -409,6 +406,7 @@ namespace ModernIU.Controls
         {
             if (TreeView.SelectedItem != null)
             {
+                Assembly assembly = Assembly.GetCallingAssembly();
                 var inlines = (TreeView.SelectedItem as TreeViewItem).Tag as List<Inline>;
                 var doc = new FlowDocument();
 
@@ -418,7 +416,7 @@ namespace ModernIU.Controls
                 doc.Background = this.docViewer.Background;
 
                 Paragraph para = new Paragraph();
-                DrawingImage drawImage = ResourceReader.Instance.ReadAs<DrawingImage>("big-data-compute-filled-small", "Resources/DrawingImageIcons.xaml");
+                DrawingImage drawImage = ResourceReader.Instance.ReadAs<DrawingImage>("big-data-compute-filled-small", "Resources/DrawingImageIcons.xaml", assembly);
                 if (drawImage != null)
                 {
                     Image image = new Image();
