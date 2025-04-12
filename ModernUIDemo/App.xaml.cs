@@ -1,5 +1,6 @@
 ﻿namespace ModernUIDemo
 {
+    using System.Configuration;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Markup;
@@ -24,6 +25,12 @@
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            /*
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Add("NewName", "Daniel Doe");
+            config.Save(ConfigurationSaveMode.Modified);
+            */
         }
 
         private static void InitializeCultures(string language = DEFAULTLANGUAGE)
