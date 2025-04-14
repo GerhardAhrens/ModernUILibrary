@@ -1,4 +1,18 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="VisualHelper.cs" company="Lifeprojects.de">
+//     Class: VisualHelper 
+//     Copyright © Lifeprojects.de 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>14.05.2025</date>
+//
+// <summary>
+// Klasse für für verschiedene Möglichkeiten abhängige DependencyObject zu finden und diese zurückzugeben.
+// </summary>
+//-----------------------------------------------------------------------
+
 namespace ModernIU.Base
 {
     using System.Collections;

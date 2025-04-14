@@ -143,6 +143,9 @@
     <Compile Update="Core\AssemblyMeta\IAssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Extensions\System.String\String.Web.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

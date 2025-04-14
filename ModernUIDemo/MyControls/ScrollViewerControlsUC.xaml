@@ -1,0 +1,93 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.ScrollViewerControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernBase="clr-namespace:ModernIU.Base;assembly=ModernUILibrary"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="300" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="14" Text="Beispiel für ..." />
+        <Separator Height="3" Background="Green" />
+
+        <ScrollViewer
+            x:Name="scrollViewer"
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalScrollBarVisibility="Visible"
+            VerticalScrollBarVisibility="Visible">
+            <Border Width="9000" Height="9000" />
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" VerticalAlignment="Top">
+            <WrapPanel>
+                <TextBlock Margin="0,0,10,0" Text="Slider for horizontal: Value:" />
+                <TextBlock Text="{Binding ElementName=scrollViewer, Path=HorizontalOffset}" />
+            </WrapPanel>
+
+            <Slider
+                Maximum="9000"
+                Minimum="0"
+                Value="{Binding ElementName=scrollViewer, Path=(ModernBase:ScrollViewerHelper.HorizontalOffset)}" />
+
+            <WrapPanel>
+                <TextBlock Margin="0,0,10,0" Text="Slider for vertical: Value:" />
+                <TextBlock Text="{Binding ElementName=scrollViewer, Path=VerticalOffset}" />
+            </WrapPanel>
+
+            <Slider
+                Maximum="9000"
+                Minimum="0"
+                Value="{Binding ElementName=scrollViewer, Path=(ModernBase:ScrollViewerHelper.VerticalOffset)}" />
+
+            <WrapPanel>
+                <TextBlock Margin="0,0,10,0" Text="Animate scroll" />
+                <Button Content="Start Demo">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        DecelerationRatio="1.0"
+                                        Storyboard.TargetName="scrollViewer"
+                                        Storyboard.TargetProperty="(ModernBase:ScrollViewerHelper.VerticalOffset)"
+                                        To="8000"
+                                        Duration="0:0:1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button Margin="10,0,0,0" Content="Reset Scrollviewer">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        DecelerationRatio="1.0"
+                                        Storyboard.TargetName="scrollViewer"
+                                        Storyboard.TargetProperty="(ModernBase:ScrollViewerHelper.VerticalOffset)"
+                                        To="0"
+                                        Duration="0:0:1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -53,6 +53,8 @@ namespace ModernBaseLibrary.Barcode
     using System.Runtime.InteropServices;
     using System.Text;
 
+    using ModernBaseLibrary.Core;
+
     /// <summary>
     /// QR Code error correction code enumeration
     /// </summary>
@@ -168,7 +170,7 @@ namespace ModernBaseLibrary.Barcode
     /// <summary>
     /// QR Code decoder class
     /// </summary>
-    public class QRDecoder
+    public class QRDecoder : DisposableCoreBase
     {
         public const string VersionNumber = "Ver 1.0.1 - 21.03.2025";
 
