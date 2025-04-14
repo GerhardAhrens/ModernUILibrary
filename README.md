@@ -14,10 +14,12 @@ Die Funktionalität in zwei Bibliotheken
 aufgeteilt. Zusätzlich gibt es noch
 - **Modern IU Demo**<br> 
   Hier werden die meisten vorhanden UI Elemente in verschiedenen Kategorien dargestellt
-- **Modern Test**
+- **Modern Test**</br>
   Für viele Klassen und Funktionen sind Tests erstellt um die Funktionsweis zu dokumentieren.
-- **ModernInsideVM**
-  Beispielprogramnm zu einer MVVM Variant
+- **ModernInsideVM**</br>
+  Beispielprogramnm zu einer MVVM Variant</br>
+- **ModernTemplate**</br>
+  Projekt zur Erstellung eines Template für das **ModernInsideVM** Framework.
 
 Desweiteren wird über die beiden Bibliotheken ein Entwicklungsframework zur einfachen Erstellung von Applikationen mit WPF und dem MVVM Pattern zur Verfügung gestellt.
 Hier wird aber nicht der klassische Ansatz des MVVM Pattern verfolgt, sondern ein Ansatz den ich **Inside MVVM** nenne.
