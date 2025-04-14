@@ -19,7 +19,7 @@ aufgeteilt. Zusätzlich gibt es noch
 - **ModernInsideVM**</br>
   Beispielprogramnm zu einer MVVM Variant</br>
 - **ModernTemplate**</br>
-  Projekt zur Erstellung eines Template für das **ModernInsideVM** Framework.
+  Projekt zur Erstellung eines Template für das **ModernInsideVM** Framework. Das Projekt- und Itemtemplate kann denn für eine neues Projekt undw eitere Dialoge als Window oder UserControl verwendet werden.
 
 Desweiteren wird über die beiden Bibliotheken ein Entwicklungsframework zur einfachen Erstellung von Applikationen mit WPF und dem MVVM Pattern zur Verfügung gestellt.
 Hier wird aber nicht der klassische Ansatz des MVVM Pattern verfolgt, sondern ein Ansatz den ich **Inside MVVM** nenne.
@@ -27,7 +27,7 @@ Mit diesem Ansatz wird auf eine eigene View-Model-Klasse verzichtet. Eine **Wind
 
 # Hinweis
 Die Bibliothek ist für private Zwecke entstanden, daher nicht sichergestellt, das alle UI Controls und Klassen auch einwandfrei funktionieren.
-Diese Bibliothek ist eher eine Sammlung von meinen Arbeiten aus den letzten Jahren. Da zu allem auch die Sourcen vorhanden sind, kann jeder notwendige Korrekturen selbst durchführen.
+Diese Bibliothek ist daher eher eine Sammlung von meinen Arbeiten aus den letzten 10-15 Jahren. Dazu habe ich alte Sourcen durchforstet, soweit notwendig an NET Core 8 und auch an gewisse Standards angepasst. Da zu allem auch die Sourcen vorhanden sind, kann jeder notwendige Korrekturen selbst durchführen.
 
 # Modern UI Demo
 
@@ -136,6 +136,8 @@ private void RegisterValidations()
 ```
 
 <img src="./InsideVM_B.png" style="width:700px;"/>
+
+# ModernTemplate
 
 # Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>

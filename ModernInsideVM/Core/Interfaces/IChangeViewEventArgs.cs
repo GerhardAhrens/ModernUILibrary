@@ -13,9 +13,9 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernInsideVM.Core.Interfaces
+namespace ModernTemplate.Core.Interfaces
 {
-    using ModernInsideVM.Core;
+    using ModernTemplate.Core;
 
     public partial interface IChangeViewEventArgs
     {
