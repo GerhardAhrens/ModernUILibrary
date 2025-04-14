@@ -102,7 +102,6 @@
     <Folder Include="ModernBaseLibrary\Extensions\System.Security\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Object\" />
     <Folder Include="ModernBaseLibrary\Extensions\System.Dynamic\" />
-    <Folder Include="ModernBaseLibrary\Extensions\System.Collections\" />
     <Folder Include="ModernBaseLibrary\Extensions\System\" />
     <Folder Include="ModernBaseLibrary\FluentAPI\API\" />
     <Folder Include="ModernBaseLibrary\FluentAPI\Type\" />

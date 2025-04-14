@@ -103,7 +103,7 @@
         Drei = 3,
     }
 
-    public static class Extensions
+    static class ExtensionsForTest
     {
         public static bool EqualEnum(this Enum @this, Enum equal)
         {

@@ -39,7 +39,7 @@ namespace ModernIU.Controls
 
     public static class ExtensionsDG
     {
-        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer = null)
+        public static HashSet<T> ToHashSetDG<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer = null)
         {
             return new HashSet<T>(source, comparer);
         }
