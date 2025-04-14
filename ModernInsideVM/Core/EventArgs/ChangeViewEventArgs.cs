@@ -4,7 +4,11 @@
 
     using ModernBaseLibrary.Core;
 
-    public class ChangeViewEventArgs : EventArgs, IEventAggregatorArgs, IFactoryArgs
+    using ModernInsideVM.Core.Interfaces;
+
+    using ModernUI.MVVM.Base;
+
+    public class ChangeViewEventArgs : EventArgs, IEventAggregatorArgs, IChangeViewEventArgs
     {
         public string Sender { get; set; }
 
@@ -29,10 +33,5 @@
         /// Wechsel von Dialog
         /// </summary>
         public CommandButtons FromPage { get; set; }
-
-        /// <summary>
-        /// Wechsel zu Dialog
-        /// </summary>
-        public CommandButtons TargetPage { get; set; }
     }
 }

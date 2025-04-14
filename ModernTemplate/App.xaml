@@ -1,9 +1,18 @@
-﻿<Application x:Class="ModernTemplate.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ModernTemplate"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="ModernTemplate.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ModernTemplate"
+    Startup="Application_Startup"
+    StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  Lokale Styles  -->
+
+                <!--  Extern Library Styles  -->
+                <ResourceDictionary Source="pack://application:,,,/ModernUILibrary;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

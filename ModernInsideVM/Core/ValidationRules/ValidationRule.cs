@@ -7,15 +7,15 @@
     using ModernBaseLibrary.Core.LINQ;
     using ModernBaseLibrary.Extension;
 
-    public class InputValidation<TViewModel> where TViewModel : class
+    public class ValidationRule<TViewModel> where TViewModel : class
     {
-        private static InputValidation<TViewModel> validation;
+        private static ValidationRule<TViewModel> validation;
 
         private TViewModel ThisObject { get; set; }
 
-        public static InputValidation<TViewModel> This(TViewModel thisObject)
+        public static ValidationRule<TViewModel> This(TViewModel thisObject)
         {
-            validation = new InputValidation<TViewModel>();
+            validation = new ValidationRule<TViewModel>();
             validation.ThisObject = thisObject;
             return validation;
         }

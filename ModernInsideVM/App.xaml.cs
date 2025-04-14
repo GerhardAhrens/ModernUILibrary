@@ -21,17 +21,6 @@
         private string exePath = string.Empty;
         private string exeName = string.Empty;
 
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-#if DEBUG
-            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error | SourceLevels.Warning;
-            //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
-            PresentationTraceSources.RoutedEventSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.RoutedEventSource.Switch.Level = SourceLevels.All;
-#endif
-        }
-
         public App()
         {
             try
@@ -54,6 +43,17 @@
                 ErrorMessage(ex, "General Error: ");
                 ApplicationExit();
             }
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+#if DEBUG
+            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error | SourceLevels.Warning;
+            //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
+            PresentationTraceSources.RoutedEventSource.Listeners.Add(new ConsoleTraceListener());
+            PresentationTraceSources.RoutedEventSource.Switch.Level = SourceLevels.All;
+#endif
         }
 
         public static void ErrorMessage(Exception ex, string message = "")

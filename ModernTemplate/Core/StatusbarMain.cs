@@ -4,9 +4,9 @@ namespace ModernInsideVM.Core
     using System.ComponentModel;
     using System.IO;
     using System.Runtime.CompilerServices;
+
     using ModernBaseLibrary.Extension;
 
-    using ModernInsideVM.Core.Enums;
     using ModernUI.MVVM.Enums;
 
     public static class StatusbarMain
@@ -122,7 +122,7 @@ namespace ModernInsideVM.Core
             if (string.IsNullOrEmpty(databaseInfo) == true)
             {
                 this.DatabaseInfo = "Keine";
-                this.DatabaseInfoTooltip = "Keine Datenbankinformationen verfügbar";
+                this.DatabaseInfoTooltip = string.Empty;
             }
             else
             {

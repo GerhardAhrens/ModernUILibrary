@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="IFactoryArgs.cs" company="Lifeprojects.de">
-//     Class: IFactoryArgs
+// <copyright file="IChangeViewEventArgs.cs" company="Lifeprojects.de">
+//     Class: IChangeViewEventArgs
 //     Copyright © Lifeprojects.de 2025
 // </copyright>
 //
@@ -13,13 +13,14 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernInsideVM.Core
+namespace ModernInsideVM.Core.Interfaces
 {
     using ModernInsideVM.Core;
 
-    public interface IFactoryArgs
+    public partial interface IChangeViewEventArgs
     {
         public CommandButtons MenuButton { get; set; }
+
         public string Sender { get; set; }
 
         public Guid EntityId { get; set; }
@@ -29,5 +30,10 @@ namespace ModernInsideVM.Core
         public bool IsRefresh { get; set; }
 
         public int RowPosition { get; set; }
+
+        /// <summary>
+        /// Wechsel von Dialog
+        /// </summary>
+        public CommandButtons FromPage { get; set; }
     }
 }

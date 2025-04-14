@@ -4,13 +4,16 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.Versioning;
 
     using ModernBaseLibrary.Extension;
 
+    using ModernInsideVM.Core.Interfaces;
     using ModernInsideVM.Views.ContentControls;
 
     using ModernUI.MVVM.Base;
 
+    [SupportedOSPlatform("windows")]
     public class DialogFactory : IDialogFactory
     {
         private static Dictionary<Enum, Type> Views = null;
@@ -45,7 +48,7 @@
             return resultContent;
         }
 
-        public static FactoryResult Get(CommandButtons mainButton, IFactoryArgs changeViewArgs)
+        public static FactoryResult Get(CommandButtons mainButton, IChangeViewEventArgs changeViewArgs)
         {
             FactoryResult resultContent = null;
             using (LoadingWaitCursor wc = new LoadingWaitCursor())
@@ -94,7 +97,7 @@
             }
         }
 
-        private static UserControlBase CreateInstanceContent(Enum key, IFactoryArgs changeViewArgs)
+        private static UserControlBase CreateInstanceContent(Enum key, IChangeViewEventArgs changeViewArgs)
         {
             Type viewObject = Views[key];
 
@@ -106,13 +109,13 @@
                     {
                         ParameterInfo param = viewObject.GetConstructors()[0].GetParameters()[0];
                         Type typParam = Type.GetType($"{param.ParameterType.Namespace}.{param.ParameterType.Name}");
-                        if (param != null && typParam.GetInterfaces().Contains(typeof(IFactoryArgs)) == true)
+                        if (param != null && typParam.GetInterfaces().Contains(typeof(IChangeViewEventArgs)) == true)
                         {
                             return (UserControlBase)Activator.CreateInstance(viewObject, changeViewArgs);
                         }
                         else
                         {
-                            throw new NotSupportedException($"Es wurde kein Konstruktor angegeben. Es muß ein Kontruktor der 'IFactoryArgs' implementiert vorhanden sein. Control: {key.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
+                            throw new NotSupportedException($"Es wurde kein Konstruktor angegeben. Es muß ein Kontruktor der 'IChangeViewEventArgs' implementiert vorhanden sein. Control: {key.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
                         }
                     }
                     else

@@ -9,16 +9,20 @@
 // <date>25.03.2025 09:20:07</date>
 //
 // <summary>
-// Interface Class for 
+// Interface Class für die DialogFactory
 // </summary>
 //-----------------------------------------------------------------------
 
 namespace ModernInsideVM.Core
 {
+    using ModernInsideVM.Core.Interfaces;
+
+    using ModernUI.MVVM.Base;
+
     public interface IDialogFactory
     {
         public abstract static FactoryResult Get(CommandButtons mainButton);
 
-        public abstract static FactoryResult Get(CommandButtons mainButton, IFactoryArgs changeViewArgs);
+        public abstract static FactoryResult Get(CommandButtons mainButton, IChangeViewEventArgs changeViewArgs);
     }
 }

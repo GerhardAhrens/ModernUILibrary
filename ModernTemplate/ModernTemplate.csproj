@@ -3,9 +3,20 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
+    <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AssemblyInfo\AssemblyMetaInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace ModernInsideVM.Core
+namespace ModernUI.MVVM.Base
 {
     using System;
     using System.Windows.Controls;

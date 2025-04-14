@@ -22,15 +22,20 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernInsideVM.Core.Enums
+namespace ModernUI.MVVM.Enums
 {
     using System;
+    using System.ComponentModel;
 
     public enum RunEnvironments : int
     {
+        [Description("Keine Festlegung")]
         None = 0,
+        [Description("Entwicklung")]
         Development = 1,
+        [Description("UI-Test/Unit-Test")]
         Test = 2,
+        [Description("Produktion")]
         Production = 3,
     }
 }

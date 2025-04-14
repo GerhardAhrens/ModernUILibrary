@@ -197,12 +197,12 @@
         {
             this.ValidationRules.Add(nameof(this.Titel), () =>
             {
-                return InputValidation<DialogC>.This(this).NotEmpty(x => x.Titel, "Titel");
+                return ValidationRule<DialogC>.This(this).NotEmpty(x => x.Titel, "Titel");
             });
 
             this.ValidationRules.Add(nameof(this.Description), () =>
             {
-                return InputValidation<DialogC>.This(this).NotEmpty(x => x.Description, "Beschreibung");
+                return ValidationRule<DialogC>.This(this).NotEmpty(x => x.Description, "Beschreibung");
             });
         }
         #endregion Register Validations
