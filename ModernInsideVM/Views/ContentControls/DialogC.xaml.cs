@@ -92,8 +92,8 @@
 
         public override void InitCommands()
         {
-            this.CmdAgg.AddOrSetCommand("DialogBackCommand", new RelayCommand(this.DialogBackHandler));
-            this.CmdAgg.AddOrSetCommand("SaveCommand", new RelayCommand(this.SaveHandler, this.CanSaveHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.DialogBack, new RelayCommand(this.DialogBackHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.Save, new RelayCommand(this.SaveHandler, this.CanSaveHandler));
         }
 
         private void LoadDataHandler()

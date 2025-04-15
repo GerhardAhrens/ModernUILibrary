@@ -101,7 +101,7 @@
 
         public override void InitCommands()
         {
-            this.CmdAgg.AddOrSetCommand("DialogBackCommand", new RelayCommand(this.DialogBackHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.DialogBack, new RelayCommand(this.DialogBackHandler));
         }
 
         private void DialogBackHandler(object p1)

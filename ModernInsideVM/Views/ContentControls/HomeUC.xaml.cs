@@ -33,9 +33,9 @@
         }
         public override void InitCommands()
         {
-            this.CmdAgg.AddOrSetCommand("CloseAppCommand", new RelayCommand(this.CloseAppHandler));
-            this.CmdAgg.AddOrSetCommand("DialogACommand", new RelayCommand(this.DialogAHandler));
-            this.CmdAgg.AddOrSetCommand("DialogCCommand", new RelayCommand(this.DialogCHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CloseApp, new RelayCommand(this.CloseAppHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.DialogA, new RelayCommand(this.DialogAHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.DialogC, new RelayCommand(this.DialogCHandler));
         }
 
         private void CloseAppHandler(object p1)

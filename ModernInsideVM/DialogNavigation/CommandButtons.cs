@@ -1,4 +1,4 @@
-namespace ModernTemplate.Core
+namespace ModernInsideVM.Core
 {
     using System.ComponentModel;
 
@@ -20,5 +20,9 @@ namespace ModernTemplate.Core
         Help = 101,
         [Description("Über ...")]
         AppAbout = 102,
+        [Description("Zurück zum vorherigen Dialog")]
+        DialogBack = 103,
+        [Description("Aktuelle Änderung speichern")]
+        Save = 104,
     }
 }

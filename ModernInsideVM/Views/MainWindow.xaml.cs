@@ -54,8 +54,8 @@
 
         public override void InitCommands()
         {
-            base.CmdAgg.AddOrSetCommand("HelpCommand", new RelayCommand(p1 => this.HelpHandler(p1), p2 => true));
-            base.CmdAgg.AddOrSetCommand("AppAboutCommand", new RelayCommand(p1 => this.AppAboutHandler(p1), p2 => true));
+            base.CmdAgg.AddOrSetCommand(CommandButtons.Help, new RelayCommand(p1 => this.HelpHandler(p1), p2 => true));
+            base.CmdAgg.AddOrSetCommand(CommandButtons.AppAbout, new RelayCommand(p1 => this.AppAboutHandler(p1), p2 => true));
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

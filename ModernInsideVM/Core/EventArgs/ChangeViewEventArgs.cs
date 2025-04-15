@@ -6,8 +6,6 @@
 
     using ModernInsideVM.Core.Interfaces;
 
-    using ModernUI.MVVM.Base;
-
     public class ChangeViewEventArgs : EventArgs, IEventAggregatorArgs, IChangeViewEventArgs
     {
         public string Sender { get; set; }
