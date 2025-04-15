@@ -26,6 +26,7 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
@@ -33,10 +34,13 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
     using System.Threading;
     using DemoDataGeneratorLib.Base;
 
+    using global::ModernBaseLibrary.Collection;
     using global::ModernBaseLibrary.Cryptography;
     using global::ModernBaseLibrary.Extension;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using ModernTest.ModernBaseLibrary.Core;
 
     [TestClass]
     public class DemoDataGenerator_Test
@@ -54,6 +58,13 @@ namespace ModernTest.ModernBaseLibrary.Cryptography
         /// </summary>
         public DemoDataGenerator_Test()
         {
+        }
+
+        [TestMethod]
+        public void ICollectionView_String()
+        {
+            ICollectionView users = BuildDemoData<UserTestGenerator>.CreateForICollectionView<UserTestGenerator>(ConfigObject, 100);
+            Assert.AreEqual(users.Cast<object>().Count(), 100);
         }
 
         [TestMethod]
