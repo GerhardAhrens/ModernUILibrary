@@ -79,6 +79,12 @@
             arg.MenuButton = CommandButtons.Home;
             this.ChangeControl(arg);
 
+            /* Letzte Windows Positionn landen*/
+            using (UserPreferences userPrefs = new UserPreferences(this))
+            {
+                userPrefs.Load();
+            }
+
             StatusbarMain.Statusbar.SetDatabaeInfo();
         }
 
@@ -92,6 +98,12 @@
                 {
                     e.Cancel = false;
                     this.statusBarDate.Stop();
+
+                    using (UserPreferences userPrefs = new UserPreferences(this))
+                    {
+                        userPrefs.Save();
+                    }
+
                     Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                     Application.Current.Shutdown();
                 }
