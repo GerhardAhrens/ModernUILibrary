@@ -45,17 +45,6 @@
             }
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-#if DEBUG
-            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error | SourceLevels.Warning;
-            //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
-            PresentationTraceSources.RoutedEventSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.RoutedEventSource.Switch.Level = SourceLevels.All;
-#endif
-        }
-
         public static void ErrorMessage(Exception ex, string message = "")
         {
             string expMsg = ex.Message;
@@ -93,6 +82,14 @@
 
             try
             {
+#if DEBUG
+                PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
+                PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error | SourceLevels.Warning;
+                //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
+                PresentationTraceSources.RoutedEventSource.Listeners.Add(new ConsoleTraceListener());
+                PresentationTraceSources.RoutedEventSource.Switch.Level = SourceLevels.All;
+#endif
+
                 /* Initalisierung Spracheinstellung */
                 InitializeCultures(DEFAULTLANGUAGE);
             }

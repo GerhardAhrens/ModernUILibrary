@@ -1,4 +1,4 @@
-namespace ModernInsideVM.Core
+namespace ModernTemplate.Core
 {
     using System;
     using System.ComponentModel;

@@ -1,12 +1,126 @@
-﻿<Window x:Class="ModernTemplate.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ModernTemplate"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+﻿<winbase:WindowBase
+    x:Class="ModernTemplate.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:ModernWPF="clr-namespace:ModernIU.WPF.Base;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ModernTemplate"
+    xmlns:localStatic="clr-namespace:ModernTemplate.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
+    Title="{Binding Path=DialogDescription, UpdateSourceTrigger=PropertyChanged, FallbackValue=~Title}"
+    Width="800"
+    Height="450"
+    winbase:DialogClosing.IsClosing="True"
+    ShowInTaskbar="True"
+    TitleFontSize="18"
+    TitleIcon="{StaticResource ResourceKey=AppWindowIcon}"
+    mc:Ignorable="d">
 
-    </Grid>
-</Window>
+    <ModernUI:MWindow.MoreOnTitle>
+        <StackPanel
+            Margin="0,0,5,0"
+            HorizontalAlignment="Right"
+            KeyboardNavigation.IsTabStop="False"
+            Orientation="Horizontal">
+            <ModernUI:GeometryButton
+                Height="30"
+                Command="{Binding Path=CmdAgg[HelpCommand]}"
+                CommandParameter="{x:Static localStatic:CommandButtons.Help}"
+                PathData="{StaticResource ResourceKey=IconHelp}" />
+
+            <ModernUI:GeometryButton
+                Height="30"
+                Command="{Binding Path=CmdAgg[AppAboutCommand]}"
+                CommandParameter="{x:Static localStatic:CommandButtons.AppAbout}"
+                PathData="{StaticResource ResourceKey=IconAbout}" />
+        </StackPanel>
+    </ModernUI:MWindow.MoreOnTitle>
+
+    <ModernUI:SimpleGrid Columns="*" Rows="*,Auto">
+        <!--#region Contentbereich-->
+        <ScrollViewer
+            CanContentScroll="True"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalAlignment="Stretch"
+                Background="White"
+                BorderBrush="Black"
+                BorderThickness="0,2,0,2">
+                <ContentControl
+                    x:Name="mainContent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="LightGray"
+                    Content="{Binding Path=WorkContent, UpdateSourceTrigger=PropertyChanged}"
+                    KeyboardNavigation.IsTabStop="False"
+                    KeyboardNavigation.TabNavigation="None"
+                    ScrollViewer.CanContentScroll="True"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    Visibility="Visible" />
+            </Border>
+        </ScrollViewer>
+        <!--#endregion Contentbereich-->
+
+        <!--#region Statuszeile-->
+        <StatusBar
+            Grid.Row="1"
+            Height="Auto"
+            Background="Transparent"
+            DataContext="StatusMain"
+            FontSize="13">
+            <StatusBarItem DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarUser}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CurrentUser, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarCalendar}" />
+                    <TextBlock
+                        x:Name="dtStatusBarDate"
+                        Margin="5,0,10,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CurrentDate, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <Separator Background="Black" />
+
+            <StatusBarItem DockPanel.Dock="Left" ToolTip="{Binding Path=DatabaseInfoTooltip, Source={x:Static localStatic:StatusbarMain.Statusbar}}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarDatabase}" />
+
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=DatabaseInfo, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+            <Separator Background="Black" />
+
+            <StatusBarItem DockPanel.Dock="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{StaticResource ResourceKey=IconStatusbarNotification}" />
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=Notification, Source={x:Static localStatic:StatusbarMain.Statusbar}}" />
+                </StackPanel>
+            </StatusBarItem>
+
+        </StatusBar>
+        <!--#endregion Statuszeile-->
+    </ModernUI:SimpleGrid>
+</winbase:WindowBase>

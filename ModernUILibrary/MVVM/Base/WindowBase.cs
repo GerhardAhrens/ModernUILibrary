@@ -58,6 +58,18 @@ namespace ModernUI.MVVM.Base
         /// </summary>
         public WindowBase()
         {
+            Window mainWindow = Application.Current.MainWindow;
+            if (mainWindow != null)
+            {
+                this.ShowInTaskbar = true;
+                this.WindowStartupLocation = WindowStartupLocation.Manual;
+            }
+            else
+            {
+                this.ShowInTaskbar = false;
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
             this.FontFamily = new FontFamily("Tahoma");
             this.FontWeight = FontWeights.Medium;
             this.className = this.GetType().Name;
@@ -66,6 +78,18 @@ namespace ModernUI.MVVM.Base
 
         public WindowBase(Type inheritsType)
         {
+            Window mainWindow = Application.Current.MainWindow;
+            if (mainWindow != null)
+            {
+                this.ShowInTaskbar = true;
+                this.WindowStartupLocation = WindowStartupLocation.Manual;
+            }
+            else
+            {
+                this.ShowInTaskbar = false;
+                this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            }
+
             this.BaseType = inheritsType;
             this.FontFamily = new FontFamily("Tahoma");
             this.FontWeight = FontWeights.Medium;
@@ -258,6 +282,30 @@ namespace ModernUI.MVVM.Base
         }
 
         #endregion ViewState Implementierung
+
+        public void CenterWindow(Window mainWindow, double factor = 300)
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = mainWindow.Width + factor;
+            double windowHeight = mainWindow.Height + (factor/ 2);
+            mainWindow.Left = (screenWidth / 2) - (windowWidth / 2);
+            mainWindow.Top = (screenHeight / 2) - (windowHeight / 2);
+            mainWindow.Width = windowWidth;
+            mainWindow.Height = windowHeight;
+
+            if ((screenWidth - mainWindow.Width) <= factor)
+            {
+                mainWindow.Width = (screenWidth - 200);
+                mainWindow.Left = (screenWidth / 2) - (mainWindow.Width / 2);
+            }
+
+            if ((screenHeight - mainWindow.Height) <= factor)
+            {
+                mainWindow.Height = (screenHeight - 100);
+                mainWindow.Top = (screenHeight / 2) - (mainWindow.Height / 2);
+            }
+        }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public string GetCurrentMethod(int level = 1)

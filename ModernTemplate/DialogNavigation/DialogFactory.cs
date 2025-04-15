@@ -8,8 +8,13 @@
 
     using ModernBaseLibrary.Extension;
 
+    using ModernTemplate.Views.ContentControls;
+
     using ModernUI.MVVM.Base;
 
+    /// <summary>
+    /// Die Factory gibt auf Basis eines CommandButton das dazugehörige UserControl-Objekt zurück 
+    /// </summary>
     [SupportedOSPlatform("windows")]
     public class DialogFactory : IDialogFactory
     {
@@ -20,6 +25,11 @@
             RegisterControls();
         }
 
+        /// <summary>
+        /// Rückgabe eines userControl auf Basis des übergebenen CommandButton
+        /// </summary>
+        /// <param name="mainButton">Enum mit CommandButton</param>
+        /// <returns>Gewähltes UserControl</returns>
         public static FactoryResult Get(CommandButtons mainButton)
         {
             FactoryResult resultContent = null;
@@ -45,6 +55,12 @@
             return resultContent;
         }
 
+        /// <summary>
+        /// Rückgabe eines userControl auf Basis des übergebenen CommandButton
+        /// </summary>
+        /// <param name="mainButton">Enum mit CommandButton</param>
+        /// <param name="changeViewArgs">Argument das dem UserControl mit übergeben werden soll</param>
+        /// <returns>Gewähltes UserControl</returns>
         public static FactoryResult Get(CommandButtons mainButton, IChangeViewEventArgs changeViewArgs)
         {
             FactoryResult resultContent = null;
@@ -81,6 +97,7 @@
                 if (Views == null)
                 {
                     Views = new Dictionary<Enum, Type>();
+                    Views.Add(CommandButtons.Home, typeof(HomeUC));
                 }
             }
             catch (Exception ex)
@@ -90,9 +107,16 @@
             }
         }
 
-        private static UserControlBase CreateInstanceContent(Enum key, IChangeViewEventArgs changeViewArgs)
+        /// <summary>
+        /// Erstellen einer Instanz eines UserControl des übergebenen CommandButton
+        /// </summary>
+        /// <param name="commandButton">>Enum mit CommandButton</param>
+        /// <param name="changeViewArgs">Argument das dem UserControl mit übergeben werden soll</param>
+        /// <returns>Gewähltes UserControl</returns>
+        /// <exception cref="NotSupportedException"></exception>
+        private static UserControlBase CreateInstanceContent(Enum commandButton, IChangeViewEventArgs changeViewArgs)
         {
-            Type viewObject = Views[key];
+            Type viewObject = Views[commandButton];
 
             if (viewObject != null && viewObject.IsAssignableTo(typeof(UserControlBase)) == true)
             {
@@ -108,7 +132,7 @@
                         }
                         else
                         {
-                            throw new NotSupportedException($"Es wurde kein Konstruktor angegeben. Es muß ein Kontruktor der 'IChangeViewEventArgs' implementiert vorhanden sein. Control: {key.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
+                            throw new NotSupportedException($"Es wurde kein Konstruktor angegeben. Es muß ein Kontruktor der 'IChangeViewEventArgs' implementiert vorhanden sein. Control: {commandButton.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
                         }
                     }
                     else
@@ -123,7 +147,7 @@
             }
             else
             {
-                throw new NotSupportedException($"Das UserControl implementiert kein 'UserControlBase'. Control: {key.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
+                throw new NotSupportedException($"Das UserControl implementiert kein 'UserControlBase'. Control: {commandButton.ToDescription()}; Object: {viewObject.GetFriendlyTypeName()}");
             }
         }
     }
