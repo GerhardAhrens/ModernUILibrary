@@ -269,4 +269,8 @@
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.4" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)ModernTemplate\_Lib\$(TargetName).dll&quot;" />
+  </Target>
+
 </Project>

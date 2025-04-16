@@ -10,14 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Picture\AppLogo.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Remove="_Lib\ModernBaseLibrary.dll" />
+    <None Remove="_Lib\ModernUILibrary.dll" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModernBaseLibrary\ModernBaseLibrary.csproj" />
-    <ProjectReference Include="..\ModernUILibrary\ModernUILibrary.csproj" />
+    <Content Include="Resources\Picture\AppLogo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Lib\ModernBaseLibrary.dll" />
+    <Content Include="_Lib\ModernUILibrary.dll" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,15 @@
 
   <ItemGroup>
     <Folder Include="Core\Settings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ModernBaseLibrary">
+      <HintPath>_Lib\ModernBaseLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ModernUILibrary">
+      <HintPath>_Lib\ModernUILibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
