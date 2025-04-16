@@ -28,8 +28,9 @@ namespace ModernBaseLibrary.Cryptography
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using ModernBaseLibrary.Core;
 
-    public sealed class LoremIpsumBuilder
+    public sealed class LoremIpsumBuilder : DisposableCoreBase
     {
         private string[] latainWords = new string[] { "consetetur", "sadipscing", "elitr", "sed", "diam", "nonumy", "eirmod",
     "tempor", "invidunt", "ut", "labore", "et", "dolore", "magna", "aliquyam", "erat", "sed", "diam", "voluptua", "Werumensium",

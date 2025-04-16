@@ -22,6 +22,7 @@ namespace ModernBaseLibrary.Core
     using System.Reflection;
     using System.Runtime.Versioning;
     using System.Windows;
+    using System.Xml.Linq;
 
     using ModernBaseLibrary.CoreBase;
 
@@ -167,29 +168,60 @@ namespace ModernBaseLibrary.Core
             }
         }
 
-        public void Save()
+        public string ProgramDataPath()
         {
-            if (this.CurrentWindow.WindowState != System.Windows.WindowState.Minimized)
+            string result = string.Empty;
+
+            string rootPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            result = $"{rootPath}\\{this.ApplicationName()}\\";
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Speichern der aktuellen Applikation Window Position in einem JSON Datei
+        /// </summary>
+        /// <param name="userSave">True - Position wird gespeichert</param>
+        public void Save(bool userSave = false)
+        {
+            if (userSave == true)
             {
-                UserScreenPosition pos = new UserScreenPosition(this.CurrentWindow);
-                SerializeHelper<UserScreenPosition>.Serialize(pos, SerializeFormatter.Json, this.FilePath);
+                if (this.CurrentWindow.WindowState != System.Windows.WindowState.Minimized)
+                {
+                    UserScreenPosition pos = new UserScreenPosition(this.CurrentWindow);
+                    SerializeHelper<UserScreenPosition>.Serialize(pos, SerializeFormatter.Json, this.FilePath);
+                }
             }
         }
 
-        public void Load()
+        /// <summary>
+        /// Laden und wiederherstellen der zuletzt gespeicherten Applikation Window Position aus einer JSON Datei
+        /// </summary>
+        /// <param name="userLoad">True - Zuletzt gespeicherte Poistion wird gelesen, die letzte Windowposition wird wiederhergestellt</param>
+        public void Load(bool userLoad = false)
         {
             UserScreenPosition screenPos = null;
 
+            if (userLoad == false)
+            {
+                return;
+            }
+
             try
             {
-                System.Windows.Forms.Screen[] screens = System.Windows.Forms.Screen.AllScreens;
-
                 if (File.Exists(this.FilePath) == false)
                 {
                     return;
                 }
 
+                System.Windows.Forms.Screen[] screens = System.Windows.Forms.Screen.AllScreens;
                 screenPos = SerializeHelper<UserScreenPosition>.DeSerialize(SerializeFormatter.Json, this.FilePath);
+
+                if (screens.Length == 0)
+                {
+                    return;
+                }
 
                 if (screenPos != null)
                 {
@@ -275,16 +307,12 @@ namespace ModernBaseLibrary.Core
 
         private string ApplicationName()
         {
-            string result = string.Empty;
-
-            Assembly assm = Assembly.GetEntryAssembly();
-            result = assm.GetName().Name;
-            return result;
+            return AppDomain.CurrentDomain.FriendlyName;
         }
 
         private string UserSettingsName()
         {
-            return "UserPreferences.Settings";
+            return $"{Environment.UserName}-LastWinPos.Setting";
         }
     }
 

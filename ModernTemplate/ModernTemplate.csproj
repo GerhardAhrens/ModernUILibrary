@@ -26,4 +26,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Settings\" />
+  </ItemGroup>
+
 </Project>

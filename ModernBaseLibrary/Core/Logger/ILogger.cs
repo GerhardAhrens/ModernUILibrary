@@ -42,9 +42,9 @@ namespace ModernBaseLibrary.Core.Logger
 
         void Warning(Exception e, string message);
 
-        void Info(string message);
+        void Info(string message, bool isAutoFlush = false);
 
-        void Info(Exception e, string message);
+        void Info(Exception e, string message, bool isAutoFlush = false);
 
         void Debug(string message);
 

@@ -80,7 +80,7 @@ namespace ModernBaseLibrary.CoreBase
             get
             {
                 string settingsPath = this.CurrentSettingsPath();
-                string settingsName = $"{this.NamePrefix}.{this.UserSettingsName()}";
+                string settingsName = $"{this.UserSettingsName()}.{this.NamePrefix}";
                 string settingsFile = Path.Combine(settingsPath, settingsName);
                 return settingsFile;
             }
@@ -140,38 +140,51 @@ namespace ModernBaseLibrary.CoreBase
         /// </summary>
         public virtual void Save()
         {
-            var dirPath = Path.GetDirectoryName(this.FilePath);
-            if (!string.IsNullOrWhiteSpace(dirPath))
+            try
             {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            using var stream = File.Create(this.FilePath);
-            using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions
-            {
-                Indented = true
-            });
-
-            writer.WriteStartObject();
-
-            foreach (var property in _properties)
-            {
-                var options = new JsonSerializerOptions();
-
-                // Use custom converter if set
-                if (property.GetCustomAttribute<JsonConverterAttribute>()?.ConverterType is { } converterType &&
-                    Activator.CreateInstance(converterType) is JsonConverter converter)
+                if (File.Exists(this.FilePath) == true)
                 {
-                    options.Converters.Add(converter);
+                    File.Delete(this.FilePath);
                 }
 
-                // Use custom name if set
-                writer.WritePropertyName(property.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name ?? property.Name);
+                var dirPath = Path.GetDirectoryName(this.FilePath);
+                if (!string.IsNullOrWhiteSpace(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                }
 
-                JsonSerializer.Serialize(writer, property.GetValue(this), property.PropertyType, options);
+                using var stream = File.Create(this.FilePath);
+                using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions
+                {
+                    Indented = true
+                });
+
+                writer.WriteStartObject();
+
+                foreach (var property in _properties)
+                {
+                    var options = new JsonSerializerOptions();
+
+                    // Use custom converter if set
+                    if (property.GetCustomAttribute<JsonConverterAttribute>()?.ConverterType is { } converterType &&
+                        Activator.CreateInstance(converterType) is JsonConverter converter)
+                    {
+                        options.Converters.Add(converter);
+                    }
+
+                    // Use custom name if set
+                    writer.WritePropertyName(property.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name ?? property.Name);
+
+                    JsonSerializer.Serialize(writer, property.GetValue(this), property.PropertyType, options);
+                }
+
+                writer.WriteEndObject();
             }
-
-            writer.WriteEndObject();
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
         }
 
         /// <summary>
@@ -182,6 +195,11 @@ namespace ModernBaseLibrary.CoreBase
         {
             try
             {
+                if (File.Exists(this.FilePath) == false)
+                {
+                    return false;
+                }
+
                 using var stream = File.OpenRead(this.FilePath);
                 using var document = JsonDocument.Parse(stream, new JsonDocumentOptions
                 {
@@ -299,21 +317,12 @@ namespace ModernBaseLibrary.CoreBase
 
         private string ApplicationName()
         {
-            string result = string.Empty;
-
-            Assembly assm = Assembly.GetEntryAssembly();
-            result = assm.GetName().Name;
-            return result;
+            return AppDomain.CurrentDomain.FriendlyName;
         }
 
         private string UserSettingsName()
         {
-            string result = string.Empty;
-            string username = Environment.UserName;
-
-            result = $"{username}.Settings";
-
-            return result;
+            return $"{Environment.UserName}.Setting";
         }
     }
 }

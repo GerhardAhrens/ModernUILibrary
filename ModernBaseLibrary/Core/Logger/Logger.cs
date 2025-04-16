@@ -172,14 +172,14 @@ namespace ModernBaseLibrary.Core.Logger
         /// Log Info.
         /// </summary>
         /// <param name="message">Log message.</param
-        public void Info(string message)
+        public void Info(string message, bool isAutoFlush = false)
         {
             if (!this.CanLog(LogLevel.INFO))
             {
                 return;
             }
 
-            this.PushLog(LogLevel.INFO, message,null);
+            this.PushLog(LogLevel.INFO, message,null, isAutoFlush);
         }
 
         /// <summary>
@@ -187,14 +187,14 @@ namespace ModernBaseLibrary.Core.Logger
         /// </summary>
         /// <param name="e">Exception</param>
         /// <param name="message">Log message</param>
-        public void Info(Exception e, string message)
+        public void Info(Exception e, string message, bool isAutoFlush = false)
         {
             if (!this.CanLog(LogLevel.INFO))
             {
                 return;
             }
 
-            this.PushLog(LogLevel.INFO, message,e);
+            this.PushLog(LogLevel.INFO, message,e, isAutoFlush);
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace ModernBaseLibrary.Core.Logger
             }
         }
 
-        private void PushLog(LogLevel level, string message,Exception e)
+        private void PushLog(LogLevel level, string message,Exception e, bool isAutoFlush = false)
         {
             if (message == null)
             {
@@ -297,6 +297,10 @@ namespace ModernBaseLibrary.Core.Logger
             {
                 handler.Push(record);
                 handler.DefaultLogFilename(record);
+                if (isAutoFlush == true)
+                {
+                    handler.Flush();
+                }
             }
         }
 

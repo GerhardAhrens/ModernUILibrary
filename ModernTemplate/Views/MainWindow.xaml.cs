@@ -62,55 +62,77 @@
         private CommandButtons CurrentCommandName { get; set; }
         #endregion Properties
 
-        #region WindowHandler
+        #region WindowEventHandler
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            this.DialogDescription = "Modern Template - Projekt";
             this.Focus();
             this.InitTimer();
             Keyboard.Focus(this);
 
+            using (ApplicationSettings settings = new ApplicationSettings())
+            {
+                settings.Load();
+                App.ExitApplicationQuestion = settings.ExitApplicationQuestion;
+                App.SaveLastWindowsPosition = settings.SaveLastWindowsPosition;
+                App.IsLogging = settings.IsLogging;
+                App.RunEnvironment = settings.RunEnvironment;
+            }
+
+            /* Letzte Windows Positionn landen*/
+            using (UserPreferences userPrefs = new UserPreferences(this))
+            {
+                userPrefs.Load(App.SaveLastWindowsPosition);
+            }
+
             NotificationService.RegisterDialog<QuestionYesNo>();
             NotificationService.RegisterDialog<MessageOk>();
 
-            this.DialogDescription = "Modern Template - Projekt";
             base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
 
             ChangeViewEventArgs arg = new ChangeViewEventArgs();
             arg.MenuButton = CommandButtons.Home;
             this.ChangeControl(arg);
 
-            /* Letzte Windows Positionn landen*/
-            using (UserPreferences userPrefs = new UserPreferences(this))
-            {
-                userPrefs.Load();
-            }
-
             StatusbarMain.Statusbar.SetDatabaeInfo();
         }
 
         public override void OnViewIsClosing(CancelEventArgs e)
         {
-            NotificationBoxButton result = this.notificationService.ApplicationExit();
-            if (result == NotificationBoxButton.Yes)
+            if (App.ExitApplicationQuestion == true)
             {
-                Window window = Application.Current.MainWindow;
-                if (window != null)
+                NotificationBoxButton result = this.notificationService.ApplicationExit();
+                if (result == NotificationBoxButton.Yes)
                 {
-                    e.Cancel = false;
-                    this.statusBarDate.Stop();
-
-                    using (UserPreferences userPrefs = new UserPreferences(this))
-                    {
-                        userPrefs.Save();
-                    }
-
-                    Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-                    Application.Current.Shutdown();
+                    this.ExitApplication(e);
+                }
+                else
+                {
+                    e.Cancel = true;
                 }
             }
             else
             {
-                e.Cancel = true;
+                this.ExitApplication(e);
+            }
+
+        }
+
+        private void ExitApplication(CancelEventArgs e)
+        {
+            Window window = Application.Current.MainWindow;
+            if (window != null)
+            {
+                e.Cancel = false;
+                this.statusBarDate.Stop();
+
+                using (UserPreferences userPrefs = new UserPreferences(this))
+                {
+                    userPrefs.Save(App.SaveLastWindowsPosition);
+                }
+
+                Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                Application.Current.Shutdown();
             }
         }
         #endregion WindowHandler

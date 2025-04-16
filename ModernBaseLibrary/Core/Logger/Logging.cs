@@ -54,6 +54,7 @@ namespace ModernBaseLibrary.Core.Logger
                         }
                     }
                 }
+
                 return instance;
             }
         }

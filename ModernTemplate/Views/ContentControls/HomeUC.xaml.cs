@@ -3,6 +3,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using ModernBaseLibrary.Cryptography;
 
     using ModernTemplate.Core;
 
@@ -20,6 +21,20 @@
             WeakEventManager<UserControl, MouseWheelEventArgs>.AddHandler(this, "PreviewMouseWheel", this.OnPreviewMouseWheel);
         }
 
+        #region Properties
+        public string DemoText
+        {
+            get => base.GetValue<string>();
+            set => base.SetValue(value);
+        }
+        #endregion Properties
+
+        public override void InitCommands()
+        {
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CloseApp, new RelayCommand(this.CloseAppHandler));
+        }
+
+        #region WindowEventHandler
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focus();
@@ -27,19 +42,14 @@
             this.InitCommands();
             this.IsUCLoaded = true;
             this.DataContext = this;
-        }
-        public override void InitCommands()
-        {
-            this.CmdAgg.AddOrSetCommand(CommandButtons.CloseApp, new RelayCommand(this.CloseAppHandler));
-        }
 
-        private void CloseAppHandler(object p1)
-        {
-            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            string words = string.Empty;
+            using (LoremIpsumBuilder lb = new LoremIpsumBuilder())
             {
-                Sender = this.GetType().Name,
-                MenuButton = CommandButtons.CloseApp,
-            });
+                words = lb.GetParagraphs(10,15);
+            }
+
+            this.DemoText = words;
         }
 
         private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -65,5 +75,18 @@
                 }
             }
         }
+
+        #endregion WindowEventHandler
+
+        #region CommandHandler
+        private void CloseAppHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.CloseApp,
+            });
+        }
+        #endregion CommandHandler
     }
 }
