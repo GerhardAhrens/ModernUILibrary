@@ -22,13 +22,13 @@ namespace ModernBaseLibrary.AssemblyInfo
     public class AssemblyMetaInfo : IAssemblyInfo
     {
         public string PacketName => "ModernUI";
-        public Version PacketVersion => new Version(1, 0, 2025, 15);
+        public Version PacketVersion => new Version(1, 0, 2025, 16);
 
         public string AssemblyName => "ModernBaseLibrary";
 
-        public Version AssemblyVersion => new Version(1, 0, 2025, 15);
+        public Version AssemblyVersion => new Version(1, 0, 2025, 16);
 
-        public string Description => "Bibliothek mit Basis C# Klassen, Extensions Methodes, Helper Klassen";
+        public string Description => "Bibliothek mit einer Sammlung von Basis C# Klassen, Extensions Methodes, Helper Klassen";
 
         public override string ToString()
         {

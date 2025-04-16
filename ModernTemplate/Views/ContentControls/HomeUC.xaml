@@ -67,17 +67,39 @@
                     BorderBrush="Black"
                     BorderThickness="0,1,0,1">
                     <StackPanel Orientation="Horizontal">
-                        <ModernUI:FlatButton
+                        <ModernUI:PathButton
                             Width="100"
                             Height="30"
-                            HorizontalAlignment="Left"
-                            Command="{Binding Path=CmdAgg[CloseAppCommand]}">
-                            <ModernUI:FlatButton.Content>
+                            Command="{Binding Path=CmdAgg[CloseAppCommand]}"
+                            IsDefault="True"
+                            PathData="{StaticResource ResourceKey=IconApplicationExit}"
+                            PathWidth="14">
+                            <ModernUI:PathButton.ToolTip>
+                                <ModernUI:MToolTip Content="Anwendung beenden" PlacementEx="TopLeft" />
+                            </ModernUI:PathButton.ToolTip>
+                            <ModernUI:PathButton.Content>
                                 <TextBlock>
-                                    <Run Text="Beenden" />
+                                    <Run Text="Benden" />
                                 </TextBlock>
-                            </ModernUI:FlatButton.Content>
-                        </ModernUI:FlatButton>
+                            </ModernUI:PathButton.Content>
+                        </ModernUI:PathButton>
+
+                        <ModernUI:PathButton
+                            Width="120"
+                            Height="30"
+                            Margin="5,0,0,0"
+                            Command="{Binding Path=CmdAgg[CustomCommand]}"
+                            PathData="{StaticResource ResourceKey=IconCustomA}"
+                            PathWidth="14">
+                            <ModernUI:PathButton.ToolTip>
+                                <ModernUI:MToolTip Content="Anwendung beenden" PlacementEx="TopLeft" />
+                            </ModernUI:PathButton.ToolTip>
+                            <ModernUI:PathButton.Content>
+                                <TextBlock>
+                                    <Run Text="Custom Dialog A" />
+                                </TextBlock>
+                            </ModernUI:PathButton.Content>
+                        </ModernUI:PathButton>
                     </StackPanel>
                 </Border>
 

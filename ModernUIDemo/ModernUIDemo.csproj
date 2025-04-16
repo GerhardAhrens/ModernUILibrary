@@ -324,6 +324,9 @@
     <Compile Update="MyControls\ScrollViewerControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\BorderControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TreeViewControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

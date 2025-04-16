@@ -8,11 +8,15 @@ namespace ModernTemplate.Core
         None = 0,
         [Description("Home Dialog mit Steuerung Main Menü")]
         Home = 1,
+        [Description("Benutzer definierter Dialog")]
+        Custom = 2,
         [Description("Anwendung beenden")]
         CloseApp = 100,
+        [Description("Zurück")]
+        DialogBack = 101,
         [Description("Hilfe")]
-        Help = 101,
+        Help = 110,
         [Description("Über ...")]
-        AppAbout = 102,
+        AppAbout = 111,
     }
 }

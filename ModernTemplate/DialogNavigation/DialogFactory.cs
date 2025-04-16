@@ -98,6 +98,7 @@
                 {
                     Views = new Dictionary<Enum, Type>();
                     Views.Add(CommandButtons.Home, typeof(HomeUC));
+                    Views.Add(CommandButtons.Custom, typeof(CustomUC));
                 }
             }
             catch (Exception ex)

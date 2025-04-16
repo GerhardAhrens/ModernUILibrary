@@ -32,6 +32,7 @@
         public override void InitCommands()
         {
             this.CmdAgg.AddOrSetCommand(CommandButtons.CloseApp, new RelayCommand(this.CloseAppHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.Custom, new RelayCommand(this.CustomHandler));
         }
 
         #region WindowEventHandler
@@ -85,6 +86,15 @@
             {
                 Sender = this.GetType().Name,
                 MenuButton = CommandButtons.CloseApp,
+            });
+        }
+
+        private void CustomHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.Custom,
             });
         }
         #endregion CommandHandler

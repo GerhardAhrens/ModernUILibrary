@@ -275,6 +275,7 @@
             this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
             this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
             this.tabItemSource.Add(new TabControlItem("Layout ContentFrame", new ContentFrameControlsUC()) { Stichworte = "Anzeige;Layout;Grid;Content;Frame" });
+            this.tabItemSource.Add(new TabControlItem("Layout Border", new BorderControlsUC()) { Stichworte = "Anzeige;Layout;Border;Rahmen" });
             this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()) { Stichworte = "Anzeige;Layout;Separator" });
             this.tabItemSource.Add(new TabControlItem("Expander Control", new ExpanderControlsUC()) { Stichworte = "Anzeige;Layout;Expander" });
             this.tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });

@@ -164,17 +164,6 @@
         #endregion CommandHandler
 
         #region Dialognavigation
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
-            if (this.WorkContent != null)
-            {
-                if (this.WorkContent.GetType() == typeof(MainWindow))
-                {
-                    this.WorkContent.Width = (this.ActualWidth -20);
-                }
-            }
-        }
-
         private void ChangeControl(ChangeViewEventArgs e)
         {
             if (e.MenuButton == CommandButtons.CloseApp)
@@ -213,6 +202,17 @@
         #endregion Dialognavigation
 
         #region Private Methodes
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            if (this.WorkContent != null)
+            {
+                if (this.WorkContent.GetType() == typeof(MainWindow))
+                {
+                    this.WorkContent.Width = (this.ActualWidth - 20);
+                }
+            }
+        }
+
         private void InitTimer()
         {
             this.statusBarDate = new DispatcherTimer();
