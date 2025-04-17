@@ -1,6 +1,7 @@
 ﻿namespace ModernTemplate
 {
     using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
@@ -43,7 +44,8 @@
         public override void InitCommands()
         {
             base.CmdAgg.AddOrSetCommand(CommandButtons.Help, new RelayCommand(p1 => this.HelpHandler(p1), p2 => true));
-            base.CmdAgg.AddOrSetCommand(CommandButtons.AppAbout, new RelayCommand(p1 => this.AppAboutHandler(p1), p2 => true));
+            base.CmdAgg.AddOrSetCommand(CommandButtons.AppAbout, new RelayCommand(p1 => this.AppAboutHandler(p1), p2 => this.CanAppAboutHandler()));
+            base.CmdAgg.AddOrSetCommand(CommandButtons.AppSettings, new RelayCommand(p1 => this.AppSettingsHandler(p1), p2 => this.CanAppSettingsHandler()));
         }
 
         #region Properties
@@ -135,6 +137,18 @@
                 Application.Current.Shutdown();
             }
         }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo); 
+
+            App.CurrentDialogHeight = this.Height;
+            if (this.WorkContent != null)
+            {
+                this.WorkContent.Height = (App.CurrentDialogHeight - 75);
+            }
+        }
+
         #endregion WindowHandler
 
         #region CommandHandler
@@ -143,8 +157,28 @@
             this.notificationService.FeaturesNotFound($"{this.CurrentCommandName}-{commandArgs.ToString()}");
         }
 
+        private bool CanAppAboutHandler()
+        {
+            if (this.WorkContent == null)
+            {
+                return false;
+            }
+
+            if (typeof(HomeUC) == this.WorkContent.GetType())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private void AppAboutHandler(object commandArgs)
         {
+            ChangeViewEventArgs arg = new ChangeViewEventArgs();
+            arg.MenuButton = CommandButtons.AppAbout;
+            this.ChangeControl(arg);
+
+            /*
             IEnumerable<IAssemblyInfo> metaInfo = null;
             using (AssemblyMetaService ams = new AssemblyMetaService())
             {
@@ -160,7 +194,31 @@
             string headLineText = "Versionen zur Modern Template.";
 
             NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, assemblyList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
+            */
         }
+
+        private bool CanAppSettingsHandler()
+        {
+            if (this.WorkContent == null)
+            {
+                return false;
+            }
+
+            if (typeof(HomeUC) == this.WorkContent.GetType())
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AppSettingsHandler(object commandArgs)
+        {
+            ChangeViewEventArgs arg = new ChangeViewEventArgs();
+            arg.MenuButton = CommandButtons.AppSettings;
+            this.ChangeControl(arg);
+        }
+
         #endregion CommandHandler
 
         #region Dialognavigation
@@ -183,6 +241,7 @@
                     this.WorkContent = menuWorkArea.WorkContent;
                     this.WorkContent.VerticalAlignment = VerticalAlignment.Stretch;
                     this.WorkContent.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    this.WorkContent.Height = (App.CurrentDialogHeight - 75);
                     this.WorkContent.Focusable = true;
 
                     TextBlock textBlock = VisualHelper.FindByName<TextBlock>(this.WorkContent, "TbTitelUC");

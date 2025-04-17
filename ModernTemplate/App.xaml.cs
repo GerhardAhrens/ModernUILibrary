@@ -56,6 +56,11 @@
         /// <summary>
         /// Festlegung für Abfrage des Programmendedialog
         /// </summary>
+        public static double CurrentDialogHeight { get; set; }
+
+        /// <summary>
+        /// Festlegung für Abfrage des Programmendedialog
+        /// </summary>
         public static bool ExitApplicationQuestion { get; set; }
 
         /// <summary>

@@ -18,5 +18,7 @@ namespace ModernTemplate.Core
         Help = 110,
         [Description("Über ...")]
         AppAbout = 111,
+        [Description("Anwendung Einstellungen")]
+        AppSettings = 112,
     }
 }

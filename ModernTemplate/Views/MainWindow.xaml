@@ -26,7 +26,7 @@
             KeyboardNavigation.IsTabStop="False"
             Orientation="Horizontal">
             <ModernUI:GeometryButton
-                Height="30"
+                Height="30"                
                 Command="{Binding Path=CmdAgg[HelpCommand]}"
                 CommandParameter="{x:Static localStatic:CommandButtons.Help}"
                 PathData="{StaticResource ResourceKey=IconHelp}" />
@@ -36,10 +36,16 @@
                 Command="{Binding Path=CmdAgg[AppAboutCommand]}"
                 CommandParameter="{x:Static localStatic:CommandButtons.AppAbout}"
                 PathData="{StaticResource ResourceKey=IconAbout}" />
+
+            <ModernUI:GeometryButton
+                Height="30"
+                Command="{Binding Path=CmdAgg[AppSettingsCommand]}"
+                CommandParameter="{x:Static localStatic:CommandButtons.AppSettings}"
+                PathData="{StaticResource ResourceKey=IconSettings}" />
         </StackPanel>
     </ModernUI:MWindow.MoreOnTitle>
 
-    <ModernUI:SimpleGrid Columns="*" Rows="*,Auto">
+    <ModernUI:SimpleGrid Columns="*" Rows="*,35">
         <!--#region Contentbereich-->
         <ScrollViewer
             CanContentScroll="True"

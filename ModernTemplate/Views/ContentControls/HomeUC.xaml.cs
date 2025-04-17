@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate.Views.ContentControls
+﻿//-----------------------------------------------------------------------
+// <copyright file="HomeUC.xaml.cs" company="Lifeprojects.de">
+//     Class: HomeUC
+//     Copyright © Lifeprojects.de 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
+// <date>02.04.2025</date>
+//
+// <summary>
+// UI Control für den Home Dialog, als Ausgangspunkt für weitere Aktivitäten
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate.Views.ContentControls
 {
     using System.Windows;
     using System.Windows.Controls;

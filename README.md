@@ -134,10 +134,19 @@ private void RegisterValidations()
     });
 }
 ```
-
 <img src="./InsideVM_B.png" style="width:700px;"/>
 
+In der ListeBox (oben) werden evenuelle Fehler dargestellt. Es kann ein Eintrag ausugewählt werden, auf diesen dann positioniert wird und zur besseren Darstellung dann auch die Hintergrundfarbe geändert wird.
+
+
 # ModernTemplate
+Das Template "ModernTemplate" kann über das Visual Studio als eine neuen Projekt ausgewählt werden.
+
+## Installation
+
+## Features
+
+
 
 # Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>
@@ -151,3 +160,6 @@ private void RegisterValidations()
 ![Version](https://img.shields.io/badge/Version-1.0.2025.15-yellow.svg)
 - Demo-Applikation zum InsideVM Framework
 - Weitere Korrekturen in der Base- und UI Library
+
+![Version](https://img.shields.io/badge/Version-1.0.2025.16-yellow.svg)
+- ModernTemplate; Projekt Template zur Auswahl mit dem Visual Studio für die Neuerstellung eines Projektes.

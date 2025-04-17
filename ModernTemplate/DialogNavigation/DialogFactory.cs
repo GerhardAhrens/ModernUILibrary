@@ -98,6 +98,8 @@
                 {
                     Views = new Dictionary<Enum, Type>();
                     Views.Add(CommandButtons.Home, typeof(HomeUC));
+                    Views.Add(CommandButtons.AppSettings, typeof(AppSettingsUC));
+                    Views.Add(CommandButtons.AppAbout, typeof(AppAboutUC));
                     Views.Add(CommandButtons.Custom, typeof(CustomUC));
                 }
             }

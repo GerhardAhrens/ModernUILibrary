@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate.Views.ContentControls
+﻿//-----------------------------------------------------------------------
+// <copyright file="CustomUC.xaml.cs" company="Lifeprojects.de">
+//     Class: CustomUC.xaml
+//     Copyright © Lifeprojects.de 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
+// <date>16.04.2025</date>
+//
+// <summary>
+// Beispiel UI Dialog mit einem 'Back'-Button
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate.Views.ContentControls
 {
     using System.Windows;
     using System.Windows.Controls;

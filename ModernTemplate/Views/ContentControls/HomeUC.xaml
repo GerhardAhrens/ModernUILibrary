@@ -75,7 +75,7 @@
                             PathData="{StaticResource ResourceKey=IconApplicationExit}"
                             PathWidth="14">
                             <ModernUI:PathButton.ToolTip>
-                                <ModernUI:MToolTip Content="Anwendung beenden" PlacementEx="TopLeft" />
+                                <ModernUI:MToolTip Content="Anwendung beenden [Alt-F4]" PlacementEx="TopLeft" />
                             </ModernUI:PathButton.ToolTip>
                             <ModernUI:PathButton.Content>
                                 <TextBlock>
@@ -92,7 +92,7 @@
                             PathData="{StaticResource ResourceKey=IconCustomA}"
                             PathWidth="14">
                             <ModernUI:PathButton.ToolTip>
-                                <ModernUI:MToolTip Content="Anwendung beenden" PlacementEx="TopLeft" />
+                                <ModernUI:MToolTip Content="Beispieldialog aufrufen" PlacementEx="TopLeft" />
                             </ModernUI:PathButton.ToolTip>
                             <ModernUI:PathButton.Content>
                                 <TextBlock>
