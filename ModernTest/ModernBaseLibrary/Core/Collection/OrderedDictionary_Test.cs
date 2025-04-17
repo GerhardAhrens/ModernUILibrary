@@ -1,8 +1,10 @@
 ﻿
-namespace EasyPrototypingNET.Test
+namespace ModernTest.ModernBaseLibrary.Collection
 {
     using System.Globalization;
     using System.Threading;
+
+    using global::ModernBaseLibrary.Collection;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

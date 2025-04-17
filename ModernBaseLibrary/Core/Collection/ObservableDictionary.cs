@@ -524,7 +524,7 @@ namespace ModernBaseLibrary.Collection
             remove { CollectionChanged -= value; }
         }
 
-        protected virtual event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {

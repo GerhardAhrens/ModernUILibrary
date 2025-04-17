@@ -8,6 +8,19 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ModernUI:ColorRadioButton}">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="#3C4C5E" />
+            <Setter Property="CheckedBrush" Value="#8ab4f8" />
+            <Setter Property="BulletSize" Value="18" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -18,12 +31,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.ColumnSpan="2"
             FontSize="14"
-            Text="Beispiel für RadioButton" />
+            Text="Beispiel für RadioButton; ColorRadioButton" />
         <Separator
             Grid.ColumnSpan="2"
             Height="3"
@@ -39,13 +53,13 @@
                 Margin="0,5"
                 Content="Eins"
                 GroupName="A" />
-            
+
             <ModernUI:MRadionButton
                 x:Name="rbZwei"
                 Margin="0,5"
                 Content="Zwei"
                 GroupName="A" />
-            
+
             <ModernUI:MRadionButton
                 x:Name="rbDrei"
                 Margin="0,5"
@@ -88,6 +102,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center" />
             </StackPanel>
+
             <StackPanel
                 Margin="0,2"
                 HorizontalAlignment="Center"
@@ -105,6 +120,7 @@
                     VerticalAlignment="Center"
                     IsChecked="True" />
             </StackPanel>
+
             <StackPanel
                 Margin="0,2"
                 HorizontalAlignment="Center"
@@ -114,6 +130,7 @@
                     Margin="20,0"
                     VerticalAlignment="Center"
                     Text="C" />
+
                 <ModernUI:FlatToggleButton
                     x:Name="tgC"
                     Width="43"
@@ -136,5 +153,47 @@
             <Run FontWeight="Bold" Text="FlatToggleButton C:" />
             <Run Text="{Binding Path=IsChecked, ElementName=tgC}" />
         </TextBlock>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Margin="0,2"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <Viewbox Margin="6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <ModernUI:ColorRadioButton
+                            BulletCircleBrush="Yellow"
+                            CheckedBrush="Green"
+                            Content="Hey, Gerhard!"
+                            GroupName="DemoGroup"
+                            IsChecked="True" />
+
+                        <ModernUI:ColorRadioButton
+                            BulletCircleBrush="Red"
+                            CheckedBrush="#f28b82"
+                            Content="Hier nicht auswählen!"
+                            GroupName="DemoGroup" />
+
+                        <ModernUI:ColorRadioButton
+                            BulletCircleBrush="Blue"
+                            CheckedBrush="#b782f2"
+                            Content="Hallo Charlie!"
+                            GroupName="DemoGroup" />
+                    </StackPanel>
+                </Grid>
+            </Viewbox>
+        </StackPanel>
     </Grid>
 </UserControl>

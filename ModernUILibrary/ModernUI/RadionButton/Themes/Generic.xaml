@@ -1,7 +1,15 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ModernIU.Converters"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <converters:BrushOpacityConverter x:Key="BrushOpacityConverter"/>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+
 
     <PathGeometry x:Key="Icon_UnChecked" Figures="M12,20A8,8,0,0,1,4,12A8,8,0,0,1,12,4A8,8,0,0,1,20,12A8,8,0,0,1,12,20 M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2z" />
     <PathGeometry x:Key="Icon_Checked" Figures="M12,20A8,8,0,0,1,4,12A8,8,0,0,1,12,4A8,8,0,0,1,20,12A8,8,0,0,1,12,20 M12,2A10,10,0,0,0,2,12A10,10,0,0,0,12,22A10,10,0,0,0,22,12A10,10,0,0,0,12,2 M12,7A5,5,0,0,0,7,12A5,5,0,0,0,12,17A5,5,0,0,0,17,12A5,5,0,0,0,12,7z" />
@@ -45,6 +53,165 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="path" Property="Fill" Value="#DDDBD5" />
                             <Setter Property="Foreground" Value="#DDDBD5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle 
+                        Margin="0,0,0,0" 
+                        UseLayoutRounding="True"
+                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
+                        StrokeThickness="1" 
+                        StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ModernUI:ColorRadioButton}">
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="6"/>
+        <Setter Property="Padding" Value="12,10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CheckedBrush" Value="#3399ff"/>
+        <Setter Property="BulletCircleBrush" Value="#ffffff"/>
+        <Setter Property="BulletSize" Value="24"/>
+        <Setter Property="UncheckedBulletBorderSize" Value="1"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ModernUI:ColorRadioButton}">
+                    <Grid Name="PART_ContainerGrid">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="ScaleX"
+                                            Storyboard.TargetName="CheckedEllipseContainerScaleTransform"
+                                            To="1" 
+                                            Duration="0:0:0.12"/>
+
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="ScaleY" 
+                                            Storyboard.TargetName="CheckedEllipseContainerScaleTransform"
+                                            To="1"
+                                            Duration="0:0:0.12"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="ScaleX" 
+                                            Storyboard.TargetName="CheckedEllipseContainerScaleTransform"
+                                            To="0" 
+                                            Duration="0"/>
+
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="ScaleY" 
+                                            Storyboard.TargetName="CheckedEllipseContainerScaleTransform"
+                                            To="0" 
+                                            Duration="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border 
+                            Name="PART_BackgroundBorder"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="Transparent"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ActualWidth}"
+                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=ActualHeight}"/>
+
+                        <BulletDecorator
+                            Name="PART_BulletDecorator"
+                            Background="Transparent"
+                            Margin="{TemplateBinding Padding}"
+                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+                            <BulletDecorator.Bullet>
+                                <Grid 
+                                    Width="{TemplateBinding BulletSize}"
+                                    Height="{TemplateBinding BulletSize}"
+                                    VerticalAlignment="Center">
+                                    <Ellipse
+                                        Name="PART_UncheckedEllipse"
+                                        Stroke="{TemplateBinding BorderBrush}"
+                                        StrokeThickness="{TemplateBinding UncheckedBulletBorderSize}"/>
+
+                                    <Grid 
+                                        Name="PART_CheckedEllipseContainerGrid"
+                                        RenderTransformOrigin="0.5,0.5">
+                                        <Grid.RenderTransform>
+                                            <ScaleTransform 
+                                                x:Name="CheckedEllipseContainerScaleTransform"
+                                                ScaleX="0"
+                                                ScaleY="0"/>
+                                        </Grid.RenderTransform>
+
+                                        <Ellipse 
+                                            Name="PART_CheckedEllipse"
+                                            Fill="{TemplateBinding CheckedBrush}">
+                                            <Ellipse.Effect>
+                                                <DropShadowEffect 
+                                                    Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckedBrush.Color}"
+                                                    Opacity="0.64"
+                                                    ShadowDepth="0"
+                                                    BlurRadius="24"/>
+                                            </Ellipse.Effect>
+                                        </Ellipse>
+
+                                        <Ellipse
+                                            Width="{Binding ElementName=PART_CheckedEllipse, Path=ActualWidth}"
+                                            Height="{Binding ElementName=PART_CheckedEllipse, Path=ActualHeight}"
+                                            Fill="{TemplateBinding BulletCircleBrush}"
+                                            RenderTransformOrigin="0.5,0.5">
+                                            <Ellipse.RenderTransform>
+                                                <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                            </Ellipse.RenderTransform>
+                                        </Ellipse>
+                                    </Grid>
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter 
+                                Margin="6,0,0,0"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter 
+                                TargetName="PART_BackgroundBorder"
+                                Property="BorderBrush" 
+                                Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CheckedBrush}"/>
+
+                            <Setter 
+                                TargetName="PART_BackgroundBorder"
+                                Property="Background" 
+                                Value="{Binding 
+                                    RelativeSource={RelativeSource TemplatedParent}, 
+                                    Path=CheckedBrush, 
+                                    Converter={StaticResource BrushOpacityConverter}, 
+                                    ConverterParameter=0.164}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_ContainerGrid" Property="Opacity" Value="0.56"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

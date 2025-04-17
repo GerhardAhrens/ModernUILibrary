@@ -13,7 +13,7 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-namespace ModernTest.ModernBaseLibrary.Core.Collection
+namespace ModernTest.ModernBaseLibrary.Collection
 {
     using System;
     using System.Collections;

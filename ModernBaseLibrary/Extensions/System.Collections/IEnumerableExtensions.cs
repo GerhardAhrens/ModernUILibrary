@@ -1138,15 +1138,272 @@ namespace ModernBaseLibrary.Extension
                 return this._uniqueCheckerMethod(obj).GetHashCode();
             }
         }
+
+        /// <summary>
+        /// Ermittelt, ob die Anzahl der Elemente in einer Folge gleich einem bestimmten Wert ist.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">The expected number of elements.</param>
+        /// <returns><value>true</value> if <paramref name="this"/> genau die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        /// <remarks>
+        /// Diese Methode ist effizienter als Enumerable.Count(), da sie die Aufzählung der Elemente nach Erreichen der Zählung beendet.
+        /// Wenn also die tatsächliche Anzahl der Elemente viel höher ist als count, wird diese Methode schneller ausgeführt.
+        /// Die Geschwindigkeit bleibt jedoch gleich, wenn <paramref name="this"/> is an ICollection&lt;T&gt;.
+        /// </remarks>
+        public static bool HasCount<T>(this IEnumerable<T> @this, int count)
+        {
+            var collection = @this as ICollection<T>;
+            if (collection != null)
+            {
+                return collection.Count == count;
+            }
+
+            return @this.Take(count + 1).Count() == count;
+        }
+
+        /// <summary>
+        /// Ermittelt, ob die Anzahl der Elemente in einer Folge gleich einem bestimmten Wert ist.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">The expected number of elements.</param>
+        /// <returns><value>true</value> if <paramref name="this"/> genau die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        public static bool HasCount<T>(this ICollection<T> @this, int count)
+        {
+            return @this.Count == count;
+        }
+
+        // <summary>
+        /// Ermittelt, ob die Folge mindestens eine bestimmte Anzahl von Elementen enthält.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">Die Mindestanzahl der Elemente.</param>
+        /// <returns><value>true</value> if <paramref name="@this"/> mindestens die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        public static bool HasAtLeast<T>(this IEnumerable<T> @this, int count)
+        {
+            var collection = @this as ICollection<T>;
+            if (collection != null)
+            {
+                return collection.Count >= count;
+            }
+
+            return @this.Take(count).Count() == count;
+        }
+
+        // <summary>
+        /// Ermittelt, ob die Folge mindestens eine bestimmte Anzahl von Elementen enthält.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">Die Mindestanzahl der Elemente.</param>
+        /// <returns><value>true</value> if <paramref name="this"/> mindestens die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        public static bool HasAtLeast<T>(this ICollection<T> @this, int count)
+        {
+            return @this.Count >= count;
+        }
+
+        /// <summary>
+        /// Ermittelt, ob die Folge höchstens eine bestimmte Anzahl von Elementen enthält.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">Die Mindestanzahl der Elemente.</param>
+        /// <returns><value>true</value> if <paramref name="this"/> höchstens die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        public static bool HasAtMost<T>(this IEnumerable<T> @this, int count)
+        {
+            var collection = @this as ICollection<T>;
+            if (collection != null)
+                return collection.Count <= count;
+            return @this.Take(count + 1).Count() <= count;
+        }
+
+        /// <summary>
+        /// Ermittelt, ob die Folge höchstens eine bestimmte Anzahl von Elementen enthält.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="count">Die Mindestanzahl der Elemente.</param>
+        /// <returns><value>true</value> if <paramref name="this"/> höchstens die angegebene Anzahl von Elementen enthält; andernfalls <value>false</value>.</returns>
+        public static bool HasAtMost<T>(this ICollection<T> @this, int count)
+        {
+            return @this.Count <= count;
+        }
+
+        /// <summary>
+        /// Ruft einen Bereich von Elementen in einer IEnumerable ab.
+        /// </summary>
+        /// <typeparam name="T">Der Typ der Elemente von <paramref name="this"/>.</typeparam>
+        /// <param name="this">Eine Sequenz, die zu zählende Elemente enthält.</param>
+        /// <param name="startIndex">Der Index, bei dem die Aufnahme von Elementen beginnen soll.</param>
+        /// <param name="endIndex">Der Index -1, bis zu dem die Element gelesen werden.</param>
+        /// <returns>A subset of source.</returns>
+        public static IEnumerable<T> Range<T>(this IEnumerable<T> @this, int startIndex, int endIndex)
+        {
+            return @this.Skip(startIndex).Take(endIndex - startIndex);
+        }
+
+        /// <summary>
+        /// Gibt das erste Element einer Sequenz zurück, oder einen Standardwert, wenn die Sequenz leer ist.
+        /// </summary>
+        public static T FirstOr<T>(this IEnumerable<T> @this, T defaultValue)
+        {
+            foreach (var item in @this)
+            {
+                return item;
+            }
+
+            return defaultValue;
+        }
+
+        /// <summary>
+        /// Gibt das erste Element der Sequenz zurück, das eine Bedingung erfüllt, oder einen Standardwert, wenn kein Wert die Bedingung erfüllt.
+        /// </summary>
+        public static T FirstOr<T>(this IEnumerable<T> @this, T defaultValue, Func<T, bool> predicate)
+        {
+            foreach (var item in @this)
+            {
+                if (predicate(item))
+                {
+                    return item;
+                }
+            }
+
+            return defaultValue;
+        }
+
+        /// <summary>
+        /// Ermittelt den ersten Index des Elements in der Quelle, das den angegebenen Kriterien entspricht.
+        /// </summary>
+        /// <returns>Der Index des ersten Elements in der Quelle, das den angegebenen Kriterien entspricht..</returns>
+        public static int IndexOf<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            return IndexOf(source, predicate, 0);
+        }
+
+        /// <summary>
+        /// Ruft den ersten Index des Elements in der Quelle ab, der dem angegebenen Wert entspricht.
+        /// </summary>
+        /// <returns>Der Index des ersten Elements in der Quelle, das die angegebenen Kriterien erfüllt</returns>
+        public static int IndexOf<T>(this IEnumerable<T> source, T value, int startIndex)
+        {
+            return IndexOf(source, value, startIndex, -1);
+        }
+
+        /// <summary>
+        /// Ermittelt den ersten Index des Elements in der Quelle, das den angegebenen Kriterien entspricht.
+        /// </summary>
+        /// <returns>Der Index des ersten Elements in der Quelle, das die angegebenen Kriterien erfüllt</returns>
+        public static int IndexOf<T>(this IEnumerable<T> source, Func<T, bool> predicate, int startIndex)
+        {
+            return IndexOf(source, predicate, startIndex, -1);
+        }
+
+        /// <summary>
+        /// Ruft den ersten Index des Elements in der Quelle ab, der dem angegebenen Wert entspricht.
+        /// </summary>
+        /// <returns>Der Index des ersten Elements in der Quelle, das die angegebenen Kriterien erfüllt</returns>
+        public static int IndexOf<T>(this IEnumerable<T> source, T value, int startIndex, int count)
+        {
+            return IndexOf(source, t => EqualityComparer<T>.Default.Equals(t, value), startIndex, count);
+        }
+
+        /// <summary>
+        /// Ermittelt den ersten Index des Elements in der Quelle, das den angegebenen Kriterien entspricht.
+        /// </summary>
+        /// <returns>Der Index des ersten Elements in der Quelle, das die angegebenen Kriterien erfüllt</returns>
+        public static int IndexOf<T>(this IEnumerable<T> source, Func<T, bool> predicate, int startIndex, int count)
+        {
+            return IndicesOf(source, predicate, startIndex, count).FirstOr(-1);
+        }
+
+        // <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die mit dem angegebenen Wert übereinstimmen.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <param name="source">A sequence that contains elements.</param>
+        /// <param name="value">The value to look for.</param>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen.</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> source, T value)
+        {
+            return IndicesOf(source, value, 0);
+        }
+
+        /// <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die den angegebenen Kriterien entsprechen.
+        /// </summary>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen.</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            return IndicesOf(source, predicate, 0);
+        }
+
+        /// <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die mit dem angegebenen Wert übereinstimmen.
+        /// </summary>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen.</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> source, T value, int startIndex)
+        {
+            return IndicesOf(source, value, startIndex, -1);
+        }
+
+        /// <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die den angegebenen Kriterien entsprechen.
+        /// </summary>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen.</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> source, Func<T, bool> predicate, int startIndex)
+        {
+            return IndicesOf(source, predicate, startIndex, -1);
+        }
+
+        /// <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die mit dem angegebenen Wert übereinstimmen.
+        /// </summary>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen..</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> source, T value, int startIndex, int count)
+        {
+            return IndicesOf(source, t => EqualityComparer<T>.Default.Equals(t, value), startIndex, count);
+        }
+
+        /// <summary>
+        /// Ruft die Indizes aller Elemente in der Quelle ab, die den angegebenen Kriterien entsprechen.
+        /// </summary>
+        /// <returns>Eine Aufzählung, die die Indizes aller Elemente in der Quelle enthält, die den angegebenen Kriterien entsprechen.</returns>
+        public static IEnumerable<int> IndicesOf<T>(this IEnumerable<T> @this, Func<T, bool> predicate, int startIndex, int count)
+        {
+            var itemsToSearch = @this;
+            if (startIndex > 0)
+            {
+                itemsToSearch = itemsToSearch.Skip(startIndex);
+            }
+
+            if (count >= 0)
+            {
+                itemsToSearch = itemsToSearch.Take(count);
+            }
+
+            int index = startIndex;
+            foreach (var item in itemsToSearch)
+            {
+                if (predicate(item))
+                {
+                    yield return index;
+                }
+
+                ++index;
+            }
+        }
     }
 
+    #region Class EnumerableIterator
     internal sealed class EnumerableIterator<T>
     {
         private readonly IEnumerator<T> _enumerator;
 
         public EnumerableIterator(IEnumerable<T> enumerable)
         {
-            _enumerator = enumerable.GetEnumerator();
+            this._enumerator = enumerable.GetEnumerator();
             MoveNext();
         }
 
@@ -1154,14 +1411,17 @@ namespace ModernBaseLibrary.Extension
 
         public T Current
         {
-            get { return _enumerator.Current; }
+            get { return this._enumerator.Current; }
         }
 
         public void MoveNext()
         {
-            HasCurrent = _enumerator.MoveNext();
+            HasCurrent = this._enumerator.MoveNext();
         }
     }
+    #endregion Class EnumerableIterator
+
+    #region Class ItemOfT
     public sealed class Item<T>
     {
         public int Index { get; set; }
@@ -1170,4 +1430,5 @@ namespace ModernBaseLibrary.Extension
 
         public bool IsLast { get; set; }
     }
+    #endregion Class ItemOfT
 }

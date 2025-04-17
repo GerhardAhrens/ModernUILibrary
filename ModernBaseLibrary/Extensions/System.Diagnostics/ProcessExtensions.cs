@@ -164,6 +164,32 @@ namespace ModernBaseLibrary.Extension
             return result;
         }
 
+        /// <summary>
+        /// Wartet asynchron auf die Beendigung des Prozesses.
+        /// </summary>
+        /// <param name="process">Der Prozess zum Warten auf die Beendigung.</param>
+        /// <returns>Ein Task, der auf das Ende des Prozesses wartet.</returns>
+        public static Task WaitForExitAsync(this Process process)
+        {
+            return WaitForExitAsync(process, CancellationToken.None);
+        }
+
+        /// <summary>
+        /// Wartet asynchron auf die Beendigung des Prozesses.
+        /// </summary>
+        /// <param name="process">Der Prozess zum Warten auf die Beendigung.</param>
+        /// <param name="cancellationToken">Ein Abbruch-Token. Wenn es aufgerufen wird, wird die Aufgabe sofort als abgebrochen zurückgegeben.</param>
+        /// <returns>Ein Task, der auf das Ende des Prozesses wartet.</returns>
+        public static Task WaitForExitAsync(this Process process, CancellationToken cancellationToken)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            process.EnableRaisingEvents = true;
+            process.Exited += (sender, args) => tcs.TrySetResult(null);
+            if (cancellationToken != CancellationToken.None)
+                cancellationToken.Register(() => tcs.TrySetCanceled());
+            return tcs.Task;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         private struct PROCESSENTRY32
         {

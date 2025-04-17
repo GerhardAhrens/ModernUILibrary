@@ -72,8 +72,7 @@ namespace ModernBaseLibrary.Core.IO
                 }
                 else if (res != 0)
                 {
-                    throw new Exception("Could not list processes locking resource." +
-                                        "Failed to get size of result.");
+                    throw new Exception("Could not list processes locking resource. Failed to get size of result.");
                 }
             }
             catch (Exception exception)
@@ -91,7 +90,6 @@ namespace ModernBaseLibrary.Core.IO
         private const int RmRebootReasonNone = 0;
         private const int CCH_RM_MAX_APP_NAME = 255;
         private const int CCH_RM_MAX_SVC_NAME = 63;
-        private List<Process> LastProcessList;
 
         [StructLayout(LayoutKind.Sequential)]
         struct RM_UNIQUE_PROCESS

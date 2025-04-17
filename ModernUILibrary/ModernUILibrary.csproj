@@ -46,7 +46,6 @@
     <Folder Include="Behaviors\ComboBox\" />
     <Folder Include="Behaviors\ListBox\" />
     <Folder Include="Behaviors\TextBox\" />
-    <Folder Include="Converters\ConverterBase\" />
     <Folder Include="Converters\Chart\" />
     <Folder Include="Converters\MultiValue\" />
     <Folder Include="Extensions\System.Windows.Input\" />

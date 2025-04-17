@@ -1,7 +1,9 @@
-﻿namespace EasyPrototypingNET.Test
+﻿namespace ModernTest.ModernBaseLibrary.Collection
 {
     using System.Collections.Generic;
     using System.Linq;
+
+    using global::ModernBaseLibrary.Collection;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

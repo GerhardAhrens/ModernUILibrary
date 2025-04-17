@@ -4,18 +4,22 @@
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
 
     using ModernBaseLibrary.Collection;
     using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.Extension;
 
     using ModernInsideVM.Core;
 
     using ModernIU.Controls;
 
     using ModernUI.MVVM.Base;
+
+    using static System.Net.Mime.MediaTypeNames;
 
     /// <summary>
     /// Interaktionslogik für DialogC.xaml
@@ -69,7 +73,7 @@
         public string ValidationErrorsSelected
         {
             get => base.GetValue<string>();
-            set => base.SetValue(value, this.NavigationProperty);
+            set => base.SetValue(value, this.InputNavigationProperty);
         }
 
         private ChangeViewEventArgs CtorArgs { get; set; }
@@ -207,28 +211,40 @@
         }
         #endregion Register Validations
 
-        private void NavigationProperty<T>(T value, string propertyName)
+        /// <summary>
+        /// Ausgewähltes Eingabeelement fokusieren und Hintergrundfarbe setzen
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
+        private void InputNavigationProperty<T>(T value, string propertyName)
         {
-            if (value is string txt)
-            {
-                this.TxtTitel.Background = Brushes.Transparent;
-                this.TxtDescription.Background = Brushes.Transparent;
+            this.TxtTitel.Background = Brushes.Transparent;
+            this.TxtDescription.Background = Brushes.Transparent;
 
-                if (txt.ToLower() == "titel")
+            if (value == null)
+            {
+                return;
+            }
+
+            foreach (var ctrl in this.GetChildren())
+            {
+                if (ctrl is TitleTextBox textBox)
                 {
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
+                    Binding binding = BindingOperations.GetBinding(textBox, TitleTextBox.TextProperty);
+                    if (value != null)
                     {
-                        this.TxtTitel.Focus();
-                        this.TxtTitel.Background = Brushes.Coral;
-                    }));
-                }
-                else if (txt.ToLower() == "description")
-                {
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
-                    {
-                        this.TxtDescription.Focus();
-                        this.TxtDescription.Background = Brushes.Coral;
-                    }));
+                        if (binding != null && binding.Path.Path.EndsWith(value.ToString()))
+                        {
+                            this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => 
+                            {
+                                textBox.Focus();
+                                textBox.Background = Brushes.Coral;
+                            }));
+
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -236,17 +252,19 @@
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             TitleTextBox tb = sender as TitleTextBox;
-            if (tb != null)
+            if (tb != null && e.Key == Key.Tab)
             {
-                if (tb.Name == this.TxtTitel.Name && e.Key == Key.Tab)
+                Dictionary<string, Action<object>> dict = new Dictionary<string, Action<object>>();
+                dict.Add("TxtTitel", new Action<object>(txt =>
                 {
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.TxtDescription.Focus(); }));
-                }
-
-                if (tb.Name == this.TxtDescription.Name && e.Key == Key.Tab)
+                }));
+                dict.Add("TxtDescription", new Action<object>(txt =>
                 {
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.TxtTitel.Focus(); }));
-                }
+                }));
+
+                dict[tb.Name].Invoke(null);
             }
         }
 

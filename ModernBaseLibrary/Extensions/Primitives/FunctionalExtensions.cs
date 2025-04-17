@@ -147,16 +147,6 @@ namespace ModernBaseLibrary.Extension
             return list.Where(predicate).LastOrDefault();
         }
 
-        public static int IndexOf<T>(this List<T> list, Func<T, bool> predicate)
-        {
-            return list.IndexOf(list.WhereFirstOrDefault(predicate));
-        }
-
-        public static int IndexOf<T>(this IEnumerable<T> list, Func<T, bool> predicate)
-        {
-            return list.IndexOf(predicate);
-        }
-
         public static PropertyInfo GetPropertyInfo<TType, TReturn>(this Expression<Func<TType, TReturn>> property)
         {
             LambdaExpression lambda = property;
