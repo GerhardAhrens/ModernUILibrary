@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MT_NewProject.png" />
     <None Remove="_Lib\ModernBaseLibrary.dll" />
     <None Remove="_Lib\ModernUILibrary.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="_Doc\MT_NewProject.png" />
     <Content Include="Resources\Picture\AppLogo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
