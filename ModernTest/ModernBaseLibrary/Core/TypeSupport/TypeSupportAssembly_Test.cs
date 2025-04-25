@@ -25,6 +25,8 @@ namespace ModernTest.ModernBaseLibrary.Core.TypeSupport
     using System.Threading;
     using System.Threading.Tasks;
 
+    using ModernTest;
+
     using global::ModernBaseLibrary.Core;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -86,7 +88,7 @@ namespace ModernTest.ModernBaseLibrary.Core.TypeSupport
             }
 
             d.Clear();
-            Assert.IsEmpty(d);
+            Assert.That.IsEmpty(d);
         }
 
         [DataRow("", "")]

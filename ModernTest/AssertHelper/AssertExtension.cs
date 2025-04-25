@@ -1,13 +1,11 @@
-﻿namespace ModernTest.ModernBaseLibrary
+﻿namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
     using System;
-    using System.Linq;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using global::ModernBaseLibrary.Extension;
 
     [DebuggerStepThrough]
@@ -190,6 +188,31 @@
             }
 
             throw new AssertFailedException($"{typeAsText } == 0");
+        }
+
+        public static void DateEquals(this Assert @this, DateTime expected, DateTime actual)
+        {
+            if (expected.Equals(actual) == true)
+            {
+                return;
+            }
+
+            throw new AssertFailedException(GetMessage(expected.ToShortDateString(), actual.ToShortDateString()));
+        }
+
+        public static void DateEquals(this Assert @this, DateTime? expected, DateTime? actual)
+        {
+            if (expected == null || actual == null)
+            {
+                return;
+            }
+
+            if (expected.Equals(actual) == true)
+            {
+                return;
+            }
+
+            throw new AssertFailedException(GetMessage(((DateTime)expected).ToShortDateString(), ((DateTime)actual).ToShortDateString()));
         }
 
         public static void StringEquals(this Assert @this, string expected, string actual)

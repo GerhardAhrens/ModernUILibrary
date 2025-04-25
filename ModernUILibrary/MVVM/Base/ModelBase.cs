@@ -16,15 +16,22 @@
 namespace ModernUILibrary.MVVM.Base
 {
     using System;
+    using System.Collections.Concurrent;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Text;
 
-    [DebuggerStepThrough]
+    //[DebuggerStepThrough]
     [Serializable]
-    public abstract class ModelBase<TModel> : IDisposable
+    public abstract class ModelBase<TModel> : IDisposable, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ConcurrentDictionary<string, object> values = new ConcurrentDictionary<string, object>();
         private bool classIsDisposed = false;
+        private bool isPropertyChanged = false;
+        private readonly string className = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelBase"/> class.
@@ -38,62 +45,19 @@ namespace ModernUILibrary.MVVM.Base
             this.Dispose(false);
         }
 
-        public static T ToClone<T>(T source)
+        public bool IsPropertyChanged
         {
-            var constructorInfo = typeof(T).GetConstructor(new Type[] { });
-            if (constructorInfo != null)
+            get { return this.isPropertyChanged; }
+            set
             {
-                var target = (T)constructorInfo.Invoke(new object[] { });
-
-                const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public;
-                var sourceProperties = source.GetType().GetProperties(Flags);
-
-                foreach (PropertyInfo pi in sourceProperties)
-                {
-                    if (pi.CanWrite == true)
-                    {
-                        var propInfoObj = target.GetType().GetProperty(pi.Name);
-                        if (propInfoObj != null)
-                        {
-                            var propValue = pi.GetValue(source, null);
-                            propInfoObj.SetValue(target, propValue, null);
-                        }
-                    }
-                }
-
-                return target;
+                this.isPropertyChanged = value;
+                this.SetProperty(ref isPropertyChanged, value);
             }
-
-            return default(T);
         }
 
-        public static T ToClone<T>(object source)
+        public T ToClone<T>()
         {
-            var constructorInfo = typeof(T).GetConstructor(new Type[] { });
-            if (constructorInfo != null)
-            {
-                var target = (T)constructorInfo.Invoke(new object[] { });
-
-                const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public;
-                var sourceProperties = source.GetType().GetProperties(Flags);
-
-                foreach (PropertyInfo pi in sourceProperties)
-                {
-                    if (pi.CanWrite == true)
-                    {
-                        var propInfoObj = target.GetType().GetProperty(pi.Name);
-                        if (propInfoObj != null)
-                        {
-                            var propValue = pi.GetValue(source, null);
-                            propInfoObj.SetValue(target, propValue, null);
-                        }
-                    }
-                }
-
-                return target;
-            }
-
-            return default(T);
+            return (T)this.MemberwiseClone();
         }
 
         public override string ToString()
@@ -169,6 +133,94 @@ namespace ModernUILibrary.MVVM.Base
             }
         }
 
+        #region Get/Set Implementierung
+        private T GetPropertyValueInternal<T>(string propertyName)
+        {
+            if (values.ContainsKey(propertyName) == false)
+            {
+                values[propertyName] = default;
+            }
+
+            var value = values[propertyName];
+            return value == null ? default : (T)value;
+        }
+
+        protected T GetValue<T>([CallerMemberName] string propertyName = "")
+        {
+            var rightsKey = $"{this.className}.{propertyName}";
+
+            return this.GetPropertyValueInternal<T>(propertyName);
+        }
+
+        protected void SetValueUnchecked<T>(T value, [CallerMemberName] string propertyName = "")
+        {
+            if (this.values.ContainsKey(propertyName) == true)
+            {
+                this.values[propertyName] = value;
+            }
+            else
+            {
+                this.values.TryAdd(propertyName, value);
+            }
+        }
+
+        protected void SetValue<T>(T value, Func<T, string, bool> preAction, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
+        {
+            if (preAction?.Invoke(value, propertyName) == true)
+            {
+                this.SetValue(value, propertyName);
+            }
+
+            if (postAction != null)
+            {
+                postAction?.Invoke(value, propertyName);
+            }
+        }
+
+        protected void SetValue<T>(T value, Action<T, string> postAction, [CallerMemberName] string propertyName = "")
+        {
+            this.SetValue(value, propertyName);
+            if (postAction != null)
+            {
+                postAction?.Invoke(value, propertyName);
+            }
+        }
+
+        protected void SetValue<T>(T value, [CallerMemberName] string propertyName = "")
+        {
+            bool changed = !object.Equals(value, this.GetPropertyValueInternal<T>(propertyName));
+            if (changed == true)
+            {
+                this.IsPropertyChanged = true;
+                var rightsKey = $"{this.className}.{propertyName}";
+                this.values[propertyName] = value;
+                this.OnPropertyChanged(propertyName);
+            }
+        }
+        #endregion Get/Set Implementierung
+
+        #region INotifyPropertyChanged Implementierung
+        protected void SetProperty<T>(ref T oldValue, T newValue, [CallerMemberName] string property = "")
+        {
+            if (object.Equals(oldValue, newValue))
+            {
+                return;
+            }
+
+            oldValue = newValue;
+            this.OnPropertyChanged(property);
+        }
+
+        protected virtual void OnPropertyChanged(string property)
+        {
+            var eventHandler = this.PropertyChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        #endregion INotifyPropertyChanged Implementierung
+
         #region Dispose
 
         public void Dispose()
@@ -188,7 +240,6 @@ namespace ModernUILibrary.MVVM.Base
 
             this.classIsDisposed = true;
         }
-
         #endregion Dispose
     }
 }

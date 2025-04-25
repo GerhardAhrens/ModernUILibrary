@@ -50,10 +50,10 @@ namespace ModernTest.ModernBaseLibrary.Core.TypeSupport
         public void CtorTest()
         {
             var d = new TypeMap();
-            Assert.IsEmpty(d);
+            Assert.IsNull(d);
             Assert.IsFalse(d.IsReadOnly);
-            Assert.IsEmpty(d.Keys);
-            Assert.IsEmpty(d.Values);
+            Assert.IsNull(d.Keys);
+            Assert.IsNull(d.Values);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace ModernTest.ModernBaseLibrary.Core.TypeSupport
             }
 
             d.Clear();
-            Assert.IsEmpty(d);
+            Assert.That.IsEmpty(d);
         }
 
         [DataRow("", "")]
