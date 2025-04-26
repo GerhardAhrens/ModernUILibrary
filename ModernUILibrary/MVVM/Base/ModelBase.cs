@@ -28,6 +28,7 @@ namespace ModernUILibrary.MVVM.Base
     public abstract class ModelBase<TModel> : IDisposable, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ConcurrentDictionary<string, object> originalValues = new ConcurrentDictionary<string, object>();
         private readonly ConcurrentDictionary<string, object> values = new ConcurrentDictionary<string, object>();
         private bool classIsDisposed = false;
         private bool isPropertyChanged = false;
@@ -80,7 +81,7 @@ namespace ModernUILibrary.MVVM.Base
             }
         }
 
-        public bool Compare<T>(T object1, T object2)
+        public static bool Compare<T>(T object1, T object2)
         {
             Type type = typeof(T);
 
@@ -116,21 +117,27 @@ namespace ModernUILibrary.MVVM.Base
             return true;
         }
 
-        public int CalculateHash(params Func<object>[] memberThunks)
+        public int CalculateHash()
         {
-            /* Overflow is okay; just wrap around */
-            unchecked
+            int result = 0;
+            var hash = new HashCode();
+
+            try
             {
-                int hash = 5;
-                foreach (var member in memberThunks)
+                PropertyInfo[] propInfo = this.GetType().GetProperties();
+                foreach (PropertyInfo propItem in propInfo)
                 {
-                    if (member() != null)
-                    {
-                        hash = hash * 33 + member().GetHashCode();
-                    }
+                    hash.Add(propItem.GetValue(this, null));
                 }
-                return hash;
+
+                result = hash.ToHashCode();
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
         }
 
         #region Get/Set Implementierung
@@ -194,6 +201,7 @@ namespace ModernUILibrary.MVVM.Base
                 this.IsPropertyChanged = true;
                 var rightsKey = $"{this.className}.{propertyName}";
                 this.values[propertyName] = value;
+                AddOriginalValues(propertyName, value);
                 this.OnPropertyChanged(propertyName);
             }
         }
@@ -241,5 +249,29 @@ namespace ModernUILibrary.MVVM.Base
             this.classIsDisposed = true;
         }
         #endregion Dispose
+
+        #region Property Tracking
+        public int CountChanges { get { return this.originalValues.Count(); } }
+
+        public ConcurrentDictionary<string, object> OriginalValues { get { return this.originalValues; } }
+
+        public bool IsChanged { get; private set; }
+
+        public void AddOriginalValues(string key, object originalValue)
+        {
+            if (this.originalValues.ContainsKey(key) == false)
+            {
+                this.originalValues[key] = originalValue;
+                this.IsChanged = true;
+            }
+        }
+
+        public void ResetChanged()
+        {
+            this.originalValues.Clear();
+            this.IsChanged = false;
+        }
+
+        #endregion Property Tracking
     }
 }

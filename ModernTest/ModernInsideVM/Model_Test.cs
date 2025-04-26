@@ -26,7 +26,9 @@ namespace ModernTest.ModernInsideVM
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.Reflection;
     using System.Threading;
 
     using global::ModernUILibrary.MVVM.Base;
@@ -83,6 +85,67 @@ namespace ModernTest.ModernInsideVM
             Assert.AreEqual(contactClone.Status, true);
         }
 
+        [TestMethod]
+        public void CompareObjectIsEquals()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            Contact contactObj2 = new Contact("Gerhard", "Ahrens");
+            contactObj2.Birthday = new DateTime(1960, 6, 28);
+            contactObj2.Status = true;
+            contactObj2.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            bool comareResult = Contact.Compare(contactObj1, contactObj2);
+            Assert.IsTrue(comareResult);
+        }
+
+        [TestMethod]
+        public void CompareObjectIsNotEquals()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            Contact contactObj2 = new Contact("Gerhard", "Ahrens");
+            contactObj2.Birthday = new DateTime(1960, 6, 28);
+            contactObj2.Status = false;
+            contactObj2.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            bool comareResult = Contact.Compare(contactObj1, contactObj2);
+            Assert.IsFalse(comareResult);
+        }
+
+        [TestMethod]
+        public void GetHashCodeFormObject()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            int hashCode = contactObj1.CalculateHash();
+        }
+
+        [TestMethod]
+        public void ObjectTracking()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            Assert.IsTrue(contactObj1.IsChanged);
+
+            contactObj1.AcceptChanges();
+
+            Assert.IsFalse(contactObj1.IsChanged);
+
+        }
+
         [DataRow("", "")]
         [TestMethod]
         public void DataRowInputTest(string input, string expected)
@@ -101,7 +164,7 @@ namespace ModernTest.ModernInsideVM
             }
         }
 
-        private class Contact : ModelBase<Contact>
+        private class Contact : ModelBase<Contact>, IRevertibleChangeTracking
         {
             public Contact(string firstName, string lastName)
             {
@@ -137,6 +200,21 @@ namespace ModernTest.ModernInsideVM
             {
                 get => base.GetValue<Dictionary<string, string>>();
                 set => base.SetValue(value);
+            }
+
+            public void RejectChanges()
+            {
+                foreach (KeyValuePair<string, object> property in this.OriginalValues)
+                {
+                    this.GetType().GetRuntimeProperty(property.Key).SetValue(this, property.Value);
+                }
+
+                this.AcceptChanges();
+            }
+
+            public void AcceptChanges()
+            {
+                base.ResetChanged();
             }
         }
     }
