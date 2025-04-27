@@ -19,9 +19,14 @@ namespace ModernUILibrary.MVVM.Base
     using System.Collections.Concurrent;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+
+    using ModernBaseLibrary.Core.LINQ;
 
     //[DebuggerStepThrough]
     [Serializable]
@@ -81,9 +86,9 @@ namespace ModernUILibrary.MVVM.Base
             }
         }
 
-        public static bool Compare<T>(T object1, T object2)
+        public static bool Compare<TModel>(TModel object1, TModel object2)
         {
-            Type type = typeof(T);
+            Type type = typeof(TModel);
 
             if (object1 == null || object2 == null)
             {
@@ -128,6 +133,34 @@ namespace ModernUILibrary.MVVM.Base
                 foreach (PropertyInfo propItem in propInfo)
                 {
                     hash.Add(propItem.GetValue(this, null));
+                }
+
+                result = hash.ToHashCode();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public int CalculateHash<T>(params Expression<Func<T, object>>[] expressions)
+        {
+            int result = 0;
+            HashCode hash = new HashCode();
+            Type type = typeof(T);
+
+            try
+            {
+                foreach (var property in expressions)
+                {
+                    string propertyName = ExpressionPropertyName.For<T>(property);
+                    object propertyValue = type.GetProperty(propertyName).GetValue(this);
+                    if (propertyValue != null)
+                    {
+                        hash.Add(propertyValue);
+                    }
                 }
 
                 result = hash.ToHashCode();

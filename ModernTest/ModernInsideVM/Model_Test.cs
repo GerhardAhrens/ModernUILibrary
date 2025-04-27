@@ -131,7 +131,27 @@ namespace ModernTest.ModernInsideVM
         }
 
         [TestMethod]
-        public void ObjectTracking()
+        public void GetHashCodeFormObjectExpression()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            int hashCode1 = contactObj1.CalculateHash<Contact>(x => x.FirstName, x => x.LastName);
+
+            Contact contactObj2 = new Contact("Gerhard", "Ahrens");
+            contactObj2.Birthday = new DateTime(1960, 6, 28);
+            contactObj2.Status = false;
+            contactObj2.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            int hashCode2 = contactObj2.CalculateHash<Contact>(x => x.FirstName, x => x.LastName);
+
+            Assert.AreEqual(hashCode1, hashCode2);
+        }
+
+        [TestMethod]
+        public void ObjectTracking_AcceptChanges()
         {
             Contact contactObj1 = new Contact("Gerhard", "Ahrens");
             contactObj1.Birthday = new DateTime(1960, 6, 28);
@@ -143,6 +163,27 @@ namespace ModernTest.ModernInsideVM
             contactObj1.AcceptChanges();
 
             Assert.IsFalse(contactObj1.IsChanged);
+
+        }
+
+        [TestMethod]
+        public void ObjectTracking_RejectChanges()
+        {
+            Contact contactObj1 = new Contact("Gerhard", "Ahrens");
+            contactObj1.Birthday = new DateTime(1960, 6, 28);
+            contactObj1.Status = true;
+            contactObj1.Phones = new Dictionary<string, string>() { { "A", "4711" }, { "B", "4712" } };
+
+            Assert.IsTrue(contactObj1.IsChanged);
+
+            contactObj1.Birthday = new DateTime(1960, 6, 29);
+            Assert.AreEqual(contactObj1.Birthday, new DateTime(1960, 6, 29));
+
+            contactObj1.RejectChanges();
+
+            Assert.IsFalse(contactObj1.IsChanged);
+
+            Assert.AreEqual(contactObj1.Birthday, new DateTime(1960, 6, 28));
 
         }
 
