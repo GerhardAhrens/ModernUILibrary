@@ -10,6 +10,7 @@
     using System.Windows.Threading;
 
     using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.Core.IO;
     using ModernBaseLibrary.Core.Logger;
 
     using ModernTemplate.Core;
