@@ -105,10 +105,17 @@ namespace System
             return !left.Equals(right);
         }
 
-        public static string Base64Encode(string plainText)
+        public static Base64 Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            string base64String = System.Convert.ToBase64String(plainTextBytes);
+            return new Base64(base64String);
+        }
+
+        public static string Base64Decode(Base64 base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData.Value);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
         public static string Base64Decode(string base64EncodedData)
@@ -116,6 +123,23 @@ namespace System
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
+
+        #region Check Funktionen
+        public bool IsBase64String()
+        {
+            bool result = false;
+
+            if (string.IsNullOrEmpty(this.Value) || this.Value.Length % 4 != 0 || this.Value.Contains(" ")
+                || this.Value.Contains("\t") || this.Value.Contains("\r") || this.Value.Contains("\n"))
+            {
+                return result;
+            }
+
+            Span<byte> buffer = new Span<byte>(new byte[this.Value.Length]);
+            result = Convert.TryFromBase64String(this.Value, buffer, out int bytesParsed);
+            return result;
+        }
+        #endregion Check Funktionen
 
         public override int GetHashCode()
         {
