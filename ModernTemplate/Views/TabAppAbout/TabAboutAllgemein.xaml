@@ -13,7 +13,7 @@
     mc:Ignorable="d">
     <ModernUI:SimpleGrid
         Margin="5"
-        Columns="120,300,160,*"
+        Columns="*"
         Rows="35,Auto,Auto,Auto, 30, 30">
         <StackPanel
             Grid.Row="0"
@@ -33,5 +33,18 @@
                 Text="Verschiedene Informationen zur Applikation" />
         </StackPanel>
 
+        <ModernUI:ContentElements
+            Grid.Row="1"
+            Margin="5,5,0,0"
+            KeyboardNavigation.DirectionalNavigation="Contained">
+            <ModernUI:ContentFrame Title="Produkt">
+                <TextBlock
+                    Width="100"
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=Product, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+
+            </ModernUI:ContentFrame>
+        </ModernUI:ContentElements>
     </ModernUI:SimpleGrid>
 </base:UserControlBase>
