@@ -32,17 +32,29 @@
         public void EnumToDictionary()
         {
             Numbers aa = Numbers.None;
-            Dictionary<int,string> result = aa.ToDictionary<Numbers>();
+            Dictionary<int,string> result = aa.ToDictionary<Numbers>(false);
             Assert.IsNotNull(result);
-            Assert.That.CountGreaterZero<Dictionary<int, string>>(result);
+            Assert.IsTrue(result.Count > 0);
+        }
+
+        [TestMethod]
+        public void EnumToDictionaryWithDescription()
+        {
+            Numbers aa = Numbers.None;
+            Dictionary<int, string> result = aa.ToDictionary<Numbers>(true);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
         }
 
         [DefaultValue(None)]
-        private enum Numbers
+        public enum Numbers
 
         {
+            [System.ComponentModel.Description("Nix")]
             None = 0,
+            [System.ComponentModel.Description("Einhundert")]
             OneHundred = 100,
+            [System.ComponentModel.Description("Zweihundert")]
             TwoHundred = 200
         }
     }

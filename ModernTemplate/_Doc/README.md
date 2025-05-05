@@ -128,12 +128,13 @@ private void CheckContent<T>(T value, string propertyName)
 }
 ```
 
+### Validierung von Eingaben
 
 ### Applikation Settings
 
-
 ### Logging
 
+### Message Dialoge
 
 ## ModernTemplate erstellen
 

@@ -30,6 +30,8 @@ namespace ModernBaseLibrary.Extension
     using System.Linq;
     using ModernBaseLibrary.Core;
     using System.Collections;
+    using System;
+    using static System.Net.Mime.MediaTypeNames;
 
     public static partial class EnumExtensions
     {
@@ -362,8 +364,7 @@ namespace ModernBaseLibrary.Extension
         {
             FieldInfo fieldInfo = @this.GetType().GetField(@this.ToString());
 
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo
-                .GetCustomAttributes(typeof(DescriptionAttribute), false);
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             if (attributes != null && attributes.Length > 0)
             {
@@ -379,8 +380,7 @@ namespace ModernBaseLibrary.Extension
         {
             FieldInfo fieldInfo = @this.GetType().GetField(@this.ToString());
 
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo
-                .GetCustomAttributes(typeof(DescriptionAttribute), false);
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             if (attributes != null && attributes.Length > 0)
             {
@@ -519,7 +519,7 @@ namespace ModernBaseLibrary.Extension
         /// </summary>
         /// <param name="this"></param>
         /// <returns></returns>
-        public static Dictionary<int, string> ToDictionary<TEnum>(this TEnum @this) where TEnum : struct
+        public static Dictionary<int, string> ToDictionary<TEnum>(this TEnum @this, bool setDescription = false) where TEnum : struct
         {
             if (typeof(TEnum).IsEnum == false)
             {
@@ -527,13 +527,28 @@ namespace ModernBaseLibrary.Extension
             }
 
             var type = typeof(TEnum);
-            return Enum.GetValues(type).Cast<int>().ToDictionary(e => e, e => Enum.GetName(type, e));
+            if (setDescription == true)
+            {
+                var dict = Enum.GetValues(type).Cast<int>().ToDictionary(e => e, e => Enum.GetName(type, e));
+
+                foreach (TEnum enumItem in (TEnum[])Enum.GetValues(typeof(TEnum)))
+                {
+                    int index = Convert.ToInt32(enumItem);
+                    dict[index] = enumItem.ToDescription();
+                }
+
+                return dict;
+            }
+            else
+            {
+                return Enum.GetValues(type).Cast<int>().ToDictionary(e => e, e => Enum.GetName(type, e));
+            }
         }
 
         /// <summary>
         /// Gib ein Enum als Dictionary zurüxk
         /// </summary>
-        /// <typeparam name="TEnumValueType"></typeparam>
+        /// <typeparam name="TEnum"></typeparam>
         /// <param name="e"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -545,6 +560,16 @@ namespace ModernBaseLibrary.Extension
             }
 
             return Enum.GetValues(@this.GetType()).Cast<object>().ToDictionary(key => Enum.GetName(@this.GetType(), key),value => (TEnumValueType)value);
+        }
+
+        public static int EnumToInt<TValue>(this TValue value) where TValue : struct, IConvertible
+        {
+            if (!typeof(TValue).IsEnum)
+            {
+                throw new ArgumentException(nameof(value));
+            }
+
+            return (int)(object)value;
         }
     }
 }
