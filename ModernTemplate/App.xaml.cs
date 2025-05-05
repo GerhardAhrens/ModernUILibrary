@@ -77,7 +77,7 @@
         /// <summary>
         /// Festlegen, ob in der Applikation das Logging aktiviert werden soll
         /// </summary>
-        public static bool IsLogging { get; set; }
+        public static int SetLoggingLevel { get; set; }
 
         public static ILogger Logger { get { return Logging.Instance.GetLogger(SHORTNAME); } }
 
@@ -89,7 +89,7 @@
 
             try
             {
-                IsLogging = false;
+                SetLoggingLevel = 0;
                 ExitApplicationQuestion = true;
                 SaveLastWindowsPosition = false;
                 RunEnvironment = RunEnvironments.Development;
@@ -166,7 +166,7 @@
         {
             LogFileOutHandler handler = new LogFileOutHandler(Path.Combine(ProgramDataPath,"Log"));
             Logger.AddHandler(handler);
-            if (IsLogging == false)
+            if (SetLoggingLevel == 0)
             {
                 Logger.SetLevel(LogLevel.NOTSET);
             }
@@ -187,8 +187,7 @@
                 settings.Load();
                 settings.ExitApplicationQuestion = App.ExitApplicationQuestion;
                 settings.SaveLastWindowsPosition = App.SaveLastWindowsPosition;
-                settings.IsLogging = App.IsLogging;
-                settings.RunEnvironment = App.RunEnvironment;
+                settings.SetLoggingLevel = App.SetLoggingLevel;
                 settings.Save();
             }
         }

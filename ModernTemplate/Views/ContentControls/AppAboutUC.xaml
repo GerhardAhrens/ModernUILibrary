@@ -7,6 +7,7 @@
     xmlns:base="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ModernTemplate.Views.ContentControls"
+    xmlns:localControls="clr-namespace:ModernTemplate.Views.ContentControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     x:Name="nameAppAboutUC"
@@ -120,6 +121,8 @@
                                 Text="Allgemein" />
                         </StackPanel>
                     </TabItem.Header>
+
+                    <localControls:TabAboutAllgemein />
                 </TabItem>
 
                 <TabItem Width="{StaticResource ResourceKey=TabItemWidth}">

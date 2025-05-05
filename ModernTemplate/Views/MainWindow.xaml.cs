@@ -1,7 +1,6 @@
 ﻿namespace ModernTemplate
 {
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
@@ -77,8 +76,7 @@
                 settings.Load();
                 App.ExitApplicationQuestion = settings.ExitApplicationQuestion;
                 App.SaveLastWindowsPosition = settings.SaveLastWindowsPosition;
-                App.IsLogging = settings.IsLogging;
-                App.RunEnvironment = settings.RunEnvironment;
+                App.SetLoggingLevel = settings.SetLoggingLevel;
             }
 
             /* Letzte Windows Positionn landen*/
@@ -117,7 +115,6 @@
             {
                 this.ExitApplication(e);
             }
-
         }
 
         private void ExitApplication(CancelEventArgs e)
@@ -128,9 +125,12 @@
                 e.Cancel = false;
                 this.statusBarDate.Stop();
 
-                using (UserPreferences userPrefs = new UserPreferences(this))
+                if (App.SaveLastWindowsPosition == true)
                 {
-                    userPrefs.Save(App.SaveLastWindowsPosition);
+                    using (UserPreferences userPrefs = new UserPreferences(this))
+                    {
+                        userPrefs.Save(App.SaveLastWindowsPosition);
+                    }
                 }
 
                 Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;

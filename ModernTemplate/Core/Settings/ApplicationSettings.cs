@@ -34,12 +34,10 @@ namespace ModernTemplate.Core
 
         public DateTime LastAccess { get; set; }
 
-        public bool ExitApplicationQuestion { get; set; } = true;
+        public bool ExitApplicationQuestion { get; set; }
 
-        public bool SaveLastWindowsPosition { get; set; } = false;
+        public bool SaveLastWindowsPosition { get; set; }
 
-        public bool IsLogging { get; set; } = false;
-
-        public RunEnvironments RunEnvironment { get; set; } = 0;
+        public int SetLoggingLevel { get; set; }
     }
 }

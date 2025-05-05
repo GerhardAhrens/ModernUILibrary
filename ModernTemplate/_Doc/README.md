@@ -17,6 +17,9 @@ Zur Installation und Verwendung der Projektvorlage **ModernTemplate.zip** muﬂ di
 
 ```bat
 c:\Users\<username>\Documents\Visual Studio 2022\Templates\ProjectTemplates\Visual C#\ModernUI\ModernTemplate.zip
+
+*Template Cache
+c:\Users\<username\AppData\Roaming\Microsoft\VisualStudio\17.0_a0c33062\ItemTemplatesCache\Visual C#\ModernUI\
 ```
 
 ## Features
@@ -129,6 +132,34 @@ private void CheckContent<T>(T value, string propertyName)
 ```
 
 ### Validierung von Eingaben
+
+Die Pr¸fung der Eingaben erfolgt ¸ber die Klasse *ValidationRule* im Namespace *Core*. Hier sind schon einige Pr¸fungen hinterlegt, die bei Bedarf erweitert werden kˆnnen.
+
+|Name  |Typ|Beschreibung |
+|:----------------|:-|:----------|
+|NotEmpty|String|Inhalt darf nicht leer sein|
+|NotEmptyAndMinChar|String|Inhalt darf nicht leer sein, und mind. x Zeichen|
+|InRange|Int|Der Inhalt muﬂ zwischen x und y liegen|
+|GreaterThanZero|Int/Double|Der Inhalt muﬂ grˆﬂer 0 sein|
+
+```csharp
+private void RegisterValidations()
+{
+    this.ValidationRules.Add(nameof(this.Titel), () =>
+    {
+        return ValidationRule<DialogC>.This(this).NotEmpty(x => x.Titel, "Titel");
+    });
+
+    this.ValidationRules.Add(nameof(this.Description), () =>
+    {
+        return ValidationRule<DialogC>.This(this).NotEmpty(x => x.Description, "Beschreibung");
+    });
+}
+```
+
+<img src="MT_Validierung.png" style="width:750px;"/>
+
+Die Fehlerhaften Elemente werden in einer ListBox dargestellt. ‹ber die Auswahl in der ListBox kann auf das jeweilige Eingabeelement gesprungen werden.
 
 ### Applikation Settings
 

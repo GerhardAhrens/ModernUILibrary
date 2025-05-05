@@ -1,13 +1,11 @@
 namespace ModernTemplate.Core
 {
     using System;
-    using System.Text;
-    using ModernBaseLibrary.Text;
-
-    using ModernTemplate.Views;
+    using System.Runtime.Versioning;
 
     using ModernIU.Controls;
-    using System.Runtime.Versioning;
+
+    using ModernTemplate.Views;
 
     [SupportedOSPlatform("windows")]
     public static class MessageContent
