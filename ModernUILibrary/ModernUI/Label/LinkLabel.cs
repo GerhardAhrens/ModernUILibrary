@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Documents;
@@ -16,9 +17,12 @@
         public static readonly DependencyProperty HyperlinkStyleProperty = null;
         public static readonly DependencyProperty HoverForegroundProperty = null;
         public static readonly DependencyProperty LinkLabelBehaviorProperty = null;
+        public static readonly DependencyProperty IsExternProperty = null;
         public static readonly DependencyProperty CommandProperty = null;
         public static readonly DependencyProperty CommandParameterProperty = null;
         public static readonly DependencyProperty CommandTargetProperty = null;
+
+        public static readonly DependencyProperty RequestNavigateCommandProperty = null;
 
         [Category("Behavior")]
         public static readonly RoutedEvent ClickEvent;
@@ -37,9 +41,17 @@
             HyperlinkStyleProperty = DependencyProperty.Register(nameof(HyperlinkStyle), typeof(Style), typeof(LinkLabel));
             HoverForegroundProperty = DependencyProperty.Register(nameof(HoverForeground), typeof(Brush), typeof(LinkLabel));
             LinkLabelBehaviorProperty = DependencyProperty.Register(nameof(LinkLabelBehavior), typeof(LinkLabelBehavior), typeof(LinkLabel));
+            IsExternProperty = DependencyProperty.Register(nameof(IsExtern), typeof(bool), typeof(LinkLabel), new PropertyMetadata(false));
             CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(LinkLabel));
             CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(LinkLabel));
             CommandTargetProperty = DependencyProperty.Register(nameof(CommandTarget), typeof(IInputElement), typeof(LinkLabel));
+            RequestNavigateCommandProperty = DependencyProperty.Register(nameof(RequestNavigateCommand), typeof(ICommand), typeof(LinkLabel), new PropertyMetadata(null));
+        }
+
+        public ICommand RequestNavigateCommand
+        {
+            get { return (ICommand)GetValue(RequestNavigateCommandProperty); }
+            set { SetValue(RequestNavigateCommandProperty, value); }
         }
 
         [Category("Common Properties"), Bindable(true)]
@@ -67,6 +79,12 @@
         {
             get { return (LinkLabelBehavior)GetValue(LinkLabelBehaviorProperty); }
             set { SetValue(LinkLabelBehaviorProperty, value); }
+        }
+
+        public bool IsExtern
+        {
+            get { return (bool)GetValue(IsExternProperty); }
+            set { SetValue(IsExternProperty, value); }
         }
 
         [Localizability(LocalizationCategory.NeverLocalize), Bindable(true), Category("Action")]
@@ -137,7 +155,32 @@
         
         private void InnerHyperlink_Click(object sender, RoutedEventArgs e)
         {
-            this.RaiseEvent(new RoutedEventArgs(LinkLabel.ClickEvent, this));
+            if (this.IsExtern == true)
+            {
+                this.RaiseEvent(new RoutedEventArgs(LinkLabel.ClickEvent, this));
+
+                if (this.RequestNavigateCommand != null)
+                {
+                    string uriFormat = ((System.Windows.Documents.Hyperlink)e.Source).NavigateUri.ToString();
+                    Uri uri = new Uri(uriFormat);
+                    UriEventArgs uriArgs = new UriEventArgs();
+                    uriArgs.Sender = this.GetType();
+                    uriArgs.TextNavigate = uriFormat;
+                    uriArgs.UriNavigate = uri;
+
+                    this.RequestNavigateCommand.Execute(uriArgs);
+                }
+            }
+            else
+            {
+                string uriFormat = ((System.Windows.Documents.Hyperlink)e.Source).NavigateUri.ToString();
+                ProcessStartInfo sInfo = new System.Diagnostics.ProcessStartInfo(uriFormat)
+                {
+                    UseShellExecute = true,
+                };
+
+                System.Diagnostics.Process.Start(sInfo);
+            }
         }
     }
 }

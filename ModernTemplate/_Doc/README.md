@@ -162,6 +162,43 @@ private void RegisterValidations()
 Die Fehlerhaften Elemente werden in einer ListBox dargestellt. Über die Auswahl in der ListBox kann auf das jeweilige Eingabeelement gesprungen werden.
 
 ### Applikation Settings
+Die Einstellungen für eine Applikation werden in eine JSON Datei unter *ProgramData\\APPLICATION* gespeichert.
+Der Dateiname wird als *APPLICATION.USERNAME.Setting* erstellt.</br>
+Die Basisklasse *SmartSettingsBase* beinhaltet alle Funktionen zum Lesen, Schreiben und prüfen der Settings.
+
+```csharp
+    public class ApplicationSettings : SmartSettingsBase
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
+        /// </summary>
+        public ApplicationSettings() : base(null,App.SHORTNAME) { }
+
+        public string LastUser { get; set; }
+
+        public DateTime LastAccess { get; set; }
+
+        public bool ExitApplicationQuestion { get; set; }
+
+        public bool SaveLastWindowsPosition { get; set; }
+
+        public int SetLoggingLevel { get; set; }
+    }
+```
+
+**Beschreibung der Funktionen**
+
+|Name  |Typ|Beschreibung |
+|:----------------|:-|:----------|
+|Save()|void|Speichern des aktuellen Inhalt in eine JSON Datei|
+|Load()|bool|Laden der Einstellungen aus einer JSON Datei in die dafür vorgesehende Properties|
+|Reset()|void|Alle Properties auf den festgelegten Default-Wert setzten|
+|Delete()|void|Die Settingsdatei löschen|
+|IsExitSettings()|bool|Prüft, ob die Settingsdatei vorhanden ist|
+|Filename|string|Gibt den Namen der Settingsdatei zurück|
+|Pathname|string|Gibt das Verzeichnis der Settingsdatei zurück|
+|GetProperties|IReadOnlyList\<PropertyInfo>|Gibt Liste der Properties zurück|
+|GetDefaults|IReadOnlyList\<PropertyInfo>|Gibt Liste der Default Properties zurück|
 
 ### Logging
 

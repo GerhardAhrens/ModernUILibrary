@@ -16,6 +16,9 @@
 namespace ModernTemplate.Core
 {
     using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
 
     using ModernBaseLibrary.Core;
@@ -24,13 +27,28 @@ namespace ModernTemplate.Core
     public class AssemblyMetaInfo : IAssemblyInfo
     {
         public string PacketName => "Template ModernInsideVM";
+
         public Version PacketVersion => new Version(1, 0, 2025, 1);
 
         public string AssemblyName => $"Template ModernInsideVM";
 
-        public Version AssemblyVersion => new Version(1,0,2025,1);
+        public Version AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version;
+
+        public DateTime AssemblyDate => new FileInfo(Assembly.GetExecutingAssembly().Location).LastAccessTime;
 
         public string Description => "Template für Modern InsideVM";
+
+        public string Unternehmen => "Company";
+
+        public string Copyright => "© Company 2025";
+
+        public string GitRepository => "https://github.com/GerhardAhrens/ModernUILibrary/tree/master/ModernTemplate/";
+
+        public string FrameworkVersion => RuntimeInformation.FrameworkDescription;
+
+        public string OSPlatform => RuntimeInformation.OSArchitecture.ToString();
+
+        public string RuntimeIdentifier => RuntimeInformation.RuntimeIdentifier;
 
         public override string ToString()
         {

@@ -36,7 +36,7 @@
 
         private void OnRequestNavigateHandler(UriEventArgs item)
         {
-            MessageBox.Show(item.TextNavigate, "URL anueigen");
+            MessageBox.Show(item.TextNavigate, "URL anzeigen");
         }
 
         private void LinkLabel_RequestNavigate(object sender, RequestNavigateEventArgs e)

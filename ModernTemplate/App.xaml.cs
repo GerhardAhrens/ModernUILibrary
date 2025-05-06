@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
     using System.Text;
     using System.Windows;
     using System.Windows.Markup;
@@ -166,14 +167,8 @@
         {
             LogFileOutHandler handler = new LogFileOutHandler(Path.Combine(ProgramDataPath,"Log"));
             Logger.AddHandler(handler);
-            if (SetLoggingLevel == 0)
-            {
-                Logger.SetLevel(LogLevel.NOTSET);
-            }
-            else
-            {
-                Logger.SetLevel(LogLevel.INFO);
-            }
+
+            Logger.SetLevel(App.SetLoggingLevel);
 
             Logger.Info($"Start '{SHORTNAME}'");
             Logger.Info("InitializeLogger");
@@ -185,10 +180,19 @@
             using (ApplicationSettings settings = new ApplicationSettings())
             {
                 settings.Load();
-                settings.ExitApplicationQuestion = App.ExitApplicationQuestion;
-                settings.SaveLastWindowsPosition = App.SaveLastWindowsPosition;
-                settings.SetLoggingLevel = App.SetLoggingLevel;
-                settings.Save();
+                if (settings.IsExitSettings() == false)
+                {
+                    settings.ExitApplicationQuestion = App.ExitApplicationQuestion;
+                    settings.SaveLastWindowsPosition = App.SaveLastWindowsPosition;
+                    settings.SetLoggingLevel = App.SetLoggingLevel;
+                    settings.Save();
+                }
+                else
+                {
+                    App.ExitApplicationQuestion = settings.ExitApplicationQuestion;
+                    App.SaveLastWindowsPosition = settings.SaveLastWindowsPosition;
+                    App.SetLoggingLevel = settings.SetLoggingLevel;
+                }
             }
         }
 

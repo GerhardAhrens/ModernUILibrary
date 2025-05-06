@@ -80,6 +80,41 @@ namespace ModernBaseLibrary.Core.Logger
             }
         }
 
+        public void SetLevel(int level)
+        {
+            lock (this.syncObj)
+            {
+                if (level == 0)
+                {
+                    this.logLevel = LogLevel.NOTSET;
+                }
+                else if (level == 10)
+                {
+                    this.logLevel = LogLevel.DEBUG;
+                }
+                else if (level == 20)
+                {
+                    this.logLevel = LogLevel.INFO;
+                }
+                else if (level == 30)
+                {
+                    this.logLevel = LogLevel.WARNING;
+                }
+                else if (level == 40)
+                {
+                    this.logLevel = LogLevel.ERROR;
+                }
+                else if (level == 50)
+                {
+                    this.logLevel = LogLevel.CRITICAL;
+                }
+                else
+                {
+                    this.logLevel = LogLevel.NOTSET;
+                }
+            }
+        }
+
         /// <summary>
         /// Log Critical.
         /// </summary>

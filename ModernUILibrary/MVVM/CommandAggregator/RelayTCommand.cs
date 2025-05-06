@@ -47,6 +47,12 @@ namespace ModernUI.MVVM.Base
         /// <param name="execute">The execution logic.</param>
         public RelayCommand(Action<TArgs> execute) : this(execute, null)
         {
+            if (execute == null)
+            {
+                this.executeDelegate = new Action<TArgs>(p1 => { });
+            }
+
+            this.executeDelegate = execute;
         }
 
         /// <summary>

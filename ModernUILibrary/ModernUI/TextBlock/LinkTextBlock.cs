@@ -27,6 +27,7 @@ namespace ModernIU.Controls
 
     using ModernIU.Base;
 
+    [SupportedOSPlatform("windows")]
     public class LinkTextBlock : TextBlock
     {
         public static readonly DependencyProperty LinkTextProperty;
@@ -68,7 +69,6 @@ namespace ModernIU.Controls
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkTextBlock"/> class.
         /// </summary>
-        [SupportedOSPlatform("windows")]
         public LinkTextBlock()
         {
             this.FontSize = ControlBase.FontSize;
@@ -129,6 +129,7 @@ namespace ModernIU.Controls
                         };
 
                         Hyperlink link = new Hyperlink();
+                        link.Tag = @this;
                         link.IsEnabled = true;
                         link.Inlines.Add(uriFormat);
                         link.NavigateUri = new Uri(uriFormat);
@@ -185,6 +186,50 @@ namespace ModernIU.Controls
                         uriArgs.UriNavigate = uri;
 
                         @this.RequestNavigateCommand.Execute(uriArgs);
+                    }
+                }
+            }
+            else
+            {
+                Hyperlink hyperLink = sender as Hyperlink;
+                if (hyperLink != null)
+                {
+                    string uriFormat = string.Empty;
+                    if (hyperLink.NavigateUri.ToString().StartsWith("http://", StringComparison.OrdinalIgnoreCase) == true)
+                    {
+                        uriFormat = $"{hyperLink.NavigateUri.ToString()}";
+                    }
+                    else if (hyperLink.NavigateUri.ToString().StartsWith("https://", StringComparison.OrdinalIgnoreCase) == true)
+                    {
+                        uriFormat = $"{hyperLink.NavigateUri.ToString()}";
+                    }
+                    else
+                    {
+                        uriFormat = $"https://{hyperLink.NavigateUri.ToString()}";
+                    }
+
+                    if (hyperLink.Tag is LinkTextBlock lb)
+                    {
+                        if (lb.IsExtern == false)
+                        {
+                            var sInfo = new System.Diagnostics.ProcessStartInfo(uriFormat)
+                            {
+                                UseShellExecute = true,
+                            };
+                            System.Diagnostics.Process.Start(sInfo);
+                        }
+                        else
+                        {
+                            if (lb.RequestNavigateCommand != null)
+                            {
+                                Uri uri = new Uri(uriFormat);
+                                UriEventArgs uriArgs = new UriEventArgs();
+                                uriArgs.Sender = lb.GetType();
+                                uriArgs.TextNavigate = uriFormat;
+                                uriArgs.UriNavigate = uri;
+                                lb.RequestNavigateCommand.Execute(uriArgs);
+                            }
+                        }
                     }
                 }
             }

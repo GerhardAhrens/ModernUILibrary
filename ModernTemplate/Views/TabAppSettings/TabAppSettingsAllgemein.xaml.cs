@@ -1,5 +1,6 @@
 ﻿namespace ModernTemplate.Views.ContentControls
 {
+    using System.Security.Cryptography.X509Certificates;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -29,6 +30,12 @@
             {
                 if (settings.IsExitSettings() == true)
                 {
+                    if (this.LogLevelSelectionChanged != settings.SetLoggingLevel)
+                    {
+                        App.Logger.Info($"LogLevel geändert von '{settings.SetLoggingLevel}' nach '{this.LogLevelSelectionChanged}'", true);
+                        App.Logger.SetLevel(this.LogLevelSelectionChanged);
+                    }
+
                     settings.Load();
                     settings.SetLoggingLevel = this.LogLevelSelectionChanged;
                     settings.ExitApplicationQuestion = this.ExitQuestion;

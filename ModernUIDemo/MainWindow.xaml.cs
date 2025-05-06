@@ -257,7 +257,7 @@
             this.tabItemSource.Add(new TabControlItem("Chart Controls", new ChartControlsUC()) { Stichworte = "Image;Grafik;Chart" });
 
             this.tabItemSource.Add(new TabControlItem("Ausgabe/Anzeige", true));
-            this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search" });
+            this.tabItemSource.Add(new TabControlItem("TextBlock Controls", new TextBlockControlsUC()) { Stichworte = "TextBlock;Anzeigen;Animation;Search;link;lable" });
             this.tabItemSource.Add(new TabControlItem("TextBox RTF HTML Controls", new TextBoxRtfHTMLControlsUC()));
             this.tabItemSource.Add(new TabControlItem("ListBox/ComboBox Controls", new ListBoxControlsUC()) { Stichworte = "ListBox;ComboBox;Flat" });
             this.tabItemSource.Add(new TabControlItem("ListTextBox Controls", new ListTextBoxControlsUC()) { Stichworte = "ListBox;Flat;ListView" });

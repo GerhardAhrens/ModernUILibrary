@@ -28,6 +28,8 @@ namespace ModernBaseLibrary.Core.Logger
 
         void SetLevel(LogLevel level);
 
+        void SetLevel(int level);
+
         void AddHandler(IHandler handler);
 
         void Critical(string message);

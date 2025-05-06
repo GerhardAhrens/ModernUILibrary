@@ -71,14 +71,6 @@
             this.InitTimer();
             Keyboard.Focus(this);
 
-            using (ApplicationSettings settings = new ApplicationSettings())
-            {
-                settings.Load();
-                App.ExitApplicationQuestion = settings.ExitApplicationQuestion;
-                App.SaveLastWindowsPosition = settings.SaveLastWindowsPosition;
-                App.SetLoggingLevel = settings.SetLoggingLevel;
-            }
-
             /* Letzte Windows Positionn landen*/
             using (UserPreferences userPrefs = new UserPreferences(this))
             {
@@ -250,6 +242,7 @@
                         textBlock.Text = titelUC;
                     }
 
+                    App.Logger.Info($"Load UC '{titelUC}'; [{(int)e.MenuButton}]",true);
                     StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms");
                 }
             }

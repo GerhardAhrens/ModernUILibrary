@@ -39,11 +39,63 @@
             KeyboardNavigation.DirectionalNavigation="Contained">
             <ModernUI:ContentFrame Title="Produkt">
                 <TextBlock
-                    Width="100"
                     FontWeight="Medium"
                     Foreground="Blue"
                     Text="{Binding Path=Product, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
 
+            <ModernUI:ContentFrame Title="Version">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=ProductVersion, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Version Datum">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=ProductDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy HH:mm}, FallbackValue=dd.MM.yyyy}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Beschreibung">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Copyright/Autor">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=Copyright, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Git Repository">
+                <ModernUI:LinkTextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    IsExtern="False"
+                    LinkText="{Binding Path=GitRepository, UpdateSourceTrigger=PropertyChanged}"
+                    RequestNavigateCommand="{Binding Path=CmdAgg[RequestNavigateCommand]}"
+                    Text="{Binding Path=GitRepository, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Frameworkversion">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=FrameworkVersion, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
+            </ModernUI:ContentFrame>
+
+            <ModernUI:ContentFrame Title="Betriebssystem">
+                <TextBlock
+                    FontWeight="Medium"
+                    Foreground="Blue"
+                    Text="{Binding Path=OSEnvironment, UpdateSourceTrigger=PropertyChanged, FallbackValue=N/A}" />
             </ModernUI:ContentFrame>
         </ModernUI:ContentElements>
     </ModernUI:SimpleGrid>

@@ -312,11 +312,18 @@
                     Text="PTA GmbH" />
 
                 <ModernUI:LinkLabel
-                    Width="220"
                     HorizontalAlignment="Left"
-                    Content="Link Label - Navigate"
+                    Content="Link Label - Navigate - mit Event"
                     FontSize="22"
                     RequestNavigate="LinkLabel_RequestNavigate"
+                    Url="https://pta.de"
+                    d:LayoutOverrides="Width, Height" />
+
+                <ModernUI:LinkLabel
+                    HorizontalAlignment="Left"
+                    Content="Link Label - Navigate mit Command"
+                    FontSize="22"
+                    RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
                     Url="https://pta.de"
                     d:LayoutOverrides="Width, Height" />
 
