@@ -18,7 +18,7 @@ Zur Installation und Verwendung der Projektvorlage **ModernTemplate.zip** muß di
 ```bat
 c:\Users\<username>\Documents\Visual Studio 2022\Templates\ProjectTemplates\Visual C#\ModernUI\ModernTemplate.zip
 
-*Template Cache
+REM ItemTemplate Cache
 c:\Users\<username\AppData\Roaming\Microsoft\VisualStudio\17.0_a0c33062\ItemTemplatesCache\Visual C#\ModernUI\
 ```
 
@@ -167,23 +167,23 @@ Der Dateiname wird als *APPLICATION.USERNAME.Setting* erstellt.</br>
 Die Basisklasse *SmartSettingsBase* beinhaltet alle Funktionen zum Lesen, Schreiben und prüfen der Settings.
 
 ```csharp
-    public class ApplicationSettings : SmartSettingsBase
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
-        /// </summary>
-        public ApplicationSettings() : base(null,App.SHORTNAME) { }
+public class ApplicationSettings : SmartSettingsBase
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
+    /// </summary>
+    public ApplicationSettings() : base(null,App.SHORTNAME) { }
 
-        public string LastUser { get; set; }
+    public string LastUser { get; set; }
 
-        public DateTime LastAccess { get; set; }
+    public DateTime LastAccess { get; set; }
 
-        public bool ExitApplicationQuestion { get; set; }
+    public bool ExitApplicationQuestion { get; set; }
 
-        public bool SaveLastWindowsPosition { get; set; }
+    public bool SaveLastWindowsPosition { get; set; }
 
-        public int SetLoggingLevel { get; set; }
-    }
+    public int SetLoggingLevel { get; set; }
+}
 ```
 
 **Beschreibung der Funktionen**
@@ -201,10 +201,92 @@ Die Basisklasse *SmartSettingsBase* beinhaltet alle Funktionen zum Lesen, Schrei
 |GetDefaults|IReadOnlyList\<PropertyInfo>|Gibt Liste der Default Properties zurück|
 
 ### Logging
+Das Template ist Standardmäßig mit einer Logging-Funktion ausgestattet. In der Klasse *App.xaml.cs* wird das Logging initalisiert.
+Die Logger-Klasse ist so gebaut, das immer erst in eine *Queue* geschrieben wird, mit dem Aufruf der Methode *Logger.Flush();* werden alle Einträge in eine Log-Datei geschrieben und die *Queue* wider geleert.
+
+```csharp
+protected override void OnStartup(StartupEventArgs e)
+{
+    /* Initalisierung Logging */
+    InitializeLogger();
+}
+```
+
+Die Logdatei wird unter *\ProgramData\\\<APPLICATION>\Log\\\<LOGFILE-NAME>.log* gespeichert.
+
+```csharp
+private void InitializeLogger()
+{
+    LogFileOutHandler handler = new LogFileOutHandler(Path.Combine(ProgramDataPath,"Log"));
+    Logger.AddHandler(handler);
+
+    Logger.SetLevel(App.SetLoggingLevel);
+
+    Logger.Info($"Start '{SHORTNAME}'");
+    Logger.Info("InitializeLogger");
+    Logger.Flush();
+}
+```
+
+Die tatsächliche Steuerung des Output (z.B. in ein File, Console oder auch in eine Datebank) wird über die Klasse *LogFileOutHandler* gesteuert. Diese leitet von der Klasse *AbstractOutHandler* ab.
+In der Klasse *LogFileOutHandler* kann zum einen festgelegt werden, wie eine Archvierung der Log-Dateien erfolgen soll, als auch der Aufbau der Logdatei (Log-Header und Log-Content)
 
 ### Message Dialoge
 
-## ModernTemplate erstellen
+Meldungsdialoge werden über einen *NotificationService* zur Verfügung gestellt. Im Grunde besteht ein Meldungsdialog aus drei Teilen:
+ - Der Basis Funktion *NotificationService*
+ - Dem *NotificationContent*, das ist der Meldungsdialog (MessageOk.xaml, QuestionYesNo.xaml) der dargestellt werden soll
+ - Einer Klasse *MessageContent.cs* in dem die darzustellende Meldung beschrieben ist.
+
+ Bevor eine Meldung verwendet werden kann, muß diese Registriert werden.
+
+ Initalisierung des *NotificationService*
+ ```csharp
+private INotificationService notificationService = new NotificationService();
+```
+
+ Registrieren der zu verwendeten Meldungen
+ ```csharp
+ private void OnLoaded(object sender, RoutedEventArgs e)
+ {
+    NotificationService.RegisterDialog<QuestionYesNo>();
+    NotificationService.RegisterDialog<MessageOk>();
+}
+```
+
+Beispiel zur Meldung *ApplicationExit()*
+```csharp
+public static NotificationBoxButton ApplicationExit(this INotificationService @this)
+{
+    (string InfoText, string CustomText, double FontSize) msgText = ("Programm beenden", $"Soll das Programm beendet werden?", 18);
+    NotificationBoxButton questionResult = NotificationBoxButton.No;
+
+    @this.ShowDialog<QuestionYesNo>(msgText, (result, tag) =>
+    {
+        if (result == true && tag != null)
+        {
+            questionResult = ((Tuple<NotificationBoxButton>)tag).Item1;
+        }
+    });
+
+    return questionResult;
+}
+```
+
+Die eigentliche Meldung wird als Extension des Typ *INotificationService* erstellt und auch so aufgerufen.
+
+Verwenden einer Meldung
+```csharp
+NotificationBoxButton result = this.notificationService.ApplicationExit();
+if (result == NotificationBoxButton.Yes)
+{
+    this.ExitApplication(e);
+}
+```
+
+Diese Vorgehensweise ermöglich eine sehr flexible Darstellung und Verwendung der Notification-Dialoge. So können z.B. Meldungsdialoge mit einem HTML Content erstellt werden, aber auch Dialoge mit einer Eingabe bzw. Auswahl (ListBox, ComboBox) sind ebenfalls möglich.
+
+<img src="MT_MessageBox.png" style="width:550px;"/>
 
 # Release Notes
 

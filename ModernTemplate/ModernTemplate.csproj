@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="MT_NewProject.png" />
+    <None Remove="_Doc\MT_MessageBox.png" />
     <None Remove="_Lib\ModernBaseLibrary.dll" />
     <None Remove="_Lib\ModernUILibrary.dll" />
     <None Remove="_Template\MyTemplate.vstemplate" />
@@ -20,13 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="_Doc\MT_MessageBox.png" />
     <Content Include="_Doc\MT_NewProject.png" />
     <Content Include="Resources\Picture\AppLogo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="_Lib\ModernBaseLibrary.dll" />
     <Content Include="_Lib\ModernUILibrary.dll" />
-    <Content Include="_Template\MyTemplate.vstemplate" />
+    <Content Include="_Template\ProjectTemplate\MyTemplate.vstemplate" />
     <Content Include="_Template\TemplateIcon.png" />
   </ItemGroup>
 

@@ -30,7 +30,7 @@
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
             Window window = this.Parent as Window;
-            window.Tag = new Tuple<NotificationBoxButton, object>(NotificationBoxButton.Ok, null);
+            window.Tag = new Tuple<NotificationBoxButton>(NotificationBoxButton.Ok);
             window.DialogResult = true;
             window.Close();
         }

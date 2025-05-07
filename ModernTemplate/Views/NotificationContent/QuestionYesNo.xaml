@@ -62,9 +62,10 @@
             LastChildFill="True">
             <TextBlock
                 x:Name="TbFull"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 DockPanel.Dock="Left"
+                Text="Demo-Text-Question"
                 TextWrapping="Wrap" />
         </DockPanel>
 
