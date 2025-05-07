@@ -8,19 +8,46 @@
 # ModernTemplate
 Das Template "ModernTemplate" kann über das Visual Studio als eine neuen Projekt ausgewählt werden.
 
+# Inhalt
+1. [Neues Projekt erstellen](#NewProject)
+2. [Installation](#Installation)
+3. [Features](#Features)</br>
+    3.1. [Hauptdialog](#MainDialog)</br>
+    3.2. [Dialog To Dialog Kommunikation](#dialogtodialogkommunikation)</br>
+    3.3. [Commands](#Commands)</br>
+    3.4. [Property Get/Set](#PropertyGetSet)</br>
+    3.5. [Validierung von Eingaben](#FieldValidation)</br>
+    3.6. [Applikation Settings](#ApplicationSettings)</br>
+    3.7. [Logging](#ApplicationLogging)</br>
+    3.8. [Message Dialoge](#NotificationService)</br>
+    3.9. [Dialog Navigation](#DialogNavigation)
+
+<div id='NewProject'/>
+
 ## Neues Projekt erstellen
+
+Aus der Liste der Projektvorlagen wählen Sie die Vorlage *ModernTemplate* aus.
 <img src="MT_NewProject.png" style="width:750px;"/>
 
-## Installation
+<div id='Installation'/>
+
+## Installation der Templates
 
 Zur Installation und Verwendung der Projektvorlage **ModernTemplate.zip** muß diese zuvor in folgendes Verzeichnis kopiert werden.
 
 ```bat
 c:\Users\<username>\Documents\Visual Studio 2022\Templates\ProjectTemplates\Visual C#\ModernUI\ModernTemplate.zip
+```
 
+In der Regel wird der Template Cache automatisch aktualisiert. Sollte die Vorlage nicht gefunden bzw. ausgewählt werden können, kann es notwendig sein denn TemplateCache zu löschen.
+```bat
 REM ItemTemplate Cache
 c:\Users\<username\AppData\Roaming\Microsoft\VisualStudio\17.0_a0c33062\ItemTemplatesCache\Visual C#\ModernUI\
 ```
+
+zu dem Projekt Template gehörebn noch zwei weitere Template *DialogUserControl.zip* und *EmptyUserControl.zip*. Damit soll die Entwicklung von neuen Dialogen unterstützt werden.
+
+<div id='Features'/>
 
 ## Features
 Das Template erstell Anwendungen werden auf Basis eine *Single Page Architektur* entwickelt. Es gibt ein Hauptwindow, in dem alle weitere Dialoge als UserControl abgebildet geladen werden. Die Steuerung zwischen den UserControls (bzw. Dialoge als UserControl) erfolgt über eine Class-To-Class Kommunikation die im *InsindeVM Framework* als EventAggregator abgebildet ist.</br>
@@ -28,10 +55,12 @@ Es wird intern das bekannte **MVVM-Pattern** abgebildet, alledings in einer star
 Trotzdem ist es nach wie vor möglich, eine externe ViewModel-Klasse zu verwenden. In den Basis-Klassen für Window als auch für UserControl sind alle Funktionalitäten für das **MVVM-Pattern** abgebildet. Das Binding zwischen XAML und der dazugehöringen *xaml.cs* funktioniert wie auch bei einer extrenen ViewModel-Klasse.</br>
 Nachteil dieser Lösung ist, komplexere Arten von Unit-Test können nicht so einfach umgesetzt werden.
 
+<div id='MainDialog'/>
+
 ### Hauptdialog
 <img src="MT_MainDialog.png" style="width:750px;"/>
 
-### Dialog-To-Dialog Kommunikation
+### Dialog To Dialog Kommunikation <a name="dialogtodialogkommunikation"></a>
 Die Kommunikation zwischen den Dialogen (aber auch Klassen) erfolgt über einen Observer.
 
 Senden von Werten
@@ -52,6 +81,8 @@ base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
 ```
 
 Der *Subscriber* empfängt die Werte, aller Instanzen, die für das Event-Argument *ChangeViewEventArgs* bestimmt sind. Der *Subscriber* führt automatisch die ihm zugewiesene Methode (im Beispiel **ChangeControl()**) mit den dazugehörigen Event-Arguments aus.
+
+<div id='Commands'/>
 
 ### Commands 
 
@@ -88,7 +119,9 @@ oder als String. Hier muß die Texterweiterung *Command* nicht extra hinzugefügt 
 this.CmdAgg.AddOrSetCommand("DialogBackCommand", new RelayCommand(this.DialogBackHandler));
 ```
 
-### Get/Set
+<div id='PropertyGetSet'/>
+
+### Property Get/Set
 Im Unterschied zu einem *Standard Get;Set;* werden bei dieser Variante keine *Private Field-Variabeln* benötigt. Die Bindungs-Funktion über das *INotifyPropertyChanged* ist bereits in der Basis-Klasse enthalten. Daher kann eine vereinfachte schreibweise verwendet werden.
 ```csharp
 public string DemoText
@@ -131,6 +164,8 @@ private void CheckContent<T>(T value, string propertyName)
 }
 ```
 
+<div id='FieldValidation'/>
+
 ### Validierung von Eingaben
 
 Die Prüfung der Eingaben erfolgt über die Klasse *ValidationRule* im Namespace *Core*. Hier sind schon einige Prüfungen hinterlegt, die bei Bedarf erweitert werden können.
@@ -160,6 +195,8 @@ private void RegisterValidations()
 <img src="MT_Validierung.png" style="width:750px;"/>
 
 Die Fehlerhaften Elemente werden in einer ListBox dargestellt. Über die Auswahl in der ListBox kann auf das jeweilige Eingabeelement gesprungen werden.
+
+<div id='ApplicationSettings'/>
 
 ### Applikation Settings
 Die Einstellungen für eine Applikation werden in eine JSON Datei unter *ProgramData\\APPLICATION* gespeichert.
@@ -200,6 +237,8 @@ public class ApplicationSettings : SmartSettingsBase
 |GetProperties|IReadOnlyList\<PropertyInfo>|Gibt Liste der Properties zurück|
 |GetDefaults|IReadOnlyList\<PropertyInfo>|Gibt Liste der Default Properties zurück|
 
+<div id='ApplicationLogging'/>
+
 ### Logging
 Das Template ist Standardmäßig mit einer Logging-Funktion ausgestattet. In der Klasse *App.xaml.cs* wird das Logging initalisiert.
 Die Logger-Klasse ist so gebaut, das immer erst in eine *Queue* geschrieben wird, mit dem Aufruf der Methode *Logger.Flush();* werden alle Einträge in eine Log-Datei geschrieben und die *Queue* wider geleert.
@@ -230,6 +269,8 @@ private void InitializeLogger()
 
 Die tatsächliche Steuerung des Output (z.B. in ein File, Console oder auch in eine Datebank) wird über die Klasse *LogFileOutHandler* gesteuert. Diese leitet von der Klasse *AbstractOutHandler* ab.
 In der Klasse *LogFileOutHandler* kann zum einen festgelegt werden, wie eine Archvierung der Log-Dateien erfolgen soll, als auch der Aufbau der Logdatei (Log-Header und Log-Content)
+
+<div id='NotificationService'/>
 
 ### Message Dialoge
 
@@ -287,6 +328,74 @@ if (result == NotificationBoxButton.Yes)
 Diese Vorgehensweise ermöglich eine sehr flexible Darstellung und Verwendung der Notification-Dialoge. So können z.B. Meldungsdialoge mit einem HTML Content erstellt werden, aber auch Dialoge mit einer Eingabe bzw. Auswahl (ListBox, ComboBox) sind ebenfalls möglich.
 
 <img src="MT_MessageBox.png" style="width:550px;"/>
+
+<div id='DialogNavigation'/>
+
+### Dialog Navigation
+
+Über die Klasse *DialogFactory.cs* werden die zur Applikation gehörenden Dialoge verwaltet bzw. über die Enum-Klasse *CommandButtons.cs* ausgewählt und zurückgegeben.
+
+- CommandButtons.cs
+  Hier werden alle Einträge festgelegt, denen ein Dialog zugeordnet werden soll
+  ```csharp
+    public enum CommandButtons : int
+    {
+        [Description("Keine Auswahl")]
+        None = 0,
+        [Description("Home Dialog mit Steuerung Main Menü")]
+        Home = 1,
+    }
+  ```
+  Das *Description* Attribute wird zur Beschreibung des Dialogtitel verwendet.
+
+- DialogFactory.cs
+  Die Klasse *DialogFactory* hat zum einen die Aufgabe der Registrierung der zu verwendeten Dialoge, zum anderen gibt die Klasse als *Factory* den gewählten Dialog als *UserControl* zurück.
+  ```csharp
+    private static void RegisterControls()
+    {
+        try
+        {
+            if (Views == null)
+            {
+                Views = new Dictionary<Enum, Type>();
+                Views.Add(CommandButtons.Home, typeof(HomeUC));
+            }
+        }
+        catch (Exception ex)
+        {
+            string errorText = ex.Message;
+            throw;
+        }
+    }
+  ```
+  Zurückgeben eines gewählten Dialog mit der Methode *Get()*
+  ```csharp
+    public static FactoryResult Get(CommandButtons mainButton, IChangeViewEventArgs changeViewArgs)
+    {
+        FactoryResult resultContent = null;
+        using (LoadingWaitCursor wc = new LoadingWaitCursor())
+        {
+            using (LoadingViewTime lvt = new LoadingViewTime())
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                if (Views.ContainsKey(mainButton) == true)
+                {
+                    UserControlBase resultInstance = CreateInstanceContent(mainButton, changeViewArgs);
+                    resultContent = new FactoryResult(resultInstance);
+                    resultContent.WorkContent.Focusable = true;
+                    resultContent.WorkContent.Focus();
+                    resultContent.UsedTime = lvt.Result();
+                    resultContent.ButtonDescription = mainButton.ToDescription();
+                }
+            }
+        }
+
+        return resultContent;
+    }
+  ```
+
 
 # Release Notes
 
