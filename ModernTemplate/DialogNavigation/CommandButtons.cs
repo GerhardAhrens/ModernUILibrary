@@ -6,19 +6,19 @@ namespace ModernTemplate.Core
     {
         [Description("Keine Auswahl")]
         None = 0,
-        [Description("Home Dialog mit Steuerung Main Menü")]
+        [EnumKey("home", "Home Dialog mit Steuerung Main Menü")]
         Home = 1,
-        [Description("Benutzer definierter Dialog")]
+        [EnumKey("","Benutzer definierter Dialog")]
         Custom = 2,
-        [Description("Anwendung beenden")]
+        [EnumKey("", "Anwendung beenden")]
         CloseApp = 100,
-        [Description("Zurück")]
+        [EnumKey("", "Zurück")]
         DialogBack = 101,
-        [Description("Hilfe")]
+        [EnumKey("", "Hilfe")]
         Help = 110,
-        [Description("Über ...")]
+        [EnumKey("", "Über ...")]
         AppAbout = 111,
-        [Description("Anwendung Einstellungen")]
+        [EnumKey("", "Anwendung Einstellungen")]
         AppSettings = 112,
     }
 }

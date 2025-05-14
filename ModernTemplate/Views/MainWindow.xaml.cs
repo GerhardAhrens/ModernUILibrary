@@ -229,7 +229,7 @@
                 {
                     StatusbarMain.Statusbar.SetNotification();
                     this.CurrentCommandName = e.MenuButton;
-                    string titelUC = e.MenuButton.ToDescription();
+                    string titelUC = e.MenuButton.GetAttributeOfType<EnumKeyAttribute>().Description;
                     this.WorkContent = menuWorkArea.WorkContent;
                     this.WorkContent.VerticalAlignment = VerticalAlignment.Stretch;
                     this.WorkContent.HorizontalAlignment = HorizontalAlignment.Stretch;

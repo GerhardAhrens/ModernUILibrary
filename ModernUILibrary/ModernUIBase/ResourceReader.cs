@@ -110,6 +110,15 @@ namespace ModernIU.Base
 
             try
             {
+                if (assembly != null)
+                {
+                    assembly = Assembly.GetExecutingAssembly();
+                }
+                else
+                {
+                    assembly = Assembly.GetEntryAssembly();
+                }
+
                 ResourceDictionary resourceDictionary = ReadEx(resourceDict, assembly);
                 if (resourceDictionary != null)
                 {

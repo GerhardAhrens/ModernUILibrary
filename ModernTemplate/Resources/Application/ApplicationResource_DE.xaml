@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="DoubleValue">1.0</sys:Double>
+    <sys:Double x:Key="IntValue">1</sys:Double>
+    <sys:Boolean x:Key="BoolValue">True</sys:Boolean>
+    <sys:String x:Key="StringValue">Test String</sys:String>
+    <Color x:Key="SteelBrushColor">#FFFFFF</Color>
+    <SolidColorBrush x:Key="SteelBrush">Green</SolidColorBrush>
+    <BitmapImage x:Key="ImagePNG" UriSource="pack://application:,,,/ModernTemplate;component/Resources/Picture/AppLogo32.png" />
+
+</ResourceDictionary>

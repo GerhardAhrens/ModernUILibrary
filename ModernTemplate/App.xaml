@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--  Lokale Styles  -->
+                <ResourceDictionary Source="Resources\Application\ApplicationResource_DE.xaml" />
                 <ResourceDictionary Source="Resources\Style\XamlIcon.xaml" />
 
                 <!--  Extern Library Styles  -->
