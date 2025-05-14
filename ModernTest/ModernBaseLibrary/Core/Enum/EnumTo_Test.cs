@@ -142,12 +142,40 @@ namespace ModernTest.ModernBaseLibrary
         }
 
         [TestMethod]
-        public void GetAttributeOfType()
+        public void GetAttributeOfType_Description()
         {
             Numbers result = Numbers.None;
             System.ComponentModel.DescriptionAttribute value = result.GetAttributeOfType<System.ComponentModel.DescriptionAttribute>();
             Assert.IsNotNull(value);
             Assert.AreEqual(value.Description, "Nix");
+        }
+
+        [TestMethod]
+        public void GetAttributeOfType_EnumKey_Item0()
+        {
+            Numbers result = Numbers.None;
+            EnumKeyAttribute value = result.GetAttributeOfType<EnumKeyAttribute>();
+            Assert.IsNull(value);
+        }
+
+        [TestMethod]
+        public void GetAttributeOfType_EnumKey_Item1()
+        {
+            Numbers result = Numbers.OneHundred;
+            EnumKeyAttribute value = result.GetAttributeOfType<EnumKeyAttribute>();
+            Assert.IsNotNull(value);
+            Assert.AreEqual(value.Guid, new Guid("{E50B1FAF-A054-40DC-A617-A188177DA075}"));
+            Assert.AreEqual(value.EnumKey, null);
+        }
+
+        [TestMethod]
+        public void GetAttributeOfType_EnumKey_Item2()
+        {
+            Numbers result = Numbers.TwoHundred;
+            EnumKeyAttribute value = result.GetAttributeOfType<EnumKeyAttribute>();
+            Assert.IsNotNull(value);
+            Assert.AreEqual(value.Guid, Guid.Empty);
+            Assert.AreEqual(value.EnumKey, "A1");
         }
 
         [TestMethod]
@@ -205,12 +233,16 @@ namespace ModernTest.ModernBaseLibrary
         {
             [System.ComponentModel.Description("Nix")]
             None = 0,
+            [EnumKey("{E50B1FAF-A054-40DC-A617-A188177DA075}")]
             [System.ComponentModel.Description("Einhundert")]
             OneHundred = 100,
+            [EnumKey("A1", "Nummerischer Wert")]
             [System.ComponentModel.Description("Zweihundert")]
             TwoHundred = 200,
+            [EnumKey("A2", "Nummerischer Wert")]
             [System.ComponentModel.Description("Dreihundert")]
             ThreeHundred = 300,
+            [EnumKey("A3", "Nummerischer Wert")]
             [System.ComponentModel.Description("Vierhundert")]
             FourHundred = 400
         }

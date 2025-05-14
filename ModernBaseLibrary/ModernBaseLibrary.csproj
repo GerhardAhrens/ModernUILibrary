@@ -159,7 +159,6 @@
     <Folder Include="Core\Cryptography\Blake\" />
     <Folder Include="Core\Cryptography\File\" />
     <Folder Include="Core\Cryptography\HashSum\" />
-    <Folder Include="Core\Attribute\" />
     <Folder Include="Core\Application\" />
     <Folder Include="Core\ApplicationHotKeys\" />
     <Folder Include="Core\ArrayCollection\" />
@@ -235,6 +234,7 @@
     <Folder Include="Extensions\System.Object\" />
     <Folder Include="Extensions\System.SecureString\" />
     <Folder Include="Exception\" />
+    <Folder Include="FeaturesManager\" />
     <Folder Include="FluentAPI\API\" />
     <Folder Include="FluentAPI\Validation\" />
     <Folder Include="FluentAPI\Type\" />

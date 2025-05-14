@@ -10,7 +10,7 @@
  * <Project>CurrentProject</Project>
  *
  * <summary>
- * Beschreibung zur Klasse
+ * Attribute für Enum um eine Guid mit Enum-Item verbinden zu können
  * </summary>
  *
  * This program is free software: you can redistribute it and/or modify
