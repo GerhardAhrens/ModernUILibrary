@@ -236,11 +236,7 @@
                     this.WorkContent.Height = (App.CurrentDialogHeight - 75);
                     this.WorkContent.Focusable = true;
 
-                    TextBlock textBlock = VisualHelper.FindByName<TextBlock>(this.WorkContent, "TbTitelUC");
-                    if (textBlock != null)
-                    {
-                        textBlock.Text = titelUC;
-                    }
+                    WindowTitleMain.WindowTitleLine.SetWindowTitle(titelUC);
 
                     App.Logger.Info($"Load UC '{titelUC}'; [{(int)e.MenuButton}]",true);
                     StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms");

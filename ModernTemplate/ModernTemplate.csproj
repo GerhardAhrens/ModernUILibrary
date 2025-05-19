@@ -9,6 +9,7 @@
     <ApplicationIcon>Resources\Picture\AppLogo.ico</ApplicationIcon>
     <AssemblyVersion>1.0.2025.0</AssemblyVersion>
     <FileVersion>1.0.2025.0</FileVersion>
+    <Description>Projekt Template zur Verwendung in Verbindung mit der ModernUI Library</Description>
   </PropertyGroup>
 
   <ItemGroup>
