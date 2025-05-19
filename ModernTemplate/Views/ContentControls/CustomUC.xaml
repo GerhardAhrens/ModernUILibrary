@@ -31,29 +31,13 @@
     <ModernUI:SimpleGrid
         x:Name="rootGrid"
         Columns="*"
-        Rows="30,*">
-        <StackPanel
-            Grid.Row="0"
-            Grid.Column="0"
-            Height="Auto"
-            HorizontalAlignment="Stretch"
-            Background="LightBlue"
-            Orientation="Horizontal">
-
-            <TextBlock
-                x:Name="TbTitelUC"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                FontSize="14"
-                FontWeight="Bold"
-                Text="TbTitelUC" />
-        </StackPanel>
+        Rows="*">
 
         <ModernUI:SimpleGrid
             Grid.Row="1"
             Grid.Column="0"
             Columns="*"
-            Rows="30,*">
+            Rows="33,*">
             <Border
                 Grid.Row="0"
                 Grid.Column="0"

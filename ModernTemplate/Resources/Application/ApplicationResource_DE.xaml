@@ -11,4 +11,6 @@
     <SolidColorBrush x:Key="SteelBrush">Green</SolidColorBrush>
     <BitmapImage x:Key="ImagePNG" UriSource="pack://application:,,,/ModernTemplate;component/Resources/Picture/AppLogo32.png" />
 
+    <sys:String x:Key="home">Home Dialog mit Ribbon Menü Steuerung</sys:String>
+
 </ResourceDictionary>

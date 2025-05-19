@@ -62,6 +62,8 @@
         /// </summary>
         public static double CurrentDialogHeight { get; set; }
 
+        public static double CurrentDialogWidth { get; set; }
+
         /// <summary>
         /// Festlegung für Abfrage des Programmendedialog
         /// </summary>
@@ -99,7 +101,7 @@
 
 #if DEBUG
                 PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-                PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error;
+                PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical;
                 //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Critical | SourceLevels.Error | SourceLevels.Warning;
                 //PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.All;
                 PresentationTraceSources.RoutedEventSource.Listeners.Add(new ConsoleTraceListener());

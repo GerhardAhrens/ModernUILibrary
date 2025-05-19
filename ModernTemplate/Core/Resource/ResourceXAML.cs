@@ -9,7 +9,7 @@
 // <date>14.05.2025 11:06:49</date>
 //
 // <summary>
-// Klasse für 
+// Die Klasse ResourceXAML Of T liest einen Wert aus dem Resource-File 'ApplicationResource_DE.xaml' aus und gibt diesen für den gewünschten Typ zurück.
 // </summary>
 //-----------------------------------------------------------------------
 
@@ -19,6 +19,7 @@ namespace ModernTemplate.Core
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
+    using ModernTemplate.Core.Resource;
 
     public static class ResourceXAML
     {
@@ -101,6 +102,18 @@ namespace ModernTemplate.Core
                     {
                         BitmapImage image = (BitmapImage)Convert.ChangeType(find, typeof(BitmapImage));
                         result = (T)Convert.ChangeType(BitmapImageToBitmap(image),typeof(System.Drawing.Bitmap));
+                    }
+                }
+                else if (typeof(T) == typeof(DialogResource))
+                {
+                    object find = app.TryFindResource(resourceName);
+                    if (find != null)
+                    {
+                        result = (T)Activator.CreateInstance(typeof(DialogResource), find.ToString());
+                    }
+                    else
+                    {
+                        result = (T)Activator.CreateInstance(typeof(DialogResource), resourceName);
                     }
                 }
             }

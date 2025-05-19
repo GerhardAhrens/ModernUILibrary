@@ -14,6 +14,7 @@
     using ModernIU.Controls;
 
     using ModernTemplate.Core;
+    using ModernTemplate.Core.Resource;
     using ModernTemplate.Views;
     using ModernTemplate.Views.ContentControls;
 
@@ -132,9 +133,10 @@
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
-            base.OnRenderSizeChanged(sizeInfo); 
+            base.OnRenderSizeChanged(sizeInfo);
 
-            App.CurrentDialogHeight = this.Height;
+            App.CurrentDialogHeight = sizeInfo.NewSize.Height;
+
             if (this.WorkContent != null)
             {
                 this.WorkContent.Height = (App.CurrentDialogHeight - 75);
@@ -156,7 +158,7 @@
                 return false;
             }
 
-            if (typeof(HomeUC) == this.WorkContent.GetType())
+            if (typeof(HomeUC) == this.WorkContent.GetType() | typeof(HomeRibbonUC) == this.WorkContent.GetType())
             {
                 return true;
             }
@@ -169,24 +171,6 @@
             ChangeViewEventArgs arg = new ChangeViewEventArgs();
             arg.MenuButton = CommandButtons.AppAbout;
             this.ChangeControl(arg);
-
-            /*
-            IEnumerable<IAssemblyInfo> metaInfo = null;
-            using (AssemblyMetaService ams = new AssemblyMetaService())
-            {
-                metaInfo = ams.GetMetaInfo();
-            }
-
-            List<string> assemblyList = new List<string>();
-            foreach (IAssemblyInfo assembly in metaInfo)
-            {
-                assemblyList.Add($"{assembly.AssemblyName}; {assembly.AssemblyVersion}");
-            }
-
-            string headLineText = "Versionen zur Modern Template.";
-
-            NotificationResult dlgResult = NotificationListBox.Show("Application", headLineText, assemblyList, MessageBoxButton.OK, NotificationIcon.Information, NotificationResult.No);
-            */
         }
 
         private bool CanAppSettingsHandler()
@@ -196,7 +180,7 @@
                 return false;
             }
 
-            if (typeof(HomeUC) == this.WorkContent.GetType())
+            if (typeof(HomeUC) == this.WorkContent.GetType() | typeof(HomeRibbonUC) == this.WorkContent.GetType())
             {
                 return true;
             }
@@ -229,6 +213,7 @@
                 {
                     StatusbarMain.Statusbar.SetNotification();
                     this.CurrentCommandName = e.MenuButton;
+                    string keyUC = e.MenuButton.GetAttributeOfType<EnumKeyAttribute>().EnumKey;
                     string titelUC = e.MenuButton.GetAttributeOfType<EnumKeyAttribute>().Description;
                     this.WorkContent = menuWorkArea.WorkContent;
                     this.WorkContent.VerticalAlignment = VerticalAlignment.Stretch;
@@ -236,7 +221,8 @@
                     this.WorkContent.Height = (App.CurrentDialogHeight - 75);
                     this.WorkContent.Focusable = true;
 
-                    WindowTitleMain.WindowTitleLine.SetWindowTitle(titelUC);
+                    string dialogTitle = ResourceXAML.ReadAs<DialogResource>(keyUC).DialogTitle;
+                    WindowTitleMain.WindowTitleLine.SetWindowTitle(dialogTitle);
 
                     App.Logger.Info($"Load UC '{titelUC}'; [{(int)e.MenuButton}]",true);
                     StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms");
