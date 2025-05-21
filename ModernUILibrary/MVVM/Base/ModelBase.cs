@@ -86,7 +86,7 @@ namespace ModernUILibrary.MVVM.Base
             }
         }
 
-        public static bool Compare<TModel>(TModel object1, TModel object2)
+        public static bool Compare(TModel object1, TModel object2)
         {
             Type type = typeof(TModel);
 

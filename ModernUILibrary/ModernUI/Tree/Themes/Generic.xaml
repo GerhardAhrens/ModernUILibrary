@@ -62,6 +62,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
@@ -156,6 +157,7 @@
         </Style.Triggers>-->
     </Style>
     <SolidColorBrush x:Key="ListBorder" Color="#828790" />
+    
     <Style TargetType="{x:Type MUI:MTreeView}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
         <Setter Property="BorderBrush" Value="{StaticResource ListBorder}" />
