@@ -294,6 +294,43 @@ namespace System.Data.SQLite
             return (T)result;
         }
 
+        private static T NewDataRow<T>(SQLiteConnection connection, string sql)
+        {
+            object result = null;
+
+            try
+            {
+                using (SQLiteCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sql;
+
+                    using (SQLiteDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.VisibleFieldCount > 0)
+                        {
+                            DataTable dt = new DataTable();
+                            dt.TableName = ExtractTablename(sql);
+                            dt.Load(dr);
+                            result = dt.NewRow();
+                        }
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)result;
+        }
+
         private static T GetCollectionView<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection)
         {
             ICollectionView result;
@@ -716,6 +753,33 @@ namespace System.Data.SQLite
         }
         #endregion GET, Lesen von Daten in verschiedene Typen
 
+        #region Neues DataRow
+        public static RecordSetResult<T> New<T>(this RecordSetResult<T> @this)
+        {
+            if (CheckNewResultParameter(typeof(T)) == false)
+            {
+                throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für das Erstellen eines Typ über das RecordSet nicht gültig.");
+            }
+
+            T resultValue = default;
+
+            try
+            {
+                if (typeof(T) == typeof(DataRow))
+                {
+                    resultValue = NewDataRow<T>(@this.Connection, @this.SQL);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return new RecordSetResult<T>(@this.Connection, resultValue, @this.SQL);
+        }
+        #endregion Neues DataRow
+
         private static string ExtractTablename(string sql)
         {
             try
@@ -747,6 +811,18 @@ namespace System.Data.SQLite
                 result = true;
             }
             else if (type.Name == typeof(long).Name)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private static bool CheckNewResultParameter(Type type)
+        {
+            bool result = false;
+
+            if (type.Name == typeof(DataRow).Name)
             {
                 result = true;
             }
