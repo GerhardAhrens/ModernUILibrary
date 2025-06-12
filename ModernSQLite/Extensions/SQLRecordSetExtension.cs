@@ -294,43 +294,6 @@ namespace System.Data.SQLite
             return (T)result;
         }
 
-        private static T NewDataRow<T>(SQLiteConnection connection, string sql)
-        {
-            object result = null;
-
-            try
-            {
-                using (SQLiteCommand cmd = connection.CreateCommand())
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = sql;
-
-                    using (SQLiteDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.VisibleFieldCount > 0)
-                        {
-                            DataTable dt = new DataTable();
-                            dt.TableName = ExtractTablename(sql);
-                            dt.Load(dr);
-                            result = dt.NewRow();
-                        }
-                    }
-                }
-            }
-            catch (SQLiteException ex)
-            {
-                string ErrorText = ex.Message;
-                throw;
-            }
-            catch (Exception ex)
-            {
-                string ErrorText = ex.Message;
-                throw;
-            }
-
-            return (T)result;
-        }
-
         private static T GetCollectionView<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection)
         {
             ICollectionView result;
@@ -533,40 +496,71 @@ namespace System.Data.SQLite
 
                                         if (itemProperty.PropertyType == typeof(Guid))
                                         {
-                                            itemProperty.SetValue(instance, new Guid(columnValue.ToString()), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, new Guid(columnValue.ToString()), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(int))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetInt32(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetInt32(i), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(long))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToInt64(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToInt64(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(decimal))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToDecimal(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToDecimal(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(double))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToDouble(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToDouble(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(DateTime))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetDateTime(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetDateTime(i), null);
+                                            }
+                                            else
+                                            {
+                                                itemProperty.SetValue(instance, new DateTime(1900,1,1), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(bool))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetBoolean(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetBoolean(i), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(byte[]))
                                         {
-                                            byte[] byteArray = (byte[])dr.GetValue(i);
-                                            itemProperty.SetValue(instance, byteArray, null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                byte[] byteArray = (byte[])dr.GetValue(i);
+                                                itemProperty.SetValue(instance, byteArray, null);
+                                            }
                                         }
                                         else
                                         {
-                                            itemProperty.SetValue(instance, columnValue, null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, columnValue, null);
+                                            }
                                         }
                                     }
                                 }
@@ -778,6 +772,44 @@ namespace System.Data.SQLite
 
             return new RecordSetResult<T>(@this.Connection, resultValue, @this.SQL);
         }
+
+        private static T NewDataRow<T>(SQLiteConnection connection, string sql)
+        {
+            object result = null;
+
+            try
+            {
+                using (SQLiteCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sql;
+
+                    using (SQLiteDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.VisibleFieldCount > 0)
+                        {
+                            DataTable dt = new DataTable();
+                            dt.TableName = ExtractTablename(sql);
+                            dt.Load(dr);
+                            result = dt.NewRow();
+                        }
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)result;
+        }
+
         #endregion Neues DataRow
 
         private static string ExtractTablename(string sql)
