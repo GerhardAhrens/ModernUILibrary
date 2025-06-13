@@ -64,18 +64,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="MSTest.Analyzers" Version="3.9.1">
+    <PackageReference Update="MSTest.Analyzers" Version="3.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="MSTest.TestAdapter" Version="3.9.1" />
+    <PackageReference Update="MSTest.TestAdapter" Version="3.9.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="MSTest.TestFramework" Version="3.9.1" />
+    <PackageReference Update="MSTest.TestFramework" Version="3.9.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -123,7 +123,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.DirectoryServices" Version="9.0.5" />
+    <PackageReference Include="System.DirectoryServices" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>

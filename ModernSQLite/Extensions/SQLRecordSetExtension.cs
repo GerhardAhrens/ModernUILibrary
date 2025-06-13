@@ -761,7 +761,8 @@ namespace System.Data.SQLite
             {
                 if (typeof(T) == typeof(DataRow))
                 {
-                    resultValue = NewDataRow<T>(@this.Connection, @this.SQL);
+                    string sql = $"SELECT {@this.SQL}.* FROM {@this.SQL} ORDER BY rowid DESC LIMIT 1";
+                    resultValue = NewDataRow<T>(@this.Connection, sql);
                 }
             }
             catch (Exception)
