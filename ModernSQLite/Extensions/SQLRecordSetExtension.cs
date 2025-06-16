@@ -496,40 +496,71 @@ namespace System.Data.SQLite
 
                                         if (itemProperty.PropertyType == typeof(Guid))
                                         {
-                                            itemProperty.SetValue(instance, new Guid(columnValue.ToString()), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, new Guid(columnValue.ToString()), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(int))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetInt32(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetInt32(i), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(long))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToInt64(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToInt64(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(decimal))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToDecimal(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToDecimal(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(double))
                                         {
-                                            itemProperty.SetValue(instance, Convert.ToDouble(columnValue), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, Convert.ToDouble(columnValue), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(DateTime))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetDateTime(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetDateTime(i), null);
+                                            }
+                                            else
+                                            {
+                                                itemProperty.SetValue(instance, new DateTime(1900,1,1), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(bool))
                                         {
-                                            itemProperty.SetValue(instance, dr.GetBoolean(i), null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, dr.GetBoolean(i), null);
+                                            }
                                         }
                                         else if (itemProperty.PropertyType == typeof(byte[]))
                                         {
-                                            byte[] byteArray = (byte[])dr.GetValue(i);
-                                            itemProperty.SetValue(instance, byteArray, null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                byte[] byteArray = (byte[])dr.GetValue(i);
+                                                itemProperty.SetValue(instance, byteArray, null);
+                                            }
                                         }
                                         else
                                         {
-                                            itemProperty.SetValue(instance, columnValue, null);
+                                            if (columnValue != DBNull.Value)
+                                            {
+                                                itemProperty.SetValue(instance, columnValue, null);
+                                            }
                                         }
                                     }
                                 }
@@ -716,6 +747,72 @@ namespace System.Data.SQLite
         }
         #endregion GET, Lesen von Daten in verschiedene Typen
 
+        #region Neues DataRow
+        public static RecordSetResult<T> New<T>(this RecordSetResult<T> @this)
+        {
+            if (CheckNewResultParameter(typeof(T)) == false)
+            {
+                throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für das Erstellen eines Typ über das RecordSet nicht gültig.");
+            }
+
+            T resultValue = default;
+
+            try
+            {
+                if (typeof(T) == typeof(DataRow))
+                {
+                    string sql = $"SELECT {@this.SQL}.* FROM {@this.SQL} ORDER BY rowid DESC LIMIT 1";
+                    resultValue = NewDataRow<T>(@this.Connection, sql);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return new RecordSetResult<T>(@this.Connection, resultValue, @this.SQL);
+        }
+
+        private static T NewDataRow<T>(SQLiteConnection connection, string sql)
+        {
+            object result = null;
+
+            try
+            {
+                using (SQLiteCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = sql;
+
+                    using (SQLiteDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.VisibleFieldCount > 0)
+                        {
+                            DataTable dt = new DataTable();
+                            dt.TableName = ExtractTablename(sql);
+                            dt.Load(dr);
+                            result = dt.NewRow();
+                        }
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)result;
+        }
+
+        #endregion Neues DataRow
+
         private static string ExtractTablename(string sql)
         {
             try
@@ -747,6 +844,18 @@ namespace System.Data.SQLite
                 result = true;
             }
             else if (type.Name == typeof(long).Name)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private static bool CheckNewResultParameter(Type type)
+        {
+            bool result = false;
+
+            if (type.Name == typeof(DataRow).Name)
             {
                 result = true;
             }
