@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using EasyPrototypingNET.Core;
-
     using ModernBaseLibrary.Core;
 
     public abstract class ValueObjectBase : IEquatable<ValueObjectBase>

@@ -85,7 +85,6 @@
     <Folder Include="AssertHelper\" />
     <Folder Include="ModernBaseLibrary\Core\ArrayCollection\" />
     <Folder Include="ModernBaseLibrary\Core\Collection\DataCollectionModel\" />
-    <Folder Include="ModernBaseLibrary\Core\Comparer\" />
     <Folder Include="ModernBaseLibrary\Core\Converter\" />
     <Folder Include="ModernBaseLibrary\Core\Enumeration\" />
     <Folder Include="ModernBaseLibrary\Core\ExpressionEngine\" />
@@ -131,6 +130,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ModernBaseLibrary\Core\Logger\LoggingSmartFileOut_Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ModernBaseLibrary\CustomDataTypes\CDT_ID.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
