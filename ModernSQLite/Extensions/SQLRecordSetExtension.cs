@@ -8,7 +8,7 @@
 // <email>developer@lifeprojects.de</email>
 // <date>03.06.2025</date>
 //
-// <summary>SQLParametersExtension Class for SQL Server Database</summary>
+// <summary>SQLRecordSetExtension Class for SQLite Database, Analoge RecordSet Anweisung</summary>
 //-----------------------------------------------------------------------
 
 namespace System.Data.SQLite
@@ -17,7 +17,6 @@ namespace System.Data.SQLite
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Reflection;
-    using System.Reflection.PortableExecutable;
     using System.Text.RegularExpressions;
     using System.Windows.Data;
 
@@ -813,6 +812,69 @@ namespace System.Data.SQLite
 
         #endregion Neues DataRow
 
+        #region Execute SQL Anweisung
+        public static RecordSetResult<T> Execute<T>(this RecordSetResult<T> @this)
+        {
+            if (CheckExecuteResultParameter(typeof(T)) == false)
+            {
+                throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für eine Execute Anweisung nicht gültig. Versuchen Sie es mit int, long.");
+            }
+
+            T resultValue = default;
+
+            try
+            {
+                if (typeof(T) == typeof(int))
+                {
+                    resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.SQLiteParameter);
+                }
+                else if (typeof(T) == typeof(long))
+                {
+                    resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.SQLiteParameter);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return new RecordSetResult<T>(@this.Connection, resultValue, @this.SQL);
+        }
+
+        private static T ExecuteNonQuery<T>(SQLiteConnection connection, string sql, SQLiteParameter[] parameterCollection)
+        {
+            object getAs = null;
+
+            try
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, connection))
+                {
+                    if (parameterCollection != null && parameterCollection.Length > 0)
+                    {
+                        cmd.Parameters.AddRange(parameterCollection);
+                    }
+
+                    int? result = cmd.ExecuteNonQuery();
+                    getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)getAs;
+        }
+
+        #endregion Execute SQL Anweisung
+
         private static string ExtractTablename(string sql)
         {
             try
@@ -856,6 +918,22 @@ namespace System.Data.SQLite
             bool result = false;
 
             if (type.Name == typeof(DataRow).Name)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private static bool CheckExecuteResultParameter(Type type)
+        {
+            bool result = false;
+
+            if (type.Name == typeof(int).Name)
+            {
+                result = true;
+            }
+            else if (type.Name == typeof(long).Name)
             {
                 result = true;
             }
@@ -941,9 +1019,19 @@ namespace System.Data.SQLite
             this.ParameterCollection = parameterCollection;
         }
 
+        public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, SQLiteParameter[] parameterCollection)
+        {
+            this.Connection = connection;
+            this.SQL = sql;
+            this.Result = resultValue;
+            this.SQLiteParameter = parameterCollection;
+        }
+
         public string SQL { get; private set; }
 
         public Dictionary<string, object> ParameterCollection { get; private set; }
+
+        public SQLiteParameter[] SQLiteParameter { get; private set; }
 
         public SQLiteConnection Connection { get; set; }
 
