@@ -32,6 +32,11 @@ namespace System.Data.SQLite
             return new RecordSetResult<T>(@this, default, sql, parameterCollection);
         }
 
+        public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, SQLiteParameter[] parameterCollection)
+        {
+            return new RecordSetResult<T>(@this, default, sql, parameterCollection);
+        }
+
         #region SET, SQL Anweisungen (Update, Delete) ausführen
         public static RecordSetResult<T> Set<T>(this RecordSetResult<T> @this)
         {
