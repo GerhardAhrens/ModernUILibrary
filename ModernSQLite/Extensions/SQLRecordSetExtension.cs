@@ -142,6 +142,10 @@ namespace System.Data.SQLite
                 {
                     resultValue = GetScalar<T>(@this.Connection, @this.SQL, @this.ParameterCollection);
                 }
+                else if (typeof(T) == typeof(byte[]) && typeof(T).IsGenericType == false && typeof(T).Namespace == "System")
+                {
+                    resultValue = GetScalar<T>(@this.Connection, @this.SQL, @this.ParameterCollection);
+                }
                 else if (typeof(T) == typeof(DataRow))
                 {
                     resultValue = GetDataRow<T>(@this.Connection, @this.SQL, @this.ParameterCollection);
