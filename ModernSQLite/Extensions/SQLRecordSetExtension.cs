@@ -20,6 +20,9 @@ namespace System.Data.SQLite
     using System.Text.RegularExpressions;
     using System.Windows.Data;
 
+    using ModernSQLite.Generator;
+    using ModernBaseLibrary.Extension;
+
     public static class SQLRecordSetExtension
     {
         public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql)
@@ -345,6 +348,41 @@ namespace System.Data.SQLite
                         {
                             dt = new DataTable();
                             dt.Load(dr);
+                            if (dt.HasColumn("CreatedOn") == true && dt.HasColumn("CreatedBy") == true && dt.HasColumn("ModifiedOn") == true && dt.HasColumn("ModifiedBy") == true)
+                            {
+                                if (dt.HasColumn("Timestamp") == false)
+                                {
+                                    dt.Columns.Add("Timestamp", typeof(string));
+                                    foreach (DataRow row in dt.Rows)
+                                    {
+                                        TimeStamp ts = new TimeStamp();
+                                        DateTime createdOn;
+                                        DateTime modifiedOn;
+                                        if (row["CreatedOn"] == DBNull.Value)
+                                        {
+                                            createdOn = new DateTime(1900, 1, 1);
+                                        }
+                                        else
+                                        {
+                                            createdOn = (DateTime)row["CreatedOn"];
+                                        }
+
+                                        if (row["ModifiedOn"] == DBNull.Value)
+                                        {
+                                            modifiedOn = new DateTime(1900, 1, 1);
+                                        }
+                                        else
+                                        {
+                                            modifiedOn = (DateTime)row["ModifiedOn"];
+                                        }
+
+                                        string timestamp = ts.MaxEntry(createdOn, row["CreatedBy"].ToString(), modifiedOn, row["ModifiedBy"].ToString());
+                                        row.BeginEdit();
+                                        row["Timestamp"] = timestamp;
+                                        row.EndEdit();
+                                    }
+                                }
+                            }
                         }
                     }
 

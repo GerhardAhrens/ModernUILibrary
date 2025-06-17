@@ -17,13 +17,8 @@ namespace ModernBaseLibrary.Extension
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data;
-    using System.Dynamic;
-    using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
-    using System.Xml;
 
     public static class DataTableExtensions
     {
@@ -35,6 +30,17 @@ namespace ModernBaseLibrary.Extension
         public static bool IsNotNullOrEmpty(this DataTable @this)
         {
             return @this != null && @this.AsEnumerable().Any() == true;
+        }
+
+        public static bool HasColumn(this DataTable @this, string columnName)
+        {
+            bool result = false;
+            if (@this != null && !string.IsNullOrEmpty(columnName) && @this.Columns.IndexOf(columnName) >= 0)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         public static void RenameColumn(this DataTable @this, string oldName, string newName)
