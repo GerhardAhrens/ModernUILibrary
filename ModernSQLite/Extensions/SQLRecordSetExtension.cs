@@ -20,8 +20,9 @@ namespace System.Data.SQLite
     using System.Text.RegularExpressions;
     using System.Windows.Data;
 
-    using ModernSQLite.Generator;
     using ModernBaseLibrary.Extension;
+
+    using ModernSQLite.Generator;
 
     public static class SQLRecordSetExtension
     {
@@ -871,11 +872,7 @@ namespace System.Data.SQLite
 
             try
             {
-                if (typeof(T) == typeof(int))
-                {
-                    resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.SQLiteParameter);
-                }
-                else if (typeof(T) == typeof(long))
+                if (typeof(T).IsGenericType == false && typeof(T).IsPrimitive == true && typeof(T).Namespace == "System")
                 {
                     resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.SQLiteParameter);
                 }
@@ -920,6 +917,61 @@ namespace System.Data.SQLite
             return (T)getAs;
         }
 
+        private static T ExecuteNonQuery<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection)
+        {
+            object getAs = null;
+
+            try
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, connection))
+                {
+                    if (parameterCollection != null && parameterCollection.Count > 0)
+                    {
+                        cmd.Parameters.Clear();
+                        foreach (KeyValuePair<string, object> item in parameterCollection)
+                        {
+                            cmd.Parameters.AddWithValue(item.Key, item.Value);
+                        }
+
+                        foreach (SQLiteParameter parameter in cmd.Parameters)
+                        {
+                            if (parameter.IsNullable == false)
+                            {
+                                if (parameter.DbType.ToString() == typeof(DateTime).Name)
+                                {
+                                    if ((DateTime)parameter.Value == DateTime.MinValue)
+                                    {
+                                        parameter.Value = new DateTime(1900, 1, 1);
+                                    }
+                                }
+                                else
+                                {
+                                    if (parameter.Value == DBNull.Value || parameter.Value == null)
+                                    {
+                                        parameter.Value = DBNull.Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    int? result = cmd.ExecuteNonQuery();
+                    getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)getAs;
+        }
         #endregion Execute SQL Anweisung
 
         private static string ExtractTablename(string sql)
@@ -981,6 +1033,10 @@ namespace System.Data.SQLite
                 result = true;
             }
             else if (type.Name == typeof(long).Name)
+            {
+                result = true;
+            }
+            else if (type.Name == typeof(string).Name)
             {
                 result = true;
             }
