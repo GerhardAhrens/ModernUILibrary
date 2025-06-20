@@ -5,13 +5,14 @@
     xmlns:MUI="clr-namespace:ModernIU.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    KeyboardNavigation.ControlTabNavigation="Cycle"
-    KeyboardNavigation.DirectionalNavigation="None"
-    KeyboardNavigation.TabNavigation="Cycle"
+    Focusable="True"
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Height="Auto" Orientation="Horizontal">
+        <StackPanel
+            Height="Auto"
+            KeyboardNavigation.DirectionalNavigation="Contained"
+            Orientation="Horizontal">
             <MUI:ComboBoxEx
                 x:Name="cbDay"
                 Width="40"
@@ -19,6 +20,7 @@
                 VerticalAlignment="Center"
                 IsEditable="True"
                 IsTextSearchEnabled="True"
+                KeyboardNavigation.IsTabStop="False"
                 KeyboardNavigation.TabIndex="10"
                 MaxLength="2" />
 
@@ -34,6 +36,7 @@
                 VerticalAlignment="Center"
                 IsEditable="True"
                 IsTextSearchEnabled="True"
+                KeyboardNavigation.IsTabStop="False"
                 KeyboardNavigation.TabIndex="11"
                 MaxLength="2" />
 
@@ -49,6 +52,7 @@
                 VerticalAlignment="Center"
                 IsEditable="True"
                 IsTextSearchEnabled="True"
+                KeyboardNavigation.IsTabStop="False"
                 KeyboardNavigation.TabIndex="12"
                 MaxLength="4" />
 
@@ -59,6 +63,7 @@
                 VerticalAlignment="Top"
                 Background="Transparent"
                 BorderThickness="0"
+                KeyboardNavigation.IsTabStop="False"
                 ToolTip="Heute auswählen">
                 <Button.Content>
                     <Path
