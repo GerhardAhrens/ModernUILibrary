@@ -135,6 +135,9 @@
     <Compile Update="ModernBaseLibrary\CustomDataTypes\CDT_ID.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ModernBaseLibrary\Extensions\System.Data\DataRowExtensions_Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

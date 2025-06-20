@@ -22,6 +22,7 @@ namespace ModernBaseLibrary.Extension
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Versioning;
+    using System.Text;
 
     [SupportedOSPlatform("windows")]
     public static class DataRowExtensions
@@ -177,11 +178,11 @@ namespace ModernBaseLibrary.Extension
                 .ToDictionary<DataColumn, string, Type>(col => col.ColumnName, col => col.DataType);
         }
 
-        public static bool ColumnExist(this DataRow @this, string columnName)
+        public static bool HasColumn(this DataRow @this, string columnName)
         {
             bool result = false;
 
-            int columnFound = @this.Table.Columns.OfType<DataColumn>().ToList().Count(c => c.ColumnName == columnName);
+            int columnFound = @this.Table.Columns.OfType<DataColumn>().ToList().Count(c => c.ColumnName.ToLower() == columnName.ToLower());
             if (columnFound > 0)
             {
                 result = true;
@@ -214,14 +215,34 @@ namespace ModernBaseLibrary.Extension
             return result;
         }
 
-        public static string ItemArrayToString(this DataRow @this, string separator = ",")
+        public static string ItemArrayToString(this DataRow @this, char separator = ',')
         {
             return string.Join(separator, @this.ItemArray);
         }
 
-        public static string ToString(this DataRow @this, string separator = ",")
+        public static string ToString(this DataRow @this, char separator = ',')
         {
             return string.Join(separator, @this.ItemArray.Select(c => c.ToString()).ToArray()); 
+        }
+
+        public static string ToString(this DataRow @this, string columns, char separator = ',')
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string[] columnList = columns.Split(',');
+
+            foreach (string column in columnList)
+            {
+                if (@this.HasColumn(column) == true)
+                {
+                    sb.Append(@this[column].ToString());
+                    sb.Append(separator);
+                }
+            }
+
+            sb.Remove(sb.ToString().Trim().Length - 1, 1);
+
+            return sb.ToString();
         }
 
         public static bool Equals(this DataRow @this, DataRow secondDataRow)
