@@ -9,6 +9,8 @@
 
     using ModernIU.Base;
 
+    using static System.Runtime.InteropServices.JavaScript.JSType;
+
     /// <summary>
     /// Interaktionslogik für TextBoxDate.xaml
     /// </summary>
@@ -16,8 +18,9 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowTodayButtonChanged));
         public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
+        public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowTodayButtonChanged));
+        public static readonly DependencyProperty ShowClearButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowDateButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowClearButtonChanged));
         private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "yyyy.MM", "yyyy.M", "MM.yyyy", "M.yyyy", "yyyy.MM" };
         private string day = string.Empty;
         private string month = string.Empty;
@@ -39,6 +42,7 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnToday, "Click", this.OnSetCurrentDate);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnClear, "Click", this.OnSetClearDate);
         }
 
         public bool IsReadOnly
@@ -63,6 +67,12 @@
         {
             get { return (bool?)GetValue(ShowTodayButtonProperty); }
             set { SetValue(ShowTodayButtonProperty, value); }
+        }
+
+        public bool? ShowDateButton
+        {
+            get { return (bool?)GetValue(ShowClearButtonProperty); }
+            set { SetValue(ShowClearButtonProperty, value); }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -90,6 +100,11 @@
 
         private void OnDateSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (this.Tag != null && Convert.ToBoolean(this.Tag) == false)
+            {
+                return;
+            }
+
             ComboBoxEx cb = sender as ComboBoxEx;
             if (sender != null)
             {
@@ -125,6 +140,8 @@
                     {
                         this.year = DateTime.Now.Year.ToString();
                     }
+
+                    this.Tag = true;
                 }
 
                 if (string.IsNullOrEmpty(day) == false && string.IsNullOrEmpty(month) == false && string.IsNullOrEmpty(year) == false)
@@ -135,6 +152,10 @@
                     if (DateTime.TryParseExact(fullDate, DateFormats, Thread.CurrentThread.CurrentCulture, DateTimeStyles.None, out date) == true)
                     {
                         this.SelectedDate = date;
+                    }
+                    else
+                    {
+                        this.SelectedDate = null;
                     }
                 }
             }
@@ -179,6 +200,22 @@
             }
         }
 
+        private static void OnShowClearButtonChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (sender is TextBoxDate control)
+            {
+                bool showButton = (bool)(e.NewValue);
+                if (showButton == true)
+                {
+                    control.btnClear.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    control.btnClear.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private static void OnSelectedDateChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (sender is TextBoxDate control)
@@ -200,6 +237,23 @@
                 this.cbDay.SelectedValue = DateTime.Now.Day;
                 this.cbMonth.SelectedValue = DateTime.Now.Month;
                 this.cbYear.SelectedValue = DateTime.Now.Year;
+                this.Tag = true;
+                this.SelectedDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            }
+        }
+
+        private void OnSetClearDate(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button control)
+            {
+                this.cbDay.SelectedValue = -1;
+                this.cbMonth.SelectedValue = -1;
+                this.cbYear.SelectedValue = -1;
+                this.day = string.Empty;
+                this.month = string.Empty;
+                this.year = string.Empty;
+                this.Tag = false;
+                this.SelectedDate = null;
             }
         }
 
