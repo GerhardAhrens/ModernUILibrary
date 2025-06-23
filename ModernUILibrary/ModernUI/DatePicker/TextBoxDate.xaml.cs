@@ -11,8 +11,6 @@
 
     using ModernIU.Base;
 
-    using static System.Runtime.InteropServices.JavaScript.JSType;
-
     /// <summary>
     /// Interaktionslogik für TextBoxDate.xaml
     /// </summary>
@@ -20,7 +18,7 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(null,OnSelectedDateChanged));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new PropertyMetadata(null,OnSelectedDateChanged));
         public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowTodayButtonChanged));
         public static readonly DependencyProperty ShowClearButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowDateButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowClearButtonChanged));
         private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "yyyy.MM", "yyyy.M", "MM.yyyy", "M.yyyy", "yyyy.MM" };
@@ -31,7 +29,6 @@
         public TextBoxDate()
         {
             this.InitializeComponent();
-
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
