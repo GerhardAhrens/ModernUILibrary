@@ -7,6 +7,8 @@
     using System.Windows.Input;
     using System.Windows.Media;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernIU.Base;
 
     using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -18,7 +20,7 @@
     {
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(nameof(IsReadOnly), typeof(bool), typeof(TextBoxDate), new PropertyMetadata(false, OnIsReadOnly));
         public static readonly DependencyProperty ReadOnlyBackgroundColorProperty = DependencyProperty.Register(nameof(ReadOnlyBackgroundColor), typeof(Brush), typeof(TextBoxDate), new PropertyMetadata(Brushes.LightYellow));
-        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(new DateTime(1900,1,1), OnSelectedDateChanged));
+        public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register(nameof(SelectedDate), typeof(DateTime?), typeof(TextBoxDate), new FrameworkPropertyMetadata(null,OnSelectedDateChanged));
         public static readonly DependencyProperty ShowTodayButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowTodayButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowTodayButtonChanged));
         public static readonly DependencyProperty ShowClearButtonProperty = DependencyProperty.RegisterAttached(nameof(ShowDateButton), typeof(bool?), typeof(TextBoxDate), new PropertyMetadata(null, OnShowClearButtonChanged));
         private static readonly string[] DateFormats = new string[] { "d.M.yyyy", "dd.MM.yyyy", "yyyy.MM", "yyyy.M", "MM.yyyy", "M.yyyy", "yyyy.MM" };
@@ -247,11 +249,17 @@
             if (sender is Button control)
             {
                 this.cbDay.SelectedValue = -1;
-                this.cbMonth.SelectedValue = -1;
-                this.cbYear.SelectedValue = -1;
+                this.cbDay.Text = string.Empty;
                 this.day = string.Empty;
+
+                this.cbMonth.SelectedValue = -1;
+                this.cbMonth.Text = string.Empty;
                 this.month = string.Empty;
+
+                this.cbYear.SelectedValue = -1;
+                this.cbYear.Text = string.Empty;
                 this.year = string.Empty;
+
                 this.Tag = false;
                 this.SelectedDate = null;
             }
@@ -352,19 +360,37 @@
             if (dtFull.Split('.').Length == 3)
             {
                 this.day = dtFull.Split('.')[0];
-                this.month = dtFull.Split('.')[1];
-                this.year = dtFull.Split('.')[2];
-            }
+                this.cbDay.Text = this.day;
 
+                this.month = dtFull.Split('.')[1];
+                this.cbMonth.Text = this.month;
+
+                this.year = dtFull.Split('.')[2];
+                this.cbYear.Text = this.year;
+
+                this.Tag = false;
+                this.SelectedDate = new DateTime(this.year.ToInt(),this.month.ToInt(), this.day.ToInt());
+            }
         }
 
         private void OnDeleteMenu(object sender, RoutedEventArgs e)
         {
             string dtFull = $"{this.cbDay.Text}.{this.cbMonth.Text}.{this.cbYear.Text}";
             Clipboard.SetText(dtFull);
+            this.cbDay.SelectedValue = -1;
+            this.cbDay.Text = string.Empty;
             this.day = string.Empty;
+
+            this.cbMonth.SelectedValue = -1;
+            this.cbMonth.Text = string.Empty;
             this.month = string.Empty;
+
+            this.cbYear.SelectedValue = -1;
+            this.cbYear.Text = string.Empty;
             this.year = string.Empty;
+
+            this.Tag = false;
+            this.SelectedDate = null;
         }
     }
 }
