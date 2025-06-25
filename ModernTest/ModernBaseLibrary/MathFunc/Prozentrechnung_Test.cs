@@ -61,6 +61,7 @@ namespace ModernTest.ModernBaseLibrary.MathFunc
         }
 
         [DynamicData(nameof(GrundwertData))]
+        //[DataRow(12.5,5.0,5.1)]
         [TestMethod]
         public void GrundwertReihe(decimal prozent, decimal prozentWert, decimal result)
         {
@@ -89,4 +90,13 @@ namespace ModernTest.ModernBaseLibrary.MathFunc
                         new object[] { 14, 8000m, 57142.86m },
                          };
     }
+
+    /*
+    public class DataRowCAttribute : DataRowAttribute
+    {
+        public DataRowCAttribute(params decimal?[]? data) => Data = data ?? [null];
+
+        new public object?[] Data { get; }
+    }
+    */
 }
