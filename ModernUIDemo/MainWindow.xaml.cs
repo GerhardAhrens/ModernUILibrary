@@ -271,11 +271,7 @@
             this.tabItemSource.Add(new TabControlItem("PunchCard Control", new PunchCardControlsUC()) { Stichworte = "Anzeige;PunchCard;Lochkarte" });
             this.tabItemSource.Add(new TabControlItem("RangePanel Control", new RangePanelControlsUC()) { Stichworte = "Anzeige;RangePanel" });
 
-            this.tabItemSource.Add(new TabControlItem("Layout Grid, Panel, Separator", true));
-            this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
-            this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
-            this.tabItemSource.Add(new TabControlItem("Layout ContentFrame", new ContentFrameControlsUC()) { Stichworte = "Anzeige;Layout;Grid;Content;Frame" });
-            this.tabItemSource.Add(new TabControlItem("Layout Border", new BorderControlsUC()) { Stichworte = "Anzeige;Layout;Border;Rahmen" });
+            this.tabItemSource.Add(new TabControlItem("Layout Controls", true));
             this.tabItemSource.Add(new TabControlItem("Separator Controls", new SeparatorControlsUC()) { Stichworte = "Anzeige;Layout;Separator" });
             this.tabItemSource.Add(new TabControlItem("Expander Control", new ExpanderControlsUC()) { Stichworte = "Anzeige;Layout;Expander" });
             this.tabItemSource.Add(new TabControlItem("TabControl", new TabControlControlsUC()) { Stichworte = "Anzeige;TabControl;Register;Layout" });
@@ -286,6 +282,13 @@
             this.tabItemSource.Add(new TabControlItem("StepBar Control", new StepBarControlsUC()) { Stichworte = "Anzeige;StepBar;Layout" });
             this.tabItemSource.Add(new TabControlItem("WaterfallPanel Control", new WaterfallPanelControlsUC()) { Stichworte = "Anzeige;Panel;Layout" });
             this.tabItemSource.Add(new TabControlItem("ScrollViewer", new ScrollViewerControlsUC()) { Stichworte = "Anzeige;ScrollViewer" });
+
+            this.tabItemSource.Add(new TabControlItem("Layout Dock, Canvas, Stackpanel", true));
+            this.tabItemSource.Add(new TabControlItem("LayoutPanel Controls", new LayoutPanelControlsUC()) { Stichworte = "Anzeige;Layout" });
+            this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
+            this.tabItemSource.Add(new TabControlItem("Layout ContentFrame", new ContentFrameControlsUC()) { Stichworte = "Anzeige;Layout;Grid;Content;Frame" });
+            this.tabItemSource.Add(new TabControlItem("Layout Border", new BorderControlsUC()) { Stichworte = "Anzeige;Layout;Border;Rahmen" });
+            this.tabItemSource.Add(new TabControlItem("Layout Canvas", new LayoutCanvasControlsUC()) { Stichworte = "Anzeige;Layout;Canvas" });
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection, XML Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
