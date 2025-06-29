@@ -6,6 +6,7 @@
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Windows.Threading;
 
     using ModernBaseLibrary.Extension;
 
@@ -40,6 +41,7 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
+            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbYear, "KeyDown", this.OnKeyDownChanged);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnToday, "Click", this.OnSetCurrentDate);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnClear, "Click", this.OnSetClearDate);
         }
@@ -299,6 +301,19 @@
                         break;
                 }
             }
+        }
+
+        private void OnKeyDownChanged(object sender, KeyEventArgs e)
+        {
+            var ctrl = ((System.Windows.FrameworkElement)e.OriginalSource);
+            if (ctrl != null && e.Key == Key.Tab)
+            {
+                if (ctrl.Name == "PART_EditableTextBox")
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.cbDay.Focus(); }));
+                }
+            }
+
         }
 
         public override void OnApplyTemplate()
