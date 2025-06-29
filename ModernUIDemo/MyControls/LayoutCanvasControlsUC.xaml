@@ -1,0 +1,145 @@
+﻿<UserControl
+    x:Class="ModernUIDemo.MyControls.LayoutCanvasControlsUC"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <x:Array x:Key="Margins" Type="{x:Type sys:String}">
+            <sys:String>00, 00</sys:String>
+            <sys:String>00, 20</sys:String>
+            <sys:String>00, 30</sys:String>
+            <sys:String>20, 00</sys:String>
+            <sys:String>20, 20</sys:String>
+            <sys:String>20, 30</sys:String>
+            <sys:String>30, 00</sys:String>
+            <sys:String>30, 20</sys:String>
+            <sys:String>30, 30</sys:String>
+            <sys:String>00, -5</sys:String>
+            <sys:String>-5, 00</sys:String>
+            <sys:String>-5, -5</sys:String>
+        </x:Array>
+        <x:Array x:Key="Distances" Type="{x:Type sys:String}">
+            <sys:String>-50</sys:String>
+            <sys:String>000</sys:String>
+            <sys:String>050</sys:String>
+            <sys:String>100</sys:String>
+            <sys:String>150</sys:String>
+            <sys:String>200</sys:String>
+            <sys:String>250</sys:String>
+            <sys:String>300</sys:String>
+            <sys:String>350</sys:String>
+        </x:Array>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="14" Text="Beispiel für Canvas..." />
+        <Separator Height="3" Background="Green" />
+
+        <Canvas
+            Name="BigSq"
+            Grid.Row="1"
+            Grid.Column="0">
+
+            <Label
+                Canvas.Left="{Binding ElementName=LeftEdgeField, Path=Text}"
+                Height="{Binding ElementName=BigSq, Path=ActualHeight}"
+                VerticalContentAlignment="Bottom"
+                BorderBrush="Red"
+                BorderThickness="1,0,0,0"
+                Content="Left edge"
+                Foreground="Red" />
+
+            <Label
+                Canvas.Top="{Binding ElementName=TopEdgeField, Path=Text}"
+                Canvas.Right="0"
+                Width="{Binding ElementName=BigSq, Path=ActualWidth}"
+                HorizontalContentAlignment="Right"
+                BorderBrush="Green"
+                BorderThickness="0,1,0,0"
+                Content="Top edge"
+                Foreground="Green" />
+
+            <Grid
+                Canvas.Left="{Binding ElementName=LeftEdgeField, Path=Text}"
+                Canvas.Top="{Binding ElementName=TopEdgeField, Path=Text}"
+                Margin="{Binding ElementName=MarginField, Path=Text, Mode=OneWay}"
+                Background="#38FF4848">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Text="Margin:" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Text="Canvas.Top:" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Text="Canvas.Left:" />
+
+                <ComboBox
+                    Name="MarginField"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="70"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{StaticResource Margins}"
+                    SelectedIndex="7" />
+
+                <ComboBox
+                    Name="TopEdgeField"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="22"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    ItemsSource="{StaticResource Distances}"
+                    SelectedIndex="2" />
+
+                <ComboBox
+                    Name="LeftEdgeField"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="70"
+                    HorizontalAlignment="Left"
+                    ItemsSource="{StaticResource Distances}"
+                    SelectedIndex="2" />
+
+            </Grid>
+        </Canvas>
+
+    </Grid>
+</UserControl>

@@ -1,5 +1,6 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -7,12 +8,15 @@
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media;
 
     using DemoDataGeneratorLib.Base;
 
     using ModernIU.Controls;
     using ModernIU.WPF.Base;
+
+    using ModernUI.MVVM.Base;
 
     /// <summary>
     /// Interaktionslogik für ListBoxControlsUC.xaml
@@ -76,8 +80,23 @@
 
         public XamlProperty<List<string>> FilterdComboBoxSource { get; set; } = XamlProperty.Set<List<string>>();
 
+        public ICommand SelectFirstItemCommand { get; }
+
+        public ICommand SelectLastItemCommand { get; }
+
+        private CheckComboBoxTest _selectedItem;
+
+        public CheckComboBoxTest SelectedItem
+        {
+            get => _selectedItem;
+            set => SetField(ref _selectedItem, value);
+        }
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnSelectFirst, "Click", this.OnSelectFirst);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnSelectLast, "Click", this.OnSelectLast);
+
             this.MComboBoxSource.Value = new List<string> { "Affe", "Bär", "Elefant", "Hund", "Zebra" };
             this.FilterdComboBoxSource.Value = new List<string> { "Affe", "Bär", "Ameise","Igel", "Elefant", "Hund","Pferd","Pinguin", "Zebra" , "2001", "2010", "2024","2030"};
             this.SelectedColorItem.Value = Brushes.Transparent;
@@ -130,6 +149,16 @@
         private void btnGetContent_Click(object sender, RoutedEventArgs e)
         {
             MMessageBox.Show(this.CheckComboBox.Content.ToString(), "Auswahl", MessageBoxButton.OK);
+        }
+
+        private void OnSelectFirst(object sender, RoutedEventArgs e)
+        {
+            this.SelectedItem = ListBoxBSource.First();
+        }
+
+        private void OnSelectLast(object sender, RoutedEventArgs e)
+        {
+            this.SelectedItem = ListBoxBSource.Last();
         }
 
         #region PropertyChanged Implementierung

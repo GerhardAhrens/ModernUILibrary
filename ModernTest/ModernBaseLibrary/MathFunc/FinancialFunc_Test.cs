@@ -1,12 +1,12 @@
 /*
- * <copyright file="Prozentrechnung_Test.cs" company="Lifeprojects.de">
- *     Class: Prozentrechnung_Test
+ * <copyright file="FinancialFunc_Test.cs" company="Lifeprojects.de">
+ *     Class: FinancialFunc_Test
  *     Copyright © Lifeprojects.de 2025
  * </copyright>
  *
  * <author>Gerhard Ahrens - Lifeprojects.de</author>
  * <email>gerhard.ahrens@lifeprojects.de</email>
- * <date>24.06.2025 20:40:44</date>
+ * <date>27.06.2025 13:26</date>
  * <Project>EasyPrototypingNET</Project>
  *
  * <summary>
@@ -36,7 +36,7 @@ namespace ModernTest.ModernBaseLibrary.MathFunc
     using ModernTest.ModernBaseLibrary.ValueTypes;
 
     [TestClass]
-    public class Prozentrechnung_Test
+    public class FinancialFunc_Test
     {
         [TestInitialize]
         public void Initialize()
@@ -47,17 +47,17 @@ namespace ModernTest.ModernBaseLibrary.MathFunc
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Prozentrechnung_Test"/> class.
+        /// Initializes a new instance of the <see cref="FinancialFunc_Test"/> class.
         /// </summary>
-        public Prozentrechnung_Test()
+        public FinancialFunc_Test()
         {
         }
 
         [TestMethod]
-        public void Grundwert()
+        public void AssetTurnover_ReturnsCorrect()
         {
-            decimal grundwert = Prozentrechnung.Grundwert(5, 20);
-            Assert.AreEqual(400, grundwert);
+            double result = FinancialFunc.CalcAssetTurnover(114.0, 100.0);
+            Assert.AreEqual(1.14, result);
         }
 
         [DynamicData(nameof(GrundwertData))]
