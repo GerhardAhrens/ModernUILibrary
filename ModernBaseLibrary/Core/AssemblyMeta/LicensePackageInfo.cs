@@ -54,13 +54,6 @@ namespace ModernBaseLibrary.Core.AssemblyMeta
 
     public class LicensePackageItem
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LicensePackageInfo"/> class.
-        /// </summary>
-        public LicensePackageItem()
-        {
-        }
-
         public string Name { get; set; }
 
         public Version Version { get; set; }
@@ -69,11 +62,13 @@ namespace ModernBaseLibrary.Core.AssemblyMeta
 
         public string Description { get; set; }
 
+        public string LicenseTyp { get; set; }
+
         public string Link { get; set; }
 
         public override string ToString()
         {
-            return $"{this.Name} - {this.Version}";
+            return $"{this.Name} - {this.Version} - {this.LicenseTyp}";
         }
 
         public override bool Equals(object obj)
@@ -92,6 +87,7 @@ namespace ModernBaseLibrary.Core.AssemblyMeta
             HashCode hashCode = new HashCode();
             hashCode.Add(this.Name);
             hashCode.Add(this.Version);
+            hashCode.Add(this.LicenseTyp);
             return hashCode.ToHashCode();
         }
     }
