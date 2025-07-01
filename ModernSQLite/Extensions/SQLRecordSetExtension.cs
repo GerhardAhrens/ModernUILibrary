@@ -391,7 +391,14 @@ namespace System.Data.SQLite
                         }
                     }
 
-                    result = CollectionViewSource.GetDefaultView(dt.Rows) as CollectionView;
+                    if (dt != null)
+                    {
+                        result = CollectionViewSource.GetDefaultView(dt.Rows) as CollectionView;
+                    }
+                    else
+                    {
+                        result = null;
+                    }
                 }
             }
             catch (SQLiteException ex)
