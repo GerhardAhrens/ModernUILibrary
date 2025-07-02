@@ -26,16 +26,39 @@ namespace System.Data.SQLite
 
     public static class SQLRecordSetExtension
     {
+        /// <summary>
+        /// Führt eine SQL Anweisung für eine offen Datenbank-Connection aus.
+        /// </summary>
+        /// <typeparam name="T">Erwarteter Datentyp</typeparam>
+        /// <param name="this">Connection Objekt der Datenbankverbindung</param>
+        /// <param name="sql">SQL Anweisung</param>
+        /// <returns>Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</returns>
         public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql)
         {
-            return new RecordSetResult<T>(@this,default, sql);
+            return new RecordSetResult<T>(@this, default, sql);
         }
 
+        /// <summary>
+        /// Führt eine SQL Anweisung für eine offen Datenbank-Connection aus.
+        /// </summary>
+        /// <typeparam name="T">Erwarteter Datentyp</typeparam>
+        /// <param name="this">Connection Objekt der Datenbankverbindung</param>
+        /// <param name="sql">SQL Anweisung</param>
+        /// <param name="parameterCollection">Dictionary mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)</param>
+        /// <returns>Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</returns>
         public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, Dictionary<string, object> parameterCollection)
         {
             return new RecordSetResult<T>(@this, default, sql, parameterCollection);
         }
 
+        /// <summary>
+        /// Führt eine SQL Anweisung für eine offen Datenbank-Connection aus.
+        /// </summary>
+        /// <typeparam name="T">Erwarteter Datentyp</typeparam>
+        /// <param name="this">Connection Objekt der Datenbankverbindung</param>
+        /// <param name="sql">SQL Anweisung</param>
+        /// <param name="parameterCollection">SQLiteParameter Array mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)</param>
+        /// <returns>Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</returns>
         public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, SQLiteParameter[] parameterCollection)
         {
             return new RecordSetResult<T>(@this, default, sql, parameterCollection);
@@ -44,6 +67,16 @@ namespace System.Data.SQLite
         #region SET, SQL Anweisungen (Update, Delete) ausführen
         public static RecordSetResult<T> Set<T>(this RecordSetResult<T> @this)
         {
+            if (@this.Connection == null)
+            {
+                throw new ArgumentException($"Das Connection-Object ist null. Daher kann das RecordSet nicht ausgeführt werden");
+            }
+
+            if (@this.Connection.State != ConnectionState.Open)
+            {
+                throw new ArgumentException($"Damit das RecordSet ausgeführt werden kann, muß die Connection offen sein.");
+            }
+
             if (CheckSetResultParameter(typeof(T)) == false)
             {
                 throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für das Schreiben des RecordSet nicht gültig.");
@@ -55,7 +88,7 @@ namespace System.Data.SQLite
             {
                 if (typeof(T).IsGenericType == false && typeof(T).IsPrimitive == true && typeof(T).Namespace == "System")
                 {
-                    resultValue = SetExecuteNonQuery<T>(@this.Connection, @this.SQL,@this.ParameterCollection);
+                    resultValue = SetExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.ParameterCollection);
                 }
             }
             catch (Exception ex)
@@ -130,6 +163,16 @@ namespace System.Data.SQLite
         #region GET, Lesen von Daten in verschiedene Typen
         public static RecordSetResult<T> Get<T>(this RecordSetResult<T> @this)
         {
+            if (@this.Connection == null)
+            {
+                throw new ArgumentException($"Das Connection-Object ist null. Daher kann das RecordSet nicht ausgeführt werden");
+            }
+
+            if (@this.Connection.State != ConnectionState.Open)
+            {
+                throw new ArgumentException($"Damit das RecordSet ausgeführt werden kann, muß die Connection offen sein.");
+            }
+
             if (CheckGetResultParameter(typeof(T)) == false)
             {
                 throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für die Rückgabe des RecordSet Result nicht gültig.");
@@ -231,7 +274,6 @@ namespace System.Data.SQLite
                         getAs = (T)Convert.ChangeType(0, typeof(T));
                     }
                 }
-
             }
             catch (SQLiteException ex)
             {
@@ -598,7 +640,7 @@ namespace System.Data.SQLite
                                             }
                                             else
                                             {
-                                                itemProperty.SetValue(instance, new DateTime(1900,1,1), null);
+                                                itemProperty.SetValue(instance, new DateTime(1900, 1, 1), null);
                                             }
                                         }
                                         else if (itemProperty.PropertyType == typeof(bool))
@@ -811,6 +853,16 @@ namespace System.Data.SQLite
         #region Neues DataRow
         public static RecordSetResult<T> New<T>(this RecordSetResult<T> @this)
         {
+            if (@this.Connection == null)
+            {
+                throw new ArgumentException($"Das Connection-Object ist null. Daher kann das RecordSet nicht ausgeführt werden");
+            }
+
+            if (@this.Connection.State != ConnectionState.Open)
+            {
+                throw new ArgumentException($"Damit das RecordSet ausgeführt werden kann, muß die Connection offen sein.");
+            }
+
             if (CheckNewResultParameter(typeof(T)) == false)
             {
                 throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für das Erstellen eines Typ über das RecordSet nicht gültig.");
@@ -877,6 +929,16 @@ namespace System.Data.SQLite
         #region Execute SQL Anweisung
         public static RecordSetResult<T> Execute<T>(this RecordSetResult<T> @this)
         {
+            if (@this.Connection == null)
+            {
+                throw new ArgumentException($"Das Connection-Object ist null. Daher kann das RecordSet nicht ausgeführt werden");
+            }
+
+            if (@this.Connection.State != ConnectionState.Open)
+            {
+                throw new ArgumentException($"Damit das RecordSet ausgeführt werden kann, muß die Connection offen sein.");
+            }
+
             if (CheckExecuteResultParameter(typeof(T)) == false)
             {
                 throw new ArgumentException($"Der Typ '{typeof(T).Name}' ist für eine Execute Anweisung nicht gültig. Versuchen Sie es mit int, long.");
@@ -1121,6 +1183,12 @@ namespace System.Data.SQLite
 
     public class RecordSetResult<T>
     {
+        /// <summary>
+        /// Gibt das Ergebnis eines RecordSet zurück
+        /// </summary>
+        /// <param name="connection">Aktuelles Datenbankverbindung, als Connection-Object</param>
+        /// <param name="resultValue">Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</param>
+        /// <param name="sql">SQL Anweisung</param>
         public RecordSetResult(SQLiteConnection connection, T resultValue, string sql)
         {
             this.Connection = connection;
@@ -1128,6 +1196,13 @@ namespace System.Data.SQLite
             this.Result = resultValue;
         }
 
+        /// <summary>
+        /// Gibt das Ergebnis eines RecordSet zurück
+        /// </summary>
+        /// <param name="connection">Aktuelles Datenbankverbindung, als Connection-Object</param>
+        /// <param name="resultValue">Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</param>
+        /// <param name="sql">SQL Anweisung</param>
+        /// <param name="parameterCollection">Dictionary mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)</param>
         public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, Dictionary<string, object> parameterCollection)
         {
             this.Connection = connection;
@@ -1136,6 +1211,13 @@ namespace System.Data.SQLite
             this.ParameterCollection = parameterCollection;
         }
 
+        /// <summary>
+        /// Gibt das Ergebnis eines RecordSet zurück
+        /// </summary>
+        /// <param name="connection">Aktuelles Datenbankverbindung, als Connection-Object</param>
+        /// <param name="resultValue">Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</param>
+        /// <param name="sql">SQL Anweisung</param>
+        /// <param name="parameterCollection">SQLiteParameter Array mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)</param>
         public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, SQLiteParameter[] parameterCollection)
         {
             this.Connection = connection;
@@ -1144,14 +1226,29 @@ namespace System.Data.SQLite
             this.SQLiteParameter = parameterCollection;
         }
 
+        /// <summary>
+        /// SQL Anweisung
+        /// </summary>
         public string SQL { get; private set; }
 
+        /// <summary>
+        /// Dictionary mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)
+        /// </summary>
         public Dictionary<string, object> ParameterCollection { get; private set; }
 
+        /// <summary>
+        /// SQLiteParameter Array mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)
+        /// </summary>
         public SQLiteParameter[] SQLiteParameter { get; private set; }
 
+        /// <summary>
+        /// Aktuelles Datenbankverbindung, als Connection-Object
+        /// </summary>
         public SQLiteConnection Connection { get; set; }
 
+        /// <summary>
+        /// Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.
+        /// </summary>
         public T Result { get; private set; }
     }
 }
