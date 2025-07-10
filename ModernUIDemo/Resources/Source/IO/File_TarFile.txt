@@ -41,8 +41,8 @@
             Console.Clear();
             Console.WriteLine("Erstellen eines TAT-Archive!");
 
-            string sourcePath = @"e:\PTA2890\_Development\Sourcen\_Demo2\";
-            string target = @"e:\PTA2890\Temp\test.tar";
+            string sourcePath = @"e:\Folder\_Development\Sourcen\_Demo2\";
+            string target = @"e:\Folder\Temp\test.tar";
 
             TarFile.CreateFromDirectory(sourcePath, target,  true);
 
