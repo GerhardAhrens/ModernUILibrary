@@ -150,10 +150,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Console\CommandLine\Attributes\" />
-    <Folder Include="Console\CommandLine\Exception\" />
-    <Folder Include="Console\ConsoleMenu\" />
-    <Folder Include="Console\ConsoleTable\" />
     <Folder Include="CoreBase\SmartSetting\" />
     <Folder Include="Core\Collection\TreeCollection\" />
     <Folder Include="Core\Cryptography\Blake\" />

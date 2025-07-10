@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ErrorLevel.cs" company="PTA">
+// <copyright file="ErrorLevel.cs" company="Lifeprojects.de">
 //     Class: ErrorLevel
-//     Copyright © PTA GmbH 2021
+//     Copyright © Lifeprojects.de 2020
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>14.07.2020</date>
 //
 // <summary>
