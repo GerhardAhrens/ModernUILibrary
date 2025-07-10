@@ -1,11 +1,11 @@
 ﻿/*
- * <copyright file="IEventObserver.cs" company="PTA GmbH">
+ * <copyright file="IEventObserver.cs" company="Lifeprojects.de">
  *     Class: IEventObserver
- *     Copyright © PTA GmbH 2022
+ *     Copyright © Lifeprojects.de 2022
  * </copyright>
  *
- * <author>Gerhard Ahrens - PTA GmbH</author>
- * <email>gerhard.ahrens@pta.de</email>
+ * <author>Gerhard Ahrens - Lifeprojects.de</author>
+ * <email>gerhard.ahrens@lifeprojects.de</email>
  * <date>15.10.2022</date>
  * <Project>Mainova.Tools</Project>
  *

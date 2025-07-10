@@ -152,7 +152,7 @@
                 Directory.CreateDirectory(Path.GetDirectoryName(pathToTests));
             }
 
-            CreateRandomFileJpeg(pathToTests, "Hallo PTA",200,200, ImageFormat.Png);
+            CreateRandomFileJpeg(pathToTests, "Hallo Lifeprojects.de",200,200, ImageFormat.Png);
         }
 
         string CombinePaths(string baseFolder, params string[] folders)

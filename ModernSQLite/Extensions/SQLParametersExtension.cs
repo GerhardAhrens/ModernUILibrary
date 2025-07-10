@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SQLParametersExtension.cs" company="Lifeprojects.de">
 //     Class: SQLParametersExtension
-//     Copyright © PTA GmbH 2019
+//     Copyright © Lifeprojects.de 2019
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

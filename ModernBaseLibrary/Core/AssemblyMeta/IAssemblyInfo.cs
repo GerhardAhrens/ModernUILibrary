@@ -5,7 +5,7 @@
 // </copyright>
 //
 // <author>Gerhard Ahrens - www.lifeprojects.de</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>03.12.2024 07:44:32</date>
 //
 // <summary>

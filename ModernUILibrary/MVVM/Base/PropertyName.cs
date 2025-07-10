@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="PropertyName.cs" company="PTA GmbH">
+// <copyright file="PropertyName.cs" company="Lifeprojects.de">
 //     Class: PropertyName
 //     Copyright © Gerhard Ahrens, 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>23.06.2023 07:49:22</date>
 //
 // <summary>

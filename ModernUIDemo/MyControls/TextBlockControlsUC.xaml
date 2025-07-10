@@ -307,16 +307,16 @@
                     Width="100"
                     HorizontalAlignment="Left"
                     IsExtern="True"
-                    LinkText="http://www.pta.de"
+                    LinkText="http://www.lifeprojects.de"
                     RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
-                    Text="PTA GmbH" />
+                    Text="Lifeprojects.de" />
 
                 <ModernUI:LinkLabel
                     HorizontalAlignment="Left"
                     Content="Link Label - Navigate - mit Event"
                     FontSize="22"
                     RequestNavigate="LinkLabel_RequestNavigate"
-                    Url="https://pta.de"
+                    Url="https://lifeprojects.de"
                     d:LayoutOverrides="Width, Height" />
 
                 <ModernUI:LinkLabel
@@ -324,7 +324,7 @@
                     Content="Link Label - Navigate mit Command"
                     FontSize="22"
                     RequestNavigateCommand="{Binding Path=RequestNavigateCommand}"
-                    Url="https://pta.de"
+                    Url="https://lifeprojects.de"
                     d:LayoutOverrides="Width, Height" />
 
                 <ModernUI:LinkLabel

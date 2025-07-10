@@ -26,14 +26,14 @@
         [TestMethod]
         public void User_CreateWithAllArgs()
         {
-            var user = new User("ahrens","gerhard.ahrens@pta.de").TryValidate();
+            var user = new User("ahrens","gerhard.ahrens@lifeprojects.de").TryValidate();
             Assert.IsNotNull(user);
         }
 
         [TestMethod]
         public void User_CreateWithAllArgsWrongEMail()
         {
-            var user = new User("ahrens", "gerhard.ahrens@pta-de").TryValidate();
+            var user = new User("ahrens", "gerhard.ahrens@Lifeprojects.de-de").TryValidate();
             Assert.IsNull(user);
         }
     }

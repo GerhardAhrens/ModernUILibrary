@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="BindableBase.cs" company="PTA GmbH">
+// <copyright file="BindableBase.cs" company="Lifeprojects.de">
 //     Class: BindableBase
-//     Copyright © PTA GmbH 2023
+//     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>06.11.2023 15:19:08</date>
 //
 // <summary>

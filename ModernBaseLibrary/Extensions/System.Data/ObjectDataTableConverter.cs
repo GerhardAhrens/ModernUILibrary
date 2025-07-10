@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="ObjectDataTableConverter.cs" company="www.pta.de">
+// <copyright file="ObjectDataTableConverter.cs" company="www.lifeprojects.de">
 //     Class: ObjectDataTableConverter
-//     Copyright © www.pta.de 2023
+//     Copyright © www.lifeprojects.de 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>19.09.2023 11:33:32</date>
 //
 // <summary>

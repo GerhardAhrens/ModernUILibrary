@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="SQLCommandExtensions.cs" company="Lifeprojects.de">
 //     Class: SQLCommandExtensions
-//     Copyright © PTA GmbH 2016
+//     Copyright © Lifeprojects.de 2016
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

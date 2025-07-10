@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="LimitClause.cs" company="Lifeprojects.de">
 //     Class: LimitClause
-//     Copyright © PTA GmbH 2017
+//     Copyright © Lifeprojects.de 2017
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

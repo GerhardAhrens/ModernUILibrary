@@ -97,7 +97,7 @@
                     <ModernUI:SyntaxBox.SyntaxDrivers>
                         <ModernUI:SyntaxConfig>
                             <!--  Keywords  -->
-                            <ModernUI:KeywordRule Foreground="Red" Keywords="hallo,Hallo,gerhard,Gerhard, charlie, charlie, pta,PTA, apm, APM, wek,WEK, rohrleitung, Rohrleitung" />
+                            <ModernUI:KeywordRule Foreground="Red" Keywords="hallo,Hallo,gerhard,Gerhard, charlie, charlie, Lifeprojects.de,Lifeprojects.de, apm, APM, wek,WEK, rohrleitung, Rohrleitung" />
 
                             <!--  Operators  -->
                             <ModernUI:KeywordRule

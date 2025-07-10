@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="XamlProperty.cs" company="PTA GmbH">
+// <copyright file="XamlProperty.cs" company="Lifeprojects.de">
 //     Class: XamlProperty
-//     Copyright © PTA GmbH 2023
+//     Copyright © Lifeprojects.de 2023
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>06.11.2023 15:21:45</date>
 //
 // <summary>

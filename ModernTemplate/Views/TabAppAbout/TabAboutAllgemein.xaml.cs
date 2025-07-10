@@ -1,11 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="TabAboutAllgemein.xaml.cs" company="PTA GmbH Mannheim">
+// <copyright file="TabAboutAllgemein.xaml.cs" company="Lifeprojects.de Mannheim">
 //     Class: TabAboutAllgemein
-//     Copyright © PTA GmbH Mannheim 2025
+//     Copyright © Lifeprojects.de Mannheim 2025
 // </copyright>
 //
-// <author>DeveloperName - PTA GmbH Mannheim</author>
-// <email>DeveloperName@pta.de</email>
+// <author>DeveloperName - Lifeprojects.de Mannheim</author>
+// <email>DeveloperName@lifeprojects.de</email>
 // <date>05.05.2025 16:12:35</date>
 //
 // <TemplateVersion>Templateversion</TemplateVersion>

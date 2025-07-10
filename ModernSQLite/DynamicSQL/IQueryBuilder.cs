@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="IQueryBuilder.cs" company="Lifeprojects.de">
 //     Class: IQueryBuilder
-//     Copyright © PTA GmbH 2017
+//     Copyright © Lifeprojects.de 2017
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

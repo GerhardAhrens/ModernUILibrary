@@ -27,7 +27,7 @@
             }*/
 
             list.Add(new Student() { ID = 1, Name = "gerhard.ahrens@lifeprojects.de" });
-            list.Add(new Student() { ID = 2, Name = "gerhard.ahrens@pta.de" });
+            list.Add(new Student() { ID = 2, Name = "gerhard.ahrens@lifeprojects.de" });
             list.Add(new Student() { ID = 3, Name = "gahrens@contractors.com" });
             list.Add(new Student() { ID = 4, Name = "charlie@lifeprojects.de" });
             list.Add(new Student() { ID = 5, Name = "buddy@ranche.com" });

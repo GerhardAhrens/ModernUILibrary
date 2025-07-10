@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="HeapsAlgorithm_Test.cs" company="www.pta.de">
+// <copyright file="HeapsAlgorithm_Test.cs" company="www.lifeprojects.de">
 //     Class: HeapsAlgorithm_Test
-//     Copyright © www.pta.de 2024
+//     Copyright © www.lifeprojects.de 2024
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.pta.de</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - www.lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>11.12.2024 13:26:33</date>
 //
 // <summary>

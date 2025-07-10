@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UIButtonCommand.cs" company="PTA GmbH">
+// <copyright file="UIButtonCommand.cs" company="Lifeprojects.de">
 //     Class: UIButtonCommand
-//     Copyright © PTA GmbH 2018
+//     Copyright © Lifeprojects.de 2018
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>18.09.2018</date>
 //
 // <summary>Class with UIButtonCommand Definition</summary>

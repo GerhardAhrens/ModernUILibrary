@@ -84,7 +84,7 @@
 
             Department dept = new Department();
             dept.DepartmentId = 1;
-            dept.DepartmentName = "PTA";
+            dept.DepartmentName = "Lifeprojects.de";
             List<Department> deptList = new List<Department>();
             deptList.Add(dept);
 
@@ -112,7 +112,7 @@
 
             Department dept = new Department();
             dept.DepartmentId = 1;
-            dept.DepartmentName = "PTA";
+            dept.DepartmentName = "Lifeprojects.de";
             List<Department> deptList = new List<Department>();
             deptList.Add(dept);
 
@@ -140,14 +140,14 @@
 
             Department dept1 = new Department();
             dept1.DepartmentId = 1;
-            dept1.DepartmentName = "PTA";
+            dept1.DepartmentName = "Lifeprojects.de";
             List<Department> deptList1 = new List<Department>();
             deptList1.Add(dept1);
             p1.Department = deptList1;
 
             Department dept2 = new Department();
             dept2.DepartmentId = 2;
-            dept2.DepartmentName = "PTA";
+            dept2.DepartmentName = "Lifeprojects.de";
             List<Department> deptList2 = new List<Department>();
             deptList2.Add(dept2);
             p2.Department = deptList2;

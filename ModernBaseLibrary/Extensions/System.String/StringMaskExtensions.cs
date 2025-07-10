@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="StringMaskExtensions.cs" company="Lifeprojects.de">
 //     Class: StringMaskExtensions
-//     Copyright © PTA GmbH 2019
+//     Copyright © Lifeprojects.de 2019
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

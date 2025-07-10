@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="SqlLiteral.cs" company="Lifeprojects.de">
 //     Class: SqlLiteral
-//     Copyright © PTA GmbH 2017
+//     Copyright © Lifeprojects.de 2017
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

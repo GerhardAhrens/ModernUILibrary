@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="AddBracket.cs" company="Lifeprojects.de">
 //     Class: AddBracket
-//     Copyright © PTA GmbH 2021
+//     Copyright © Lifeprojects.de 2021
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

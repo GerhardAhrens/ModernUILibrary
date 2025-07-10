@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FileLockException.cs" company="PTA">
+// <copyright file="FileLockException.cs" company="Lifeprojects.de">
 //     Class: FileLockException
-//     Copyright © PTA GmbH 2021
+//     Copyright © Lifeprojects.de 2021
 // </copyright>
 //
-// <author>Gerhard Ahrens - PTA GmbH</author>
-// <email>gerhard.ahrens@pta.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>gerhard.ahrens@lifeprojects.de</email>
 // <date>14.07.2020</date>
 //
 // <summary>

@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="JoinClause.cs" company="Lifeprojects.de">
 //     Class: JoinClause
-//     Copyright © PTA GmbH 2017
+//     Copyright © Lifeprojects.de 2017
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

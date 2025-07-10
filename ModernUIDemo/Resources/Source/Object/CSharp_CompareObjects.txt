@@ -100,7 +100,7 @@
 
             Department dept = new Department();
             dept.DepartmentId = 1;
-            dept.DepartmentName = "PTA";
+            dept.DepartmentName = "Lifeprojects.de";
             List<Department> deptList = new List<Department>();
             deptList.Add(dept);
 

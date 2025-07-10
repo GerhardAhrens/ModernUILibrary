@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 // <copyright file="OrderByClause.cs" company="Lifeprojects.de">
 //     Class: OrderByClause
-//     Copyright © PTA GmbH 2017
+//     Copyright © Lifeprojects.de 2017
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>

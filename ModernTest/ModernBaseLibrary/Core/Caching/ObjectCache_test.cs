@@ -152,11 +152,11 @@ namespace ModernTest.ModernBaseLibrary.Core
             }
             else if (text == "new")
             {
-                liste = new List<string>() { "Gerhard", "Ahrens", "Mannheim", "PTA", "GmbH" };
+                liste = new List<string>() { "Gerhard", "Ahrens", "Mannheim", "Lifeprojects.de", "GmbH" };
             }
             else if (text == string.Empty)
             {
-                liste = new List<string>() { "Gerhard", "Ahrens", "Mannheim", "PTA", "GmbH", "Maus", "Hund", "Katz" };
+                liste = new List<string>() { "Gerhard", "Ahrens", "Mannheim", "Lifeprojects.de", "GmbH", "Maus", "Hund", "Katz" };
             }
 
             return liste;

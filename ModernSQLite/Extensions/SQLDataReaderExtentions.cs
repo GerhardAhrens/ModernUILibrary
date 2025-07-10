@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SQLDataReaderExtentions.cs" company="Lifeprojects.de">
 //     Class: SQLDataReaderExtentions
-//     Copyright © PTA GmbH 2018
+//     Copyright © Lifeprojects.de 2018
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>
