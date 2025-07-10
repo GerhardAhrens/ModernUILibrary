@@ -156,6 +156,9 @@ c:\Users\<username>\Documents\Visual Studio 2022\Templates\ProjectTemplates\Visu
 Das Template erstell Anwendungen werden auf Basis eine *Single Page Architektur* entwickelt. Es gibt ein Hauptwindow, in dem alle weitere Dialoge als UserControl abgebildet geladen werden. Die Steuerung zwischen den UserControls (bzw. Dialoge als UserControl) erfolgt über eine Class-To-Class Kommunikation die im *InsindeVM Framework* als EventAggregator abgebildet ist.\
 Nachteil dieser Lösung ist, komplexere Arten von Unit-Test können nicht so einfach umgesetzt werden.
 
+# Modern Console
+
+**Modern Console** ist eine Sammlung von Klassen die im besonderen für Consolen-Anwendungen eingesetzt werden können.
 
 # Release Notes
 ![Version](https://img.shields.io/badge/Version-1.0.2024.1-yellow.svg)<br>

@@ -24,6 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernInsideVM", "ModernIns
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernSQLite", "ModernSQLite\ModernSQLite.csproj", "{54322E66-EAE3-4326-A90B-C17B51B2B4A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernConsole", "ModernConsole\ModernConsole.csproj", "{CFD0A15B-AD3E-45C4-B55F-F1697EF5F263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernConsoleDemo", "ModernConsoleDemo\ModernConsoleDemo.csproj", "{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,14 @@ Global
 		{54322E66-EAE3-4326-A90B-C17B51B2B4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54322E66-EAE3-4326-A90B-C17B51B2B4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54322E66-EAE3-4326-A90B-C17B51B2B4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD0A15B-AD3E-45C4-B55F-F1697EF5F263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD0A15B-AD3E-45C4-B55F-F1697EF5F263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD0A15B-AD3E-45C4-B55F-F1697EF5F263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD0A15B-AD3E-45C4-B55F-F1697EF5F263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
