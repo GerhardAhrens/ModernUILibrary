@@ -28,7 +28,15 @@
                 .Add("CommandLine - Flag 4", () => { Flags04(args); }, 1))
 
               .Add(SmartMenu.Menu("Tabellen")
-                .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1)
+                .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1))
+
+              .Add(SmartMenu.Menu("Meldungen")
+                .Add("Message Alert", () => { ConsoleMenuHandler("MessageAlert"); }, 1))
+
+              .Add(SmartMenu.Menu("Eingabe")
+                .Add("Eingabe allgemein", () => { ConsoleMenuHandler("InputLine"); }, 1)
+                .Add("Eingabe Passwort ", () => { ConsoleMenuHandler("InputPassword"); }, 1)
+                .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1)
             ).Show();
         }
 

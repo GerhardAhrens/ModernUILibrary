@@ -18,6 +18,7 @@ namespace ModernConsoleDemo
     using System;
     using System.Runtime.Versioning;
 
+    using ModernConsole.Message;
     using ModernConsole.Pattern;
     using ModernConsole.Table;
 
@@ -42,6 +43,51 @@ namespace ModernConsoleDemo
 
             MConsole.WriteLine("\nFORMAT: Default:\n");
             table.Show();
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("MessageAlert")]
+        public void Message_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            MConsole.Alert("Das ist eine Meldung vom Typ Info", "Typ Info", ConsoleMessageType.Info);
+
+            MConsole.Alert("Das ist eine Meldung vom Typ Error", "Typ Error", ConsoleMessageType.Error);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("InputLine")]
+        public void Eingabe_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            string value = MConsole.InputLine("Name:", "Gerhard");
+            MConsole.Alert($"Eingabewert: {value}", "Result", ConsoleMessageType.Info);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("InputPassword")]
+        public void Eingabe_B(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            string value = MConsole.Password("Ihr Passwort:");
+            MConsole.Alert($"Eingabewert: {value}", "Result", ConsoleMessageType.Info);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("AbfrageJN")]
+        public void Eingabe_C(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            bool value = MConsole.Confirm("Beenden");
+            MConsole.Alert($"Auswahl: {value}", "Result", ConsoleMessageType.Info);
 
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }

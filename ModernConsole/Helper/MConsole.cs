@@ -35,7 +35,7 @@ namespace System
     using ModernConsole.Extension;
 
     [SupportedOSPlatform("windows")]
-    public static class MConsole
+    public static partial class MConsole
     {
         static MConsole()
         {

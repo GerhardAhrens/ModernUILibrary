@@ -25,12 +25,8 @@
 namespace ModernConsole.Extension
 {
     using System.Collections.Generic;
-    using System.Data;
-    using System.Globalization;
-    using System.IO;
     using System.Linq;
     using System.Runtime.Versioning;
-    using System.Text;
     using System.Text.RegularExpressions;
 
     [SupportedOSPlatform("windows")]
@@ -45,17 +41,6 @@ namespace ModernConsole.Extension
         public static string Repeat(this string @this, int n)
         {
             return string.Concat(Enumerable.Repeat(@this, n));
-        }
-
-        /// <summary>
-        /// Wiederholt ein Zeichen 'n' mal
-        /// </summary>
-        /// <param name="@this">Char</param>
-        /// <param name="n">Anzahl der wiederholten Zeichen</param>
-        /// <returns>Zeichenkette mit den wiederholten Zeichen</returns>
-        public static string Repeat(this char @this, int n)
-        {
-            return new String(@this, n);
         }
 
         /// <summary>
