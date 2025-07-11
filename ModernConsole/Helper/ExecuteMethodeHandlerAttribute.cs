@@ -1,16 +1,16 @@
 ﻿/*
- * <copyright file="HelpAttribute.cs" company="Lifeprojects.de">
- *     Class: HelpAttribute
+ * <copyright file="ExecuteMethodeHandlerAttribute.cs" company="Lifeprojects.de">
+ *     Class: ExecuteMethodeHandlerAttribute
  *     Copyright © Lifeprojects.de 2022
  * </copyright>
  *
  * <author>Gerhard Ahrens - Lifeprojects.de</author>
  * <email>developer@lifeprojects.de</email>
- * <date>18.11.2022</date>
+ * <date>29.09.2022</date>
  * <Project>EasyPrototypingNET</Project>
  *
  * <summary>
- * Help Attribute Klasse
+ * Class Attribute for ExecuteMethodeHandlerAttribute
  * </summary>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,23 +22,21 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace ModernConsole.CommandLine
+namespace ModernConsole.Pattern
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class HelpAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    public class ExecuteMethodeHandlerAttribute : Attribute
     {
-        private readonly string usageText;
-        
-        public HelpAttribute(string usageText)
+        public ExecuteMethodeHandlerAttribute(string handlerValue, string descriptionValue = "")
         {
-            this.usageText = usageText;
+            this.CommandHandler = handlerValue;
+            this.Description = descriptionValue;
         }
 
-        public string Usage
-        {
-            get { return usageText; }
-        }
+        public string CommandHandler { get; set; }
+
+        public string Description { get; set; }
     }
 }

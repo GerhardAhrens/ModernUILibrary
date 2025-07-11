@@ -372,7 +372,7 @@ namespace ModernConsole.CommandLine
             return Regex.IsMatch(key, keyPattern);
         }
 
-        private string _getPropKeyHelpInfo(PropertyInfo property, bool includeDescription = false)
+        private string GetPropKeyHelpInfo(PropertyInfo property, bool includeDescription = true)
         {
             var flag = property.GetCustomAttribute<FlagAttribute>();
             var help = property.GetCustomAttribute<HelpAttribute>();
@@ -402,10 +402,10 @@ namespace ModernConsole.CommandLine
                     {
                         //first help text in argument
                         var help = typeof(TData).GetCustomAttribute<HelpAttribute>();
-                        return $"========== Help Information ==========\n {help?.Usage}\n\n" +
+                        return $"========== Hilfe Information ==========\n {help?.Usage}\n\n" +
                                                 $"{System.AppDomain.CurrentDomain.FriendlyName} " +
-                                                String.Join(" ", System.Activator.CreateInstance<TData>().GetType().GetProperties().Select(prop => _getPropKeyHelpInfo(prop)).ToArray()) +
-                                                "\n========== End Help Information ==========";
+                                                String.Join('\n', System.Activator.CreateInstance<TData>().GetType().GetProperties().Select(prop => GetPropKeyHelpInfo(prop)).ToArray()) +
+                                                "\n========== Hilfe Information ==========";
                     }
                     else
                     {
@@ -415,7 +415,7 @@ namespace ModernConsole.CommandLine
                             var help = property.GetCustomAttribute<HelpAttribute>();
                             if (help != null)
                             {
-                                return "Usage: " + _getPropKeyHelpInfo(property, true);
+                                return "Usage: " + GetPropKeyHelpInfo(property, true);
                             }
                             else return $"No Help Attribute found on Property [{property.Name}]";
                         }
