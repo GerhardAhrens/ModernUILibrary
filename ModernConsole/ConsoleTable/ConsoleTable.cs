@@ -222,7 +222,7 @@ namespace ModernConsole.Table
             return builder.ToString();
         }
 
-        public void Write(ConsoleTableFormat format = ConsoleTableFormat.Default)
+        public void Show(ConsoleTableFormat format = ConsoleTableFormat.Default)
         {
             switch (format)
             {

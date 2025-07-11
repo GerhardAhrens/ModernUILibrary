@@ -18,54 +18,18 @@
         private static void Main(string[] args)
         {
             SmartMenu.Menu("Consolen Features")
-               .Add("ClearScreen", () => { ConsoleMenuHandler($"Methode{ConsoleKey.D1}"); })
+               .Add("ClearScreen", () => { ConsoleMenuHandler("MethodeClearScreen"); })
+
                .Add(SmartMenu.Menu("CommandLine")
-               .Add("CommandLine - Help", () => { CmdHelp01(args); }, 1)
-               ).Show();
+                .Add("CommandLine - Help", () => { CmdHelp01(args); }, 1)
+                .Add("CommandLine - Flag 1", () => { Flags01(args); }, 1)
+                .Add("CommandLine - Flag 2", () => { Flags02(args); }, 1)
+                .Add("CommandLine - Flag 3", () => { Flags03(args); }, 1)
+                .Add("CommandLine - Flag 4", () => { Flags04(args); }, 1))
 
-            /*
-            menuOptions = new List<ConsoleMenuOption>();
-            menuOptions.Add(new ConsoleMenuOption("ClearScreen() [1]", () =>
-            {
-                ConsoleMenuHandler($"Methode{ConsoleKey.D1}");
-                ConsoleMenu.WriteMenu(menuOptions, menuOptions.First());
-            }, ConsoleKey.D1, ConsoleColor.Yellow));
-
-            menuOptions.Add(new ConsoleMenuOption("CommandLine - Help", () =>
-            {
-                CmdHelp01(args);
-            }, ConsoleColor.White));
-
-            menuOptions.Add(new ConsoleMenuOption("CommandLine - Flags-1", () =>
-            {
-                Flags01(args);
-            }, ConsoleColor.White));
-
-            menuOptions.Add(new ConsoleMenuOption("CommandLine - Flags-2", () =>
-            {
-                Flags02(args);
-            }, ConsoleColor.White));
-
-            menuOptions.Add(new ConsoleMenuOption("CommandLine - Flags-3 - Action List", () =>
-            {
-                Flags03(args);
-            }, ConsoleColor.White));
-
-            menuOptions.Add(new ConsoleMenuOption("CommandLine - Flags-4", () =>
-            {
-                Flags04(args);
-            }, ConsoleColor.White));
-
-            menuOptions.Add(new ConsoleMenuOption("E[x]it", () =>
-            {
-                Environment.Exit(0);
-            }));
-
-            using (ConsoleMenu cm = new ConsoleMenu())
-            {
-                cm.Run(menuOptions, menuOptions[0], ConsoleColor.Red);
-            }
-            */
+              .Add(SmartMenu.Menu("Tabellen")
+                .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1)
+            ).Show();
         }
 
         private static void ConsoleMenuHandler(string commandParam)

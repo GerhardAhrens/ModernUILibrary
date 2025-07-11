@@ -19,14 +19,30 @@ namespace ModernConsoleDemo
     using System.Runtime.Versioning;
 
     using ModernConsole.Pattern;
+    using ModernConsole.Table;
 
     [SupportedOSPlatform("windows")]
     public class MenuExecute
     {
-        [ExecuteMethodeHandler("MethodeD1")]
+        [ExecuteMethodeHandler("MethodeClearScreen")]
         public void MethodeClearScreen(string sender, string param)
         {
             MConsole.ClearScreen();
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("MethodeTabellenDefault")]
+        public void MethodeTabellen_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            var table = new ConsoleTable("Eins", "Zwei", "Drei");
+            table.AddRow(1, 2, 3)
+                 .AddRow("Eine lange Zeile", "Ja, so ist es", "oh");
+
+            MConsole.WriteLine("\nFORMAT: Default:\n");
+            table.Show();
+
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
     }

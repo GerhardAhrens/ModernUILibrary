@@ -90,7 +90,7 @@ namespace ModernConsole.Menu
                 }
                 else
                 {
-                    sb.AppendFormat("{0}b - {1}", Environment.NewLine, this.GetText("back"));
+                    sb.AppendFormat("{0}z - {1}", Environment.NewLine, this.GetText("back"));
                 }
 
                 Console.WriteLine(sb.ToString());
@@ -102,7 +102,7 @@ namespace ModernConsole.Menu
                     this.Items[Convert.ToInt32(k.KeyChar.ToString())].Act.Invoke();
                 }
 
-                if (k.Key == ConsoleKey.B)
+                if (k.Key == ConsoleKey.Z)
                 {
                     break;
                 }
