@@ -36,7 +36,10 @@
               .Add(SmartMenu.Menu("Eingabe")
                 .Add("Eingabe allgemein", () => { ConsoleMenuHandler("InputLine"); }, 1)
                 .Add("Eingabe Passwort ", () => { ConsoleMenuHandler("InputPassword"); }, 1)
-                .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1)
+                .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1))
+
+              .Add(SmartMenu.Menu("CheckBox")
+                .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1)
             ).Show();
         }
 

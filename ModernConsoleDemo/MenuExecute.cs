@@ -91,5 +91,21 @@ namespace ModernConsoleDemo
 
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
+
+        [ExecuteMethodeHandler("ConsoleCheckBox")]
+        public void ConsoleCheckBox_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            string[] plugins = ["C#", "WPF", "C++", "Java"];
+            var selectedItems = MConsole.Checkbox("Wähle eine Programmiersprache aus:", plugins).Select();
+            for (int i = 0; i < selectedItems.Length; i++)
+            {
+                var plugin = selectedItems[i];
+                Console.WriteLine(plugin.Option, (ConsoleColor)i);
+            }
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
     }
 }

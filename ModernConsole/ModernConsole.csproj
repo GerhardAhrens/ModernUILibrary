@@ -12,6 +12,7 @@
     <Folder Include="MessageAlert\" />
     <Folder Include="InputLine\" />
     <Folder Include="Confirm\" />
+    <Folder Include="ConsoleCheckbox\" />
   </ItemGroup>
 
 </Project>
