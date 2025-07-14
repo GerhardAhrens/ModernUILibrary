@@ -829,7 +829,32 @@ namespace System.Data.SQLite
                                 string keyName = dr.GetName(0);
                                 string valueName = dr.GetName(1);
                                 MethodInfo method = typeCollection.GetMethod("Add");
-                                method.Invoke(result, new object[] { dr.GetInt32(keyName), dr.GetString(valueName) });
+
+                                Type[] genericTyp = typeCollection.GenericTypeArguments;
+                                if (genericTyp[0].Name == typeof(string).Name && genericTyp[1].Name == typeof(string).Name)
+                                {
+                                    method.Invoke(result, new object[] { dr.GetString(keyName), dr.GetString(valueName) });
+                                }
+                                else if (genericTyp[0].Name == typeof(Int32).Name && genericTyp[1].Name == typeof(string).Name)
+                                {
+                                    method.Invoke(result, new object[] { dr.GetInt32(keyName), dr.GetString(valueName) });
+                                }
+                                else if (genericTyp[0].Name == typeof(Int64).Name && genericTyp[1].Name == typeof(string).Name)
+                                {
+                                    method.Invoke(result, new object[] { dr.GetInt64(keyName), dr.GetString(valueName) });
+                                }
+                                else if (genericTyp[0].Name == typeof(Guid).Name && genericTyp[1].Name == typeof(string).Name)
+                                {
+                                    method.Invoke(result, new object[] { dr.GetGuid(keyName), dr.GetString(valueName) });
+                                }
+                                else if (genericTyp[0].Name == typeof(string).Name && genericTyp[1].Name == typeof(object).Name)
+                                {
+                                    method.Invoke(result, new object[] { dr.GetString(keyName), dr.GetString(valueName) });
+                                }
+                                else
+                                {
+                                    throw new ArgumentException($"Die Parameter für Key: '{genericTyp[0].Name}' und Value: '{genericTyp[1].Name}' dürfen in diese Kombination nicht verwendet werden.");
+                                }
                             }
                         }
                     }
