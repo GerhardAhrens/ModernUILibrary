@@ -16,6 +16,7 @@
 namespace ModernBaseLibrary.Core.IO
 {
     using System;
+    using System.Globalization;
     using System.Management;
 
     public class DetectVirtualMachine
@@ -44,6 +45,27 @@ namespace ModernBaseLibrary.Core.IO
                         }
 
                         vm.IsVM = true;
+
+                        if (item["Description"] != null)
+                        {
+                            vm.Description = item["Description"].ToString();
+                        }
+
+                        if (item["Name"] != null)
+                        {
+                            vm.ComputerName = item["Name"].ToString();
+                        }
+
+                        if (item["NumberOfProcessors"] != null)
+                        {
+                            vm.NumberOfProcessors = Convert.ToInt32(item["NumberOfProcessors"], CultureInfo.CurrentCulture);
+                        }
+
+                        if (item["TotalPhysicalMemory"] != null)
+                        {
+                            vm.TotalPhysicalMemory = Convert.ToInt64(item["TotalPhysicalMemory"], CultureInfo.CurrentCulture);
+                        }
+
                         return vm;
                     }
 
@@ -56,6 +78,27 @@ namespace ModernBaseLibrary.Core.IO
                             vm.Name = item["Manufacturer"].ToString();
                             vm.Version = item["Model"].ToString().Replace(",", ".");
                             vm.IsVM = true;
+
+                            if (item["Description"] != null)
+                            {
+                                vm.Description = item["Description"].ToString();
+                            }
+
+                            if (item["Name"] != null)
+                            {
+                                vm.ComputerName = item["Name"].ToString();
+                            }
+
+                            if (item["NumberOfProcessors"] != null)
+                            {
+                                vm.NumberOfProcessors = Convert.ToInt32(item["NumberOfProcessors"], CultureInfo.CurrentCulture);
+                            }
+
+                            if (item["TotalPhysicalMemory"] != null)
+                            {
+                                vm.TotalPhysicalMemory = Convert.ToInt64(item["TotalPhysicalMemory"], CultureInfo.CurrentCulture);
+                            }
+
                             return vm;
                         }
                     }
@@ -81,5 +124,13 @@ namespace ModernBaseLibrary.Core.IO
         public string Name { get; set; }
 
         public string Version { get; set; }
+
+        public string Description { get; set; }
+
+        public string ComputerName { get; set; }
+
+        public int NumberOfProcessors { get; set; }
+
+        public long TotalPhysicalMemory { get; set; }
     }
 }
