@@ -10,7 +10,9 @@
         public static string InputLine(string? defaultValue = null)
         {
             if (string.IsNullOrEmpty(defaultValue))
+            {
                 return System.Console.ReadLine();
+            }
 
             return ReadWithEditableValue(defaultValue);
         }
@@ -19,7 +21,10 @@
         {
             System.Console.Write(prompt);
             if (string.IsNullOrEmpty(defaultValue))
+            {
                 return System.Console.ReadLine();
+            }
+
             return ReadWithEditableValue(defaultValue);
         }
 
@@ -27,7 +32,9 @@
         {
             System.Console.Write(prompt);
             if (string.IsNullOrEmpty(defaultValue))
+            {
                 return System.Console.ReadLine();
+            }
 
             return ReadWithEditableValue(defaultValue);
         }
@@ -56,13 +63,18 @@
                     System.Console.CursorLeft -= 1;
 
                 }
-                else if (info.Key == ConsoleKey.Enter) { Write(Environment.NewLine); break; }
+                else if (info.Key == ConsoleKey.Enter)
+                { 
+                    Write(Environment.NewLine); 
+                    break; 
+                }
                 else
                 {
                     System.Console.Write(info.KeyChar);
                     chars.Add(info.KeyChar);
                 }
             }
+
             return new string([.. chars]);
         }
         #endregion
