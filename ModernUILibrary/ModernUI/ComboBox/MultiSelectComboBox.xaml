@@ -1,9 +1,13 @@
 ﻿<UserControl
     x:Class="ModernIU.Controls.MultiSelectComboBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
     <ComboBox
         x:Name="MultiSelectCombo"
+        MinWidth="100"
+        MinHeight="25"
+        Background="LightGray"
         IsSynchronizedWithCurrentItem="True"
         OverridesDefaultStyle="True"
         ScrollViewer.CanContentScroll="True"
@@ -12,21 +16,25 @@
         SnapsToDevicePixels="True">
         <ComboBox.ItemTemplate>
             <DataTemplate>
-                <CheckBox
-                    Click="CheckBox_Click"
+                <MUI:MCheckBox
+                    x:Name="chkItem"
+                    Click="OnCheckBoxClick"
                     Content="{Binding Title}"
                     IsChecked="{Binding Path=IsSelected, Mode=TwoWay}"
                     Tag="{RelativeSource FindAncestor,
                                          AncestorType={x:Type ComboBox}}" />
             </DataTemplate>
         </ComboBox.ItemTemplate>
+
         <ComboBox.Template>
             <ControlTemplate TargetType="ComboBox">
-                <Grid>
+                <Grid Background="LightGray">
                     <ToggleButton
                         Name="ToggleButton"
                         Grid.Column="2"
-                        Height="{Binding Path=Height, ElementName=MultiSelectCombo}"
+                        Height="Auto"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center"
                         ClickMode="Press"
@@ -45,11 +53,13 @@
                             Name="DropDown"
                             MinWidth="{TemplateBinding ActualWidth}"
                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                            Background="White"
                             SnapsToDevicePixels="True">
                             <Border
                                 x:Name="DropDownBorder"
                                 BorderBrush="Black"
                                 BorderThickness="1" />
+
                             <ScrollViewer
                                 Margin="4,6,4,6"
                                 DataContext="{Binding}"

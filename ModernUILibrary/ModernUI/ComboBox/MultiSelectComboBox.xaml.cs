@@ -30,7 +30,7 @@
             this.VerticalContentAlignment = VerticalAlignment.Center;
             this.Padding = new Thickness(0);
             this.Margin = new Thickness(2);
-            this.MinHeight = 18;
+            this.MinHeight = 25;
             this.ClipToBounds = false;
             this.Focusable = true;
             this._nodeList = new ObservableCollection<MultiSelectNode>();
@@ -108,7 +108,7 @@
             }
         }
 
-        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        private void OnCheckBoxClick(object sender, RoutedEventArgs e)
         {
             CheckBox clickedBox = (CheckBox)sender;
 
@@ -254,7 +254,6 @@
             this.Title = title;
         }
 
-        #region Properties
         public string Title
         {
             get
@@ -279,14 +278,13 @@
                 NotifyPropertyChanged();
             }
         }
-        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (PropertyChanged != null)
+            if (this.PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
