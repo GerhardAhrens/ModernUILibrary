@@ -17,8 +17,8 @@ namespace ModernTemplate.Views.ContentControls
 {
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Controls.Ribbon;
     using System.Windows.Input;
+
     using ModernBaseLibrary.Cryptography;
 
     using ModernTemplate.Core;
@@ -35,7 +35,6 @@ namespace ModernTemplate.Views.ContentControls
             this.InitializeComponent();
 
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-            WeakEventManager<UserControl, MouseWheelEventArgs>.AddHandler(this, "PreviewMouseWheel", this.OnPreviewMouseWheel);
         }
 
         #region Properties
@@ -49,7 +48,11 @@ namespace ModernTemplate.Views.ContentControls
         public override void InitCommands()
         {
             this.CmdAgg.AddOrSetCommand(CommandButtons.CloseApp, new RelayCommand(this.CloseAppHandler));
-            this.CmdAgg.AddOrSetCommand(CommandButtons.Custom, new RelayCommand(this.CustomHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CustomA, new RelayCommand(this.CustomAHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CustomB, new RelayCommand(this.CustomBHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CatKatalogA, new RelayCommand(this.CatKatalogAHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CatKatalogB, new RelayCommand(this.CatKatalogBHandler));
+            this.CmdAgg.AddOrSetCommand(CommandButtons.CatKatalogC, new RelayCommand(this.CatKatalogCHandler));
         }
 
         #region WindowEventHandler
@@ -77,31 +80,6 @@ namespace ModernTemplate.Views.ContentControls
 
             this.DemoText = words;
         }
-
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) == true)
-            {
-                if (e.Delta > 0)
-                {
-                    if (this.Scalefactor.ScaleX <= 2.0)
-                    {
-                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX + 0.25;
-                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY + 0.25;
-                    }
-                }
-
-                if (e.Delta < 0)
-                {
-                    if (this.Scalefactor.ScaleX > 1.0)
-                    {
-                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX - 0.25;
-                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY - 0.25;
-                    }
-                }
-            }
-        }
-
         #endregion WindowEventHandler
 
         #region CommandHandler
@@ -114,12 +92,48 @@ namespace ModernTemplate.Views.ContentControls
             });
         }
 
-        private void CustomHandler(object p1)
+        private void CustomAHandler(object p1)
         {
             base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
             {
                 Sender = this.GetType().Name,
-                MenuButton = CommandButtons.Custom,
+                MenuButton = CommandButtons.CustomA,
+            });
+        }
+
+        private void CustomBHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.CustomB,
+            });
+        }
+
+        private void CatKatalogAHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.CatKatalogA,
+            });
+        }
+
+        private void CatKatalogBHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.CatKatalogB,
+            });
+        }
+
+        private void CatKatalogCHandler(object p1)
+        {
+            base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+            {
+                Sender = this.GetType().Name,
+                MenuButton = CommandButtons.CatKatalogC,
             });
         }
         #endregion CommandHandler

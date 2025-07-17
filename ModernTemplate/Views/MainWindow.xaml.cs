@@ -158,7 +158,7 @@
                 return false;
             }
 
-            if (typeof(HomeUC) == this.WorkContent.GetType() | typeof(HomeRibbonUC) == this.WorkContent.GetType())
+            if (typeof(HomeRibbonUC) == this.WorkContent.GetType())
             {
                 return true;
             }
@@ -180,7 +180,7 @@
                 return false;
             }
 
-            if (typeof(HomeUC) == this.WorkContent.GetType() | typeof(HomeRibbonUC) == this.WorkContent.GetType())
+            if (typeof(HomeRibbonUC) == this.WorkContent.GetType())
             {
                 return true;
             }
@@ -215,16 +215,17 @@
                     this.CurrentCommandName = e.MenuButton;
                     string keyUC = e.MenuButton.GetAttributeOfType<EnumKeyAttribute>().EnumKey;
                     string titelUC = e.MenuButton.GetAttributeOfType<EnumKeyAttribute>().Description;
-                    this.WorkContent = menuWorkArea.WorkContent;
-                    this.WorkContent.VerticalAlignment = VerticalAlignment.Stretch;
-                    this.WorkContent.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    this.WorkContent.Height = (App.CurrentDialogHeight - 75);
-                    this.WorkContent.Focusable = true;
+                    if (menuWorkArea.WorkContent != null)
+                    {
+                        this.WorkContent = menuWorkArea.WorkContent;
+                        this.WorkContent.VerticalContentAlignment = VerticalAlignment.Stretch;
+                        this.WorkContent.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+                        this.WorkContent.Focusable = true;
+                    }
 
-                    string dialogTitle = ResourceXAML.ReadAs<DialogResource>(keyUC).DialogTitle;
-                    WindowTitleMain.WindowTitleLine.SetWindowTitle(dialogTitle);
+                    WindowTitleMain.WindowTitleLine.SetWindowTitle(titelUC);
 
-                    App.Logger.Info($"Load UC '{titelUC}'; [{(int)e.MenuButton}]",true);
+                    App.Logger.Info($"Load UC '{titelUC}'; [{(int)e.MenuButton}]", true);
                     StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms");
                 }
             }

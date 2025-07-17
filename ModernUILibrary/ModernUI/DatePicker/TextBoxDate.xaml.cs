@@ -41,7 +41,13 @@
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbDay, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbMonth, "SelectionChanged", this.OnDateSelectionChanged);
             WeakEventManager<ComboBoxEx, SelectionChangedEventArgs>.AddHandler(this.cbYear, "SelectionChanged", this.OnDateSelectionChanged);
-            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbYear, "KeyDown", this.OnKeyDownChanged);
+            //WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbDay, "KeyDown", this.OnKeyDownChanged);
+            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbDay, "PreviewKeyDown", this.OnPreviewKeyDown);
+            //WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbMonth, "KeyDown", this.OnKeyDownChanged);
+            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbMonth, "PreviewKeyDown", this.OnPreviewKeyDown);
+            //WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbYear, "KeyDown", this.OnKeyDownChanged);
+            WeakEventManager<ComboBoxEx, KeyEventArgs>.AddHandler(this.cbYear, "PreviewKeyDown", this.OnPreviewKeyDown);
+
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnToday, "Click", this.OnSetCurrentDate);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.btnClear, "Click", this.OnSetClearDate);
         }
@@ -264,56 +270,27 @@
             }
         }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             int key = (int)e.Key;
             e.Handled = !(key >= 34 && key <= 43 || key == 2 || key == 32 || key == 21 || key == 22 || key == 23 || key == 25 || key == 3);
 
-            if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
-            {
-                if (e.Key == Key.Tab)
-                {
-                    return;
-                }
-            }
-            else
-            {
-                switch (e.Key)
-                {
-                    case Key.Up:
-                        break;
-                    case Key.Down:
-                        break;
-                    case Key.Left:
-                        return;
-                    case Key.Right:
-                        return;
-                    case Key.Pa1:
-                        return;
-                    case Key.End:
-                        return;
-                    case Key.Delete:
-                        return;
-                    case Key.Return:
-                        this.MoveFocus(FocusNavigationDirection.Next);
-                        break;
-                    case Key.Tab:
-                        break;
-                }
-            }
-        }
-
-        private void OnKeyDownChanged(object sender, KeyEventArgs e)
-        {
             var ctrl = ((System.Windows.FrameworkElement)e.OriginalSource);
-            if (ctrl != null && e.Key == Key.Tab)
+            if (ctrl != null && (e.Key == Key.Tab | e.Key == Key.Return))
             {
-                if (ctrl.Name == "PART_EditableTextBox")
+                if (ctrl.Name == "PART_EditableTextBox" && ((ComboBoxEx)sender).Name == "cbDay")
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.cbMonth.Focus(); }));
+                }
+                else if (ctrl.Name == "PART_EditableTextBox" && ((ComboBoxEx)sender).Name == "cbMonth")
+                {
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.cbYear.Focus(); }));
+                }
+                else if (ctrl.Name == "PART_EditableTextBox" && ((ComboBoxEx)sender).Name == "cbYear")
                 {
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() => { this.cbDay.Focus(); }));
                 }
             }
-
         }
 
         public override void OnApplyTemplate()

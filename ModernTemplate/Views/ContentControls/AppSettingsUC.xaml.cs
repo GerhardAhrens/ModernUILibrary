@@ -33,7 +33,6 @@ namespace ModernTemplate.Views.ContentControls
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-            WeakEventManager<UserControl, MouseWheelEventArgs>.AddHandler(this, "PreviewMouseWheel", this.OnPreviewMouseWheel);
         }
 
         #region Properties
@@ -60,31 +59,6 @@ namespace ModernTemplate.Views.ContentControls
 
             this.tcAppSettings.Height = (App.CurrentDialogHeight - 65);
         }
-
-        private void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) == true)
-            {
-                if (e.Delta > 0)
-                {
-                    if (this.Scalefactor.ScaleX <= 2.0)
-                    {
-                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX + 0.25;
-                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY + 0.25;
-                    }
-                }
-
-                if (e.Delta < 0)
-                {
-                    if (this.Scalefactor.ScaleX > 1.0)
-                    {
-                        this.Scalefactor.ScaleX = this.Scalefactor.ScaleX - 0.25;
-                        this.Scalefactor.ScaleY = this.Scalefactor.ScaleY - 0.25;
-                    }
-                }
-            }
-        }
-
         #endregion WindowEventHandler
 
         #region CommandHandler
@@ -94,7 +68,7 @@ namespace ModernTemplate.Views.ContentControls
             {
                 Sender = this.GetType().Name,
                 MenuButton = CommandButtons.Home,
-                FromPage = CommandButtons.Custom
+                FromPage = CommandButtons.AppSettings
             });
         }
         #endregion CommandHandler

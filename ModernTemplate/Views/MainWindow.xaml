@@ -11,8 +11,8 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
     Title="{Binding Path=WindowTitle, Source={x:Static localStatic:WindowTitleMain.WindowTitleLine}, FallbackValue=~Title}"
-    Width="800"
-    Height="450"
+    Width="1100"
+    Height="700"
     winbase:DialogClosing.IsClosing="True"
     ShowInTaskbar="True"
     TitleFontSize="18"
@@ -26,7 +26,7 @@
             KeyboardNavigation.IsTabStop="False"
             Orientation="Horizontal">
             <ModernUI:GeometryButton
-                Height="30"                
+                Height="30"
                 Command="{Binding Path=CmdAgg[HelpCommand]}"
                 CommandParameter="{x:Static localStatic:CommandButtons.Help}"
                 PathData="{StaticResource ResourceKey=IconHelp}" />
@@ -47,30 +47,25 @@
 
     <ModernUI:SimpleGrid Columns="*" Rows="*,35">
         <!--#region Contentbereich-->
-        <ScrollViewer
-            CanContentScroll="True"
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Auto">
-            <Border
-                Grid.Row="0"
-                Grid.Column="0"
-                VerticalAlignment="Stretch"
-                Background="White"
-                BorderBrush="Black"
-                BorderThickness="0,2,0,2">
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="0,1,0,1">
+            <ScrollViewer
+                CanContentScroll="True"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
                 <ContentControl
                     x:Name="mainContent"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
                     Background="LightGray"
                     Content="{Binding Path=WorkContent, UpdateSourceTrigger=PropertyChanged}"
-                    KeyboardNavigation.IsTabStop="False"
-                    KeyboardNavigation.TabNavigation="None"
                     ScrollViewer.CanContentScroll="True"
                     VirtualizingPanel.IsVirtualizing="True"
                     Visibility="Visible" />
-            </Border>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Border>
         <!--#endregion Contentbereich-->
 
         <!--#region Statuszeile-->

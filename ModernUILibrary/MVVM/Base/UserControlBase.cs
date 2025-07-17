@@ -35,9 +35,7 @@ namespace ModernUI.MVVM.Base
     using System.Windows;
     using System.Windows.Controls;
 
-    using ModernBaseLibrary.Collection;
     using ModernBaseLibrary.Core;
-    using static System.Runtime.InteropServices.JavaScript.JSType;
 
     [DebuggerStepThrough]
     [Serializable]

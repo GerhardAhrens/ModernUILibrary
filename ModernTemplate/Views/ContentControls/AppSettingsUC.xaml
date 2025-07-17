@@ -30,17 +30,12 @@
             </Style.Triggers>
         </Style>
 
-        <sys:Double x:Key="ScaleXY">1.0</sys:Double>
         <sys:Double x:Key="TabItemWidth">110</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding Key="Esc" Command="{StaticResource ResourceKey=BackCmdKey}" />
     </UserControl.InputBindings>
-
-    <UserControl.LayoutTransform>
-        <ScaleTransform x:Name="Scalefactor" ScaleX="{StaticResource ResourceKey=ScaleXY}" ScaleY="{StaticResource ResourceKey=ScaleXY}" />
-    </UserControl.LayoutTransform>
 
     <ModernUI:SimpleGrid
         x:Name="rootGrid"

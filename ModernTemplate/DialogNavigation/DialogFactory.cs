@@ -100,7 +100,11 @@
                     Views.Add(CommandButtons.Home, typeof(HomeRibbonUC));
                     Views.Add(CommandButtons.AppSettings, typeof(AppSettingsUC));
                     Views.Add(CommandButtons.AppAbout, typeof(AppAboutUC));
-                    Views.Add(CommandButtons.Custom, typeof(CustomUC));
+                    Views.Add(CommandButtons.CustomA, typeof(CustomUC));
+                    Views.Add(CommandButtons.CustomB, typeof(TemplateDetailUC));
+                    Views.Add(CommandButtons.CatKatalogA, typeof(CustomUC));
+                    Views.Add(CommandButtons.CatKatalogB, typeof(CustomUC));
+                    Views.Add(CommandButtons.CatKatalogC, typeof(CustomUC));
                 }
             }
             catch (Exception ex)
