@@ -227,16 +227,16 @@ namespace ModernConsole.Table
             switch (format)
             {
                 case ConsoleTableFormat.Default:
-                    this.Options.OutputTo.WriteLine(ToString());
+                    this.Options.OutputTo.WriteLine(this.ToString());
                     break;
                 case ConsoleTableFormat.MarkDown:
-                    this.Options.OutputTo.WriteLine(ToMarkDownString());
+                    this.Options.OutputTo.WriteLine(this.ToMarkDownString());
                     break;
                 case ConsoleTableFormat.Alternative:
-                    this.Options.OutputTo.WriteLine(ToStringAlternative());
+                    this.Options.OutputTo.WriteLine(this.ToStringAlternative());
                     break;
                 case ConsoleTableFormat.Minimal:
-                    this.Options.OutputTo.WriteLine(ToMinimalString());
+                    this.Options.OutputTo.WriteLine(this.ToMinimalString());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(format), format, null);

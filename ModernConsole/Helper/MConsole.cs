@@ -1051,6 +1051,190 @@ namespace System
         }
 
         #endregion Interaction
+
+        #region Clear Screen/Area
+        public static void ClearToEndOfCurrentLine(int row, ConsoleColor backColor = ConsoleColor.Black)
+        {
+            var saveBackColor = Console.BackgroundColor;
+            Console.BackgroundColor = backColor;
+            var savePos = Console.GetCursorPosition();
+            Console.CursorVisible = false;
+
+            int currentLeft = Console.CursorLeft;
+            for (int i = row; i < Console.BufferHeight; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write(new string(' ', Console.WindowWidth - currentLeft));
+            }
+
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+
+            Console.BackgroundColor = saveBackColor;
+        }
+
+        public static void ClearArea(int startRow, int startColumn, int width, int height)
+        {
+            var savePos = Console.GetCursorPosition();
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < width; col++)
+                {
+                    Console.SetCursorPosition(startColumn + col, startRow + row);
+                    Console.Write(' ');
+                }
+            }
+
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+        }
+
+        public static void ClearArea(int startRow, int startColumn, int width, int height, ConsoleColor backColor = ConsoleColor.Black)
+        {
+            var savePos = Console.GetCursorPosition();
+            var saveBackColor = Console.BackgroundColor;
+            Console.BackgroundColor = backColor;
+
+            for (int row = 0; row < height; row++)
+            {
+                for (int col = 0; col < width; col++)
+                {
+                    Console.SetCursorPosition(startColumn + col, startRow + row);
+                    Console.Write(' ');
+                }
+            }
+
+            Console.BackgroundColor = saveBackColor;
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+        }
+        #endregion
+
+        #region Say/Get
+        /// <summary>
+        /// Stellt einen Text an der festgelegten Position dar
+        /// </summary>
+        /// <param name="row">Zeile</param>
+        /// <param name="col">Spalte</param>
+        /// <param name="say">text</param>
+        /// <param name="inputLength">Länge der Eingabe</param>
+        /// <example>
+        /// ConsoleMenu.Say(0, 1, "Vorname:");
+        /// </example>
+        public static void Say(int row, int col, string say, int inputLength)
+        {
+            var savePos = Console.GetCursorPosition();
+            var saveBackColor = Console.BackgroundColor;
+            var saveForegroundColor = Console.ForegroundColor;
+
+            Console.SetCursorPosition(col, row);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(say);
+            Console.SetCursorPosition(col + say.Length, row);
+
+            if (inputLength > 0)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+
+                for (int i = 0; i < inputLength; i++)
+                {
+                    Console.Write(' ');
+                }
+            }
+
+            Console.ForegroundColor = saveForegroundColor;
+            Console.BackgroundColor = saveBackColor;
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+        }
+
+        /// <summary>
+        /// Stellt einen Text an der festgelegten Position dar
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <param name="say"></param>
+        public static void Say(int row, int col, string say)
+        {
+            var savePos = Console.GetCursorPosition();
+            var saveBackColor = Console.BackgroundColor;
+            var saveForegroundColor = Console.ForegroundColor;
+
+            Console.SetCursorPosition(col, row);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(say);
+            Console.SetCursorPosition(col + say.Length, row);
+
+            Console.ForegroundColor = saveForegroundColor;
+            Console.BackgroundColor = saveBackColor;
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+        }
+
+        /// <summary>
+        /// Eingabe eines Textes an angegebener Position
+        /// </summary>
+        /// <param name="row">Zeile</param>
+        /// <param name="col">Spalte</param>
+        /// <param name="inputLength">Länge der Eingabe</param>
+        /// <returns>Eingegebener Text</returns>
+        /// <example>
+        /// string v1 = ConsoleMenu.Get(0, 9);
+        /// </example>
+        public static string Get(int row, int col, int inputLength = 10)
+        {
+            string result = string.Empty;
+
+            var savePos = Console.GetCursorPosition();
+            var saveBackColor = Console.BackgroundColor;
+            var saveForegroundColor = Console.ForegroundColor;
+            var saveCursorSize = Console.CursorSize;
+
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            Console.SetCursorPosition(col, row);
+            Console.CursorSize = 100;
+
+            List<char> keys = new List<char>();
+            Console.CursorVisible = true;
+            do
+            {
+                char key = Console.ReadKey(false).KeyChar;
+                if (key == '\r')
+                {
+                    break;
+                }
+                else if (key == '\b')
+                {
+                    if (keys.Count > 0)
+                    {
+                        Console.Write(' ');
+                        keys.RemoveAt(keys.Count - 1);
+                        var cpos = Console.GetCursorPosition();
+                        Console.SetCursorPosition(cpos.Left - 1, cpos.Top);
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(col, row);
+                    }
+                }
+                else
+                {
+                    keys.Add(key);
+                }
+            } while (keys.Count < inputLength);
+
+            Console.CursorVisible = false;
+            result = string.Join(string.Empty, keys);
+
+            Console.CursorSize = saveCursorSize;
+            Console.ForegroundColor = saveForegroundColor;
+            Console.BackgroundColor = saveBackColor;
+            Console.SetCursorPosition(savePos.Left, savePos.Top);
+
+            return result;
+        }        
+        #endregion Say/Get
     }
 
     #region ConsoleColorScope helper class
@@ -1083,6 +1267,7 @@ namespace System
 
     #endregion ConsoleColorScope helper class
 
+    #region ConsoleSpinner
     public class ConsoleSpinner : IDisposable
     {
         private string[,] sequence = new string[,] {
@@ -1101,6 +1286,7 @@ namespace System
         private bool active;
         private readonly Thread thread;
         private int animationTyp;
+        private ConsoleColor saveForegroundColor;
 
         public ConsoleSpinner(int left, int top, int delay = 100, int animationTyp = 0)
         {
@@ -1108,7 +1294,8 @@ namespace System
             this.top = top;
             this.delay = delay;
             this.animationTyp = animationTyp;
-            thread = new Thread(Spin);
+            this.thread = new Thread(Spin);
+            this.saveForegroundColor = Console.ForegroundColor;
         }
 
         public void Start()
@@ -1118,6 +1305,7 @@ namespace System
             {
                 thread.Start();
                 Console.CursorVisible = false;
+                this.saveForegroundColor = Console.ForegroundColor;
             }
         }
 
@@ -1125,8 +1313,9 @@ namespace System
         {
             active = false;
             int len = sequence[this.animationTyp, 0].Length;
-            Draw(new string(' ',len));
+            Draw(new string(' ', len));
             Console.CursorVisible = true;
+            Console.ForegroundColor = saveForegroundColor;
         }
 
         private void Spin()
@@ -1158,4 +1347,5 @@ namespace System
             Stop();
         }
     }
+    #endregion ConsoleSpinner
 }

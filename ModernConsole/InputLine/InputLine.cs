@@ -7,7 +7,7 @@
             return System.Console.ReadKey();
         }
 
-        public static string InputLine(string? defaultValue = null)
+        public static string InputLine(string defaultValue = null)
         {
             if (string.IsNullOrEmpty(defaultValue))
             {
@@ -17,7 +17,7 @@
             return ReadWithEditableValue(defaultValue);
         }
 
-        public static string InputLine(string? prompt, string? defaultValue = null)
+        public static string InputLine(string prompt, string defaultValue = null)
         {
             System.Console.Write(prompt);
             if (string.IsNullOrEmpty(defaultValue))
@@ -28,7 +28,7 @@
             return ReadWithEditableValue(defaultValue);
         }
 
-        public static string Read(string? prompt, string? defaultValue = null)
+        public static string Read(string prompt, string defaultValue = null)
         {
             System.Console.Write(prompt);
             if (string.IsNullOrEmpty(defaultValue))

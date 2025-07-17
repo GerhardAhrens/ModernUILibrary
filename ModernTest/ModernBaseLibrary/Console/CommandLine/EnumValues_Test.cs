@@ -30,9 +30,9 @@ namespace ModernTest.ModernBaseLibrary.Console.CommandLine
     using System.Linq;
     using System.Threading;
 
-    using global::ModernBaseLibrary.CommandLine;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using ModernConsole.CommandLine;
 
     [TestClass]
     public class EnumValues_Test

@@ -28,9 +28,9 @@ namespace ModernTest.ModernBaseLibrary.Console.CommandLine
     using System.Globalization;
     using System.Threading;
 
-    using global::ModernBaseLibrary.CommandLine;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using ModernConsole.CommandLine;
 
     [TestClass]
     public class ExtrasValuesTest

@@ -18,7 +18,11 @@
         private static void Main(string[] args)
         {
             SmartMenu.Menu("Consolen Features")
-               .Add("ClearScreen", () => { ConsoleMenuHandler("MethodeClearScreen"); })
+               .Add(SmartMenu.Menu("ClearScreen")
+               .Add("ClearScreen Alles", () => { ConsoleMenuHandler("MethodeClearScreen"); })
+               .Add("ClearScreen ab Zeile", () => { ConsoleMenuHandler("MethodeClearScreenLine"); })
+               .Add("ClearScreen Bereich", () => { ConsoleMenuHandler("MethodeClearScreenArea"); })
+               )
 
                .Add(SmartMenu.Menu("CommandLine")
                 .Add("CommandLine - Help", () => { CmdHelp01(args); }, 1)
@@ -28,7 +32,17 @@
                 .Add("CommandLine - Flag 4", () => { Flags04(args); }, 1))
 
               .Add(SmartMenu.Menu("Tabellen")
-                .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1))
+                .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1)
+                .Add("Tabelle, Layout MarkDown", () => { ConsoleMenuHandler("MethodeTabellenMarkDown"); })
+                .Add("Tabelle, Layout Alternativ", () => { ConsoleMenuHandler("MethodeTabellenAlternativ"); })
+                .Add("Tabelle, Layout Komplex", () => { ConsoleMenuHandler("MethodeTabellenKomplex"); })
+                )
+
+              .Add(SmartMenu.Menu("ProgressBar")
+                .Add("ProgressBar Grün", () => { ConsoleMenuHandler("ProgressBarGreen"); })
+                .Add("ProgressBar Blau", () => { ConsoleMenuHandler("ProgressBarBlue"); })
+                .Add("Spinner Animation Blau", () => { ConsoleMenuHandler("SpinnerAnnimation"); })
+                )
 
               .Add(SmartMenu.Menu("Meldungen")
                 .Add("Message Alert", () => { ConsoleMenuHandler("MessageAlert"); }, 1))
@@ -36,7 +50,9 @@
               .Add(SmartMenu.Menu("Eingabe")
                 .Add("Eingabe allgemein", () => { ConsoleMenuHandler("InputLine"); }, 1)
                 .Add("Eingabe Passwort ", () => { ConsoleMenuHandler("InputPassword"); }, 1)
-                .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1))
+                .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1)
+                .Add("Text an Position anzeigen ", () => { ConsoleMenuHandler("SayOnPos"); }, 1)
+                )
 
               .Add(SmartMenu.Menu("CheckBox")
                 .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1)
