@@ -52,10 +52,14 @@
                 .Add("Eingabe Passwort ", () => { ConsoleMenuHandler("InputPassword"); }, 1)
                 .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1)
                 .Add("Text an Position anzeigen ", () => { ConsoleMenuHandler("SayOnPos"); }, 1)
+                .Add("Text an Position eingeben/anzeigen ", () => { ConsoleMenuHandler("SayGetOnPos"); })
+                .Add("Passwort eingeben ", () => { ConsoleMenuHandler("SayPasswort"); })
                 )
 
               .Add(SmartMenu.Menu("CheckBox")
-                .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1)
+                .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1))
+
+              .Add("Erste Ebene", () => { ConsoleMenuHandler("ConsoleCheckBox"); }
             ).Show();
         }
 

@@ -5,9 +5,12 @@ namespace System
         public static string Password(string prompt)
         {
             if (prompt is not null)
+            {
                 Write(prompt);
+            }
 
             var password = string.Empty;
+
             do
             {
                 var keyInfo = System.Console.ReadKey(true);

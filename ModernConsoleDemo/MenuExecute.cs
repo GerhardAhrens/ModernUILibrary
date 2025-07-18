@@ -181,6 +181,30 @@ namespace ModernConsoleDemo
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
 
+        [ExecuteMethodeHandler("SayGetOnPos")]
+        public void Eingabe_E(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            MConsole.Say(6, 10, "Text mit Eingabfeld: ", 20);
+            string value = MConsole.Get(6, 31, 20);
+            MConsole.Alert($"Passwort ist : {value}", "Ergebnis", ConsoleMessageType.Info);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        [ExecuteMethodeHandler("SayPasswort")]
+        public void Eingabe_F(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            MConsole.Write("Passwort eingeben: ");
+            string value = MConsole.Password(string.Empty);
+            MConsole.Alert($"Auswahl: {value}", "Eingabe", ConsoleMessageType.Info);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
         [ExecuteMethodeHandler("ConsoleCheckBox")]
         public void ConsoleCheckBox_A(string sender, string param)
         {
