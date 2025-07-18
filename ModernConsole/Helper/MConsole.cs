@@ -421,6 +421,7 @@ namespace System
             Console.BackgroundColor = oldBackColor;
         }
 
+        /*
         public static void Line(string text, int count, ConsoleColor textColor, ConsoleColor backColor = ConsoleColor.Black)
         {
             ConsoleColor oldTextColor = Console.ForegroundColor;
@@ -441,6 +442,7 @@ namespace System
             Console.ForegroundColor = oldTextColor;
             Console.BackgroundColor = oldBackColor;
         }
+        */
 
         public static void RepeatLine(string text, int count, ConsoleColor textColor, ConsoleColor backColor = ConsoleColor.Black)
         {

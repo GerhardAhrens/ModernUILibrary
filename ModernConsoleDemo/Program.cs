@@ -38,6 +38,9 @@
                 .Add("Tabelle, Layout Komplex", () => { ConsoleMenuHandler("MethodeTabellenKomplex"); })
                 )
 
+               .Add(SmartMenu.Menu("Linien")
+                .Add("Line default", () => { ConsoleMenuHandler("LineDefault"); }))
+
               .Add(SmartMenu.Menu("ProgressBar")
                 .Add("ProgressBar Grün", () => { ConsoleMenuHandler("ProgressBarGreen"); })
                 .Add("ProgressBar Blau", () => { ConsoleMenuHandler("ProgressBarBlue"); })

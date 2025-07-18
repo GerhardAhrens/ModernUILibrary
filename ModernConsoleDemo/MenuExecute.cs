@@ -324,5 +324,23 @@ namespace ModernConsoleDemo
 
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
+
+        [ExecuteMethodeHandler("LineDefault")]
+        public void Line_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            MConsole.Line();
+            MConsole.Line('*');
+            MConsole.Line("Test");
+            MConsole.Line("Test * Test * Test", ConsoleColor.Red);
+
+            MConsole.Say(5, 5, "Linie mit Position");
+            MConsole.Say(6, 5, "Linie mit Position");
+            MConsole.Line(5, 25, 30);
+            MConsole.Line(6, 25, 30, foregroundColor: ConsoleColor.Yellow);
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace System
         {
             return new ConsoleConfirm(message).GetAnswer();
         }
+
         public static bool Confirm(string message, bool defaultValue)
         {
             return new ConsoleConfirm(message, defaultValue).GetAnswer();
@@ -15,7 +16,7 @@ namespace System
     }
 
     [SupportedOSPlatform("windows")]
-    internal class ConsoleConfirm(string Message)
+    internal class ConsoleConfirm(string message)
     {
         private bool? defaultValue;
 
@@ -33,7 +34,7 @@ namespace System
                 confirmActions = this.defaultValue.Value ? "J/n" : "j/N";
             }
 
-            Console.Write($"{Message} [{confirmActions}]: ");
+            Console.Write($"{message} [{confirmActions}]: ");
             var result = Console.ReadKey();
             Console.WriteLine();
             if (result.Key == ConsoleKey.Enter)
