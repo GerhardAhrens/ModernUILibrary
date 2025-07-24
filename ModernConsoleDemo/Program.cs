@@ -18,9 +18,9 @@
         {
             SmartMenu.Menu("Consolen Features")
                .Add(SmartMenu.Menu("ClearScreen")
-               .Add("ClearScreen Alles", () => { ConsoleMenuHandler("MethodeClearScreen"); })
-               .Add("ClearScreen ab Zeile", () => { ConsoleMenuHandler("MethodeClearScreenLine"); })
-               .Add("ClearScreen Bereich", () => { ConsoleMenuHandler("MethodeClearScreenArea"); })
+               .Add("ClearScreen Alles", () => { ConsoleMenuHandler("MethodeClearScreen"); }, 1)
+               .Add("ClearScreen ab Zeile", () => { ConsoleMenuHandler("MethodeClearScreenLine"); }, 1)
+               .Add("ClearScreen Bereich", () => { ConsoleMenuHandler("MethodeClearScreenArea"); }, 1)
                )
 
                .Add(SmartMenu.Menu("CommandLine")
@@ -28,40 +28,43 @@
                 .Add("CommandLine - Flag 1", () => { Flags01(args); }, 1)
                 .Add("CommandLine - Flag 2", () => { Flags02(args); }, 1)
                 .Add("CommandLine - Flag 3", () => { Flags03(args); }, 1)
-                .Add("CommandLine - Flag 4", () => { Flags04(args); }, 1))
+                .Add("CommandLine - Flag 4", () => { Flags04(args); }, 1)
+                )
 
               .Add(SmartMenu.Menu("Tabellen")
                 .Add("Tabelle, Layout Default", () => { ConsoleMenuHandler("MethodeTabellenDefault"); }, 1)
-                .Add("Tabelle, Layout MarkDown", () => { ConsoleMenuHandler("MethodeTabellenMarkDown"); })
-                .Add("Tabelle, Layout Alternativ", () => { ConsoleMenuHandler("MethodeTabellenAlternativ"); })
-                .Add("Tabelle, Layout Komplex", () => { ConsoleMenuHandler("MethodeTabellenKomplex"); })
-                )
+                .Add("Tabelle, Layout MarkDown", () => { ConsoleMenuHandler("MethodeTabellenMarkDown"); },1)
+                .Add("Tabelle, Layout Alternativ", () => { ConsoleMenuHandler("MethodeTabellenAlternativ"); },1)
+                .Add("Tabelle, Layout Komplex", () => { ConsoleMenuHandler("MethodeTabellenKomplex"); },1)
+               )
 
-               .Add(SmartMenu.Menu("Linien")
-                .Add("Line default", () => { ConsoleMenuHandler("LineDefault"); }))
+              .Add(SmartMenu.Menu("Linien")
+                .Add("Line default", () => { ConsoleMenuHandler("LineDefault"); },1)
+               )
 
               .Add(SmartMenu.Menu("ProgressBar")
-                .Add("ProgressBar Grün", () => { ConsoleMenuHandler("ProgressBarGreen"); })
-                .Add("ProgressBar Blau", () => { ConsoleMenuHandler("ProgressBarBlue"); })
-                .Add("Spinner Animation Blau", () => { ConsoleMenuHandler("SpinnerAnnimation"); })
-                )
+                .Add("ProgressBar Grün", () => { ConsoleMenuHandler("ProgressBarGreen"); },1)
+                .Add("ProgressBar Blau", () => { ConsoleMenuHandler("ProgressBarBlue"); },1)
+                .Add("Spinner Animation Blau", () => { ConsoleMenuHandler("SpinnerAnnimation"); },1)
+              )
 
               .Add(SmartMenu.Menu("Meldungen")
-                .Add("Message Alert", () => { ConsoleMenuHandler("MessageAlert"); }, 1))
+                .Add("Message Alert", () => { ConsoleMenuHandler("MessageAlert"); }, 1)
+                .Add("ASCII Text", () => { ConsoleMenuHandler("AsciiText"); }, 1)
+              )
 
               .Add(SmartMenu.Menu("Eingabe")
                 .Add("Eingabe allgemein", () => { ConsoleMenuHandler("InputLine"); }, 1)
                 .Add("Eingabe Passwort ", () => { ConsoleMenuHandler("InputPassword"); }, 1)
                 .Add("Abfrage mit J/N ", () => { ConsoleMenuHandler("AbfrageJN"); }, 1)
                 .Add("Text an Position anzeigen ", () => { ConsoleMenuHandler("SayOnPos"); }, 1)
-                .Add("Text an Position eingeben/anzeigen ", () => { ConsoleMenuHandler("SayGetOnPos"); })
-                .Add("Passwort eingeben ", () => { ConsoleMenuHandler("SayPasswort"); })
-                )
+                .Add("Text an Position eingeben/anzeigen ", () => { ConsoleMenuHandler("SayGetOnPos"); },1)
+                .Add("Passwort eingeben ", () => { ConsoleMenuHandler("SayPasswort"); },1)
+              )
 
               .Add(SmartMenu.Menu("CheckBox")
-                .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1))
-
-              .Add("Erste Ebene", () => { ConsoleMenuHandler("ConsoleCheckBox"); }
+                .Add("CheckBox allgemein", () => { ConsoleMenuHandler("ConsoleCheckBox"); }, 1)
+               
             ).Show();
         }
 
@@ -147,7 +150,7 @@
             FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
 
             MConsole.ClearScreen();
-            MConsole.WriteLine(copyInfo.IsDeleted);
+            MConsole.WriteLine(copyInfo.IsDeleted.ToString());
 
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }

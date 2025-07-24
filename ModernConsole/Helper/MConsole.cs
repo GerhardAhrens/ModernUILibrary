@@ -324,7 +324,7 @@ namespace System
         /// </summary>
         /// <param name="text"></param>
         /// <param name="color"></param>
-        public static void WriteLine(object text, ConsoleColor color = ConsoleColor.White)
+        public static void WriteLine(string text, ConsoleColor color = ConsoleColor.White)
         {
             var oldColor = Console.ForegroundColor;
             Console.ForegroundColor = color;

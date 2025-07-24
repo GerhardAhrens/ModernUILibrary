@@ -342,5 +342,15 @@ namespace ModernConsoleDemo
 
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
+
+        [ExecuteMethodeHandler("AsciiText")]
+        public void AsciiText_A(string sender, string param)
+        {
+            MConsole.ClearScreen();
+
+            MConsole.AsciiText("Test");
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
     }
 }
