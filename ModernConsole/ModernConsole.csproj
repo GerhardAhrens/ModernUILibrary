@@ -15,4 +15,8 @@
     <Folder Include="ConsoleCheckbox\" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)ModernConsoleTemplate\_Lib\$(TargetName).dll&quot;" />
+  </Target>
+
 </Project>

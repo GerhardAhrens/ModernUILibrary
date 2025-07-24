@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernConsole", "ModernCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernConsoleDemo", "ModernConsoleDemo\ModernConsoleDemo.csproj", "{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernConsoleTemplate", "ModernConsoleTemplate\ModernConsoleTemplate.csproj", "{A83729EC-377E-4F15-ACF7-8CA501D7AEE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4EF7AC-416B-4ACE-A263-D91770BDA56A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83729EC-377E-4F15-ACF7-8CA501D7AEE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83729EC-377E-4F15-ACF7-8CA501D7AEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83729EC-377E-4F15-ACF7-8CA501D7AEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83729EC-377E-4F15-ACF7-8CA501D7AEE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <ApplicationIcon>Resources\Console.Template.ico</ApplicationIcon>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Console.Template.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_Lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ModernConsole">
+      <HintPath>_Lib\ModernConsole.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
