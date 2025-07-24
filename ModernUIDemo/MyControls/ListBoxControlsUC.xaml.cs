@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
     using System.Windows;
@@ -103,6 +104,13 @@
             this.FillDataListBoxA();
             this.FillDataListBoxB();
             this.FillDataListBoxC();
+
+            /*
+            var firstItem = this.ListBoxASource.First();
+            List<CheckComboBoxTest> selectItems = new List<CheckComboBoxTest>();
+            selectItems.Add(firstItem);
+            this.ListBoxSourceSelectedItem = selectItems;
+            */
         }
 
         private void FillDataListBoxA()
@@ -181,15 +189,39 @@
         #endregion PropertyChanged Implementierung
     }
 
-    [DebuggerDisplay("ID={this.ID};Content={this.Content}")]
     public class CheckComboBoxTest
     {
         public int ID { get; set; }
         public string Content { get; set; }
 
+        public override int GetHashCode()
+        {
+            int result = 0;
+            var hash = new HashCode();
+
+            try
+            {
+                PropertyInfo[] propInfo = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (PropertyInfo propItem in propInfo)
+                {
+                    hash.Add(propItem.GetValue(this, null));
+                }
+
+                result = hash.ToHashCode();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        /*
         public override string ToString()
         {
             return $"ID={this.ID};Content={this.Content}";
         }
+        */
     }
 }

@@ -21,10 +21,13 @@ namespace ModernIU.Controls
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Text.Json;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using ModernBaseLibrary.Reader;
 
     using ModernIU.Base;
 
@@ -33,7 +36,7 @@ namespace ModernIU.Controls
         private Type boundType;
 
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(MultiSelectListbox), new PropertyMetadata(false, OnIsReadOnlyChanged));
-        public static readonly DependencyProperty SelectedItemsListProperty = DependencyProperty.Register("SelectedItemsList", typeof(IList), typeof(MultiSelectListbox), new PropertyMetadata(null, OnSelectedItemsListChange));
+        public static readonly DependencyProperty SelectedItemsListProperty = DependencyProperty.Register("SelectedItemsList", typeof(IList), typeof(MultiSelectListbox), new PropertyMetadata(OnSelectedItemsListChange));
         private static MultiSelectListbox self;
 
         /// <summary>
@@ -200,12 +203,11 @@ namespace ModernIU.Controls
         {
             if (e.NewValue != null)
             {
-
                 var control = (MultiSelectListbox)d;
                 if (e.NewValue.GetType().IsGenericType == true)
                 {
                     var selectItems = (IList)e.NewValue;
-                    foreach (object item in control.ItemsSource)
+                    foreach (var item in control.ItemsSource)
                     {
                         foreach (var selectItem in selectItems)
                         {
