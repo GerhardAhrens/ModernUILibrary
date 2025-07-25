@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------
-// <copyright file="ID.cs" company="NRM Netzdienste Rhein-Main GmbH">
+// <copyright file="ID.cs" company="lifeprojects.de">
 //     Class: ID
-//     Copyright © NRM Netzdienste Rhein-Main GmbH 2024
+//     Copyright © Lifeprojects.de 2024
 // </copyright>
 //
-// <author>DeveloperName - NRM Netzdienste Rhein-Main GmbH</author>
-// <email>DeveloperName@nrm-netzdienste.de</email>
-// <date>18.06.2024 10:26:52</date>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developerName@lifeprojects.de</email>
+// <date>21.06.2024 07:42:49</date>
 //
 // <summary>
-// Klasse für Domain Typ ID
+// Klasse für 
 // </summary>
 //-----------------------------------------------------------------------
 

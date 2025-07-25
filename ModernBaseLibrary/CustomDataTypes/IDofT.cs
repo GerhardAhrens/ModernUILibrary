@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------
-// <copyright file="IDofT.cs" company="NRM Netzdienste Rhein-Main GmbH">
+// <copyright file="IDofT.cs" company="lifeprojects.de">
 //     Class: IDofT
-//     Copyright © NRM Netzdienste Rhein-Main GmbH 2024
+//     Copyright © Lifeprojects.de 2024
 // </copyright>
 //
-// <author>DeveloperName - NRM Netzdienste Rhein-Main GmbH</author>
-// <email>DeveloperName@nrm-netzdienste.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developerName@lifeprojects.de</email>
 // <date>21.06.2024 07:42:49</date>
 //
 // <summary>
@@ -15,7 +15,6 @@
 
 namespace System
 {
-    using System;
     using System.Collections.Generic;
     using System.Numerics;
 

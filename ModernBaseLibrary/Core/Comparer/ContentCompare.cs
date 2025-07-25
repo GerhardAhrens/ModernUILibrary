@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="CatPurchaserDetailVM.cs" company="NRM Netzdienste Rhein-Main GmbH">
-//     Class: CatPurchaserDetailVM
-//     Copyright © NRM Netzdienste Rhein-Main GmbH 2024
+// <copyright file="ContentCompare.cs" company="Lifeprojects.de">
+//     Class: ContentCompare
+//     Copyright © Lifeprojects.de 2024
 // </copyright>
 //
-// <author>DeveloperName - NRM Netzdienste Rhein-Main GmbH</author>
-// <email>DeveloperName@nrm-netzdienste.de</email>
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developerName@lifeprojects.de</email>
 // <date>17.07.2024 09:17:54</date>
 //
 // <summary>
