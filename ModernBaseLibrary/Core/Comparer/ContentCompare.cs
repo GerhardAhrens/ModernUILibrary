@@ -148,14 +148,14 @@ namespace ModernBaseLibrary.Comparer
         }
 
         /// <summary>
-        /// Die Mehtode vergleicht den Wert zwischen DataRow Column und ViewModel Property
+        /// Die Methode vergleicht den Wert zwischen DataRow Column und ViewModel Property
         /// </summary>
         /// <typeparam name="TViewModel"></typeparam>
-        /// <param name="this">ViewModel</param>
-        /// <param name="dr">DataRow</param>
+        /// <param name="vm">ViewModel</param>
+        /// <param name="row">DataRow</param>
         /// <param name="expression">List from Properties</param>
         /// <returns>True = Value are equal</returns>
-        public static bool IsFieldsEqual(TViewModel @this, DataRow dr, params Expression<Func<TViewModel, object>>[] expression)
+        public static bool IsFieldsEqual(TViewModel vm, DataRow row, params Expression<Func<TViewModel, object>>[] expression)
         {
             bool result = true;
             if (expression.Length == 0)
@@ -168,20 +168,106 @@ namespace ModernBaseLibrary.Comparer
                 string propertyName = ExpressionPropertyName.For<TViewModel>(expression[i]);
                 if (string.IsNullOrEmpty(propertyName) == false)
                 {
-                    object propertyValue = @this.GetType().GetProperty(propertyName).GetValue(@this);
+                    object propertyValue = vm.GetType().GetProperty(propertyName).GetValue(vm);
                     if (propertyValue != null)
                     {
-                        object dbvalue = dr[propertyName];
-                        if (object.Equals(propertyValue, dbvalue) == false)
+                        if (row[propertyName] == DBNull.Value && propertyValue != null)
                         {
                             result = false;
                             break;
+                        }
+                        else
+                        {
+                            object dbvalue = row[propertyName];
+                            if (AreEqual(propertyValue, dbvalue) == false)
+                            {
+                                result = false;
+                                break;
+                            }
                         }
                     }
                 }
             }
 
             return result;
+        }
+
+        public static bool IsEqualByIgnorFields(TViewModel vm, DataRow row, params Expression<Func<TViewModel, object>>[] expression)
+        {
+            bool result = true;
+
+            if (vm == null || row == null)
+            {
+                return false;
+            }
+
+            try
+            {
+                PropertyInfo[] properties = typeof(TViewModel).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Where(s => s.CanWrite == true).ToArray();
+
+                foreach (DataColumn column in row.Table.Columns)
+                {
+                    string colName = column.ColumnName.ToUpper();
+                    if (SearchIgnorField(expression, colName) == true)
+                    {
+                        continue;
+                    }
+
+                    PropertyInfo columnName = properties.FirstOrDefault(f => f.Name.ToUpper() == column.ColumnName.ToUpper());
+                    if (columnName != null)
+                    {
+                        if (row[colName] != DBNull.Value)
+                        {
+                            if (colName == "ID" && columnName.PropertyType.Name == typeof(ID).Name)
+                            {
+                                object colValue = row[colName];
+                                ID propertyValue = (ID)typeof(TViewModel).GetProperty(columnName.Name).GetValue(vm);
+                                if (AreEqual(propertyValue.Value, colValue) == false)
+                                {
+                                    result = false;
+                                }
+                            }
+                            else
+                            {
+                                object colValue = row[colName];
+                                object propertyValue = typeof(TViewModel).GetProperty(columnName.Name).GetValue(vm);
+                                if (AreEqual(propertyValue, colValue) == false)
+                                {
+                                    result = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            object propertyValue = typeof(TViewModel).GetProperty(columnName.Name).GetValue(vm);
+                            if (propertyValue != null)
+                            {
+                                result = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        private static bool SearchIgnorField(Expression<Func<TViewModel, object>>[] expression, string colName)
+        {
+            for (int i = 0; i < expression.Length; i++)
+            {
+                string expressionProperty = ExpressionPropertyName.For<TViewModel>(expression[i]);
+                if (expressionProperty.ToUpper() == colName.ToUpper())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static bool AreEqual<T>(T objProp, T objDataRow)
