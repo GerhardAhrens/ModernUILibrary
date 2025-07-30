@@ -16,8 +16,7 @@ namespace ModernBaseLibrary.Core
         /// <param name="param">The param to be checked</param>
         /// <param name="threshold">The threshold against which the param will be checked</param>
         /// <param name="paramName">The name of the param to be checked, that will be included in the exception</param>
-        public static void NotGreaterThan<TParam>(TParam param, TParam threshold, string paramName) 
-            where TParam : IComparable<TParam>
+        public static void NotGreaterThan<TParam>(TParam param, TParam threshold, string paramName) where TParam : IComparable<TParam>
         {
             NotGreaterThan(param, threshold, paramName, null);
         }
@@ -32,8 +31,7 @@ namespace ModernBaseLibrary.Core
         /// <param name="threshold">The threshold against which the param will be checked</param>
         /// <param name="paramName">The name of the param to be checked, that will be included in the exception</param>
         /// <param name="message">The message that will be included in the exception</param>
-        public static void NotGreaterThan<TParam>(TParam param, TParam threshold, string paramName, string message) 
-            where TParam : IComparable<TParam>
+        public static void NotGreaterThan<TParam>(TParam param, TParam threshold, string paramName, string message) where TParam : IComparable<TParam>
         {
             if (string.IsNullOrWhiteSpace(paramName))
             {

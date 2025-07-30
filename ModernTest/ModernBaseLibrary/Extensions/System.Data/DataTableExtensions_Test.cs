@@ -18,6 +18,7 @@ namespace ModernTest.ModernBaseLibrary
     using System;
     using System.Data;
     using System.Globalization;
+    using System.Linq;
     using System.Threading;
 
     using global::ModernBaseLibrary.Extension;
@@ -56,6 +57,28 @@ namespace ModernTest.ModernBaseLibrary
             Assert.IsFalse(dt.HasColumn("IdX"));
         }
 
+        [TestMethod]
+        public void GetRow_True()
+        {
+            DataTable dt = CreateStruktur();
+            dt = FillWithOverRows(dt);
+
+            DataRow dr = dt.GetRow(0);
+            Assert.IsNotNull(dr);
+            Assert.IsTrue(dr.ItemArray.Length > 0);
+        }
+
+        [TestMethod]
+        public void GetRows_True()
+        {
+            DataTable dt = CreateStruktur();
+            dt = FillWithOverRows(dt);
+
+            DataRow[] dr = dt.GetRows();
+            Assert.IsNotNull(dr);
+            Assert.IsTrue(dr.Count() > 0);
+        }
+
         [DataRow("", "")]
         [TestMethod]
         public void DataRowInputTest(string input, string expected)
@@ -90,6 +113,31 @@ namespace ModernTest.ModernBaseLibrary
             dt.Columns.Add("Birthday", typeof(DateTime));
             dt.Columns.Add("IsActive", typeof(bool));
             dt.Columns.Add(dc);
+
+            return dt;
+        }
+
+        private static DataTable FillWithOverRows(DataTable dt)
+        {
+            DataRow dr1 = dt.NewRow();
+            dr1["Id"] = new Guid("{4BB4C40A-71E6-42B0-A73A-1320066D28AC}");
+            dr1["Author"] = "Otto Osterhase";
+            dr1["Birthday"] = new DateTime(2017, 4, 16);
+            dr1["IsActive"] = true;
+            dr1["Country"] = "DE";
+            dt.Rows.Add(dr1);
+            dt.AcceptChanges();
+
+            DataRow dr2 = dt.NewRow();
+            dr2["Id"] = new Guid("{78AE10E0-373B-41B9-8463-43CC5048F850}");
+            dr2["Author"] = "Max Osterhase";
+            dr2["Birthday"] = new DateTime(2016, 4, 16);
+            dr2["IsActive"] = false;
+            dr2["Country"] = "DE";
+
+            int yourPosition = 0;
+            dt.Rows.InsertAt(dr2, yourPosition);
+            dt.AcceptChanges();
 
             return dt;
         }

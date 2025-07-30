@@ -20,6 +20,9 @@ namespace ModernBaseLibrary.Extension
     using System.Linq;
     using System.Reflection;
 
+    using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.FluentAPI;
+
     public static class DataTableExtensions
     {
         public static bool IsNullOrEmpty(this DataTable @this)
@@ -78,88 +81,109 @@ namespace ModernBaseLibrary.Extension
                 .ToDictionary<DataColumn, string, Type>(col => col.ColumnName, col => col.DataType);
         }
 
-        /// <summary>
-        /// A DataTable extension method that return the first row.
-        /// </summary>
-        /// <param name="this">The table to act on.</param>
-        /// <returns>The first row of the table.</returns>
-        public static DataRow FirstRow(this DataTable @this)
+        public static Dictionary<string, string> GetColumnsName(this DataTable @this)
         {
-            return @this.Rows[0];
-        }
+            Dictionary<string, string> columnNames = null;
 
-        /// <summary>
-        /// the DataTable extension method returns a row that matches the criterion
-        /// </summary>
-        /// <param name="this">The table to act on.</param>
-        /// <returns>The first row of the table.</returns>
-        public static DataRow FindRow(this DataTable @this, Func<DataRow, bool> filterCondition)
-        {
-            return @this.AsEnumerable().Where(filterCondition).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// the DataTable extension method returns a row that matches the criterion
-        /// </summary>
-        /// <param name="this">The table to act on.</param>
-        /// <returns>The first row of the table.</returns>
-        public static DataRow[] FindRows(this DataTable @this, Func<DataRow, bool> filterCondition)
-        {
-            return @this.AsEnumerable().Where(filterCondition).ToArray();
-        }
-
-        /// <summary>A DataTable extension method that last row.</summary>
-        /// <param name="this">The @this to act on.</param>
-        /// <returns>A DataRow.</returns>
-        public static DataRow LastRow(this DataTable @this)
-        {
-            return @this.Rows[@this.Rows.Count - 1];
-        }
-
-        public static DataTable AsDataTable<T>(this IEnumerable<T> @this)
-        {
-            var table = new DataTable();
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
-
-            foreach (PropertyDescriptor prop in properties)
+            if (@this != null)
             {
-                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+                columnNames = new Dictionary<string, string>();
+
+                foreach (DataColumn item in @this.Columns)
+                {
+                    if (item.ColumnName.ToLower() == "flags")
+                    {
+                        columnNames.Add(item.ColumnName, string.Format("{{{{{0}}}}}", item.ColumnName));
+                    }
+                    else
+                    {
+                        columnNames.Add(item.ColumnName, item.DataType.Name);
+                    }
+                }
             }
 
-            foreach (T item in @this)
-            {
-                DataRow row = table.NewRow();
-                foreach (PropertyDescriptor prop in properties)
-                {
-                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
-                }
+            return columnNames;
+        }
 
-                table.Rows.Add(row);
+        #region DataRow
+        public static DataRow GetRow(this DataTable @this,int rowPos = 0)
+        {
+            Argument.NotNull<DataTable>(@this, "@this","Das DataTable Object darf nicht null sein.");
+            Argument.NotGreaterThan<int>(0, rowPos, "rowPos","Die Row-Position muß >= 0 sein");
+            DataRow row = @this.Rows[rowPos];
+
+            return row;
+        }
+
+        public static DataRow[] GetRows(this DataTable @this)
+        {
+            Argument.NotNull<DataTable>(@this, "@this", "Das DataTable Object darf nicht null sein.");
+            DataRowCollection rows = @this.Rows;
+
+            return rows.Cast<DataRow>().ToArray();
+        }
+
+        public static DataRow CloneRow(this DataTable @this, int rowPos, bool newId = false)
+        {
+            DataRow rowNew = @this.NewRow();
+            rowNew.ItemArray = @this.Rows[rowPos].ItemArray;
+
+            if (newId == true)
+            {
+                if (rowNew.HasColumn("Id") == true && @this.Columns["Id"].DataType == typeof(Guid) == true)
+                {
+                    rowNew.SetField<Guid>("Id", Guid.NewGuid());
+                }
             }
 
-            return table;
+            @this.Rows.Add(rowNew);
+            @this.AcceptChanges();
+
+            return rowNew;
         }
 
-        public static List<T> ToListOf<T>(this DataTable dt)
+        public static DataRow CloneRow(this DataTable @this, Func<DataRow, bool> filterCondition, bool newId = false)
         {
-            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
-            var columnNames = dt.Columns.Cast<DataColumn>()
-                .Select(c => c.ColumnName)
-                .ToList();
-            var objectProperties = typeof(T).GetProperties(flags);
-            var targetList = dt.AsEnumerable().Select(dataRow =>
+            DataRow rowNew = @this.NewRow();
+            DataRow rowTemp = @this.First(filterCondition);
+            rowNew.ItemArray = rowTemp.ItemArray;
+
+            if (newId == true)
             {
-                var instanceOfT = Activator.CreateInstance<T>();
-
-                foreach (var properties in objectProperties.Where(properties => columnNames.Contains(properties.Name) && dataRow[properties.Name] != DBNull.Value))
+                if (rowNew.HasColumn("Id") == true && @this.Columns["Id"].DataType == typeof(Guid) == true)
                 {
-                    properties.SetValue(instanceOfT, dataRow[properties.Name], null);
+                    rowNew.SetField<Guid>("Id", Guid.NewGuid());
                 }
-                return instanceOfT;
-            }).ToList();
+            }
 
-            return targetList;
+            @this.Rows.Add(rowNew);
+            @this.AcceptChanges();
+
+            return rowNew;
         }
+        #endregion DataRow
+
+        #region Count
+        public static int Count(this DataTable @this)
+        {
+            if (@this == null)
+            {
+                throw new ArgumentNullException(nameof(@this));
+            }
+
+            return @this.Rows.Count;
+        }
+
+        public static int Count(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            if (@this == null)
+            {
+                throw new ArgumentNullException(nameof(@this));
+            }
+
+            return @this.Rows.Cast<DataRow>().Count(filterCondition);
+        }
+        #endregion Count
 
         #region ToSorting
         public static DataTable ToSorting(this DataTable dt, ListSortDirection direction, string colName)
@@ -221,30 +245,208 @@ namespace ModernBaseLibrary.Extension
         }
         #endregion ToSorting
 
-        public static Dictionary<string, string> GetColumnsName(this DataTable @this)
+        #region  Suchen und Filtern
+        /// <summary>
+        /// A DataTable extension method that return the first row.
+        /// </summary>
+        /// <param name="this">The table to act on.</param>
+        /// <returns>The first row of the table.</returns>
+        public static DataRow FirstRow(this DataTable @this)
         {
-            Dictionary<string, string> columnNames = null;
-
-            if (@this != null)
-            {
-                columnNames = new Dictionary<string, string>();
-
-                foreach (DataColumn item in @this.Columns)
-                {
-                    if (item.ColumnName.ToLower() == "flags")
-                    {
-                        columnNames.Add(item.ColumnName, string.Format("{{{{{0}}}}}", item.ColumnName));
-                    }
-                    else
-                    {
-                        columnNames.Add(item.ColumnName, item.DataType.Name);
-                    }
-                }
-            }
-
-            return columnNames;
+            return @this.Rows[0];
         }
 
+        /// <summary>
+        /// the DataTable extension method returns a row that matches the criterion
+        /// </summary>
+        /// <param name="this">The table to act on.</param>
+        /// <returns>The first row of the table.</returns>
+        public static DataRow FindRow(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            return @this.AsEnumerable().Where(filterCondition).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// the DataTable extension method returns a row that matches the criterion
+        /// </summary>
+        /// <param name="this">The table to act on.</param>
+        /// <returns>The first row of the table.</returns>
+        public static DataRow[] FindRows(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            return @this.AsEnumerable().Where(filterCondition).ToArray();
+        }
+
+        /// <summary>A DataTable extension method that last row.</summary>
+        /// <param name="this">The @this to act on.</param>
+        /// <returns>A DataRow.</returns>
+        public static DataRow LastRow(this DataTable @this)
+        {
+            return @this.Rows[@this.Rows.Count - 1];
+        }
+
+        public static DataRow Contains(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            DataRow filteredRow = @this.Rows
+                   .Cast<DataRow>()
+                   .FirstOrDefault(filterCondition);
+
+            if (filteredRow == null)
+            {
+                return null;
+            }
+            else
+            {
+                return filteredRow;
+            }
+        }
+
+        public static DataTable ContainsAll(this DataTable @this, string searchText)
+        {
+            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+
+            if (searchText.Equals(string.Empty))
+            {
+                return @this;
+            }
+
+            DataRow[] filteredRows = @this.Rows
+                   .Cast<DataRow>()
+                   .Where(r => r.ItemArray.Any(c => c.ToString().IndexOf(searchText, comparison) >= 0))
+                   .ToArray();
+
+            if (filteredRows.Length == 0)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp;
+            }
+            else
+            {
+                return filteredRows.CopyToDataTable();
+            }
+        }
+
+        public static DataTable Where(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            DataRow[] filteredRows = @this.Rows
+                   .Cast<DataRow>()
+                   .Where(filterCondition)
+                   .ToArray();
+
+            if (filteredRows.Length == 0)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp;
+            }
+            else
+            {
+                return filteredRows.CopyToDataTable();
+            }
+        }
+
+        public static DataTable WhereTake(this DataTable @this, Func<DataRow, bool> filterCondition, int takeCount)
+        {
+            DataRow[] filteredRows = @this.Rows
+                   .Cast<DataRow>()
+                   .Where(filterCondition)
+                   .Take(takeCount)
+                   .ToArray();
+
+            if (filteredRows.Length == 0)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp;
+            }
+            else
+            {
+                return filteredRows.CopyToDataTable();
+            }
+        }
+
+        public static DataRow First(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            DataRow filteredRow = @this.Rows
+                   .Cast<DataRow>()
+                   .FirstOrDefault(filterCondition);
+
+            if (filteredRow == null)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp.NewRow();
+            }
+            else
+            {
+                return filteredRow;
+            }
+        }
+
+        public static DataRow last(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            DataRow filteredRow = @this.Rows
+                   .Cast<DataRow>()
+                   .LastOrDefault(filterCondition);
+
+            if (filteredRow == null)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp.NewRow();
+            }
+            else
+            {
+                return filteredRow;
+            }
+        }
+        #endregion  Suchen und Filtern
+
+        #region Convert DataTable to ...
+        public static DataTable AsDataTable<T>(this IEnumerable<T> @this)
+        {
+            var table = new DataTable();
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+
+            foreach (PropertyDescriptor prop in properties)
+            {
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            foreach (T item in @this)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                {
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                }
+
+                table.Rows.Add(row);
+            }
+
+            return table;
+        }
+
+        public static List<T> ToListOf<T>(this DataTable dt)
+        {
+            const BindingFlags FLAGS = BindingFlags.Public | BindingFlags.Instance;
+            var columnNames = dt.Columns.Cast<DataColumn>()
+                .Select(c => c.ColumnName)
+                .ToList();
+            var objectProperties = typeof(T).GetProperties(FLAGS);
+            var targetList = dt.AsEnumerable().Select(dataRow =>
+            {
+                var instanceOfT = Activator.CreateInstance<T>();
+
+                foreach (var properties in objectProperties.Where(properties => columnNames.Contains(properties.Name) && dataRow[properties.Name] != DBNull.Value))
+                {
+                    properties.SetValue(instanceOfT, dataRow[properties.Name], null);
+                }
+                return instanceOfT;
+            }).ToList();
+
+            return targetList;
+        }
         public static DataTable ToDataTable<T>(IList<T> @this)
         {
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
@@ -398,7 +600,8 @@ namespace ModernBaseLibrary.Extension
             {
                 return null;
             }
-        }
+        }        
+        #endregion Convert DataTable to ...
 
         #region Select Distinct
         /// <summary>
