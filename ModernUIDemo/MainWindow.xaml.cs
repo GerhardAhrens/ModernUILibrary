@@ -288,7 +288,7 @@
             this.tabItemSource.Add(new TabControlItem("Layout Controls", new LayoutControlsUC()) { Stichworte = "Anzeige;Layout;Grid" });
             this.tabItemSource.Add(new TabControlItem("Layout ContentFrame", new ContentFrameControlsUC()) { Stichworte = "Anzeige;Layout;Grid;Content;Frame" });
             this.tabItemSource.Add(new TabControlItem("Layout Border", new BorderControlsUC()) { Stichworte = "Anzeige;Layout;Border;Rahmen" });
-            this.tabItemSource.Add(new TabControlItem("Layout Canvas", new LayoutCanvasControlsUC()) { Stichworte = "Anzeige;Layout;Canvas" });
+            this.tabItemSource.Add(new TabControlItem("Layout Margin/Padding", new LayoutMarginPaddingControlsUC()) { Stichworte = "Layout;Padding;Margin" });
 
             this.tabItemSource.Add(new TabControlItem("Listen, Collection, XML Darstellung", true));
             this.tabItemSource.Add(new TabControlItem("FlatListView Control", new FlatListViewControlsUC()) { Stichworte = "ListView;Flat" });
