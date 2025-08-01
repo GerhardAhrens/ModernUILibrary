@@ -333,6 +333,9 @@
     <Compile Update="MyControls\LayoutMarginPaddingControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyControls\LayoutDockPanelControlsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MyControls\TreeViewControlsUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -45,7 +45,7 @@ namespace ModernBaseLibrary.Extension
     using System.Runtime.Versioning;
 
     [SupportedOSPlatform("windows")]
-    public static class TypeExtensions
+    public static partial class TypeExtensions
     {
         private static readonly Dictionary<Type, string> TypeAliases = new Dictionary<Type, string>
         {
