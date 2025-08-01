@@ -10,11 +10,9 @@
     using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Extension;
 
-    using ModernIU.Base;
     using ModernIU.Controls;
 
     using ModernTemplate.Core;
-    using ModernTemplate.Core.Resource;
     using ModernTemplate.Views;
     using ModernTemplate.Views.ContentControls;
 
@@ -26,7 +24,7 @@
     [SupportedOSPlatform("windows")]
     public partial class MainWindow : WindowBase, IDialogClosing
     {
-        private const string DateFormat = "dd.MM.yyyy HH:mm";
+        private const string DATEFORMAT = "dd.MM.yyyy HH:mm";
         private INotificationService notificationService = new NotificationService();
         private DispatcherTimer statusBarDate = null;
 
@@ -237,16 +235,6 @@
         #endregion Dialognavigation
 
         #region Private Methodes
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
-            if (this.WorkContent != null)
-            {
-                if (this.WorkContent.GetType() == typeof(MainWindow))
-                {
-                    this.WorkContent.Width = (this.ActualWidth - 20);
-                }
-            }
-        }
 
         private void InitTimer()
         {
@@ -256,7 +244,7 @@
             this.statusBarDate.Tick += new EventHandler(
                 delegate (object s, EventArgs a)
                 {
-                    this.dtStatusBarDate.Text = DateTime.Now.ToString(DateFormat);
+                    this.dtStatusBarDate.Text = DateTime.Now.ToString(DATEFORMAT);
                 });
         }
         #endregion Private Methodes

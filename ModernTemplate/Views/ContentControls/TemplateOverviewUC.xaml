@@ -2,6 +2,7 @@
     x:Class="ModernTemplate.Views.ContentControls.TemplateOverviewUC"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernConverter="clr-namespace:ModernIU.Converters;assembly=ModernUILibrary"
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:ModernWPF="clr-namespace:ModernIU.WPF.Base;assembly=ModernUILibrary"
     xmlns:base="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
@@ -16,6 +17,12 @@
 
     <UserControl.Resources>
         <ModernWPF:CommandKeyReference x:Key="BackCmdKey" Command="{Binding Path=CmdAgg[DialogBackCommand]}" />
+
+        <ModernConverter:MaxWidthConverter x:Key="MaxWidthConverter" />
+        <ModernConverter:RowNumberConverter x:Key="rowNumberConverter" />
+        <ModernConverter:BooleanToNotVisibleConverter x:Key="BooleanToNotVisibilityConverter" />
+
+        <sys:Double x:Key="IconSize">16.0</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
@@ -25,7 +32,7 @@
     <ModernUI:SimpleGrid
         x:Name="rootGrid"
         Columns="*"
-        Rows="20,35,*">
+        Rows="20,35,Auto,*">
 
         <TextBlock
             Grid.Row="0"
@@ -33,7 +40,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontWeight="Medium"
-            Text="Erweiterte Dialogbeschreibung" />
+            Text="Erweiterte Dialogbeschreibung, Übersich xyz Daten" />
 
         <Border
             Grid.Row="1"
@@ -59,29 +66,96 @@
                     </ModernUI:PathButton.Content>
                 </ModernUI:PathButton>
 
-                <Button
+                <ModernUI:PathButton
                     Width="100"
                     Height="30"
-                    Content="AAA" />
+                    Margin="5,0,0,0"
+                    Command="{Binding Path=CmdAgg[RecordAddCommand]}"
+                    PathData="{StaticResource ResourceKey=IconRecordPlus}"
+                    PathWidth="{StaticResource ResourceKey=IconSize}">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Neuer Eintrag hinzufügen" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Neu" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
+                </ModernUI:PathButton>
+
+                <ModernUI:PathButton
+                    Width="100"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    Command="{Binding Path=CmdAgg[RecordEditCommand]}"
+                    PathData="{StaticResource ResourceKey=IconRecordEdit}"
+                    PathWidth="{StaticResource ResourceKey=IconSize}">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Gewählter Eintrag ändern" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Ändern" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
+                </ModernUI:PathButton>
+
+                <!--  weitere Controls im Menü  -->
             </StackPanel>
         </Border>
 
         <StackPanel Grid.Row="2" Grid.Column="0">
-            <ScrollViewer
-                Width="Auto"
-                MaxHeight="400"
-                HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto">
+            <ModernUI:IconTextBox
+                x:Name="TxtSearchFilter"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Width="{Binding Path=ActualWidth, ElementName=nameTemplateOverviewUC, Converter={StaticResource ResourceKey=MaxWidthConverter}, ConverterParameter=10}"
+                Height="30"
+                Margin="5,5,0,0"
+                HorizontalAlignment="Left"
+                BorderThickness="1"
+                CornerRadius="3"
+                IconBackground="AliceBlue"
+                IconForeground="Gray"
+                IconPathData="{StaticResource ResourceKey=IconSearch}"
+                IconPlacement="Left"
+                IconWidth="{StaticResource ResourceKey=IconSize}"
+                KeyboardNavigation.IsTabStop="False"
+                Text="{Binding Path=FilterDefaultSearch, UpdateSourceTrigger=PropertyChanged}"
+                Watermark="Suchen und Filter" />
+
+            <!--#region Keine Daten zum Filter gefunden-->
+            <StackPanel
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="0,50,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Panel.ZIndex="1"
+                Orientation="Horizontal"
+                Visibility="{Binding Path=IsFilterContentFound, Converter={StaticResource ResourceKey=BooleanToNotVisibilityConverter}, FallbackValue=True}">
                 <TextBlock
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="18"
-                    ScrollViewer.CanContentScroll="True"
-                    Text="{Binding Path=DemoText, UpdateSourceTrigger=PropertyChanged, FallbackValue=~DemoText}"
-                    TextWrapping="NoWrap" />
-            </ScrollViewer>
-        </StackPanel>
+                    FontWeight="Bold">
+                    <Run
+                        FontSize="28"
+                        Foreground="Blue"
+                        Text="😕" />
+                    <Run Text="Keine Daten vorhanden, oder der Suchfilter passt nicht!" />
 
+                    <LineBreak />
+                    <Run
+                        FontSize="28"
+                        Foreground="Green"
+                        Text="⌨️" />
+                    <Run Text="Geben Sie neue Daten ein oder prüfen Sie den Filter." />
+                </TextBlock>
+            </StackPanel>
+            <!--#endregion Keine Daten zum Filter gefunden-->
+
+            <!--  Ab hier können Daten z.B. als Liste angezeigt werden  -->
+        </StackPanel>
     </ModernUI:SimpleGrid>
 </base:UserControlBase>

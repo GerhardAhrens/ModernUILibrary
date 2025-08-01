@@ -19,6 +19,8 @@
         <!--  Allgemeine UserControl Resources  -->
         <ModernConverter:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
         <ModernWPF:CommandKeyReference x:Key="BackCmdKey" Command="{Binding Path=CmdAgg[DialogBackCommand]}" />
+
+        <sys:Double x:Key="IconSize">16.0</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
@@ -86,10 +88,22 @@
                     </ModernUI:PathButton.Content>
                 </ModernUI:PathButton>
 
-                <Button
+                <ModernUI:PathButton
                     Width="100"
                     Height="30"
-                    Content="AAA" />
+                    Margin="5,0,0,0"
+                    Command="{Binding Path=CmdAgg[RecordSaveCommand]}"
+                    PathData="{StaticResource ResourceKey=IconRecordSave}"
+                    PathWidth="{StaticResource ResourceKey=IconSize}">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Aktuelle Änderung speichern" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Speichern" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
+                </ModernUI:PathButton>
             </StackPanel>
         </Border>
 

@@ -18,8 +18,6 @@
     <None Remove="_Doc\MT_MessageBox.png" />
     <None Remove="_Lib\ModernBaseLibrary.dll" />
     <None Remove="_Lib\ModernUILibrary.dll" />
-    <None Remove="_Template\MyTemplate.vstemplate" />
-    <None Remove="_Template\TemplateIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,8 +31,6 @@
     </Content>
     <Content Include="_Lib\ModernBaseLibrary.dll" />
     <Content Include="_Lib\ModernUILibrary.dll" />
-    <Content Include="_Template\ProjectTemplate\MyTemplate.vstemplate" />
-    <Content Include="_Template\TemplateIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

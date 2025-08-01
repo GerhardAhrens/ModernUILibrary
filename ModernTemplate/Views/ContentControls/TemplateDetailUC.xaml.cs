@@ -34,9 +34,12 @@ namespace ModernTemplate.Views.ContentControls
     /// </summary>
     public partial class TemplateDetailUC : UserControlBase
     {
-        public TemplateDetailUC() : base(typeof(TemplateDetailUC))
+        public TemplateDetailUC(ChangeViewEventArgs args) : base(typeof(TemplateDetailUC))
         {
             this.InitializeComponent();
+
+            this.CtorArgs = args;
+
             this.InitCommands();
 
             this.ValidationErrors = new ObservableDictionary<string, string>();
@@ -65,16 +68,14 @@ namespace ModernTemplate.Views.ContentControls
         }
         #endregion InputValidation List
 
+        private ChangeViewEventArgs CtorArgs { get; set; }
+
         #endregion Properties
 
         public override void InitCommands()
         {
             this.CmdAgg.AddOrSetCommand(CommandButtons.DialogBack, new RelayCommand(this.DialogBackHandler));
-        }
-
-        private void LoadDataHandler()
-        {
-            /* lesen und vorbereiten von Daten */
+            this.CmdAgg.AddOrSetCommand("RecordSaveCommand", new RelayCommand(this.RecordSaveHandler));
         }
 
         #region WindowEventHandler
@@ -86,13 +87,29 @@ namespace ModernTemplate.Views.ContentControls
             this.RegisterValidations();
             this.LoadDataHandler();
 
-            this.IsUCLoaded = true;
             this.DataContext = this;
+            this.IsUCLoaded = true;
 
             this.DemoText = string.Empty;
         }
 
         #endregion WindowEventHandler
+
+        #region Daten landen und Filtern
+        private void LoadDataHandler()
+        {
+            /* lesen und vorbereiten von Daten */
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+        }
+        #endregion Daten landen und Filtern
 
         #region Register Validations
         private void RegisterValidations()
@@ -159,6 +176,20 @@ namespace ModernTemplate.Views.ContentControls
                 FromPage = CommandButtons.TemplateDetailUC
             });
         }
+
+        private void RecordSaveHandler(object obj)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+        }
+
         #endregion CommandHandler
     }
 }

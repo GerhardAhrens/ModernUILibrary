@@ -4,16 +4,12 @@
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Reflection;
     using System.Text;
     using System.Windows;
     using System.Windows.Markup;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
     using System.Windows.Threading;
 
     using ModernBaseLibrary.Core;
-    using ModernBaseLibrary.Core.IO;
     using ModernBaseLibrary.Core.Logger;
 
     using ModernTemplate.Core;
@@ -25,6 +21,7 @@
     /// </summary>
     public partial class App : Application
     {
+        private const int MAX_INSTANCE = 2;
         private const string DEFAULTLANGUAGE = "de-DE";
         public const string SHORTNAME = "ModernTemplate";
         private static readonly string MessageBoxTitle = "ModernTemplate Application";
@@ -91,6 +88,8 @@
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            SingleInstanceApplication();
 
             try
             {
@@ -235,6 +234,18 @@
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             Debug.WriteLine($"{exeName}-{(e.Exception as Exception).Message}");
+        }
+
+        private static void SingleInstanceApplication()
+        {
+            Process proc = Process.GetCurrentProcess();
+            int count = Process.GetProcesses().Where(p => p.ProcessName == proc.ProcessName).Count();
+
+            if (count > MAX_INSTANCE)
+            {
+                InfoMessage($"Die Anwendung {proc.ProcessName} wird bereits ausgeführt ({count}x) und daher wieder beendet.");
+                ApplicationExit();
+            }
         }
 
         /// <summary>
