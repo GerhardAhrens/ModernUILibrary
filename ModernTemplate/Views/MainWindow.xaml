@@ -11,10 +11,11 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:winbase="clr-namespace:ModernUI.MVVM.Base;assembly=ModernUILibrary"
     Title="{Binding Path=WindowTitle, Source={x:Static localStatic:WindowTitleMain.WindowTitleLine}, FallbackValue=~Title}"
-    Width="1100"
-    Height="700"
+    Width="1000"
+    Height="650"
     winbase:DialogClosing.IsClosing="True"
     ShowInTaskbar="True"
+    SizeToContent="Manual"
     TitleFontSize="18"
     TitleIcon="{StaticResource ResourceKey=AppWindowIcon}"
     mc:Ignorable="d">
