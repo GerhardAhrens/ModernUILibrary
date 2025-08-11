@@ -72,7 +72,6 @@
     <EmbeddedResource Include="Images\img3.png" />
     <EmbeddedResource Include="Images\img4.png" />
     <EmbeddedResource Include="Images\img5.png" />
-    <EmbeddedResource Include="Resources\BuildDate.txt" />
     <EmbeddedResource Include="Resources\MDText\DemoText.md" />
     <EmbeddedResource Include="Resources\MDText\sampleimage.jpg" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
