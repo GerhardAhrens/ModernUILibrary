@@ -1105,6 +1105,7 @@ namespace System.Data.SQLite
         }
         #endregion Execute SQL Anweisung
 
+        #region Private Methoden
         private static string ExtractTablename(string sql)
         {
             try
@@ -1234,6 +1235,7 @@ namespace System.Data.SQLite
 
             return result;
         }
+        #endregion Private Methoden
     }
 
     public class RecordSetResult<T>
