@@ -49,7 +49,17 @@ namespace System.Data.SQLite
             }
             else
             {
-                throw new FileNotFoundException($"Die Datenbankdatei '{databaseName}' wurde nicht gefunden!");
+                SQLiteConnection.CreateFile(databaseName);
+                if (File.Exists(databaseName) == true)
+                {
+                    this.DatabaseFullName = databaseName;
+                    this.ConnectString = ConnectStringToText(this.DatabaseFullName);
+                    this.CreateConnection(ConnectString);
+                }
+                else
+                {
+                    throw new FileNotFoundException($"Die Datenbankdatei '{databaseName}' wurde nicht gefunden!");
+                }
             }
         }
 
