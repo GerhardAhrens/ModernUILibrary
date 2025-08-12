@@ -28,6 +28,8 @@
     <Folder Include="Core\" />
     <Folder Include="Extensions\" />
     <Folder Include="DynamicSQL\" />
+    <Folder Include="CodeDOM\" />
+    <Folder Include="Context\" />
     <Folder Include="SQLGenerator\" />
     <Folder Include="SQLBuilder\" />
   </ItemGroup>
