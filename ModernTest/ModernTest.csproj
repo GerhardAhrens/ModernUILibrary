@@ -119,7 +119,6 @@
     <Folder Include="ModernBaseLibrary\ValueTypes\Records\" />
     <Folder Include="ModernBaseLibrary\ValueTypes\Nullables\" />
     <Folder Include="ModernBaseLibrary\WMI\" />
-    <Folder Include="ModernUILibrary\WPF\Converters\" />
   </ItemGroup>
 
   <ItemGroup>

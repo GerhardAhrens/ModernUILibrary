@@ -26,8 +26,8 @@ namespace ModernSQLite.Generator
     using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Extension;
 
-    [DebuggerNonUserCode]
-    [DebuggerStepThrough]
+    //[DebuggerNonUserCode]
+    //[DebuggerStepThrough]
     public sealed class SqlBuilderContext : IDisposable
     {
         private bool classIsDisposed = false;
@@ -133,7 +133,7 @@ namespace ModernSQLite.Generator
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
                     }
-                    else if (column.ColumnName.ToLower() == "Timestap")
+                    else if (column.ColumnName.ToLower() == "Timestap".ToLower())
                     {
                         columnNames.Add(column);
                         columnParamNames.Add($":{column.ColumnName}");
@@ -171,21 +171,9 @@ namespace ModernSQLite.Generator
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
                     }
-                    else if (column.ColumnName.ToLower() == "Timestamp")
+                    else if (column.ColumnName.ToLower() == "Timestamp".ToLower())
                     {
-                        if (prm.Any(a => a.ParameterName == "CreatedBy") == true && prm.Any(a => a.ParameterName == "ModifiedBy") == true)
-                        {
-                            string createdBy = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToString();
-                            DateTime createdOn = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToDateTime();
-                            string modifiedBy = prm.FirstOrDefault(f => f.ParameterName == "ModifiedBy").Value.ToString();
-                            DateTime modifiedOn = prm.FirstOrDefault(f => f.ParameterName == "ModifiedOn").Value.ToDateTime();
-                            string timeStamp = new TimeStamp().MaxEntry(createdOn, createdBy, modifiedOn, modifiedBy);
-                            prm[step] = new SQLiteParameter(column.ColumnName, timeStamp);
-                        }
-                        else
-                        {
-                            prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {Environment.UserName}");
-                        }
+                        prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {this.CurrentUser}");
                     }
                     else
                     {
@@ -248,10 +236,10 @@ namespace ModernSQLite.Generator
                         columnNames.Add(column);
                         sb.Append($"{column} = :{column}, ");
                     }
-                    else if (column.ColumnName.ToLower() == "Timestap")
+                    else if (column.ColumnName.ToLower() == "Timestap".ToLower())
                     {
                         columnNames.Add(column);
-                        columnParamNames.Add($":{column.ColumnName}");
+                        sb.Append($":{column.ColumnName}");
                     }
                     else
                     {
@@ -282,21 +270,9 @@ namespace ModernSQLite.Generator
                     {
                         prm[step] = new SQLiteParameter(column.ColumnName, DateTime.Now);
                     }
-                    else if (column.ColumnName.ToLower() == "Timestamp")
+                    else if (column.ColumnName.ToLower() == "Timestamp".ToLower())
                     {
-                        if (prm.Any(a => a.ParameterName == "CreatedBy") == true && prm.Any(a => a.ParameterName == "ModifiedBy") == true)
-                        {
-                            string createdBy = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToString();
-                            DateTime createdOn = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToDateTime();
-                            string modifiedBy = prm.FirstOrDefault(f => f.ParameterName == "ModifiedBy").Value.ToString();
-                            DateTime modifiedOn = prm.FirstOrDefault(f => f.ParameterName == "ModifiedOn").Value.ToDateTime();
-                            string timeStamp = new TimeStamp().MaxEntry(createdOn, createdBy, modifiedOn, modifiedBy);
-                            prm[step] = new SQLiteParameter(column.ColumnName, timeStamp);
-                        }
-                        else
-                        {
-                            prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {Environment.UserName}");
-                        }
+                        prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {this.CurrentUser}");
                     }
                     else
                     {
