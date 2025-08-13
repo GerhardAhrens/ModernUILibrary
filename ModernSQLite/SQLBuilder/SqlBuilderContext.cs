@@ -23,6 +23,9 @@ namespace ModernSQLite.Generator
     using System.Linq;
     using System.Text;
 
+    using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.Extension;
+
     [DebuggerNonUserCode]
     [DebuggerStepThrough]
     public sealed class SqlBuilderContext : IDisposable
@@ -36,6 +39,21 @@ namespace ModernSQLite.Generator
         {
             this.CurrentDataRow = currentDataRow;
             this.TableName = dataTableName;
+        }
+
+        public SqlBuilderContext(DataRow currentDataRow, SqlBuilderOptions sqlBuilderOptions)
+        {
+            this.CurrentDataRow = currentDataRow;
+
+            ArgumentNullException.ThrowIfNull(sqlBuilderOptions, nameof(sqlBuilderOptions));
+
+            this.TableName = sqlBuilderOptions.TableName;
+            this.CurrentUser = sqlBuilderOptions.CurrentUser;
+            this.KeyColumn = sqlBuilderOptions.KeyColumn;
+            this.CreateByColumn = sqlBuilderOptions.CreateByColumn;
+            this.CreateOnColumn = sqlBuilderOptions.CreateOnColumn;
+            this.ModifyByColumn = sqlBuilderOptions.ModifyByColumn;
+            this.ModifyOnColumn = sqlBuilderOptions.ModifyOnColumn;
         }
 
         public SqlBuilderContext(DataRow currentDataRow)
@@ -115,6 +133,11 @@ namespace ModernSQLite.Generator
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
                     }
+                    else if (column.ColumnName.ToLower() == "Timestap")
+                    {
+                        columnNames.Add(column);
+                        columnParamNames.Add($":{column.ColumnName}");
+                    }
                     else
                     {
                         columnNames.Add(column);
@@ -147,6 +170,22 @@ namespace ModernSQLite.Generator
                     }
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
+                    }
+                    else if (column.ColumnName.ToLower() == "Timestamp")
+                    {
+                        if (prm.Any(a => a.ParameterName == "CreatedBy") == true && prm.Any(a => a.ParameterName == "ModifiedBy") == true)
+                        {
+                            string createdBy = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToString();
+                            DateTime createdOn = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToDateTime();
+                            string modifiedBy = prm.FirstOrDefault(f => f.ParameterName == "ModifiedBy").Value.ToString();
+                            DateTime modifiedOn = prm.FirstOrDefault(f => f.ParameterName == "ModifiedOn").Value.ToDateTime();
+                            string timeStamp = new TimeStamp().MaxEntry(createdOn, createdBy, modifiedOn, modifiedBy);
+                            prm[step] = new SQLiteParameter(column.ColumnName, timeStamp);
+                        }
+                        else
+                        {
+                            prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {Environment.UserName}");
+                        }
                     }
                     else
                     {
@@ -209,6 +248,11 @@ namespace ModernSQLite.Generator
                         columnNames.Add(column);
                         sb.Append($"{column} = :{column}, ");
                     }
+                    else if (column.ColumnName.ToLower() == "Timestap")
+                    {
+                        columnNames.Add(column);
+                        columnParamNames.Add($":{column.ColumnName}");
+                    }
                     else
                     {
                         columnNames.Add(column);
@@ -237,6 +281,22 @@ namespace ModernSQLite.Generator
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
                         prm[step] = new SQLiteParameter(column.ColumnName, DateTime.Now);
+                    }
+                    else if (column.ColumnName.ToLower() == "Timestamp")
+                    {
+                        if (prm.Any(a => a.ParameterName == "CreatedBy") == true && prm.Any(a => a.ParameterName == "ModifiedBy") == true)
+                        {
+                            string createdBy = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToString();
+                            DateTime createdOn = prm.FirstOrDefault(f => f.ParameterName == "CreatedBy").Value.ToDateTime();
+                            string modifiedBy = prm.FirstOrDefault(f => f.ParameterName == "ModifiedBy").Value.ToString();
+                            DateTime modifiedOn = prm.FirstOrDefault(f => f.ParameterName == "ModifiedOn").Value.ToDateTime();
+                            string timeStamp = new TimeStamp().MaxEntry(createdOn, createdBy, modifiedOn, modifiedBy);
+                            prm[step] = new SQLiteParameter(column.ColumnName, timeStamp);
+                        }
+                        else
+                        {
+                            prm[step] = new SQLiteParameter(column.ColumnName, $"{DateTime.Now.ToString("dd.MM.yyyy HH:mm")} - {Environment.UserName}");
+                        }
                     }
                     else
                     {
@@ -305,5 +365,20 @@ namespace ModernSQLite.Generator
             this.classIsDisposed = true;
         }
         #endregion Dispose Function
+    }
+
+    public sealed class SqlBuilderOptions
+    {
+        public SqlBuilderOptions()
+        {
+        }
+
+        public string CurrentUser { get; set; } = Environment.UserName;
+        public string[] KeyColumn { get; set; } = { "Id" };
+        public string CreateByColumn { get; set; } = "CreatedBy";
+        public string CreateOnColumn { get; set; } = "CreatedOn";
+        public string ModifyByColumn { get; set; } = "ModifiedBy";
+        public string ModifyOnColumn { get; set; } = "ModifiedOn";
+        public string TableName { get; set; }
     }
 }
