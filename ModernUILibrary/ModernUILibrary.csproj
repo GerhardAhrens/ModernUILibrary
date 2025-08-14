@@ -111,7 +111,6 @@
     <Folder Include="ModernUI\Slider\Themes\" />
     <Folder Include="ModernUI\SplitButton\Themes\" />
     <Folder Include="ModernUI\TextBox\SyntaxBox\" />
-    <Folder Include="ModernUI\TextBox\Themes\" />
     <Folder Include="ModernUI\Timeline\Themes\" />
     <Folder Include="ModernUI\TitleBar\Themes\" />
     <Folder Include="ModernUI\ToggleButton\Themes\" />

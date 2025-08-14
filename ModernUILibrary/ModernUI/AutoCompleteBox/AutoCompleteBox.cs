@@ -26,6 +26,8 @@
             this.FontFamily = ControlBase.FontFamily;
             this.Margin = ControlBase.DefaultMargin;
             this.Height = ControlBase.DefaultHeight;
+            this.BorderBrush = ControlBase.BorderBrush;
+            this.BorderThickness = ControlBase.BorderThickness;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalContentAlignment = VerticalAlignment.Center;
             this.IsReadOnly = false;

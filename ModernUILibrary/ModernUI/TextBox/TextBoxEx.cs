@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------
-// <copyright file="TextBoxAll.cs" company="Lifeprojects.de">
-//     Class: TextBoxAll
-//     Copyright © Lifeprojects.de 2024
+// <copyright file="TextBoxEx.cs" company="Lifeprojects.de">
+//     Class: TextBoxEx
+//     Copyright © Lifeprojects.de 2025
 // </copyright>
 //
 // <author>Gerhard Ahrens - Lifeprojects.de</author>
 // <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>02.02.2024</date>
+// <date>14.08.2025</date>
 //
 // <summary>
 // Klasse für 
@@ -23,27 +23,27 @@ namespace ModernIU.Controls
 
     using ModernIU.Base;
 
-    public class TextBoxAll : TextBox
+    public class TextBoxEx : TextBox
     {
-        public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxAll), new PropertyMetadata(Brushes.Transparent));
-        public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxAll), new PropertyMetadata(true, OnSetBorderChanged));
+        public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxEx), new PropertyMetadata(Brushes.Transparent));
+        public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true, OnSetBorderChanged));
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextBoxAll"/> class.
+        /// Initializes a new instance of the <see cref="TextBoxEx"/> class.
         /// </summary>
-        public TextBoxAll()
+        public TextBoxEx()
         {
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
+            this.BorderBrush = Brushes.Green;
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            this.VerticalAlignment = VerticalAlignment.Center;
             this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.Padding = new Thickness(0);
             this.Margin = new Thickness(2);
-            this.BorderBrush = ControlBase.BorderBrush;
-            this.BorderThickness = ControlBase.BorderThickness;
-            this.Background = Brushes.Transparent;
             this.MinHeight = 18;
             this.Height = 23;
-            this.IsReadOnly = false;
+            this.ClipToBounds = false;
             this.Focusable = true;
 
             /* Trigger an Style übergeben */
@@ -65,8 +65,6 @@ namespace ModernIU.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.CaretIndex = this.Text.Length;
-            this.SelectAll();
 
             /* Spezifisches Kontextmenü für Control übergeben */
             this.ContextMenu = this.BuildContextMenu();
@@ -84,42 +82,38 @@ namespace ModernIU.Controls
             }
         }
 
+        protected override void OnGotFocus(RoutedEventArgs e)
+        {
+            this.Focus();
+            this.Select(0, this.Text.Length);
+            this.SelectAll();
+       }
+
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            if (e.KeyboardDevice.Modifiers == ModifierKeys.Shift)
+            switch (e.Key)
             {
-                if (e.Key == Key.Tab)
-                {
+                case Key.Up:
+                    this.MoveFocus(FocusNavigationDirection.Previous);
+                    break;
+                case Key.Down:
+                    this.MoveFocus(FocusNavigationDirection.Next);
+                    break;
+                case Key.Left:
                     return;
-                }
-            }
-            else
-            {
-                switch (e.Key)
-                {
-                    case Key.Up:
-                        this.MoveFocus(FocusNavigationDirection.Previous);
-                        break;
-                    case Key.Down:
-                        this.MoveFocus(FocusNavigationDirection.Next);
-                        break;
-                    case Key.Left:
-                        return;
-                    case Key.Right:
-                        return;
-                    case Key.Pa1:
-                        return;
-                    case Key.End:
-                        return;
-                    case Key.Delete:
-                        return;
-                    case Key.Return:
-                        this.MoveFocus(FocusNavigationDirection.Next);
-                        break;
-                    case Key.Tab:
-                        this.MoveFocus(FocusNavigationDirection.Next);
-                        break;
-                }
+                case Key.Right:
+                    return;
+                case Key.Pa1:
+                    return;
+                case Key.End:
+                    return;
+                case Key.Delete:
+                    return;
+                case Key.Return:
+                    this.MoveFocus(FocusNavigationDirection.Next);
+                    break;
+                case Key.Tab:
+                    break;
             }
         }
 
@@ -129,9 +123,11 @@ namespace ModernIU.Controls
 
             if (focusedElement != null)
             {
-                if (focusedElement is TextBox)
+                if (focusedElement is TextBoxEx txt)
                 {
                     focusedElement.MoveFocus(new TraversalRequest(direction));
+                    txt.Select(0, txt.Text.Length);
+                    txt.SelectAll();
                 }
             }
         }
@@ -140,14 +136,14 @@ namespace ModernIU.Controls
         {
             if (e.NewValue != null)
             {
-                var control = (TextBoxAll)d;
+                var control = (TextBoxEx)d;
 
                 if (e.NewValue.GetType() == typeof(bool))
                 {
                     if ((bool)e.NewValue == true)
                     {
-                        control.BorderBrush = Brushes.Green;
-                        control.BorderThickness = new Thickness(1);
+                        control.BorderBrush = ControlBase.BorderBrush;
+                        control.BorderThickness = ControlBase.BorderThickness;
                     }
                     else
                     {
