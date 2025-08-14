@@ -60,6 +60,7 @@
             this.Height = 23;
             this.IsReadOnly = false;
             this.Focusable = true;
+            this.ClipToBounds = false;
 
             this.PreviewKeyUp += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyUp);
             this.PreviewKeyDown += new System.Windows.Input.KeyEventHandler(SharpRichTextBox_PreviewKeyDown);
@@ -73,6 +74,9 @@
             this.CommandBindings.Add(binding);
 
             this.SetUpBindingForBackground();
+
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
         }
 
         /// <summary>
@@ -206,9 +210,6 @@
                 this.BorderBrush = Brushes.Transparent;
                 this.BorderThickness = new Thickness(0);
             }
-
-            /* Trigger an Style übergeben */
-            this.Style = this.SetTriggerFunction();
 
             /* Spezifisches Kontextmenü für Control übergeben */
             this.ContextMenu = this.BuildContextMenu();
