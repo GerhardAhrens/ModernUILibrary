@@ -39,6 +39,7 @@ namespace ModernIU.Controls
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Center;
             this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.AcceptsReturn = false;
             this.Padding = new Thickness(0);
             this.Margin = new Thickness(2);
             this.MinHeight = 18;
@@ -110,7 +111,10 @@ namespace ModernIU.Controls
                 case Key.Delete:
                     return;
                 case Key.Return:
-                    this.MoveFocus(FocusNavigationDirection.Next);
+                    if (this.AcceptsReturn == true)
+                    {
+                        this.MoveFocus(FocusNavigationDirection.Next);
+                    }
                     break;
                 case Key.Tab:
                     break;
