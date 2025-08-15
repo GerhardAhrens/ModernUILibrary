@@ -37,7 +37,7 @@ namespace ModernIU.Behaviors
         public static readonly DependencyProperty DecimalPlaceProperty = DependencyProperty.Register("DecimalPlace", typeof(int), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(2));
         public static readonly DependencyProperty EscapeClearsTextProperty = DependencyProperty.RegisterAttached("EscapeClearsText", typeof(bool), typeof(TextBoxInputBehavior), new FrameworkPropertyMetadata(false));
 
-        private const NumberStyles ValidNumberStyles = NumberStyles.AllowDecimalPoint |
+        private const NumberStyles VALIDNUMBERSTYLES = NumberStyles.AllowDecimalPoint |
                                            NumberStyles.AllowThousands |
                                            NumberStyles.AllowLeadingSign;
 
@@ -281,24 +281,35 @@ namespace ModernIU.Behaviors
             if (e.Key == Key.Delete)
             {
                 /*wenn was selektiert wird dann wird nur das gelöscht mit ENTF*/
-                if (this.AssociatedObject?.SelectionLength > 0)
+                if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput || this.InputMode == TextBoxInputMode.CurrencyInput)
                 {
-                    if (!this.IsValidInput(this.GetText(string.Empty)))
+                    if (this.AssociatedObject.Text.Length <= 1)
                     {
-                        System.Media.SystemSounds.Beep.Play();
+                        this.AssociatedObject.Text = "0";
                         e.Handled = true;
                     }
                 }
-                else if (this.AssociatedObject?.CaretIndex < this.AssociatedObject.Text.Length)
+                else
                 {
-                    /*selber löschen */
-                    var txt = this.AssociatedObject.Text;
-                    var entf = txt.Remove(this.AssociatedObject.CaretIndex, 1);
-
-                    if (!this.IsValidInput(entf))
+                    if (this.AssociatedObject?.SelectionLength > 0)
                     {
-                        System.Media.SystemSounds.Beep.Play();
-                        e.Handled = true;
+                        if (!this.IsValidInput(this.GetText(string.Empty)))
+                        {
+                            System.Media.SystemSounds.Beep.Play();
+                            e.Handled = true;
+                        }
+                    }
+                    else if (this.AssociatedObject?.CaretIndex < this.AssociatedObject.Text.Length)
+                    {
+                        /*selber löschen */
+                        var txt = this.AssociatedObject.Text;
+                        var entf = txt.Remove(this.AssociatedObject.CaretIndex, 1);
+
+                        if (!this.IsValidInput(entf))
+                        {
+                            System.Media.SystemSounds.Beep.Play();
+                            e.Handled = true;
+                        }
                     }
                 }
             }
@@ -438,7 +449,7 @@ namespace ModernIU.Behaviors
                     }
 
                     decimal decimalValueOut;
-                    var result = decimal.TryParse(input, ValidNumberStyles, CultureInfo.CurrentCulture, out decimalValueOut);
+                    var result = decimal.TryParse(input, VALIDNUMBERSTYLES, CultureInfo.CurrentCulture, out decimalValueOut);
                     return result;
 
                 case TextBoxInputMode.CurrencyInput:
@@ -501,7 +512,7 @@ namespace ModernIU.Behaviors
                     }
 
                     decimal currencyValueOut;
-                    var currencyResult = decimal.TryParse(input, ValidNumberStyles, CultureInfo.CurrentCulture, out currencyValueOut);
+                    var currencyResult = decimal.TryParse(input, VALIDNUMBERSTYLES, CultureInfo.CurrentCulture, out currencyValueOut);
                     return currencyResult;
 
                 case TextBoxInputMode.PercentInput: /*99,999 is zulässig und nur positiv ohne 1000er Trennzeichen*/
