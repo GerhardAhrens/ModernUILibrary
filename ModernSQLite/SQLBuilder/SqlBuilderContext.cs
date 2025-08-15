@@ -26,8 +26,8 @@ namespace ModernSQLite.Generator
     using ModernBaseLibrary.Core;
     using ModernBaseLibrary.Extension;
 
-    //[DebuggerNonUserCode]
-    //[DebuggerStepThrough]
+    [DebuggerNonUserCode]
+    [DebuggerStepThrough]
     public sealed class SqlBuilderContext : IDisposable
     {
         private bool classIsDisposed = false;
