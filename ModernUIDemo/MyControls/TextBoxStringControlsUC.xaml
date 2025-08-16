@@ -298,9 +298,11 @@
                 Orientation="Horizontal">
                 <ModernUI:TextBoxEx
                     Width="200"
+                    InputMode="DigitInput"
+                    IsNegative="False"
                     KeyboardNavigation.IsTabStop="True"
                     KeyboardNavigation.TabIndex="100"
-                    Text="Test" />
+                    Text="" />
                 <ModernUI:TextBoxEx
                     Width="200"
                     KeyboardNavigation.IsTabStop="True"
