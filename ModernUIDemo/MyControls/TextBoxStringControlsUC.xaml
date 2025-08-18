@@ -295,22 +295,30 @@
             <StackPanel
                 Margin="0,2"
                 KeyboardNavigation.TabNavigation="Cycle"
-                Orientation="Horizontal">
-                <ModernUI:TextBoxEx
-                    Width="200"
-                    KeyboardNavigation.IsTabStop="True"
-                    KeyboardNavigation.TabIndex="100"
-                    Text="Test" />
-                <ModernUI:TextBoxEx
-                    Width="200"
-                    KeyboardNavigation.IsTabStop="True"
-                    KeyboardNavigation.TabIndex="101"
-                    Text="Test-1" />
-                <ModernUI:TextBoxEx
-                    Width="200"
-                    KeyboardNavigation.IsTabStop="True"
-                    KeyboardNavigation.TabIndex="102"
-                    Text="Test-2" />
+                Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,75,0" Text="Integer (Positiv / Negativ)" />
+                    <TextBlock Text="Integer (nur Positiv)" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <ModernUI:TextBoxEx
+                        Width="200"
+                        KeyboardNavigation.IsTabStop="True"
+                        KeyboardNavigation.TabIndex="100"
+                        Text="Test" />
+                    <ModernUI:TextBoxEx
+                        Width="200"
+                        KeyboardNavigation.IsTabStop="True"
+                        KeyboardNavigation.TabIndex="101"
+                        Text="Test-1" />
+                    <ModernUI:TextBoxEx
+                        Width="200"
+                        KeyboardNavigation.IsTabStop="True"
+                        KeyboardNavigation.TabIndex="102"
+                        Text="Test-2" />
+                </StackPanel>
+
             </StackPanel>
 
         </StackPanel>
