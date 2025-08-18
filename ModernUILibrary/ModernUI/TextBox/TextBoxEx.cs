@@ -22,9 +22,11 @@ namespace ModernIU.Controls
     using System.Windows.Media;
 
     using ModernIU.Base;
+    using ModernIU.Behaviors;
 
     public class TextBoxEx : TextBox
     {
+        public static readonly DependencyProperty IsNegativeProperty = DependencyProperty.Register("IsNegative", typeof(bool), typeof(TextBoxEx), new PropertyMetadata(false));
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxEx), new PropertyMetadata(Brushes.Transparent));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true, OnSetBorderChanged));
 
@@ -33,6 +35,7 @@ namespace ModernIU.Controls
         /// </summary>
         public TextBoxEx()
         {
+            this.InputMode = TextBoxInputMode.DigitInput;
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
             this.BorderBrush = Brushes.Green;
@@ -47,9 +50,20 @@ namespace ModernIU.Controls
             this.ClipToBounds = false;
             this.Focusable = true;
 
-            /* Trigger an Style übergeben */
-            this.Style = this.SetTriggerFunction();
+            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                this.HorizontalContentAlignment = HorizontalAlignment.Right;
+            }
+            else
+            {
+                this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            }
+
+                /* Trigger an Style übergeben */
+                this.Style = this.SetTriggerFunction();
         }
+
+        public TextBoxInputMode InputMode { get; set; }
 
         public bool SetBorder
         {
@@ -61,6 +75,12 @@ namespace ModernIU.Controls
         {
             get { return (Brush)GetValue(ReadOnlyColorProperty); }
             set { SetValue(ReadOnlyColorProperty, value); }
+        }
+
+        public bool IsNegative
+        {
+            get { return (bool)GetValue(IsNegativeProperty); }
+            set { SetValue(IsNegativeProperty, value); }
         }
 
         public override void OnApplyTemplate()
@@ -92,6 +112,52 @@ namespace ModernIU.Controls
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            base.OnPreviewKeyDown(e);
+
+            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                if (this.IsNegative == true)
+                {
+                    if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+                    {
+                        if (this.Text.Count(c => c == '-') >= 1)
+                        {
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            int cursorPos = ((TextBox)e.Source).CaretIndex;
+                            if (cursorPos == 0)
+                            {
+                                e.Handled = false;
+                            }
+                            else
+                            {
+                                e.Handled = true;
+                            }
+                        }
+
+                        return;
+                    }
+                }
+
+                if (e.Key == Key.Back)
+                {
+                }
+                else if (e.Key == Key.Delete)
+                {
+                }
+                else
+                {
+                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty));
+                    if (char.IsDigit(checkChar) == true)
+                    {
+                        e.Handled = false;
+                        return;
+                    }
+                }
+            }
+
             switch (e.Key)
             {
                 case Key.Up:
@@ -273,6 +339,21 @@ namespace ModernIU.Controls
 
             // move caret to the end of inserted text
             this.CaretIndex = index + valueLength;
+        }
+
+        private bool CheckIsDigit(string wert)
+        {
+            return wert.ToCharArray().All(char.IsDigit);
+        }
+
+        private bool CheckIsLetterOrDigit(string wert)
+        {
+            return wert.ToCharArray().All(char.IsLetterOrDigit);
+        }
+
+        private bool CheckIsLetter(string wert)
+        {
+            return wert.ToCharArray().All(char.IsLetter);
         }
     }
 }
