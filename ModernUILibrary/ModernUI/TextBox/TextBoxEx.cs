@@ -16,6 +16,7 @@
 namespace ModernIU.Controls
 {
     using System;
+    using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -29,8 +30,18 @@ namespace ModernIU.Controls
     public class TextBoxEx : TextBox
     {
         public static readonly DependencyProperty IsNegativeProperty = DependencyProperty.Register("IsNegative", typeof(bool), typeof(TextBoxEx), new PropertyMetadata(false));
+        public static readonly DependencyProperty DecimalPlaceProperty = DependencyProperty.Register("DecimalPlace", typeof(int), typeof(TextBoxEx), new FrameworkPropertyMetadata(2));
         public static readonly DependencyProperty ReadOnlyColorProperty = DependencyProperty.Register("ReadOnlyColor", typeof(Brush), typeof(TextBoxEx), new PropertyMetadata(Brushes.Transparent));
         public static readonly DependencyProperty SetBorderProperty = DependencyProperty.Register("SetBorder", typeof(bool), typeof(TextBoxEx), new PropertyMetadata(true, OnSetBorderChanged));
+        public static readonly DependencyProperty EscapeClearsTextProperty = DependencyProperty.RegisterAttached("EscapeClearsText", typeof(bool), typeof(TextBoxEx), new FrameworkPropertyMetadata(false));
+
+        private readonly char decimalSeparator;
+        private readonly char numberGroupSeparator;
+        private readonly CultureInfo cultureInfo = null;
+
+        private const NumberStyles VALIDNUMBERSTYLES = NumberStyles.AllowDecimalPoint |
+                                           NumberStyles.AllowThousands |
+                                           NumberStyles.AllowLeadingSign;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBoxEx"/> class.
@@ -51,6 +62,12 @@ namespace ModernIU.Controls
             this.ClipToBounds = false;
             this.Focusable = true;
 
+            this.cultureInfo = Thread.CurrentThread.CurrentUICulture;
+            this.decimalSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberDecimalSeparator);
+            this.numberGroupSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberGroupSeparator);
+
+            this.IsPasting = false;
+
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
         }
@@ -69,11 +86,25 @@ namespace ModernIU.Controls
             set { SetValue(ReadOnlyColorProperty, value); }
         }
 
+        public bool EscapeClearsText
+        {
+            get { return (bool)this.GetValue(EscapeClearsTextProperty); }
+            set { this.SetValue(EscapeClearsTextProperty, value); }
+        }
+
         public bool IsNegative
         {
             get { return (bool)GetValue(IsNegativeProperty); }
             set { SetValue(IsNegativeProperty, value); }
         }
+
+        public int DecimalPlace
+        {
+            get { return (int)this.GetValue(DecimalPlaceProperty); }
+            set { this.SetValue(DecimalPlaceProperty, value); }
+        }
+
+        private bool IsPasting { get; set; }
 
         public override void OnApplyTemplate()
         {
@@ -111,9 +142,43 @@ namespace ModernIU.Controls
             this.SelectAll();
         }
 
+        protected override void OnTextInput(TextCompositionEventArgs e)
+        {
+            base.OnTextInput(e);
+
+            if (this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 0)
+                {
+                    if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 1)
+                    {
+                    }
+
+                    string[] decimalPlace = this.Text.Split(this.decimalSeparator, StringSplitOptions.RemoveEmptyEntries);
+                    if (decimalPlace.Length > 1)
+                    {
+                        if (decimalPlace[1].Length > this.DecimalPlace)
+                        {
+                            this.Text = $"{decimalPlace[0]}{this.decimalSeparator}{decimalPlace[1].Substring(0, this.DecimalPlace)}";
+                            this.CaretIndex = this.Text.Length;
+                            this.SelectAll();
+                        }
+                    }
+                }
+            }
+        }
+
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             base.OnPreviewKeyDown(e);
+
+            if (e.Key == Key.Escape && this.EscapeClearsText == true)
+            {
+                if (this.InputMode == TextBoxInputMode.DigitInput)
+                {
+                    this.Text = "0";
+                }
+            }
 
             if (this.InputMode == TextBoxInputMode.DigitInput)
             {
@@ -142,22 +207,20 @@ namespace ModernIU.Controls
                     }
                 }
 
-                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1, Key.LeftAlt, Key.LeftCtrl, Key.LeftShift, Key.RightAlt, Key.RightCtrl, Key.RightShift) == true)
+                if (this.IsNegative == false)
                 {
-                }
-                else
-                {
-                    if (this.IsNegative == false)
+                    if (e.Key == Key.OemMinus)
                     {
-                        if (e.Key == Key.OemMinus)
-                        {
-                            e.Handled = true;
-                            return;
-                        }
+                        e.Handled = true;
+                        return;
                     }
+                }
 
-                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
-                    if (char.IsDigit(checkChar) == true)
+                string keyText = e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty);
+                char outTemp;
+                if (char.TryParse(keyText, out outTemp))
+                {
+                    if (char.IsDigit(outTemp) == true)
                     {
                         e.Handled = false;
                         return;
@@ -171,16 +234,73 @@ namespace ModernIU.Controls
             }
             else if (this.InputMode == TextBoxInputMode.DecimalInput)
             {
+                if (this.IsNegative == true)
+                {
+                    if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+                    {
+                        if (this.Text.Count(c => c == '-') >= 1)
+                        {
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            int cursorPos = ((TextBox)e.Source).CaretIndex;
+                            if (cursorPos == 0)
+                            {
+                                e.Handled = false;
+                            }
+                            else
+                            {
+                                e.Handled = true;
+                            }
+                        }
+
+                        return;
+                    }
+                }
+
+                if (this.IsNegative == false)
+                {
+                    if (e.Key == Key.OemMinus)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                }
+
+                string keyText = e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty);
+                char outTemp;
+                if (char.TryParse(keyText, out outTemp))
+                {
+                    if (char.IsDigit(outTemp) == true)
+                    {
+                        e.Handled = false;
+                        return;
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                }
+
+                /* wen mehr als ein Komma */
+                if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 0)
+                {
+                    if (this.Text.ToCharArray().Last() == outTemp)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+               }
             }
             else if (this.InputMode == TextBoxInputMode.Letter)
             {
-                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1,Key.LeftAlt,Key.LeftCtrl, Key.LeftShift, Key.RightAlt,Key.RightCtrl, Key.RightShift) == true)
+                string keyText = e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty);
+                char outTemp;
+                if (char.TryParse(keyText, out outTemp))
                 {
-                }
-                else
-                {
-                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
-                    if (char.IsLetter(checkChar) == true)
+                    if (char.IsLetter(outTemp) == true)
                     {
                         e.Handled = false;
                         return;
@@ -194,13 +314,11 @@ namespace ModernIU.Controls
             }
             else if (this.InputMode == TextBoxInputMode.LetterOrDigit)
             {
-                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1, Key.LeftAlt, Key.LeftCtrl, Key.LeftShift, Key.RightAlt, Key.RightCtrl, Key.RightShift) == true)
+                string keyText = e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty);
+                char outTemp;
+                if (char.TryParse(keyText, out outTemp))
                 {
-                }
-                else
-                {
-                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
-                    if (char.IsLetterOrDigit(checkChar) == true)
+                    if (char.IsLetterOrDigit(outTemp) == true)
                     {
                         e.Handled = false;
                         return;
