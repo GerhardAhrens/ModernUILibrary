@@ -21,6 +21,8 @@ namespace ModernIU.Controls
     using System.Windows.Input;
     using System.Windows.Media;
 
+    using ModernBaseLibrary.Extension;
+
     using ModernIU.Base;
     using ModernIU.Behaviors;
 
@@ -35,7 +37,6 @@ namespace ModernIU.Controls
         /// </summary>
         public TextBoxEx()
         {
-            this.InputMode = TextBoxInputMode.DigitInput;
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
             this.BorderBrush = Brushes.Green;
@@ -50,20 +51,11 @@ namespace ModernIU.Controls
             this.ClipToBounds = false;
             this.Focusable = true;
 
-            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
-            {
-                this.HorizontalContentAlignment = HorizontalAlignment.Right;
-            }
-            else
-            {
-                this.HorizontalContentAlignment = HorizontalAlignment.Left;
-            }
-
-                /* Trigger an Style übergeben */
-                this.Style = this.SetTriggerFunction();
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
         }
 
-        public TextBoxInputMode InputMode { get; set; }
+        public TextBoxInputMode InputMode { get; set; } = TextBoxInputMode.None;
 
         public bool SetBorder
         {
@@ -87,6 +79,15 @@ namespace ModernIU.Controls
         {
             base.OnApplyTemplate();
 
+            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+                this.HorizontalContentAlignment = HorizontalAlignment.Right;
+            }
+            else
+            {
+                this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            }
+
             /* Spezifisches Kontextmenü für Control übergeben */
             this.ContextMenu = this.BuildContextMenu();
 
@@ -108,13 +109,13 @@ namespace ModernIU.Controls
             this.Focus();
             this.Select(0, this.Text.Length);
             this.SelectAll();
-       }
+        }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             base.OnPreviewKeyDown(e);
 
-            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
+            if (this.InputMode == TextBoxInputMode.DigitInput)
             {
                 if (this.IsNegative == true)
                 {
@@ -141,21 +142,78 @@ namespace ModernIU.Controls
                     }
                 }
 
-                if (e.Key == Key.Back)
-                {
-                }
-                else if (e.Key == Key.Delete)
+                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1, Key.LeftAlt, Key.LeftCtrl, Key.LeftShift, Key.RightAlt, Key.RightCtrl, Key.RightShift) == true)
                 {
                 }
                 else
                 {
-                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty));
+                    if (this.IsNegative == false)
+                    {
+                        if (e.Key == Key.OemMinus)
+                        {
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+
+                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
                     if (char.IsDigit(checkChar) == true)
                     {
                         e.Handled = false;
                         return;
                     }
+                    else
+                    {
+                        e.Handled = true;
+                        return;
+                    }
                 }
+            }
+            else if (this.InputMode == TextBoxInputMode.DecimalInput)
+            {
+            }
+            else if (this.InputMode == TextBoxInputMode.Letter)
+            {
+                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1,Key.LeftAlt,Key.LeftCtrl, Key.LeftShift, Key.RightAlt,Key.RightCtrl, Key.RightShift) == true)
+                {
+                }
+                else
+                {
+                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
+                    if (char.IsLetter(checkChar) == true)
+                    {
+                        e.Handled = false;
+                        return;
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                }
+            }
+            else if (this.InputMode == TextBoxInputMode.LetterOrDigit)
+            {
+                if (e.Key.In(Key.Back, Key.Delete, Key.Left, Key.Right, Key.Home, Key.Pa1, Key.LeftAlt, Key.LeftCtrl, Key.LeftShift, Key.RightAlt, Key.RightCtrl, Key.RightShift) == true)
+                {
+                }
+                else
+                {
+                    char checkChar = Convert.ToChar(e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty));
+                    if (char.IsLetterOrDigit(checkChar) == true)
+                    {
+                        e.Handled = false;
+                        return;
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                }
+            }
+            else if (this.InputMode == TextBoxInputMode.None)
+            {
             }
 
             switch (e.Key)
@@ -166,16 +224,6 @@ namespace ModernIU.Controls
                 case Key.Down:
                     this.MoveFocus(FocusNavigationDirection.Next);
                     break;
-                case Key.Left:
-                    return;
-                case Key.Right:
-                    return;
-                case Key.Pa1:
-                    return;
-                case Key.End:
-                    return;
-                case Key.Delete:
-                    return;
                 case Key.Return:
                     if (this.AcceptsReturn == true)
                     {

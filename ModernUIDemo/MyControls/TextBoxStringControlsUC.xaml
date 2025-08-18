@@ -6,7 +6,7 @@
     xmlns:ModernUI="clr-namespace:ModernIU.Controls;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    d:DesignHeight="500"
     d:DesignWidth="850"
     mc:Ignorable="d">
 
@@ -297,26 +297,45 @@
                 KeyboardNavigation.TabNavigation="Cycle"
                 Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="0,0,75,0" Text="Integer (Positiv / Negativ)" />
+                    <TextBlock Margin="0,0,15,0" Text="Integer (Positiv / Negativ)" />
                     <TextBlock Text="Integer (nur Positiv)" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <ModernUI:TextBoxEx
-                        Width="200"
+                        x:Name="txtIntNP"
+                        Width="140"
+                        InputMode="DigitInput"
+                        IsNegative="True"
                         KeyboardNavigation.IsTabStop="True"
                         KeyboardNavigation.TabIndex="100"
-                        Text="Test" />
+                        Text="0" />
                     <ModernUI:TextBoxEx
-                        Width="200"
+                        x:Name="txtIntP"
+                        Width="140"
+                        InputMode="DigitInput"
+                        IsNegative="False"
                         KeyboardNavigation.IsTabStop="True"
                         KeyboardNavigation.TabIndex="101"
-                        Text="Test-1" />
+                        Text="0" />
+                    <ModernUI:TextBoxEx
+                        Width="140"
+                        InputMode="DecimalInput"
+                        KeyboardNavigation.IsTabStop="True"
+                        KeyboardNavigation.TabIndex="102"
+                        Text="0" />
+
                     <ModernUI:TextBoxEx
                         Width="200"
+                        InputMode="Letter"
                         KeyboardNavigation.IsTabStop="True"
                         KeyboardNavigation.TabIndex="102"
                         Text="Test-2" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="10,0,100,0" Text="{Binding Path=Text, ElementName=txtIntNP, StringFormat=Result {0:N0}}" />
+                    <TextBlock Text="{Binding Path=Text, ElementName=txtIntP, StringFormat=Result {0:N0}}" />
                 </StackPanel>
 
             </StackPanel>
