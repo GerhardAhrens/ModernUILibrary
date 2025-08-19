@@ -6,8 +6,8 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.1.2025.20</AssemblyVersion>
-    <FileVersion>1.1.2025.20</FileVersion>
+    <AssemblyVersion>1.1.2025.21</AssemblyVersion>
+    <FileVersion>1.1.2025.21</FileVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 

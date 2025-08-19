@@ -18,6 +18,7 @@ namespace System.Data.SQLite
     using System.ComponentModel;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using System.Transactions;
     using System.Windows.Data;
 
     using ModernBaseLibrary.Extension;
@@ -38,6 +39,11 @@ namespace System.Data.SQLite
             return new RecordSetResult<T>(@this, default, sql);
         }
 
+        public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, SQLiteTransaction transaction)
+        {
+            return new RecordSetResult<T>(@this, default, sql);
+        }
+
         /// <summary>
         /// Führt eine SQL Anweisung für eine offen Datenbank-Connection aus.
         /// </summary>
@@ -51,6 +57,11 @@ namespace System.Data.SQLite
             return new RecordSetResult<T>(@this, default, sql, parameterCollection);
         }
 
+        public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, Dictionary<string, object> parameterCollection, SQLiteTransaction transaction)
+        {
+            return new RecordSetResult<T>(@this, default, sql, parameterCollection);
+        }
+
         /// <summary>
         /// Führt eine SQL Anweisung für eine offen Datenbank-Connection aus.
         /// </summary>
@@ -60,6 +71,11 @@ namespace System.Data.SQLite
         /// <param name="parameterCollection">SQLiteParameter Array mit einer Liste von Parametern als String (Parametername) und Object (Parametervalue)</param>
         /// <returns>Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.</returns>
         public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, SQLiteParameter[] parameterCollection)
+        {
+            return new RecordSetResult<T>(@this, default, sql, parameterCollection);
+        }
+
+        public static RecordSetResult<T> RecordSet<T>(this SQLiteConnection @this, string sql, SQLiteParameter[] parameterCollection, SQLiteTransaction transaction)
         {
             return new RecordSetResult<T>(@this, default, sql, parameterCollection);
         }
@@ -975,7 +991,14 @@ namespace System.Data.SQLite
             {
                 if (typeof(T).IsGenericType == false && typeof(T).IsPrimitive == true && typeof(T).Namespace == "System")
                 {
-                    resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter);
+                    if (@this.Transaction != null)
+                    {
+                        resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter,@this.Transaction);
+                    }
+                    else
+                    {
+                        resultValue = ExecuteNonQuery<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter);
+                    }
                 }
             }
             catch (Exception)
@@ -985,6 +1008,74 @@ namespace System.Data.SQLite
             }
 
             return new RecordSetResult<T>(@this.Connection, resultValue, @this.SQL);
+        }
+
+        private static T ExecuteNonQuery<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection, SQLiteParameter[] sqliteParameter, SQLiteTransaction transaction)
+        {
+            object getAs = null;
+            SQLiteTransaction trans = null;
+
+            try
+            {
+                trans = connection.BeginTransaction();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, connection))
+                {
+                    cmd.Transaction = transaction;
+
+                    if (parameterCollection != null && parameterCollection.Count > 0)
+                    {
+                        cmd.Parameters.Clear();
+                        foreach (KeyValuePair<string, object> item in parameterCollection)
+                        {
+                            cmd.Parameters.AddWithValue(item.Key, item.Value);
+                        }
+
+                        foreach (SQLiteParameter parameter in cmd.Parameters)
+                        {
+                            if (parameter.IsNullable == false)
+                            {
+                                if (parameter.DbType.ToString() == typeof(DateTime).Name)
+                                {
+                                    if ((DateTime)parameter.Value == DateTime.MinValue)
+                                    {
+                                        parameter.Value = new DateTime(1900, 1, 1);
+                                    }
+                                }
+                                else
+                                {
+                                    if (parameter.Value == DBNull.Value || parameter.Value == null)
+                                    {
+                                        parameter.Value = DBNull.Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (sqliteParameter != null && sqliteParameter.Length > 0)
+                    {
+                        cmd.Parameters.AddRange(sqliteParameter);
+                    }
+
+                    int? result = cmd.ExecuteNonQuery();
+                    getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                    trans.Commit();
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                trans.Rollback();
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)getAs;
         }
 
         private static T ExecuteNonQuery<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection, SQLiteParameter[] sqliteParameter)
@@ -1041,6 +1132,69 @@ namespace System.Data.SQLite
             }
             catch (Exception ex)
             {
+                string ErrorText = ex.Message;
+                throw;
+            }
+
+            return (T)getAs;
+        }
+
+        private static T ExecuteNonQuery<T>(SQLiteConnection connection, string sql, Dictionary<string, object> parameterCollection, SQLiteTransaction transaction)
+        {
+            object getAs = null;
+            SQLiteTransaction trans = null;
+
+            try
+            {
+                trans = connection.BeginTransaction();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, connection))
+                {
+                    cmd.Transaction = transaction;
+
+                    if (parameterCollection != null && parameterCollection.Count > 0)
+                    {
+                        cmd.Parameters.Clear();
+                        foreach (KeyValuePair<string, object> item in parameterCollection)
+                        {
+                            cmd.Parameters.AddWithValue(item.Key, item.Value);
+                        }
+
+                        foreach (SQLiteParameter parameter in cmd.Parameters)
+                        {
+                            if (parameter.IsNullable == false)
+                            {
+                                if (parameter.DbType.ToString() == typeof(DateTime).Name)
+                                {
+                                    if ((DateTime)parameter.Value == DateTime.MinValue)
+                                    {
+                                        parameter.Value = new DateTime(1900, 1, 1);
+                                    }
+                                }
+                                else
+                                {
+                                    if (parameter.Value == DBNull.Value || parameter.Value == null)
+                                    {
+                                        parameter.Value = DBNull.Value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    int? result = cmd.ExecuteNonQuery();
+                    getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                    trans.Commit();
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                trans.Rollback();
+                string ErrorText = ex.Message;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
                 string ErrorText = ex.Message;
                 throw;
             }
@@ -1250,6 +1404,15 @@ namespace System.Data.SQLite
         {
             this.Connection = connection;
             this.SQL = sql;
+            this.Transaction = null;
+            this.Result = resultValue;
+        }
+
+        public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, SQLiteTransaction transaction)
+        {
+            this.Connection = connection;
+            this.SQL = sql;
+            this.Transaction = transaction;
             this.Result = resultValue;
         }
 
@@ -1264,7 +1427,17 @@ namespace System.Data.SQLite
         {
             this.Connection = connection;
             this.SQL = sql;
+            this.Transaction = null;
+            this.ParameterCollection = parameterCollection;
             this.Result = resultValue;
+        }
+
+        public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, Dictionary<string, object> parameterCollection, SQLiteTransaction transaction)
+        {
+            this.Connection = connection;
+            this.SQL = sql;
+            this.Result = resultValue;
+            this.Transaction = transaction;
             this.ParameterCollection = parameterCollection;
         }
 
@@ -1279,8 +1452,18 @@ namespace System.Data.SQLite
         {
             this.Connection = connection;
             this.SQL = sql;
-            this.Result = resultValue;
             this.SQLiteParameter = parameterCollection;
+            this.Transaction = null;
+            this.Result = resultValue;
+        }
+
+        public RecordSetResult(SQLiteConnection connection, T resultValue, string sql, SQLiteParameter[] parameterCollection, SQLiteTransaction transaction)
+        {
+            this.Connection = connection;
+            this.SQL = sql;
+            this.SQLiteParameter = parameterCollection;
+            this.Transaction = transaction;
+            this.Result = resultValue;
         }
 
         /// <summary>
@@ -1302,6 +1485,8 @@ namespace System.Data.SQLite
         /// Aktuelles Datenbankverbindung, als Connection-Object
         /// </summary>
         public SQLiteConnection Connection { get; set; }
+
+        public SQLiteTransaction Transaction { get; set; }
 
         /// <summary>
         /// Erwarteterer Wert der SQL Anweisung, werden keine Daten gefunden, wird entweder null oder der Default-Wert des Datentyp zurückgegeben.
