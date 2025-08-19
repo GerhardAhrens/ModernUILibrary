@@ -105,9 +105,9 @@ namespace ModernIU.Controls
             DataObject.AddCopyingHandler(this, CopyPasteEventHandler);
             DataObject.AddPastingHandler(this, CopyPasteEventHandler);
 
-            /*Events */
             CaretIndex = Text.LastIndexOfAny(new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }) + 1;
 
+            /*Events */
             PreviewKeyDown += TextBox_PreviewKeyDown;
             PreviewMouseDown += TextBox_PreviewMouseDown;
             PreviewMouseUp += TextBox_PreviewMouseUp;
@@ -167,10 +167,14 @@ namespace ModernIU.Controls
 
             /*Check maximum value */
             if (value > ctb.MaximumValue && ctb.MaximumValue > 0)
+            {
                 return ctb.MaximumValue;
+            }
 
             if (value < ctb.MinimumValue && ctb.MinimumValue < 0)
+            {
                 return ctb.MinimumValue;
+            }
 
             return value;
         }

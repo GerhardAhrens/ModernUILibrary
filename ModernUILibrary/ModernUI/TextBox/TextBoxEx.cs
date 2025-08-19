@@ -38,10 +38,7 @@ namespace ModernIU.Controls
         private readonly char decimalSeparator;
         private readonly char numberGroupSeparator;
         private readonly CultureInfo cultureInfo = null;
-
-        private const NumberStyles VALIDNUMBERSTYLES = NumberStyles.AllowDecimalPoint |
-                                           NumberStyles.AllowThousands |
-                                           NumberStyles.AllowLeadingSign;
+        private readonly char negativeSign;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBoxEx"/> class.
@@ -51,6 +48,7 @@ namespace ModernIU.Controls
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
             this.BorderBrush = Brushes.Green;
+            this.BorderThickness = new Thickness(1);
             this.HorizontalContentAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Center;
             this.VerticalContentAlignment = VerticalAlignment.Center;
@@ -65,8 +63,7 @@ namespace ModernIU.Controls
             this.cultureInfo = Thread.CurrentThread.CurrentUICulture;
             this.decimalSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberDecimalSeparator);
             this.numberGroupSeparator = Convert.ToChar(this.cultureInfo.NumberFormat.NumberGroupSeparator);
-
-            this.IsPasting = false;
+            this.negativeSign = Convert.ToChar(this.cultureInfo.NumberFormat.NegativeSign);
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();
@@ -104,13 +101,11 @@ namespace ModernIU.Controls
             set { this.SetValue(DecimalPlaceProperty, value); }
         }
 
-        private bool IsPasting { get; set; }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            if (this.InputMode == TextBoxInputMode.DigitInput || this.InputMode == TextBoxInputMode.DecimalInput)
+            if (this.InputMode.In(TextBoxInputMode.DigitInput, TextBoxInputMode.DecimalInput,TextBoxInputMode.PercentInput, TextBoxInputMode.CurrencyInput) == true)
             {
                 this.HorizontalContentAlignment = HorizontalAlignment.Right;
             }
@@ -142,27 +137,107 @@ namespace ModernIU.Controls
             this.SelectAll();
         }
 
-        protected override void OnTextInput(TextCompositionEventArgs e)
+        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
-            base.OnTextInput(e);
-
             if (this.InputMode == TextBoxInputMode.DecimalInput)
             {
-                if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 0)
+                bool approvedDecimalPoint = false;
+
+
+                if (e.Text == this.decimalSeparator.ToString())
                 {
-                    if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 1)
+                    if ((this.Text.Contains(this.decimalSeparator) == false))
                     {
+                        approvedDecimalPoint = true;
+                    }
+                }
+
+                if (this.IsNegative == true)
+                {
+                    int countKomma = this.Text.ToCharArray().Where(w => w == this.decimalSeparator).Count();
+                    if (countKomma < 1 && approvedDecimalPoint == true)
+                    {
+                        if ((char.IsPunctuation(e.Text, e.Text.Length - 1)))
+                        {
+                            e.Handled = false;
+                            return;
+                        }
                     }
 
-                    string[] decimalPlace = this.Text.Split(this.decimalSeparator, StringSplitOptions.RemoveEmptyEntries);
-                    if (decimalPlace.Length > 1)
+                    int countNeg = this.Text.ToCharArray().Where(w => w == this.negativeSign).Count();
+                    if (countNeg < 1 && e.Text == this.negativeSign.ToString())
                     {
-                        if (decimalPlace[1].Length > this.DecimalPlace)
+                        if ((char.IsPunctuation(e.Text, e.Text.Length - 1)))
                         {
-                            this.Text = $"{decimalPlace[0]}{this.decimalSeparator}{decimalPlace[1].Substring(0, this.DecimalPlace)}";
-                            this.CaretIndex = this.Text.Length;
-                            this.SelectAll();
+                            e.Handled = false;
+                            return;
                         }
+                    }
+                }
+
+                if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
+                {
+                    e.Handled = true;
+                }
+
+                string fullText = $"{this.Text}{e.Text}";
+                if (fullText.Contains(this.decimalSeparator.ToString()) == true)
+                {
+                    int countDec = fullText.Split(this.decimalSeparator)[1].Length;
+                    if (countDec > this.DecimalPlace)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            else if (this.InputMode == TextBoxInputMode.CurrencyInput)
+            {
+                bool approvedDecimalPoint = false;
+
+
+                if (e.Text == this.decimalSeparator.ToString())
+                {
+                    if ((this.Text.Contains(this.decimalSeparator) == false))
+                    {
+                        approvedDecimalPoint = true;
+                    }
+                }
+
+                if (this.IsNegative == true)
+                {
+                    int countKomma = this.Text.ToCharArray().Where(w => w == this.decimalSeparator).Count();
+                    if (countKomma < 1 && approvedDecimalPoint == true)
+                    {
+                        if ((char.IsPunctuation(e.Text, e.Text.Length - 1)))
+                        {
+                            e.Handled = false;
+                            return;
+                        }
+                    }
+
+                    int countNeg = this.Text.ToCharArray().Where(w => w == this.negativeSign).Count();
+                    if (countNeg < 1 && e.Text == this.negativeSign.ToString())
+                    {
+                        if ((char.IsPunctuation(e.Text, e.Text.Length - 1)))
+                        {
+                            e.Handled = false;
+                            return;
+                        }
+                    }
+                }
+
+                if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
+                {
+                    e.Handled = true;
+                }
+
+                string fullText = $"{this.Text}{e.Text}";
+                if (fullText.Contains(this.decimalSeparator.ToString()) == true)
+                {
+                    int countDec = fullText.Split(this.decimalSeparator)[1].Length;
+                    if (countDec > 2)
+                    {
+                        e.Handled = true;
                     }
                 }
             }
@@ -174,7 +249,7 @@ namespace ModernIU.Controls
 
             if (e.Key == Key.Escape && this.EscapeClearsText == true)
             {
-                if (this.InputMode == TextBoxInputMode.DigitInput)
+                if (this.InputMode.In(TextBoxInputMode.DigitInput, TextBoxInputMode.DecimalInput, TextBoxInputMode.CurrencyInput, TextBoxInputMode.PercentInput))
                 {
                     this.Text = "0";
                 }
@@ -234,65 +309,9 @@ namespace ModernIU.Controls
             }
             else if (this.InputMode == TextBoxInputMode.DecimalInput)
             {
-                if (this.IsNegative == true)
-                {
-                    if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
-                    {
-                        if (this.Text.Count(c => c == '-') >= 1)
-                        {
-                            e.Handled = true;
-                        }
-                        else
-                        {
-                            int cursorPos = ((TextBox)e.Source).CaretIndex;
-                            if (cursorPos == 0)
-                            {
-                                e.Handled = false;
-                            }
-                            else
-                            {
-                                e.Handled = true;
-                            }
-                        }
-
-                        return;
-                    }
-                }
-
-                if (this.IsNegative == false)
-                {
-                    if (e.Key == Key.OemMinus)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
-
-                string keyText = e.Key.ToString().Replace("D", string.Empty).Replace("Oem", string.Empty);
-                char outTemp;
-                if (char.TryParse(keyText, out outTemp))
-                {
-                    if (char.IsDigit(outTemp) == true)
-                    {
-                        e.Handled = false;
-                        return;
-                    }
-                    else
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
-
-                /* wen mehr als ein Komma */
-                if (this.Text.ToCharArray().Where(x => x == this.decimalSeparator).Count() > 0)
-                {
-                    if (this.Text.ToCharArray().Last() == outTemp)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-               }
+            }
+            else if (this.InputMode == TextBoxInputMode.CurrencyInput)
+            {
             }
             else if (this.InputMode == TextBoxInputMode.Letter)
             {
@@ -445,11 +464,14 @@ namespace ModernIU.Controls
                 WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(deleteMenu, "Click", this.OnDeleteMenu);
                 textBoxContextMenu.Items.Add(deleteMenu);
 
-                MenuItem setDateMenu = new MenuItem();
-                setDateMenu.Header = "Setze Datum";
-                setDateMenu.Icon = Icons.GetPathGeometry(Icons.IconClock);
-                WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(setDateMenu, "Click", this.OnSetDateMenu);
-                textBoxContextMenu.Items.Add(setDateMenu);
+                if (this.InputMode.NotIn(TextBoxInputMode.DigitInput, TextBoxInputMode.DecimalInput, TextBoxInputMode.CurrencyInput, TextBoxInputMode.PercentInput, TextBoxInputMode.LetterOrDigit))
+                {
+                    MenuItem setDateMenu = new MenuItem();
+                    setDateMenu.Header = "Setze Datum";
+                    setDateMenu.Icon = Icons.GetPathGeometry(Icons.IconClock);
+                    WeakEventManager<MenuItem, RoutedEventArgs>.AddHandler(setDateMenu, "Click", this.OnSetDateMenu);
+                    textBoxContextMenu.Items.Add(setDateMenu);
+                }
             }
 
             return textBoxContextMenu;

@@ -42,8 +42,10 @@ namespace ModernIU.Controls
         {
             this.FontSize = ControlBase.FontSize;
             this.FontFamily = ControlBase.FontFamily;
-            this.HorizontalContentAlignment = HorizontalAlignment.Left;
+            this.HorizontalContentAlignment = HorizontalAlignment.Right;
             this.VerticalContentAlignment = VerticalAlignment.Center;
+            this.BorderBrush = Brushes.Green;
+            this.BorderThickness = new Thickness(1);
             this.Margin = new Thickness(2);
             this.MinHeight = 18;
             this.Height = 23;

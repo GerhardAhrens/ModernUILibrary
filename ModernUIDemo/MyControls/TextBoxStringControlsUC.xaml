@@ -300,6 +300,7 @@
                     <TextBlock Margin="0,0,15,0" Text="Integer (Positiv / Negativ)" />
                     <TextBlock Text="Integer (nur Positiv)" />
                     <TextBlock Margin="40,0,0,0" Text="Decimal (nur Positiv, N2)" />
+                    <TextBlock Margin="15,0,0,0" Text="Currency (nur Positiv, C2)" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -319,8 +320,9 @@
                         KeyboardNavigation.IsTabStop="True"
                         KeyboardNavigation.TabIndex="101"
                         Text="0" />
-                    
+
                     <ModernUI:TextBoxEx
+                        x:Name="txtDecN2"
                         Width="140"
                         DecimalPlace="2"
                         EscapeClearsText="True"
@@ -331,16 +333,28 @@
                         Text="0" />
 
                     <ModernUI:TextBoxEx
+                        x:Name="txtCurrencyC2"
+                        Width="140"
+                        EscapeClearsText="True"
+                        InputMode="CurrencyInput"
+                        IsNegative="False"
+                        KeyboardNavigation.IsTabStop="True"
+                        KeyboardNavigation.TabIndex="102"
+                        Text="0" />
+
+                    <ModernUI:TextBoxEx
                         Width="200"
                         InputMode="Letter"
                         KeyboardNavigation.IsTabStop="True"
                         KeyboardNavigation.TabIndex="102"
-                        Text="Test-2" />
+                        Text="Test-Text" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="10,0,100,0" Text="{Binding Path=Text, ElementName=txtIntNP, StringFormat=Result {0:N0}}" />
                     <TextBlock Text="{Binding Path=Text, ElementName=txtIntP, StringFormat=Result {0:N0}}" />
+                    <TextBlock Margin="100,0,0,0" Text="{Binding Path=Text, ElementName=txtDecN2, StringFormat=Result {0:N2}}" />
+                    <TextBlock Margin="100,0,0,0" Text="{Binding Path=Text, ElementName=txtCurrencyC2, StringFormat=Result {0:C2}}" />
                 </StackPanel>
 
             </StackPanel>

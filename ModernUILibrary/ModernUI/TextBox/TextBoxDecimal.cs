@@ -95,32 +95,6 @@
             }
         }
 
-        protected override void OnTextChanged(TextChangedEventArgs e)
-        {
-            base.OnTextChanged(e);
-
-            /*
-            if (string.IsNullOrEmpty( this.Text)  == true )
-            {
-                this.Text = string.Empty;
-                this.Number = 0;
-            }
-            else
-            {
-                if (decimal.TryParse(this.Text, out decimal result))
-                {
-                    this.Number = Convert.ToDecimal(string.IsNullOrEmpty(this.Text) == true ? "0" : this.Text);
-                    this.Text = this.Number.ToString(CultureInfo.CurrentCulture);
-                }
-                else
-                {
-                    this.Text = string.Empty;
-                    this.Number = 0;
-                }
-            }
-            */
-        }
-
         protected override void OnGotFocus(RoutedEventArgs e)
         {
             base.OnGotFocus(e);
