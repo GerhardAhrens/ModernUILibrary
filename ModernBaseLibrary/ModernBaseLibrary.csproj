@@ -175,6 +175,7 @@
     <Folder Include="Core\Media\" />
     <Folder Include="Core\FormatTo\" />
     <Folder Include="Core\Encoding\" />
+    <Folder Include="Core\Process\" />
     <Folder Include="Core\TypeSupport\" />
     <Folder Include="Core\Weak\" />
     <Folder Include="Core\TypeConverter\" />

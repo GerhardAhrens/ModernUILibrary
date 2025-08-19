@@ -163,8 +163,7 @@ namespace ModernIU.Behaviors
         /// <param name="e"></param>
         static void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if ((from change in e.Changes where change.RemovedLength > 0 select change).Any() && (from change in e.Changes where change.AddedLength > 0 select change).Any() == false
-            )
+            if ((from change in e.Changes where change.RemovedLength > 0 select change).Any() && (from change in e.Changes where change.AddedLength > 0 select change).Any() == false)
             {
                 return;
             }
@@ -190,7 +189,7 @@ namespace ModernIU.Behaviors
 
             string indicator = GetAutoCompleteIndicator(tb);
             int startIndex = 0; //Start from the beginning of the line.
-            string matchingString = tb.Text;
+            string matchingString = tb.Text.ToUpper();
             //If we have a trigger string, make sure that it has been typed before
             //giving auto-completion suggestions.
             if (string.IsNullOrEmpty(indicator) == false)
@@ -203,7 +202,7 @@ namespace ModernIU.Behaviors
                 }
 
                 startIndex += indicator.Length;
-                matchingString = tb.Text.Substring(startIndex, tb.Text.Length - startIndex);
+                matchingString = tb.Text.Substring(startIndex, tb.Text.Length - startIndex).ToUpper();
             }
 
             //If we don't have anything after the trigger string, return.
@@ -224,8 +223,7 @@ namespace ModernIU.Behaviors
                     where subvalue != null && subvalue.Length >= textLength
                     select subvalue
                 
-
-                where value.ToLower().Substring(0, textLength).Equals(matchingString.ToLower(), comparer)
+                where value.ToUpper().Substring(0, textLength).Equals(matchingString.ToUpper(), comparer)
                 select value.Substring(textLength, value.Length - textLength)
             ).FirstOrDefault();
 
@@ -237,7 +235,7 @@ namespace ModernIU.Behaviors
 
             int matchStart = startIndex + matchingString.Length;
             tb.TextChanged -= onTextChanged;
-            tb.Text += match;
+            tb.Text = $"{tb.Text.ToUpper()}{match.ToUpper()}";
             tb.CaretIndex = matchStart;
             tb.SelectionStart = matchStart;
             tb.SelectionLength = tb.Text.Length - startIndex;

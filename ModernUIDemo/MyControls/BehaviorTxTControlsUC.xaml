@@ -434,7 +434,7 @@
                 x:Name="txtAutoComplete1"
                 Width="200"
                 HorizontalAlignment="Left"
-                Behavior:TextBoxAutoComplete.AutoCompleteIndicator="@"
+                Behavior:TextBoxAutoComplete.AutoCompleteIndicator=";"
                 Behavior:TextBoxAutoComplete.AutoCompleteItemsSource="{Binding Path=AutoCompleteList.Value, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="{Binding Path=AutoCompleteListTT.Value}" />
 
