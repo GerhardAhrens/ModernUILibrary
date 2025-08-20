@@ -16,23 +16,38 @@
 namespace ModernBaseLibrary.Core
 {
     using System.Diagnostics;
+    using System.Windows.Input;
 
     using ModernBaseLibrary.Extension;
 
     public class ObjectRuntime : DisposableCoreBase
     {
+        private readonly Cursor previousCursor;
+
         private Stopwatch sw = null;
 
         public ObjectRuntime()
         {
             this.sw = new Stopwatch();
             this.sw.Start();
+
+            this.previousCursor = Mouse.OverrideCursor;
+            Mouse.OverrideCursor = Cursors.Wait;
+        }
+
+        public ObjectRuntime(Cursor cursorTyp)
+        {
+            this.sw = new Stopwatch();
+            this.sw.Start();
+
+            this.previousCursor = cursorTyp;
+            Mouse.OverrideCursor = Cursors.Wait;
         }
 
         public string Result()
         {
             this.sw.Stop();
-
+            Mouse.OverrideCursor = this.previousCursor;
             return this.sw.GetTimeString();
         }
 
@@ -46,8 +61,23 @@ namespace ModernBaseLibrary.Core
         public long ResultMilliseconds()
         {
             this.sw.Stop();
-
+            Mouse.OverrideCursor = this.previousCursor;
             return this.sw.ElapsedMilliseconds;
+        }
+
+        public static void SetNormal()
+        {
+            Mouse.OverrideCursor = null;
+        }
+
+        public static void SetWait()
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+        }
+
+        public override void DisposeManagedResources()
+        {
+            Mouse.OverrideCursor = this.previousCursor;
         }
     }
 }

@@ -134,6 +134,11 @@
         #region Event Implement Function
         private void PART_ChooseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(this.Text) == false)
+            {
+                this.InitialDirectory = this.Text.Trim();
+            }
+
             switch (this.ChooseBoxType)
             {
                 case EnumChooseBoxType.SingleFile:
