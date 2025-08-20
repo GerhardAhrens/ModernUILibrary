@@ -47,6 +47,11 @@ namespace System.Data.SQLite
                 this.ConnectString = ConnectStringToText(this.DatabaseFullName);
                 this.CreateConnection(ConnectString);
             }
+            else
+            {
+                this.DatabaseFullName = databaseName;
+                this.ConnectString = ConnectStringToText(this.DatabaseFullName);
+            }
         }
 
         public string ConnectString { get; private set; }
