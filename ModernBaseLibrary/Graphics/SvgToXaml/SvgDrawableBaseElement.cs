@@ -1,4 +1,24 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="SvgDrawableBaseElement.cs" company="Lifeprojects.de">
+//     Class: SvgDrawableBaseElement
+//     Copyright © Lifeprojects.de 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>06.10.2023</date>
+//
+// <summary>
+// Die Klasse gehört zur Funktion "SvgToXaml",
+// eine SVG-Vektor-Grafik für XAML nutzbar zu machen.
+// </summary>
+// <remark>
+// Die Klasse wurde ursprünglich vom
+// Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
+// erstellt, und von mir für NET 8 überarbeitet und angepasst.
+// </remark>
+//-----------------------------------------------------------------------
+
 namespace ModernBaseLibrary.Graphics.SVG
 {
     using System;
@@ -34,31 +54,45 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             XAttribute opacity_attribute = drawableBaseElement.Attribute("opacity");
             if (opacity_attribute != null)
+            {
                 Opacity = SvgLength.Parse(opacity_attribute.Value);
+            }
 
             XAttribute fill_opacity_attribute = drawableBaseElement.Attribute("fill-opacity");
             if (fill_opacity_attribute != null)
+            {
                 FillOpacity = SvgLength.Parse(fill_opacity_attribute.Value);
+            }
 
             XAttribute stroke_opacity_attribute = drawableBaseElement.Attribute("stroke-opacity");
             if (stroke_opacity_attribute != null)
+            {
                 StrokeOpacity = SvgLength.Parse(stroke_opacity_attribute.Value);
+            }
 
             XAttribute transform_attribute = drawableBaseElement.Attribute("transform");
             if (transform_attribute != null)
+            {
                 Transform = SvgTransform.Parse(transform_attribute.Value);
+            }
 
             XAttribute fill_attribute = drawableBaseElement.Attribute("fill");
             if (fill_attribute != null)
+            {
                 Fill = SvgPaint.Parse(fill_attribute.Value);
+            }
 
             XAttribute stroke_attribute = drawableBaseElement.Attribute("stroke");
             if (stroke_attribute != null)
+            {
                 Stroke = SvgPaint.Parse(stroke_attribute.Value);
+            }
 
             XAttribute stroke_width_attribute = drawableBaseElement.Attribute("stroke-width");
             if (stroke_width_attribute != null)
+            {
                 StrokeWidth = SvgLength.Parse(stroke_width_attribute.Value);
+            }
 
             XAttribute stroke_linecap_attribute = drawableBaseElement.Attribute("stroke-linecap");
             if (stroke_linecap_attribute != null)
@@ -112,7 +146,9 @@ namespace ModernBaseLibrary.Graphics.SVG
             if (stroke_miterlimit_attribute != null)
             {
                 if (stroke_miterlimit_attribute.Value == "inherit")
+                {
                     StrokeMiterlimit = Double.NaN;
+                }
                 else
                 {
                     double miterlimit = Double.Parse(stroke_miterlimit_attribute.Value, CultureInfo.InvariantCulture.NumberFormat);
@@ -126,9 +162,13 @@ namespace ModernBaseLibrary.Graphics.SVG
             if (stroke_dasharray_attribute != null)
             {
                 if (stroke_dasharray_attribute.Value == "none")
+                {
                     StrokeDasharray = null;
+                }
                 else if (stroke_dasharray_attribute.Value == "inherit")
+                {
                     StrokeDasharray = new SvgLength[0];
+                }
                 else
                 {
                     List<SvgLength> lengths = new List<SvgLength>();
@@ -165,7 +205,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                     {
                         clip_path = clip_path.Substring(1, clip_path.Length - 2).Trim();
                         if (clip_path.StartsWith("#"))
+                        {
                             ClipPath = clip_path.Substring(1);
+                        }
                     }
                 }
             }
@@ -181,7 +223,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                     {
                         filter = filter.Substring(1, filter.Length - 2).Trim();
                         if (filter.StartsWith("#"))
+                        {
                             Filter = filter.Substring(1);
+                        }
                     }
                 }
             }
@@ -197,7 +241,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                     {
                         mask = mask.Substring(1, mask.Length - 2).Trim();
                         if (mask.StartsWith("#"))
+                        {
                             Mask = mask.Substring(1);
+                        }
                     }
                 }
             }
@@ -324,10 +370,14 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             Geometry geometry = GetBaseGeometry();
             if (geometry == null)
+            {
                 return null;
+            }
 
             if (Transform != null)
+            {
                 geometry.Transform = Transform.ToTransform();
+            }
 
             if (ClipPath != null)
             {
@@ -336,7 +386,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                 {
                     Geometry clip_geometry = clip_path_element.GetClipGeometry();
                     if (clip_geometry != null)
+                    {
                         return Geometry.Combine(geometry, clip_geometry, GeometryCombineMode.Intersect, null);
+                    }
                 }
             }
 
@@ -347,10 +399,14 @@ namespace ModernBaseLibrary.Graphics.SVG
         public Pen GetPen()
         {
             if (Stroke == null)
+            {
                 return null;
+            }
 
             if (StrokeWidth.ToDouble() <= 0.0)
+            {
                 return null;
+            }
 
             Brush brush = Stroke.ToBrush(this);
             brush.Opacity = Opacity.ToDouble() * StrokeOpacity.ToDouble();
@@ -364,11 +420,15 @@ namespace ModernBaseLibrary.Graphics.SVG
         public Brush GetBrush()
         {
             if (Fill == null)
+            {
                 return null;
+            }
 
             Brush brush = Fill.ToBrush(this);
             if (brush == null)
+            {
                 return null;
+            }
 
             brush.Opacity = Opacity.ToDouble() * FillOpacity.ToDouble();
             return brush;
@@ -379,20 +439,32 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             Geometry geometry = GetGeometry();
             if (geometry == null)
+            {
                 return null;
+            }
 
             if (geometry.IsEmpty())
+            {
                 return null;
+            }
+
             if (geometry.Bounds.Width <= 0.0)
+            {
                 return null;
+            }
+
             if (geometry.Bounds.Height <= 0.0)
+            {
                 return null;
+            }
 
             Brush brush = GetBrush();
             Pen pen = GetPen();
 
             if ((brush == null) && (pen == null))
+            {
                 return null;
+            }
 
 
             // Apply fill-rule...
@@ -401,9 +473,13 @@ namespace ModernBaseLibrary.Graphics.SVG
             {
                 PathGeometry path_geometry = Geometry.Combine(geometry, Geometry.Empty, GeometryCombineMode.Exclude, null);
                 if (FillRule == SvgFillRule.Evenodd)
+                {
                     path_geometry.FillRule = System.Windows.Media.FillRule.EvenOdd;
+                }
                 else if (FillRule == SvgFillRule.Nonzero)
+                {
                     path_geometry.FillRule = System.Windows.Media.FillRule.Nonzero;
+                }
                 geometry = path_geometry;
             }
             GeometryDrawing geometry_drawing = new GeometryDrawing(brush, pen, geometry);
@@ -416,7 +492,9 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             Drawing drawing = GetBaseDrawing();
             if (drawing == null)
+            {
                 return null;
+            }
 
             BitmapEffect bitmap_effect = null;
             if (Filter != null)
@@ -424,7 +502,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                 {
                     SvgFilterElement filter_element = Document.Elements[Filter] as SvgFilterElement;
                     if (filter_element != null)
+                    {
                         bitmap_effect = filter_element.ToBitmapEffect();
+                    }
                 }
 
             Brush opacity_mask = null;
@@ -436,7 +516,9 @@ namespace ModernBaseLibrary.Graphics.SVG
                     opacity_mask = mask_element.GetOpacityMask();
                     if (opacity_mask != null)
                         if (Transform != null)
+                        {
                             opacity_mask.Transform = Transform.ToTransform();
+                        }
                 }
             }
 

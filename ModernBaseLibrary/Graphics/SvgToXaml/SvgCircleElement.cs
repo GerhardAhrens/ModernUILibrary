@@ -1,4 +1,24 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="SvgCircleElement.cs" company="Lifeprojects.de">
+//     Class: SvgCircleElement
+//     Copyright © Lifeprojects.de 2023
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>06.10.2023</date>
+//
+// <summary>
+// Die Klasse gehört zur Funktion "SvgToXaml",
+// eine SVG-Vektor-Grafik für XAML nutzbar zu machen.
+// </summary>
+// <remark>
+// Die Klasse wurde ursprünglich vom
+// Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
+// erstellt, und von mir für NET 8 überarbeitet und angepasst.
+// </remark>
+//-----------------------------------------------------------------------
+
 namespace ModernBaseLibrary.Graphics.SVG
 {
     using System.Windows;
@@ -30,21 +50,26 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             XAttribute cx_attribute = circleElement.Attribute("cx");
             if (cx_attribute != null)
+            {
                 CenterX = SvgCoordinate.Parse(cx_attribute.Value);
+            }
 
             XAttribute cy_attribute = circleElement.Attribute("cy");
             if (cy_attribute != null)
+            {
                 CenterY = SvgCoordinate.Parse(cy_attribute.Value);
+            }
 
             XAttribute r_attribute = circleElement.Attribute("r");
             if (r_attribute != null)
+            {
                 Radius = SvgLength.Parse(r_attribute.Value);
+            }
         }
 
         public override Geometry GetBaseGeometry()
         {
-            return new EllipseGeometry(new Point(CenterX.ToDouble(), CenterY.ToDouble()),
-                                       Radius.ToDouble(), Radius.ToDouble());
+            return new EllipseGeometry(new Point(CenterX.ToDouble(), CenterY.ToDouble()), Radius.ToDouble(), Radius.ToDouble());
         }
 
     }

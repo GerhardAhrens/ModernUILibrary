@@ -1,4 +1,24 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="SvgDrawableContainerBaseElement.cs" company="Lifeprojects.de">
+//     Class: SvgDrawableContainerBaseElement
+//     Copyright © Lifeprojects.de 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>06.10.2023</date>
+//
+// <summary>
+// Die Klasse gehört zur Funktion "SvgToXaml",
+// eine SVG-Vektor-Grafik für XAML nutzbar zu machen.
+// </summary>
+// <remark>
+// Die Klasse wurde ursprünglich vom
+// Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
+// erstellt, und von mir für NET 8 überarbeitet und angepasst.
+// </remark>
+//-----------------------------------------------------------------------
+
 namespace ModernBaseLibrary.Graphics.SVG
 {
     using System;
@@ -19,23 +39,33 @@ namespace ModernBaseLibrary.Graphics.SVG
         {
             XAttribute opacity_attribute = drawableContainerElement.Attribute("opacity");
             if (opacity_attribute != null)
+            {
                 Opacity = SvgLength.Parse(opacity_attribute.Value);
+            }
 
             XAttribute transform_attribute = drawableContainerElement.Attribute("transform");
             if (transform_attribute != null)
+            {
                 Transform = SvgTransform.Parse(transform_attribute.Value);
+            }
 
             XAttribute clip_attribute = drawableContainerElement.Attribute("clip-path");
             if (clip_attribute != null)
+            {
                 ClipPath = SvgURL.Parse(clip_attribute.Value);
+            }
 
             XAttribute filter_attribute = drawableContainerElement.Attribute("filter");
             if (filter_attribute != null)
+            {
                 Filter = SvgURL.Parse(filter_attribute.Value);
+            }
 
             XAttribute mask_attribute = drawableContainerElement.Attribute("mask");
             if (mask_attribute != null)
+            {
                 Mask = SvgURL.Parse(mask_attribute.Value);
+            }
 
             XAttribute display_attribute = drawableContainerElement.Attribute("display");
             if (display_attribute != null)
@@ -122,19 +152,27 @@ namespace ModernBaseLibrary.Graphics.SVG
             foreach (SvgBaseElement element in Children)
             {
                 if (element is SvgDrawableBaseElement)
+                {
                     geometry_group.Children.Add((element as SvgDrawableBaseElement).GetGeometry());
+                }
                 else if (element is SvgDrawableContainerBaseElement)
+                {
                     geometry_group.Children.Add((element as SvgDrawableContainerBaseElement).GetGeometry());
+                }
             }
 
             if (Transform != null)
+            {
                 geometry_group.Transform = Transform.ToTransform();
+            }
 
             if (ClipPath != null)
             {
                 SvgClipPathElement clip_path_element = Document.Elements[ClipPath.Id] as SvgClipPathElement;
                 if (clip_path_element != null)
+                {
                     return Geometry.Combine(geometry_group, clip_path_element.GetClipGeometry(), GeometryCombineMode.Exclude, null);
+                }
             }
 
             return geometry_group;
@@ -146,7 +184,9 @@ namespace ModernBaseLibrary.Graphics.SVG
 
             drawing_group.Opacity = Opacity.ToDouble();
             if (Transform != null)
+            {
                 drawing_group.Transform = Transform.ToTransform();
+            }
 
             foreach (SvgBaseElement child_element in Children)
             {
@@ -159,30 +199,40 @@ namespace ModernBaseLibrary.Graphics.SVG
                 if (element is SvgDrawableBaseElement)
                 {
                     if ((element as SvgDrawableBaseElement).Display != SvgDisplay.None)
+                    {
                         drawing = (element as SvgDrawableBaseElement).Draw();
+                    }
                 }
                 else if (element is SvgDrawableContainerBaseElement)
                 {
                     if ((element as SvgDrawableContainerBaseElement).Display != SvgDisplay.None)
+                    {
                         drawing = (element as SvgDrawableContainerBaseElement).Draw();
+                    }
                 }
 
                 if (drawing != null)
+                {
                     drawing_group.Children.Add(drawing);
+                }
             }
 
             if (Filter != null)
             {
                 SvgFilterElement filter_element = Document.Elements[Filter.Id] as SvgFilterElement;
                 if (filter_element != null)
+                {
                     drawing_group.BitmapEffect = filter_element.ToBitmapEffect();
+                }
             }
 
             if (ClipPath != null)
             {
                 SvgClipPathElement clip_path_element = Document.Elements[ClipPath.Id] as SvgClipPathElement;
                 if (clip_path_element != null)
+                {
                     drawing_group.ClipGeometry = clip_path_element.GetClipGeometry();
+                }
             }
 
             if (Mask != null)

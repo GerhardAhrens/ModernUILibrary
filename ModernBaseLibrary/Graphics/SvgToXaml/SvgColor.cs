@@ -1,4 +1,24 @@
-﻿
+﻿//-----------------------------------------------------------------------
+// <copyright file="SvgColor.cs" company="Lifeprojects.de">
+//     Class: SvgColor
+//     Copyright © Lifeprojects.de 2023
+// </copyright>
+//
+// <author>Gerhard Ahrens - Lifeprojects.de</author>
+// <email>developer@lifeprojects.de</email>
+// <date>06.10.2023</date>
+//
+// <summary>
+// Die Klasse gehört zur Funktion "SvgToXaml",
+// eine SVG-Vektor-Grafik für XAML nutzbar zu machen.
+// </summary>
+// <remark>
+// Die Klasse wurde ursprünglich vom
+// Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
+// erstellt, und von mir für NET 8 überarbeitet und angepasst.
+// </remark>
+//-----------------------------------------------------------------------
+
 namespace ModernBaseLibrary.Graphics.SVG
 {
     using System;
@@ -40,17 +60,17 @@ namespace ModernBaseLibrary.Graphics.SVG
                 string color = value.Substring(1).Trim();
                 if (color.Length == 3)
                 {
-                    float r = (float)(Byte.Parse(String.Format("{0}{0}", color[0]), NumberStyles.HexNumber) / 255.0);
-                    float g = (float)(Byte.Parse(String.Format("{0}{0}", color[1]), NumberStyles.HexNumber) / 255.0);
-                    float b = (float)(Byte.Parse(String.Format("{0}{0}", color[2]), NumberStyles.HexNumber) / 255.0);
+                    float r = (float)(byte.Parse(String.Format("{0}{0}", color[0]), NumberStyles.HexNumber) / 255.0);
+                    float g = (float)(byte.Parse(String.Format("{0}{0}", color[1]), NumberStyles.HexNumber) / 255.0);
+                    float b = (float)(byte.Parse(String.Format("{0}{0}", color[2]), NumberStyles.HexNumber) / 255.0);
                     return new SvgColor(r, g, b);
                 }
 
                 if (color.Length == 6)
                 {
-                    float r = (float)(Byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber) / 255.0);
-                    float g = (float)(Byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber) / 255.0);
-                    float b = (float)(Byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber) / 255.0);
+                    float r = (float)(byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber) / 255.0);
+                    float g = (float)(byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber) / 255.0);
+                    float b = (float)(byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber) / 255.0);
                     return new SvgColor(r, g, b);
                 }
             }
@@ -74,7 +94,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             r = (float)(Double.Parse(components[0], CultureInfo.InvariantCulture.NumberFormat) / 100.0);
                         }
                         else
-                            r = (float)(Byte.Parse(components[0]) / 255.0);
+                            r = (float)(byte.Parse(components[0]) / 255.0);
 
                         components[1] = components[1].Trim();
                         if (components[1].EndsWith("%"))
@@ -83,7 +103,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             g = (float)(Double.Parse(components[1], CultureInfo.InvariantCulture.NumberFormat) / 100.0);
                         }
                         else
-                            g = (float)(Byte.Parse(components[1]) / 255.0);
+                            g = (float)(byte.Parse(components[1]) / 255.0);
 
                         components[2] = components[1].Trim();
                         if (components[2].EndsWith("%"))
@@ -92,7 +112,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             b = (float)(Double.Parse(components[2], CultureInfo.InvariantCulture.NumberFormat) / 100.0);
                         }
                         else
-                            b = (float)(Byte.Parse(components[2]) / 255.0);
+                            b = (float)(byte.Parse(components[2]) / 255.0);
 
                         return new SvgColor(r, g, b);
                     }

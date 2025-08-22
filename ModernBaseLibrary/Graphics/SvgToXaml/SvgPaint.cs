@@ -34,17 +34,17 @@ namespace ModernBaseLibrary.Graphics.SVG
                 string color = value.Substring(1).Trim();
                 if (color.Length == 3)
                 {
-                    byte r = Byte.Parse(String.Format("{0}{0}", color[0]), NumberStyles.HexNumber);
-                    byte g = Byte.Parse(String.Format("{0}{0}", color[1]), NumberStyles.HexNumber);
-                    byte b = Byte.Parse(String.Format("{0}{0}", color[2]), NumberStyles.HexNumber);
+                    byte r = byte.Parse(String.Format("{0}{0}", color[0]), NumberStyles.HexNumber);
+                    byte g = byte.Parse(String.Format("{0}{0}", color[1]), NumberStyles.HexNumber);
+                    byte b = byte.Parse(String.Format("{0}{0}", color[2]), NumberStyles.HexNumber);
                     return new SvgColorPaint(new SvgColor(r, g, b));
                 }
 
                 if (color.Length == 6)
                 {
-                    byte r = Byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
-                    byte g = Byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
-                    byte b = Byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
+                    byte r = byte.Parse(color.Substring(0, 2), NumberStyles.HexNumber);
+                    byte g = byte.Parse(color.Substring(2, 2), NumberStyles.HexNumber);
+                    byte b = byte.Parse(color.Substring(4, 2), NumberStyles.HexNumber);
                     return new SvgColorPaint(new SvgColor(r, g, b));
                 }
             }
@@ -68,7 +68,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             r = Single.Parse(components[0], CultureInfo.InvariantCulture.NumberFormat) / 100;
                         }
                         else
-                            r = (float)(Byte.Parse(components[0]) / 255.0);
+                            r = (float)(byte.Parse(components[0]) / 255.0);
 
                         components[1] = components[1].Trim();
                         if (components[1].EndsWith("%"))
@@ -77,7 +77,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             g = Single.Parse(components[1], CultureInfo.InvariantCulture.NumberFormat) / 100;
                         }
                         else
-                            g = (float)(Byte.Parse(components[1]) / 255.0);
+                            g = (float)(byte.Parse(components[1]) / 255.0);
 
                         components[2] = components[1].Trim();
                         if (components[2].EndsWith("%"))
@@ -86,7 +86,7 @@ namespace ModernBaseLibrary.Graphics.SVG
                             b = Single.Parse(components[2], CultureInfo.InvariantCulture.NumberFormat) / 100;
                         }
                         else
-                            b = (float)(Byte.Parse(components[2]) / 255.0);
+                            b = (float)(byte.Parse(components[2]) / 255.0);
 
                         return new SvgColorPaint(new SvgColor(r, g, b));
                     }

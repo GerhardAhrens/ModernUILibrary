@@ -15,7 +15,7 @@
 // <remark>
 // Die Klasse wurde ursprünglich vom
 // Copyright (C) 2009,2011 Boris Richter <himself@boris-richter.net>
-// erstellt, und von mir für NET 7 überarbeitet und angepasst.
+// erstellt, und von mir für NET 8 überarbeitet und angepasst.
 // </remark>
 //-----------------------------------------------------------------------
 

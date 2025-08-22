@@ -1,8 +1,8 @@
-﻿
-namespace ModernBaseLibrary.Graphics.SVG
+﻿namespace ModernBaseLibrary.Graphics.SVG
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Xml.Linq;
 
@@ -145,8 +145,16 @@ namespace ModernBaseLibrary.Graphics.SVG
                         Children.Add(new SvgStyleElement(document, this, element));
                         break;
 
+                    case "title":
+                        Children.Add(new SvgStyleElement(document, this, element));
+                        break;
+
+                    case "desc":
+                        Children.Add(new SvgStyleElement(document, this, element));
+                        break;
+
                     default:
-                        throw new NotImplementedException(String.Format("Unhandled element: {0}", element));
+                        throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, "Unhandled element: {0}; {1}", element, element.Name.LocalName));
                 }
         }
     }
