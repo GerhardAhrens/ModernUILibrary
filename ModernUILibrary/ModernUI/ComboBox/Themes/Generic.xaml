@@ -215,6 +215,7 @@
         <Setter Property="MinHeight" Value="20" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
         <Setter Property="Padding" Value="5,0,0,0" />
         <Setter Property="Watermark" Value="Auswahl..." />
         <Setter Property="CornerRadius" Value="3" />
@@ -408,7 +409,7 @@
                             <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </Trigger>
                         <Trigger Property="ComboBox.IsEditable" Value="True">
-                            <Setter Property="KeyboardNavigation.IsTabStop" Value="False" />
+                            <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
                             <Setter TargetName="PART_EditableTextBox" Property="UIElement.Visibility" Value="Visible" />
                             <Setter TargetName="ContentSite" Property="UIElement.Visibility" Value="Hidden" />
                         </Trigger>
