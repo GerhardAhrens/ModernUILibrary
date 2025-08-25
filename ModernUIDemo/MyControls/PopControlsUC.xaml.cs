@@ -100,6 +100,37 @@
         #endregion PropertyChanged Implementierung
     }
 
+    public class NotifiactionPopupSettings
+    {
+        public NotifiactionPopupSettings(UIElement placementTarget, int delay = 5)
+        {
+            this.PlacementTarget = placementTarget;
+            this.Delay = delay;
+        }
+
+        public UIElement PlacementTarget { get; private set; }
+
+        public int Delay { get; private set; }
+
+        public PlacementMode PlacementMode { get; set; }
+
+        public double PopupWidth { get; set; }
+
+        public double PopupHeight { get; set; }
+
+        public PopupAnimation PopupAnimation { get; set; }
+
+        public double HorizontalOffset { get; set; }
+
+        public double VerticalOffset { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <Link>
+    /// https://putridparrot.com/blog/automatically-update-a-wpf-popup-position/
+    /// </Link>
     public class NotifiactionPopup : IDisposable
     {
         public event EventHandler<PopupResultArgs> PopupClick;
@@ -117,7 +148,7 @@
 
         public UIElement PlacementTarget { get; private set; }
 
-        public int Delay { get; set; }
+        public int Delay { get; private set; }
 
         public Popup CreatePopup(string field, string msgText)
         {
