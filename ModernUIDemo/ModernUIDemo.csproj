@@ -77,10 +77,10 @@
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Heaps.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_AmstrongNumber.txt" />
     <EmbeddedResource Include="Resources\Source\Algorithm\Algorithm_Palindrome.txt" />
-    <EmbeddedResource Include="Resources\Source\Console\Console_Table - Kopieren.txt" />
-    <EmbeddedResource Include="Resources\Source\Console\Console_Alignment_String.txt" />
-    <EmbeddedResource Include="Resources\Source\Console\Console_Spinner.txt" />
-    <EmbeddedResource Include="Resources\Source\Console\Console_CommandLine.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Table.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Alignment_String.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\Spinner.txt" />
+    <EmbeddedResource Include="Resources\Source\Console\CommandLine.txt" />
     <EmbeddedResource Include="Resources\Source\CoreBase\Microsoft.Extensions.Configuration.txt" />
     <EmbeddedResource Include="Resources\Source\CoreBase\CoreBase_SmartSettings.txt" />
     <EmbeddedResource Include="Resources\Source\CSharp\CSharp_ArtofGenerics.txt" />
