@@ -4,6 +4,7 @@
     using System.Windows;
     using System.Windows.Controls.Primitives;
     using System.Windows.Interop;
+    using System.Windows.Threading;
 
     public class PopupEx : Popup
     {

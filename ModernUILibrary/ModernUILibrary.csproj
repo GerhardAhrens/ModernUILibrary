@@ -46,6 +46,7 @@
     <Folder Include="Behaviors\Graphics\" />
     <Folder Include="Behaviors\ComboBox\" />
     <Folder Include="Behaviors\ListBox\" />
+    <Folder Include="Behaviors\Popup\" />
     <Folder Include="Behaviors\TextBox\" />
     <Folder Include="Converters\Chart\" />
     <Folder Include="Converters\MultiValue\" />

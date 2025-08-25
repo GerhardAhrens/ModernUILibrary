@@ -82,8 +82,11 @@
                 if (value != null && this.sourceWPF == true)
                 {
                     UserControl uc = value.ItemContent as UserControl;
-                    this.SourceName = uc.GetType().Name;
-                    this.ContentItem = uc;
+                    if (uc != null)
+                    {
+                        this.SourceName = uc.GetType().Name;
+                        this.ContentItem = uc;
+                    }
                 }
                 else
                 {
@@ -310,18 +313,18 @@
             this.tabItemSource.Add(new TabControlItem("ProgressBar Controls", new ProgressBarControlsUC()));
             this.tabItemSource.Add(new TabControlItem("Tooltip Controls", new TooltipControlsUC()));
             this.tabItemSource.Add(new TabControlItem("GroupBox Controls", new GroupBoxControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Rating Controls", new RatingControlsUC()) { Stichworte = "Rating;Bewertung" });
 
             this.tabItemSource.Add(new TabControlItem($"MessageBox, NoticeMessage\nWindow", true));
-            this.tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("NotificationBox Window", new NotifiactionBoxControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("NoticeMessage Controls", new NoticeMessageControlsUC()) { Stichworte = "Message;Meldung" });
+            this.tabItemSource.Add(new TabControlItem("MessageBox Window", new MessageBoxControlsUC()) { Stichworte = "Message;Meldung" });
+            this.tabItemSource.Add(new TabControlItem("NotificationBox Window", new NotifiactionBoxControlsUC()) { Stichworte = "Message;Meldung" });
             this.tabItemSource.Add(new TabControlItem("Notification Service Dialog", new NotificationServiceControlsUC()));
             this.tabItemSource.Add(new TabControlItem("Messaging mit zwei Controls", new MessagingAControlsUC()));
             this.tabItemSource.Add(new TabControlItem("Messaging B", new MessagingBControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Flyout Window", new FlyoutControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("Window", new WindowControlsUC()));
-            this.tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()));
+            this.tabItemSource.Add(new TabControlItem("Flyout Window", new FlyoutControlsUC()) { Stichworte = "Window;Dialog" });
+            this.tabItemSource.Add(new TabControlItem("Window", new WindowControlsUC()) { Stichworte = "Window;Dialog" });
+            this.tabItemSource.Add(new TabControlItem("PopUp Window", new PopUpControlsUC()) { Stichworte = "Window;Popup" });
 
             this.tabItemSource.Add(new TabControlItem($"Dateien, IO", true));
             this.tabItemSource.Add(new TabControlItem("Datei/Verzeichnis Controls", new FileFolderBoxControlsUC()) { Stichworte = "Dialog;Verzeichnis;Dateien;File;Folder" });

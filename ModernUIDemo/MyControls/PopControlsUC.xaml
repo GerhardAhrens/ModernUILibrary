@@ -6,12 +6,14 @@
     xmlns:MUIBehaviors="clr-namespace:ModernIU.Behaviors;assembly=ModernUILibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="namePopUpControlsUC"
     d:DesignHeight="450"
     d:DesignWidth="900"
     mc:Ignorable="d">
 
     <UserControl.Resources>
         <PathGeometry x:Key="Icon_Close" Figures="M754.782 212.596 512 455.368 269.218 212.596c-13.081-13.081-34.29-13.081-47.369 0-13.081 13.081-13.081 34.288 0 47.367l242.782 242.771L221.849 745.507c-13.081 13.081-13.081 34.288 0 47.367 13.081 13.081 34.29 13.081 47.369 0L512 550.103l242.782 242.771c13.081 13.081 34.289 13.081 47.37 0 13.081-13.081 13.081-34.288 0-47.367L559.37 502.735l242.782-242.771c13.081-13.081 13.081-34.288 0-47.367C789.07 199.517 767.862 199.517 754.782 212.596z" />
+
     </UserControl.Resources>
 
     <Grid>
@@ -21,14 +23,29 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.ColumnSpan="2"
-            FontSize="14"
-            Text="Beispiel zum Aufrufen eines PopUp Window" />
+        <DockPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">
+            <TextBlock
+                DockPanel.Dock="Left"
+                FontSize="14"
+                Text="Beispiel zum Aufrufen eines PopUp Window" />
+
+            <Button
+                x:Name="BtnShowErrors"
+                Width="100"
+                Height="25"
+                HorizontalAlignment="Right"
+                Content="Errors"
+                DockPanel.Dock="Right" />
+        </DockPanel>
+
         <Separator
             Grid.ColumnSpan="2"
             Height="3"
@@ -43,7 +60,7 @@
                 Width="100"
                 Height="30"
                 Click="btnOpenMaskLayer_Click"
-                Content="Klick" />
+                Content="Klick für Popup Window" />
             <MUI:PopupEx
                 x:Name="popupMaskLayer"
                 MUIBehaviors:MaskLayerBehavior.Owner="{Binding Path=., RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -82,6 +99,63 @@
                 </Grid>
             </MUI:PopupEx>
         </StackPanel>
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Button
+                x:Name="btnOpenNotificationPopup"
+                Width="200"
+                Height="30"
+                Click="btnOpenNotificationPopup_Click"
+                Content="Klick für Notification Popup" />
+
+            <MUI:PopupDelay
+                Width="200"
+                Height="100"
+                MUIBehaviors:ClosePopupBehavior.PopupContainer="{Binding ElementName=namePopUpControlsUC}"
+                Delay="3"
+                HorizontalOffset="-205"
+                IsOpen="{Binding Path=ShowPopup.Value, UpdateSourceTrigger=PropertyChanged}"
+                Placement="Right"
+                PlacementTarget="{Binding ElementName=BtnShowErrors}"
+                VerticalOffset="40">
+                <Border
+                    Background="LightPink"
+                    BorderBrush="Blue"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <Grid>
+                        <TextBlock Text="Hallo" />
+                    </Grid>
+                </Border>
+            </MUI:PopupDelay>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnOpenGeneratePopup"
+                Width="200"
+                Height="30"
+                Margin="0,0,5,0"
+                Click="btnOpenGeneratePopup_Click"
+                Content="Klick für Generate Popup" />
+
+            <Button
+                x:Name="btnShowPopup"
+                Width="200"
+                Height="30"
+                Click="btnShowPopup_Click"
+                Content="Klick für anzeigen Popup" />
+
+        </StackPanel>
+
 
     </Grid>
 </UserControl>
