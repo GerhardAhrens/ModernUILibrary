@@ -1,5 +1,6 @@
 ﻿namespace ModernUIDemo
 {
+    using System;
     using System.Configuration;
     using System.Globalization;
     using System.Windows;
@@ -21,14 +22,25 @@
 
         public static string DatePattern { get; private set; }
 
+        public record Person(string Name, int Age);
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             /*
+            Person scooby = new("Scooby Doo", 7);
+            Person charlie = scooby with { Name = "Charlie", Age = 3 };
+            */
+
+            /*
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings.Add("NewName", "Daniel Doe");
+
+            if (config.AppSettings.Settings["NewName"].Value.ToString() == "Daniel Doe")
+            {
+            }
+
             config.Save(ConfigurationSaveMode.Modified);
             */
         }
