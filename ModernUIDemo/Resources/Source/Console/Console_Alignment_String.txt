@@ -1,0 +1,36 @@
+﻿namespace ConsoleTable
+{
+    using System;
+
+    public class Program
+    {
+        private static void Main(string[] args)
+        {
+            var number = 123;
+            Console.WriteLine($"|{number,-10}|");
+            Console.WriteLine($"|{number,10}|");
+
+            /*
+            |123       |
+            |       123|
+            */
+
+            var number = 123;
+            Console.WriteLine($"|{number, -10:F3}|");
+            Console.WriteLine($"|{number, 10:F3}|");
+
+            /*
+            |123.000   |
+            |   123.000|
+            */
+
+            var number = 123;
+            Console.WriteLine($"|{number:F3}|");
+            Console.WriteLine($"|{number:F3}|");
+
+            /*
+            |123.000|
+            |123.000|
+            */
+        }
+}

@@ -401,6 +401,7 @@
             this.tabItemSource.Add(new TabControlItem("CommandLine", new SyntaxBoxControlsUC()) { Stichworte = "Console;CommandLine", SourceFile = "Console.Console_CommandLine.txt" });
             this.tabItemSource.Add(new TabControlItem("Spinner", new SyntaxBoxControlsUC()) { Stichworte = "Console;Spinner", SourceFile = "Console.Console_Spinner.txt" });
             this.tabItemSource.Add(new TabControlItem("Table", new SyntaxBoxControlsUC()) { Stichworte = "Console;Table", SourceFile = "Console.Console_Table.txt" });
+            this.tabItemSource.Add(new TabControlItem("Alignment", new SyntaxBoxControlsUC()) { Stichworte = "Alignment;String", SourceFile = "Console_Alignment_String.txt" });
 
             this.tabItemSource.Add(new TabControlItem("Application ", true));
             this.tabItemSource.Add(new TabControlItem("SmartSettings", new SyntaxBoxControlsUC()) { Stichworte = "Application;SmartSettings", SourceFile = "CoreBase.CoreBase_SmartSettings.txt" });
