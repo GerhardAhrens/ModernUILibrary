@@ -6,8 +6,8 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.1.2025.21</AssemblyVersion>
-    <FileVersion>1.1.2025.21</FileVersion>
+    <AssemblyVersion>1.1.2025.23</AssemblyVersion>
+    <FileVersion>1.1.2025.23</FileVersion>
     <ApplicationIcon>LibLogo.ico</ApplicationIcon>
   </PropertyGroup>
 

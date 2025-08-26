@@ -12,7 +12,7 @@
     [SupportedOSPlatform("windows")]
     internal class Program
     {
-        public static List<ConsoleMenuOption> menuOptions;
+        public static List<ConsoleMenuOption> menuOptions = null;
 
         private static void Main(string[] args)
         {
