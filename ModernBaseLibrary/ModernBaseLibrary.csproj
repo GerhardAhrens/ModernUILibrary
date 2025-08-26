@@ -242,8 +242,6 @@
     <Folder Include="CustomDataTypes\" />
     <Folder Include="Network\SmtpMail\" />
     <Folder Include="Localization\" />
-    <Folder Include="Network\VMDetector\Environments\" />
-    <Folder Include="Network\VMDetector\Win32\" />
     <Folder Include="Pattern\Factory\" />
     <Folder Include="TextAnalysis\HumanText\" />
     <Folder Include="TextAnalysis\LexicalAnalyzer\" />
@@ -259,7 +257,6 @@
     <PackageReference Include="System.DirectoryServices" Version="8.0.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
     <PackageReference Include="System.Management" Version="9.0.6" />
-    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.6" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
