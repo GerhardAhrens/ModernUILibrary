@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MUI="clr-namespace:ModernIU.Controls">
+    <Style TargetType="MUI:SelectableTextBlock">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MUI:SelectableTextBlock">
+                    <TextBox
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderThickness="0"
+                        Foreground="{TemplateBinding Foreground}"
+                        IsReadOnly="True"
+                        IsTabStop="False"
+                        Text="{TemplateBinding Text}"
+                        TextAlignment="{Binding TextAlignment, RelativeSource={RelativeSource TemplatedParent}}"
+                        TextDecorations="{Binding TextDecorations, RelativeSource={RelativeSource TemplatedParent}}"
+                        TextWrapping="{TemplateBinding TextWrapping}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -26,8 +26,13 @@
         {
             this.InitializeComponent();
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+
+            NotifiactionPopup.PopupClick += this.NotifiactionPopup_PopupClick;
+
+
             this.DataContext = this;
         }
+
 
         public XamlProperty<bool> ShowPopup { get; set; } = XamlProperty.Set<bool>();
 
@@ -52,22 +57,23 @@
 
         private void btnOpenGeneratePopup_Click(object sender, RoutedEventArgs e)
         {
-            using (NotifiactionPopup np = new NotifiactionPopup(this.BtnShowErrors))
-            {
-                WeakEventManager<NotifiactionPopup, PopupResultArgs>.AddHandler(np, "PopupClick", this.PopupClickHandler);
+            NotifiactionPopup.PlacementTarget = this.BtnShowErrors;
+            NotifiactionPopup.Delay = 5;
 
-                Popup po = np.CreatePopup("Vorname", "Eingabefehler A, Das ist ein langer Text zur Bescreibung des Fehlertextes in der Eingabe.");
-                this.listPop.Add(po);
-                po = np.CreatePopup("Beruf", "Eingabefehler B");
-                this.listPop.Add(po);
-                po = np.CreatePopup("Geburtstag", "Eingabefehler C");
-                this.listPop.Add(po);
-                po = np.CreatePopup("Rolle", "Eingabefehler D");
-                this.listPop.Add(po);
-            }
+            Popup po = NotifiactionPopup.CreatePopup("Vorname", "Eingabefehler A, Das ist ein langer Text zur Bescreibung des Fehlertextes in der Eingabe.");
+            this.listPop.Add(po);
+            po = NotifiactionPopup.CreatePopup("Beruf", "Eingabefehler B");
+            this.listPop.Add(po);
+            po = NotifiactionPopup.CreatePopup("Geburtstag", "Eingabefehler C");
+            this.listPop.Add(po);
+            po = NotifiactionPopup.CreatePopup("Rolle", "Eingabefehler D");
+            this.listPop.Add(po);
+
+
+            MessageBox.Show("Einträge zum NotifiactionPopup erstellt!", "NotifiactionPopup");
         }
 
-        private void PopupClickHandler(object sender, PopupResultArgs e)
+        private void NotifiactionPopup_PopupClick(object sender, PopupResultArgs e)
         {
             MessageBox.Show($"Popup: {e.Tag}", "Eingabefehler");
         }
@@ -100,67 +106,62 @@
         #endregion PropertyChanged Implementierung
     }
 
-    public class NotifiactionPopupSettings
-    {
-        public NotifiactionPopupSettings(UIElement placementTarget, int delay = 5)
-        {
-            this.PlacementTarget = placementTarget;
-            this.Delay = delay;
-        }
-
-        public UIElement PlacementTarget { get; private set; }
-
-        public int Delay { get; private set; }
-
-        public PlacementMode PlacementMode { get; set; }
-
-        public double PopupWidth { get; set; }
-
-        public double PopupHeight { get; set; }
-
-        public PopupAnimation PopupAnimation { get; set; }
-
-        public double HorizontalOffset { get; set; }
-
-        public double VerticalOffset { get; set; }
-    }
 
     /// <summary>
-    /// 
+    /// Die Klasse erstellt ein Popup um einen Einghabefehler darzustellen
     /// </summary>
-    /// <Link>
-    /// https://putridparrot.com/blog/automatically-update-a-wpf-popup-position/
-    /// </Link>
-    public class NotifiactionPopup : IDisposable
+    /// <remarks>
+    /// Das Control wird direkt im C# Source erstellt
+    /// </remarks>
+    public class NotifiactionPopup 
     {
-        public event EventHandler<PopupResultArgs> PopupClick;
-        private bool disposed;
+        /// <summary>
+        /// Event das beim Klick auf ein Popup ausgelöst wird
+        /// </summary>
+        public static event EventHandler<PopupResultArgs> PopupClick;
 
         private static int popNumber = 0;
-        public NotifiactionPopup(UIElement placementTarget, int delay = 5)
-        {
-            this.PlacementTarget = placementTarget;
-            this.Delay = delay;
-        }
 
-        public Popup GetPopup { get; private set; }
+        /// <summary>
+        /// Element/Control an dem das erste Popup plaziert ist. Alle weiteren werden direkt darunter gezeigt.
+        /// </summary>
+        public static UIElement PlacementTarget { get; set; }
+
+        /// <summary>
+        /// Zeit in Sekunden, bis sich das Popup automatisch schließt. Bei -1 bleibt das Popup solang stehen, bis es angeklickt wird.
+        /// </summary>
+        public static int Delay { get; set; } = 5;
+
+        public static PlacementMode PlacementMode { get; set; } = PlacementMode.Right;
+
+        public static PopupAnimation PopupAnimation { get; set; } = PopupAnimation.Slide;
+
+        public static double PopupWidth { get; set; } = 200;
+
+        public static double PopupHeight { get; set; } = 100;
 
 
-        public UIElement PlacementTarget { get; private set; }
+        public static double HorizontalOffset { get; set; }
 
-        public int Delay { get; private set; }
+        public static double VerticalOffset { get; set; }
 
-        public Popup CreatePopup(string field, string msgText)
+        /// <summary>
+        /// Erstelle Popup
+        /// </summary>
+        /// <param name="field">Eingabefeld</param>
+        /// <param name="msgText">Fehlerbeschreibung</param>
+        /// <returns>Popup Object</returns>
+        public static Popup CreatePopup(string field, string msgText)
         {
             popNumber++;
             Popup popup = new Popup();
             popup.Tag = $"{popNumber}";
             popup.AllowsTransparency = true;
-            popup.Width = 200;
-            popup.Height = 100;
-            popup.Placement = PlacementMode.Right;
-            popup.PlacementTarget = PlacementTarget;
-            popup.PopupAnimation = PopupAnimation.Slide;
+            popup.Width = NotifiactionPopup.PopupWidth;
+            popup.Height = NotifiactionPopup.PopupHeight;
+            popup.Placement = NotifiactionPopup.PlacementMode;
+            popup.PlacementTarget = NotifiactionPopup.PlacementTarget;
+            popup.PopupAnimation = NotifiactionPopup.PopupAnimation;
             popup.HorizontalOffset = -110;
             popup.VerticalOffset = 30;
             if (popNumber > 1)
@@ -170,7 +171,7 @@
             }
 
             Border border = new Border();
-            border.Background = Brushes.Pink;
+            border.Background = (Brush)(new BrushConverter().ConvertFrom("#FF6600"));
             border.BorderBrush = Brushes.Blue;
             border.BorderThickness = new Thickness(1);
             border.CornerRadius = new CornerRadius(5);
@@ -179,23 +180,26 @@
             grid.Margin = new Thickness(5, 5, 0, 0);
 
             TextBlock textBlockTitle = new TextBlock();
+            textBlockTitle.Foreground= Brushes.White;
             textBlockTitle.Height = 18;
             textBlockTitle.FontWeight = FontWeights.Bold;
             textBlockTitle.FontSize = 14;
             textBlockTitle.Inlines.Add(new Underline(new Run("Eingabefehler")));
 
             TextBlock textBlockMsgA = new TextBlock();
+            textBlockMsgA.Foreground = Brushes.White;
             textBlockMsgA.Height = 18;
-            textBlockMsgA.Margin = new Thickness(0, 5, 0, 0);
+            textBlockMsgA.Margin = new Thickness(0, 4, 0, 0);
             textBlockMsgA.FontWeight = FontWeights.Medium;
             textBlockMsgA.Inlines.Add(new Run("Feld:"));
             textBlockMsgA.Inlines.Add(new Run(field));
 
             TextBlock textBlockMsgB = new TextBlock();
+            textBlockMsgB.Foreground = Brushes.White;
             textBlockMsgB.Width = popup.Width - 10;
             textBlockMsgB.Height = popup.Height - (textBlockTitle.Height + textBlockMsgA.Height);
             textBlockMsgB.TextWrapping = TextWrapping.Wrap;
-            textBlockMsgB.Margin = new Thickness(0, 5, 0, 0);
+            textBlockMsgB.Margin = new Thickness(0, 4, 0, 0);
             textBlockMsgB.FontWeight = FontWeights.Medium;
             textBlockMsgB.Inlines.Add(new Run(msgText));
 
@@ -214,58 +218,44 @@
                 {
                     internalPopup.IsOpen = false;
                     e.Handled = true;
-                    this.RaisePopupResult(internalPopup.Tag);
+                    RaisePopupResult(internalPopup.Tag);
                 }
             };
 
-            popup.Opened += (s, e) =>
+            if (Delay > 0)
             {
-                Popup internalPopup = (Popup)s;
-                if (internalPopup != null)
+                popup.Opened += (s, e) =>
                 {
-                    DispatcherTimer timer = new DispatcherTimer();
-                    timer.Interval = TimeSpan.FromSeconds(this.Delay+(0.25* popNumber));
-                    timer.Start();
-                    timer.Tick += (s, e) =>
+                    Popup internalPopup = (Popup)s;
+                    if (internalPopup != null)
                     {
-                        internalPopup.IsOpen = false;
-                        timer.Stop();
-                        timer = null;
-                    };
-                }
-            };
+                        DispatcherTimer timer = new DispatcherTimer();
+                        timer.Interval = TimeSpan.FromSeconds(Delay + (0.25 * popNumber));
+                        timer.Start();
+                        timer.Tick += (s, e) =>
+                        {
+                            internalPopup.IsOpen = false;
+                            timer.Stop();
+                            timer = null;
+                        };
+                    }
+                };
+            }
+
+            popup.UpdateLayout();
 
             return popup;
         }
 
-        private void RaisePopupResult(object tag)
+        private static void RaisePopupResult(object tag)
         {
-            var handler = this.PopupClick;
+            var handler = PopupClick;
             if (handler != null)
             {
                 var args = new PopupResultArgs();
                 args.Tag = tag;
-                handler(this, args);
+                handler(typeof(NotifiactionPopup), args);
             }
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-            }
-
-
-            disposed = true;
         }
     }
 

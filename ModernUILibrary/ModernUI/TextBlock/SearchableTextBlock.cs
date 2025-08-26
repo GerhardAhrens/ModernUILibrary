@@ -1,5 +1,4 @@
-﻿
-namespace ModernIU.Controls
+﻿namespace ModernIU.Controls
 {
     using System;
     using System.Collections.Generic;
