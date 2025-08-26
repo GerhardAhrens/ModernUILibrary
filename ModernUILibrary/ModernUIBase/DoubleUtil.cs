@@ -1,5 +1,6 @@
 ﻿namespace ModernIU.Base
 {
+    using System.Management;
     using System.Runtime.InteropServices;
 
     public class DoubleUtil
@@ -38,9 +39,9 @@
         {
             dpix = 0;
             dpiy = 0;
-            using (System.Management.ManagementClass mc = new System.Management.ManagementClass("Win32_DesktopMonitor"))
+            using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
             {
-                using (System.Management.ManagementObjectCollection moc = mc.GetInstances())
+                using (ManagementObjectCollection moc = mc.GetInstances())
                 {
 
                     foreach (System.Management.ManagementObject each in moc)
