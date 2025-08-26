@@ -9,6 +9,7 @@
         {
             get
             {
+                /*
                 int dx = 0;
                 int dy = 0;
                 GetDPI(out dx, out dy);
@@ -16,6 +17,8 @@
                 {
                     return (double)dx / 96.0;
                 }
+                */
+
                 return 1.0;
             }
         }
@@ -24,6 +27,7 @@
         {
             get
             {
+                /*
                 int dx = 0;
                 int dy = 0;
                 GetDPI(out dx, out dy);
@@ -31,10 +35,13 @@
                 {
                     return (double)dy / 96.0;
                 }
+                */
+
                 return 1.0;
             }
         }
 
+        /*
         public static void GetDPI(out int dpix, out int dpiy)
         {
             dpix = 0;
@@ -52,6 +59,8 @@
                 }
             }
         }
+        */
+
         public static bool GreaterThan(double value1, double value2)
         {
             return value1 > value2 && !DoubleUtil.AreClose(value1, value2);
