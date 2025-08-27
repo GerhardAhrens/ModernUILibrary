@@ -93,7 +93,7 @@
             <ModernUI:HeaderSeparator
                 Height="15"
                 Background="Green"
-                Header="Default MComboBox" />
+                Header="Default ComboBoxEx" />
 
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <ModernUI:ComboBoxEx

@@ -64,6 +64,9 @@ namespace ModernIU.Controls
             this.IsNumeric = false;
             this.IsReadOnly = false;
             this.IsEditable = true;
+
+            /* Trigger an Style übergeben */
+            this.Style = this.SetTriggerFunction();
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -130,8 +133,8 @@ namespace ModernIU.Controls
                 this._defaultBackgroundBorder = border.Background;
             }
 
-            /* Trigger an Style übergeben */
-            this.Style = this.SetTriggerFunction();
+            this.BorderBrush = Brushes.Green;
+            this.BorderThickness = new Thickness(1);
 
             /* Spezifisches Kontextmenü für Control übergeben */
             if (this.IsEnabledContextMenu == true)
