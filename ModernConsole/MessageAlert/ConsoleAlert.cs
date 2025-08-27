@@ -7,7 +7,12 @@ namespace System
     [SupportedOSPlatform("windows")]
     public static partial class MConsole
     {
-        public static void Alert(string message, string title, ConsoleMessageType messageType)
+        public static void Alert(string message, string title, ConsoleMessageType messageType = ConsoleMessageType.Error)
+        {
+            ConsoleAlert.Create(message, title, messageType);
+        }
+
+        public static void Info(string message, string title, ConsoleMessageType messageType = ConsoleMessageType.Info)
         {
             ConsoleAlert.Create(message, title, messageType);
         }

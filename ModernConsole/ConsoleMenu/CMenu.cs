@@ -1,7 +1,7 @@
-/*
+﻿/*
  * <copyright file="CMenu.cs" company="Lifeprojects.de">
  *     Class: CMenu
- *     Copyright � Lifeprojects.de 2023
+ *     Copyright © Lifeprojects.de 2023
  * </copyright>
  *
  * <author>Gerhard Ahrens - Lifeprojects.de</author>
@@ -10,7 +10,7 @@
  * <Project>EasyPrototypingNET</Project>
  *
  * <summary>
- * �ber die Klasse kann ein einfaches Konsolen Men� erstellt werden.
+ * Über die Klasse kann ein einfaches Konsolen Menü erstellt werden.
  * </summary>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -76,7 +76,7 @@ namespace ModernConsole.Menu
                 StringBuilder sb = new StringBuilder();
                 if (this.Name != null)
                 {
-                    sb.AppendLine($"*** {this.Name} ****");
+                    sb.AppendLine($"───┤ {this.Name} ├───").AppendLine(new string('─', (10+ this.Name.Length)));
                 }
 
                 for (int i = 0; i < Items.Count; i++)
@@ -125,7 +125,7 @@ namespace ModernConsole.Menu
             if (cultureInfo.TwoLetterISOLanguageName == "de")
             {
                 this.cmenuTexte.Add($"{cultureInfo.TwoLetterISOLanguageName}_quit", "Beenden");
-                this.cmenuTexte.Add($"{cultureInfo.TwoLetterISOLanguageName}_back", "Zur�ck");
+                this.cmenuTexte.Add($"{cultureInfo.TwoLetterISOLanguageName}_back", "Zurück");
             }
             else
             {
