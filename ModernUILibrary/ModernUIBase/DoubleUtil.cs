@@ -9,7 +9,6 @@
         {
             get
             {
-                /*
                 int dx = 0;
                 int dy = 0;
                 GetDPI(out dx, out dy);
@@ -17,7 +16,6 @@
                 {
                     return (double)dx / 96.0;
                 }
-                */
 
                 return 1.0;
             }
@@ -27,7 +25,6 @@
         {
             get
             {
-                /*
                 int dx = 0;
                 int dy = 0;
                 GetDPI(out dx, out dy);
@@ -35,31 +32,36 @@
                 {
                     return (double)dy / 96.0;
                 }
-                */
 
                 return 1.0;
             }
         }
 
-        /*
         public static void GetDPI(out int dpix, out int dpiy)
         {
             dpix = 0;
             dpiy = 0;
-            using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
+            try
             {
-                using (ManagementObjectCollection moc = mc.GetInstances())
+                using (ManagementClass mc = new ManagementClass("Win32_DesktopMonitor"))
                 {
-
-                    foreach (System.Management.ManagementObject each in moc)
+                    using (ManagementObjectCollection moc = mc.GetInstances())
                     {
-                        dpix = int.Parse((each.Properties["PixelsPerXLogicalInch"].Value.ToString()));
-                        dpiy = int.Parse((each.Properties["PixelsPerYLogicalInch"].Value.ToString()));
+
+                        foreach (System.Management.ManagementObject each in moc)
+                        {
+                            dpix = int.Parse((each.Properties["PixelsPerXLogicalInch"].Value.ToString()));
+                            dpiy = int.Parse((each.Properties["PixelsPerYLogicalInch"].Value.ToString()));
+                        }
                     }
                 }
             }
+            catch (Exception)
+            {
+                dpix = 96;
+                dpiy = 96;
+            }
         }
-        */
 
         public static bool GreaterThan(double value1, double value2)
         {

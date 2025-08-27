@@ -8,6 +8,8 @@
 
     using ModernBaseLibrary.Core;
 
+    using ModernIU.Base;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -27,6 +29,10 @@
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            /*
+            var dpi = ScreenHelper.DPI;
+            */
 
             /*
             Person scooby = new("Scooby Doo", 7);
