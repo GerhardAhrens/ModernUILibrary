@@ -54,6 +54,8 @@
 
         public void DatabaseInfo(string databasePath)
         {
+            MConsole.ClearScreen();
+
             if (File.Exists(databasePath) == true)
             {
                 using (DatabaseRepository repository = new DatabaseRepository())
@@ -78,6 +80,31 @@
 
                     MConsole.WriteLine();
                 }
+            }
+            else
+            {
+                MConsole.Alert($"Die Datenbankdatei '{databasePath}' ist nicht vorhanden.", "Keine Datei");
+            }
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        public void DatabaseMetaInfo(string databasePath)
+        {
+            MConsole.ClearScreen();
+
+            if (File.Exists(databasePath) == true)
+            {
+                using (DatabaseRepository repository = new DatabaseRepository())
+                {
+                    List<Tuple<string, string, object, Type>> metaList = repository.MetadataInformation();
+                    foreach (Tuple<string, string, object, Type> item in metaList)
+                    {
+                        MConsole.WriteInfoLine($"Name:{item.Item1}; Value: {item.Item3}");
+                    }
+                }
+
+                MConsole.WriteLine();
             }
             else
             {

@@ -42,6 +42,23 @@ namespace ModernSQLiteDemo.SQLite
             return result;
         }
 
+        public decimal SumGehalt()
+        {
+            decimal result = 0;
+
+            try
+            {
+                result = base.Connection.RecordSet<int>($"select SUM([Gehalt]) from {this.Tablename}").Get().Result;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return Math.Round(result,2,MidpointRounding.AwayFromZero);
+        }
+
 
         public ICollectionView SelectAsICollectionView()
         {
@@ -67,6 +84,43 @@ namespace ModernSQLiteDemo.SQLite
             try
             {
                 result = base.Connection.RecordSet<DataTable>($"SELECT * FROM {this.Tablename}").Get().Result;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return result;
+        }
+
+        public Dictionary<Guid, string> SelectAsDictionary()
+        {
+            Dictionary<Guid, string> result = null;
+
+            try
+            {
+                string sqlText = $"SELECT [Id], [Vorname] || ' ' || [Nachname] AS [Name] FROM {this.Tablename}";
+                result = base.Connection.RecordSet<Dictionary<Guid, string>>(sqlText).Get().Result;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return result;
+        }
+
+        public DataRow SelectByFirst()
+        {
+            DataRow result = null;
+            string sqlStatement = string.Empty;
+
+            try
+            {
+                sqlStatement = $"SELECT * FROM {this.Tablename} ORDER BY ROWID ASC LIMIT 1";
+                result = base.Connection.RecordSet<DataRow>(sqlStatement).Get().Result;
             }
             catch (Exception ex)
             {
@@ -124,7 +178,6 @@ namespace ModernSQLiteDemo.SQLite
                 using (SqlBuilderContext ctx = new SqlBuilderContext(entity))
                 {
                     (string, SQLiteParameter[]) sql = ctx.GetInsert();
-                    string dumpSql = ctx.GetSqlDump(sql);
                     this.Connection.RecordSet<int>(sql.Item1, sql.Item2).Execute();
                 }
             }

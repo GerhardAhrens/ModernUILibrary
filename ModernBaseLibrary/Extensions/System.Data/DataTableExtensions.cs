@@ -256,6 +256,24 @@ namespace ModernBaseLibrary.Extension
             return @this.Rows[0];
         }
 
+        public static DataRow First(this DataTable @this, Func<DataRow, bool> filterCondition)
+        {
+            DataRow filteredRow = @this.Rows
+                   .Cast<DataRow>()
+                   .FirstOrDefault(filterCondition);
+
+            if (filteredRow == null)
+            {
+                DataTable dtTemp = @this.Clone();
+                dtTemp.Clear();
+                return dtTemp.NewRow();
+            }
+            else
+            {
+                return filteredRow;
+            }
+        }
+
         /// <summary>
         /// the DataTable extension method returns a row that matches the criterion
         /// </summary>
@@ -365,25 +383,13 @@ namespace ModernBaseLibrary.Extension
             }
         }
 
-        public static DataRow First(this DataTable @this, Func<DataRow, bool> filterCondition)
+        public static DataRow Last(this DataTable @this)
         {
-            DataRow filteredRow = @this.Rows
-                   .Cast<DataRow>()
-                   .FirstOrDefault(filterCondition);
-
-            if (filteredRow == null)
-            {
-                DataTable dtTemp = @this.Clone();
-                dtTemp.Clear();
-                return dtTemp.NewRow();
-            }
-            else
-            {
-                return filteredRow;
-            }
+            return @this.Rows[@this.Rows.Count];
         }
 
-        public static DataRow last(this DataTable @this, Func<DataRow, bool> filterCondition)
+
+        public static DataRow Last(this DataTable @this, Func<DataRow, bool> filterCondition)
         {
             DataRow filteredRow = @this.Rows
                    .Cast<DataRow>()

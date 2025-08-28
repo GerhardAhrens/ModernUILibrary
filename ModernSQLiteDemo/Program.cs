@@ -24,9 +24,10 @@ namespace ModernSQLiteDemo
 
             SmartMenu.Menu("SQLite Library Demo")
                /* Mit Untermenü */
-               .Add(SmartMenu.Menu("Datenbank Connection / Create")
-               .Add("Connection / Create", () => { new FuncConnection().CreateDatabase(Program.DatabasePath); }, 1)
+               .Add(SmartMenu.Menu("Datenbank Erstellen / Create Tabelle")
+               .Add("Erstellen Datenbank, Tabelle", () => { new FuncConnection().CreateDatabase(Program.DatabasePath); }, 1)
                .Add("Datenbank Information", () => { new FuncConnection().DatabaseInfo(Program.DatabasePath); }, 1)
+               .Add("Datenbank Metadaten", () => { new FuncConnection().DatabaseMetaInfo(Program.DatabasePath); }, 1)
                )
 
                /* Mit Untermenü */
@@ -36,8 +37,23 @@ namespace ModernSQLiteDemo
                )
 
                /* Mit Untermenü */
-               .Add(SmartMenu.Menu("Select")
-               .Add("CommandLine - Help", () => { new MenuExecute().FuncEmpty(); }, 1)
+               .Add(SmartMenu.Menu("Select (Lesen von Daten)")
+               .Add("Select als ICollectionView", () => { new FuncSelect().SelectAsICollectionView(Program.DatabasePath); }, 1)
+               .Add("Select als DataTable", () => { new FuncSelect().SelectAsDataTable(Program.DatabasePath); }, 1)
+               .Add("Select als Dictionary", () => { new FuncSelect().SelectAsDictionary(Program.DatabasePath); }, 1)
+               .Add("Select als Scalar (einzelne Column, z.B Count)", () => { new FuncSelect().SelectAsScalarCount(Program.DatabasePath); }, 1)
+               .Add("Select als Scalar (einzelne Column, z.B Sum)", () => { new FuncSelect().SelectAsScalarSum(Program.DatabasePath); }, 1)
+               .Add("Select DataRow by Id", () => { new FuncSelect().SelectById(Program.DatabasePath); }, 1)
+               )
+
+               /* Mit Untermenü */
+               .Add(SmartMenu.Menu("Update")
+               .Add("Update Column", () => { new MenuExecute().FuncEmpty(); }, 1)
+               )
+
+               /* Mit Untermenü */
+               .Add(SmartMenu.Menu("Delete")
+               .Add("Delete DataRow", () => { new MenuExecute().FuncEmpty(); }, 1)
                )
 
                /* Ohne Untermenü */
