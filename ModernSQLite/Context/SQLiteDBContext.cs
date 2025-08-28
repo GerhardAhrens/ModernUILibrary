@@ -144,6 +144,40 @@ namespace System.Data.SQLite
             return false;
         }
 
+        /// <summary>
+        /// Lesen alle Columns/Tabelle der aktuellen SQLite Datenbank
+        /// </summary>
+        /// <returns>DataTable</returns>
+        public DataTable GetSchema(SQLiteTableSchema schemaTyp = SQLiteTableSchema.Columns)
+        {
+            DataTable dataTableSchema = null;
+
+            try
+            {
+                using (SQLiteConnection sqliteConnection = new SQLiteConnection(this.ConnectString))
+                {
+                    if (sqliteConnection.State != ConnectionState.Open)
+                    {
+                        sqliteConnection.Open();
+                        if (sqliteConnection.State == ConnectionState.Open)
+                        {
+                            dataTableSchema = new DataTable(schemaTyp.ToString());
+                            dataTableSchema = sqliteConnection.GetSchema(schemaTyp.ToString());
+                        }
+                    }
+
+                    sqliteConnection.Close();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return dataTableSchema;
+        }
+
         public DataTable Tables()
         {
             DataTable tables = null;
@@ -157,25 +191,28 @@ namespace System.Data.SQLite
                     if (sqliteConnection.State != ConnectionState.Open)
                     {
                         sqliteConnection.Open();
-                        this.ConnectionState = sqliteConnection.State;
+                        if (sqliteConnection.State == ConnectionState.Open)
+                        {
+                            this.ConnectionState = sqliteConnection.State;
 
-                        tables = sqliteConnection.GetSchema(SQLiteTableSchema.Columns.ToString());
-                        tables.Columns.Remove("TABLE_CATALOG");
-                        tables.Columns.Remove("TABLE_SCHEMA");
-                        tables.Columns.Remove("COLUMN_GUID");
-                        tables.Columns.Remove("COLUMN_PROPID");
-                        tables.Columns.Remove("COLUMN_HASDEFAULT");
-                        tables.Columns.Remove("COLUMN_DEFAULT");
-                        tables.Columns.Remove("COLUMN_FLAGS");
-                        tables.Columns.Remove("TYPE_GUID");
-                        tables.Columns.Remove("CHARACTER_MAXIMUM_LENGTH");
-                        tables.Columns.Remove("CHARACTER_SET_CATALOG");
-                        tables.Columns.Remove("CHARACTER_SET_SCHEMA");
-                        tables.Columns.Remove("CHARACTER_SET_NAME");
-                        tables.Columns.Remove("COLLATION_CATALOG");
-                        tables.Columns.Remove("COLLATION_NAME");
-                        tables.Columns.Remove("DOMAIN_CATALOG");
-                        tables.Columns.Remove("DOMAIN_NAME");
+                            tables = sqliteConnection.GetSchema(SQLiteTableSchema.Columns.ToString());
+                            tables.Columns.Remove("TABLE_CATALOG");
+                            tables.Columns.Remove("TABLE_SCHEMA");
+                            tables.Columns.Remove("COLUMN_GUID");
+                            tables.Columns.Remove("COLUMN_PROPID");
+                            tables.Columns.Remove("COLUMN_HASDEFAULT");
+                            tables.Columns.Remove("COLUMN_DEFAULT");
+                            tables.Columns.Remove("COLUMN_FLAGS");
+                            tables.Columns.Remove("TYPE_GUID");
+                            tables.Columns.Remove("CHARACTER_MAXIMUM_LENGTH");
+                            tables.Columns.Remove("CHARACTER_SET_CATALOG");
+                            tables.Columns.Remove("CHARACTER_SET_SCHEMA");
+                            tables.Columns.Remove("CHARACTER_SET_NAME");
+                            tables.Columns.Remove("COLLATION_CATALOG");
+                            tables.Columns.Remove("COLLATION_NAME");
+                            tables.Columns.Remove("DOMAIN_CATALOG");
+                            tables.Columns.Remove("DOMAIN_NAME");
+                        }
                     }
 
                     sqliteConnection.Close();
@@ -187,6 +224,41 @@ namespace System.Data.SQLite
             }
 
             return tables;
+        }
+
+        public List<Tuple<string, string, object, Type>> MetadataInformation()
+        {
+            List<Tuple<string, string, object, Type>> meta = new List<Tuple<string, string, object, Type>>();
+
+            FileInfo fi = new FileInfo(this.DatabaseFullName);
+            if (fi.Exists == true)
+            {
+                meta.Add(new Tuple<string, string, object, Type>("Name", "FileInfo", fi.Name, typeof(string)));
+                meta.Add(new Tuple<string, string, object, Type>("Path", "FileInfo", fi.FullName, typeof(string)));
+                meta.Add(new Tuple<string, string, object, Type>("Length", "FileInfo", fi.Length, typeof(long)));
+                meta.Add(new Tuple<string, string, object, Type>("LastWriteTime", "FileInfo", fi.LastWriteTime, typeof(DateTime)));
+            }
+
+            using (SQLiteConnection sqliteConnection = new SQLiteConnection(this.ConnectString))
+            {
+                if (sqliteConnection.State != ConnectionState.Open)
+                {
+                    sqliteConnection.Open();
+
+                    using (SQLiteCommand cmd = new SQLiteCommand("vacuum", sqliteConnection))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                meta.Add(new Tuple<string, string, object, Type>("DataSource", "SQLiteConnection", sqliteConnection.DataSource, typeof(string)));
+                meta.Add(new Tuple<string, string, object, Type>("DefaultTimeout", "SQLiteConnection", sqliteConnection.DefaultTimeout, typeof(int)));
+                meta.Add(new Tuple<string, string, object, Type>("ServerVersion", "SQLiteConnection", sqliteConnection.ServerVersion, typeof(string)));
+
+                sqliteConnection.Close();
+            }
+
+            return meta;
         }
 
         public void Vacuum()
@@ -290,6 +362,42 @@ namespace System.Data.SQLite
             return result;
         }
         #endregion Funktionen zur Datenbank
+
+        #region Datenbanksicherung
+
+        public void Backup(string targetBackup = "")
+        {
+            try
+            {
+                if (File.Exists(this.DatabaseFullName) == true)
+                {
+                    FileInfo fi = new FileInfo(this.DatabaseFullName);
+                    if (string.IsNullOrEmpty(targetBackup) == true)
+                    {
+                        targetBackup = $"{Path.GetDirectoryName(this.DatabaseFullName)}\\{Path.GetFileNameWithoutExtension(this.DatabaseFullName)}_{DateTime.Now.ToString("yyyyMMdd")}{Path.GetExtension(this.DatabaseFullName)}";
+                    }
+
+                    var result = this.CopyFileAsync(this.DatabaseFullName, targetBackup);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private async Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            using (Stream source = File.Open(sourcePath, FileMode.Open))
+            {
+                using (Stream destination = File.Create(destinationPath))
+                {
+                    await source.CopyToAsync(destination);
+                }
+            }
+        }
+
+        #endregion Datenbanksicherung
 
         private void CreateConnection(string connectionString)
         {

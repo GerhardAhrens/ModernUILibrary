@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DemoBLOB\" />
     <Folder Include="SQLite\" />
   </ItemGroup>
 

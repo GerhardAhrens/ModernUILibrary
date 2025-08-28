@@ -145,7 +145,7 @@ namespace ModernSQLite.Generator
                     }
                 }
 
-                string names = string.Join(',', columnNames.Select(s => s.ColumnName));
+                string names = string.Join(',', columnNames.Select(s => $"[{s.ColumnName}]"));
                 string paramNames = string.Join(',', columnParamNames);
                 sb.Append($"INSERT INTO {tableName}").Append(" (");
                 sb.Append(names).Append(")");
@@ -185,6 +185,42 @@ namespace ModernSQLite.Generator
             }
 
             return (sb.ToString(),prm);
+        }
+
+        public string GetSqlDump((string, SQLiteParameter[]) sql)
+        {
+            foreach (SQLiteParameter param in sql.Item2)
+            {
+                string name = param.ParameterName;
+                object value = param.Value;
+                DbType dataType = param.DbType;
+                if (dataType == DbType.String)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", $"'{value}'");
+                }
+                else if (dataType == DbType.DateTime)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", $"'{value}'");
+                }
+                else if (dataType == DbType.Int16 || dataType == DbType.Int32 || dataType == DbType.Int64)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", $"{value}");
+                }
+                else if (dataType == DbType.Double || dataType == DbType.Decimal || dataType == DbType.Currency)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", $"{value.ToString().Replace(',','.')}");
+                }
+                else if (dataType == DbType.Binary)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", "null");
+                }
+                else if (dataType == DbType.Boolean)
+                {
+                    sql.Item1 = sql.Item1.Replace($":{name}", value.ToBool() == true ? 1.ToString() : 0.ToString());
+                }
+            }
+
+            return sql.Item1;
         }
 
         public (string, SQLiteParameter[]) GetUpdate()
@@ -229,12 +265,12 @@ namespace ModernSQLite.Generator
                     else if (column.ColumnName.ToLower() == this.ModifyByColumn.ToLower())
                     {
                         columnNames.Add(column);
-                        sb.Append($"{column} = :{column}, ");
+                        sb.Append($"[{column}] = :{column}, ");
                     }
                     else if (column.ColumnName.ToLower() == this.ModifyOnColumn.ToLower())
                     {
                         columnNames.Add(column);
-                        sb.Append($"{column} = :{column}, ");
+                        sb.Append($"[{column}] = :{column}, ");
                     }
                     else if (column.ColumnName.ToLower() == "Timestap".ToLower())
                     {
@@ -244,12 +280,12 @@ namespace ModernSQLite.Generator
                     else
                     {
                         columnNames.Add(column);
-                        sb.Append ($"{column} = :{column}, ");
+                        sb.Append ($"[{column}] = :{column}, ");
                     }
                 }
 
                 sb.Remove(sb.ToString().Trim().Length-1,1);
-                sb.Append($" WHERE {this.KeyColumn.First()} = :{this.KeyColumn.First()}");
+                sb.Append($" WHERE [{this.KeyColumn.First()}] = :{this.KeyColumn.First()}");
 
                 /* Oracle Parameter */
                 prm = new SQLiteParameter[columnNames.Count];
@@ -312,7 +348,7 @@ namespace ModernSQLite.Generator
                 }
 
                 sb.Append($"DELETE FROM {tableName}");
-                sb.Append($" WHERE {this.KeyColumn.First()} = :{this.KeyColumn.First()}");
+                sb.Append($" WHERE [{this.KeyColumn.First()}] = :{this.KeyColumn.First()}");
 
                 /* SQLite Parameter */
                 prm = new SQLiteParameter[1];
