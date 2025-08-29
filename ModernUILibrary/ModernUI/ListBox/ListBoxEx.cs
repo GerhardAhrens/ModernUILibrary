@@ -15,6 +15,7 @@
 
 namespace ModernIU.Controls
 {
+    using System.Collections;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -39,13 +40,12 @@ namespace ModernIU.Controls
             this.Padding = new Thickness(2);
             this.Margin = new Thickness(2);
             this.ClipToBounds = false;
-            this.MinHeight = 24;
+            this.MinHeight = 60;
             this.MinWidth = 60;
             this.SnapsToDevicePixels = true;
             this.VerticalAlignment = VerticalAlignment.Top;
             this.BorderBrush = Brushes.Green;
             this.BorderThickness = new Thickness(1);
-            this.Margin = new Thickness(2);
             this.SetValue(KeyboardNavigation.IsTabStopProperty, false);
             this.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, false);
             this.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
@@ -54,6 +54,32 @@ namespace ModernIU.Controls
             this.Resources.Add(SystemColors.WindowTextBrushKey, Colors.White);
             this.Resources.Add(SystemColors.HighlightColorKey, Colors.Gray);
             Validation.SetErrorTemplate(this, null);
+
+            WeakEventManager<ListBoxEx, SelectionChangedEventArgs>.AddHandler(this, "SelectionChanged", OnSelectionChanged);
+        }
+
+        public static readonly DependencyProperty SelectedItemsListProperty =
+           DependencyProperty.Register(nameof(SelectedItemsList), typeof(IList), typeof(ListBoxEx), new PropertyMetadata(null));
+
+        public IList SelectedItemsList
+        {
+            get { return (IList)GetValue(SelectedItemsListProperty); }
+            set { SetValue(SelectedItemsListProperty, value); }
+        }
+
+        public static readonly DependencyProperty CountSelectedItemsProperty =
+           DependencyProperty.Register(nameof(CountSelectedItems), typeof(int), typeof(ListBoxEx), new PropertyMetadata(null));
+
+        public int CountSelectedItems
+        {
+            get { return (int)GetValue(CountSelectedItemsProperty); }
+            private set { SetValue(CountSelectedItemsProperty, value); }
+        }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.SelectedItemsList = this.SelectedItems;
+            this.CountSelectedItems = this.SelectedItems.Count;
         }
 
         private Style SetTriggerFunction()

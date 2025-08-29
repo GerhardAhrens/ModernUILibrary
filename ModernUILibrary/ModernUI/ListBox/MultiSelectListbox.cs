@@ -25,6 +25,7 @@ namespace ModernIU.Controls
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
+    using System.Windows.Input;
     using System.Windows.Media;
 
     using ModernBaseLibrary.Reader;
@@ -37,6 +38,7 @@ namespace ModernIU.Controls
 
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(MultiSelectListbox), new PropertyMetadata(false, OnIsReadOnlyChanged));
         public static readonly DependencyProperty SelectedItemsListProperty = DependencyProperty.Register("SelectedItemsList", typeof(IList), typeof(MultiSelectListbox), new PropertyMetadata(OnSelectedItemsListChange));
+
         private static MultiSelectListbox self;
 
         /// <summary>
@@ -49,6 +51,14 @@ namespace ModernIU.Controls
             this.BorderBrush = ControlBase.BorderBrush;
             this.BorderThickness = ControlBase.BorderThickness;
             this.SelectionMode = SelectionMode.Extended;
+            this.SetValue(KeyboardNavigation.IsTabStopProperty, false);
+            this.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, false);
+            this.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+            this.SetValue(VirtualizingPanel.VirtualizationModeProperty, VirtualizationMode.Recycling);
+            this.Resources.Add(SystemColors.WindowBrushKey, Brushes.WhiteSmoke);
+            this.Resources.Add(SystemColors.WindowTextBrushKey, Colors.White);
+            this.Resources.Add(SystemColors.HighlightColorKey, Colors.Gray);
+            Validation.SetErrorTemplate(this, null);
 
             /* Trigger an Style übergeben */
             this.Style = this.SetTriggerFunction();

@@ -140,7 +140,7 @@
                 <ModernUI:HeaderSeparator
                     Height="15"
                     Background="Green"
-                    Header="ListBox" />
+                    Header= " MultiSelectListbox (Mit/Ohne Mehrfachauswahl) durch CheckBox; ListBoxEx (Mit/Ohne Mehrfachauswahl)" />
 
                 <DockPanel HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
@@ -170,7 +170,7 @@
                             </i:Interaction.Behaviors>
                         </ModernUI:ListBoxEx>
 
-                        <TextBlock Margin="10,0,0,0" Text="{Binding Path=SelectedItem, ElementName=ListboxB}" />
+                        <TextBlock Margin="10,0,0,0" Text="{Binding Path=CountSelectedItems, ElementName=ListboxB, FallbackValue=0, StringFormat=Anzahl: {0:N0}}" />
 
                         <Button
                             x:Name="BtnSelectFirst"
