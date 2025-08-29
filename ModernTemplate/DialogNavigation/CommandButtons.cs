@@ -1,3 +1,19 @@
+//-----------------------------------------------------------------------
+// <copyright file="CommandButtons.cs" company="company">
+//     Class: CommandButtons
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Zur Steuerung der Command-Button (z.B. im Ribbon Menü) werden hier die Enums eingetragen.
+// Diese werden zum einen in 'DialogFactory' als auch für die Menüsteurung benötigt.
+// </summary>
+//-----------------------------------------------------------------------
+
 namespace ModernTemplate.Core
 {
     using System.ComponentModel;

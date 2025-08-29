@@ -1,4 +1,21 @@
-﻿namespace ModernTemplate.Core
+﻿//-----------------------------------------------------------------------
+// <copyright file="DialogFactory.cs" company="company">
+//     Class: DialogFactory
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Die Factory gibt auf Basis eines CommandButton ein zugeordnetes UserControl zurück.
+// In der Methode 'RegisterControls()' werden alle UserControls eingetragen, die für die Hautmenüstreuerung benötigt werden.
+// Die weitere Verwaltung erfolgt automatisch-
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate.Core
 {
     using System;
     using System.Collections.Generic;

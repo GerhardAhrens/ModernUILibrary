@@ -1,15 +1,16 @@
 //-----------------------------------------------------------------------
-// <copyright file="ApplicationSettings.cs" company="Lifeprojects.de">
+// <copyright file="ApplicationSettings.cs" company="company">
 //     Class: ApplicationSettings
-//     Copyright © Lifeprojects.de 2025
+//     Copyright © company 2025
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>16.04.2025</date>
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
-// Die Klasse liest und schreibt Benutzerbezogene Einstellungen
+// Die Klasse liest und schreibt Benutzerbezogene Einstellungen. Die Datei für die Einstellungen wird in der Regel
+// im Verzeichnis ProgramData\Anwendungsname als JSON Datei gespeichert.
 // </summary>
 //-----------------------------------------------------------------------
 
@@ -29,6 +30,8 @@ namespace ModernTemplate.Core
         public ApplicationSettings() : base(null,App.SHORTNAME)
         {
         }
+
+        public string DatenbankConnection { get; set; }
 
         public string LastUser { get; set; }
 

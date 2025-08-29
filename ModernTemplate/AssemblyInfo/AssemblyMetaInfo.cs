@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------
-// <copyright file="AssemblyMetaInfo.cs" company="www.lifeprojects.de">
+// <copyright file="AssemblyMetaInfo.cs" company="company">
 //     Class: AssemblyMetaInfo
-//     Copyright © www.lifeprojects.de 2025
+//     Copyright © company 2025
 // </copyright>
 //
-// <author>Gerhard Ahrens - www.lifeprojects.de</author>
-// <email>developer@lifeprojects.de</email>
-// <date>09.04.2025</date>
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
 // Klasse für die Festlegung von Metainformationen zum Projekt

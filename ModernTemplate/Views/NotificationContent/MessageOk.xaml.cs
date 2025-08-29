@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate.Views
+﻿//-----------------------------------------------------------------------
+// <copyright file="MessageOk.xaml.cs" company="company">
+//     Class: MessageOk
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Deklaration eines Message Dialog für eine Meldung die mit 'OK' bestädigt werden soll.
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate.Views
 {
     using System;
     using System.Windows;

@@ -1,15 +1,15 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="AppAboutUC.xaml.cs" company="Lifeprojects.de">
+// <copyright file="AppAboutUC.xaml.cs" company="company">
 //     Class: AppAboutUC
-//     Copyright © Lifeprojects.de 2025
+//     Copyright © company 2025
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>16.04.2025</date>
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
-// UI Control für Applikation Settings
+// Die Klasse dient als Container für TabControl Item um verschiedene Inhalte für den About-Dialog darstellen zuu können
 // </summary>
 //-----------------------------------------------------------------------
 
@@ -56,8 +56,6 @@ namespace ModernTemplate.Views.ContentControls
             this.InitCommands();
             this.IsUCLoaded = true;
             this.DataContext = this;
-
-            this.tcAppSettings.Height = (App.CurrentDialogHeight - 65);
         }
 
         #endregion WindowEventHandler

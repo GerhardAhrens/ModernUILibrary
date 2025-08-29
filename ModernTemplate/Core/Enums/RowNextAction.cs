@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
-// <copyright file="IDialogFactory.cs" company="company">
-//     Class: IDialogFactory
+// <copyright file="RowNextAction.cs" company="company">
+//     Class: RowNextAction
 //     Copyright © company 2025
 // </copyright>
 //
@@ -9,18 +9,21 @@
 // <date>dd.MM.yyyy</date>
 //
 // <summary>
-// Interface Class für die DialogFactory
+// Enum Klasse für die Übergabe weiterer Aktionen.
 // </summary>
 //-----------------------------------------------------------------------
 
 namespace ModernTemplate.Core
 {
-    using ModernUI.MVVM.Base;
+    using System;
 
-    public interface IDialogFactory
+    public enum RowNextAction : int
     {
-        public abstract static FactoryResult Get(CommandButtons mainButton);
-
-        public abstract static FactoryResult Get(CommandButtons mainButton, IChangeViewEventArgs changeViewArgs);
+        None = 0,
+        AddRow = 1,
+        InsertRow = 2,
+        UpdateRow = 3,
+        CopyRow = 4,
+        Refresh = 5,
     }
 }

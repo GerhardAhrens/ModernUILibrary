@@ -31,6 +31,15 @@
 
         public App()
         {
+            /*
+            string aa1 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 0);
+            string aa2 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 1);
+            string aa3 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 2);
+            string del1 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 0);
+            string del2 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 1);
+            string del3 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 2);
+            */
+
             try
             {
                 /* Name der EXE Datei*/

@@ -37,31 +37,25 @@ namespace ModernTemplate.Core
         /// Menüpunkt als Enum
         /// </summary>
         public CommandButtons MenuButton { get; set; }
-        
+
         /// <summary>
         /// Id des Entity Objektes
         /// </summary>
         public Guid EntityId { get; set; }
 
         /// <summary>
-        /// Steuerung, ob im nachfolgenden Dialog ein neuer Ertrag erstellt werden soll
+        /// Id eines abhängigen Objectes
         /// </summary>
-        public bool IsNew { get; set; } = false;
+        public Guid ParentId { get; set; }
 
-        /// <summary>
-        /// Steuerung, ob beim Wechsel auf eine Übersicht ein Refresh der angezeigten Daten erfolgen soll
-        /// </summary>
-        public bool IsRefresh { get; set; } = false;
-
-        /// <summary>
-        /// Steuerung, ob eine Kopie des aktuellen Datensatz erfolgen soll
-        /// </summary>
-        public bool IsCopy { get; set; } = false;
+        public RowNextAction RowNextAction { get; set; }
 
         /// <summary>
         /// Steuerung, Ursprungsposition des aktuellen datensatz
         /// </summary>
         public int RowPosition { get; set; }
+
+        public bool IsRefresh { get; set; }
 
         /// <summary>
         /// Ursprungsdialog

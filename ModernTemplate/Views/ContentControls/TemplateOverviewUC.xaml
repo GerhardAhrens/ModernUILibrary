@@ -40,7 +40,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontWeight="Medium"
-            Text="Erweiterte Dialogbeschreibung, Übersich xyz Daten" />
+            Text="Erweiterte Dialogbeschreibung, Übersicht xyz Daten" />
 
         <Border
             Grid.Row="1"

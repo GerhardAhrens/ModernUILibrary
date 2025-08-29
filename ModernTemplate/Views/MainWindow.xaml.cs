@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate
+﻿//-----------------------------------------------------------------------
+// <copyright file="MainWindow.xaml.cs" company="company">
+//     Class: MainWindow
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Die Klasse beinhaltet das MainWindow sowie ein ContentControl um die weiteren Dailoge darstellen zu können.
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate
 {
     using System.ComponentModel;
     using System.Runtime.Versioning;
@@ -25,7 +40,6 @@
     public partial class MainWindow : WindowBase, IDialogClosing
     {
         private const string DATEFORMAT = "dd.MM.yyyy HH:mm";
-        private INotificationService notificationService = new NotificationService();
         private DispatcherTimer statusBarDate = null;
 
         public MainWindow()
@@ -33,9 +47,9 @@
             this.InitializeComponent();
             this.InitCommands();
             this.InitTimer();
-            base.CenterWindow(this);
+            base.CenterWindow(this,0);
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
-
+            this.Notifications = new NotificationService();
             this.DataContext = this;
         }
 
@@ -59,6 +73,8 @@
             set { base.SetValue(value); }
         }
 
+        private INotificationService Notifications { get; set; }
+
         private CommandButtons CurrentCommandName { get; set; }
         #endregion Properties
 
@@ -78,6 +94,8 @@
 
             NotificationService.RegisterDialog<QuestionYesNo>();
             NotificationService.RegisterDialog<MessageOk>();
+            NotificationService.RegisterDialog<LoginView>();
+            NotificationService.RegisterDialog<MessageTimerOk>();
 
             base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
 
@@ -92,7 +110,7 @@
         {
             if (App.ExitApplicationQuestion == true)
             {
-                NotificationBoxButton result = this.notificationService.ApplicationExit();
+                NotificationBoxButton result = this.Notifications.ApplicationExit();
                 if (result == NotificationBoxButton.Yes)
                 {
                     this.ExitApplication(e);
@@ -146,7 +164,7 @@
         #region CommandHandler
         private void HelpHandler(object commandArgs)
         {
-            this.notificationService.FeaturesNotFound($"{this.CurrentCommandName}-{commandArgs.ToString()}");
+            this.Notifications.FeaturesNotFound($"{this.CurrentCommandName}-{commandArgs.ToString()}");
         }
 
         private bool CanAppAboutHandler()

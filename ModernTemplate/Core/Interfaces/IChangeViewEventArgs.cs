@@ -23,9 +23,7 @@ namespace ModernTemplate.Core
 
         public Guid EntityId { get; set; }
 
-        public bool IsNew { get; set; }
-
-        public bool IsRefresh { get; set; }
+        public RowNextAction RowNextAction { get; set; }
 
         public int RowPosition { get; set; }
 

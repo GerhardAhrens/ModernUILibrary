@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate.Views
+﻿//-----------------------------------------------------------------------
+// <copyright file="QuestionYesNo.xaml.cs" company="company">
+//     Class: QuestionYesNo
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Deklaration eines Message Dialog für eine Meldung die mit 'Ja/Nein' bestädigt werden soll.
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate.Views
 {
     using System;
     using System.Windows;

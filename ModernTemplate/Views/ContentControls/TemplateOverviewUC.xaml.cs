@@ -16,6 +16,7 @@
 namespace ModernTemplate.Views.ContentControls
 {
     using System.Data;
+    using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -29,6 +30,7 @@ namespace ModernTemplate.Views.ContentControls
     /// <summary>
     /// Interaktionslogik für TemplateOverviewUC.xaml
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public partial class TemplateOverviewUC : UserControlBase
     {
         private INotificationService notificationService = new NotificationService();
@@ -140,7 +142,7 @@ namespace ModernTemplate.Views.ContentControls
                 Sender = this.GetType().Name,
                 MenuButton = CommandButtons.None,
                 FromPage = CommandButtons.None,
-                IsNew = true,
+                RowNextAction = RowNextAction.AddRow,
                 IsRefresh = true,
             });
         }
@@ -166,8 +168,7 @@ namespace ModernTemplate.Views.ContentControls
                 MenuButton = CommandButtons.None,
                 FromPage = CommandButtons.None,
                 RowPosition = 0, /* aktuelle Position im Grid */
-                IsNew = false,
-                IsRefresh = true,
+                RowNextAction = RowNextAction.Refresh,
                 EntityId = Guid.Empty, /* Guid in der Auswahl vom Edit-Item */
             });
         }

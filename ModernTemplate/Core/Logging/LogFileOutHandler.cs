@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------
-// <copyright file="LogFileOutHandler.cs" company="Lifeprojects.de">
+// <copyright file="LogFileOutHandler.cs" company="company">
 //     Class: LogFileOutHandler
-//     Copyright © Lifeprojects.de 2025
+//     Copyright © company 2025
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>Gerhard Ahrens@Lifeprojects.de</email>
-// <date>16.04.2025 08:13:41</date>
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
 // Klasse zur implementierung eines Logging Handler zur Dateiausgabe
