@@ -1,7 +1,10 @@
 ﻿namespace ModernUIDemo.MyControls
 {
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Data;
     using System.Net.WebSockets;
+    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -10,13 +13,14 @@
     /// <summary>
     /// Interaktionslogik für ButtonControlsUC.xaml
     /// </summary>
-    public partial class ButtonControlsUC : UserControl
+    public partial class ButtonControlsUC : UserControl, INotifyPropertyChanged
     {
         DataTable dt = new DataTable();
 
         public ButtonControlsUC()
         {
             this.InitializeComponent();
+            this.DataContext = this;
 
             List<string> list = new List<string>();
             list.Add("Alles");
@@ -86,5 +90,24 @@
                 MessageBox.Show($"{ucName}");
             }
         }
+
+        #region PropertyChanged Implementierung
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion PropertyChanged Implementierung
     }
 }

@@ -1,13 +1,14 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:ModernUI="clr-namespace:ModernIU.Controls">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ModernUI="clr-namespace:ModernIU.Controls">
 
     <PathGeometry x:Key="UncheckedIcon" Figures="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z" />
     <PathGeometry x:Key="CheckedIcon" Figures="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
 
     <Style TargetType="{x:Type ModernUI:IconToggleButton}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Green" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -18,22 +19,41 @@
         <Setter Property="CheckedIcon" Value="{StaticResource CheckedIcon}" />
         <Setter Property="Content" Value="Option" />
         <Setter Property="CheckedContent" Value="Check" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="UncheckedIconSize" Value="14" />
         <Setter Property="CheckedIconSize" Value="14" />
         <Setter Property="CheckedForeground" Value="Blue" />
-        <Setter Property="ContentMargin" Value="5,0,0,0" />
+        <Setter Property="ContentMargin" Value="0,0,0,0" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="IconMargin" Value="0,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ModernUI:IconToggleButton}">
-                    <StackPanel Orientation="{TemplateBinding Orientation}" Background="Transparent">
-                        <Path x:Name="icon" Data="{TemplateBinding UncheckedIcon}" Stretch="Uniform" 
-                              Width="{TemplateBinding UncheckedIconSize}" Fill="{TemplateBinding Foreground}" />
-                        <ContentPresenter x:Name="content" Content="{TemplateBinding Content}" 
-                                          Margin="{TemplateBinding ContentMargin}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </StackPanel>
+                    <Border
+                        Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <StackPanel Orientation="{TemplateBinding Orientation}">
+                            <Path
+                                x:Name="icon"
+                                Width="{TemplateBinding UncheckedIconSize}"
+                                Margin="{TemplateBinding IconMargin}"
+                                Data="{TemplateBinding UncheckedIcon}"
+                                Fill="{TemplateBinding Foreground}"
+                                Stretch="Uniform" />
+
+                            <ContentPresenter
+                                x:Name="content"
+                                Margin="{TemplateBinding ContentMargin}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </StackPanel>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="icon" Property="Data" Value="{Binding CheckedIcon, RelativeSource={RelativeSource AncestorType=ModernUI:IconToggleButton}}" />
@@ -45,6 +65,17 @@
                         </Trigger>
                         <Trigger Property="Orientation" Value="Vertical">
                             <Setter Property="ContentMargin" Value="0,5,0,0" />
+                            <Setter Property="IconMargin" Value="0,5,0,0" />
+                        </Trigger>
+
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter Property="ContentMargin" Value="5,0,0,0" />
+                            <Setter Property="IconMargin" Value="5,0,0,0" />
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Cursor" Value="Hand" />
+                            <Setter TargetName="border" Property="Background" Value="LightGray" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

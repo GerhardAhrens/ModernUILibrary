@@ -448,29 +448,6 @@
                     </ModernUI:ButtonGroup.ItemTemplate>
                 </ModernUI:ButtonGroup>
             </StackPanel>
-
-            <ModernUI:HeaderSeparator
-                Height="15"
-                Background="Green"
-                Header="Spezieller Button Style" />
-
-            <StackPanel Height="60" Orientation="Horizontal">
-                <ModernUI:IconToggleButton
-                    VerticalAlignment="Center"
-                    CheckedContent="Aktiv"
-                    Content="InAktive"
-                    FontSize="14"
-                    Orientation="Horizontal" />
-
-                <ModernUI:IconToggleButton
-                    Margin="20,0,0,0"
-                    VerticalAlignment="Center"
-                    CheckedContent="Aktiv"
-                    Content="InAktive"
-                    ContentMargin="0,10,0,0"
-                    FontSize="14"
-                    Orientation="Vertical" />
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
