@@ -97,6 +97,39 @@ namespace ModernTemplate.Core
 
             return questionResult;
         }
+
+        public static NotificationBoxButton InputErrorsFound(this INotificationService @this)
+        {
+            (string InfoText, string CustomText, double FontSize) msgText = ("Eingabefehler gefunden", $"Wegen Eingabefehler kann der Dialog nicht verlassen werden. Korrigieren Sie die Eingabe, oder brechen Sie den Dialog ab.", 18);
+            NotificationBoxButton resultOK = NotificationBoxButton.Ok;
+
+            @this.ShowDialog<MessageOk>(msgText, (result, tag) =>
+            {
+                if (result == true && tag != null)
+                {
+                    resultOK = ((Tuple<NotificationBoxButton>)tag).Item1;
+                }
+            });
+
+            return resultOK;
+        }
+
+        public static NotificationBoxButton ExistLastChanges(this INotificationService @this)
+        {
+            (string InfoText, string CustomText, double FontSize) msgText = ("Änderungen verwerfen", $"Wollen Sie die aktuellen Änderungen verwerfen ohne zu speichern?", 18);
+            NotificationBoxButton questionResult = NotificationBoxButton.No;
+
+            @this.ShowDialog<QuestionYesNo>(msgText, (result, tag) =>
+            {
+                if (result == true && tag != null)
+                {
+                    questionResult = ((Tuple<NotificationBoxButton>)tag).Item1;
+                }
+            });
+
+            return questionResult;
+        }
+
         #endregion Meldungen zu Bearbeitungsdialoge
 
         #region Meldungen zur Datenbank

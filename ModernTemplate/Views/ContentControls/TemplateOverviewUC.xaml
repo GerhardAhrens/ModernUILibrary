@@ -16,17 +16,35 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <ModernWPF:CommandKeyReference x:Key="BackCmdKey" Command="{Binding Path=CmdAgg[DialogBackCommand]}" />
-
         <ModernConverter:MaxWidthConverter x:Key="MaxWidthConverter" />
         <ModernConverter:RowNumberConverter x:Key="rowNumberConverter" />
         <ModernConverter:BooleanToNotVisibleConverter x:Key="BooleanToNotVisibilityConverter" />
+
+        <ModernWPF:CommandKeyReference x:Key="BackCmdKey" Command="{Binding Path=CmdAgg[DialogBackCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="AddCmdKey" Command="{Binding Path=CmdAgg[RecordAddCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="EditCmdKey" Command="{Binding Path=CmdAgg[RecordEditCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="DeleteCmdKey" Command="{Binding Path=CmdAgg[RecordDeleteCommand]}" />
 
         <sys:Double x:Key="IconSize">16.0</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding Key="Esc" Command="{StaticResource ResourceKey=BackCmdKey}" />
+
+        <KeyBinding
+            Key="N"
+            Command="{StaticResource ResourceKey=AddCmdKey}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="E"
+            Command="{StaticResource ResourceKey=EditCmdKey}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="D"
+            Command="{StaticResource ResourceKey=DeleteCmdKey}"
+            Modifiers="Ctrl" />
     </UserControl.InputBindings>
 
     <ModernUI:SimpleGrid
@@ -96,6 +114,23 @@
                     <ModernUI:PathButton.Content>
                         <TextBlock>
                             <Run Text="Ändern" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
+                </ModernUI:PathButton>
+
+                <ModernUI:PathButton
+                    Width="100"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    Command="{Binding Path=CmdAgg[RecordDeleteCommand]}"
+                    PathData="{StaticResource ResourceKey=IconRecordDelete}"
+                    PathWidth="{StaticResource ResourceKey=IconSize}">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Gewählter Eintrag löschen" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Löschen" />
                         </TextBlock>
                     </ModernUI:PathButton.Content>
                 </ModernUI:PathButton>

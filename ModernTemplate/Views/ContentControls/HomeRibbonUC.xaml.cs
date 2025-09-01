@@ -71,15 +71,7 @@ namespace ModernTemplate.Views.ContentControls
             this.InitCommands();
             this.IsUCLoaded = true;
             this.DataContext = this;
-
-            string words = string.Empty;
-            using (LoremIpsumBuilder lb = new LoremIpsumBuilder())
-            {
-                words = lb.GetParagraphs(10,15);
-            }
-
-            this.DemoText = words;
-        }
+       }
         #endregion WindowEventHandler
 
         #region CommandHandler

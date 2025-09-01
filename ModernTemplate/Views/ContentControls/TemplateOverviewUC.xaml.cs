@@ -1,25 +1,29 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TemplateOverviewUC.xaml.cs" company="Lifeprojects.de">
+// <copyright file="TemplateOverviewUC.xaml.cs" company="company">
 //     Class: TemplateOverviewUC.xaml
-//     Copyright © Lifeprojects.de 2025
+//     Copyright © company yyyy
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>16.04.2025</date>
+// <author>Autor - company</author>
+// <email>autor@company.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
-// Beispiel UI Dialog mit einem 'Back'-Button
+// Beispiel UI Dialog zur Darstellung von Daten in einer Übersicht
 // </summary>
 //-----------------------------------------------------------------------
 
 namespace ModernTemplate.Views.ContentControls
 {
+    using System.ComponentModel;
     using System.Data;
     using System.Runtime.Versioning;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+
+    using ModernBaseLibrary.Core;
+    using ModernBaseLibrary.Extension;
 
     using ModernIU.Controls;
 
@@ -45,6 +49,18 @@ namespace ModernTemplate.Views.ContentControls
         }
 
         #region Properties
+        public ICollectionView DialogDataView
+        {
+            get => base.GetValue<ICollectionView>();
+            set => base.SetValue(value);
+        }
+
+        public DataRow CurrentSelectedItem
+        {
+            get => base.GetValue<DataRow>();
+            set => base.SetValue(value);
+        }
+
         public string FilterDefaultSearch
         {
             get => base.GetValue<string>();
@@ -66,6 +82,7 @@ namespace ModernTemplate.Views.ContentControls
             this.CmdAgg.AddOrSetCommand(CommandButtons.DialogBack, new RelayCommand(this.DialogBackHandler));
             this.CmdAgg.AddOrSetCommand("RecordAddCommand", new RelayCommand(this.RecordAddHandler));
             this.CmdAgg.AddOrSetCommand("RecordEditCommand", new RelayCommand(this.RecordEditHandler, this.CanRecordEditHandler));
+            this.CmdAgg.AddOrSetCommand("RecordDeleteCommand", new RelayCommand(this.RecordDeleteHandler, this.CanRecordDeleteHandler));
         }
 
         #region WindowEventHandler
@@ -85,11 +102,21 @@ namespace ModernTemplate.Views.ContentControls
         #endregion WindowEventHandler
 
         #region Daten landen und Filtern
+        /// <summary>
+        /// Lesen der Daten aus einer Datenquelle zum Aufbau der Übersicht
+        /// </summary>
+        /// <param name="isRefresh">Es wird nicht Positioniert, der erste Eintrag ist als Aktuell markiert</param>
         private void LoadDataHandler(bool isRefresh = false)
         {
             try
             {
+                using (ObjectRuntime objectRuntime = new ObjectRuntime())
+                {
+                    /* Lesen aller Daten zum Aufbau der Übersicht */
 
+                    this.IsFilterContentFound = this.DisplayRowCount > 0 ? true : false;
+                    StatusbarMain.Statusbar.SetNotification($"Bereit: {objectRuntime.ResultMilliseconds()}ms; Anzahl: {this.DisplayRowCount}");
+                }
             }
             catch (Exception ex)
             {
@@ -98,6 +125,11 @@ namespace ModernTemplate.Views.ContentControls
             }
         }
 
+        /// <summary>
+        /// Diese Funktion wird zum Filtern der Daten aus dem Listview aufgerufen.
+        /// </summary>
+        /// <param name="rowItem">Aktuelles DataRow</param>
+        /// <returns></returns>
         private bool DataDefaultFilter(DataRow rowItem)
         {
             bool found = false;
@@ -111,10 +143,19 @@ namespace ModernTemplate.Views.ContentControls
 
         }
 
+        /// <summary>
+        /// Wird bei jeder Eingabe zum Suchen/Filtern aufgerufen
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="propertyName"></param>
         private void RefreshDefaultFilter(string value, string propertyName)
         {
             if (value != null)
             {
+
+                this.DialogDataView.Refresh();
+                this.DisplayRowCount = this.DialogDataView.Count<DataRow>();
+                this.DialogDataView.MoveCurrentToFirst();
 
                 this.IsFilterContentFound = this.DisplayRowCount > 0 ? true : false;
 
@@ -155,12 +196,10 @@ namespace ModernTemplate.Views.ContentControls
 
         private void RecordEditHandler(object obj)
         {
-            /*
             if (this.CurrentSelectedItem == null)
             {
                 this.CurrentSelectedItem = ((DataRow)obj);
             }
-            */
 
             base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
             {
@@ -171,6 +210,29 @@ namespace ModernTemplate.Views.ContentControls
                 RowNextAction = RowNextAction.Refresh,
                 EntityId = Guid.Empty, /* Guid in der Auswahl vom Edit-Item */
             });
+        }
+
+        private bool CanRecordDeleteHandler(object commandParam)
+        {
+            if (this.CurrentSelectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void RecordDeleteHandler(object obj)
+        {
+            if (this.CurrentSelectedItem == null)
+            {
+                this.CurrentSelectedItem = ((DataRow)obj);
+            }
+
+            /* Logik zum löschen eines Datensatz */
+            /* Refresh auf der Übersicht erzwingen */
         }
         #endregion CommandHandler
     }

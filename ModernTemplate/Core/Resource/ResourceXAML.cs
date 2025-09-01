@@ -33,7 +33,7 @@ namespace ModernTemplate.Core
             app = Application.Current;
         }
 
-        public static T ReadAs<T>(string resourceName)
+        public static T GetAs<T>(string resourceName)
         {
             T result = default(T);
 

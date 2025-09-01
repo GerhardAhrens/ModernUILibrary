@@ -82,28 +82,38 @@ namespace ModernTemplate
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.DialogDescription = "Modern Template - Projekt";
-            this.Focus();
-            this.InitTimer();
-            Keyboard.Focus(this);
 
-            /* Letzte Windows Positionn landen*/
-            using (UserPreferences userPrefs = new UserPreferences(this))
+            try
             {
-                userPrefs.Load(App.SaveLastWindowsPosition);
+                this.Focus();
+                this.InitTimer();
+                Keyboard.Focus(this);
+
+                /* Letzte Windows Positionn landen*/
+                using (UserPreferences userPrefs = new UserPreferences(this))
+                {
+                    userPrefs.Load(App.SaveLastWindowsPosition);
+                }
+
+                NotificationService.RegisterDialog<QuestionYesNo>();
+                NotificationService.RegisterDialog<MessageOk>();
+                NotificationService.RegisterDialog<LoginView>();
+                NotificationService.RegisterDialog<MessageTimerOk>();
+
+                base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
+
+                ChangeViewEventArgs arg = new ChangeViewEventArgs();
+                arg.MenuButton = CommandButtons.Home;
+                this.ChangeControl(arg);
+
+                StatusbarMain.Statusbar.SetDatabaeInfo();
             }
-
-            NotificationService.RegisterDialog<QuestionYesNo>();
-            NotificationService.RegisterDialog<MessageOk>();
-            NotificationService.RegisterDialog<LoginView>();
-            NotificationService.RegisterDialog<MessageTimerOk>();
-
-            base.EventAgg.Subscribe<ChangeViewEventArgs>(this.ChangeControl);
-
-            ChangeViewEventArgs arg = new ChangeViewEventArgs();
-            arg.MenuButton = CommandButtons.Home;
-            this.ChangeControl(arg);
-
-            StatusbarMain.Statusbar.SetDatabaeInfo();
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                App.Logger.Error(ex, errorText);
+                throw;
+            }
         }
 
         public override void OnViewIsClosing(CancelEventArgs e)
@@ -247,6 +257,7 @@ namespace ModernTemplate
             }
             else
             {
+                App.Logger.Info($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann nicht gefunden werden.");
                 throw new NotSupportedException($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann nicht gefunden werden.");
             }
         }

@@ -1,29 +1,30 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TemplateDetailUC.xaml.cs" company="Lifeprojects.de">
+// <copyright file="TemplateDetailUC.xaml.cs" company="company">
 //     Class: TemplateDetailUC.xaml
-//     Copyright © Lifeprojects.de 2025
+//     Copyright © company yyyy
 // </copyright>
 //
-// <author>Gerhard Ahrens - Lifeprojects.de</author>
-// <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>16.04.2025</date>
+// <author>Autor - company</author>
+// <email>autor@lifeprojects.de</email>
+// <date>dd.MM.yyyy</date>
 //
 // <summary>
-// Beispiel UI Dialog mit einem 'Back'-Button
+// Beispiel UI Dialog zur Detail Bearbeitung
 // </summary>
 //-----------------------------------------------------------------------
 
 namespace ModernTemplate.Views.ContentControls
 {
+    using System.Data;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Threading;
 
     using ModernBaseLibrary.Collection;
-    using ModernBaseLibrary.Extension;
+    using ModernBaseLibrary.Core;
+
+    using ModernIU.Controls;
 
     using ModernTemplate.Core;
 
@@ -42,9 +43,13 @@ namespace ModernTemplate.Views.ContentControls
 
             this.InitCommands();
 
-            this.ValidationErrors = new ObservableDictionary<string, string>();
+            this.ValidationErrors = new ObservableDictionary<string, Popup>();
 
             WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Unloaded", this.OnUnLoaded);
+            WeakEventManager<UserControl, RoutedEventArgs>.AddHandler(this, "Unloaded", this.OnUnLoaded);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnShowErrors, "Click", this.ShowInputValidation);
+            NotifiactionPopup.PopupClick += this.OnNotifiactionPopupClick;
         }
 
         #region Properties
@@ -54,20 +59,28 @@ namespace ModernTemplate.Views.ContentControls
             set => base.SetValue(value);
         }
 
-        #region InputValidation List
-        public ObservableDictionary<string, string> ValidationErrors
+        public DataRow OriginalRow
         {
-            get => base.GetValue<ObservableDictionary<string, string>>();
+            get => base.GetValue<DataRow>();
             set => base.SetValue(value);
         }
 
-        public string ValidationErrorsSelected
+        public DataRow CurrentRow
         {
-            get => base.GetValue<string>();
-            set => base.SetValue(value, this.InputNavigationProperty);
+            get => base.GetValue<DataRow>();
+            set => base.SetValue(value);
+        }
+
+        #region InputValidation List
+        public ObservableDictionary<string, Popup> ValidationErrors
+        {
+            get => base.GetValue<ObservableDictionary<string, Popup>>();
+            set => base.SetValue(value);
         }
         #endregion InputValidation List
 
+        private INotificationService NotificationService { get; set; } = new NotificationService();
+        private bool IsColumnModified { get; set; } = false;
         private ChangeViewEventArgs CtorArgs { get; set; }
 
         #endregion Properties
@@ -76,6 +89,7 @@ namespace ModernTemplate.Views.ContentControls
         {
             this.CmdAgg.AddOrSetCommand(CommandButtons.DialogBack, new RelayCommand(this.DialogBackHandler));
             this.CmdAgg.AddOrSetCommand("RecordSaveCommand", new RelayCommand(this.RecordSaveHandler));
+            this.CmdAgg.AddOrSetCommand("DialogCancelCommand", new RelayCommand(this.DialogCancelHandler));
         }
 
         #region WindowEventHandler
@@ -91,6 +105,13 @@ namespace ModernTemplate.Views.ContentControls
             this.IsUCLoaded = true;
 
             this.DemoText = string.Empty;
+        }
+
+        private void OnUnLoaded(object sender, RoutedEventArgs e)
+        {
+            /* Funktionalität beim verlassen des UserControls */
+            NotifiactionPopup.Reset();
+            NotifiactionPopup.PopupClick -= this.OnNotifiactionPopupClick;
         }
 
         #endregion WindowEventHandler
@@ -109,66 +130,148 @@ namespace ModernTemplate.Views.ContentControls
                 throw;
             }
         }
+
+        private void OnColumnChanged(object sender, DataColumnChangeEventArgs e)
+        {
+            string fieldName = e.Column.ColumnName;
+            this.IsColumnModified = true;
+            this.CheckInputControls(fieldName);
+            StatusbarMain.Statusbar.SetNotification("Geändert:");
+        }
+
+
         #endregion Daten landen und Filtern
 
-        #region Register Validations
+        #region Register und Prüfen Validations
         private void RegisterValidations()
         {
             /* Validierungsregeln für 
-            this.ValidationRules.Add(nameof(this.Titel), () =>
+            this.ValidationRules.Add("Word", () =>
             {
-                return ValidationRule<TemplateUC>.This(this).NotEmpty(x => x.Titel, "Titel");
+                return InputValidation<DataRow>.This(this.CurrentRow).NotEmpty("Word", "Stichwort");
             });
             */
 
         }
-        #endregion Register Validations
 
-        #region InputValidation Handler
-        private void InputNavigationProperty<T>(T value, string propertyName)
+        private bool CheckInputControls(params string[] fieldNames)
         {
-            /* Zu prüfende Eingaben, Background auf Transparent setzten */
+            bool result = false;
 
-            if (value == null)
+            try
             {
-                return;
-            }
-
-            foreach (var ctrl in this.GetChildren())
-            {
-                /* Gegebenenfalls Eingabe anpassen bzw. erweitern, z.B. CheckBox usw. */
-                if (ctrl is TextBox textBox)
+                foreach (string fieldName in fieldNames)
                 {
-                    Binding binding = BindingOperations.GetBinding(textBox, TextBox.TextProperty);
-                    if (value != null)
+                    Func<Result<string>> function = null;
+                    if (this.ValidationRules.TryGetValue(fieldName, out function) == true)
                     {
-                        if (binding != null && binding.Path.Path.EndsWith(value.ToString()))
+                        Result<string> ruleText = this.DoValidation(function, fieldName);
+                        if (string.IsNullOrEmpty(ruleText.Value) == false)
                         {
-                            this.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
+                            if (this.ValidationErrors.ContainsKey(fieldName) == false)
                             {
-                                textBox.Focus();
-                                textBox.Background = Brushes.Coral;
-                            }));
-
-                            break;
+                                NotifiactionPopup.PlacementTarget = this.BtnShowErrors;
+                                NotifiactionPopup.Delay = 5;
+                                Popup po = NotifiactionPopup.CreatePopup(fieldName, ruleText.Value);
+                                po.IsOpen = true;
+                                this.ValidationErrors.Add(fieldName, po);
+                            }
+                        }
+                        else
+                        {
+                            if (this.ValidationErrors.ContainsKey(fieldName) == true)
+                            {
+                                NotifiactionPopup.Remove();
+                                this.ValidationErrors.Remove(fieldName);
+                            }
                         }
                     }
                 }
+
+                if (this.ValidationErrors != null && this.ValidationErrors.Count > 0)
+                {
+                    result = true;
+                }
+                else if (this.ValidationErrors != null && this.ValidationErrors.Count == 0)
+                {
+                    NotifiactionPopup.Reset();
+                    result = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return result;
+        }
+
+        private void ShowInputValidation(object sender, RoutedEventArgs e)
+        {
+            foreach (Popup item in this.ValidationErrors.Values)
+            {
+                item.IsOpen = true;
             }
         }
-        #endregion InputValidation Handler
+
+        private void OnNotifiactionPopupClick(object sender, PopupResultArgs e)
+        {
+            if (e != null)
+            {
+                /* Zu überwachendes Control
+                if (e.SourceName == "Word")
+                {
+                    this.txtWord.Focus();
+                }
+                */
+            }
+        }
+        #endregion Register und Prüfen Validations
 
         #region CommandHandler
         private void DialogBackHandler(object p1)
         {
-            if (ValidationErrors?.Count > 0)
+            if (ValidationErrors?.Count > 0 || this.IsColumnModified == true)
             {
                 /* 
                  * Eventuelle Prüfung, ob Validation Errors vorhanden sind 
                  * Meldung ausgeben, oder andere Behandlung
                  */
+                _ = this.NotificationService.InputErrorsFound();
             }
 
+            if (this.IsColumnModified == true)
+            {
+                NotificationBoxButton result = this.NotificationService.ExistLastChanges();
+                if (result == NotificationBoxButton.Yes)
+                {
+                    base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+                    {
+                        Sender = this.GetType().Name,
+                        MenuButton = CommandButtons.Home,
+                        FromPage = CommandButtons.TemplateDetailUC
+                    });
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
+                {
+                    Sender = this.GetType().Name,
+                    MenuButton = CommandButtons.Home,
+                    FromPage = CommandButtons.TemplateDetailUC
+                });
+            }
+        }
+
+        private void DialogCancelHandler(object obj)
+        {
+            /* Dialog sofort ohne weitere Prüfung abbrechen*/
             base.EventAgg.Publish<ChangeViewEventArgs>(new ChangeViewEventArgs
             {
                 Sender = this.GetType().Name,

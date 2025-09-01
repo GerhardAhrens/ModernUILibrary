@@ -116,15 +116,6 @@
                 MaxHeight="400"
                 HorizontalScrollBarVisibility="Disabled"
                 VerticalScrollBarVisibility="Auto">
-                <TextBlock
-                    Width="800"
-                    Margin="0,20,0,10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="18"
-                    ScrollViewer.CanContentScroll="True"
-                    Text="{Binding Path=DemoText, UpdateSourceTrigger=PropertyChanged, FallbackValue=~DemoText}"
-                    TextWrapping="NoWrap" />
             </ScrollViewer>
         </StackPanel>
     </ModernUI:SimpleGrid>

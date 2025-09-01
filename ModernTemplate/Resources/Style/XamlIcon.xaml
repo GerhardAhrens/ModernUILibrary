@@ -54,11 +54,12 @@
     </DrawingImage>
     <!--#endregion HomeUC-->
 
-    <!--#region Icon Allgemein -->
+    <!--#region Icon Allgemein-->
     <PathGeometry x:Key="IconDialogBack" Figures="M21,11H6.83L10.41,7.41L9,6L3,12L9,18L10.41,16.58L6.83,13H21V11Z" />
     <PathGeometry x:Key="IconAttachment" Figures="M7.5,18A5.5,5.5 0 0,1 2,12.5A5.5,5.5 0 0,1 7.5,7H18A4,4 0 0,1 22,11A4,4 0 0,1 18,15H9.5A2.5,2.5 0 0,1 7,12.5A2.5,2.5 0 0,1 9.5,10H17V11.5H9.5A1,1 0 0,0 8.5,12.5A1,1 0 0,0 9.5,13.5H18A2.5,2.5 0 0,0 20.5,11A2.5,2.5 0 0,0 18,8.5H7.5A4,4 0 0,0 3.5,12.5A4,4 0 0,0 7.5,16.5H17V18H7.5Z" />
     <PathGeometry x:Key="IconDialogCancel" Figures="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
-    <!--#endregion Icon Allgemein -->
+
+    <!--#endregion Icon Allgemein-->
 
     <!--#region Custom Overview Dialog-->
     <PathGeometry x:Key="IconSearch" Figures="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H13C12.59,21.75 12.2,21.44 11.86,21.1C11.53,20.77 11.25,20.4 11,20H6V4H13V9H18V10.18C18.71,10.34 19.39,10.61 20,11V8L14,2M20.31,18.9C21.64,16.79 21,14 18.91,12.68C16.8,11.35 14,12 12.69,14.08C11.35,16.19 12,18.97 14.09,20.3C15.55,21.23 17.41,21.23 18.88,20.32L22,23.39L23.39,22L20.31,18.9M16.5,19A2.5,2.5 0 0,1 14,16.5A2.5,2.5 0 0,1 16.5,14A2.5,2.5 0 0,1 19,16.5A2.5,2.5 0 0,1 16.5,19Z" />
@@ -71,8 +72,14 @@
 
     <!--#region Custom Detail Dialog-->
     <PathGeometry x:Key="IconRecordSave" Figures="M4 19H10V21H4C2.89 21 2 20.1 2 19V5C2 3.9 2.89 3 4 3H16L20 7V9.12L18 11.12V7.83L15.17 5H4V19M14 10V6H5V10H14M20.42 12.3C20.31 12.19 20.18 12.13 20.04 12.13C19.9 12.13 19.76 12.19 19.65 12.3L18.65 13.3L20.7 15.35L21.7 14.35C21.92 14.14 21.92 13.79 21.7 13.58L20.42 12.3M12 19.94V22H14.06L20.12 15.93L18.07 13.88L12 19.94M14 15C14 13.34 12.66 12 11 12S8 13.34 8 15 9.34 18 11 18C11.04 18 11.08 18 11.13 18L14 15.13C14 15.09 14 15.05 14 15" />
+
+    <DrawingImage x:Key="IconValidationError">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="Red" Geometry="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
     <!--#endregion Custom Detail Dialog-->
-    
+
     <!--#region Statuszeile-->
     <Viewbox
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

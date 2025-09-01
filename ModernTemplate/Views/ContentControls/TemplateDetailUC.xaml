@@ -18,13 +18,32 @@
     <UserControl.Resources>
         <!--  Allgemeine UserControl Resources  -->
         <ModernConverter:BooleanToVisibleConverter x:Key="BooleanToVisibleConverter" />
+        <ModernConverter:IntToVisibilityConverter x:Key="intToVisibilityConverter" />
+
         <ModernWPF:CommandKeyReference x:Key="BackCmdKey" Command="{Binding Path=CmdAgg[DialogBackCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="SaveCmdKey" Command="{Binding Path=CmdAgg[RecordSaveCommand]}" />
+        <ModernWPF:CommandKeyReference x:Key="CancelCmdKey" Command="{Binding Path=CmdAgg[DialogCancelCommand]}" />
 
         <sys:Double x:Key="IconSize">16.0</sys:Double>
     </UserControl.Resources>
 
     <UserControl.InputBindings>
         <KeyBinding Key="Esc" Command="{StaticResource ResourceKey=BackCmdKey}" />
+
+        <KeyBinding
+            Key="F4"
+            Command="{StaticResource ResourceKey=BackCmdKey}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="X"
+            Command="{StaticResource ResourceKey=CancelCmdKey}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="S"
+            Command="{StaticResource ResourceKey=SaveCmdKey}"
+            Modifiers="Ctrl" />
     </UserControl.InputBindings>
 
     <ModernUI:SimpleGrid
@@ -39,38 +58,13 @@
             FontWeight="Medium"
             Text="Erweiterte Dialogbeschreibung" />
 
-        <!--#region Validation Notification Panel-->
-        <ScrollViewer
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            MaxHeight="60"
-            Background="Red"
-            Focusable="False"
-            VerticalScrollBarVisibility="Auto"
-            Visibility="{Binding Path=ValidationErrors.Count, Converter={StaticResource ResourceKey=BooleanToVisibleConverter}}">
-            <ListBox
-                Height="Auto"
-                Background="Transparent"
-                DisplayMemberPath="Value"
-                Focusable="False"
-                FontWeight="Bold"
-                Foreground="White"
-                IsSynchronizedWithCurrentItem="True"
-                ItemsSource="{Binding Path=ValidationErrors, UpdateSourceTrigger=PropertyChanged}"
-                SelectedIndex="-1"
-                SelectedValue="{Binding Path=ValidationErrorsSelected, UpdateSourceTrigger=PropertyChanged}"
-                SelectedValuePath="Key" />
-        </ScrollViewer>
-        <!--#endregion Validation Notification Panel-->
-
         <Border
             Grid.Row="2"
             Grid.Column="0"
             HorizontalAlignment="Stretch"
             BorderBrush="Black"
             BorderThickness="0,1,0,1">
-            <StackPanel Orientation="Horizontal">
+            <DockPanel>
                 <ModernUI:PathButton
                     Width="100"
                     Height="30"
@@ -104,7 +98,43 @@
                         </TextBlock>
                     </ModernUI:PathButton.Content>
                 </ModernUI:PathButton>
-            </StackPanel>
+
+                <ModernUI:PathButton
+                    Width="100"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    Command="{Binding Path=CmdAgg[DialogCancelCommand]}"
+                    PathData="{StaticResource ResourceKey=IconDialogCancel}"
+                    PathWidth="{StaticResource ResourceKey=IconSize}">
+                    <ModernUI:PathButton.ToolTip>
+                        <ModernUI:MToolTip Content="Aktuelle Bearbeitung abbrechen" PlacementEx="TopLeft" />
+                    </ModernUI:PathButton.ToolTip>
+                    <ModernUI:PathButton.Content>
+                        <TextBlock>
+                            <Run Text="Abbruch" />
+                        </TextBlock>
+                    </ModernUI:PathButton.Content>
+                </ModernUI:PathButton>
+
+                <Button
+                    x:Name="BtnShowErrors"
+                    Width="50"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    ToolTip="Eingabefehler im Detail anzeigen"
+                    Visibility="{Binding Path=ValidationErrors.Count, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ResourceKey=intToVisibilityConverter}}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{StaticResource ResourceKey=IconValidationError}" Stretch="None" />
+                            <TextBlock
+                                FontSize="14"
+                                FontWeight="Medium"
+                                Text="{Binding Path=ValidationErrors.Count, UpdateSourceTrigger=PropertyChanged, FallbackValue=00}" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>            
+            </DockPanel>
         </Border>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
