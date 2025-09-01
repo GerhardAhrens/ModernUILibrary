@@ -47,8 +47,7 @@ Die gesamte Datenhaltung zwischen der GUI und der Datenbank wird auf Basis von D
 ## Features des Template
 Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalitäten mit.
 
-### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md))
-C:\_Projekte\_Git_Private\ModernUI\ModernTemplate\Core\_MT_Core.md
+### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
 
 ### Settings
 
