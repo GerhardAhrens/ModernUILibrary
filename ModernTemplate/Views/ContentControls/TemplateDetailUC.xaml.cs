@@ -35,6 +35,10 @@ namespace ModernTemplate.Views.ContentControls
     /// </summary>
     public partial class TemplateDetailUC : UserControlBase
     {
+        /// <summary>
+        /// Konstruktor der Klasse mit einem Konfigurationsparameter 'ChangeViewEventArgs'
+        /// </summary>
+        /// <param name="args"></param>
         public TemplateDetailUC(ChangeViewEventArgs args) : base(typeof(TemplateDetailUC))
         {
             this.InitializeComponent();
@@ -93,6 +97,11 @@ namespace ModernTemplate.Views.ContentControls
         }
 
         #region WindowEventHandler
+        /// <summary>
+        /// Ereignis wenn das UserControl erstellt wurde und sichtbar ist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             this.Focus();
@@ -107,6 +116,11 @@ namespace ModernTemplate.Views.ContentControls
             this.DemoText = string.Empty;
         }
 
+        /// <summary>
+        /// Ereignis, wenn das UserControl verlassen wird
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnUnLoaded(object sender, RoutedEventArgs e)
         {
             /* Funktionalität beim verlassen des UserControls */
@@ -117,6 +131,9 @@ namespace ModernTemplate.Views.ContentControls
         #endregion WindowEventHandler
 
         #region Daten landen und Filtern
+        /// <summary>
+        /// In der Methode werden die notwendigen Daten für die GUI geladen
+        /// </summary>
         private void LoadDataHandler()
         {
             /* lesen und vorbereiten von Daten */
@@ -131,6 +148,11 @@ namespace ModernTemplate.Views.ContentControls
             }
         }
 
+        /// <summary>
+        /// Löst ein Event aus, wenn sich ein DataColumn auf einer DataRow ändert. Intern wird die Methode 'CheckInputControls' ausgelöst.
+        /// </summary>
+        /// <param name="sender">DataRow</param>
+        /// <param name="e">DataColumn</param>
         private void OnColumnChanged(object sender, DataColumnChangeEventArgs e)
         {
             string fieldName = e.Column.ColumnName;
@@ -143,6 +165,9 @@ namespace ModernTemplate.Views.ContentControls
         #endregion Daten landen und Filtern
 
         #region Register und Prüfen Validations
+        /// <summary>
+        /// Registrierung der Validierungsregeln für die Eingabe. Zu den vorhandenen Regeln können weitere erstellt werden. 
+        /// </summary>
         private void RegisterValidations()
         {
             /* Validierungsregeln für 
@@ -154,6 +179,11 @@ namespace ModernTemplate.Views.ContentControls
 
         }
 
+        /// <summary>
+        /// Prüfung der Eingaben mit den für das Column regisitriere Regelset.
+        /// </summary>
+        /// <param name="fieldNames">Column</param>
+        /// <returns>True ? Eingabe OK</returns>
         private bool CheckInputControls(params string[] fieldNames)
         {
             bool result = false;
@@ -207,6 +237,11 @@ namespace ModernTemplate.Views.ContentControls
             return result;
         }
 
+        /// <summary>
+        /// Bei einem Fehler in der Eingabe wird ein Popup mit einem entsprechendem Hinweis dargestellt.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowInputValidation(object sender, RoutedEventArgs e)
         {
             foreach (Popup item in this.ValidationErrors.Values)
@@ -215,6 +250,11 @@ namespace ModernTemplate.Views.ContentControls
             }
         }
 
+        /// <summary>
+        /// Bei einem Fehler in der Eingabe wird ein Popup dargestellt. Durch einen Klick auf das Popup wird auf das entsprechende Eingabe-Control gesprungen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnNotifiactionPopupClick(object sender, PopupResultArgs e)
         {
             if (e != null)

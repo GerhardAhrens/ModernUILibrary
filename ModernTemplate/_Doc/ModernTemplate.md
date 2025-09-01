@@ -47,16 +47,8 @@ Die gesamte Datenhaltung zwischen der GUI und der Datenbank wird auf Basis von D
 ## Features des Template
 Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalitäten mit.
 
-### Logging
-Es wird eine Logging-Funktion zur Verfügung gestellt, deren Funktionalität durch die abzuleitende Klasse *AbstractOutHandler* verändert bzw. anggepasst werden kann. Im Standard erfolgt das Logging in eine datei über die Klasse *LogFileOutHandler*.
-```csharp
-App.Logger.Error(ex, errorText);
-```
-oder
-```csharp
-App.Logger.Warning($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann nicht gefunden werden.");
-```
-Die Stufe des Errorlevel kann konfiguriert werden und wird erst nach dem Neustart der Anwendung wirksam.
+### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md))
+C:\_Projekte\_Git_Private\ModernUI\ModernTemplate\Core\_MT_Core.md
 
 ### Settings
 
