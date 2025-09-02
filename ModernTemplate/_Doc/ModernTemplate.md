@@ -36,7 +36,11 @@ Die beiden Bibliotheken sind im Verzeichnis ***\\_Lib\\*** abgelegt.</br>
 Je nach Aufgabe können weitere Bibliotheken auch in Form von GuGet-Paketen der Solution hinzugefügt werden.
 
 # Interne Struktur und Funktion
-Anwendungen die auf Basis des **Modern Template** erstellt werden, sind als *Single Page* Anwendungen ausgelegt. Alle Dialoge werdfen in einem *ContentControl* dargestellt. Die Steuerung zwischen den Dialoge erfolgt über ein Mediator. Im Grunde ist jeder Dialog autark, es können aber über den Mediator Parameter zwischen Dialoge ausgetauscht werden. So kann z.B. von einem Übersichtsdialog ein Bearbeitungsdialog aufgerufen werden.
+Anwendungen die auf Basis des **Modern Template** erstellt werden, sind als *Single Page* Anwendungen ausgelegt. Alle Dialoge werdfen in einem *ContentControl* dargestellt. Die Steuerung zwischen den Dialoge erfolgt über ein Mediator. Im Grunde ist jeder Dialog autark, es können aber über den Mediator Parameter zwischen Dialoge ausgetauscht werden. So kann z.B. von einem Übersichtsdialog ein Bearbeitungsdialog aufgerufen werden.</br>
+
+## [Dialoge & Views](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Views/_MT_Views)
+## [Repository & Daten](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Repository/_MT_Repository)
+
 
 ## Datenzugriffe
 Die Datenzugriffe erfolgen über Repository-Klassen. Im einfachsten Fall kann zu einem Dialog (Übersicht und Bearbeitung) eine Klasse vorhanden sein die entweder eine Liste (irgendein Listentyp) oder einen Datesansatz zur Bearbeitung (CRUD) zurück (Typ-spezifisch) gibt. 
