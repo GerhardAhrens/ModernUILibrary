@@ -3,13 +3,6 @@ r { color: Red }
 o { color: Orange }
 g { color: Green }
 </style>
-
-<!--
-<r>TODO:</r> Rot
-<o>TODO:</o> Orange
-<g>DONE:</g> Grün
--->
- 
 # Verzeichnis Core
 
 Im Verzeichnis *Core* werden alle Funktionalitäten abgelegt, die in der gesamten Anwendung verwendet werden können.
@@ -27,7 +20,7 @@ App.Logger.Warning($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann 
 ```
 Die Stufe des Errorlevel kann konfiguriert werden und wird erst nach dem Neustart der Anwendung wirksam.
 
-## Settings
+## <a name="CoreSettings"></a>Settings
 Unabhängig der *app.config* steht die Basisklasse *SmartSettingsBase* zur Erstellung und Bearbeitung einer Konfiguration zur Verfügung. Diese Konfigurationsdatei wird unter dem Verzeichnis *ProgramData\\<AppName>* als **JSON Datei** gespeichert.
 Der Vorteil dieser Möglichkeit ist zum einen die einfachen Verwendung beim Lesen und Schreiben, aber auch die Typ-Sicherheit.
 So kann eine einfache Klasse mit Properties erstellt werden, die von *SmartSettingsBase* ableitet.
@@ -93,7 +86,7 @@ private void InitializeSettings()
 }
 ```
 
-##  Eingabe Validierung
+## <a name="CoreValidation"></a>Eingabe Validierung
 
 Die Prüfung von Eingaben erfolgt in zwei Schritten. 
 - Erstellen und Registrieren einer Prüfregel
