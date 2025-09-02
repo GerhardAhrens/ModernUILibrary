@@ -3,11 +3,11 @@ r { color: Red }
 o { color: Orange }
 g { color: Green }
 </style>
-<!--
+<!---
 <r>TODO:</r> Rot
 <o>TODO:</o> Orange
 <g>DONE:</g> Grün
--->
+--->
 # Modern Projekt Template
 
 ![NET](https://img.shields.io/badge/NET-8.0-green.svg)
@@ -57,7 +57,7 @@ Die gesamte Datenhaltung zwischen der GUI und der Datenbank wird auf Basis von D
 ## Features des Template
 Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalitäten mit.
 
-### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)(#CoreLogging)
+### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md#CoreLogging)
 ### [Setting](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
 ### [Eingabe Validierung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
 ### [Meldungsdialoge (auch intern Notification)](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
