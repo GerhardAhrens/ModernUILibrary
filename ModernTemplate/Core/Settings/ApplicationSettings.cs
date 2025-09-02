@@ -17,17 +17,19 @@
 namespace ModernTemplate.Core
 {
     using System;
+    using System.Runtime.Versioning;
 
     using ModernBaseLibrary.CoreBase;
 
     using ModernUI.MVVM.Enums;
 
+    [SupportedOSPlatform("windows")]
     public class ApplicationSettings : SmartSettingsBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
         /// </summary>
-        public ApplicationSettings() : base(null,App.SHORTNAME)
+        public ApplicationSettings() : base(null,App.SHORTAPPNAME)
         {
         }
 

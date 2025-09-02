@@ -13,7 +13,8 @@ oder
 ```csharp
 App.Logger.Warning($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann nicht gefunden werden.");
 ```
-Die Stufe des Errorlevel kann konfiguriert werden und wird erst nach dem Neustart der Anwendung wirksam.
+Die Stufe des Errorlevel kann konfiguriert werden und wird erst nach dem Neustart der Anwendung wirksam. Die Log-Datei wird nach *ProgramData\\anwendung\\Log\\* geschrieben.
+
 
 ## <a name="CoreSettings"></a>Settings
 Unabhängig der *app.config* steht die Basisklasse *SmartSettingsBase* zur Erstellung und Bearbeitung einer Konfiguration zur Verfügung. Diese Konfigurationsdatei wird unter dem Verzeichnis *ProgramData\\<AppName>* als **JSON Datei** gespeichert.

@@ -28,18 +28,18 @@ Zum einen bilden die beiden Bibliotheken die Grundlage des Entwicklungsframework
 
 # Interne Abhängigkeiten
 Das Template verwendet zwei weitere Bilbliotheken
-- ModernBaseLibrary
-- ModernUILibrary
+- [ModernBaseLibrary](https://github.com/GerhardAhrens/ModernUILibrary/tree/master/ModernBaseLibrary)
+- [ModernUILibrary](https://github.com/GerhardAhrens/ModernUILibrary/tree/master/ModernUILibrary)
 
 Beide liegen als Source in der gleichen Solution **ModernUILibrary**. Er werden dazu keine weiteren Bibliotheken verwendet. Alle weiteren Pakete sind von Microsoft selbst, da das NET Core mit jeder Version stärker fragmentiert wird.
 Die beiden Bibliotheken sind im Verzeichnis ***\\_Lib\\*** abgelegt.</br>
 Je nach Aufgabe können weitere Bibliotheken auch in Form von GuGet-Paketen der Solution hinzugefügt werden.
 
 # Interne Struktur und Funktion
-Anwendungen die auf Basis des **Modern Template** erstellt werden, sind als *Single Page* Anwendungen ausgelegt. Alle Dialoge werdfen in einem *ContentControl* dargestellt. Die Steuerung zwischen den Dialoge erfolgt über ein Mediator. Im Grunde ist jeder Dialog autark, es können aber über den Mediator Parameter zwischen Dialoge ausgetauscht werden. So kann z.B. von einem Übersichtsdialog ein Bearbeitungsdialog aufgerufen werden.</br>
+Anwendungen die auf Basis des **Modern Template** erstellt werden, sind als *Single Page* Anwendungen ausgelegt. Alle Dialoge werden in einem *ContentControl* dargestellt. Die Steuerung zwischen den Dialoge erfolgt über ein Mediator. Im Grunde ist jeder Dialog autark, es können aber über den Mediator Parameter über die Klasse **ChangeViewEventArgs** zwischen Dialoge ausgetauscht werden. Diese kann bei Bedarf mit weiteren Properties angepasst werden. So kann z.B. von einem Übersichtsdialog ein Bearbeitungsdialog aufgerufen werden.</br>
 
-## [Dialoge & Views](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Views/_MT_Views)
-## [Repository & Daten](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Repository/_MT_Repository)
+## [Dialoge & Views & Binding](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Views/_MT_Views.md)
+## [Repository & CRUD](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Repository/_MT_Repository.md))
 
 
 ## Datenzugriffe
@@ -55,6 +55,14 @@ Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalität
 ### [Setting](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md#CoreSettings)
 ### [Eingabe Validierung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md#CoreValidation)
 ### [Meldungsdialoge (auch intern Notification)](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+
+# Schritt für Schritt
+## App.xaml.cs & App.cs
+## Resources
+## Menüpunkte (Home View)
+## Dialoge & Views (ContentControls)
+## TabAppAbout
+## TabAppSettings
 
 # Nach der Fertigstellung einer Anwendung
 Nach der Fertigstellung können die verschiedenen Beschreibungen als auch Klassen/XAML Templates gelöscht werden.
