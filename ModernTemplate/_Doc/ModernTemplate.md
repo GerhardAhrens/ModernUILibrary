@@ -1,9 +1,4 @@
-﻿<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-</style>
-# Modern Projekt Template
+﻿# Modern Projekt Template
 
 ![NET](https://img.shields.io/badge/NET-8.0-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)

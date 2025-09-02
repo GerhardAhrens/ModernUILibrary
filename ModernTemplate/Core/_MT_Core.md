@@ -1,13 +1,8 @@
-﻿<style>
-r { color: Red }
-o { color: Orange }
-g { color: Green }
-</style>
-# Verzeichnis Core
+﻿# Verzeichnis Core
 
 Im Verzeichnis *Core* werden alle Funktionalitäten abgelegt, die in der gesamten Anwendung verwendet werden können.
 
-<r>**Hinweis:**</r> Das "\\Core" Verzeichnis kann um eigenen zusätzlichen Verzeichnisse und Klassen erweitert werden.
+<span style="color:red">**Hinweis:**</span> Das "\\Core" Verzeichnis kann um eigenen zusätzlichen Verzeichnisse und Klassen erweitert werden.
 
 ## <a name="CoreLogging"></a>Logging
 Es wird eine Logging-Funktion zur Verfügung gestellt, deren Funktionalität durch die abzuleitende Klasse *AbstractOutHandler* verändert bzw. anggepasst werden kann. Im Standard erfolgt das Logging in eine datei über die Klasse *LogFileOutHandler*.
@@ -198,7 +193,7 @@ NotificationService.RegisterDialog<MessageOk>();
 
 Die verschiedenen Meldungstypen sind im Verzeichnis *Views\\NotificationContent* abgelegt. Diese können als Vorlage zur Implementierung weiterer Meldungstypen dienen. Auf diese Weise können nicht nur einfache **Ok** oder **Ja/Nein** Dialoge erstellt werden, sondern auch komplexere Dialoge für die Eingabe oder Auswahl von Daten.
 
-<r>**Wichtig:**</r> Die zu verwendenten Dialogtypen müssen im jedenfall vor der Verwendung registriert werden.
+<span style="color:red">**Wichtig:**</span> Die zu verwendenten Dialogtypen müssen im jedenfall vor der Verwendung registriert werden.
 
 
 
