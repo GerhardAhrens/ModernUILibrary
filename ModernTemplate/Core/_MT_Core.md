@@ -16,7 +16,7 @@ Im Verzeichnis *Core* werden alle Funktionalitäten abgelegt, die in der gesamte
 
 <r>**Hinweis:**</r> Das "\\Core" Verzeichnis kann um eigenen zusätzlichen Verzeichnisse und Klassen erweitert werden.
 
-## Logging
+## <a name="CoreLogging"></a>Logging
 Es wird eine Logging-Funktion zur Verfügung gestellt, deren Funktionalität durch die abzuleitende Klasse *AbstractOutHandler* verändert bzw. anggepasst werden kann. Im Standard erfolgt das Logging in eine datei über die Klasse *LogFileOutHandler*.
 ```csharp
 App.Logger.Error(ex, errorText);
