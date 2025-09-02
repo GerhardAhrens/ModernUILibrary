@@ -26,9 +26,7 @@ public class ApplicationSettings : SmartSettingsBase
     /// <summary>
     /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
     /// </summary>
-    public ApplicationSettings() : base(null,App.SHORTNAME)
-    {
-    }
+    public ApplicationSettings() : base(null,App.SHORTNAME) { }
 
     public string DatenbankConnection { get; set; }
 
@@ -184,7 +182,7 @@ Dazu muß das Event *PopupClick* registriert und im UnLoad wieder De-Registriert
 ```
 
 ## Meldungsdialoge (auch intern Notification)
-Meldungen in der Anwendung bestehen aus zwei Teilen. Einem *NotificationService* für der bestimmte Meldungstypen registriert werden, und die Meldung selbst die als Exctension Methode auf dem Interface *INotificationService* aufgerufen wird. Die Methoden, die die Meldungen beinhalten sind in der statischen Klasse *Core\\MessageContent.cs* gesammelt.
+Meldungen in der Anwendung bestehen aus zwei Teilen. Einem *NotificationService* für den bestimmte Meldungstypen registriert werden müssen, und die Meldung selbst die als Exctension Methode auf dem Interface *INotificationService* aufgerufen wird. Die Methoden, die die Meldungen beinhalten sind in der statischen Klasse *Core\\MessageContent.cs* gesammelt.
 Registrierung der Meldungstypen.
 ```csharp
 NotificationService.RegisterDialog<QuestionYesNo>();
@@ -195,5 +193,38 @@ Die verschiedenen Meldungstypen sind im Verzeichnis *Views\\NotificationContent*
 
 <span style="color:red">**Wichtig:**</span> Die zu verwendenten Dialogtypen müssen im jedenfall vor der Verwendung registriert werden.
 
+Implementierung der Meldung **ApplicationExit()**.
+```csharp
+public static NotificationBoxButton ApplicationExit(this INotificationService @this)
+{
+    (string InfoText, string CustomText, double FontSize) msgText = ("Programm beenden", $"Soll das Programm beendet werden?", MSG_FONTSIZE);
+    NotificationBoxButton questionResult = NotificationBoxButton.No;
+
+    @this.ShowDialog<QuestionYesNo>(msgText, (result, tag) =>
+    {
+        if (result == true && tag != null)
+        {
+            questionResult = ((Tuple<NotificationBoxButton>)tag).Item1;
+        }
+    });
+
+    return questionResult;
+}
+```
+
+und Aufruf der Meldung aus der Anwendung
+```csharp
+NotificationBoxButton result = this.Notifications.ApplicationExit();
+if (result == NotificationBoxButton.Yes)
+{
+    this.ExitApplication(e);
+}
+else
+{
+    e.Cancel = true;
+}
+```
+
+### [Erstellung eigener Notification-Typen](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Views/NotificationContent/_MT_NotificationContent.md)
 
 
