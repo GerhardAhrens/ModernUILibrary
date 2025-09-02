@@ -6,7 +6,7 @@
 //
 // <author>Gerhard Ahrens - www.lifeprojects.de</author>
 // <email>gerhard.ahrens@lifeprojects.de</email>
-// <date>03.12.2024 07:49:42</date>
+// <date>01.11.2024</date>
 //
 // <summary>
 // Klasse zur Darstellung von Assembly Meta Informationen
@@ -24,9 +24,9 @@ namespace ModernSQLite.AssemblyInfo
         public string PacketName => "ModernUI";
         public Version PacketVersion => new Version(1, 0, 2025, 16);
 
-        public string AssemblyName => "Modern";
+        public string AssemblyName => "ModernSQLite";
 
-        public Version AssemblyVersion => new Version(1, 0, 2025, 1);
+        public Version AssemblyVersion => new Version(1, 0, 2025, 21);
 
         public string Description => "Bibliothek mit einer Sammlung C# Klassen zum lesen und schreiben in Verbindung mit einer SQLite Datenbank";
 

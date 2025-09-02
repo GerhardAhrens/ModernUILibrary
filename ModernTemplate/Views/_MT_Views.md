@@ -32,7 +32,7 @@ arg.MenuButton = CommandButtons.Home;
 this.ChangeControl(arg);
 ```
 
-Die Methode läd num über die Zuordnung des *CommandButtons* das entsprechende UserControl in das ContentControl.
+Die Methode läd nun über die Zuordnung des *CommandButtons* das entsprechende UserControl in das ContentControl.
 ```csharp
 private void ChangeControl(ChangeViewEventArgs e)
 {
