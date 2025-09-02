@@ -1,6 +1,20 @@
-﻿# Verzeichnis Core
+﻿<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+</style>
+
+<!--
+<r>TODO:</r> Rot
+<o>TODO:</o> Orange
+<g>DONE:</g> Grün
+-->
+ 
+# Verzeichnis Core
 
 Im Verzeichnis *Core* werden alle Funktionalitäten abgelegt, die in der gesamten Anwendung verwendet werden können.
+
+<r>**Hinweis:**</r> Das "\\Core" Verzeichnis kann um eigenen zusätzlichen Verzeichnisse und Klassen erweitert werden.
 
 ## Logging
 Es wird eine Logging-Funktion zur Verfügung gestellt, deren Funktionalität durch die abzuleitende Klasse *AbstractOutHandler* verändert bzw. anggepasst werden kann. Im Standard erfolgt das Logging in eine datei über die Klasse *LogFileOutHandler*.
@@ -14,8 +28,184 @@ App.Logger.Warning($"Der Dialog '{e.MenuButton}|{e.MenuButton.ToString()}' kann 
 Die Stufe des Errorlevel kann konfiguriert werden und wird erst nach dem Neustart der Anwendung wirksam.
 
 ## Settings
+Unabhängig der *app.config* steht die Basisklasse *SmartSettingsBase* zur Erstellung und Bearbeitung einer Konfiguration zur Verfügung. Diese Konfigurationsdatei wird unter dem Verzeichnis *ProgramData\\<AppName>* als **JSON Datei** gespeichert.
+Der Vorteil dieser Möglichkeit ist zum einen die einfachen Verwendung beim Lesen und Schreiben, aber auch die Typ-Sicherheit.
+So kann eine einfache Klasse mit Properties erstellt werden, die von *SmartSettingsBase* ableitet.
+
+```csharp
+public class ApplicationSettings : SmartSettingsBase
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ApplicationSettings"/> class.
+    /// </summary>
+    public ApplicationSettings() : base(null,App.SHORTNAME)
+    {
+    }
+
+    public string DatenbankConnection { get; set; }
+
+    public string LastUser { get; set; }
+
+    public DateTime LastAccess { get; set; }
+
+    public bool ExitApplicationQuestion { get; set; }
+
+    public bool SaveLastWindowsPosition { get; set; }
+
+    public int SetLoggingLevel { get; set; }
+}
+```
+
+Auf Grund der einfachen Struktur ist eine Anpaasung auch bei späteren Erweiterungen möglich.
+```json
+{
+  "DatenbankConnection": null,
+  "LastUser": null,
+  "LastAccess": "0001-01-01T00:00:00",
+  "ExitApplicationQuestion": true,
+  "SaveLastWindowsPosition": false,
+  "SetLoggingLevel": 0
+}
+```
+
+Die Basisklasse stellt eine Reihe von Methoden zum lesen und Schreiben zur Verfügung.
+
+```csharp
+private void InitializeSettings()
+{
+    using (ApplicationSettings settings = new ApplicationSettings())
+    {
+        settings.Load();
+        if (settings.IsExitSettings() == false)
+        {
+            settings.ExitApplicationQuestion = App.ExitApplicationQuestion;
+            settings.SaveLastWindowsPosition = App.SaveLastWindowsPosition;
+            settings.SetLoggingLevel = App.SetLoggingLevel;
+            settings.Save();
+        }
+        else
+        {
+            App.ExitApplicationQuestion = settings.ExitApplicationQuestion;
+            App.SaveLastWindowsPosition = settings.SaveLastWindowsPosition;
+            App.SetLoggingLevel = settings.SetLoggingLevel;
+        }
+    }
+}
+```
 
 ##  Eingabe Validierung
 
+Die Prüfung von Eingaben erfolgt in zwei Schritten. 
+- Erstellen und Registrieren einer Prüfregel
+- Prüfung z.B. während der Eingabe und darstellen (als Popup) wenn ein Fehler vorhanden ist.
+
+Im Verzeichnis **Core\\ValidationRules** befindet sich die statische Klasse *InputValidation*, in der bereits verschiedene Prüfregeln abgelegt sind.
+Wie im Architekturkonzept festgelegt, arbeitet auch die Validierung mit einem *DataRow*.
+```csharp
+public class InputValidation<TDataRow> where TDataRow : class
+{}
+```
+Die Klasse selbst verwendet eine Fluent-API und arbeitet typisiert. Das Ergebnis wird über ein Result-Objekt zurückgegeben.
+```csharp
+public Result<string> NotEmpty(string fieldName, string displayName = "")
+{
+    string result = string.Empty;
+    bool resultValidError = false;
+    string propertyValue = (string)((DataRow)validation.ThisObject).GetAs<string>(fieldName);
+
+    displayName = string.IsNullOrEmpty(displayName) == true ? fieldName : displayName;
+
+    if (string.IsNullOrEmpty(propertyValue) == true)
+    {
+        result = $"Das Feld '{displayName}' darf nicht leer sein.";
+        resultValidError = true;
+    }
+
+    return Result<string>.SuccessResult(result, resultValidError);
+}
+```
+
+Die Validierungsregel wird einem Dictionary hinzugefügt und ausgewertet.
+```csharp
+this.ValidationRules.Add("ShortName", () =>
+{
+    return InputValidation<DataRow>.This(this.CurrentRow).NotEmpty("ShortName", "Benutzername");
+});
+```
+
+Die Methode *CheckInputControls* wertet die Regel aus und steuert die Darstellung
+```csharp
+private bool CheckInputControls(params string[] fieldNames)
+{
+    bool result = false;
+
+    try
+    {
+        foreach (string fieldName in fieldNames)
+        {
+            Func<Result<string>> function = null;
+            if (this.ValidationRules.TryGetValue(fieldName, out function) == true)
+            {
+                Result<string> ruleText = this.DoValidation(function, fieldName);
+                if (string.IsNullOrEmpty(ruleText.Value) == false)
+                {
+                    if (this.ValidationErrors.ContainsKey(fieldName) == false)
+                    {
+                        NotifiactionPopup.PlacementTarget = this.BtnShowErrors;
+                        NotifiactionPopup.Delay = 5;
+                        Popup po = NotifiactionPopup.CreatePopup(fieldName, ruleText.Value);
+                        po.IsOpen = true;
+                        this.ValidationErrors.Add(fieldName, po);
+                    }
+                }
+                else
+                {
+                    if (this.ValidationErrors.ContainsKey(fieldName) == true)
+                    {
+                        NotifiactionPopup.Remove();
+                        this.ValidationErrors.Remove(fieldName);
+                    }
+                }
+            }
+        }
+
+        if (this.ValidationErrors != null && this.ValidationErrors.Count > 0)
+        {
+            result = true;
+        }
+        else if (this.ValidationErrors != null && this.ValidationErrors.Count == 0)
+        {
+            NotifiactionPopup.Reset();
+            result = false;
+        }
+    }
+    catch (Exception ex)
+    {
+        string errorText = ex.Message;
+        throw;
+    }
+
+    return result;
+}
+```
+
+Zusätzlich ist eine Möglichkeit in den Popup implementiert, um durch Klick auf das jeweilige Feld zu springen auf dem ein Fehler aufgetreten ist.
+Dazu muß das Event *PopupClick* registriert und im UnLoad wieder De-Registriert werden.
+```csharp
+ NotifiactionPopup.PopupClick += this.OnNotifiactionPopupClick;
+```
+
 ## Meldungsdialoge (auch intern Notification)
+Meldungen in der Anwendung bestehen aus zwei Teilen. Einem *NotificationService* für der bestimmte Meldungstypen registriert werden, und die Meldung selbst die als Exctension Methode auf dem Interface *INotificationService* aufgerufen wird. Die Methoden, die die Meldungen beinhalten sind in der statischen Klasse *Core\\MessageContent.cs* gesammelt.
+Registrierung der Meldungstypen.
+```csharp
+NotificationService.RegisterDialog<QuestionYesNo>();
+NotificationService.RegisterDialog<MessageOk>();
+```
+
+Die verschiedenen Meldungstypen sind im Verzeichnis *Views\\NotificationContent* abgelegt. Diese können als Vorlage zur Implementierung weiterer Meldungstypen dienen. Auf diese Weise können nicht nur einfache **Ok** oder **Ja/Nein** Dialoge erstellt werden, sondern auch komplexere Dialoge für die Eingabe oder Auswahl von Daten.
+
+<r>**Wichtig:**</r> Die zu verwendenten Dialogtypen müssen im jedenfall vor der Verwendung registriert werden.
+
+
 

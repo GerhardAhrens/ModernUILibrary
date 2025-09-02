@@ -1,4 +1,19 @@
-﻿namespace ModernTemplate
+﻿//-----------------------------------------------------------------------
+// <copyright file="MainWindow.xaml.cs" company="company">
+//     Class: MainWindow
+//     Copyright © company 2025
+// </copyright>
+//
+// <author>Gerhard Ahrens - company</author>
+// <email>gerhard.ahrens@company.de</email>
+// <date>dd.MM.yyyy</date>
+//
+// <summary>
+// Die Klasse beinhaltet die Funktionaliät die beim Start geprüft bzw. erstellt werden sollen.
+// </summary>
+//-----------------------------------------------------------------------
+
+namespace ModernTemplate
 {
     using System.Collections;
     using System.Diagnostics;
@@ -23,7 +38,8 @@
     {
         private const int MAX_INSTANCE = 2;
         private const string DEFAULTLANGUAGE = "de-DE";
-        public const string SHORTNAME = "ModernTemplate";
+        public const string SHORTAPPNAME = "ModernTemplate";
+        public const string LONGAPPNAME = "Modern Template - Projekt";
         private static readonly string MessageBoxTitle = "ModernTemplate Application";
         private static readonly string UnexpectedError = "An unexpected error occured.";
         private string exePath = string.Empty;
@@ -31,15 +47,6 @@
 
         public App()
         {
-            /*
-            string aa1 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 0);
-            string aa2 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 1);
-            string aa3 = Humanizer.GetX("Bereit: [ein/{0}/keine] [Datensatz/Datensätze/Datensätze]", 2);
-            string del1 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 0);
-            string del2 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 1);
-            string del3 = Humanizer.GetX("[Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden/Es wurde kein Datensatz zum löschen gefunden]", 2);
-            */
-
             try
             {
                 /* Name der EXE Datei*/
@@ -90,7 +97,7 @@
         /// </summary>
         public static int SetLoggingLevel { get; set; }
 
-        public static ILogger Logger { get { return Logging.Instance.GetLogger(SHORTNAME); } }
+        public static ILogger Logger { get { return Logging.Instance.GetLogger(App.SHORTAPPNAME); } }
 
         public static string ProgramDataPath { get { return new UserPreferences().ProgramDataPath(); } }
 
@@ -182,7 +189,7 @@
 
             Logger.SetLevel(App.SetLoggingLevel);
 
-            Logger.Info($"Start '{SHORTNAME}'");
+            Logger.Info($"Start '{App.SHORTAPPNAME}'");
             Logger.Info("InitializeLogger");
             Logger.Flush();
         }

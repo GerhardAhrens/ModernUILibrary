@@ -21,7 +21,7 @@
 // string del2 = Humanizer.Get("[Es wurde kein Datensatz zum löschen gefunden/Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden]", 1);
 // string del3 = Humanizer.Get("[Es wurde kein Datensatz zum löschen gefunden/Soll der gefundene Datensatz gelöscht werden/Sollen die gefunden Datensätze '{0}' gelöscht werden]", 2);
 // string var1 = Humanizer.Get("[Es ist kein Datensatz vorhanden/Es sind mehrere Datenätze vorhanden]",0);
-// string var1 = Humanizer.Get("[Es ist kein Datensatz vorhanden/Es sind mehrere Datenätze vorhanden]",2);
+// string var2 = Humanizer.Get("[Es ist kein Datensatz vorhanden/Es sind mehrere Datenätze vorhanden]",2);
 // </Remark>
 //-----------------------------------------------------------------------
 
@@ -119,17 +119,17 @@ namespace ModernTemplate.Core
             }
         }
 
-        public static T[] ExtractContent<T>(this string @this, string regex)
+        public static T[] ExtractContent<T>(this string @this, string regPattern)
         {
             TypeConverter tc = TypeDescriptor.GetConverter(typeof(T));
             if (tc.CanConvertFrom(typeof(string)) == false)
             {
                 throw new ArgumentException("Type does not have a TypeConverter from string", "T");
             }
+
             if (string.IsNullOrEmpty(@this) == false)
             {
-                return
-                    Regex.Matches(@this, regex)
+                return Regex.Matches(@this, regPattern)
                     .Cast<Match>()
                     .Select(f => f.ToString())
                     .Select(f => (T)tc.ConvertFrom(f))

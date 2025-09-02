@@ -90,13 +90,23 @@ namespace ModernTemplate.Views.ContentControls
         {
             this.Focus();
             Keyboard.Focus(this);
-            this.InitCommands();
 
-            this.DataContext = this;
+            try
+            {
+                this.InitCommands();
 
-            this.LoadDataHandler();
+                this.DataContext = this;
 
-            this.IsUCLoaded = true;
+                this.LoadDataHandler();
+
+                this.IsUCLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
+                throw;
+            }
         }
 
         #endregion WindowEventHandler
@@ -120,7 +130,8 @@ namespace ModernTemplate.Views.ContentControls
             }
             catch (Exception ex)
             {
-                string errorText = ex.Message;
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
                 throw;
             }
         }

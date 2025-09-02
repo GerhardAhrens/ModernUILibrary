@@ -81,7 +81,7 @@ namespace ModernTemplate
         #region WindowEventHandler
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.DialogDescription = "Modern Template - Projekt";
+            this.DialogDescription = App.LONGAPPNAME;
 
             try
             {
@@ -110,8 +110,8 @@ namespace ModernTemplate
             }
             catch (Exception ex)
             {
-                string errorText = ex.Message;
-                App.Logger.Error(ex, errorText);
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
                 throw;
             }
         }

@@ -21,6 +21,8 @@ namespace ModernTemplate.Views.ContentControls
 
     using ModernBaseLibrary.Cryptography;
 
+    using ModernIU.Controls;
+
     using ModernTemplate.Core;
 
     using ModernUI.MVVM.Base;
@@ -58,19 +60,28 @@ namespace ModernTemplate.Views.ContentControls
         #region WindowEventHandler
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            ContentPresenter titlePanel = this.HomeRibbonMenu.Template.FindName("PART_TitleHost", this.HomeRibbonMenu) as ContentPresenter;
-            if (titlePanel != null)
+            try
             {
-                titlePanel.Height = 0;
-                titlePanel.Content = null;
-                titlePanel.Visibility = Visibility.Collapsed;
-            }
+                ContentPresenter titlePanel = this.HomeRibbonMenu.Template.FindName("PART_TitleHost", this.HomeRibbonMenu) as ContentPresenter;
+                if (titlePanel != null)
+                {
+                    titlePanel.Height = 0;
+                    titlePanel.Content = null;
+                    titlePanel.Visibility = Visibility.Collapsed;
+                }
 
-            this.Focus();
-            Keyboard.Focus(this);
-            this.InitCommands();
-            this.IsUCLoaded = true;
-            this.DataContext = this;
+                this.Focus();
+                Keyboard.Focus(this);
+                this.InitCommands();
+                this.IsUCLoaded = true;
+                this.DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
+                throw;
+            }
        }
         #endregion WindowEventHandler
 

@@ -107,13 +107,22 @@ namespace ModernTemplate.Views.ContentControls
             this.Focus();
             Keyboard.Focus(this);
 
-            this.RegisterValidations();
-            this.LoadDataHandler();
+            try
+            {
+                this.RegisterValidations();
+                this.LoadDataHandler();
 
-            this.DataContext = this;
-            this.IsUCLoaded = true;
+                this.DataContext = this;
+                this.IsUCLoaded = true;
 
-            this.DemoText = string.Empty;
+                this.DemoText = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -130,7 +139,7 @@ namespace ModernTemplate.Views.ContentControls
 
         #endregion WindowEventHandler
 
-        #region Daten landen und Filtern
+        #region Daten landen und darstellen
         /// <summary>
         /// In der Methode werden die notwendigen Daten für die GUI geladen
         /// </summary>
@@ -143,7 +152,8 @@ namespace ModernTemplate.Views.ContentControls
             }
             catch (Exception ex)
             {
-                string errorText = ex.Message;
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
                 throw;
             }
         }
@@ -162,7 +172,7 @@ namespace ModernTemplate.Views.ContentControls
         }
 
 
-        #endregion Daten landen und Filtern
+        #endregion Daten landen und darstellen
 
         #region Register und Prüfen Validations
         /// <summary>
@@ -170,13 +180,21 @@ namespace ModernTemplate.Views.ContentControls
         /// </summary>
         private void RegisterValidations()
         {
-            /* Validierungsregeln für 
-            this.ValidationRules.Add("Word", () =>
+            try
             {
-                return InputValidation<DataRow>.This(this.CurrentRow).NotEmpty("Word", "Stichwort");
-            });
-            */
-
+                /* Validierungsregeln für 
+                this.ValidationRules.Add("Word", () =>
+                {
+                    return InputValidation<DataRow>.This(this.CurrentRow).NotEmpty("Word", "Stichwort");
+                });
+                */
+            }
+            catch (Exception ex)
+            {
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
+                throw;
+            }
         }
 
         /// <summary>
@@ -230,7 +248,8 @@ namespace ModernTemplate.Views.ContentControls
             }
             catch (Exception ex)
             {
-                string errorText = ex.Message;
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
                 throw;
             }
 
@@ -328,7 +347,8 @@ namespace ModernTemplate.Views.ContentControls
             }
             catch (Exception ex)
             {
-                string errorText = ex.Message;
+                App.Logger.Error(ex, ex.Message);
+                ExceptionView.Show(ex);
                 throw;
             }
         }

@@ -1,4 +1,14 @@
-﻿# Modern Projekt Template
+﻿<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+</style>
+<!--
+<r>TODO:</r> Rot
+<o>TODO:</o> Orange
+<g>DONE:</g> Grün
+-->
+# Modern Projekt Template
 
 ![NET](https://img.shields.io/badge/NET-8.0-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
@@ -24,7 +34,7 @@ Je nach Bedarf können natürlich auf ViewModel-Klassen erstellt und verwendet w
 ```
 Das zu Bindende Property (bzw. eigentlich das ItemArray-Element) wird in eckiger Klammer geschrieben.
 Ein weiterer Punkt für die Aufwandsreduzierung ist eine Umfangreiche Bibliothek mit UI Controls und C# Klassen für viele verschiedene Bereiche.</br>
-Zum einen bilden die beiden Bibliotheken die Grundlage des Entwicklungsframework bzw. des Templates weiter ist die Bibliothek auch eine Quelle für Informationen zur Erstellung eigener Funktionaliäten.
+Zum einen bilden die beiden Bibliotheken die Grundlage des Entwicklungsframework bzw. des Templates weiter ist die Bibliothek auch eine Quelle für Informationen zur Erstellung eigener Funktionaliäten gedacht.
 
 # Interne Abhängigkeiten
 Das Template verwendet zwei weitere Bilbliotheken
@@ -48,13 +58,10 @@ Die gesamte Datenhaltung zwischen der GUI und der Datenbank wird auf Basis von D
 Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalitäten mit.
 
 ### [Logging](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+### [Setting](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+### [Eingabe Validierung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+### [Meldungsdialoge (auch intern Notification)](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
 
-### Settings
-
-### Eingabe Validierung
-
-### Meldungsdialoge (auch intern Notification)
-
-# Nach der Fertigstellung
+# Nach der Fertigstellung einer Anwendung
 Nach der Fertigstellung können die verschiedenen Beschreibungen als auch Klassen/XAML Templates gelöscht werden.
 Die Beschreibungen dienen bei der Erstelllung einer neuen Anwendung als Hilfestellung und Orientierung.
