@@ -25,7 +25,7 @@ public class TagWordsRepository : SQLiteDBContext
         this.DBConnection = base.Connection;
     }
 
-    public SQLiteConnection DBConnection { get; private set; }
+    public SqlConnection DBConnection { get; private set; }
 
     private string Tablename { get; set; }
 

@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernSQLiteDemo", "ModernS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernSqlServer", "ModernSqlServer\ModernSqlServer.csproj", "{CEFF451F-7774-4F5B-8D70-2C55311E63FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernSqlServerDemo", "ModernSqlServerDemo\ModernSqlServerDemo.csproj", "{C626BCF2-D956-4D03-99FB-D8CBCD26903C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{CEFF451F-7774-4F5B-8D70-2C55311E63FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEFF451F-7774-4F5B-8D70-2C55311E63FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEFF451F-7774-4F5B-8D70-2C55311E63FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C626BCF2-D956-4D03-99FB-D8CBCD26903C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C626BCF2-D956-4D03-99FB-D8CBCD26903C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C626BCF2-D956-4D03-99FB-D8CBCD26903C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C626BCF2-D956-4D03-99FB-D8CBCD26903C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

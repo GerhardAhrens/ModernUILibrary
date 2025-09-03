@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+      <TargetFramework>net8.0-windows</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DemoBLOB\Donald-Erschrocken.gif" />
+    <None Remove="DemoBLOB\FolderContent.txt" />
+    <None Remove="DemoBLOB\GuteNacht.gif" />
+    <None Remove="DemoBLOB\Snoopy-Fall.gif" />
+    <None Remove="DemoBLOB\snoopy-happy-thanksgiving.gif" />
+    <None Remove="DemoBLOB\snoopy-peanuts.gif" />
+    <None Remove="DemoBLOB\Snoopy-Play.gif" />
+    <None Remove="DemoBLOB\wake-up-dog-barking.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DemoBLOB\Donald-Erschrocken.gif" />
+    <Content Include="DemoBLOB\FolderContent.txt" />
+    <Content Include="DemoBLOB\GuteNacht.gif" />
+    <Content Include="DemoBLOB\Snoopy-Fall.gif" />
+    <Content Include="DemoBLOB\snoopy-happy-thanksgiving.gif" />
+    <Content Include="DemoBLOB\snoopy-peanuts.gif" />
+    <Content Include="DemoBLOB\Snoopy-Play.gif" />
+    <Content Include="DemoBLOB\wake-up-dog-barking.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModernConsole\ModernConsole.csproj" />
+    <ProjectReference Include="..\ModernSqlServer\ModernSqlServer.csproj" />
+  </ItemGroup>
+
+</Project>

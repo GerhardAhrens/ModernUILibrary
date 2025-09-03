@@ -1,5 +1,4 @@
-﻿
-namespace ModernSQLiteDemo
+﻿namespace ModernSQLiteDemo
 {
     using System;
     using System.Collections.Generic;
