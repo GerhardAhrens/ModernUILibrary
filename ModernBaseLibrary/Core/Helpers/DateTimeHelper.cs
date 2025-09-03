@@ -20,6 +20,15 @@ namespace ModernBaseLibrary.Core
 
     public class DateTimeHelper
     {
+        private static readonly DateTime _weekDate;
+        private static DateTime ThisSunday => GetSundayDate(_weekDate);
+        private static DateTime FirstDay_ThisYear => DateTime.Parse($"01/01/{ThisSunday.Year}");
+        private static DateTime FirstDay_LastYear => DateTime.Parse($"01/01/{ThisSunday.Year - 1}");
+        private static DateTime FirstDay_NextYear => DateTime.Parse($"01/01/{ThisSunday.Year + 1}");
+        private static DateTime FirstSunday_ThisYear => GetSundayDate_WeekOne(FirstDay_ThisYear);
+        private static DateTime FirstSunday_LastYear => GetSundayDate_WeekOne(FirstDay_LastYear);
+        private static DateTime FirstSunday_NextYear => GetSundayDate_WeekOne(FirstDay_NextYear);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DateTimeHelper"/> class.
         /// </summary>
@@ -213,6 +222,55 @@ namespace ModernBaseLibrary.Core
             if (OS > 31) { OS -= 31; month++; }
             DateTime result = new DateTime(year, month, (byte)OS);
             return result;
+        }
+
+        public static int TotalWeeksThisYear()
+        {
+            TimeSpan daysBetween = FirstSunday_NextYear - FirstSunday_ThisYear;
+
+            return (daysBetween.Days / 7);
+        }
+
+        public static int TotalWeeksLastYear()
+        {
+            TimeSpan daysBetween = FirstSunday_ThisYear - FirstSunday_LastYear;
+
+            return (daysBetween.Days / 7);
+        }
+
+        private static DateTime GetSundayDate(DateTime suppliedDate)
+        {
+            var checkDay = suppliedDate;
+
+            //Check if the day of the supplied date is a Sunday
+            while (checkDay.DayOfWeek != DayOfWeek.Sunday)
+            {
+                checkDay = checkDay.AddDays(1);
+            }
+            return checkDay;
+        }
+
+        private static bool IsDateInFirstWeek(DateTime suppliedDate)
+        {
+            var output = false;
+            // First week must contain a Thursday, so lowest Sunday date possible is the 4th
+            if (suppliedDate.Day >= 4)
+            {
+                output = true;
+            }
+
+            return output;
+        }
+
+        private static DateTime GetSundayDate_WeekOne(DateTime suppliedDate)
+        {
+            var checkDay = GetSundayDate(suppliedDate);
+            if (IsDateInFirstWeek(checkDay) == false)
+            {
+                checkDay = checkDay.AddDays(7);
+            }
+
+            return checkDay;
         }
     }
 }
