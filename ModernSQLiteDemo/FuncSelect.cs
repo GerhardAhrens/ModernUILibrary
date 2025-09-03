@@ -169,6 +169,27 @@
             MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
         }
 
+        public void SelectAsScalarByteArray(string databasePath)
+        {
+            MConsole.ClearScreen();
+
+            if (Directory.Exists(Path.GetDirectoryName(databasePath)) == true && File.Exists(databasePath) == true)
+            {
+                byte[] selectResult;
+                using (ContactRepository repository = new ContactRepository())
+                {
+                    selectResult = repository.GetPhoto();
+
+                }
+
+                MConsole.WriteLine();
+                MConsole.WriteInfoLine($"Ergebnis: {selectResult.Length.ToByteText()}.");
+                MConsole.WriteLine();
+            }
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
         public void SelectById(string databasePath)
         {
             MConsole.ClearScreen();

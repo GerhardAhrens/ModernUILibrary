@@ -1381,6 +1381,10 @@ namespace Microsoft.Data.SqlClient
             {
                 result = true;
             }
+            else if (type.Name == typeof(byte[]).Name)
+            {
+                result = true;
+            }
 
             return result;
         }

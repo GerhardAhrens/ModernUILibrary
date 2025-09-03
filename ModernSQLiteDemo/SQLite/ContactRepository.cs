@@ -59,6 +59,23 @@ namespace ModernSQLiteDemo.SQLite
             return Math.Round(result,2,MidpointRounding.AwayFromZero);
         }
 
+        public byte[] GetPhoto()
+        {
+            byte[] result = Array.Empty<byte>();
+            ;
+
+            try
+            {
+                result = base.Connection.RecordSet<byte[]>($"select [Photo] from {this.Tablename} WHERE Id = 'faab6e95-ca53-4f4e-a5e0-c0b760f17bc8'").Get().Result;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return result;
+        }
 
         public ICollectionView SelectAsICollectionView()
         {

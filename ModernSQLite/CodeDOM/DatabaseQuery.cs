@@ -55,7 +55,7 @@ namespace ModernSQLite.CodeDOM
             {
                 DataTable result = new DataTable();
 
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SQLiteConnection sqlConnection = new SQLiteConnection(connectionString))
                 {
                     sqlConnection.Open();
 
@@ -89,7 +89,7 @@ namespace ModernSQLite.CodeDOM
             {
                 int rowsAffected = 0;
 
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SQLiteConnection sqlConnection = new SQLiteConnection(connectionString))
                 {
                     sqlConnection.Open();
                     using (SQLiteCommand sqlCommand = sqlConnection.CreateCommand())
@@ -123,7 +123,7 @@ namespace ModernSQLite.CodeDOM
             try
             {
                 object result = new object();
-                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+                using (SQLiteConnection sqlConnection = new SQLiteConnection(connectionString))
                 {
                     sqlConnection.Open();
 
