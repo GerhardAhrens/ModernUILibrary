@@ -206,6 +206,10 @@ namespace Microsoft.Data.SqlClient
                 {
                     resultValue = GetScalar<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter);
                 }
+                else if (typeof(T) == typeof(Guid) && typeof(T).IsGenericType == false && typeof(T).Namespace == "System")
+                {
+                    resultValue = GetScalar<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter);
+                }
                 else if (typeof(T) == typeof(DataRow))
                 {
                     resultValue = GetDataRow<T>(@this.Connection, @this.SQL, @this.ParameterCollection, @this.SQLiteParameter);
@@ -283,11 +287,18 @@ namespace Microsoft.Data.SqlClient
                     var result = cmd.ExecuteScalar();
                     if (result != DBNull.Value)
                     {
-                        getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                        if (typeof(T) == typeof(Guid))
+                        {
+                            getAs = new Guid(result.ToString());
+                        }
+                        else
+                        {
+                            getAs = result == null ? default(T) : (T)Convert.ChangeType(result, typeof(T));
+                        }
                     }
                     else
                     {
-                        getAs = (T)Convert.ChangeType(0, typeof(T));
+                        getAs = (T)Convert.ChangeType(default(T), typeof(T));
                     }
                 }
             }
@@ -1382,6 +1393,10 @@ namespace Microsoft.Data.SqlClient
                 result = true;
             }
             else if (type.Name == typeof(byte[]).Name)
+            {
+                result = true;
+            }
+            else if (type.Name == typeof(Guid).Name)
             {
                 result = true;
             }

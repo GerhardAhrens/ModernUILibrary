@@ -43,6 +43,7 @@
                .Add("Select als Scalar (einzelne Column, z.B Count)", () => { new FuncSelect().SelectAsScalarCount(Program.DatabasePath); }, 1)
                .Add("Select als Scalar (einzelne Column, z.B Sum)", () => { new FuncSelect().SelectAsScalarSum(Program.DatabasePath); }, 1)
                .Add("Select als Scalar (einzelne Column, Byte Array)", () => { new FuncSelect().SelectAsScalarByteArray(Program.DatabasePath); }, 1)
+               .Add("Select als Scalar (einzelne Column, Guid)", () => { new FuncSelect().SelectAsScalarGuid(Program.DatabasePath); }, 1)
                .Add("Select DataRow by Id", () => { new FuncSelect().SelectById(Program.DatabasePath); }, 1)
                )
 

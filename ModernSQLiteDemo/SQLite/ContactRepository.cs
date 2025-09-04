@@ -66,7 +66,25 @@ namespace ModernSQLiteDemo.SQLite
 
             try
             {
-                result = base.Connection.RecordSet<byte[]>($"select [Photo] from {this.Tablename} WHERE Id = 'faab6e95-ca53-4f4e-a5e0-c0b760f17bc8'").Get().Result;
+                result = base.Connection.RecordSet<byte[]>($"select [Photo] from {this.Tablename} WHERE Id = 'ff0005a1-c510-413a-aba2-1aa7c9beb37a'").Get().Result;
+            }
+            catch (Exception ex)
+            {
+                string errorText = ex.Message;
+                throw;
+            }
+
+            return result;
+        }
+
+        public Guid GetGuid()
+        {
+            Guid result = Guid.Empty;
+            ;
+
+            try
+            {
+                result = base.Connection.RecordSet<Guid>($"select [Id] from {this.Tablename} WHERE Id = 'ff0005a1-c510-413a-aba2-1aa7c9beb37a'").Get().Result;
             }
             catch (Exception ex)
             {
