@@ -228,4 +228,42 @@ else
 
 ### [Erstellung eigener Notification-Typen](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Views/NotificationContent/_MT_NotificationContent.md)
 
+## Commandline Unterstützung
+Auch wenn die Anwendung in erster Linie als Windows Anwendung konzipiert ist, kann diese trotzdem bei Bedarf mit einer Komandozeile aufgerufen werden.
+In dem Template wird als Beispiel der Username verwendung um diese mit einer Kommandozeile übergeben zu können.
+```text
+anwendung.exe -u=snoopy
+anwendung.exe -username=snoopy
+```
+
+Der Commandline-Parser bekommt die aktuelle Commnadline übergeben.
+```csharp
+string[] cmdArgs = CommandManager.CommandLineToArgs(Environment.CommandLine);
+CommandParser parser = new CommandParser(cmdArgs);
+ApplicationCmdl commandLineInfo = parser.Parse<ApplicationCmdl>();
+string[] helpText = parser.GetHelpInfo<ApplicationCmdl>()?.Split('\n');
+```
+
+Das Ergebnis des Parser wird in eine festzulegende Klasse geschrieben.
+Wichtig hierbei ist, das der Parameter - Flag "Longname" mit dem Propertiename übereinstimmen muss.
+Im Beispiel Property **Username** und [Flag("**username**", "u")]
+```csharp
+public class ApplicationCmdl
+{
+    /// <summary>
+    /// -u= oder -username=
+    /// </summary>
+    [Flag("username", "u")]
+    [Help("Benutzername")]
+    public string Username { get; set; }
+
+    [Flag("timeout", "t")]
+    [Help("Benutzername")]
+    public int Timeout { get; set; }
+}
+```
+Die Klasse kann einen beliebigen Namen und Inhalt haben, muß aber mit den darüberstehenden Attributen zusammenpassen. Auf diese Weise kann auch mit einer *typisierten* Commandline gearbeitet werden. Der Commandline-Parser identifiziert auf Grund der Commandline-Klasse die Properties und Commandline-Parameter und konvertiert den Parameter in den Typ des Properties.
+
+## Einfache Benutzerverwaltung
+
 

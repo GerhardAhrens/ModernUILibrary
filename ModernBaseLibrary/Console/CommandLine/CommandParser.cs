@@ -54,9 +54,10 @@ namespace System.Cmdl
             this._args = args;
             var ret = new Dictionary<string, List<string>>();
             string key = string.Empty;
+
             foreach (string arg in args)
             {
-                if (CmdLineKeyDetection.GetShortKeyDetector().IsKey(arg)) //short-option
+                if (CmdLineKeyDetection.GetShortKeyDetector().IsKey(arg)) //Prüfen auf short-option
                 {
                     if (CmdLineKeyDetection.GetShortKeyDetector().IsJoinedToValue(arg))
                     {
@@ -70,7 +71,6 @@ namespace System.Cmdl
                             }
                         }
 
-                        //to hold the value of the key before the equals sign incase of aggregation like -asu=mykeels
                         ret[key].Add(split.Last());
                     }
                     else if (CmdLineKeyDetection.GetShortKeyDetector().IsAggregated(arg, this.GetShortKeys(targetType))) //works on aggregate short keys like -sa
@@ -165,8 +165,19 @@ namespace System.Cmdl
             args = args ?? this._args ?? new string[] { };
             this._args = args;
             var _dict = GetDictionary(args, typeof(TData));
+
             TData ret = Activator.CreateInstance<TData>();
+
+            if (args != null && args.Length >= 2)
+            {
+                if (args[1].StartsWith("rem", StringComparison.CurrentCultureIgnoreCase) == true || args[1].StartsWith("*", StringComparison.CurrentCultureIgnoreCase) == true)
+                {
+                    return ret;
+                }
+            }
+
             PropertyInfo[] properties = ret.GetType().GetProperties();
+
             foreach (var property in properties)
             {
                 var flag = property.GetCustomAttribute<FlagAttribute>();
@@ -183,15 +194,26 @@ namespace System.Cmdl
                 {
                     if (key == "--")
                     {
-                        if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel))) ((ICmdLineModel)ret).Extras = _dict[key].ToArray();
+                        if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel)))
+                        {
+                            ((ICmdLineModel)ret).Extras = _dict[key].ToArray();
+                        }
                     }
-                    else this.SetPropertyValue<TData>(ret, property, _dict[key], transform);
+                    else
+                    {
+                        this.SetPropertyValue<TData>(ret, property, _dict[key], transform);
+                    }
                 }
-                if (_dict.ContainsKey(""))
+
+                if (_dict.ContainsKey(string.Empty))
                 {
-                    if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel))) ((ICmdLineModel)ret).Options = _dict[""].ToArray();
+                    if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel)) == true)
+                    {
+                        ((ICmdLineModel)ret).Options = _dict[""].ToArray();
+                    }
                 }
             }
+
             return ret;
         }
 

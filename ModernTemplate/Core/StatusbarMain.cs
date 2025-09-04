@@ -105,6 +105,29 @@ namespace ModernTemplate.Core
             }
         }
 
+        private string userRights = string.Empty;
+        public string UserRights
+        {
+            get { return this.userRights; }
+            set
+            {
+                this.userRights = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public void SetCurrentUser(string user = null)
+        {
+            if (string.IsNullOrEmpty(user) == true)
+            {
+                this.CurrentUser = string.Empty;
+            }
+            else
+            {
+                this.CurrentUser = user;
+            }
+        }
+
         public void SetNotification(string notification = null)
         {
             if (string.IsNullOrEmpty(notification) == true)
@@ -114,6 +137,18 @@ namespace ModernTemplate.Core
             else
             {
                 this.Notification = notification;
+            }
+        }
+
+        public void SetUserRights(string userRights = null)
+        {
+            if (string.IsNullOrEmpty(userRights) == true)
+            {
+                this.UserRights = string.Empty;
+            }
+            else
+            {
+                this.UserRights = userRights;
             }
         }
 

@@ -20,8 +20,7 @@ namespace ModernBaseLibrary.Core
 
     public class DateTimeHelper
     {
-        private static readonly DateTime _weekDate;
-        private static DateTime ThisSunday => GetSundayDate(_weekDate);
+        private static DateTime ThisSunday => GetSundayDate(DateTime.Now);
         private static DateTime FirstDay_ThisYear => DateTime.Parse($"01/01/{ThisSunday.Year}");
         private static DateTime FirstDay_LastYear => DateTime.Parse($"01/01/{ThisSunday.Year - 1}");
         private static DateTime FirstDay_NextYear => DateTime.Parse($"01/01/{ThisSunday.Year + 1}");

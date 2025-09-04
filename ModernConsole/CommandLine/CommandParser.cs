@@ -54,9 +54,18 @@ namespace ModernConsole.CommandLine
             this._args = args;
             var ret = new Dictionary<string, List<string>>();
             string key = string.Empty;
+
+            if (args != null && args.Length >= 2)
+            {
+                if (args[1].StartsWith("rem", StringComparison.CurrentCultureIgnoreCase) == true || args[1].StartsWith("*", StringComparison.CurrentCultureIgnoreCase) == true)
+                {
+                    return ret;
+                }
+            }
+
             foreach (string arg in args)
             {
-                if (CmdLineKeyDetection.GetShortKeyDetector().IsKey(arg)) //short-option
+                if (CmdLineKeyDetection.GetShortKeyDetector().IsKey(arg)) //Prüfen auf short-option
                 {
                     if (CmdLineKeyDetection.GetShortKeyDetector().IsJoinedToValue(arg))
                     {
@@ -70,7 +79,6 @@ namespace ModernConsole.CommandLine
                             }
                         }
 
-                        //to hold the value of the key before the equals sign incase of aggregation like -asu=mykeels
                         ret[key].Add(split.Last());
                     }
                     else if (CmdLineKeyDetection.GetShortKeyDetector().IsAggregated(arg, this.GetShortKeys(targetType))) //works on aggregate short keys like -sa

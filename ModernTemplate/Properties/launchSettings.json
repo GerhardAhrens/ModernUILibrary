@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ModernTemplate": {
+      "commandName": "Project",
+      "commandLineArgs": "*-u=Snoopy"
+    }
+  }
+}

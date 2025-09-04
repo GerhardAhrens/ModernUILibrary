@@ -15,6 +15,7 @@
 
 namespace ModernTemplate
 {
+    using System.Cmdl;
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
@@ -101,11 +102,15 @@ namespace ModernTemplate
 
         public static string ProgramDataPath { get { return new UserPreferences().ProgramDataPath(); } }
 
+        public static string StartApplicationUser { get; private set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             SingleInstanceApplication();
+
+            CommandLineParser();
 
             try
             {
@@ -262,6 +267,43 @@ namespace ModernTemplate
                 InfoMessage($"Die Anwendung {proc.ProcessName} wird bereits ausgeführt ({count}x) und daher wieder beendet.");
                 ApplicationExit();
             }
+        }
+
+        private static void CommandLineParser()
+        {
+            string[] cmdArgs = CommandManager.CommandLineToArgs(Environment.CommandLine);
+            CommandParser parser = new CommandParser(cmdArgs);
+            ApplicationCmdl commandLineInfo = parser.Parse<ApplicationCmdl>();
+            string[] helpText = parser.GetHelpInfo<ApplicationCmdl>()?.Split('\n');
+
+            if (helpText?.Length > 0)
+            {
+                InfoMessage(string.Join('\n', helpText));
+                ApplicationExit();
+            }
+            else
+            {
+                if (commandLineInfo != null)
+                {
+                    if (string.IsNullOrEmpty(commandLineInfo.Username) == false)
+                    {
+                        StartApplicationUser = commandLineInfo.Username;
+                        StartApplicationUser = $"{Environment.UserDomainName}\\{commandLineInfo.Username}";
+                    }
+                    else
+                    {
+                        StartApplicationUser = $"{Environment.UserDomainName}\\{Environment.UserName}";
+                    }
+
+                    StatusbarMain.Statusbar.SetCurrentUser(StartApplicationUser);
+                }
+                else
+                {
+                    StartApplicationUser = $"{Environment.UserDomainName}\\{Environment.UserName}";
+                    StatusbarMain.Statusbar.SetCurrentUser(StartApplicationUser);
+                }
+            }
+
         }
 
         /// <summary>

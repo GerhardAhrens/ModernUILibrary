@@ -6,7 +6,7 @@
 ![Version](https://img.shields.io/badge/Version-1.0.2025.0-yellow.svg)]
 
 # Modern Template
-Das **Modern Template** soll die Entwicklung von Desktop-Anwendungen unter C#/WPF unterstützen. Durch den Einsatz des Templates kann die Entwicklungszeit bis zu 30% reduziert werden. Das wird dadurch erreicht, Das dass Template vile Basis Funktionalitäten wie Ordnerstruktur, Dialog-Management, Logging, Konfigurationsverwaltung usw. bereits integriert hat.
+Das **Modern Template** soll die Entwicklung von Desktop-Anwendungen unter C#/WPF unterstützen. Durch den Einsatz des Templates kann die Entwicklungszeit bis zu 30% reduziert werden. Das wird dadurch erreicht, da dass Template viele Basis Funktionalitäten wie Ordnerstruktur, Dialog-Management, Logging, Konfigurationsverwaltung usw. bereits integriert hat.
 
 ## Wie wird die Entwicklungszeit reduziert?
 Zum einen durch den Einsatz des Templates in dem bereits ein Teil der Basisstrauktur einer Desktop-Anwendung abgebildet ist. Nach dem das Template in einer eigenen Solution angewedet wird, kann die Solution direkt kompiliert und gestartet werden. So hat mann schon schnell einen Klickbaren-Prototyp.</br>
@@ -55,6 +55,8 @@ Wie obenen bereits erwähnt, bringt das Template einen Reihe von Funktionalität
 ### [Setting](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md#CoreSettings)
 ### [Eingabe Validierung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md#CoreValidation)
 ### [Meldungsdialoge (auch intern Notification)](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+### [CommandLine Unterstützung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
+### [Einfache Benutzerverwaltung](https://github.com/GerhardAhrens/ModernUILibrary/blob/master/ModernTemplate/Core/_MT_Core.md)
 
 # Schritt für Schritt
 ## App.xaml.cs & App.cs
