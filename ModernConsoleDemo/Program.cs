@@ -94,6 +94,27 @@
 
         private static void Flags01(string[] args)
         {
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program --quelle=text.txt --ziel=neu.txt");
+            CommandParser parser = new CommandParser(args.Length == 0 ? cmdArgs : args);
+            FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
+
+            MConsole.ClearScreen();
+
+            if (copyInfo.source != null)
+            {
+                MConsole.WriteLine(copyInfo.source);
+            }
+
+            if (copyInfo.destination != null)
+            {
+                MConsole.WriteLine(copyInfo.destination);
+            }
+
+            MConsole.Wait("Eine Taste für zurück!", ConsoleColor.Yellow);
+        }
+
+        private static void Flags01A(string[] args)
+        {
             string[] cmdArgs = CommandManager.CommandLineToArgs("program -q=text.txt -z=neu.txt");
             CommandParser parser = new CommandParser(args.Length == 0 ? cmdArgs : args);
             FileCopyModel copyInfo = parser.Parse<FileCopyModel>();

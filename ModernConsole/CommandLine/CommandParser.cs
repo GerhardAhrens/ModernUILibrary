@@ -147,7 +147,7 @@ namespace ModernConsole.CommandLine
                 }
                 else //non-option
                 {
-                    if (key == "" && !ret.ContainsKey(key))
+                    if (key == string.Empty && !ret.ContainsKey(key))
                     {
                         ret.Add(key, new List<string>()); //options
                     }
@@ -191,15 +191,26 @@ namespace ModernConsole.CommandLine
                 {
                     if (key == "--")
                     {
-                        if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel))) ((ICmdLineModel)ret).Extras = _dict[key].ToArray();
+                        if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel)) == true)
+                        {
+                            ((ICmdLineModel)ret).Extras = _dict[key].ToArray();
+                        }
                     }
-                    else this.SetPropertyValue<TData>(ret, property, _dict[key], transform);
+                    else
+                    {
+                        this.SetPropertyValue<TData>(ret, property, _dict[key], transform);
+                    }
                 }
-                if (_dict.ContainsKey(""))
+
+                if (_dict.ContainsKey(string.Empty))
                 {
-                    if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel))) ((ICmdLineModel)ret).Options = _dict[""].ToArray();
+                    if (typeof(TData).GetInterfaces().Contains(typeof(ICmdLineModel)))
+                    {
+                        ((ICmdLineModel)ret).Options = _dict[string.Empty].ToArray();
+                    }
                 }
             }
+
             return ret;
         }
 
