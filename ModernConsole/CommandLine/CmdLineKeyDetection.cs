@@ -39,19 +39,28 @@ namespace ModernConsole.CommandLine
 
         public static ShortKeyDetection GetShortKeyDetector()
         {
-            if (_shortDetector == null) _shortDetector = new ShortKeyDetection();
+            if (_shortDetector == null)
+            {
+                _shortDetector = new ShortKeyDetection();
+            }
+
             return _shortDetector;
         }
 
         public static LongKeyDetection GetLongKeyDetector()
         {
-            if (_longDetector == null) _longDetector = new LongKeyDetection();
+            if (_longDetector == null)
+            {
+                _longDetector = new LongKeyDetection();
+            }
+
             return _longDetector;
         }
 
         public class ShortKeyDetection
         {
             private const string KEY_JOINS_VALUE_REGEX = @"(=(\"")?([a-zA-Z0-9\.\/\\])+)(\"")?$"; //-u=name
+
             public bool IsKey(string potentialKey)
             {
                 return Regex.IsMatch(potentialKey, CmdLineKeyDetection.SHORT_KEY_REGEX);
@@ -82,11 +91,13 @@ namespace ModernConsole.CommandLine
                          }
                          else
                          {
-                             keys.Add("-" + pKey[i]);
+                             keys.Add($"-{pKey[i]}");
                          }
                      }
+
                      return new KeyValuePair<string[], string>(keys.ToArray(), string.Join(string.Empty, pKey.Skip(indexOfNotKey)));
                  };
+
                 return new Tuple<bool, KeyValuePair<string[], string>>(IsFollowedByValue(potentialKey), getValueFn(potentialKey, requiredKeyList));
             }
 
@@ -108,7 +119,7 @@ namespace ModernConsole.CommandLine
             private const string KEY_JOINS_VALUE_REGEX = @"=(\"")?([a-zA-Z0-9\.\/\\])+(\"")?$"; //--user=name
             public bool IsKey(string potentialKey)
             {
-                return Regex.IsMatch(potentialKey, CmdLineKeyDetection.LONG_KEY_REGEX);
+                return Regex.IsMatch(potentialKey.ToLower(), CmdLineKeyDetection.LONG_KEY_REGEX);
             }
 
             public bool IsJoinedToValue(string potentialKey)

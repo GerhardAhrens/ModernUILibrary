@@ -72,7 +72,7 @@ namespace ModernConsole.CommandLine
                         string[] split = arg.Split('=');
                         foreach (char potentialKey in split.First().AsEnumerable().Skip(1))
                         {
-                            key = "-" + potentialKey;
+                            key = $"-{potentialKey}";
                             if (!ret.ContainsKey(key) || ret[key].Count == 0)
                             {
                                 ret[key] = new List<string>();

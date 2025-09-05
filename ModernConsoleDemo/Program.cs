@@ -94,7 +94,7 @@
 
         private static void Flags01(string[] args)
         {
-            string[] cmdArgs = CommandManager.CommandLineToArgs("program --quelle=text.txt --ziel=neu.txt");
+            string[] cmdArgs = CommandManager.CommandLineToArgs("program --Quelle=text.txt --ziel=neu.txt");
             CommandParser parser = new CommandParser(args.Length == 0 ? cmdArgs : args);
             FileCopyModel copyInfo = parser.Parse<FileCopyModel>();
 

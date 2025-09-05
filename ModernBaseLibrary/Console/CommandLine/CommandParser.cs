@@ -55,6 +55,14 @@ namespace System.Cmdl
             var ret = new Dictionary<string, List<string>>();
             string key = string.Empty;
 
+            if (args != null && args.Length >= 2)
+            {
+                if (args[1].StartsWith("rem", StringComparison.CurrentCultureIgnoreCase) == true || args[1].StartsWith("*", StringComparison.CurrentCultureIgnoreCase) == true)
+                {
+                    return ret;
+                }
+            }
+
             foreach (string arg in args)
             {
                 if (CmdLineKeyDetection.GetShortKeyDetector().IsKey(arg)) //Prüfen auf short-option
@@ -64,7 +72,7 @@ namespace System.Cmdl
                         string[] split = arg.Split('=');
                         foreach (char potentialKey in split.First().AsEnumerable().Skip(1))
                         {
-                            key = "-" + potentialKey;
+                            key = $"-{potentialKey}";
                             if (!ret.ContainsKey(key) || ret[key].Count == 0)
                             {
                                 ret[key] = new List<string>();
@@ -139,7 +147,7 @@ namespace System.Cmdl
                 }
                 else //non-option
                 {
-                    if (key == "" && !ret.ContainsKey(key))
+                    if (key == string.Empty && !ret.ContainsKey(key))
                     {
                         ret.Add(key, new List<string>()); //options
                     }
